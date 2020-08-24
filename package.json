@@ -1,0 +1,108 @@
+{
+  "name": "sqform",
+  "version": "1.0.0",
+  "description": "SQ Form",
+  "main": "dist/index.js",
+  "private": false,
+  "sideEffects": false,
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "parcel build src/index.js",
+    "lint": "eslint 'src/**/*.js'",
+    "lint.fix": "eslint 'src/**/*.js' --fix",
+    "lint.staged": "lint-staged",
+    "semver": "npm version",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -c .storybook -o .out",
+    "nuke-everything": "rm -rf ./dist && rm -rf ./node_modules && rm -f package-lock.json",
+    "release.local": "eval $(egrep -v '^#' .env | xargs) npx semantic-release --no-ci --debug",
+    "release.dry-run": "eval $(egrep -v '^#' .env | xargs) npx semantic-release --no-ci --debug --dry-run",
+    "commit": "npx git-cz",
+    "format": "npx prettier --write 'src/**/*.js'"
+  },
+  "files": [
+    "/dist"
+  ],
+  "commitlint": {
+    "rules": {
+      "type-enum": [
+        "feat",
+        "fix",
+        "docs",
+        "chore"
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SelectQuoteLabs/SQForm"
+  },
+  "keywords": [],
+  "author": "SelectQuoteLabs",
+  "license": "MIT",
+  "homepage": "https://github.com/SelectQuoteLabs/SQForm#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.4.3",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "formik": "^2.1.4",
+    "prop-types": "^15.7.2",
+    "react-window": "^1.8.5",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/2.8.4",
+    "swr": "^0.3.0",
+    "yup": "^0.28.3"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-docs": "^5.3.9",
+    "@storybook/addon-info": "^5.3.9",
+    "@storybook/addon-knobs": "^5.3.9",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addon-notes": "^5.3.9",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.2.6",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-docgen": "^4.1.0",
+    "eslint": "^6.6.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.1.2",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.4.2",
+    "parcel": "^2.0.0-alpha.3.2",
+    "prettier": "^1.18.2",
+    "react-scripts": "3.3.0",
+    "rimraf": "^3.0.0",
+    "storybook-addon-material-ui": "^0.9.0-alpha.20"
+  },
+  "browserslist": "last 2 Chrome versions"
+}

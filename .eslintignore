@@ -1,0 +1,8 @@
+node_modules
+dist
+mock_components/**/*.css
+src/**/*.css
+*.json
+*.md
+.storybook
+.out

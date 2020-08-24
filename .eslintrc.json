@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["import", "flowtype", "jsx-a11y", "react", "react-hooks"],
+  "rules": {
+    "no-useless-computed-key": "off",
+    "no-useless-rename": "off",
+    "import/no-unresolved": "off",
+    "no-extra-boolean-cast": "off",
+    "no-prototype-builtins": "off",
+    "no-case-declarations": "off"
+  }
+}

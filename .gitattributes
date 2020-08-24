@@ -1,0 +1,8 @@
+# Treat all files as Unix-Style line endings
+* text eol=lf
+
+*.txt -text
+*.jpg -text
+*.png -text
+*.ttf -text
+*.mp4 -text
