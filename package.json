@@ -26,10 +26,14 @@
   "commitlint": {
     "rules": {
       "type-enum": [
-        "feat",
-        "fix",
-        "docs",
-        "chore"
+        2,
+        "always",
+        [
+          "feat",
+          "fix",
+          "docs",
+          "chore"
+        ]
       ]
     }
   },
@@ -40,7 +44,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md}": [
+    "*.{js,md}": [
       "prettier --write",
       "eslint --fix",
       "git add"

@@ -1,7 +1,6 @@
 node_modules
 dist
-mock_components/**/*.css
-src/**/*.css
+*.css
 *.json
 *.md
 .storybook
