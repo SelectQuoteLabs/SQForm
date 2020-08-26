@@ -8,32 +8,34 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Small API</>,
+    title: <>Formik</>,
     imageUrl: 'img/undraw_forms.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Formik is a form library that keeps track of values/errors/visited
+        fields, orchestrates validation, and handles submission, so we don't
+        have to.
       </>
     )
   },
   {
-    title: <>Standardized Styling</>,
+    title: <>Yup</>,
     imageUrl: 'img/undraw_design_components.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Yup is a JavaScript schema builder for validation. Define a schema, then
+        validate the shape of an existing value.
       </>
     )
   },
   {
-    title: <>Powered by React</>,
+    title: <>Material UI</>,
     imageUrl: 'img/undraw_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Material UI is a React UI library that provides a Grid system,
+        Typography system, and form components to provide a consisten and
+        beautiful UI for SQForm.
       </>
     )
   }
@@ -83,6 +85,7 @@ function Home() {
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
+              <h2 style={{ textAlign: 'center' }}>Powered By</h2>
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />

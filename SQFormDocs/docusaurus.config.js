@@ -1,6 +1,6 @@
 module.exports = {
   title: 'SQForm',
-  tagline: 'SelectQuote Form Library',
+  tagline: 'SQForm is a Form Library without a catchy phrase',
   url: 'https://selectquotelabs.github.io/SQForm/',
   baseUrl: '/SQForm/',
   onBrokenLinks: 'warn',
@@ -32,11 +32,11 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Learn 👨‍💻',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/'
+              label: 'SQForm Storybook',
+              href: 'https://master--5f4431386ea00a00220d495c.chromatic.com/'
             },
             {
               label: 'Second Doc',
@@ -45,37 +45,37 @@ module.exports = {
           ]
         },
         {
-          title: 'Community',
+          title: 'Open Source ❤️',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus'
+              label: 'Formik',
+              href: 'https://formik.org/'
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus'
+              label: 'Yup',
+              href: 'https://github.com/jquense/yup'
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus'
+              label: 'Material UI',
+              href: 'https://material-ui.com/'
             }
           ]
         },
         {
-          title: 'More',
+          title: 'More 💡',
           items: [
             {
-              label: 'Blog',
-              to: 'blog'
+              label: 'GitHub',
+              href: 'https://github.com/SelectQuoteLabs'
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/SelectQuoteLabs/SQForm'
+              label: 'Markdown Style Guide',
+              to: 'docs/styleguide/'
             }
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} SelectQuote, Inc. Built with Docusaurus.`
+      copyright: `Copyright © ${new Date().getFullYear()} SelectQuote`
     }
   },
   presets: [
@@ -84,7 +84,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'doc1',
+          homePageId: 'doc2',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/SelectQuoteLabs/SQForm/edit/master/'
         },
