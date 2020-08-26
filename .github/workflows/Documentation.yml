@@ -24,6 +24,7 @@ jobs:
           npm run build
 
       - name: Deploy to GitHub Pages 🚀
+        working-directory: SQFormDocs
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
