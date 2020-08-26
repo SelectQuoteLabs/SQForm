@@ -1,51 +1,31 @@
 name: Documentation
 
 on:
-  pull_request:
-    branches: [master]
   push:
-    branches: [master]
+    branches:
+      - master
 
 defaults:
   run:
     working-directory: SQFormDocs
 
 jobs:
-  checks:
-    if: github.event_name != 'push'
+  docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2-beta
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          node-version: '12'
-      - name: Test Build
+          persist-credentials: false
+
+      - name: Install and Build
         run: |
-          if [ -e package-lock.json ]; then
           npm ci
-          else
-          npm i
-          fi
           npm run build
-  gh-deploy:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2-beta
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
-          node-version: '12'
-      - uses: crazy-max/ghaction-github-pages@v2
-        with:
-          target_branch: master
-          build_dir: build
-        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy to GitHub Pages
-        run: |
-          if [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
-          npx docusaurus deploy
+          BRANCH: master
+          FOLDER: build
