@@ -28,5 +28,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: master
-          FOLDER: build
-        working-directory: SQFormDocs
+          FOLDER: SQFormDocs/build
