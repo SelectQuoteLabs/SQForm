@@ -1,9 +1,9 @@
 module.exports = {
   title: 'SQForm',
   tagline: 'SelectQuote Form Library',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://selectquotelabs.github.io',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'SelectQuoteLabs',
   projectName: 'SQForm',
