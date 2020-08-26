@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
       - name: Test Build
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
       - uses: crazy-max/ghaction-github-pages@v2
