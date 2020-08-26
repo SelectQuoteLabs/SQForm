@@ -2,7 +2,7 @@ module.exports = {
   title: 'SQForm',
   tagline: 'SelectQuote Form Library',
   url: 'https://selectquotelabs.github.io/SQForm/',
-  baseUrl: '/',
+  baseUrl: '/SQForm',
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'SelectQuoteLabs',
