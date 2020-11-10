@@ -9,8 +9,6 @@ import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
-import PokemonAutocomplete from './components/PokemonAutocomplete';
-import MoviesAutocomplete from './components/MoviesAutocomplete';
 import markdown from '../notes/SQForm.md';
 
 import {
@@ -108,66 +106,6 @@ export const basicForm = () => {
         </SQFormDropdown>
         <SQFormCheckbox name="cool" label="Cool" />
         <SQFormCheckbox name="lame" label="Lame" isDisabled={true} />
-        <Grid item sm={12}>
-          <Grid container justify="space-between">
-            <SQFormResetButtonWithConfirmation
-              variant="outlined"
-              confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-            >
-              RESET
-            </SQFormResetButtonWithConfirmation>
-            <SQFormButton>Submit</SQFormButton>
-          </Grid>
-        </Grid>
-      </SQForm>
-    </Card>
-  );
-};
-
-export const basicFormWithAsyncAutocompletePokemon = () => {
-  const validationSchema = {
-    pokemon: Yup.string().required('Required')
-  };
-
-  return (
-    <Card raised style={{padding: 16}}>
-      <SQForm
-        initialValues={{pokemon: ''}}
-        onSubmit={handleSubmit}
-        muiGridProps={{spacing: 4}}
-        validationSchema={validationSchema}
-      >
-        <PokemonAutocomplete name="pokemon" />
-        <Grid item sm={12}>
-          <Grid container justify="space-between">
-            <SQFormResetButtonWithConfirmation
-              variant="outlined"
-              confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-            >
-              RESET
-            </SQFormResetButtonWithConfirmation>
-            <SQFormButton>Submit</SQFormButton>
-          </Grid>
-        </Grid>
-      </SQForm>
-    </Card>
-  );
-};
-
-export const basicFormWithAsyncAutocompleteMovies = () => {
-  const validationSchema = {
-    movie: Yup.string().required('Required')
-  };
-
-  return (
-    <Card raised style={{padding: 16}}>
-      <SQForm
-        initialValues={{movie: ''}}
-        onSubmit={handleSubmit}
-        muiGridProps={{spacing: 4}}
-        validationSchema={validationSchema}
-      >
-        <MoviesAutocomplete name="movie" />
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormResetButtonWithConfirmation

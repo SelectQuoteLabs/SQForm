@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DialogAlert, RoundedButton} from 'scplus-shared-components';
 
-import {useDialog} from '../../hooks/useDialog';
+import {DialogAlert, RoundedButton, useDialog} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
 function SQFormResetButtonWithConfirmation({
@@ -11,13 +10,18 @@ function SQFormResetButtonWithConfirmation({
   buttonTitle = 'Form Reset',
   confirmationContent,
   confirmationTitle = 'Reset Form',
-  variant = 'contained'
+  variant = 'contained',
+  onReset = () => {}
 }) {
   const [isOpen, {openDialog, closeDialog}] = useDialog();
   const {dirty, handleReset} = useFormButton(isDisabled);
 
   const handlePrimaryButtonClick = () => {
     handleReset();
+
+    // optional function prop consumer can pass to handle any additional side effects when resetting form
+    onReset();
+
     closeDialog();
   };
 
@@ -50,7 +54,8 @@ SQFormResetButtonWithConfirmation.propTypes = {
   confirmationTitle: PropTypes.string,
   confirmationContent: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
-  buttonTitle: PropTypes.string
+  buttonTitle: PropTypes.string,
+  onReset: PropTypes.func
 };
 
 export default SQFormResetButtonWithConfirmation;

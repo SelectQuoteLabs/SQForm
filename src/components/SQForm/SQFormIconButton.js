@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {IconButton} from 'scplus-shared-components';
 
 import {useFormButton} from './useFormButton';
+import {IconButton} from 'scplus-shared-components';
 
 function SQFormIconButton({
   IconComponent,

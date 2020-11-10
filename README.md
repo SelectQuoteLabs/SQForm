@@ -27,6 +27,18 @@ The commit will be validated through a linter pre-commit hook and will reject an
 
 Coming soon...
 
+## Migration from SC+ Shared Components Library
+
+- `> npm install sqform`
+
+- Update all SQForm related imports from `scplus-shared-components` to `sqform`
+
+- SQDialogForm was renamed to SQFormDialog (fix where imported)
+
+- SQDialogStepper was renamed to SQFormDialogStepper (fix where imported)
+
+- SQDialogStep was renamed to SQFormDialogStep (fix where imported)
+
 ### Initial Setup
 
 Coming Soon...

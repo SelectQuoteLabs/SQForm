@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RoundedButton} from 'scplus-shared-components';
 
+import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
 function SQFormButton({

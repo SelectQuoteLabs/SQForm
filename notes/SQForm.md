@@ -36,8 +36,6 @@ The `helperText` prop defaults to an empty space it is always present in the DOM
 
 As shown in the component prop-types, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
 
-See "Basic Form with Async Autocomplete" for example showing async data fetching for autocomplete options. This pattern requires wrapping `SQFormAutocomplete` in a component that tracks the input value and passes it to the useSWR query. See [pokeapi](https://pokeapi.co/docs/v2#pokemon-section) for info on the public API used for the example.
-
 **SQFormDropdown**
 
 As shown in the component prop-types, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
