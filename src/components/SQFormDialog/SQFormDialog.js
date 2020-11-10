@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
-import RoundedButton from 'scplus-shared-components';
+import {RoundedButton} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 import './SQFormDialog.css';
 
