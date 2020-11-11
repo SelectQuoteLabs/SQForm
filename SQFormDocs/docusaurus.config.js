@@ -83,7 +83,6 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          // It is recommended to set document id as docs home page (`docs/` path).
           homePageId: 'doc2',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/SelectQuoteLabs/SQForm/edit/master/'

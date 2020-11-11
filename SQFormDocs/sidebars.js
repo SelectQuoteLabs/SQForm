@@ -1,7 +1,6 @@
 module.exports = {
   someSidebar: {
-    'Getting Started': ['styleguide', 'doc2', 'doc3'],
-    Installation: ['mdx'],
+    'Getting Started': ['installation', 'styleguide', 'doc2'],
     'Component API': [
       'sq_form',
       'autocomplete',
