@@ -1,28 +1,28 @@
 ---
 id: installation
 title: Installation
+slug: /
 ---
 
 ### Install
 
-```sh
+```bash
 $ npm install sqform
 ```
 
 ### Prerequisites
 
-In order to use SQForm, you must install its peer dependencies
+In order to use SQForm, its peer dependencies must be installed
 
-```sh
+```bash
 $ npm install react react-dom @material-ui/core @material-ui/icons @material-ui/lab @material-ui/pickers
 ```
 
 ### Additional Setup
 
-In order to use the `SQFormDatePicker` component you must add the LocalizationProvider context provider.
+The `SQFormDatePicker` component relies on the Material-UI `LocalizationProvider` to work.
 
-```js
-// index.js
+```jsx
 import { LocalizationProvider } from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 
@@ -33,4 +33,4 @@ import MomentAdapter from '@material-ui/pickers/adapter/moment';
 
 :::tip
 
-Visit the SCPlus Shared Components docs for setting up Material-UI
+Visit the [SC+ Shared Components documentation](https://bitbucket.org/SelectQuote/scplus-shared-components/src/master/README.md) for setting up Material-UI

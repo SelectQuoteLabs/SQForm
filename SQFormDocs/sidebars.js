@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    'Getting Started': ['installation', 'styleguide', 'doc2'],
+    'Getting Started': ['installation', 'introduction'],
     'Component API': [
       'sq_form',
       'autocomplete',
@@ -12,8 +12,8 @@ module.exports = {
       'read_only_field',
       'reset_button_with_confirmation',
       'text_area',
-      'text_field'
+      'text_field',
     ],
-    Hooks: ['use_form', 'use_form_button']
-  }
+    Hooks: ['use_form', 'use_form_button'],
+  },
 };
