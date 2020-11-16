@@ -1,7 +1,4 @@
-const packageJSON = require('./package.json');
-
 module.exports = {
-  repositoryURL: packageJSON.repository.url,
   branches: 'master',
   plugins: [
     '@semantic-release/commit-analyzer',
