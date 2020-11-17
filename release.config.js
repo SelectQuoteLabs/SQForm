@@ -1,4 +1,5 @@
 module.exports = {
+  repositoryUrl: 'https://github.com/SelectQuoteLabs/SQForm.git',
   branches: 'master',
   plugins: [
     '@semantic-release/commit-analyzer',
