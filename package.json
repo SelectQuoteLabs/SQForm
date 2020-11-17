@@ -55,6 +55,9 @@
     "type": "git",
     "url": "https://github.com/SelectQuoteLabs/SQForm.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [],
   "author": "SelectQuoteLabs",
   "license": "MIT",
