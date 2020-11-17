@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.0...v1.0.1) (2020-11-17)
+
+
+### Bug Fixes
+
+* 🐛 declare npm publish as a public npm package ([1a0b52b](https://github.com/SelectQuoteLabs/SQForm/commit/1a0b52bc9955b5ce63ad045234851d3c2cf89b6b))
+
 ## 1.0.0 (2020-11-17)
 
 
