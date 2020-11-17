@@ -7,7 +7,7 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     library: 'SQForm',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'umd'
   },
   optimization: {
     splitChunks: {

@@ -33,9 +33,9 @@ Coming soon...
 
 ## Migration from SC+ Shared Components Library
 
-- `> npm install sqform`
+- `> npm install @selectquotelabs/sqform`
 
-- Update all SQForm related imports from `scplus-shared-components` to `sqform`
+- Update all SQForm related imports from `scplus-shared-components` to `@selectquotelabs/sqform`
 
 - SQDialogForm was renamed to SQFormDialog (fix where imported)
 
