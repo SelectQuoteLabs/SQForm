@@ -1,3 +1,10 @@
+### [1.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.1...v1.0.2) (2020-11-17)
+
+
+### Bug Fixes
+
+* 🐛 Change library target to umd to handle es6 modules ([2699189](https://github.com/SelectQuoteLabs/SQForm/commit/26991893dd2b3b7eeece706a1d50c854a4a63c34))
+
 ### [1.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.0...v1.0.1) (2020-11-17)
 
 
