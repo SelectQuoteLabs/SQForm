@@ -1,3 +1,10 @@
+### [1.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.2...v1.0.3) (2020-11-18)
+
+
+### Bug Fixes
+
+* 🐛 Fixes the broken build and migrates to rollup ([dbb8914](https://github.com/SelectQuoteLabs/SQForm/commit/dbb8914e74aef6a0f1ff5714bccf8d70259b66b6))
+
 ### [1.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.1...v1.0.2) (2020-11-17)
 
 
