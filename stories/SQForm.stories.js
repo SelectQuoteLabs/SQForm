@@ -6,6 +6,7 @@ import {action} from '@storybook/addon-actions';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import CheckMarkIcon from '@material-ui/icons/CheckCircle';
+import {SectionHeader} from 'scplus-shared-components';
 
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
@@ -21,7 +22,9 @@ import {
   SQFormCheckbox,
   SQFormDropdown,
   SQFormReadOnlyField,
-  SQFormResetButtonWithConfirmation
+  SQFormResetButtonWithConfirmation,
+  SQFormCheckboxGroup,
+  SQFormCheckboxGroupItem
 } from '../src';
 
 export default {
@@ -66,6 +69,11 @@ const MOCK_FORM_WITH_BOOLEANS_ENTITY = {
 const MOCK_FORM_FOR_FIELD_ARRAY = {
   ...MOCK_FORM_ENTITY,
   friends: ['Joe', 'Jane', 'Jack', 'Jill']
+};
+
+const MOCK_FORM_FOR_CHECKBOX_GROUP = {
+  friends: ['Joe', 'Jane', 'Jack', 'Jill'],
+  selectAll: false
 };
 
 const MOCK_STATE_OPTIONS = [
@@ -221,6 +229,102 @@ export const formWithFieldArray = () => {
         </Grid>
         <Grid item sm={12}>
           <Grid container justify="flex-end">
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+// oftentimes this data might be fetched asynchronously so we'd need to memoize it inside the component
+const names = [
+  'Jim',
+  'Jake',
+  'John',
+  'Jose',
+  'Jaipal',
+  'Joe',
+  'Jane',
+  'Jack',
+  'Jill'
+];
+
+export const formWithCheckboxGroup = () => {
+  return (
+    <Card raised style={{padding: 16}}>
+      <SectionHeader title="Friends" />
+      <SQForm
+        // the property you want to store the array of checked items determines the `name` prop below
+        initialValues={MOCK_FORM_FOR_CHECKBOX_GROUP}
+        onSubmit={handleSubmit}
+        muiGridProps={{spacing: 4}}
+      >
+        {/* the group's `name` string should always match the item's `name` string */}
+        <SQFormCheckboxGroup
+          name="friends"
+          useSelectAll={true}
+          selectAllData={names} // whatever you'd want 'select all' to include
+          selectAllContainerProps={{
+            // MUI Grid container props, plus a style prop if you're feeling fancy
+            direction: 'column',
+            wrap: 'nowrap',
+            style: {
+              padding: '16px 16px 0 16px'
+            }
+          }}
+          selectAllProps={
+            // any props that a SQFormCheckboxGroupItem accepts
+            // realistically, these would only include `isDisabled`, `size`, `label`,
+            {
+              label: 'ALL THE PEEPS'
+            }
+          }
+        >
+          {arrayHelpers => {
+            const {values} = arrayHelpers.form;
+            return (
+              <Grid
+                container
+                direction="column"
+                wrap="nowrap"
+                style={{
+                  height: 200,
+                  overflow: 'auto',
+                  padding: '0 16px'
+                }}
+              >
+                {names.map(name => {
+                  return (
+                    <Grid item key={name}>
+                      <SQFormCheckboxGroupItem
+                        name="friends"
+                        label={name}
+                        isChecked={values.friends.includes(name)}
+                        onChange={e => {
+                          if (e.target.checked) {
+                            arrayHelpers.push(name);
+                          } else {
+                            const idx = values.friends.indexOf(name);
+                            arrayHelpers.remove(idx);
+                          }
+                        }}
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            );
+          }}
+        </SQFormCheckboxGroup>
+        <Grid item sm={12}>
+          <Grid container justify="space-between">
+            <SQFormResetButtonWithConfirmation
+              variant="outlined"
+              confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+            >
+              RESET
+            </SQFormResetButtonWithConfirmation>
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>

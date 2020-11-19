@@ -11,6 +11,8 @@ export {default as SQFormAsyncAutocomplete} from './components/SQForm/SQFormAsyn
 export {default as SQFormAutocomplete} from './components/SQForm/SQFormAutocomplete';
 export {default as SQFormButton} from './components/SQForm/SQFormButton';
 export {default as SQFormCheckbox} from './components/SQForm/SQFormCheckbox';
+export {default as SQFormCheckboxGroup} from './components/SQForm/SQFormCheckboxGroup';
+export {default as SQFormCheckboxGroupItem} from './components/SQForm/SQFormCheckboxGroupItem';
 export {default as SQFormDatePicker} from './components/SQForm/SQFormDatePicker';
 export {default as SQFormDateTimePicker} from './components/SQForm/SQFormDateTimePicker';
 export {

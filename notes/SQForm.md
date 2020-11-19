@@ -28,6 +28,10 @@ If you're still reading this, I commend you. The docs say all of this by the way
 
 Use like any other checkbox. The value is provided from SQForm like the rest of the SQForm components.
 
+**SQFormCheckboxGroup & SQFormCheckboxGroupItem**
+
+`SQFormCheckboxGroup` acts as `SQFieldArray` does, using render props to pass `arrayHelpers` to your array of `SQFormCheckboxGroupItem`s. The required `name` prop must match the `initialValues` array property to store the checked items to be saved. `useSelectAll` triggers the 'Select All' checkbox at the top of the list, and if set to `true`, it must also receive an array `selectAllData` that represent the list of items to save if 'Select All' is checked. See 'Form With Checkbox Group' story for full example.
+
 **SQFormTextField**
 
 The `helperText` prop defaults to an empty space it is always present in the DOM. This prevents UI bounce when the placeholder text appears, changing the calculated height of the input.
