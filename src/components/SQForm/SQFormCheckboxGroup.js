@@ -17,6 +17,15 @@ export default function SQFormCheckboxGroup({
 }) {
   const {values, setFieldValue} = useSQFormContext();
 
+  const handleSelectAllChange = event => {
+    if (event.target.checked) {
+      setFieldValue(name, selectAllData);
+    } else {
+      setFieldValue(name, []);
+    }
+    setFieldValue('selectAll', !values.selectAll);
+  };
+
   if (!useSelectAll) {
     return <SQFieldArray name={name}>{children}</SQFieldArray>;
   }
@@ -28,14 +37,7 @@ export default function SQFormCheckboxGroup({
           name="selectAll"
           label="Select All"
           isChecked={values.selectAll}
-          onChange={e => {
-            if (e.target.checked) {
-              setFieldValue(name, selectAllData);
-            } else {
-              setFieldValue(name, []);
-            }
-            setFieldValue('selectAll', !values.selectAll);
-          }}
+          onChange={handleSelectAllChange}
           {...selectAllProps}
         />
       </Grid>
