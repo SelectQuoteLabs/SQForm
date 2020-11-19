@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.3...v1.1.0) (2020-11-19)
+
+
+### Features
+
+* 🎸 add SQFormCheckboxGroup and SQFormCheckboxGroupItem ([fdf96d7](https://github.com/SelectQuoteLabs/SQForm/commit/fdf96d702559d73c37be9dc84b0e014609105d11))
+
 ### [1.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.2...v1.0.3) (2020-11-18)
 
 
