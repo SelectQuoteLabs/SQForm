@@ -45,8 +45,6 @@ function SQFormDialog({
         onSave={onSave}
         saveButtonText={saveButtonText}
         title={title}
-        enableReinitialize={false}
-        initialValues={initialValues}
         muiGridProps={muiGridProps}
       />
     </Formik>
