@@ -1,21 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
-import Grid from '@material-ui/core/Grid';
-import {Formik, Form} from 'formik';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {RoundedButton} from 'scplus-shared-components';
-import SQFormButton from '../SQForm/SQFormButton';
-import './SQFormDialog.css';
-
-const Transition = React.forwardRef((props, ref) => {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
+import SQFormDialogInner from './SQFormDialogInner';
 
 function SQFormDialog({
   cancelButtonText = 'Cancel',
@@ -47,43 +34,19 @@ function SQFormDialog({
       validationSchema={validationYupSchema}
       validateOnMount={true}
     >
-      <Dialog
+      <SQFormDialogInner
+        cancelButtonText={cancelButtonText}
+        children={children}
         disableBackdropClick={disableBackdropClick}
+        isDisabled={isDisabled}
+        isOpen={isOpen}
         maxWidth={maxWidth}
-        open={isOpen}
-        TransitionComponent={Transition}
         onClose={onClose}
-      >
-        <Form>
-          <DialogTitle disableTypography={true}>
-            <Typography variant="h4">{title}</Typography>
-          </DialogTitle>
-          <DialogContent dividers={true}>
-            <Grid
-              {...muiGridProps}
-              container
-              spacing={muiGridProps.spacing || 2}
-            >
-              {children}
-            </Grid>
-          </DialogContent>
-          <DialogActions className="sqFormDialog__actions">
-            <RoundedButton
-              title={cancelButtonText}
-              onClick={onClose}
-              color="secondary"
-              variant="outlined"
-            >
-              {cancelButtonText}
-            </RoundedButton>
-            {onSave && (
-              <SQFormButton title={saveButtonText}>
-                {saveButtonText}
-              </SQFormButton>
-            )}
-          </DialogActions>
-        </Form>
-      </Dialog>
+        onSave={onSave}
+        saveButtonText={saveButtonText}
+        title={title}
+        muiGridProps={muiGridProps}
+      />
     </Formik>
   );
 }
