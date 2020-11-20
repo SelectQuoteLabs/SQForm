@@ -1,3 +1,10 @@
+### [1.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.1.0...v1.1.1) (2020-11-20)
+
+
+### Bug Fixes
+
+* 🐛 reset form state during onclose event ([03846b4](https://github.com/SelectQuoteLabs/SQForm/commit/03846b4e282ff5497307cd4f7a3df14cb98164c3))
+
 ## [1.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.0.3...v1.1.0) (2020-11-19)
 
 
