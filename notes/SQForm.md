@@ -32,6 +32,12 @@ Use like any other checkbox. The value is provided from SQForm like the rest of 
 
 `SQFormCheckboxGroup` acts as `SQFieldArray` does, using render props to pass `arrayHelpers` to your array of `SQFormCheckboxGroupItem`s. The required `name` prop must match the `initialValues` array property to store the checked items to be saved. `useSelectAll` triggers the 'Select All' checkbox at the top of the list, and if set to `true`, it must also receive an array `selectAllData` that represent the list of items to save if 'Select All' is checked. See 'Form With Checkbox Group' story for full example.
 
+**SQFormMultiSelect**
+
+`SQFormMultiSelect` uses Material UI's base Select input with the `multiple` flag passed in by default. The component handles the
+"Select All" internally. The required `name` prop must match the `initialValues` array property to store the selected items. The
+`useSelectAll` prop triggers the "Select All" select option at the top of the list.
+
 **SQFormTextField**
 
 The `helperText` prop defaults to an empty space it is always present in the DOM. This prevents UI bounce when the placeholder text appears, changing the calculated height of the input.
