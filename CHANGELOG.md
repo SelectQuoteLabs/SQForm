@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.1.1...v1.2.0) (2020-11-23)
+
+
+### Features
+
+* 🎸 SQForm MultiSelect ([33b85ab](https://github.com/SelectQuoteLabs/SQForm/commit/33b85ab802b404ec119c4c496c461333df466d2c))
+
 ### [1.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.1.0...v1.1.1) (2020-11-20)
 
 
