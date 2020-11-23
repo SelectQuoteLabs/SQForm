@@ -94,7 +94,19 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Joe', value: 'Joe'},
   {label: 'Jane', value: 'Jane'},
   {label: 'Jack', value: 'Jack'},
-  {label: 'Jill', value: 'Jill'}
+  {label: 'Jill', value: 'Jill'},
+  {label: 'John', value: 'John'},
+  {label: 'Jocelyn', value: 'Jocelyn'},
+  {label: 'Jacob', value: 'Jacob'},
+  {label: 'Jackson', value: 'Jackson'},
+  {label: 'Josh', value: 'Josh'},
+  {label: 'Joseph', value: 'Joseph'},
+  {label: 'Jeremy', value: 'Jeremy'},
+  {label: 'Joel', value: 'Joel'},
+  {label: 'Jonah', value: 'Jonah'},
+  {label: 'Judah', value: 'Judah'},
+  {label: 'Jimmy', value: 'Jimmy'},
+  {label: 'Jessica', value: 'Jessica'}
 ];
 
 const handleSubmit = (values, actions) => {

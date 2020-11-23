@@ -9,8 +9,25 @@ import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import {useSQFormContext} from '../../../src';
-
 import {useForm} from './useForm';
+
+/**
+ * Material UI has a jank issue with the multi select form,
+ * requiring us to pass in these MenuProps
+ * https://stackoverflow.com/questions/59785482/multiselect-box-popover-keeps-jumping-when-scroll-or-select-items
+ */
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  },
+  variant: 'menu',
+  getContentAnchorEl: null
+};
 
 function SQFormMultiSelect({
   children,
@@ -57,6 +74,7 @@ function SQFormMultiSelect({
         fullWidth={true}
         labelId={labelID}
         renderValue={selected => selected.join(', ')}
+        MenuProps={MenuProps}
       >
         {useSelectAll && (
           <MenuItem
