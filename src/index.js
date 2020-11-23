@@ -25,3 +25,4 @@ export {default as SQFormReadOnlyField} from './components/SQForm/SQFormReadOnly
 export {default as SQFormResetButtonWithConfirmation} from './components/SQForm/SQFormResetButtonWithConfirmation';
 export {default as SQFormTextarea} from './components/SQForm/SQFormTextarea';
 export {default as SQFormTextField} from './components/SQForm/SQFormTextField';
+export {default as SQFormMultiSelect} from './components/SQForm/SQFormMultiSelect';
