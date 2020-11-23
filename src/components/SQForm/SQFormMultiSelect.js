@@ -8,6 +8,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
 import {useForm} from './useForm';
 
@@ -36,9 +37,11 @@ function SQFormMultiSelect({
   label,
   name,
   size = 'auto',
-  useSelectAll = true
+  useSelectAll = true,
+  toolTipPlacement = 'bottom'
 }) {
   const {setFieldValue} = useSQFormContext();
+  const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
     formikField: {field},
     fieldState: {isFieldError},
@@ -47,52 +50,89 @@ function SQFormMultiSelect({
     name,
     isRequired
   });
+
   const labelID = label.toLowerCase();
+  const toolTipTitle = field.value.join(', ');
+
+  const getIsSelectAllChecked = value => value.includes('ALL');
+  const getIsSelectNoneChecked = value => value.includes('NONE');
+
+  const getValues = (
+    children,
+    isSelectAllChecked,
+    isSelectNoneChecked,
+    value
+  ) => {
+    if (isSelectAllChecked) {
+      return children.map(option => option.value);
+    }
+
+    if (isSelectNoneChecked) {
+      return [];
+    }
+
+    return value;
+  };
 
   const handleMultiSelectChange = event => {
-    const selectAllWasChecked = event.target.value.includes('ALL');
-    const selectNoneWasChecked = event.target.value.includes('NONE');
-
-    const values = selectAllWasChecked
-      ? children.map(option => option.value)
-      : selectNoneWasChecked
-      ? []
-      : event.target.value;
+    const value = event.target.value;
+    const isSelectAllChecked = getIsSelectAllChecked(value);
+    const isSelectNoneChecked = getIsSelectNoneChecked(value);
+    const values = getValues(
+      children,
+      isSelectAllChecked,
+      isSelectNoneChecked,
+      value
+    );
 
     setFieldValue(name, values);
+  };
+
+  const toggleTooltip = () => {
+    setToolTipEnabled(!toolTipEnabled);
   };
 
   return (
     <Grid item sm={size}>
       <InputLabel id={labelID}>{label}</InputLabel>
-      <Select
-        multiple
-        input={<Input disabled={isDisabled} name={name} />}
-        value={field.value}
-        onBlur={handleBlur}
-        onChange={handleMultiSelectChange}
-        fullWidth={true}
-        labelId={labelID}
-        renderValue={selected => selected.join(', ')}
-        MenuProps={MenuProps}
+      <Tooltip
+        placement={toolTipPlacement}
+        arrow
+        enterDelay={1000}
+        leaveDelay={100}
+        title={toolTipEnabled ? toolTipTitle : ''}
       >
-        {useSelectAll && (
-          <MenuItem
-            value={children.length === field.value.length ? 'NONE' : 'ALL'}
-          >
-            <Checkbox checked={children.length === field.value.length} />
-            <ListItemText primary="Select All" />
-          </MenuItem>
-        )}
-        {children.map(option => {
-          return (
-            <MenuItem key={option.value} value={option.value}>
-              <Checkbox checked={field.value.includes(option.value)} />
-              <ListItemText primary={option.value} />
+        <Select
+          multiple
+          input={<Input disabled={isDisabled} name={name} />}
+          value={field.value}
+          onBlur={handleBlur}
+          onChange={handleMultiSelectChange}
+          fullWidth={true}
+          labelId={labelID}
+          renderValue={selected => selected.join(', ')}
+          MenuProps={MenuProps}
+          onOpen={toggleTooltip}
+          onClose={toggleTooltip}
+        >
+          {useSelectAll && (
+            <MenuItem
+              value={children.length === field.value.length ? 'NONE' : 'ALL'}
+            >
+              <Checkbox checked={children.length === field.value.length} />
+              <ListItemText primary="Select All" />
             </MenuItem>
-          );
-        })}
-      </Select>
+          )}
+          {children.map(option => {
+            return (
+              <MenuItem key={option.value} value={option.value}>
+                <Checkbox checked={field.value.includes(option.value)} />
+                <ListItemText primary={option.value} />
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </Tooltip>
       <FormHelperText error={isFieldError} required={isRequired}>
         {HelperTextComponent}
       </FormHelperText>
@@ -119,7 +159,9 @@ SQFormMultiSelect.propTypes = {
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** This property will allow the end user to check a "Select All" box */
-  useSelectAll: PropTypes.bool
+  useSelectAll: PropTypes.bool,
+  /** Use MUI's Tooltip Position Values */
+  toolTipPlacement: PropTypes.string
 };
 
 export default SQFormMultiSelect;
