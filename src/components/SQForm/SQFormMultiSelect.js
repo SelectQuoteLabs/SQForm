@@ -127,7 +127,7 @@ function SQFormMultiSelect({
             return (
               <MenuItem key={option.value} value={option.value}>
                 <Checkbox checked={field.value.includes(option.value)} />
-                <ListItemText primary={option.value} />
+                <ListItemText primary={option.label} />
               </MenuItem>
             );
           })}
