@@ -91,22 +91,22 @@ const MOCK_FORM_FOR_MULTISELECT = {
 };
 
 const MOCK_FRIENDS_OPTIONS = [
-  {label: 'Joe', value: 'Joe'},
-  {label: 'Jane', value: 'Jane'},
-  {label: 'Jack', value: 'Jack'},
-  {label: 'Jill', value: 'Jill'},
-  {label: 'John', value: 'John'},
-  {label: 'Jocelyn', value: 'Jocelyn'},
-  {label: 'Jacob', value: 'Jacob'},
-  {label: 'Jackson', value: 'Jackson'},
-  {label: 'Josh', value: 'Josh'},
-  {label: 'Joseph', value: 'Joseph'},
-  {label: 'Jeremy', value: 'Jeremy'},
-  {label: 'Joel', value: 'Joel'},
-  {label: 'Jonah', value: 'Jonah'},
-  {label: 'Judah', value: 'Judah'},
-  {label: 'Jimmy', value: 'Jimmy'},
-  {label: 'Jessica', value: 'Jessica'}
+  {label: 'Joe', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jane', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jack', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jill', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'John', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jocelyn', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jacob', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jackson', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Josh', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Joseph', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jeremy', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Joel', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jonah', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Judah', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
 ];
 
 const handleSubmit = (values, actions) => {
