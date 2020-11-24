@@ -1,3 +1,10 @@
+### [1.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.0...v1.2.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* 🐛 Fixed a list item label ([c173f6e](https://github.com/SelectQuoteLabs/SQForm/commit/c173f6e48f846a0f6a06939700122d29fbbc22c4))
+
 ## [1.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.1.1...v1.2.0) (2020-11-23)
 
 
