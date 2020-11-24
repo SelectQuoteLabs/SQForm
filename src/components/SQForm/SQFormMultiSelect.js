@@ -92,6 +92,19 @@ function SQFormMultiSelect({
     setToolTipEnabled(!toolTipEnabled);
   };
 
+  /**
+   * this handles scenarios where label and value are not the same,
+   * e.g., if value is an "ID"
+   */
+  const getRenderValue = selected => {
+    const selectedChildren = children
+      ?.filter(child => selected.includes(child.value))
+      ?.map(child => child.label)
+      ?.join(', ');
+
+    return selectedChildren;
+  };
+
   return (
     <Grid item sm={size}>
       <InputLabel id={labelID}>{label}</InputLabel>
@@ -110,7 +123,7 @@ function SQFormMultiSelect({
           onChange={handleMultiSelectChange}
           fullWidth={true}
           labelId={labelID}
-          renderValue={selected => selected.join(', ')}
+          renderValue={getRenderValue}
           MenuProps={MenuProps}
           onOpen={toggleTooltip}
           onClose={toggleTooltip}
