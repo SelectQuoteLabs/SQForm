@@ -1,3 +1,10 @@
+### [1.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.1...v1.2.2) (2020-11-24)
+
+
+### Bug Fixes
+
+* 🐛 Fixed a multi select value render ([a17abc1](https://github.com/SelectQuoteLabs/SQForm/commit/a17abc1672b2f87f9904bf84164390ad6f1906e4))
+
 ### [1.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.0...v1.2.1) (2020-11-24)
 
 
