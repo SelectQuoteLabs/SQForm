@@ -5,10 +5,6 @@ on:
     branches:
       - master
 
-defaults:
-  run:
-    working-directory: SQFormDocs
-
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -24,9 +20,10 @@ jobs:
           npm run build
 
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: master
           FOLDER: SQFormDocs/build
           TARGET_FOLDER: docs
+          CLEAN: true
