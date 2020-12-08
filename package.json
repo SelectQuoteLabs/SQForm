@@ -15,7 +15,8 @@
     "nuke-everything": "rm -rf ./dist && rm -rf ./node_modules && rm -f package-lock.json",
     "commit": "npx git-cz",
     "format": "npx prettier --write 'src/**/*.js'",
-    "docs": "cd SQFormDocs && npm start"
+    "docs": "cd SQFormDocs && npm start",
+    "build-docs": "cd SQFormDocs && npm ci && npm run build"
   },
   "files": [
     "/dist"
