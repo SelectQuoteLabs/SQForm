@@ -7,6 +7,7 @@ import {
   DialogTitle,
   Divider,
   Grid,
+  makeStyles,
   Slide,
   Step,
   StepButton,
@@ -26,6 +27,15 @@ export function SQFormDialogStep({children}) {
 const Transition = React.forwardRef((props, ref) => {
   return <Slide direction="down" ref={ref} {...props} />;
 });
+
+const useStyles = makeStyles({
+  root: {
+    padding: 20
+    // whiteSpace: 'nowrap'
+  }
+});
+
+// change text color to same as icon color
 
 export function SQFormDialogStepper({
   cancelButtonText = 'Cancel',
@@ -49,6 +59,8 @@ export function SQFormDialogStepper({
   const currentChild = steps[activeStep];
   const [completed, setCompleted] = React.useState({});
 
+  const classes = useStyles();
+
   const totalSteps = React.useMemo(() => {
     return steps.length;
   }, [steps]);
@@ -58,8 +70,11 @@ export function SQFormDialogStepper({
   }, [activeStep, totalSteps]);
 
   // Our last step doesn't get marked complete
-  const allStepsCompleted = () =>
-    Object.keys(completed).length === totalSteps - 1;
+  const allStepsCompleted = () => {
+    console.log(totalSteps);
+    console.log(Object.keys(completed));
+    return Object.keys(completed).length === totalSteps - 1;
+  };
 
   const handleNext = () => {
     const newActiveStep =
@@ -133,26 +148,52 @@ export function SQFormDialogStepper({
   function SubmitButton() {
     const {errors, values} = useFormikContext();
 
+    // const isButtonDisabled = React.useMemo(() => {
+    //   const currentStepKeys = currentChild.props.validationSchema._nodes;
+
+    //   const formValues = Object.values(values).filter(val => val);
+    //   if (!formValues.length) {
+    //     return true;
+    //   }
+
+    //   if (
+    //     currentChild.props.validationSchema._nodes.some(step =>
+    //       Object.keys(errors).includes(step)
+    //     )
+    //   ) {
+    //     return true;
+    //   }
+
+    //   return false;
+    // }, [errors, values]);
+
     const isButtonDisabled = React.useMemo(() => {
       const currentStepKeys = currentChild.props.validationSchema._nodes;
-      const currentStepValues = Object.keys(values)
-        .filter(key => currentStepKeys.includes(key))
-        .reduce((obj, key) => {
-          obj[key] = values[key];
-          return obj;
-        }, {});
-      const formValues = Object.values(currentStepValues).filter(val => val);
+      console.log('currentStepKeys', currentChild.props.validationSchema);
+      // const currentStepValues = Object.keys(values)
+      //   .filter(key => currentStepKeys.includes(key))
+      //   .reduce((obj, key) => {
+      //     obj[key] = values[key];
+      //     return obj;
+      //   }, {});
+      // console.log('currentStepValues', currentStepValues);
+      // const formValues = Object.values(currentStepValues).filter(val => val);
+      // console.log('formValues', formValues);
+      const formValues = Object.values(values).filter(val => val);
+
       if (
         !formValues.length ||
         currentStepKeys.some(step => Object.keys(errors).includes(step))
       ) {
+        // console.log('formvalues', !formValues.length);
         return true;
       }
 
-      if (allStepsCompleted() && isLastStep) {
+      if (isLastStep && allStepsCompleted()) {
+        console.log('not complete');
         return false;
       }
-      return true;
+      return false;
     }, [errors, values]);
     return (
       <RoundedButton
@@ -160,7 +201,7 @@ export function SQFormDialogStepper({
         isDisabled={isButtonDisabled}
         title={cancelButtonText}
       >
-        Submit
+        {isLastStep ? 'Submit' : 'Next'}
       </RoundedButton>
     );
   }
@@ -184,11 +225,9 @@ export function SQFormDialogStepper({
             <DialogTitle disableTypography={true}>
               <Typography variant="h4">{title}</Typography>
             </DialogTitle>
-            <DialogContent
-              dividers={true}
-              style={{...contentStyle, paddingTop: '.75rem'}}
-            >
-              <div className="SQFormDialogStepper__stepContainer">
+            <Divider />
+            <div className="SQFormDialogStepper__stepContainer">
+              <Grid container className="SQFormDialogStepper__stepper">
                 <IconButton
                   title="Previous Step"
                   IconComponent={ArrowLeftIcon}
@@ -196,23 +235,32 @@ export function SQFormDialogStepper({
                   isIconTeal={true}
                   onClick={handleBack}
                 />
-                <div className="SQFormDialogStepper__stepper">
-                  <Stepper nonLinear activeStep={activeStep}>
-                    {steps.map((child, index) => (
-                      <Step key={child.props.label}>
-                        <StepButton
-                          onClick={handleStep(index)}
-                          completed={completed[index]}
-                        >
-                          {child?.props.label}
-                        </StepButton>
-                      </Step>
-                    ))}
-                  </Stepper>
-                </div>
+                {/* <div className="SQFormDialogStepper__stepper"> */}
+                <Stepper nonLinear activeStep={activeStep} classes={classes}>
+                  {steps.map((child, index) => (
+                    <Step key={child.props.label}>
+                      <StepButton
+                        classes={classes}
+                        onClick={handleStep(index)}
+                        completed={completed[index]}
+                      >
+                        {child?.props.label}
+                      </StepButton>
+                    </Step>
+                  ))}
+                </Stepper>
+                {/* </div> */}
                 <NextButton />
-              </div>
-              <Divider className="SQFormDialogStepper__divider" />
+              </Grid>
+            </div>
+            <DialogContent
+              dividers={true}
+              style={{
+                ...contentStyle,
+                paddingTop: '40px',
+                paddingBottom: '40px'
+              }}
+            >
               <Grid
                 {...muiGridProps}
                 container
