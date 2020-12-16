@@ -129,7 +129,7 @@ export function SQFormDialogStepper({
       if (!formValues.length || isLastStep) return true;
 
       if (
-        currentChild.props.validationSchema?._nodes?.some(step =>
+        currentChild.props.validationSchema._nodes.some(step =>
           Object.keys(errors).includes(step)
         )
       ) {
@@ -216,7 +216,6 @@ export function SQFormDialogStepper({
                   isIconTeal={true}
                   onClick={handleBack}
                 />
-                {/* <div className="SQFormDialogStepper__stepper"> */}
                 <Stepper nonLinear activeStep={activeStep} classes={classes}>
                   {steps.map((child, index) => (
                     <Step key={child.props.label}>
@@ -229,7 +228,6 @@ export function SQFormDialogStepper({
                     </Step>
                   ))}
                 </Stepper>
-                {/* </div> */}
                 <NextButton />
               </Grid>
             </div>
