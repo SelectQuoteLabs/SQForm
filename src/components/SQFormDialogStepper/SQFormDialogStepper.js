@@ -30,12 +30,16 @@ const Transition = React.forwardRef((props, ref) => {
 
 const useStyles = makeStyles({
   root: {
-    padding: 20
-    // whiteSpace: 'nowrap'
+    padding: 20,
+    '& svg': {
+      fontSize: 30
+    },
+    '& span': {
+      fontSize: 15,
+      whiteSpace: 'nowrap'
+    }
   }
 });
-
-// change text color to same as icon color
 
 export function SQFormDialogStepper({
   cancelButtonText = 'Cancel',
@@ -71,8 +75,6 @@ export function SQFormDialogStepper({
 
   // Our last step doesn't get marked complete
   const allStepsCompleted = () => {
-    console.log(totalSteps);
-    console.log(Object.keys(completed));
     return Object.keys(completed).length === totalSteps - 1;
   };
 
@@ -120,11 +122,14 @@ export function SQFormDialogStepper({
     const {errors, values} = useFormikContext();
 
     const isButtonDisabled = React.useMemo(() => {
+      if (!currentChild.props.validationSchema) {
+        return false;
+      }
       const formValues = Object.values(values).filter(val => val);
       if (!formValues.length || isLastStep) return true;
 
       if (
-        currentChild.props.validationSchema._nodes.some(step =>
+        currentChild.props.validationSchema?._nodes?.some(step =>
           Object.keys(errors).includes(step)
         )
       ) {
@@ -136,6 +141,8 @@ export function SQFormDialogStepper({
 
     return (
       <IconButton
+        height={'80px'}
+        width={'80px'}
         title="Next Step"
         IconComponent={ArrowRightIcon}
         isDisabled={isButtonDisabled}
@@ -148,49 +155,21 @@ export function SQFormDialogStepper({
   function SubmitButton() {
     const {errors, values} = useFormikContext();
 
-    // const isButtonDisabled = React.useMemo(() => {
-    //   const currentStepKeys = currentChild.props.validationSchema._nodes;
-
-    //   const formValues = Object.values(values).filter(val => val);
-    //   if (!formValues.length) {
-    //     return true;
-    //   }
-
-    //   if (
-    //     currentChild.props.validationSchema._nodes.some(step =>
-    //       Object.keys(errors).includes(step)
-    //     )
-    //   ) {
-    //     return true;
-    //   }
-
-    //   return false;
-    // }, [errors, values]);
-
     const isButtonDisabled = React.useMemo(() => {
+      if (!currentChild.props.validationSchema) {
+        return false;
+      }
       const currentStepKeys = currentChild.props.validationSchema._nodes;
-      console.log('currentStepKeys', currentChild.props.validationSchema);
-      // const currentStepValues = Object.keys(values)
-      //   .filter(key => currentStepKeys.includes(key))
-      //   .reduce((obj, key) => {
-      //     obj[key] = values[key];
-      //     return obj;
-      //   }, {});
-      // console.log('currentStepValues', currentStepValues);
-      // const formValues = Object.values(currentStepValues).filter(val => val);
-      // console.log('formValues', formValues);
       const formValues = Object.values(values).filter(val => val);
 
       if (
         !formValues.length ||
         currentStepKeys.some(step => Object.keys(errors).includes(step))
       ) {
-        // console.log('formvalues', !formValues.length);
         return true;
       }
 
       if (isLastStep && allStepsCompleted()) {
-        console.log('not complete');
         return false;
       }
       return false;
@@ -229,6 +208,8 @@ export function SQFormDialogStepper({
             <div className="SQFormDialogStepper__stepContainer">
               <Grid container className="SQFormDialogStepper__stepper">
                 <IconButton
+                  height={'80px'}
+                  width={'80px'}
                   title="Previous Step"
                   IconComponent={ArrowLeftIcon}
                   isDisabled={activeStep === 0}
@@ -240,7 +221,6 @@ export function SQFormDialogStepper({
                   {steps.map((child, index) => (
                     <Step key={child.props.label}>
                       <StepButton
-                        classes={classes}
                         onClick={handleStep(index)}
                         completed={completed[index]}
                       >
@@ -256,9 +236,9 @@ export function SQFormDialogStepper({
             <DialogContent
               dividers={true}
               style={{
-                ...contentStyle,
                 paddingTop: '40px',
-                paddingBottom: '40px'
+                paddingBottom: '40px',
+                ...contentStyle
               }}
             >
               <Grid

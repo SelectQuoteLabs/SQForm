@@ -30,55 +30,70 @@ const handleSubmit = (values, actions) => {
 };
 
 export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
-  const prioritizedList = [
+  const quotesList = [
     {
       id: 1,
-      firstName: 'Ashley',
-      lastName: 'Payne',
-      ColorCode: 'Yellow',
+      accountId: 1273123,
+      name: 'Ashley Payne',
       PLRule: 'Quoted - LowInterest - Attempt2'
     },
     {
       id: 2,
       accountId: 1277773123,
-      firstName: 'Tom',
-      lastName: 'Payne',
-      ColorCode: 'Green',
+      name: 'Tom Payne',
+      PLRule: 'Quoted - LowInterest - Attempt2'
+    },
+    {
+      id: 3,
+      accountId: 1277773123,
+      name: 'Tom Tim',
+      PLRule: 'Quoted - LowInterest - Attempt2'
+    },
+    {
+      id: 4,
+      accountId: 1277773123,
+      name: 'Tom Thumb',
       PLRule: 'Quoted - LowInterest - Attempt2'
     }
   ];
 
-  const agentPVList = () => {
-    if (!prioritizedList) return [];
-    return prioritizedList.map(listItem => ({
+  const quotedList = () => {
+    const mappedList = quotesList.map(listItem => ({
       id: listItem.id,
-      header: listItem.accountId
-        ? `Acct ID : ${listItem.accountId}`
-        : 'Create a New Quote',
-      secondaryRows: listItem.accountId && [
-        `Name : ${listItem.firstName} ${listItem.lastName}`,
+      header: `Acct ID : ${listItem.accountId}`,
+      secondaryRows: [
+        `Name : ${listItem.name}`,
         `PV Rule : ${listItem.PLRule}`
       ],
       onClick: () => {
-        listItem.accountId && alert(`Account ${listItem.accountId}`);
+        alert(`Account ${listItem.accountId}`);
       }
     }));
+    return [
+      {
+        header: 'Create a New Quote',
+        id: 123,
+        onClick: () => {
+          alert(`Create new account`);
+        }
+      },
+      ...mappedList
+    ];
   };
 
   const tabOptions = [
     {
       label: 'Agent PV',
       value: 'agentPV',
-      listItems: agentPVList(),
-      handleRefresh: () => {
-        alert('Refreshing Prioritized List');
-      }
+      listItems: quotedList(),
+      isSelectable: true
     }
   ];
 
-  const MOCK_FORM_FOR_CHECKBOX_GROUP = {
+  const initialValues = {
     friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-    selectAll: false
+    selectAll: false,
+    quote: ''
   };
   const names = [
     'Jim',
@@ -99,32 +114,26 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         title="Quote Tool"
         isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
         onClose={action('Close button clicked')}
-        contentHeight="25rem"
-        contentStyle={{height: '30rem'}}
+        contentStyle={{
+          height: '265px',
+          padding: '15px 15px'
+        }}
         fullWidth
         muiGridProps={{
           justify: 'space-between',
           alignItems: 'center'
         }}
-        initialValues={{
-          ...MOCK_FORM_FOR_CHECKBOX_GROUP
-        }}
+        initialValues={initialValues}
         setValues={() => {
           console.log('values set');
         }}
         onSubmit={handleSubmit}
       >
-        <SQFormDialogStep
-          label="Quotes"
-          validationSchema={Yup.object({
-            firstName: Yup.string(),
-            lastName: Yup.string()
-          })}
-        >
+        <SQFormDialogStep label="Quotes">
           <CardList
             shouldRenderHeader={false}
-            contentWidth="45rem"
-            contentHeight="85vh"
+            contentWidth="100%"
+            contentHeight="250px"
             cardStyle={{minWidth: 'auto'}}
             isInitiallyExpanded={true}
             isExpandable={boolean('isExpandable', true)}
@@ -162,7 +171,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
                   direction="column"
                   wrap="nowrap"
                   style={{
-                    height: 200,
+                    height: 180,
                     overflow: 'auto',
                     padding: '0 16px'
                   }}
@@ -204,8 +213,9 @@ export const SQDialogStepperWithValidation = () => {
         title="SQ Stepper Form"
         isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
         onClose={action('Close button clicked')}
-        contentHeight="25rem"
+        contentStyle={{height: '200px'}}
         fullWidth
+        maxWidth="md"
         muiGridProps={{
           justify: 'space-between',
           alignItems: 'center'
@@ -257,8 +267,8 @@ export const SQDialogStepperWithValidation = () => {
             accountID: Yup.mixed().when('newAccount', {
               is: true,
               then: Yup.number()
-                .required('Required')
-                .min(100, 'Since this is a new account we need the number')
+                .required('Required for new account')
+                .min(100, 'Required for new account')
             })
           })}
         >
@@ -276,12 +286,7 @@ export const SQDialogStepperWithValidation = () => {
             description: Yup.string().required('Required')
           })}
         >
-          <SQFormTextField
-            fullWidth
-            name="description"
-            label="Description"
-            isRequired={true}
-          />
+          <SQFormTextField fullWidth name="description" label="Description" />
         </SQFormDialogStep>
       </SQFormDialogStepper>
     </>
