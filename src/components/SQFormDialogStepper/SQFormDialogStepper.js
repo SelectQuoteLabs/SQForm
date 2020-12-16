@@ -74,13 +74,12 @@ export function SQFormDialogStepper({
   }, [activeStep, totalSteps]);
 
   // Our last step doesn't get marked complete
-  const allStepsCompleted = () => {
-    return Object.keys(completed).length === totalSteps - 1;
-  };
+  const isAllStepsCompleted = () =>
+    Object.keys(completed).length === totalSteps - 1;
 
   const handleNext = () => {
     const newActiveStep =
-      isLastStep && !allStepsCompleted
+      isLastStep && !isAllStepsCompleted
         ? // It's the last step, but not all steps have been completed,
           // find the first step that has been completed
           steps.findIndex((step, i) => !(i in completed))
@@ -129,7 +128,7 @@ export function SQFormDialogStepper({
       if (!formValues.length || isLastStep) return true;
 
       if (
-        currentChild.props.validationSchema._nodes.some(step =>
+        Object.keys(currentChild.props.validationSchema.fields).some(step =>
           Object.keys(errors).includes(step)
         )
       ) {
@@ -159,7 +158,9 @@ export function SQFormDialogStepper({
       if (!currentChild.props.validationSchema) {
         return false;
       }
-      const currentStepKeys = currentChild.props.validationSchema._nodes;
+      const currentStepKeys = Object.keys(
+        currentChild.props.validationSchema.fields
+      );
       const formValues = Object.values(values).filter(val => val);
 
       if (
@@ -169,7 +170,7 @@ export function SQFormDialogStepper({
         return true;
       }
 
-      if (isLastStep && allStepsCompleted()) {
+      if (isLastStep && isAllStepsCompleted()) {
         return false;
       }
       return false;

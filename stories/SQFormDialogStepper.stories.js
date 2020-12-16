@@ -237,7 +237,7 @@ export const SQDialogStepperWithValidation = () => {
           label="Personal Data"
           validationSchema={Yup.object({
             firstName: Yup.string().required('Required'),
-            lastName: Yup.string().required('Required name.')
+            lastName: Yup.string().required('Required')
           })}
         >
           <SQFormTextField
