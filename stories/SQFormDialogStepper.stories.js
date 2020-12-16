@@ -1,10 +1,9 @@
 import React from 'react';
 import * as Yup from 'yup';
-import Grid from '@material-ui/core/Grid';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {withInfo} from '@storybook/addon-info';
 import {action} from '@storybook/addon-actions';
-import {Typography} from '@material-ui/core';
+import {Typography, Grid} from '@material-ui/core';
 import {CardList} from 'scplus-shared-components';
 import markdown from '../notes/SQFormDialogStepper.md';
 

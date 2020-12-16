@@ -140,8 +140,8 @@ export function SQFormDialogStepper({
 
     return (
       <IconButton
-        height={'80px'}
-        width={'80px'}
+        height="80px"
+        width="80px"
         title="Next Step"
         IconComponent={ArrowRightIcon}
         isDisabled={isButtonDisabled}
@@ -209,8 +209,8 @@ export function SQFormDialogStepper({
             <div className="SQFormDialogStepper__stepContainer">
               <Grid container className="SQFormDialogStepper__stepper">
                 <IconButton
-                  height={'80px'}
-                  width={'80px'}
+                  height="80px"
+                  width="80px"
                   title="Previous Step"
                   IconComponent={ArrowLeftIcon}
                   isDisabled={activeStep === 0}
@@ -233,7 +233,7 @@ export function SQFormDialogStepper({
               </Grid>
             </div>
             <DialogContent
-              dividers={true}
+              dividers
               style={{
                 paddingTop: '40px',
                 paddingBottom: '40px',
@@ -270,8 +270,8 @@ export function SQFormDialogStepper({
 SQFormDialogStepper.propTypes = {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText: PropTypes.string,
-  /** The content to be rendered in the dialog body */
-  children: PropTypes.node.isRequired,
+  /** The content to be rendered in the dialog body.  Will be an array of React elements. */
+  children: PropTypes.array.isRequired,
   /** If true, clicking the backdrop will not fire the onClose callback. */
   disableBackdropClick: PropTypes.bool,
   /** Sets the dialog to the maxWidth. */
