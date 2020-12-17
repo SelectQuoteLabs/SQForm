@@ -1,3 +1,13 @@
+## [1.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.2...v1.3.0) (2020-12-17)
+
+
+### Features
+
+* 🎸 Updated import styles, simplified booleans ([9865e43](https://github.com/SelectQuoteLabs/SQForm/commit/9865e43f94c1ad4f5869c37143e0690ff48ecefa))
+* 🎸 Updated primary button and styling ([4c14df7](https://github.com/SelectQuoteLabs/SQForm/commit/4c14df7bc1660956388de3f0305699ef351c4465))
+* 🎸 Updated stepper next button and UI along with better ex ([5a7ecfe](https://github.com/SelectQuoteLabs/SQForm/commit/5a7ecfe112bda0275c879bb45dccfca6125d7afe))
+* 🎸 Updated the boolean variable name and validation schema ([84436de](https://github.com/SelectQuoteLabs/SQForm/commit/84436de51e8cc484eff7084f17d3e19f3900dda8))
+
 ### [1.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.1...v1.2.2) (2020-11-24)
 
 
