@@ -7,13 +7,8 @@
 
 .SQFormDialogStepper__stepContainer {
   text-align: center;
-  padding-bottom: 1rem;
 }
 
 .SQFormDialogStepper__stepper {
-  display: inline-block;
-}
-
-.SQFormDialogStepper__divider {
-  margin-bottom: 2rem !important; /* material-ui override */
+  justify-content: center;
 }
