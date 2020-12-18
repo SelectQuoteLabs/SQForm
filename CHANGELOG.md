@@ -1,3 +1,10 @@
+### [1.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.3.0...v1.3.1) (2020-12-18)
+
+
+### Bug Fixes
+
+* 🐛 Updated how styling is delivered in component ([a4c2589](https://github.com/SelectQuoteLabs/SQForm/commit/a4c25896344ac219e1057ddedf3cfe77d38cead1))
+
 ## [1.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.2.2...v1.3.0) (2020-12-17)
 
 
