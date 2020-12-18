@@ -29,7 +29,7 @@ The commit will be validated through a linter pre-commit hook and will reject an
 
 ## Consuming
 
-Coming soon...
+- `> npm install @selectquotelabs/sqform`
 
 ## Migration from SC+ Shared Components Library
 
