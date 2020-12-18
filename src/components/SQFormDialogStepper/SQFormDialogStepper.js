@@ -18,7 +18,6 @@ import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {Form, Formik, useFormikContext} from 'formik';
 import {IconButton, RoundedButton} from 'scplus-shared-components';
-import './SQFormDialogStepper.css';
 
 export function SQFormDialogStep({children}) {
   return <>{children}</>;
@@ -38,6 +37,21 @@ const useStyles = makeStyles({
       fontSize: 15,
       whiteSpace: 'nowrap'
     }
+  }
+});
+
+const useActionsStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flex: '1 1 100%',
+    padding: '16px 24px'
+  }
+});
+
+const useStepperStyles = makeStyles({
+  root: {
+    justifyContent: 'center'
   }
 });
 
@@ -64,18 +78,17 @@ export function SQFormDialogStepper({
   const [completed, setCompleted] = React.useState({});
 
   const classes = useStyles();
-
-  const totalSteps = React.useMemo(() => {
-    return steps.length;
-  }, [steps]);
+  const actionsClasses = useActionsStyles();
+  const stepperClasses = useStepperStyles();
 
   const isLastStep = React.useMemo(() => {
-    return activeStep === totalSteps - 1;
-  }, [activeStep, totalSteps]);
+    return activeStep === steps.length - 1;
+  }, [activeStep, steps]);
 
   // Our last step doesn't get marked complete
-  const isAllStepsCompleted = () =>
-    Object.keys(completed).length === totalSteps - 1;
+  const isAllStepsCompleted = () => {
+    return Object.keys(completed).length === steps.length - 1;
+  };
 
   const handleNext = () => {
     const newActiveStep =
@@ -206,8 +219,8 @@ export function SQFormDialogStepper({
               <Typography variant="h4">{title}</Typography>
             </DialogTitle>
             <Divider />
-            <div className="SQFormDialogStepper__stepContainer">
-              <Grid container className="SQFormDialogStepper__stepper">
+            {steps.length > 1 && (
+              <Grid container classes={stepperClasses}>
                 <IconButton
                   height="80px"
                   width="80px"
@@ -231,7 +244,7 @@ export function SQFormDialogStepper({
                 </Stepper>
                 <NextButton />
               </Grid>
-            </div>
+            )}
             <DialogContent
               dividers
               style={{
@@ -249,7 +262,7 @@ export function SQFormDialogStepper({
                 {currentChild}
               </Grid>
             </DialogContent>
-            <DialogActions className="SQFormDialogStepper__actions">
+            <DialogActions classes={actionsClasses}>
               <RoundedButton
                 title={cancelButtonText}
                 onClick={onClose}

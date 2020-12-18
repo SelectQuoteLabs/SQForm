@@ -91,8 +91,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
 
   const initialValues = {
     friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-    selectAll: false,
-    quote: ''
+    selectAll: false
   };
   const names = [
     'Jim',
