@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.3.1...v2.0.0) (2020-12-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 SQFormDialogStepper.js validationSchema prop now accepts a JS object
+
+### Bug Fixes
+
+* 🐛 Changes validationSchema prop to accept object ([a82a9d7](https://github.com/SelectQuoteLabs/SQForm/commit/a82a9d73e6cfc1b48343baffed21808dfaadef4b)), closes [#25](https://github.com/SelectQuoteLabs/SQForm/issues/25)
+
 ### [1.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v1.3.0...v1.3.1) (2020-12-18)
 
 
