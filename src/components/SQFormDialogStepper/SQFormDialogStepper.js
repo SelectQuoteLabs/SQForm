@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
 import {IconButton, RoundedButton} from 'scplus-shared-components';
 
@@ -77,6 +78,10 @@ export function SQFormDialogStepper({
   const currentChild = steps[activeStep];
   const [completed, setCompleted] = React.useState({});
 
+  const validationSchema = currentChild.props.validationSchema
+    ? Yup.object().shape(currentChild.props.validationSchema)
+    : null;
+
   const classes = useStyles();
   const actionsClasses = useActionsStyles();
   const stepperClasses = useStepperStyles();
@@ -134,14 +139,14 @@ export function SQFormDialogStepper({
     const {errors, values} = useFormikContext();
 
     const isButtonDisabled = React.useMemo(() => {
-      if (!currentChild.props.validationSchema) {
+      if (!validationSchema) {
         return false;
       }
       const formValues = Object.values(values).filter(val => val);
       if (!formValues.length || isLastStep) return true;
 
       if (
-        Object.keys(currentChild.props.validationSchema.fields).some(step =>
+        Object.keys(validationSchema.fields).some(step =>
           Object.keys(errors).includes(step)
         )
       ) {
@@ -168,12 +173,10 @@ export function SQFormDialogStepper({
     const {errors, values} = useFormikContext();
 
     const isButtonDisabled = React.useMemo(() => {
-      if (!currentChild.props.validationSchema) {
+      if (!validationSchema) {
         return false;
       }
-      const currentStepKeys = Object.keys(
-        currentChild.props.validationSchema.fields
-      );
+      const currentStepKeys = Object.keys(validationSchema.fields);
       const formValues = Object.values(values).filter(val => val);
 
       if (
@@ -202,7 +205,7 @@ export function SQFormDialogStepper({
   return (
     <Formik
       {...props}
-      validationSchema={currentChild.props.validationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       {({isSubmitting, isValid}) => (

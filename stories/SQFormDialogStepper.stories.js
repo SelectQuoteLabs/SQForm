@@ -140,10 +140,10 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Dependents"
-          validationSchema={Yup.object({
+          validationSchema={{
             firstName: Yup.string(),
             lastName: Yup.string()
-          })}
+          }}
         >
           <Typography variant="body2" noWrap>
             Select up to 5 dependents to be added to your quote.
@@ -233,10 +233,10 @@ export const SQDialogStepperWithValidation = () => {
       >
         <SQFormDialogStep
           label="Personal Data"
-          validationSchema={Yup.object({
+          validationSchema={{
             firstName: Yup.string().required('Required'),
             lastName: Yup.string().required('Required')
-          })}
+          }}
         >
           <SQFormTextField
             fullWidth
@@ -261,14 +261,14 @@ export const SQDialogStepperWithValidation = () => {
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
-          validationSchema={Yup.object({
+          validationSchema={{
             accountID: Yup.mixed().when('newAccount', {
               is: true,
               then: Yup.number()
                 .required('Required for new account')
                 .min(100, 'Required for new account')
             })
-          })}
+          }}
         >
           <SQFormTextField
             fullWidth
@@ -280,9 +280,9 @@ export const SQDialogStepperWithValidation = () => {
         </SQFormDialogStep>
         <SQFormDialogStep
           label="More Info"
-          validationSchema={Yup.object({
+          validationSchema={{
             description: Yup.string().required('Required')
-          })}
+          }}
         >
           <SQFormTextField fullWidth name="description" label="Description" />
         </SQFormDialogStep>
