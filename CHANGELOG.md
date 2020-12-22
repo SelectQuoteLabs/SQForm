@@ -1,3 +1,10 @@
+### [2.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.1...v2.0.2) (2020-12-22)
+
+
+### Bug Fixes
+
+* 🐛 Displays - - when empty, displays label instead of value ([40e5243](https://github.com/SelectQuoteLabs/SQForm/commit/40e52432dc9b6e28f0af11d839bfdcb098f4346d)), closes [#31](https://github.com/SelectQuoteLabs/SQForm/issues/31)
+
 ### [2.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.0...v2.0.1) (2020-12-22)
 
 
