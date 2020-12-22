@@ -10,6 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
+import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
 
 /**
@@ -28,6 +29,18 @@ const MenuProps = {
   },
   variant: 'menu',
   getContentAnchorEl: null
+};
+
+const getToolTipTitle = (formikFieldValue, options) => {
+  if (!formikFieldValue.length) {
+    return 'No value(s) selected';
+  }
+
+  return formikFieldValue
+    .map(value => {
+      return options.find(option => option.value === value).label;
+    })
+    .join(', ');
 };
 
 function SQFormMultiSelect({
@@ -52,7 +65,7 @@ function SQFormMultiSelect({
   });
 
   const labelID = label.toLowerCase();
-  const toolTipTitle = field.value.join(', ');
+  const toolTipTitle = getToolTipTitle(field.value, children);
 
   const getIsSelectAllChecked = value => value.includes('ALL');
   const getIsSelectNoneChecked = value => value.includes('NONE');
@@ -97,12 +110,14 @@ function SQFormMultiSelect({
    * e.g., if value is an "ID"
    */
   const getRenderValue = selected => {
-    const selectedChildren = children
+    if (!selected.length) {
+      return EMPTY_LABEL;
+    }
+
+    return children
       ?.filter(child => selected.includes(child.value))
       ?.map(child => child.label)
       ?.join(', ');
-
-    return selectedChildren;
   };
 
   return (
@@ -117,6 +132,7 @@ function SQFormMultiSelect({
       >
         <Select
           multiple
+          displayEmpty
           input={<Input disabled={isDisabled} name={name} />}
           value={field.value}
           onBlur={handleBlur}
@@ -133,14 +149,20 @@ function SQFormMultiSelect({
               value={children.length === field.value.length ? 'NONE' : 'ALL'}
             >
               <Checkbox checked={children.length === field.value.length} />
-              <ListItemText primary="Select All" />
+              <ListItemText
+                primary="Select All"
+                primaryTypographyProps={{variant: 'body2'}}
+              />
             </MenuItem>
           )}
           {children.map(option => {
             return (
               <MenuItem key={option.value} value={option.value}>
                 <Checkbox checked={field.value.includes(option.value)} />
-                <ListItemText primary={option.label} />
+                <ListItemText
+                  primary={option.label}
+                  primaryTypographyProps={{variant: 'body2'}}
+                />
               </MenuItem>
             );
           })}
