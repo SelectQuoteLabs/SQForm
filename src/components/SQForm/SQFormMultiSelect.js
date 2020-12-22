@@ -30,6 +30,18 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
+const getToolTipTitle = (formikFieldValue, options) => {
+  if (!formikFieldValue.length) {
+    return 'No value(s) selected';
+  }
+
+  return formikFieldValue
+    .map(value => {
+      return options.find(option => option.value === value).label;
+    })
+    .join(', ');
+};
+
 function SQFormMultiSelect({
   children,
   isDisabled = false,
@@ -52,7 +64,7 @@ function SQFormMultiSelect({
   });
 
   const labelID = label.toLowerCase();
-  const toolTipTitle = field.value.join(', ');
+  const toolTipTitle = getToolTipTitle(field.value, children);
 
   const getIsSelectAllChecked = value => value.includes('ALL');
   const getIsSelectNoneChecked = value => value.includes('NONE');
