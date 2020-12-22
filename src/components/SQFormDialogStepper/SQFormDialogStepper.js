@@ -170,7 +170,7 @@ export function SQFormDialogStepper({
   }
 
   function SubmitButton() {
-    const {errors, values} = useFormikContext();
+    const {errors, values, dirty} = useFormikContext();
 
     const isButtonDisabled = React.useMemo(() => {
       if (!validationSchema) {
@@ -181,7 +181,8 @@ export function SQFormDialogStepper({
 
       if (
         !formValues.length ||
-        currentStepKeys.some(step => Object.keys(errors).includes(step))
+        currentStepKeys.some(step => Object.keys(errors).includes(step)) ||
+        !dirty
       ) {
         return true;
       }
@@ -190,7 +191,7 @@ export function SQFormDialogStepper({
         return false;
       }
       return false;
-    }, [errors, values]);
+    }, [errors, values, dirty]);
     return (
       <RoundedButton
         type="submit"
