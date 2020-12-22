@@ -1,3 +1,12 @@
+### [2.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.0...v2.0.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* 🐛 Fixs dropdown font size and renders empty label - - ([2308d55](https://github.com/SelectQuoteLabs/SQForm/commit/2308d558e7e2cba3605b8a5601590732d39d874d)), closes [#30](https://github.com/SelectQuoteLabs/SQForm/issues/30)
+* 🐛 Reading the dirty state on load to disable submit/next ([60034e2](https://github.com/SelectQuoteLabs/SQForm/commit/60034e2a0428702ed26def39fde72ad8ca05f3e8)), closes [#26](https://github.com/SelectQuoteLabs/SQForm/issues/26)
+* 🐛 Tooltip now displays the option label rather than value ([40d1e42](https://github.com/SelectQuoteLabs/SQForm/commit/40d1e425ad326852e2971916302efd4ca7db8157)), closes [#30](https://github.com/SelectQuoteLabs/SQForm/issues/30)
+
 ## [2.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v1.3.1...v2.0.0) (2020-12-18)
 
 
