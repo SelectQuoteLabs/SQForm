@@ -8,8 +8,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 
 import {useForm} from './useForm';
+import {EMPTY_LABEL} from '../../utils/constants';
 
-const EMPTY_LABEL = '- -';
 const EMPTY_VALUE = '';
 const EMPTY_OPTION = {label: EMPTY_LABEL, value: EMPTY_VALUE};
 
@@ -51,16 +51,26 @@ function SQFormDropdown({
     return [EMPTY_OPTION, ...children];
   }, [children, displayEmpty]);
 
+  const renderValue = value => {
+    if (value === EMPTY_VALUE) {
+      return EMPTY_LABEL;
+    }
+
+    return options.find(option => option.value === value).label;
+  };
+
   return (
     <Grid item sm={size}>
       <InputLabel id={labelID}>{label}</InputLabel>
       <Select
+        displayEmpty={true}
         input={<Input disabled={isDisabled} name={name} />}
         value={field.value}
         onBlur={handleBlur}
         onChange={handleChange}
         fullWidth={true}
         labelId={labelID}
+        renderValue={renderValue}
       >
         {options.map(option => {
           return (
