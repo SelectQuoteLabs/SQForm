@@ -8,8 +8,13 @@ export function useFormButton(isDisabled) {
     const errorsCount = Object.values(errors).length;
     const formValues = Object.values(values).filter(val => val);
 
-    if (!dirty || isDisabled) return true;
-    if (!!errorsCount || !formValues.length) return true;
+    if (dirty && !isDisabled && !errorsCount) {
+      return false;
+    }
+
+    if (!dirty || isDisabled || !!errorsCount || !formValues.length) {
+      return true;
+    }
 
     return false;
   }, [dirty, errors, isDisabled, values]);
