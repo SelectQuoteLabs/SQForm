@@ -3,6 +3,7 @@ import {FieldArray, useFormikContext} from 'formik';
 // Form Utils
 export {FieldArray as SQFieldArray};
 export {useFormikContext as useSQFormContext};
+export {sanitizeInitialValues, serializeFormValues} from './utils';
 
 // SQForm Components
 export {default as SQFormDialog} from './components/SQFormDialog';
