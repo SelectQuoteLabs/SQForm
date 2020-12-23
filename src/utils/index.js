@@ -1,5 +1,3 @@
-import {EMPTY_LABEL} from './constants';
-
 // Note - Formik fields expect empty strings and not nulls
 // When initializing the forms initialValues we can use this function to replace all nulls with empty strings
 export function sanitizeInitialValues(valuesObject) {
@@ -10,11 +8,12 @@ export function sanitizeInitialValues(valuesObject) {
   );
 }
 
-// Note - SQForm calls this function onSubmit automatically for you
+// If we want to send null to our API instead of empty strings
+// Note - If this becomes a common scenario we can make this the default behavior for SQForm onSubmit
 export function serializeFormValues(formValues) {
   return JSON.parse(
     JSON.stringify(formValues, (_key, value) => {
-      return value === '' || value === EMPTY_LABEL ? null : value;
+      return value === '' ? null : value;
     })
   );
 }
