@@ -93,7 +93,7 @@ function SQFormAutocomplete({
   size = 'auto'
 }) {
   const classes = useStyles();
-  const {setFieldValue, setTouched, values} = useFormikContext();
+  const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError},
@@ -114,10 +114,10 @@ function SQFormAutocomplete({
 
   const handleAutocompleteBlur = React.useCallback(
     event => {
-      setTouched({[name]: true});
+      setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
-    [name, onBlur, setTouched]
+    [name, onBlur, setTouched, touched]
   );
 
   const handleAutocompleteChange = React.useCallback(
