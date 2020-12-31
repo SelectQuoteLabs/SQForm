@@ -105,9 +105,6 @@ function SQFormAutocomplete({
 
   const initialValue = children.find(option => {
     if (option.value === value) {
-      if (!touched.hasOwnProperty(name)) {
-        setTouched({...touched, ...{[name]: true}});
-      }
       return option;
     }
     return null;
