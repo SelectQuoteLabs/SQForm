@@ -1,3 +1,10 @@
+## [2.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.1.0...v2.2.0) (2021-01-04)
+
+
+### Features
+
+* 🎸 Allow text fields HTML5 types ([ce44960](https://github.com/SelectQuoteLabs/SQForm/commit/ce449603165d4193295847e5627d925b0a085b29)), closes [#45](https://github.com/SelectQuoteLabs/SQForm/issues/45)
+
 ## [2.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.3...v2.1.0) (2021-01-04)
 
 
