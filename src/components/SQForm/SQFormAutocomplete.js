@@ -102,6 +102,14 @@ function SQFormAutocomplete({
     name,
     isRequired
   });
+
+  const initialValue = children.find(option => {
+    if (option.value === value) {
+      return option;
+    }
+    return null;
+  });
+
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
 
@@ -150,6 +158,7 @@ function SQFormAutocomplete({
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
         inputValue={inputValue}
+        value={initialValue}
         getOptionLabel={option => option.label}
         renderInput={params => {
           return (
