@@ -135,7 +135,7 @@ export const basicForm = () => {
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
         <SQFormTextField name="hobby" label="Hobby" size={4} />
-        <SQFormTextField name="age" label="Age" size={2} />
+        <SQFormTextField name="age" label="Age" type="number" size={2} />
         <SQFormDropdown name="state" label="State" displayEmpty={true} size={4}>
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
@@ -208,7 +208,13 @@ export const formWithValidation = () => {
         >
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
-        <SQFormTextField name="age" label="Age" size={2} isRequired={true} />
+        <SQFormTextField
+          name="age"
+          label="Age"
+          type="number"
+          size={2}
+          isRequired={true}
+        />
         <SQFormTextarea name="note" label="Note" size={5} isRequired={true} />
         <Grid item sm={12}>
           <Grid container justify="space-between">
