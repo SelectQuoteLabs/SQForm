@@ -1,3 +1,10 @@
+### [2.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.2...v2.0.3) (2020-12-29)
+
+
+### Bug Fixes
+
+* 🐛 Fixed onBlur event for autocomplete and touched fields ([c62e313](https://github.com/SelectQuoteLabs/SQForm/commit/c62e313264f8cf0c2a9f513cfa8071fe961d5d50)), closes [#38](https://github.com/SelectQuoteLabs/SQForm/issues/38)
+
 ### [2.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.1...v2.0.2) (2020-12-22)
 
 

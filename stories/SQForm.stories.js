@@ -59,7 +59,7 @@ const MOCK_FORM_ENTITY = {
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
-  actions: '',
+  actions: 2,
   note: ''
 };
 
@@ -515,7 +515,7 @@ export const applyAnAction = () => {
       >
         <SQFormAutocomplete
           name="actions"
-          label="Actions"
+          label="Actions with a default value"
           size={5}
           isRequired={true}
         >

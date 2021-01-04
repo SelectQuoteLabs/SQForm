@@ -93,7 +93,7 @@ function SQFormAutocomplete({
   size = 'auto'
 }) {
   const classes = useStyles();
-  const {setFieldValue, setTouched, values} = useFormikContext();
+  const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError},
@@ -102,6 +102,14 @@ function SQFormAutocomplete({
     name,
     isRequired
   });
+
+  const initialValue = children.find(option => {
+    if (option.value === value) {
+      return option;
+    }
+    return null;
+  });
+
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
 
@@ -114,10 +122,10 @@ function SQFormAutocomplete({
 
   const handleAutocompleteBlur = React.useCallback(
     event => {
-      setTouched({[name]: true});
+      setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
-    [name, onBlur, setTouched]
+    [name, onBlur, setTouched, touched]
   );
 
   const handleAutocompleteChange = React.useCallback(
@@ -150,6 +158,7 @@ function SQFormAutocomplete({
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
         inputValue={inputValue}
+        value={initialValue}
         getOptionLabel={option => option.label}
         renderInput={params => {
           return (

@@ -22,7 +22,7 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   const isTouched = getIn(meta, 'touched');
   const isError = !!errorMessage;
   const isFieldError = isTouched && isError;
-  const isFieldRequired = !isTouched && isRequired;
+  const isFieldRequired = !isTouched && isRequired && !getIn(meta, 'value');
   const isFulfilled = isTouched && !isFieldError;
 
   const handleChange = React.useCallback(
