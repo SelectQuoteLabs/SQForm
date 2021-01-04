@@ -16,7 +16,8 @@ function SQFormTextField({
   onBlur,
   onChange,
   startAdornment,
-  endAdornment
+  endAdornment,
+  type = 'text'
 }) {
   const {
     formikField: {field},
@@ -47,7 +48,7 @@ function SQFormTextField({
         }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}
-        type="text"
+        type={type}
         label={label}
         helperText={HelperTextComponent}
         placeholder={placeholder}
@@ -80,7 +81,9 @@ SQFormTextField.propTypes = {
   /** Adornment that appears at the start of the input */
   startAdornment: PropTypes.node,
   /** Adornment that appears at the end of the input */
-  endAdornment: PropTypes.node
+  endAdornment: PropTypes.node,
+  /** Defines the input type for the text field. Must be a valid HTML5 input type */
+  type: PropTypes.string
 };
 
 export default SQFormTextField;
