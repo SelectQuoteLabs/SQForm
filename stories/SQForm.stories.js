@@ -537,6 +537,55 @@ export const applyAnAction = () => {
   );
 };
 
+export const ccaChecklist = () => {
+  const dropdownOptions = [
+    {label: 'Pitched', value: 'pitched'},
+    {label: 'Transferred', value: 'transferred'}
+  ];
+  const validationSchema = {
+    dvh: Yup.string(),
+    hra: Yup.string(),
+    shield: Yup.string()
+  };
+
+  return (
+    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+      <SQForm
+        initialValues={{
+          dvh: '',
+          hra: 'pitched',
+          shield: ''
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        muiGridProps={{
+          spacing: 2,
+          justify: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <SQFormDropdown name="dvh" label="DVH" displayEmpty={true} size={2}>
+          {dropdownOptions}
+        </SQFormDropdown>
+        <SQFormDropdown name="hra" label="HRA" displayEmpty={true} size={2}>
+          {dropdownOptions}
+        </SQFormDropdown>
+        <SQFormDropdown
+          name="shield"
+          label="Reliashield"
+          displayEmpty={true}
+          size={2}
+        >
+          {dropdownOptions}
+        </SQFormDropdown>
+        <Grid item size={2} style={{alignSelf: 'flex-end'}}>
+          <SQFormIconButton IconComponent={CheckMarkIcon} />
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
 function random(length) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
