@@ -1,3 +1,10 @@
+## [2.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.2.0...v2.3.0) (2021-01-06)
+
+
+### Features
+
+* 🎸 allow passthrough of props to mui field children ([71df780](https://github.com/SelectQuoteLabs/SQForm/commit/71df780ee065e9285235a455b97995a6796f69d1))
+
 ## [2.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.1.0...v2.2.0) (2021-01-04)
 
 
