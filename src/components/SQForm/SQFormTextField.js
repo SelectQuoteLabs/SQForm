@@ -86,7 +86,7 @@ SQFormTextField.propTypes = {
   endAdornment: PropTypes.node,
   /** Defines the input type for the text field. Must be a valid HTML5 input type */
   type: PropTypes.string,
-  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps: PropTypes.object
 };
 

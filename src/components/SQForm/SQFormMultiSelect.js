@@ -199,7 +199,7 @@ SQFormMultiSelect.propTypes = {
   useSelectAll: PropTypes.bool,
   /** Use MUI's Tooltip Position Values */
   toolTipPlacement: PropTypes.string,
-  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
   muiFieldProps: PropTypes.object
 };
 

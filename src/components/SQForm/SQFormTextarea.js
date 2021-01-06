@@ -80,7 +80,7 @@ SQFormTextarea.propTypes = {
   rows: PropTypes.number,
   /** Maximum number of rows to display when multiline option is set to true. */
   rowsMax: PropTypes.number,
-  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps: PropTypes.object
 };
 

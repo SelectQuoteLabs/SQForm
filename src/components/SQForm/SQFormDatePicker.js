@@ -97,7 +97,7 @@ SQFormDatePicker.propTypes = {
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
   onChange: PropTypes.func,
-  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps: PropTypes.object
 };
 
