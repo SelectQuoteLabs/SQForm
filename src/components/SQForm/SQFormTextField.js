@@ -17,7 +17,8 @@ function SQFormTextField({
   onChange,
   startAdornment,
   endAdornment,
-  type = 'text'
+  type = 'text',
+  muiFieldProps = {}
 }) {
   const {
     formikField: {field},
@@ -56,6 +57,7 @@ function SQFormTextField({
         onBlur={handleBlur}
         required={isRequired}
         value={field.value}
+        {...muiFieldProps}
       />
     </Grid>
   );
@@ -83,7 +85,9 @@ SQFormTextField.propTypes = {
   /** Adornment that appears at the end of the input */
   endAdornment: PropTypes.node,
   /** Defines the input type for the text field. Must be a valid HTML5 input type */
-  type: PropTypes.string
+  type: PropTypes.string,
+  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormTextField;

@@ -16,7 +16,8 @@ function SQFormTextarea({
   onBlur,
   onChange,
   rows = 3,
-  rowsMax = 3
+  rowsMax = 3,
+  muiFieldProps = {}
 }) {
   const {values} = useFormikContext();
   const {
@@ -50,6 +51,7 @@ function SQFormTextarea({
         rowsMax={rowsMax}
         variant="outlined"
         value={values[name]}
+        {...muiFieldProps}
       />
     </Grid>
   );
@@ -77,7 +79,9 @@ SQFormTextarea.propTypes = {
   /** Number of rows to display when multiline option is set to true. */
   rows: PropTypes.number,
   /** Maximum number of rows to display when multiline option is set to true. */
-  rowsMax: PropTypes.number
+  rowsMax: PropTypes.number,
+  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormTextarea;

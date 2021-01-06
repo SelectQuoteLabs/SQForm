@@ -24,7 +24,8 @@ function SQFormDateTimePicker({
   isRequired = false,
   placeholder = '',
   onBlur,
-  onChange
+  onChange,
+  muiFieldProps = {}
 }) {
   const {
     formikField: {field, helpers},
@@ -73,6 +74,7 @@ function SQFormDateTimePicker({
             />
           );
         }}
+        {...muiFieldProps}
       />
     </Grid>
   );
@@ -94,7 +96,9 @@ SQFormDateTimePicker.propTypes = {
   /** Custom onBlur event callback */
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  /** Any valid prop for material ui child component - https://material-ui.com/  */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormDateTimePicker;
