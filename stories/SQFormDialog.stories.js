@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 
-import {SQFormDialog, SQFormDatePicker} from '../src';
+import {SQFormDialog, SQFormDatePicker, SQFormTextField} from '../src';
 
 export default {
   title: 'SQFormDialog',
@@ -55,6 +55,41 @@ export const sqFormDialog = () => (
     >
       <SQFormDatePicker name="startDate" label="Start Date" />
       <SQFormDatePicker name="endDate" label="End Date" />
+    </SQFormDialog>
+  </>
+);
+
+const MOCK_EMPTY_USER_STATE = {
+  firstName: '',
+  lastName: ''
+};
+
+export const sqFormDialogWithAutoFocus = () => (
+  <>
+    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
+    <SQFormDialog
+      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
+      isDisabled={boolean(
+        'isDisabled',
+        false,
+        'Toggle disabled state of Save Button'
+      )}
+      maxWidth="sm"
+      onClose={action('Close button clicked')}
+      onSave={handleSubmit}
+      title="Create New User"
+      initialValues={MOCK_EMPTY_USER_STATE}
+      muiGridProps={{
+        spacing: 2,
+        alignItems: 'center'
+      }}
+    >
+      <SQFormTextField
+        name="firstName"
+        label="First Name (Auto Focused)"
+        muiFieldProps={{autoFocus: true}}
+      />
+      <SQFormTextField name="lastName" label="Last Name" />
     </SQFormDialog>
   </>
 );

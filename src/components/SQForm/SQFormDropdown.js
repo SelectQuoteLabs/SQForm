@@ -22,7 +22,8 @@ function SQFormDropdown({
   name,
   onBlur,
   onChange,
-  size = 'auto'
+  size = 'auto',
+  muiFieldProps = {}
 }) {
   const {
     formikField: {field},
@@ -71,6 +72,7 @@ function SQFormDropdown({
         fullWidth={true}
         labelId={labelID}
         renderValue={renderValue}
+        {...muiFieldProps}
       >
         {options.map(option => {
           return (
@@ -110,7 +112,9 @@ SQFormDropdown.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormDropdown;

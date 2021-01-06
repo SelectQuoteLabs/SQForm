@@ -11,7 +11,8 @@ function SQFormCheckbox({
   label,
   name,
   onChange,
-  size = 'auto'
+  size = 'auto',
+  muiFieldProps = {}
 }) {
   const {
     formikField: {field},
@@ -32,6 +33,7 @@ function SQFormCheckbox({
             disabled={isDisabled}
             name={name}
             onChange={handleChange}
+            {...muiFieldProps}
           />
         }
         label={label}
@@ -50,7 +52,9 @@ SQFormCheckbox.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  /** Any valid prop for material ui checkbox child component - https://material-ui.com/api/checkbox/#props */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormCheckbox;
