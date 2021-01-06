@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {withInfo} from '@storybook/addon-info';
 import {action} from '@storybook/addon-actions';
-import {Typography, Grid} from '@material-ui/core';
-import {CardList} from 'scplus-shared-components';
+import {Grid} from '@material-ui/core';
+import {CardList, SectionHeader} from 'scplus-shared-components';
 import markdown from '../notes/SQFormDialogStepper.md';
 
 import {
@@ -113,7 +113,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
         onClose={action('Close button clicked')}
         contentStyle={{
-          height: '265px',
+          height: '100%',
           padding: '15px 15px'
         }}
         fullWidth
@@ -132,7 +132,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
             shouldRenderHeader={false}
             contentWidth="100%"
             contentHeight="250px"
-            cardStyle={{minWidth: 'auto'}}
+            cardStyle={{minWidth: 'auto', paddingLeft: '15px'}}
             isInitiallyExpanded={true}
             isExpandable={boolean('isExpandable', true)}
             tabs={tabOptions}
@@ -145,58 +145,61 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
             lastName: Yup.string()
           }}
         >
-          <Typography variant="body2" noWrap>
-            Select up to 5 dependents to be added to your quote.
-          </Typography>{' '}
-          <SQFormCheckboxGroup
-            name="friends"
-            useSelectAll={true}
-            selectAllData={names} // whatever you'd want 'select all' to include
-            selectAllContainerProps={{
-              // MUI Grid container props, plus a style prop if you're feeling fancy
-              direction: 'column',
-              wrap: 'nowrap',
-              style: {
-                padding: '16px 16px 0 16px'
-              }
-            }}
-          >
-            {arrayHelpers => {
-              const {values} = arrayHelpers.form;
-              return (
-                <Grid
-                  container
-                  direction="column"
-                  wrap="nowrap"
-                  style={{
-                    height: 180,
-                    overflow: 'auto',
-                    padding: '0 16px'
-                  }}
-                >
-                  {names.map(name => {
-                    return (
-                      <Grid item key={name}>
-                        <SQFormCheckboxGroupItem
-                          name="friends"
-                          label={name}
-                          isChecked={values.friends.includes(name)}
-                          onChange={e => {
-                            if (e.target.checked) {
-                              arrayHelpers.push(name);
-                            } else {
-                              const idx = values.friends.indexOf(name);
-                              arrayHelpers.remove(idx);
-                            }
-                          }}
-                        />
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              );
-            }}
-          </SQFormCheckboxGroup>
+          <div style={{padding: '15px 15px 0px 15px', width: '100%'}}>
+            <SectionHeader
+              informativeHeading="Select up to 5 dependents to be added"
+              title="Dependants"
+            />
+            <SQFormCheckboxGroup
+              name="friends"
+              useSelectAll={true}
+              selectAllData={names} // whatever you'd want 'select all' to include
+              selectAllContainerProps={{
+                // MUI Grid container props, plus a style prop if you're feeling fancy
+                direction: 'column',
+                wrap: 'nowrap',
+                style: {
+                  paddingLeft: '15px'
+                }
+              }}
+            >
+              {arrayHelpers => {
+                const {values} = arrayHelpers.form;
+                return (
+                  <Grid
+                    container
+                    direction="column"
+                    wrap="nowrap"
+                    style={{
+                      height: 180,
+                      overflow: 'auto',
+                      padding: '0 16px'
+                    }}
+                  >
+                    {names.map(name => {
+                      return (
+                        <Grid item key={name}>
+                          <SQFormCheckboxGroupItem
+                            name="friends"
+                            label={name}
+                            isChecked={values.friends.includes(name)}
+                            onChange={e => {
+                              if (e.target.checked) {
+                                arrayHelpers.push(name);
+                              } else {
+                                const idx = values.friends.indexOf(name);
+                                arrayHelpers.remove(idx);
+                              }
+                            }}
+                          />
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                );
+              }}
+            </SQFormCheckboxGroup>
+          </div>
         </SQFormDialogStep>
       </SQFormDialogStepper>
     </>
@@ -211,12 +214,13 @@ export const SQDialogStepperWithValidation = () => {
         title="SQ Stepper Form"
         isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
         onClose={action('Close button clicked')}
-        contentStyle={{height: '200px'}}
+        contentStyle={{height: '300px'}}
         fullWidth
         maxWidth="md"
         muiGridProps={{
           justify: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          spacing: 6
         }}
         initialValues={{
           firstName: '',
@@ -226,8 +230,8 @@ export const SQDialogStepperWithValidation = () => {
           description: '',
           age: ''
         }}
-        setValues={() => {
-          console.log('values set');
+        setValues={formValues => {
+          console.log('values set', formValues);
         }}
         onSubmit={handleSubmit}
       >
