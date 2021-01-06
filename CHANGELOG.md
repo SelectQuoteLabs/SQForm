@@ -1,3 +1,31 @@
+## [2.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.2.0...v2.3.0) (2021-01-06)
+
+
+### Features
+
+* 🎸 allow passthrough of props to mui field children ([71df780](https://github.com/SelectQuoteLabs/SQForm/commit/71df780ee065e9285235a455b97995a6796f69d1))
+
+## [2.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.1.0...v2.2.0) (2021-01-04)
+
+
+### Features
+
+* 🎸 Allow text fields HTML5 types ([ce44960](https://github.com/SelectQuoteLabs/SQForm/commit/ce449603165d4193295847e5627d925b0a085b29)), closes [#45](https://github.com/SelectQuoteLabs/SQForm/issues/45)
+
+## [2.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.3...v2.1.0) (2021-01-04)
+
+
+### Features
+
+* 🎸 Utils to sanitize initial form data & serialize form ([b0c1c30](https://github.com/SelectQuoteLabs/SQForm/commit/b0c1c305c29cf0b33d37d632d9af3e4782f7ffb2))
+
+
+### Bug Fixes
+
+* 🐛 Allow default value to be used in autocomplete component ([6825df8](https://github.com/SelectQuoteLabs/SQForm/commit/6825df890ee4cff86284c9110112e68d0fdbfc2d)), closes [#43](https://github.com/SelectQuoteLabs/SQForm/issues/43)
+* 🐛 Submit button enables when empty dropdown selection made ([60ac6ee](https://github.com/SelectQuoteLabs/SQForm/commit/60ac6ee977c21f2cc3e806362fe2f3af01c9f8cc)), closes [#37](https://github.com/SelectQuoteLabs/SQForm/issues/37)
+* 🐛 Updated to not set Required text instead of touched ([a3287b8](https://github.com/SelectQuoteLabs/SQForm/commit/a3287b8a89efc2ec0ce7510a25d26e2aa8fd7506))
+
 ### [2.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v2.0.2...v2.0.3) (2020-12-29)
 
 

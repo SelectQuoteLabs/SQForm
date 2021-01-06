@@ -49,6 +49,20 @@ Coming Soon...
 
 ## Development
 
+To get started first install the projects dependencies
+
+```sh
+$ npm install
+```
+
+It's recommended to use the Node version specified in the `.nvmrc` file. If you have [nvm](https://github.com/nvm-sh/nvm#about) installed execute the following terminal command:
+
+```sh
+$ nvm use
+```
+
+> Note: If you run `nvm use` and don't have that version of Node installed, `nvm` will tell you how to install it
+
 ### Running Storybook locally
 
 ```sh

@@ -135,7 +135,7 @@ export const basicForm = () => {
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
         <SQFormTextField name="hobby" label="Hobby" size={4} />
-        <SQFormTextField name="age" label="Age" size={2} />
+        <SQFormTextField name="age" label="Age" type="number" size={2} />
         <SQFormDropdown name="state" label="State" displayEmpty={true} size={4}>
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
@@ -208,7 +208,13 @@ export const formWithValidation = () => {
         >
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
-        <SQFormTextField name="age" label="Age" size={2} isRequired={true} />
+        <SQFormTextField
+          name="age"
+          label="Age"
+          type="number"
+          size={2}
+          isRequired={true}
+        />
         <SQFormTextarea name="note" label="Note" size={5} isRequired={true} />
         <Grid item sm={12}>
           <Grid container justify="space-between">
@@ -529,6 +535,55 @@ export const applyAnAction = () => {
           rows={2}
           rowsMax={2}
         />
+        <Grid item size={2} style={{alignSelf: 'flex-end'}}>
+          <SQFormIconButton IconComponent={CheckMarkIcon} />
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const ccaChecklist = () => {
+  const dropdownOptions = [
+    {label: 'Pitched', value: 'pitched'},
+    {label: 'Transferred', value: 'transferred'}
+  ];
+  const validationSchema = {
+    dvh: Yup.string(),
+    hra: Yup.string(),
+    shield: Yup.string()
+  };
+
+  return (
+    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+      <SQForm
+        initialValues={{
+          dvh: '',
+          hra: 'pitched',
+          shield: ''
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        muiGridProps={{
+          spacing: 2,
+          justify: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <SQFormDropdown name="dvh" label="DVH" displayEmpty={true} size={2}>
+          {dropdownOptions}
+        </SQFormDropdown>
+        <SQFormDropdown name="hra" label="HRA" displayEmpty={true} size={2}>
+          {dropdownOptions}
+        </SQFormDropdown>
+        <SQFormDropdown
+          name="shield"
+          label="Reliashield"
+          displayEmpty={true}
+          size={2}
+        >
+          {dropdownOptions}
+        </SQFormDropdown>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
           <SQFormIconButton IconComponent={CheckMarkIcon} />
         </Grid>

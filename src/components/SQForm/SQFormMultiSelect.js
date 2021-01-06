@@ -51,7 +51,8 @@ function SQFormMultiSelect({
   name,
   size = 'auto',
   useSelectAll = true,
-  toolTipPlacement = 'bottom'
+  toolTipPlacement = 'bottom',
+  muiFieldProps = {}
 }) {
   const {setFieldValue} = useSQFormContext();
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
@@ -143,6 +144,7 @@ function SQFormMultiSelect({
           MenuProps={MenuProps}
           onOpen={toggleTooltip}
           onClose={toggleTooltip}
+          {...muiFieldProps}
         >
           {useSelectAll && (
             <MenuItem
@@ -196,7 +198,9 @@ SQFormMultiSelect.propTypes = {
   /** This property will allow the end user to check a "Select All" box */
   useSelectAll: PropTypes.bool,
   /** Use MUI's Tooltip Position Values */
-  toolTipPlacement: PropTypes.string
+  toolTipPlacement: PropTypes.string,
+  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
+  muiFieldProps: PropTypes.object
 };
 
 export default SQFormMultiSelect;
