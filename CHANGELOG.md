@@ -1,3 +1,10 @@
+## [2.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.3.0...v2.4.0) (2021-01-08)
+
+
+### Features
+
+* 🎸 Updated stepper component step styling and removed arro ([b73b005](https://github.com/SelectQuoteLabs/SQForm/commit/b73b0058f47d26dbd2b35c0becee035d58659cc3)), closes [#52](https://github.com/SelectQuoteLabs/SQForm/issues/52)
+
 ## [2.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.2.0...v2.3.0) (2021-01-06)
 
 
