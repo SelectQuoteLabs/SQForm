@@ -14,11 +14,9 @@ import {
   Stepper,
   Typography
 } from '@material-ui/core';
-import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import ArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
-import {IconButton, RoundedButton} from 'scplus-shared-components';
+import {RoundedButton} from 'scplus-shared-components';
 
 export function SQFormDialogStep({children}) {
   return <>{children}</>;
@@ -31,11 +29,15 @@ const Transition = React.forwardRef((props, ref) => {
 const useStyles = makeStyles({
   root: {
     padding: 20,
+    width: '100%',
     '& svg': {
-      fontSize: 30
+      fontSize: 30,
+      '& text': {
+        fontSize: 15,
+        fontWeight: 600
+      }
     },
     '& span': {
-      fontSize: 15,
       whiteSpace: 'nowrap'
     }
   }
@@ -52,6 +54,7 @@ const useActionsStyles = makeStyles({
 
 const useStepperStyles = makeStyles({
   root: {
+    padding: '1px',
     justifyContent: 'center'
   }
 });
@@ -71,6 +74,7 @@ export function SQFormDialogStepper({
   setValues,
   fullWidth = true,
   contentStyle,
+  initialValues,
   ...props
 }) {
   const steps = React.Children.toArray(children);
@@ -106,10 +110,6 @@ export function SQFormDialogStepper({
     handleComplete();
   };
 
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
   const handleStep = step => () => {
     const nextStep = step.toString();
     const prevStep = (step - 1).toString();
@@ -134,40 +134,6 @@ export function SQFormDialogStepper({
       handleNext();
     }
   };
-
-  function NextButton() {
-    const {errors, values} = useFormikContext();
-
-    const isButtonDisabled = React.useMemo(() => {
-      if (!validationSchema) {
-        return false;
-      }
-      const formValues = Object.values(values).filter(val => val);
-      if (!formValues.length || isLastStep) return true;
-
-      if (
-        Object.keys(validationSchema.fields).some(step =>
-          Object.keys(errors).includes(step)
-        )
-      ) {
-        return true;
-      }
-
-      return false;
-    }, [errors, values]);
-
-    return (
-      <IconButton
-        height="80px"
-        width="80px"
-        title="Next Step"
-        IconComponent={ArrowRightIcon}
-        isDisabled={isButtonDisabled}
-        isIconTeal={true}
-        type="submit"
-      />
-    );
-  }
 
   function SubmitButton() {
     const {errors, values, dirty} = useFormikContext();
@@ -208,8 +174,10 @@ export function SQFormDialogStepper({
       {...props}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      initialValues={initialValues}
+      enableReinitialize={enableReinitialize}
     >
-      {({isSubmitting, isValid}) => (
+      {() => (
         <Dialog
           TransitionComponent={Transition}
           disableBackdropClick={disableBackdropClick}
@@ -225,15 +193,6 @@ export function SQFormDialogStepper({
             <Divider />
             {steps.length > 1 && (
               <Grid container classes={stepperClasses}>
-                <IconButton
-                  height="80px"
-                  width="80px"
-                  title="Previous Step"
-                  IconComponent={ArrowLeftIcon}
-                  isDisabled={activeStep === 0}
-                  isIconTeal={true}
-                  onClick={handleBack}
-                />
                 <Stepper nonLinear activeStep={activeStep} classes={classes}>
                   {steps.map((child, index) => (
                     <Step key={child.props.label}>
@@ -241,12 +200,16 @@ export function SQFormDialogStepper({
                         onClick={handleStep(index)}
                         completed={completed[index]}
                       >
-                        {child?.props.label}
+                        <Typography
+                          variant="overline"
+                          color={index === activeStep ? 'error' : ''} // sets the color to orange if current step
+                        >
+                          {child?.props.label}
+                        </Typography>
                       </StepButton>
                     </Step>
                   ))}
                 </Stepper>
-                <NextButton />
               </Grid>
             )}
             <DialogContent
@@ -295,6 +258,8 @@ SQFormDialogStepper.propTypes = {
   fullWidth: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
+  /** Allows the initial values to be updated after initial render */
+  enableReinitialize: PropTypes.bool,
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
   maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', false]),
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
