@@ -193,6 +193,8 @@ SQFormMultiSelect.propTypes = {
   isRequired: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
+  /** Custom onChange event callback */
+  onChange: PropTypes.func,
   /** Name identifier of the input field */
   name: PropTypes.string.isRequired,
   /** Size of the input given full-width is 12. */
