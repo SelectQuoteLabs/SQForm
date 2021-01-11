@@ -49,6 +49,7 @@ function SQFormMultiSelect({
   isRequired = false,
   label,
   name,
+  onChange,
   size = 'auto',
   useSelectAll = true,
   toolTipPlacement = 'bottom',
@@ -59,9 +60,10 @@ function SQFormMultiSelect({
   const {
     formikField: {field},
     fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
   } = useForm({
     name,
+    onChange,
     isRequired
   });
 
@@ -137,7 +139,7 @@ function SQFormMultiSelect({
           input={<Input disabled={isDisabled} name={name} />}
           value={field.value}
           onBlur={handleBlur}
-          onChange={handleMultiSelectChange}
+          onChange={handleMultiSelectChange && handleChange}
           fullWidth={true}
           labelId={labelID}
           renderValue={getRenderValue}
