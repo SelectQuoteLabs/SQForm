@@ -1,3 +1,10 @@
+## [2.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.4.0...v2.5.0) (2021-01-11)
+
+
+### Features
+
+* 🎸 SQFormTextField default placeholder '- -' ([ab7afef](https://github.com/SelectQuoteLabs/SQForm/commit/ab7afef5a39bcd511fb1f4828b55bbea19799cff))
+
 ## [2.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.3.0...v2.4.0) (2021-01-08)
 
 
