@@ -11,7 +11,7 @@ function SQFormTextField({
   label,
   isDisabled = false,
   isRequired = false,
-  placeholder = '',
+  placeholder = '- -',
   size = 'auto',
   onBlur,
   onChange,
