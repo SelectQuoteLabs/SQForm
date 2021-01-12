@@ -60,10 +60,9 @@ function SQFormMultiSelect({
   const {
     formikField: {field},
     fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {handleBlur, HelperTextComponent}
   } = useForm({
     name,
-    onChange,
     isRequired
   });
 
@@ -102,6 +101,7 @@ function SQFormMultiSelect({
     );
 
     setFieldValue(name, values);
+    onChange && onChange(value);
   };
 
   const toggleTooltip = () => {
@@ -139,7 +139,7 @@ function SQFormMultiSelect({
           input={<Input disabled={isDisabled} name={name} />}
           value={field.value}
           onBlur={handleBlur}
-          onChange={handleMultiSelectChange && handleChange}
+          onChange={handleMultiSelectChange}
           fullWidth={true}
           labelId={labelID}
           renderValue={getRenderValue}
