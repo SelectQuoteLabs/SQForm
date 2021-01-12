@@ -1,3 +1,12 @@
+## [2.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.5.0...v2.6.0) (2021-01-12)
+
+
+### Features
+
+* 🎸 Added onChange handler to multiselect component ([dff40e6](https://github.com/SelectQuoteLabs/SQForm/commit/dff40e685ac611844975e3870d7a3a3f0a30a5c3)), closes [#53](https://github.com/SelectQuoteLabs/SQForm/issues/53)
+* 🎸 Added proptype ([4aa802b](https://github.com/SelectQuoteLabs/SQForm/commit/4aa802bc22c44fe4fd0e2b2a727a77d57086b199)), closes [#53](https://github.com/SelectQuoteLabs/SQForm/issues/53)
+* 🎸 Updated code to call onChange and default handler ([f4ecf85](https://github.com/SelectQuoteLabs/SQForm/commit/f4ecf85a5539c9a15e10b9f8e0aa5097a36c64d2)), closes [#53](https://github.com/SelectQuoteLabs/SQForm/issues/53)
+
 ## [2.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.4.0...v2.5.0) (2021-01-11)
 
 
