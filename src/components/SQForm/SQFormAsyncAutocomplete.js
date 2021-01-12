@@ -91,6 +91,7 @@ function SQFormAsyncAutocomplete({
   name,
   onBlur,
   onChange,
+  onInputChange,
   handleAsyncInputChange,
   loading,
   open,
@@ -142,8 +143,9 @@ function SQFormAsyncAutocomplete({
     (_event, value) => {
       setInputValue(value);
       handleAsyncInputChange(value);
+      onInputChange && onInputChange();
     },
-    [handleAsyncInputChange]
+    [handleAsyncInputChange, onInputChange]
   );
 
   return (
@@ -231,6 +233,8 @@ SQFormAsyncAutocomplete.propTypes = {
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
   onChange: PropTypes.func,
+  /** Custom onInputChange event callback (key pressed)*/
+  onInputChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 };
