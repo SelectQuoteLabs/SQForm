@@ -388,6 +388,7 @@ export const basicFormWithMultiSelect = () => {
           label="Friends"
           size={5}
           isRequired={true}
+          onChange={action('Friends selected')}
           useSelectAll={boolean('Use Select All', true)}
         >
           {MOCK_FRIENDS_OPTIONS}
