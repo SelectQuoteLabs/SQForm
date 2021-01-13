@@ -294,3 +294,40 @@ export const SQDialogStepperWithValidation = () => {
     </>
   );
 };
+
+export const SQDialogStepperLoading = () => {
+  return (
+    <>
+      <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
+      <SQFormDialogStepper
+        title="SQ Stepper Form"
+        isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
+        onClose={action('Close button clicked')}
+        fullWidth
+        maxWidth="md"
+        initialValues={{
+          firstName: ''
+        }}
+        setValues={formValues => {
+          console.log('values set', formValues);
+        }}
+        onSubmit={handleSubmit}
+        isLoading={true}
+      >
+        <SQFormDialogStep
+          label="Personal Data"
+          validationSchema={{
+            firstName: Yup.string().required('Required')
+          }}
+        >
+          <SQFormTextField
+            fullWidth
+            name="firstName"
+            label="First Name"
+            isRequired={true}
+          />
+        </SQFormDialogStep>
+      </SQFormDialogStepper>
+    </>
+  );
+};

@@ -17,6 +17,7 @@ import {
 import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
+import LoadingSpinner from '../LoadingSpinner';
 
 export function SQFormDialogStep({children}) {
   return <>{children}</>;
@@ -75,6 +76,7 @@ export function SQFormDialogStepper({
   fullWidth = true,
   contentStyle,
   initialValues,
+  isLoading,
   ...props
 }) {
   const steps = React.Children.toArray(children);
@@ -220,14 +222,18 @@ export function SQFormDialogStepper({
                 ...contentStyle
               }}
             >
-              <Grid
-                {...muiGridProps}
-                container
-                spacing={muiGridProps.spacing || 3}
-                justify="center"
-              >
-                {currentChild}
-              </Grid>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <Grid
+                  {...muiGridProps}
+                  container
+                  spacing={muiGridProps.spacing || 3}
+                  justify="center"
+                >
+                  {currentChild}
+                </Grid>
+              )}
             </DialogContent>
             <DialogActions classes={actionsClasses}>
               <RoundedButton
@@ -256,6 +262,8 @@ SQFormDialogStepper.propTypes = {
   disableBackdropClick: PropTypes.bool,
   /** Sets the dialog to the maxWidth. */
   fullWidth: PropTypes.bool,
+  /** Should the loading spinner be shown */
+  isLoading: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
   /** Allows the initial values to be updated after initial render */

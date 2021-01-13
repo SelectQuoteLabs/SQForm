@@ -93,3 +93,34 @@ export const sqFormDialogWithAutoFocus = () => (
     </SQFormDialog>
   </>
 );
+
+export const sqFormDialogLoading = () => (
+  <>
+    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
+    <SQFormDialog
+      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
+      isDisabled={boolean(
+        'isDisabled',
+        false,
+        'Toggle disabled state of Save Button'
+      )}
+      maxWidth="sm"
+      onClose={action('Close button clicked')}
+      onSave={handleSubmit}
+      title="Create New User"
+      initialValues={MOCK_EMPTY_USER_STATE}
+      muiGridProps={{
+        spacing: 2,
+        alignItems: 'center'
+      }}
+      isLoading={true}
+    >
+      <SQFormTextField
+        name="firstName"
+        label="First Name (Auto Focused)"
+        muiFieldProps={{autoFocus: true}}
+      />
+      <SQFormTextField name="lastName" label="Last Name" />
+    </SQFormDialog>
+  </>
+);

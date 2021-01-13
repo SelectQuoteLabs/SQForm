@@ -18,7 +18,8 @@ function SQFormDialog({
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
-  validationSchema
+  validationSchema,
+  isLoading
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -35,6 +36,7 @@ function SQFormDialog({
       validateOnMount={true}
     >
       <SQFormDialogInner
+        isLoading={isLoading}
         cancelButtonText={cancelButtonText}
         children={children}
         disableBackdropClick={disableBackdropClick}
@@ -60,6 +62,8 @@ SQFormDialog.propTypes = {
   disableBackdropClick: PropTypes.bool,
   /** The current disabled state of the Dialog Save Button */
   isDisabled: PropTypes.bool,
+  /** Should the loading spinner be shown */
+  isLoading: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */

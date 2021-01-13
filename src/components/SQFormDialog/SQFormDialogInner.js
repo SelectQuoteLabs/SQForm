@@ -14,6 +14,7 @@ import {Form} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import {useSQFormContext} from '../../index';
 import SQFormButton from '../SQForm/SQFormButton';
+import LoadingSpinner from '../LoadingSpinner';
 
 const Transition = React.forwardRef((props, ref) => {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -39,7 +40,8 @@ function SQFormDialogInner({
   onSave,
   saveButtonText,
   title,
-  muiGridProps
+  muiGridProps,
+  isLoading
 }) {
   const actionsClasses = useActionsStyles();
   const {resetForm} = useSQFormContext();
@@ -62,9 +64,17 @@ function SQFormDialogInner({
           <Typography variant="h4">{title}</Typography>
         </DialogTitle>
         <DialogContent dividers={true}>
-          <Grid {...muiGridProps} container spacing={muiGridProps.spacing || 2}>
-            {children}
-          </Grid>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <Grid
+              {...muiGridProps}
+              container
+              spacing={muiGridProps.spacing || 2}
+            >
+              {children}
+            </Grid>
+          )}
         </DialogContent>
         <DialogActions classes={actionsClasses}>
           <RoundedButton
@@ -93,6 +103,8 @@ SQFormDialogInner.propTypes = {
   disableBackdropClick: PropTypes.bool,
   /** The current disabled state of the Dialog Save Button */
   isDisabled: PropTypes.bool,
+  /** Should the loading spinner be shown */
+  isLoading: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
