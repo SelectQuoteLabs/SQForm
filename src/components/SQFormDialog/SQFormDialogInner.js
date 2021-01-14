@@ -14,7 +14,6 @@ import {Form} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import {useSQFormContext} from '../../index';
 import SQFormButton from '../SQForm/SQFormButton';
-import LoadingSpinner from '../LoadingSpinner';
 
 const Transition = React.forwardRef((props, ref) => {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -40,8 +39,7 @@ function SQFormDialogInner({
   onSave,
   saveButtonText,
   title,
-  muiGridProps,
-  isLoading
+  muiGridProps
 }) {
   const actionsClasses = useActionsStyles();
   const {resetForm} = useSQFormContext();
@@ -64,17 +62,9 @@ function SQFormDialogInner({
           <Typography variant="h4">{title}</Typography>
         </DialogTitle>
         <DialogContent dividers={true}>
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <Grid
-              {...muiGridProps}
-              container
-              spacing={muiGridProps.spacing || 2}
-            >
-              {children}
-            </Grid>
-          )}
+          <Grid {...muiGridProps} container spacing={muiGridProps.spacing || 2}>
+            {children}
+          </Grid>
         </DialogContent>
         <DialogActions classes={actionsClasses}>
           <RoundedButton

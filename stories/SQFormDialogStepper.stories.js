@@ -313,6 +313,7 @@ export const SQDialogStepperLoading = () => {
         }}
         onSubmit={handleSubmit}
         isLoading={true}
+        loadingMessage="Loading data for the step"
       >
         <SQFormDialogStep
           label="Personal Data"

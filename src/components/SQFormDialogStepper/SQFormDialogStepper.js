@@ -76,6 +76,7 @@ export function SQFormDialogStepper({
   fullWidth = true,
   contentStyle,
   initialValues,
+  loadingMessage,
   isLoading,
   ...props
 }) {
@@ -223,7 +224,7 @@ export function SQFormDialogStepper({
               }}
             >
               {isLoading ? (
-                <LoadingSpinner />
+                <LoadingSpinner message={loadingMessage} />
               ) : (
                 <Grid
                   {...muiGridProps}
@@ -268,6 +269,8 @@ SQFormDialogStepper.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   /** Allows the initial values to be updated after initial render */
   enableReinitialize: PropTypes.bool,
+  /** Optional message to be added to the loading spinner */
+  loadingMessage: PropTypes.string,
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
   maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', false]),
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */

@@ -18,8 +18,7 @@ function SQFormDialog({
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
-  validationSchema,
-  isLoading
+  validationSchema
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -36,7 +35,6 @@ function SQFormDialog({
       validateOnMount={true}
     >
       <SQFormDialogInner
-        isLoading={isLoading}
         cancelButtonText={cancelButtonText}
         children={children}
         disableBackdropClick={disableBackdropClick}

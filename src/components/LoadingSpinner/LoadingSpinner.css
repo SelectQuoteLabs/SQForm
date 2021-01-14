@@ -1,7 +1,0 @@
-.loadingSpinner {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  width: 100%;
-  animation: 0.45s fade-in;
-}
