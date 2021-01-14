@@ -144,7 +144,7 @@ function SQFormAutocomplete({
   const handleInputChange = React.useCallback(
     (_event, value) => {
       setInputValue(value);
-      onInputChange && onInputChange(_event, value);
+      onInputChange && onInputChange(value);
     },
     [onInputChange]
   );
