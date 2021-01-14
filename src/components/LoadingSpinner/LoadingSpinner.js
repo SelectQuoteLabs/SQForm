@@ -13,6 +13,9 @@ const useStyles = makeStyles({
     width: '100%',
     animation: '0.45s fade-in',
     alignItems: 'center'
+  },
+  typography: {
+    paddingTop: '10px'
   }
 });
 
@@ -22,7 +25,11 @@ function LoadingSpinner({message}) {
   return (
     <Grid classes={classes}>
       <LoadingIcon height="10rem" />
-      {message && <Typography variant="caption">{message}</Typography>}
+      {message && (
+        <Typography className={classes.typography} variant="subtitle1">
+          {message}
+        </Typography>
+      )}
     </Grid>
   );
 }

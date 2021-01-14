@@ -76,7 +76,7 @@ export function SQFormDialogStepper({
   fullWidth = true,
   contentStyle,
   initialValues,
-  loadingMessage,
+  loadingMessage = '',
   isLoading = false,
   ...props
 }) {
