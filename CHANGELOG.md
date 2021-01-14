@@ -1,3 +1,10 @@
+## [2.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.6.0...v2.7.0) (2021-01-13)
+
+
+### Features
+
+* 🎸 Added onInputChange prop to autocomplete component ([2b08d17](https://github.com/SelectQuoteLabs/SQForm/commit/2b08d174618668a25a3e641ab2e49c0ca19b54ab)), closes [#65](https://github.com/SelectQuoteLabs/SQForm/issues/65)
+
 ## [2.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.5.0...v2.6.0) (2021-01-12)
 
 

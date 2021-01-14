@@ -90,6 +90,7 @@ function SQFormAutocomplete({
   name,
   onBlur,
   onChange,
+  onInputChange,
   size = 'auto'
 }) {
   const classes = useStyles();
@@ -140,9 +141,13 @@ function SQFormAutocomplete({
     [name, onChange, setFieldValue]
   );
 
-  const handleInputChange = React.useCallback((_event, value) => {
-    setInputValue(value);
-  }, []);
+  const handleInputChange = React.useCallback(
+    (_event, value) => {
+      setInputValue(value);
+      onInputChange && onInputChange();
+    },
+    [onInputChange]
+  );
 
   return (
     <Grid item sm={size}>
@@ -214,6 +219,8 @@ SQFormAutocomplete.propTypes = {
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
   onChange: PropTypes.func,
+  /** Custom onInputChange event callback (key pressed) */
+  onInputChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 };

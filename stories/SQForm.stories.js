@@ -131,6 +131,7 @@ export const basicForm = () => {
           name="tenThousandOptions"
           label="Ten Thousand Options"
           size={6}
+          onInputChange={action('Update local state')}
         >
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
