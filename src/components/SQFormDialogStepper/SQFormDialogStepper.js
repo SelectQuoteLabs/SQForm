@@ -17,9 +17,18 @@ import {
 import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
+import LoadingSpinner from '../LoadingSpinner';
 
-export function SQFormDialogStep({children}) {
-  return <>{children}</>;
+export function SQFormDialogStep({
+  children,
+  isLoading = false,
+  loadingMessage = ''
+}) {
+  return isLoading ? (
+    <LoadingSpinner message={loadingMessage} />
+  ) : (
+    <>{children}</>
+  );
 }
 
 const Transition = React.forwardRef((props, ref) => {
@@ -130,7 +139,7 @@ export function SQFormDialogStepper({
       await onSubmit(values, helpers);
       setCompleted(true);
     } else {
-      setValues(values);
+      setValues && setValues(values);
       handleNext();
     }
   };
@@ -246,6 +255,15 @@ export function SQFormDialogStepper({
     </Formik>
   );
 }
+
+SQFormDialogStep.propTypes = {
+  /** The content to be rendered in the step body. */
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType]),
+  /** Should the loading spinner be shown */
+  isLoading: PropTypes.bool,
+  /** Optional message to be added to the loading spinner */
+  loadingMessage: PropTypes.string
+};
 
 SQFormDialogStepper.propTypes = {
   /** The secondary button text (Button located on left side of Dialog) */
