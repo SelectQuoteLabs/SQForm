@@ -77,7 +77,7 @@ export function SQFormDialogStepper({
   contentStyle,
   initialValues,
   loadingMessage,
-  isLoading,
+  isLoading = false,
   ...props
 }) {
   const steps = React.Children.toArray(children);
