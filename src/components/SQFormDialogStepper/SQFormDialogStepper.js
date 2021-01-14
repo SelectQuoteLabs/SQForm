@@ -274,8 +274,6 @@ SQFormDialogStepper.propTypes = {
   disableBackdropClick: PropTypes.bool,
   /** Sets the dialog to the maxWidth. */
   fullWidth: PropTypes.bool,
-  /** Should the loading spinner be shown */
-  isLoading: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
   /** Allows the initial values to be updated after initial render */
