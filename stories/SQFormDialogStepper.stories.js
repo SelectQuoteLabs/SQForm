@@ -307,13 +307,10 @@ export const SQDialogStepperLoading = () => {
         maxWidth="md"
         initialValues={{
           firstName: '',
-          lastName: ''
-        }}
-        setValues={formValues => {
-          console.log('values set', formValues);
+          lastName: '',
+          text: ''
         }}
         onSubmit={handleSubmit}
-        loadingMessage="Loading data for the step"
       >
         <SQFormDialogStep
           label="First Name"
@@ -322,12 +319,15 @@ export const SQDialogStepperLoading = () => {
           }}
           isLoading={false}
         >
-          <SQFormTextField
-            fullWidth
-            name="firstName"
-            label="First Name"
-            isRequired={true}
-          />
+          <div>
+            <SQFormTextField
+              fullWidth
+              name="firstName"
+              label="First Name"
+              isRequired={true}
+            />
+            <SQFormTextField fullWidth name="text" label="Text" />
+          </div>
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Last Name"
@@ -335,6 +335,7 @@ export const SQDialogStepperLoading = () => {
             lastName: Yup.string().required('Required')
           }}
           isLoading={true}
+          loadingMessage="Loading data for the step"
         >
           <SQFormTextField
             fullWidth

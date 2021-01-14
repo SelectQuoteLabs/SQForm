@@ -139,7 +139,7 @@ export function SQFormDialogStepper({
       await onSubmit(values, helpers);
       setCompleted(true);
     } else {
-      setValues(values);
+      setValues && setValues(values);
       handleNext();
     }
   };
@@ -257,8 +257,8 @@ export function SQFormDialogStepper({
 }
 
 SQFormDialogStep.propTypes = {
-  /** The content to be rendered in the dialog body.  Will be an array of React elements. */
-  children: PropTypes.array.isRequired,
+  /** The content to be rendered in the step body. */
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType]),
   /** Should the loading spinner be shown */
   isLoading: PropTypes.bool,
   /** Optional message to be added to the loading spinner */
