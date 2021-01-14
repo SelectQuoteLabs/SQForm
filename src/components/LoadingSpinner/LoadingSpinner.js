@@ -5,7 +5,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import LoadingIcon from '../LoadingIcon';
 import {Grid, Typography} from '@material-ui/core';
 
-const useStyles = makeStyles({
+const gridStyles = makeStyles({
   root: {
     display: 'flex',
     flex: '1 1 auto',
@@ -13,20 +13,24 @@ const useStyles = makeStyles({
     width: '100%',
     animation: '0.45s fade-in',
     alignItems: 'center'
-  },
-  typography: {
+  }
+});
+
+const typographyStyles = makeStyles({
+  root: {
     paddingTop: '10px'
   }
 });
 
 function LoadingSpinner({message}) {
-  const classes = useStyles();
+  const gridClasses = gridStyles();
+  const typographyClasses = typographyStyles();
 
   return (
-    <Grid classes={classes}>
+    <Grid classes={gridClasses}>
       <LoadingIcon height="10rem" />
       {message && (
-        <Typography className={classes.typography} variant="subtitle1">
+        <Typography classes={typographyClasses} variant="subtitle1">
           {message}
         </Typography>
       )}
