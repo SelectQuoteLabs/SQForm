@@ -19,8 +19,16 @@ import {Form, Formik, useFormikContext} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
 
-export function SQFormDialogStep({children}) {
-  return <>{children}</>;
+export function SQFormDialogStep({
+  children,
+  isLoading = false,
+  loadingMessage = ''
+}) {
+  return isLoading ? (
+    <LoadingSpinner message={loadingMessage} />
+  ) : (
+    <>{children}</>
+  );
 }
 
 const Transition = React.forwardRef((props, ref) => {
@@ -77,7 +85,6 @@ export function SQFormDialogStepper({
   contentStyle,
   initialValues,
   loadingMessage = '',
-  isLoading = false,
   ...props
 }) {
   const steps = React.Children.toArray(children);
@@ -223,18 +230,14 @@ export function SQFormDialogStepper({
                 ...contentStyle
               }}
             >
-              {isLoading ? (
-                <LoadingSpinner message={loadingMessage} />
-              ) : (
-                <Grid
-                  {...muiGridProps}
-                  container
-                  spacing={muiGridProps.spacing || 3}
-                  justify="center"
-                >
-                  {currentChild}
-                </Grid>
-              )}
+              <Grid
+                {...muiGridProps}
+                container
+                spacing={muiGridProps.spacing || 3}
+                justify="center"
+              >
+                {currentChild}
+              </Grid>
             </DialogContent>
             <DialogActions classes={actionsClasses}>
               <RoundedButton
@@ -253,6 +256,15 @@ export function SQFormDialogStepper({
     </Formik>
   );
 }
+
+SQFormDialogStep.propTypes = {
+  /** The content to be rendered in the dialog body.  Will be an array of React elements. */
+  children: PropTypes.array.isRequired,
+  /** Should the loading spinner be shown */
+  isLoading: PropTypes.bool,
+  /** Optional message to be added to the loading spinner */
+  loadingMessage: PropTypes.string
+};
 
 SQFormDialogStepper.propTypes = {
   /** The secondary button text (Button located on left side of Dialog) */
