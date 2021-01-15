@@ -152,10 +152,12 @@ export function SQFormDialogStepper({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-      const formValues = Object.values(values).filter(val => val);
+      const stepValues = currentStepKeys.some(step => {
+        return !!values[step];
+      });
 
       if (
-        !formValues.length ||
+        !stepValues ||
         currentStepKeys.some(step => Object.keys(errors).includes(step)) ||
         !dirty
       ) {
