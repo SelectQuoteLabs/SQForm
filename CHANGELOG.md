@@ -1,3 +1,10 @@
+### [2.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v2.8.0...v2.8.1) (2021-01-15)
+
+
+### Bug Fixes
+
+* 🐛 Next button logic to look at current step values to enab ([53009da](https://github.com/SelectQuoteLabs/SQForm/commit/53009dac6cd3b6819adce833421a32d38ed5655a)), closes [#75](https://github.com/SelectQuoteLabs/SQForm/issues/75)
+
 ## [2.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.7.0...v2.8.0) (2021-01-14)
 
 
