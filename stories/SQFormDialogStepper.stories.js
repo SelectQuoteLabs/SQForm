@@ -65,7 +65,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         `PV Rule : ${listItem.PLRule}`
       ],
       onClick: () => {
-        alert(`Account ${listItem.accountId}`);
+        console.log(`Account ${listItem.accountId}`);
       }
     }));
     return [
@@ -73,7 +73,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         header: 'Create a New Quote',
         id: 123,
         onClick: () => {
-          alert(`Create new account`);
+          console.log(`Create new account`);
         }
       },
       ...mappedList
@@ -90,8 +90,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
   ];
 
   const initialValues = {
-    friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-    selectAll: false
+    friends: ['Joe', 'Jane', 'Jack', 'Jill']
   };
   const names = [
     'Jim',
@@ -141,8 +140,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         <SQFormDialogStep
           label="Dependents"
           validationSchema={{
-            firstName: Yup.string(),
-            lastName: Yup.string()
+            friends: Yup.array()
           }}
         >
           <div style={{padding: '15px 15px 0px 15px', width: '100%'}}>
@@ -271,7 +269,8 @@ export const SQDialogStepperWithValidation = () => {
               then: Yup.number()
                 .required('Required for new account')
                 .min(100, 'Required for new account')
-            })
+            }),
+            age: Yup.string().required('Required')
           }}
         >
           <SQFormTextField
@@ -280,7 +279,7 @@ export const SQDialogStepperWithValidation = () => {
             type="number"
             label="Account ID"
           />
-          <SQFormTextField name="age" label="Age" size={2} />
+          <SQFormTextField name="age" label="Age" size={2} isRequired />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="More Info"
@@ -289,6 +288,60 @@ export const SQDialogStepperWithValidation = () => {
           }}
         >
           <SQFormTextField fullWidth name="description" label="Description" />
+        </SQFormDialogStep>
+      </SQFormDialogStepper>
+    </>
+  );
+};
+
+export const SQDialogStepperLoading = () => {
+  return (
+    <>
+      <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
+      <SQFormDialogStepper
+        title="SQ Stepper Form"
+        isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
+        onClose={action('Close button clicked')}
+        fullWidth
+        maxWidth="md"
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          text: ''
+        }}
+        onSubmit={handleSubmit}
+      >
+        <SQFormDialogStep
+          label="First Name"
+          validationSchema={{
+            firstName: Yup.string().required('Required')
+          }}
+          isLoading={false}
+        >
+          <div>
+            <SQFormTextField
+              fullWidth
+              name="firstName"
+              label="First Name"
+              isRequired={true}
+            />
+            <SQFormTextField fullWidth name="text" label="Text" />
+          </div>
+        </SQFormDialogStep>
+        <SQFormDialogStep
+          label="Last Name"
+          validationSchema={{
+            lastName: Yup.string().required('Required')
+          }}
+          isLoading={true}
+          loadingMessage="Loading data for the step"
+        >
+          <SQFormTextField
+            fullWidth
+            name="lastName"
+            label="Last Name"
+            isRequired={true}
+          />
         </SQFormDialogStep>
       </SQFormDialogStepper>
     </>
