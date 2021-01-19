@@ -25,7 +25,9 @@ function SQFormDatePicker({
   placeholder = '',
   onBlur,
   onChange,
-  muiFieldProps = {}
+  setDisabledDates,
+  muiFieldProps = {},
+  muiTextInputProps = {}
 }) {
   const {
     formikField: {field, helpers},
@@ -53,6 +55,7 @@ function SQFormDatePicker({
       <DatePicker
         label={label}
         disabled={isDisabled}
+        shouldDisableDate={setDisabledDates}
         value={value}
         onChange={handleChange}
         renderInput={inputProps => {
@@ -61,9 +64,9 @@ function SQFormDatePicker({
               {...inputProps}
               name={name}
               color="primary"
-              disabled={isDisabled}
               error={isFieldError}
               fullWidth={true}
+              inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
               InputLabelProps={{shrink: true}}
               FormHelperTextProps={{error: isFieldError}}
               helperText={isFieldError ? errorMessage : HelperTextComponent}
@@ -97,8 +100,12 @@ SQFormDatePicker.propTypes = {
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
   onChange: PropTypes.func,
+  /** Disable specific date(s) (day: DateIOType) => boolean */
+  setDisabledDates: PropTypes.func,
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
+  /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
+  muiTextInputProps: PropTypes.object
 };
 
 export default SQFormDatePicker;

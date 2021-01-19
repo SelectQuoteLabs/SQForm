@@ -16,6 +16,7 @@ export {default as SQFormCheckboxGroup} from './components/SQForm/SQFormCheckbox
 export {default as SQFormCheckboxGroupItem} from './components/SQForm/SQFormCheckboxGroupItem';
 export {default as SQFormDatePicker} from './components/SQForm/SQFormDatePicker';
 export {default as SQFormDateTimePicker} from './components/SQForm/SQFormDateTimePicker';
+export {default as SQFormDatePickerWithCalendarInputOnly} from './components/SQForm/SQFormDatePickerWithCalendarInputOnly';
 export {
   SQFormDialogStepper,
   SQFormDialogStep
