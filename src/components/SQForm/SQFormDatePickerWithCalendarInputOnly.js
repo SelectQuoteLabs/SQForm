@@ -109,7 +109,10 @@ SQFormDatePickerWithCalendarInputOnly.propTypes = {
   onBlur: PropTypes.func,
   /** Custom onChange event callback */
   onChange: PropTypes.func,
-  /** Disable specific date(s) (day: DateIOType) => boolean */
+  /** Disable specific date(s) (day: DateIOType) => boolean
+   * This is a predicate function called for every day of the month
+   * Return true to disable that day or false to enable that day
+   */
   setDisabledDate: PropTypes.func,
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps: PropTypes.object
