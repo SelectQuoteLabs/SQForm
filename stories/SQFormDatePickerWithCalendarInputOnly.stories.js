@@ -38,7 +38,7 @@ export const basicDatePicker = () => {
 };
 
 export const disableWeekendsDatePicker = () => {
-  const setDisabledDates = date => {
+  const setDisabledDate = date => {
     if (date.day() === 0 || date.day() === 6) {
       return true;
     }
@@ -54,7 +54,31 @@ export const disableWeekendsDatePicker = () => {
       <SQFormDatePickerWithCalendarInputOnly
         name="date"
         label="Date"
-        setDisabledDates={setDisabledDates}
+        setDisabledDate={setDisabledDate}
+      />
+    </SQForm>
+  );
+};
+
+export const onlyEnableFirstDayOfMonthDatePicker = () => {
+  const setDisabledDate = date => {
+    // disable all days EXCEPT first day of the month
+    if (date.date() !== 1) {
+      return true;
+    }
+    return false;
+  };
+
+  return (
+    <SQForm
+      initialValues={{date: ''}}
+      onSubmit={handleSubmit}
+      validationSchema={basicSchema}
+    >
+      <SQFormDatePickerWithCalendarInputOnly
+        name="date"
+        label="Date"
+        setDisabledDate={setDisabledDate}
       />
     </SQForm>
   );

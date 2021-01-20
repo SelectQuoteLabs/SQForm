@@ -33,7 +33,7 @@ function SQFormDatePickerWithCalendarInputOnly({
   placeholder = '',
   onBlur,
   onChange,
-  setDisabledDates,
+  setDisabledDate,
   muiFieldProps = {}
 }) {
   const clearButtonClasses = useClearButtonStyles();
@@ -61,7 +61,7 @@ function SQFormDatePickerWithCalendarInputOnly({
       placeholder={placeholder}
       onBlur={onBlur}
       onChange={onChange}
-      setDisabledDates={setDisabledDates}
+      setDisabledDate={setDisabledDate}
       muiFieldProps={{
         ...muiFieldProps,
         open: isOpen,
@@ -110,7 +110,7 @@ SQFormDatePickerWithCalendarInputOnly.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func,
   /** Disable specific date(s) (day: DateIOType) => boolean */
-  setDisabledDates: PropTypes.func,
+  setDisabledDate: PropTypes.func,
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps: PropTypes.object
 };
