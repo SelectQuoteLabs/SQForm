@@ -1,3 +1,10 @@
+## [2.9.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.8.1...v2.9.0) (2021-01-20)
+
+
+### Features
+
+* 🎸 Component to force user date selection via DatePicker ([7c27b61](https://github.com/SelectQuoteLabs/SQForm/commit/7c27b613223a60347cfc50452c175d7a98774a9f)), closes [#74](https://github.com/SelectQuoteLabs/SQForm/issues/74)
+
 ### [2.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v2.8.0...v2.8.1) (2021-01-15)
 
 
