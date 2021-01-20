@@ -1,3 +1,25 @@
+### [2.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v2.8.0...v2.8.1) (2021-01-15)
+
+
+### Bug Fixes
+
+* 🐛 Next button logic to look at current step values to enab ([53009da](https://github.com/SelectQuoteLabs/SQForm/commit/53009dac6cd3b6819adce833421a32d38ed5655a)), closes [#75](https://github.com/SelectQuoteLabs/SQForm/issues/75)
+
+## [2.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.7.0...v2.8.0) (2021-01-14)
+
+
+### Features
+
+* 🎸 Added proptypes and moved loading to step ([dd37b16](https://github.com/SelectQuoteLabs/SQForm/commit/dd37b163b28ea60e3d3390be18562e39cbde112e))
+* 🎸 Adding loading state to dialogs ([0f4d01d](https://github.com/SelectQuoteLabs/SQForm/commit/0f4d01df7fd066734a535804561b0dd37bf03f27)), closes [#70](https://github.com/SelectQuoteLabs/SQForm/issues/70)
+* 🎸 Moved styling to makeStyles instead of css ([89282c3](https://github.com/SelectQuoteLabs/SQForm/commit/89282c3aa59bf1a255e5d39d6191b8dc8dc2eca2))
+* 🎸 removed loading message ([f1fdfb6](https://github.com/SelectQuoteLabs/SQForm/commit/f1fdfb6fc26de64f71e72c4b8af7b80c358f8670))
+* 🎸 removed proptype ([b09c596](https://github.com/SelectQuoteLabs/SQForm/commit/b09c5966691e03c8347a51543d181caab4af6bca))
+* 🎸 Removed unused stories, added default prop value ([56ebd87](https://github.com/SelectQuoteLabs/SQForm/commit/56ebd875c795b0cf279fd174cdd880186f58db80))
+* 🎸 updated proptype and fixed setvalues call of undefined ([4948c98](https://github.com/SelectQuoteLabs/SQForm/commit/4948c98556486f39c0f48e2fe963c9eed386f395))
+* 🎸 updated styles for typography to remove warning ([9788a1a](https://github.com/SelectQuoteLabs/SQForm/commit/9788a1ac2eca5650f4b61c0c63238b446315a629))
+* 🎸 Updated the typography message style and default messag ([9295b45](https://github.com/SelectQuoteLabs/SQForm/commit/9295b4569177ff7fadbd2f5009279cbdae11d5f7))
+
 ## [2.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.6.0...v2.7.0) (2021-01-13)
 
 
