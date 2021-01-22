@@ -13,7 +13,8 @@ import {
   SQFormDialogStep,
   SQFormDialogStepper,
   SQFormCheckboxGroup,
-  SQFormCheckboxGroupItem
+  SQFormCheckboxGroupItem,
+  SQFormResetInitialValuesButton
 } from '../src';
 
 export default {
@@ -223,6 +224,7 @@ export const SQDialogStepperWithValidation = () => {
         initialValues={{
           firstName: '',
           lastName: '',
+          middleI: '',
           newAccount: false,
           accountID: '',
           description: '',
@@ -240,6 +242,17 @@ export const SQDialogStepperWithValidation = () => {
             lastName: Yup.string().required('Required')
           }}
         >
+          <SQFormResetInitialValuesButton
+            tooltip="Clear Addresses"
+            confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+            initialValuesObject={{
+              firstName: 'test Name',
+              lastName: '',
+              middleI: 'initial name'
+            }}
+          >
+            Clear Addresses
+          </SQFormResetInitialValuesButton>
           <SQFormTextField
             fullWidth
             name="firstName"
@@ -273,6 +286,16 @@ export const SQDialogStepperWithValidation = () => {
             age: Yup.string().required('Required')
           }}
         >
+          <SQFormResetInitialValuesButton
+            tooltip="Reset Account Details"
+            confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+            initialValuesObject={{
+              accountID: '',
+              age: 20
+            }}
+          >
+            Reset Account Details
+          </SQFormResetInitialValuesButton>
           <SQFormTextField
             fullWidth
             name="accountID"

@@ -25,6 +25,7 @@ export {default as SQFormDropdown} from './components/SQForm/SQFormDropdown';
 export {default as SQFormIconButton} from './components/SQForm/SQFormIconButton';
 export {default as SQFormReadOnlyField} from './components/SQForm/SQFormReadOnlyField';
 export {default as SQFormResetButtonWithConfirmation} from './components/SQForm/SQFormResetButtonWithConfirmation';
+export {default as SQFormResetInitialValuesButton} from './components/SQForm/SQFormResetInitialValuesButton';
 export {default as SQFormTextarea} from './components/SQForm/SQFormTextarea';
 export {default as SQFormTextField} from './components/SQForm/SQFormTextField';
 export {default as SQFormMultiSelect} from './components/SQForm/SQFormMultiSelect';
