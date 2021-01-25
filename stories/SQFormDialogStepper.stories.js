@@ -206,19 +206,17 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
 };
 
 export const SQDialogStepperWithValidation = () => {
-  const personalDateInitialValues = {
+  const personalDataInitialValues = {
     firstName: '',
     lastName: '',
     middleI: '',
     newAccount: false,
-    accountID: '',
-    description: '',
-    age: ''
+    description: ''
   };
 
-  const accountDetails = {
+  const accountDetailsInitValues = {
     accountID: '',
-    age: 20
+    age: ''
   };
 
   return (
@@ -236,7 +234,10 @@ export const SQDialogStepperWithValidation = () => {
           alignItems: 'center',
           spacing: 6
         }}
-        initialValues={personalDateInitialValues}
+        initialValues={{
+          ...personalDataInitialValues,
+          ...accountDetailsInitValues
+        }}
         setValues={formValues => {
           console.log('values set', formValues);
         }}
@@ -254,7 +255,7 @@ export const SQDialogStepperWithValidation = () => {
               <SQFormResetInitialValuesButton
                 tooltip="Clear Addresses"
                 confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-                initialValuesObject={personalDateInitialValues}
+                initialValuesObject={personalDataInitialValues}
               >
                 Clear Addresses
               </SQFormResetInitialValuesButton>
@@ -299,7 +300,7 @@ export const SQDialogStepperWithValidation = () => {
               <SQFormResetInitialValuesButton
                 tooltip="Reset Accounts"
                 confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-                initialValuesObject={accountDetails}
+                initialValuesObject={accountDetailsInitValues}
               >
                 Reset Accounts
               </SQFormResetInitialValuesButton>
