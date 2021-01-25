@@ -42,6 +42,7 @@ export const sqFormDialog = () => (
         false,
         'Toggle disabled state of Save Button'
       )}
+      shouldRequireFieldUpdates={true}
       maxWidth="sm"
       onClose={action('Close button clicked')}
       onSave={handleSubmit}

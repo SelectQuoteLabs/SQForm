@@ -1,3 +1,5 @@
+import deepEqual from 'fast-deep-equal';
+
 // Note - Formik fields expect empty strings and not nulls
 // When initializing the forms initialValues we can use this function to replace all nulls with empty strings
 export function sanitizeInitialValues(valuesObject) {
@@ -16,4 +18,8 @@ export function serializeFormValues(formValues) {
       return value === '' ? null : value;
     })
   );
+}
+
+export function hasUpdated(initialValues, values) {
+  return !deepEqual(initialValues, values);
 }

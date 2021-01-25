@@ -1,23 +1,29 @@
 import React from 'react';
 import {useFormikContext} from 'formik';
+import {hasUpdated} from '../../utils';
 
-export function useFormButton(isDisabled) {
-  const {dirty, errors, values, ...rest} = useFormikContext();
+export function useFormButton(isDisabled, shouldRequireFieldUpdates) {
+  const {values, initialValues, isValid, ...rest} = useFormikContext();
+  const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
   const isButtonDisabled = React.useMemo(() => {
-    const errorsCount = Object.values(errors).length;
-    const formValues = Object.values(values).filter(val => val);
-
-    if (dirty && !isDisabled && !errorsCount) {
-      return false;
+    if (isDisabled || !isValid) {
+      return true;
     }
 
-    if (!dirty || isDisabled || !!errorsCount || !formValues.length) {
+    if (shouldRequireFieldUpdates && !hasFormBeenUpdated) {
       return true;
     }
 
     return false;
-  }, [dirty, errors, isDisabled, values]);
+  }, [hasFormBeenUpdated, isDisabled, isValid, shouldRequireFieldUpdates]);
 
-  return {dirty, errors, isButtonDisabled, values, ...rest};
+  return {
+    isButtonDisabled,
+    hasFormBeenUpdated,
+    values,
+    initialValues,
+    isValid,
+    ...rest
+  };
 }

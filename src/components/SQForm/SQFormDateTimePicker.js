@@ -29,7 +29,7 @@ function SQFormDateTimePicker({
 }) {
   const {
     formikField: {field, helpers},
-    fieldState: {isFieldError, errorMessage},
+    fieldState: {isFieldError},
     fieldHelpers: {handleBlur, HelperTextComponent}
   } = useForm({
     name,
@@ -66,7 +66,7 @@ function SQFormDateTimePicker({
               fullWidth={true}
               InputLabelProps={{shrink: true}}
               FormHelperTextProps={{error: isFieldError}}
-              helperText={isFieldError ? errorMessage : HelperTextComponent}
+              helperText={HelperTextComponent}
               placeholder={placeholder}
               onBlur={handleBlur}
               required={isRequired}
