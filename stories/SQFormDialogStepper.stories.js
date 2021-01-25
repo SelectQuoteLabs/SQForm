@@ -206,6 +206,21 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
 };
 
 export const SQDialogStepperWithValidation = () => {
+  const personalDateInitialValues = {
+    firstName: '',
+    lastName: '',
+    middleI: '',
+    newAccount: false,
+    accountID: '',
+    description: '',
+    age: ''
+  };
+
+  const accountDetails = {
+    accountID: '',
+    age: 20
+  };
+
   return (
     <>
       <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
@@ -221,15 +236,7 @@ export const SQDialogStepperWithValidation = () => {
           alignItems: 'center',
           spacing: 6
         }}
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          middleI: '',
-          newAccount: false,
-          accountID: '',
-          description: '',
-          age: ''
-        }}
+        initialValues={personalDateInitialValues}
         setValues={formValues => {
           console.log('values set', formValues);
         }}
@@ -242,17 +249,18 @@ export const SQDialogStepperWithValidation = () => {
             lastName: Yup.string().required('Required')
           }}
         >
-          <SQFormResetInitialValuesButton
-            tooltip="Clear Addresses"
-            confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-            initialValuesObject={{
-              firstName: 'test Name',
-              lastName: '',
-              middleI: 'initial name'
-            }}
-          >
-            Clear Addresses
-          </SQFormResetInitialValuesButton>
+          <SectionHeader title="Prefill Address">
+            <div style={{marginRight: '10px'}}>
+              <SQFormResetInitialValuesButton
+                tooltip="Clear Addresses"
+                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+                initialValuesObject={personalDateInitialValues}
+              >
+                Clear Addresses
+              </SQFormResetInitialValuesButton>
+            </div>
+          </SectionHeader>
+
           <SQFormTextField
             fullWidth
             name="firstName"
@@ -286,16 +294,18 @@ export const SQDialogStepperWithValidation = () => {
             age: Yup.string().required('Required')
           }}
         >
-          <SQFormResetInitialValuesButton
-            tooltip="Reset Account Details"
-            confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-            initialValuesObject={{
-              accountID: '',
-              age: 20
-            }}
-          >
-            Reset Account Details
-          </SQFormResetInitialValuesButton>
+          <SectionHeader title="Prefill Address">
+            <div style={{marginRight: '10px'}}>
+              <SQFormResetInitialValuesButton
+                tooltip="Reset Accounts"
+                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+                initialValuesObject={accountDetails}
+              >
+                Reset Accounts
+              </SQFormResetInitialValuesButton>
+            </div>
+          </SectionHeader>
+
           <SQFormTextField
             fullWidth
             name="accountID"
