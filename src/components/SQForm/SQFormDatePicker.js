@@ -31,7 +31,7 @@ function SQFormDatePicker({
 }) {
   const {
     formikField: {field, helpers},
-    fieldState: {isFieldError, errorMessage},
+    fieldState: {isFieldError},
     fieldHelpers: {handleBlur, HelperTextComponent}
   } = useForm({
     name,
@@ -69,7 +69,7 @@ function SQFormDatePicker({
               inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
               InputLabelProps={{shrink: true}}
               FormHelperTextProps={{error: isFieldError}}
-              helperText={isFieldError ? errorMessage : HelperTextComponent}
+              helperText={HelperTextComponent}
               placeholder={placeholder}
               onBlur={handleBlur}
               required={isRequired}

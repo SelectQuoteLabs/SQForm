@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
 function SQFormButton({
   children,
   isDisabled = false,
+  shouldRequireFieldUpdates = false,
   title = 'Form Submission',
   type = 'submit'
 }) {
-  const {dirty, isButtonDisabled, handleReset} = useFormButton(isDisabled);
+  const {dirty, isButtonDisabled, handleReset} = useFormButton(
+    isDisabled,
+    shouldRequireFieldUpdates
+  );
 
   const isSQFormButtonDisabled = React.useMemo(() => {
     if (type === 'reset') {
@@ -33,9 +36,15 @@ function SQFormButton({
 }
 
 SQFormButton.propTypes = {
+  /** Contents of the form button, usually text */
   children: PropTypes.node.isRequired,
+  /** Custom disabled state */
   isDisabled: PropTypes.bool,
+  /** Whether or not the form requires updates to the form to enable the submit button */
+  shouldRequireFieldUpdates: PropTypes.bool,
+  /** The title of the button */
   title: PropTypes.string,
+  /** Type of button, defaults to 'submit' */
   type: PropTypes.oneOf(['submit', 'reset'])
 };
 

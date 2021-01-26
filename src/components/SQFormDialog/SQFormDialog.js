@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
+import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
 function SQFormDialog({
   cancelButtonText = 'Cancel',
@@ -18,6 +19,7 @@ function SQFormDialog({
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
+  shouldRequireFieldUpdates = false,
   validationSchema
 }) {
   const validationYupSchema = React.useMemo(() => {
@@ -26,9 +28,12 @@ function SQFormDialog({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
+  const initialErrors = useInitialRequiredErrors(validationSchema);
+
   return (
     <Formik
       enableReinitialize={enableReinitialize}
+      initialErrors={initialErrors}
       initialValues={initialValues}
       onSubmit={onSave}
       validationSchema={validationYupSchema}
@@ -44,6 +49,7 @@ function SQFormDialog({
         onClose={onClose}
         onSave={onSave}
         saveButtonText={saveButtonText}
+        shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
       />
@@ -76,6 +82,8 @@ SQFormDialog.propTypes = {
   initialValues: PropTypes.object.isRequired,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
+  /** Whether or not the dialog form requires updates to the form to enable the submit button */
+  shouldRequireFieldUpdates: PropTypes.bool,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema

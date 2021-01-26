@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
+import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
 function SQForm({
   children,
@@ -18,6 +19,8 @@ function SQForm({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
+  const initialErrors = useInitialRequiredErrors(validationSchema);
+
   // HACK: This is a workaround for: https://github.com/mui-org/material-ui-pickers/issues/2112
   // Remove this reset handler when the issue is fixed.
   const handleReset = () => {
@@ -27,6 +30,7 @@ function SQForm({
   return (
     <Formik
       enableReinitialize={enableReinitialize}
+      initialErrors={initialErrors}
       initialValues={initialValues}
       onSubmit={onSubmit}
       onReset={handleReset}
