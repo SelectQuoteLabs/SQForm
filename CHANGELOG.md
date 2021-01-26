@@ -1,3 +1,10 @@
+## [2.10.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.9.0...v2.10.0) (2021-01-26)
+
+
+### Features
+
+* 🎸 Fixes submit button, reset button, helper text behavior ([bc55e62](https://github.com/SelectQuoteLabs/SQForm/commit/bc55e62e54a6371b352d770d647b1be2b02a6bb3)), closes [#59](https://github.com/SelectQuoteLabs/SQForm/issues/59) [#83](https://github.com/SelectQuoteLabs/SQForm/issues/83) [#47](https://github.com/SelectQuoteLabs/SQForm/issues/47)
+
 ## [2.9.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.8.1...v2.9.0) (2021-01-20)
 
 
