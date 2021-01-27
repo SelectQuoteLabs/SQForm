@@ -13,7 +13,8 @@ import {
   SQFormDialogStep,
   SQFormDialogStepper,
   SQFormCheckboxGroup,
-  SQFormCheckboxGroupItem
+  SQFormCheckboxGroupItem,
+  SQFormResetInitialValuesButton
 } from '../src';
 
 export default {
@@ -205,6 +206,19 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
 };
 
 export const SQDialogStepperWithValidation = () => {
+  const personalDataInitialValues = {
+    firstName: '',
+    lastName: '',
+    middleI: '',
+    newAccount: false,
+    description: ''
+  };
+
+  const accountDetailsInitValues = {
+    accountID: '',
+    age: ''
+  };
+
   return (
     <>
       <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
@@ -221,12 +235,8 @@ export const SQDialogStepperWithValidation = () => {
           spacing: 6
         }}
         initialValues={{
-          firstName: '',
-          lastName: '',
-          newAccount: false,
-          accountID: '',
-          description: '',
-          age: ''
+          ...personalDataInitialValues,
+          ...accountDetailsInitValues
         }}
         setValues={formValues => {
           console.log('values set', formValues);
@@ -240,6 +250,18 @@ export const SQDialogStepperWithValidation = () => {
             lastName: Yup.string().required('Required')
           }}
         >
+          <SectionHeader title="Prefill Address">
+            <div style={{marginRight: '10px'}}>
+              <SQFormResetInitialValuesButton
+                tooltip="Clear Addresses"
+                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+                initialValuesObject={personalDataInitialValues}
+              >
+                Clear Addresses
+              </SQFormResetInitialValuesButton>
+            </div>
+          </SectionHeader>
+
           <SQFormTextField
             fullWidth
             name="firstName"
@@ -273,6 +295,18 @@ export const SQDialogStepperWithValidation = () => {
             age: Yup.string().required('Required')
           }}
         >
+          <SectionHeader title="Prefill Address">
+            <div style={{marginRight: '10px'}}>
+              <SQFormResetInitialValuesButton
+                tooltip="Reset Accounts"
+                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+                initialValuesObject={accountDetailsInitValues}
+              >
+                Reset Accounts
+              </SQFormResetInitialValuesButton>
+            </div>
+          </SectionHeader>
+
           <SQFormTextField
             fullWidth
             name="accountID"
