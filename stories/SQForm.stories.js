@@ -263,7 +263,7 @@ export const formWithFieldArray = () => {
         </Grid>
         <Grid item sm={12}>
           <Grid container justify="flex-end">
-            <SQFormButton>Submit</SQFormButton>
+            <SQFormButton shouldRequireFieldUpdates={true}>Submit</SQFormButton>
           </Grid>
         </Grid>
       </SQForm>

@@ -32,12 +32,13 @@ function SQFormDialogInner({
   cancelButtonText,
   children,
   disableBackdropClick,
-  isDisabled,
+  isDisabled = false,
   isOpen,
   maxWidth,
   onClose,
   onSave,
   saveButtonText,
+  shouldRequireFieldUpdates = false,
   title,
   muiGridProps
 }) {
@@ -76,7 +77,13 @@ function SQFormDialogInner({
             {cancelButtonText}
           </RoundedButton>
           {onSave && (
-            <SQFormButton title={saveButtonText}>{saveButtonText}</SQFormButton>
+            <SQFormButton
+              title={saveButtonText}
+              isDisabled={isDisabled}
+              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+            >
+              {saveButtonText}
+            </SQFormButton>
           )}
         </DialogActions>
       </Form>
@@ -103,6 +110,8 @@ SQFormDialogInner.propTypes = {
   onSave: PropTypes.func,
   /** The primary button text (Button located on right side of Dialog) */
   saveButtonText: PropTypes.string,
+  /** Whether or not the dialog form requires updates to the form to enable the submit button */
+  shouldRequireFieldUpdates: PropTypes.bool,
   /** Title text at the top of the Dialog */
   title: PropTypes.string.isRequired,
   /** Any prop from https://material-ui.com/api/grid */

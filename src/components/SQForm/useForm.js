@@ -14,16 +14,43 @@ function _handleError(name, isRequired) {
   }
 }
 
+function _getIsFulfilled(isRequired, hasValue, isError) {
+  if (!isRequired && !isError) {
+    return true;
+  }
+
+  if (hasValue && !isError) {
+    return true;
+  }
+
+  return false;
+}
+
+function _getHasValue(meta) {
+  const fieldValue = getIn(meta, 'value');
+
+  if (Array.isArray(fieldValue)) {
+    return !!fieldValue.length;
+  }
+
+  if (fieldValue) {
+    return true;
+  }
+
+  return false;
+}
+
 export function useForm({name, isRequired, onBlur, onChange}) {
   _handleError(name, isRequired);
 
   const [field, meta, helpers] = useField(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
+  const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
   const isFieldError = isTouched && isError;
-  const isFieldRequired = !isTouched && isRequired && !getIn(meta, 'value');
-  const isFulfilled = isTouched && !isFieldError;
+  const isFieldRequired = isRequired && !hasValue;
+  const isFulfilled = _getIsFulfilled(isRequired, hasValue, isError);
 
   const handleChange = React.useCallback(
     event => {
@@ -42,14 +69,6 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   );
 
   const HelperTextComponent = React.useMemo(() => {
-    if (isFieldRequired) {
-      return (
-        <>
-          <WarningIcon color="disabled" style={SPACE_STYLE} />
-          Required
-        </>
-      );
-    }
     if (isFieldError) {
       return (
         <>
@@ -58,14 +77,18 @@ export function useForm({name, isRequired, onBlur, onChange}) {
         </>
       );
     }
-    if (isFulfilled)
+    if (isFieldRequired) {
       return (
-        <VerifiedIcon
-          style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}}
-        />
+        <>
+          <WarningIcon color="disabled" style={SPACE_STYLE} />
+          Required
+        </>
       );
-    return ' '; // return something so DOM element always exists
-  }, [errorMessage, isFieldError, isFieldRequired, isFulfilled]);
+    }
+    return (
+      <VerifiedIcon style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}} />
+    );
+  }, [errorMessage, isFieldError, isFieldRequired]);
 
   return {
     formikField: {field, meta, helpers},
