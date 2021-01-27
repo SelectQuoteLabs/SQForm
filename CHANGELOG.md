@@ -1,3 +1,11 @@
+## [2.11.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.10.0...v2.11.0) (2021-01-27)
+
+
+### Features
+
+* 🎸 Issue-69 SQFormDialogStepper expose a way to reset/clea ([dd9bf82](https://github.com/SelectQuoteLabs/SQForm/commit/dd9bf820be6cab9c2cf206b6bdede33fa7413651)), closes [#69](https://github.com/SelectQuoteLabs/SQForm/issues/69)
+* 🎸 SQFormDialogStepper expose a way to reset/clear steps v ([1d93233](https://github.com/SelectQuoteLabs/SQForm/commit/1d9323316109fa28b1a40807308ff3bf70b46dc8))
+
 ## [2.10.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.9.0...v2.10.0) (2021-01-26)
 
 
