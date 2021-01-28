@@ -86,7 +86,7 @@ SQFormDialog.propTypes = {
   initialValues: PropTypes.object.isRequired,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
-  /** open/close props for cancel confirmation dialog*/
+  /** Whether or not the dialog form requires updates to the form to enable the submit button */
   shouldRequireFieldUpdates: PropTypes.bool,
   /**
    * Yup validation schema shape
