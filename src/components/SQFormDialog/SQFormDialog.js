@@ -20,7 +20,9 @@ function SQFormDialog({
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
-  validationSchema
+  validationSchema,
+  cancelConfirmDialogProps = {},
+  showCancelConfirmDialog = true
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -52,6 +54,8 @@ function SQFormDialog({
         shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
+        showCancelConfirmDialog={showCancelConfirmDialog}
+        cancelConfirmDialogProps={cancelConfirmDialogProps}
       />
     </Formik>
   );
@@ -82,13 +86,25 @@ SQFormDialog.propTypes = {
   initialValues: PropTypes.object.isRequired,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
-  /** Whether or not the dialog form requires updates to the form to enable the submit button */
+  /** open/close props for cancel confirmation dialog*/
   shouldRequireFieldUpdates: PropTypes.bool,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
+  /** Whether or not the Cancel Confirm Dialog nedeeded */
+  showCancelConfirmDialog: PropTypes.bool,
+  /**
+   * Any Valid props for Cancel Confirmation Dialog
+   * title: Modal Title
+   * secondaryButtonText: The secondary button text (Button located on left side of Dialog)
+   * primaryButtonText: The primary button text (Button located on right side of Dialog)
+   * content: The content to be rendered in the dialog body
+   * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
+   *
+   * */
+  cancelConfirmDialogProps: PropTypes.object
 };
 
 export default SQFormDialog;

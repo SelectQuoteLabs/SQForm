@@ -11,7 +11,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import {Form} from 'formik';
-import {RoundedButton} from 'scplus-shared-components';
+import {RoundedButton, DialogAlert, useDialog} from 'scplus-shared-components';
 import {useSQFormContext} from '../../index';
 import SQFormButton from '../SQForm/SQFormButton';
 
@@ -40,54 +40,96 @@ function SQFormDialogInner({
   saveButtonText,
   shouldRequireFieldUpdates = false,
   title,
-  muiGridProps
+  muiGridProps,
+  showCancelConfirmDialog,
+  cancelConfirmDialogProps
 }) {
   const actionsClasses = useActionsStyles();
   const {resetForm} = useSQFormContext();
 
-  const handleClose = () => {
-    resetForm();
-    onClose();
+  const [
+    isDialogAlertModalOpen,
+    {openDialog: openDialogAlertModal, closeDialog: closeDialogAlertModal}
+  ] = useDialog();
+
+  const handleCancel = () => {
+    if (!showCancelConfirmDialog) {
+      resetForm();
+      onClose();
+
+      return;
+    }
+
+    openDialogAlertModal();
   };
 
+  const confirmCancel = () => {
+    resetForm();
+    onClose();
+    closeDialogAlertModal();
+  };
+
+  const {content, ...restProps} = cancelConfirmDialogProps;
+
   return (
-    <Dialog
-      disableBackdropClick={disableBackdropClick}
-      maxWidth={maxWidth}
-      open={isOpen}
-      TransitionComponent={Transition}
-      onClose={handleClose}
-    >
-      <Form>
-        <DialogTitle disableTypography={true}>
-          <Typography variant="h4">{title}</Typography>
-        </DialogTitle>
-        <DialogContent dividers={true}>
-          <Grid {...muiGridProps} container spacing={muiGridProps.spacing || 2}>
-            {children}
-          </Grid>
-        </DialogContent>
-        <DialogActions classes={actionsClasses}>
-          <RoundedButton
-            title={cancelButtonText}
-            onClick={handleClose}
-            color="secondary"
-            variant="outlined"
-          >
-            {cancelButtonText}
-          </RoundedButton>
-          {onSave && (
-            <SQFormButton
-              title={saveButtonText}
-              isDisabled={isDisabled}
-              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+    <>
+      <Dialog
+        disableBackdropClick={disableBackdropClick}
+        maxWidth={maxWidth}
+        open={isOpen}
+        TransitionComponent={Transition}
+        onClose={handleCancel}
+      >
+        <Form>
+          <DialogTitle disableTypography={true}>
+            <Typography variant="h4">{title}</Typography>
+          </DialogTitle>
+          <DialogContent dividers={true}>
+            <Grid
+              {...muiGridProps}
+              container
+              spacing={muiGridProps.spacing || 2}
             >
-              {saveButtonText}
-            </SQFormButton>
-          )}
-        </DialogActions>
-      </Form>
-    </Dialog>
+              {children}
+            </Grid>
+          </DialogContent>
+          <DialogActions classes={actionsClasses}>
+            <RoundedButton
+              title={cancelButtonText}
+              onClick={handleCancel}
+              color="secondary"
+              variant="outlined"
+            >
+              {cancelButtonText}
+            </RoundedButton>
+            {onSave && (
+              <SQFormButton
+                title={saveButtonText}
+                isDisabled={isDisabled}
+                shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+              >
+                {saveButtonText}
+              </SQFormButton>
+            )}
+          </DialogActions>
+        </Form>
+      </Dialog>
+
+      {showCancelConfirmDialog && (
+        <DialogAlert
+          isOpen={isDialogAlertModalOpen}
+          primaryButtonText="Continue"
+          secondaryButtonText="Go Back"
+          onPrimaryButtonClick={confirmCancel}
+          onSecondaryButtonClick={closeDialogAlertModal}
+          title={`Cancel Changes`}
+          {...restProps}
+        >
+          {content ||
+            `You currently have unsaved changes which will be lost if you continue.`}
+        </DialogAlert>
+      )}
+    </>
   );
 }
 
