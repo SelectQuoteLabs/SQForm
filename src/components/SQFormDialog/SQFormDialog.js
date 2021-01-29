@@ -22,7 +22,7 @@ function SQFormDialog({
   shouldRequireFieldUpdates = false,
   validationSchema,
   cancelConfirmDialogProps = {},
-  showCancelConfirmDialog = true
+  openCancelConfirmationDialog = true
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -54,7 +54,7 @@ function SQFormDialog({
         shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
-        showCancelConfirmDialog={showCancelConfirmDialog}
+        openCancelConfirmationDialog={openCancelConfirmationDialog}
         cancelConfirmDialogProps={cancelConfirmDialogProps}
       />
     </Formik>
@@ -93,18 +93,19 @@ SQFormDialog.propTypes = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema: PropTypes.object,
-  /** Whether or not the Cancel Confirm Dialog nedeeded */
-  showCancelConfirmDialog: PropTypes.bool,
-  /**
-   * Any Valid props for Cancel Confirmation Dialog
-   * title: Modal Title
-   * secondaryButtonText: The secondary button text (Button located on left side of Dialog)
-   * primaryButtonText: The primary button text (Button located on right side of Dialog)
-   * content: The content to be rendered in the dialog body
-   * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
-   *
-   * */
-  cancelConfirmDialogProps: PropTypes.object
+  /** Whether or not to show the confirmation dialog upon clicking the cancel button */
+  openCancelConfirmationDialog: PropTypes.bool,
+  /** Any Valid props for Cancel Confirmation Dialog */
+  cancelConfirmDialogProps: PropTypes.shape({
+    /** The primary button text (Button located on right side of Dialog) */
+    primaryButtonText: PropTypes.string,
+    /** The secondary button text (Button located on left side of Dialog)*/
+    secondaryButtonText: PropTypes.string,
+    /** Modal Title */
+    title: PropTypes.string,
+    /** The content to be rendered in the dialog alert body */
+    content: PropTypes.node
+  })
 };
 
 export default SQFormDialog;

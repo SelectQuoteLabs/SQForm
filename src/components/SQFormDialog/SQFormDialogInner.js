@@ -41,7 +41,7 @@ function SQFormDialogInner({
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
-  showCancelConfirmDialog,
+  openCancelConfirmationDialog,
   cancelConfirmDialogProps
 }) {
   const actionsClasses = useActionsStyles();
@@ -53,14 +53,12 @@ function SQFormDialogInner({
   ] = useDialog();
 
   const handleCancel = () => {
-    if (!showCancelConfirmDialog) {
+    if (!openCancelConfirmationDialog) {
       resetForm();
       onClose();
-
-      return;
+    } else {
+      openDialogAlertModal();
     }
-
-    openDialogAlertModal();
   };
 
   const confirmCancel = () => {
@@ -115,7 +113,7 @@ function SQFormDialogInner({
         </Form>
       </Dialog>
 
-      {showCancelConfirmDialog && (
+      {openCancelConfirmationDialog && (
         <DialogAlert
           isOpen={isDialogAlertModalOpen}
           primaryButtonText="Continue"
@@ -156,8 +154,19 @@ SQFormDialogInner.propTypes = {
   shouldRequireFieldUpdates: PropTypes.bool,
   /** Title text at the top of the Dialog */
   title: PropTypes.string.isRequired,
-  /** Any prop from https://material-ui.com/api/grid */
-  muiGridProps: PropTypes.object
+  /** Whether or not to show the confirmation dialog upon clicking the cancel button */
+  openCancelConfirmationDialog: PropTypes.bool,
+  /** Any Valid props for Cancel Confirmation Dialog */
+  cancelConfirmDialogProps: PropTypes.shape({
+    /** The primary button text (Button located on right side of Dialog) */
+    primaryButtonText: PropTypes.string,
+    /** The secondary button text (Button located on left side of Dialog)*/
+    secondaryButtonText: PropTypes.string,
+    /** Modal Title */
+    title: PropTypes.string,
+    /** The content to be rendered in the dialog alert body */
+    content: PropTypes.node
+  })
 };
 
 export default SQFormDialogInner;
