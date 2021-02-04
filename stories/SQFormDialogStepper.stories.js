@@ -118,8 +118,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
         }}
         fullWidth
         muiGridProps={{
-          justify: 'space-between',
-          alignItems: 'center'
+          justify: 'space-between'
         }}
         initialValues={initialValues}
         setValues={() => {
@@ -231,7 +230,6 @@ export const SQDialogStepperWithValidation = () => {
         maxWidth="md"
         muiGridProps={{
           justify: 'space-between',
-          alignItems: 'center',
           spacing: 6
         }}
         initialValues={{

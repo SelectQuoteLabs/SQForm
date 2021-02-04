@@ -48,6 +48,9 @@ const useStyles = makeStyles({
     },
     '& span': {
       whiteSpace: 'nowrap'
+    },
+    '& .MuiStepLabel-label.MuiStepLabel-alternativeLabel': {
+      marginTop: '5px'
     }
   }
 });
@@ -89,7 +92,7 @@ export function SQFormDialogStepper({
   const steps = React.Children.toArray(children);
   const [activeStep, setActiveStep] = React.useState(0);
   const currentChild = steps[activeStep];
-  const [completed, setCompleted] = React.useState({});
+  const [completed, setCompleted] = React.useState([]);
 
   const validationSchema = currentChild.props.validationSchema
     ? Yup.object().shape(currentChild.props.validationSchema)
@@ -103,41 +106,21 @@ export function SQFormDialogStepper({
     return activeStep === steps.length - 1;
   }, [activeStep, steps]);
 
-  // Our last step doesn't get marked complete
-  const isAllStepsCompleted = () => {
-    return Object.keys(completed).length === steps.length - 1;
-  };
-
   const handleNext = () => {
-    const newActiveStep =
-      isLastStep && !isAllStepsCompleted
-        ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
-    handleComplete();
+    setActiveStep(activeStep + 1);
+    setCompleted([...completed, activeStep]);
   };
 
   const handleStep = step => () => {
-    const nextStep = step.toString();
-    const prevStep = (step - 1).toString();
-    const completedKeys = Object.keys(completed);
-    if ([nextStep, prevStep].some(step => completedKeys.includes(step))) {
+    const nextStep = step;
+    if ([nextStep].some(step => completed.includes(step))) {
       setActiveStep(step);
     }
-  };
-
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
   };
 
   const handleSubmit = async (values, helpers) => {
     if (isLastStep) {
       await onSubmit(values, helpers);
-      setCompleted(true);
     } else {
       setValues && setValues(values);
       handleNext();
@@ -164,9 +147,6 @@ export function SQFormDialogStepper({
         return true;
       }
 
-      if (isLastStep && isAllStepsCompleted()) {
-        return false;
-      }
       return false;
     }, [errors, values, dirty]);
     return (
@@ -204,16 +184,17 @@ export function SQFormDialogStepper({
             <Divider />
             {steps.length > 1 && (
               <Grid container classes={stepperClasses}>
-                <Stepper nonLinear activeStep={activeStep} classes={classes}>
+                <Stepper activeStep={activeStep} classes={classes}>
                   {steps.map((child, index) => (
-                    <Step key={child.props.label}>
-                      <StepButton
-                        onClick={handleStep(index)}
-                        completed={completed[index]}
-                      >
+                    <Step
+                      key={`${child.props.label}-${index}`}
+                      classes={classes.label}
+                      alternativeLabel
+                    >
+                      <StepButton onClick={handleStep(index)}>
                         <Typography
                           variant="overline"
-                          color={index === activeStep ? 'error' : ''} // sets the color to orange if current step
+                          color={index === activeStep ? 'error' : 'initial'} // sets the color to orange if current step
                         >
                           {child?.props.label}
                         </Typography>

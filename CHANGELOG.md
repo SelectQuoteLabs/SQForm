@@ -1,3 +1,10 @@
+## [2.12.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.11.0...v2.12.0) (2021-02-03)
+
+
+### Features
+
+* 🎸 Updated the stepper labels, made steps linear ([1dfb899](https://github.com/SelectQuoteLabs/SQForm/commit/1dfb89977cc351c3ead22b308be86280be18e76d))
+
 ## [2.11.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.10.0...v2.11.0) (2021-01-27)
 
 
