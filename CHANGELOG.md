@@ -1,3 +1,16 @@
+## [3.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.12.0...v3.0.0) (2021-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 No
+
+### Features
+
+* 🎸 Added Cancel Confirmation Dialog modal ([e01b4b9](https://github.com/SelectQuoteLabs/SQForm/commit/e01b4b9f375fa35aa8a1f696df87f8374bb0d184)), closes [#60](https://github.com/SelectQuoteLabs/SQForm/issues/60)
+* 🎸 open cancel confirm dialog if form is dirty ([99a4dee](https://github.com/SelectQuoteLabs/SQForm/commit/99a4deeea8a9f4d8528cb6b70a35e66cc8675141)), closes [#60](https://github.com/SelectQuoteLabs/SQForm/issues/60)
+* 🎸 revert changes ([a27e6bb](https://github.com/SelectQuoteLabs/SQForm/commit/a27e6bbbaaaedc7717e888ed260548df81803bee)), closes [#60](https://github.com/SelectQuoteLabs/SQForm/issues/60)
+
 ## [2.12.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.11.0...v2.12.0) (2021-02-03)
 
 
