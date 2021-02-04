@@ -43,7 +43,7 @@ function SQFormDialogInner({
   muiGridProps
 }) {
   const actionsClasses = useActionsStyles();
-  const {resetForm} = useSQFormContext();
+  const {resetForm, dirty: isDirty} = useSQFormContext();
 
   const [
     isDialogAlertOpen,
@@ -51,7 +51,11 @@ function SQFormDialogInner({
   ] = useDialog();
 
   const handleCancel = () => {
-    openDialogAlert();
+    if (!isDirty) {
+      onClose();
+    } else {
+      openDialogAlert();
+    }
   };
 
   const confirmCancel = () => {
