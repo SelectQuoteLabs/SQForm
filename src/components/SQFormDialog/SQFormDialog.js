@@ -20,9 +20,7 @@ function SQFormDialog({
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
-  validationSchema,
-  cancelConfirmDialogProps = {},
-  openCancelConfirmationDialog = true
+  validationSchema
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -54,8 +52,6 @@ function SQFormDialog({
         shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
-        openCancelConfirmationDialog={openCancelConfirmationDialog}
-        cancelConfirmDialogProps={cancelConfirmDialogProps}
       />
     </Formik>
   );
@@ -92,20 +88,7 @@ SQFormDialog.propTypes = {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object,
-  /** Whether or not to show the confirmation dialog upon clicking the cancel button */
-  openCancelConfirmationDialog: PropTypes.bool,
-  /** Any Valid props for Cancel Confirmation Dialog */
-  cancelConfirmDialogProps: PropTypes.shape({
-    /** The primary button text (Button located on right side of Dialog) */
-    primaryButtonText: PropTypes.string,
-    /** The secondary button text (Button located on left side of Dialog)*/
-    secondaryButtonText: PropTypes.string,
-    /** Modal Title */
-    title: PropTypes.string,
-    /** The content to be rendered in the dialog alert body */
-    content: PropTypes.node
-  })
+  validationSchema: PropTypes.object
 };
 
 export default SQFormDialog;
