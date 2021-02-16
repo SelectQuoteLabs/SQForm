@@ -33,7 +33,7 @@ function _getHasValue(meta) {
     return true;
   }
 
-  return !!fieldValue ?? false;
+  return !!fieldValue;
 }
 
 export function useForm({name, isRequired, onBlur, onChange}) {
