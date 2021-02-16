@@ -14,11 +14,7 @@ function _handleError(name, isRequired) {
   }
 }
 
-function _getIsFulfilled(isRequired, hasValue, isError) {
-  if (!isRequired && !isError) {
-    return true;
-  }
-
+function _getIsFulfilled(hasValue, isError) {
   if (hasValue && !isError) {
     return true;
   }
@@ -33,11 +29,11 @@ function _getHasValue(meta) {
     return !!fieldValue.length;
   }
 
-  if (fieldValue) {
+  if (typeof fieldValue === 'number') {
     return true;
   }
 
-  return false;
+  return !!fieldValue ?? false;
 }
 
 export function useForm({name, isRequired, onBlur, onChange}) {
@@ -50,7 +46,7 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   const isError = !!errorMessage;
   const isFieldError = isTouched && isError;
   const isFieldRequired = isRequired && !hasValue;
-  const isFulfilled = _getIsFulfilled(isRequired, hasValue, isError);
+  const isFulfilled = _getIsFulfilled(hasValue, isError);
 
   const handleChange = React.useCallback(
     event => {
@@ -85,10 +81,15 @@ export function useForm({name, isRequired, onBlur, onChange}) {
         </>
       );
     }
-    return (
-      <VerifiedIcon style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}} />
-    );
-  }, [errorMessage, isFieldError, isFieldRequired]);
+    if (isFulfilled) {
+      return (
+        <VerifiedIcon
+          style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}}
+        />
+      );
+    }
+    return ' '; // return something so UI space always exists
+  }, [errorMessage, isFieldError, isFieldRequired, isFulfilled]);
 
   return {
     formikField: {field, meta, helpers},
