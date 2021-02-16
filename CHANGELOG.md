@@ -1,3 +1,10 @@
+### [3.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.0...v3.0.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* 🐛 Field is fulfilled if theres no error and theres a value ([77d2e8c](https://github.com/SelectQuoteLabs/SQForm/commit/77d2e8c0194f8b33fd353ba8187d9e9e8e79d9f4)), closes [#91](https://github.com/SelectQuoteLabs/SQForm/issues/91)
+
 ## [3.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v2.12.0...v3.0.0) (2021-02-04)
 
 
