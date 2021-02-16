@@ -163,9 +163,9 @@ export const formWithValidation = () => {
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
     city: Yup.string(),
-    age: Yup.string()
-      .min(1, 'Invalid age')
-      .max(3, 'Invalid age')
+    age: Yup.number()
+      .min(1, 'Age 1-65')
+      .max(65, 'Age 1-65')
       .required('Required'),
     state: Yup.string().required('Required'),
     tenThousandOptions: Yup.string().required('Required'),
