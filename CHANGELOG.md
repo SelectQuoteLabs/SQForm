@@ -1,3 +1,10 @@
+### [3.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.1...v3.0.2) (2021-02-17)
+
+
+### Bug Fixes
+
+* 🐛 Update Formik to fix validate onmount bug fixed in 2.1.6 ([5944a3c](https://github.com/SelectQuoteLabs/SQForm/commit/5944a3c8e0bf6721937155197c99b3e29d02d6bf))
+
 ### [3.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.0...v3.0.1) (2021-02-16)
 
 
