@@ -76,6 +76,7 @@ export function SQFormDialogStepper({
   children,
   disableBackdropClick = false,
   isOpen = false,
+  isNextDisabled = false,
   maxWidth = 'sm',
   onClose,
   onSubmit,
@@ -131,6 +132,9 @@ export function SQFormDialogStepper({
     const {errors, values, dirty} = useFormikContext();
 
     const isButtonDisabled = React.useMemo(() => {
+      if (isNextDisabled) {
+        return true;
+      }
       if (!validationSchema) {
         return false;
       }
@@ -149,13 +153,15 @@ export function SQFormDialogStepper({
 
       return false;
     }, [errors, values, dirty]);
+
+    const submitText = isLastStep ? 'Submit' : 'Next';
     return (
       <RoundedButton
         type="submit"
         isDisabled={isButtonDisabled}
-        title={cancelButtonText}
+        title={submitText}
       >
-        {isLastStep ? 'Submit' : 'Next'}
+        {submitText}
       </RoundedButton>
     );
   }
@@ -257,6 +263,8 @@ SQFormDialogStepper.propTypes = {
   disableBackdropClick: PropTypes.bool,
   /** Sets the dialog to the maxWidth. */
   fullWidth: PropTypes.bool,
+  /** Disables the next/submit button */
+  isNextDisabled: PropTypes.bool,
   /** The current open/closed state of the Dialog */
   isOpen: PropTypes.bool.isRequired,
   /** Allows the initial values to be updated after initial render */
