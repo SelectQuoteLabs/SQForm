@@ -1,3 +1,11 @@
+## [3.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.2...v3.1.0) (2021-02-18)
+
+
+### Features
+
+* 🎸 Added ability to disable next in the stepper ([0838706](https://github.com/SelectQuoteLabs/SQForm/commit/0838706dd7645d7c17b94af0c95846a594dbf5f1)), closes [#96](https://github.com/SelectQuoteLabs/SQForm/issues/96)
+* 🎸 Updated name of primary button variable ([ef12da9](https://github.com/SelectQuoteLabs/SQForm/commit/ef12da971cc8b5a696628846b5d2acf50f4dd00a))
+
 ### [3.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.1...v3.0.2) (2021-02-17)
 
 
