@@ -154,14 +154,14 @@ export function SQFormDialogStepper({
       return false;
     }, [errors, values, dirty]);
 
-    const submitText = isLastStep ? 'Submit' : 'Next';
+    const primaryButtonText = isLastStep ? 'Submit' : 'Next';
     return (
       <RoundedButton
         type="submit"
         isDisabled={isButtonDisabled}
-        title={submitText}
+        title={primaryButtonText}
       >
-        {submitText}
+        {primaryButtonText}
       </RoundedButton>
     );
   }
