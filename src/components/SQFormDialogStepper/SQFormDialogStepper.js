@@ -273,6 +273,8 @@ SQFormDialogStepper.propTypes = {
   maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', false]),
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
   onClose: PropTypes.func.isRequired,
+  /** Callback function invoked when user clicks primary submit button */
+  onSubmit: PropTypes.func.isRequired,
   /** Callback function invoke when the user clicks the primary button */
   onSave: PropTypes.func,
   /** The primary button text (Button located on right side of Dialog) */

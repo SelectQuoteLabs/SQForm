@@ -93,7 +93,7 @@ function SQFormAsyncAutocomplete({
   onChange,
   onInputChange,
   handleAsyncInputChange,
-  loading,
+  loading = false,
   open,
   onOpen,
   onClose,
@@ -225,6 +225,8 @@ SQFormAsyncAutocomplete.propTypes = {
   isDisabled: PropTypes.bool,
   /** Required property used to highlight input and label if not fulfilled */
   isRequired: PropTypes.bool,
+  /** Whether the component is loading */
+  loading: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
   /** Name identifier of the input field */
@@ -235,6 +237,12 @@ SQFormAsyncAutocomplete.propTypes = {
   onChange: PropTypes.func,
   /** Custom onInputChange event callback (key pressed)*/
   onInputChange: PropTypes.func,
+  /** Whether the popup is open */
+  open: PropTypes.bool,
+  /** Callback for when the popup requests to be opened */
+  onOpen: PropTypes.func,
+  /** Callback for when the popup requests to be closed */
+  onClose: PropTypes.func,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 };

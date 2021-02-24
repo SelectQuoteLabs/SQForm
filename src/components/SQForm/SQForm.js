@@ -57,6 +57,8 @@ function SQForm({
 SQForm.propTypes = {
   /** Form Input(s) */
   children: PropTypes.node.isRequired,
+  /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */
+  enableReinitialize: PropTypes.bool,
   /** Form Entity Object */
   initialValues: PropTypes.object.isRequired,
   /** Any prop from https://material-ui.com/api/grid */

@@ -50,11 +50,17 @@ function SQFormResetButtonWithConfirmation({
 }
 
 SQFormResetButtonWithConfirmation.propTypes = {
+  /** The contents of the form button; usually text */
   children: PropTypes.node.isRequired,
+  /** Title of the confirmation dialog */
   confirmationTitle: PropTypes.string,
-  confirmationContent: PropTypes.string.isRequired,
+  /** Content of the confirmation dialog */
+  confirmationContent: PropTypes.node.isRequired,
+  /** Whether the button is disabled */
   isDisabled: PropTypes.bool,
+  /** Title of the button */
   buttonTitle: PropTypes.string,
+  /** Callback for reset*/
   onReset: PropTypes.func
 };
 

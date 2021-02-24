@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -38,11 +39,11 @@ const useStyles = makeStyles({
   }
 });
 
-const LoadingIcon = props => {
+const LoadingIcon = ({height = '10rem'}) => {
   const classes = useStyles();
 
   return (
-    <svg height={props.height || '10rem'} viewBox="0 0 446 439">
+    <svg height={height} viewBox="0 0 446 439">
       <g
         className={classes.sqLoadingIcon}
         stroke="none"
@@ -94,6 +95,11 @@ const LoadingIcon = props => {
       </g>
     </svg>
   );
+};
+
+LoadingIcon.propTypes = {
+  /** The height of the loading icon */
+  height: PropTypes.string
 };
 
 export default LoadingIcon;

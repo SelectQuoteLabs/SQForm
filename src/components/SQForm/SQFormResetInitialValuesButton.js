@@ -54,12 +54,19 @@ function SQFormResetInitialValuesButton({
 }
 
 SQFormResetInitialValuesButton.propTypes = {
+  /** Content for the button; usually text */
   children: PropTypes.node.isRequired,
+  /** Title for the confirmation dialog */
   confirmationTitle: PropTypes.string,
-  confirmationContent: PropTypes.string.isRequired,
+  /** Content for the confirmation dialog */
+  confirmationContent: PropTypes.node.isRequired,
+  /** Whether the button is disabled */
   isDisabled: PropTypes.bool,
+  /** Title for the button */
   buttonTitle: PropTypes.string,
+  /** initial form values */
   initialValuesObject: PropTypes.object,
+  /** Button tooltip */
   tooltip: PropTypes.string
 };
 

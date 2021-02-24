@@ -64,8 +64,6 @@ SQFormTextarea.propTypes = {
   label: PropTypes.string.isRequired,
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder: PropTypes.string,
-  /** Render textfield as a multiline text field */
-  multiline: PropTypes.bool,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
   /** Required property used to highlight input and label if not fulfilled */

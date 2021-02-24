@@ -36,7 +36,7 @@ SQFormIconButton.propTypes = {
   shouldRequireFieldUpdates: PropTypes.bool,
   /** The title of the button */
   title: PropTypes.string,
-  /** Type of button, defaults to 'button' */
+  /** Type of button, defaults to 'submit' */
   type: PropTypes.string
 };
 
