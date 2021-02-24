@@ -78,6 +78,8 @@ SQFormDialog.propTypes = {
   saveButtonText: PropTypes.string,
   /** Title text at the top of the Dialog */
   title: PropTypes.string.isRequired,
+  /** Value to pass on to Formik for enableReinitialize prop https://formik.org/docs/api/formik#enablereinitialize-boolean */
+  enableReinitialize: PropTypes.bool,
   /** Form Entity Object */
   initialValues: PropTypes.object.isRequired,
   /** Any prop from https://material-ui.com/api/grid */

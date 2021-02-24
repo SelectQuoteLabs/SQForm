@@ -39,7 +39,7 @@ function LoadingSpinner({message}) {
 }
 
 LoadingSpinner.propTypes = {
-  isLoading: PropTypes.bool,
+  /** The loading message */
   message: PropTypes.string
 };
 
