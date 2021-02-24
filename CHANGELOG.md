@@ -1,3 +1,10 @@
+### [3.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.0...v3.1.1) (2021-02-24)
+
+
+### Bug Fixes
+
+* 🐛 Added missing proptype documentation ([81be624](https://github.com/SelectQuoteLabs/SQForm/commit/81be624881ebd52c3449a1212d68ce34bee6dc6b)), closes [#95](https://github.com/SelectQuoteLabs/SQForm/issues/95)
+
 ## [3.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.0.2...v3.1.0) (2021-02-18)
 
 
