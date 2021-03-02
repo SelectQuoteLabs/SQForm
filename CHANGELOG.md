@@ -1,3 +1,10 @@
+### [3.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.0...v3.2.1) (2021-03-02)
+
+
+### Bug Fixes
+
+* 🐛 add error props to InputLabel and Select ([6285af0](https://github.com/SelectQuoteLabs/SQForm/commit/6285af06559ed1d41eedf4f62e17c1d803132e13)), closes [#92](https://github.com/SelectQuoteLabs/SQForm/issues/92)
+
 ## [3.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.1...v3.2.0) (2021-03-02)
 
 
