@@ -1,3 +1,10 @@
+## [3.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.1...v3.2.0) (2021-03-02)
+
+
+### Features
+
+* 🎸 Added SQFormRadioButtonGroup component ([aea8208](https://github.com/SelectQuoteLabs/SQForm/commit/aea82087190491f664be9e1072b2f3db65fa7ac2)), closes [#64](https://github.com/SelectQuoteLabs/SQForm/issues/64)
+
 ### [3.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.0...v3.1.1) (2021-02-24)
 
 

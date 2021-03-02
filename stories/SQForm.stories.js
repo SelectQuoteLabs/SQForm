@@ -25,7 +25,8 @@ import {
   SQFormResetButtonWithConfirmation,
   SQFormCheckboxGroup,
   SQFormCheckboxGroupItem,
-  SQFormMultiSelect
+  SQFormMultiSelect,
+  SQFormRadioButtonGroup
 } from '../src';
 
 export default {
@@ -55,7 +56,8 @@ const MOCK_FORM_ENTITY = {
   age: '',
   state: '',
   tenThousandOptions: '',
-  note: ''
+  note: '',
+  preferredPet: ''
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
@@ -109,6 +111,12 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
 ];
 
+const RADIO_GROUP_OPTIONS = [
+  {label: 'Cat', value: 'cat'},
+  {label: 'Dog', value: 'dog'},
+  {label: 'Both', value: 'both', isDisabled: true}
+];
+
 const handleSubmit = (values, actions) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
@@ -142,6 +150,13 @@ export const basicForm = () => {
         </SQFormDropdown>
         <SQFormCheckbox name="cool" label="Cool" />
         <SQFormCheckbox name="lame" label="Lame" isDisabled={true} />
+        <SQFormRadioButtonGroup
+          name="preferredPet"
+          groupLabel="Cat or Dog?"
+          shouldDisplayInRow={true}
+        >
+          {RADIO_GROUP_OPTIONS}
+        </SQFormRadioButtonGroup>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormResetButtonWithConfirmation
@@ -169,6 +184,7 @@ export const formWithValidation = () => {
       .required('Required'),
     state: Yup.string().required('Required'),
     tenThousandOptions: Yup.string().required('Required'),
+    preferredPet: Yup.string().required('Required'),
     note: Yup.string().required('Required')
   };
 
@@ -217,6 +233,14 @@ export const formWithValidation = () => {
           isRequired={true}
         />
         <SQFormTextarea name="note" label="Note" size={5} isRequired={true} />
+        <SQFormRadioButtonGroup
+          name="preferredPet"
+          groupLabel="Cat or Dog?"
+          shouldDisplayInRow={true}
+          isRequired={true}
+        >
+          {RADIO_GROUP_OPTIONS}
+        </SQFormRadioButtonGroup>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormButton title="Reset" type="reset">
