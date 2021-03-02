@@ -1,3 +1,10 @@
+## [3.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.1...v3.3.0) (2021-03-02)
+
+
+### Features
+
+* 🎸 add maxCharacters prop to TextField, rendered in label ([cd78a17](https://github.com/SelectQuoteLabs/SQForm/commit/cd78a177dd3ea976fceb8a3df2a655c974c44588)), closes [#19](https://github.com/SelectQuoteLabs/SQForm/issues/19)
+
 ### [3.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.0...v3.2.1) (2021-03-02)
 
 
