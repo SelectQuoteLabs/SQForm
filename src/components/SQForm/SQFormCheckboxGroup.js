@@ -1,66 +1,120 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Grid} from '@material-ui/core';
-import {
-  SQFieldArray,
-  SQFormCheckboxGroupItem,
-  useSQFormContext
-} from '../../../src';
+import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormGroup from '@material-ui/core/FormGroup';
+import {SQFormCheckboxGroupItem, useSQFormContext} from '../../../src';
+import {useForm} from './useForm';
 
-export default function SQFormCheckboxGroup({
+function SQFormCheckboxGroup({
   name,
-  children,
-  useSelectAll = false,
-  selectAllData = null,
-  selectAllContainerProps = {},
-  selectAllProps = {}
+  groupLabel,
+  isRequired = false,
+  onChange,
+  shouldDisplayInRow = false,
+  shouldUseSelectAll = false,
+  size = 'auto',
+  children
 }) {
-  const {values, setFieldValue} = useSQFormContext();
+  const {
+    fieldHelpers: {handleChange, HelperTextComponent}
+  } = useForm({
+    name,
+    isRequired,
+    onChange
+  });
+
+  const {setFieldValue} = useSQFormContext();
 
   const handleSelectAllChange = event => {
-    if (event.target.checked) {
-      setFieldValue(name, selectAllData);
-    } else {
+    if (!event.target.checked) {
       setFieldValue(name, []);
+      return;
     }
-    setFieldValue('selectAll', !values.selectAll);
+
+    const enabledGroupValues = children.reduce((acc, checkboxOption) => {
+      const {value, isDisabled} = checkboxOption;
+      if (!isDisabled) {
+        return [...acc, value];
+      }
+
+      return acc;
+    }, []);
+
+    setFieldValue(name, enabledGroupValues);
   };
 
-  if (!useSelectAll) {
-    return <SQFieldArray name={name}>{children}</SQFieldArray>;
-  }
+  const childrenToCheckboxGroupItems = () => {
+    const providedCheckboxItems = children.map(checkboxOption => {
+      const {label, value, isDisabled, inputProps} = checkboxOption;
+
+      return (
+        <SQFormCheckboxGroupItem
+          groupName={name}
+          label={label}
+          value={value}
+          isRowDisplay={shouldDisplayInRow}
+          onChange={handleChange}
+          isDisabled={isDisabled}
+          inputProps={inputProps}
+          key={`SQFormCheckboxGroupItem_${value}`}
+        />
+      );
+    });
+    if (shouldUseSelectAll) {
+      return [
+        <SQFormCheckboxGroupItem
+          groupName="selectAll"
+          label="All"
+          value="selectAll"
+          isRowDisplay={shouldDisplayInRow}
+          onChange={handleSelectAllChange}
+        />,
+        ...providedCheckboxItems
+      ];
+    }
+
+    return providedCheckboxItems;
+  };
 
   return (
-    <>
-      <Grid container {...selectAllContainerProps}>
-        <SQFormCheckboxGroupItem
-          name="selectAll"
-          label="Select All"
-          isChecked={values.selectAll}
-          onChange={handleSelectAllChange}
-          {...selectAllProps}
-        />
-      </Grid>
-      <SQFieldArray name={name}>{children}</SQFieldArray>
-    </>
+    <Grid item sm={size}>
+      <InputLabel id={groupLabel.toLowerCase()}>{groupLabel}</InputLabel>
+      <FormGroup row={shouldDisplayInRow}>
+        {childrenToCheckboxGroupItems()}
+      </FormGroup>
+      <FormHelperText required={isRequired}>
+        {HelperTextComponent}
+      </FormHelperText>
+    </Grid>
   );
 }
 
 SQFormCheckboxGroup.propTypes = {
-  /** the `name` must match the name of the desired array in `initialValues` */
+  /** Name of the checkbox group */
   name: PropTypes.string.isRequired,
-  /** boolean flag to trigger usage of Select All functionality */
-  useSelectAll: PropTypes.bool,
-  /** array of items to put in the `name` array on 'select all' click */
-  selectAllData: PropTypes.array,
-  /** props for the Grid container wrapping the select all checkbox */
-  selectAllContainerProps: PropTypes.object,
-  /** props for the 'select all' SQFormCheckboxGroupItem component */
-  selectAllProps: PropTypes.object,
-  /** the `children` must be a single SQFormCheckboxGroupItem or an array of them */
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.elementType,
-    PropTypes.arrayOf([PropTypes.element, PropTypes.elementType])
-  ]).isRequired
+  /** Label to display above the group */
+  groupLabel: PropTypes.string.isRequired,
+  /** Whether this a selection in this group is required */
+  isRequired: PropTypes.bool,
+  /** Function to call on value change */
+  onChange: PropTypes.func,
+  /** Whether to display the group in a row */
+  shouldDisplayInRow: PropTypes.bool,
+  /** Whether to display the select all checkbox */
+  shouldUseSelectAll: PropTypes.bool,
+  /** Size of the input given full-width is 12. */
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  /** Children must be an array of object with checkbox label and value information */
+  children: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+      isDisabled: PropTypes.bool,
+      inputProps: PropTypes.object
+    }).isRequired
+  ).isRequired
 };
+
+export default SQFormCheckboxGroup;
