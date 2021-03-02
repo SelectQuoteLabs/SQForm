@@ -131,7 +131,12 @@ export const basicForm = () => {
         onSubmit={handleSubmit}
         muiGridProps={{spacing: 4}}
       >
-        <SQFormTextField name="firstName" label="First name" size={3} />
+        <SQFormTextField
+          name="firstName"
+          label="First name"
+          size={3}
+          maxCharacters={10}
+        />
         <SQFormTextField name="lastName" label="Last name" size={3} />
         <SQFormReadOnlyField name="city" label="City" />
         <SQFormReadOnlyField name="state" label="State" size={1} />
@@ -200,6 +205,7 @@ export const formWithValidation = () => {
           label="First name"
           size={6}
           isRequired={true}
+          maxCharacters={10}
         />
         <SQFormTextField
           name="lastName"
