@@ -18,18 +18,44 @@ function SQFormTextField({
   startAdornment,
   endAdornment,
   type = 'text',
+  inputProps = {},
+  maxCharacters,
   muiFieldProps = {}
 }) {
   const {
     formikField: {field},
     fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {
+      handleBlur,
+      handleChange: handleChangeHelper,
+      HelperTextComponent
+    }
   } = useForm({
     name,
     isRequired,
     onBlur,
     onChange
   });
+
+  const [valueLength, setValueLength] = React.useState(field.value.length || 0);
+
+  const handleChange = e => {
+    setValueLength(e.target.value.length);
+    handleChangeHelper(e);
+  };
+
+  const maxCharactersValue = inputProps.maxLength || maxCharacters;
+  const characterCounter = maxCharactersValue && (
+    <small>
+      : {valueLength}/{maxCharactersValue}
+    </small>
+  );
+
+  const labelText = (
+    <span>
+      {label} {characterCounter}
+    </span>
+  );
 
   return (
     <Grid item sm={size}>
@@ -47,10 +73,14 @@ function SQFormTextField({
             <InputAdornment position="end">{endAdornment}</InputAdornment>
           ) : null
         }}
+        inputProps={{
+          maxLength: maxCharacters,
+          ...inputProps
+        }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}
         type={type}
-        label={label}
+        label={labelText}
         helperText={HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
@@ -86,6 +116,10 @@ SQFormTextField.propTypes = {
   endAdornment: PropTypes.node,
   /** Defines the input type for the text field. Must be a valid HTML5 input type */
   type: PropTypes.string,
+  /** Attributes applied to the `input` element */
+  inputProps: PropTypes.object,
+  /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
+  maxCharacters: PropTypes.number,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps: PropTypes.object
 };
