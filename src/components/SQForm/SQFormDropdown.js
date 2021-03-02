@@ -62,7 +62,9 @@ function SQFormDropdown({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={labelID}>{label}</InputLabel>
+      <InputLabel error={isFieldError} id={labelID}>
+        {label}
+      </InputLabel>
       <Select
         displayEmpty={true}
         input={<Input disabled={isDisabled} name={name} />}
@@ -72,6 +74,7 @@ function SQFormDropdown({
         fullWidth={true}
         labelId={labelID}
         renderValue={renderValue}
+        error={isFieldError}
         {...muiFieldProps}
       >
         {options.map(option => {
