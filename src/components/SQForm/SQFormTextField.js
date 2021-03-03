@@ -37,7 +37,9 @@ function SQFormTextField({
     onChange
   });
 
-  const [valueLength, setValueLength] = React.useState(field.value.length || 0);
+  const [valueLength, setValueLength] = React.useState(
+    field.value?.length || 0
+  );
 
   const handleChange = e => {
     setValueLength(e.target.value.length);
