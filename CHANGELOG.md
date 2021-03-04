@@ -1,3 +1,10 @@
+## [3.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.1...v3.4.0) (2021-03-04)
+
+
+### Features
+
+* 🎸 add maxCharacters prop to SQFormTextarea ([dc0aa60](https://github.com/SelectQuoteLabs/SQForm/commit/dc0aa601312cc6955661cef1ca58aae2c3fbf05e)), closes [#104](https://github.com/SelectQuoteLabs/SQForm/issues/104)
+
 ### [3.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.0...v3.3.1) (2021-03-03)
 
 
