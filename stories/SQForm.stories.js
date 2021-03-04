@@ -257,7 +257,13 @@ export const formWithValidation = () => {
           size={2}
           isRequired={true}
         />
-        <SQFormTextarea name="note" label="Note" size={5} isRequired={true} />
+        <SQFormTextarea
+          name="note"
+          label="Note"
+          size={5}
+          isRequired={true}
+          maxCharacters={100}
+        />
         <SQFormRadioButtonGroup
           name="preferredPet"
           groupLabel="Cat or Dog?"
