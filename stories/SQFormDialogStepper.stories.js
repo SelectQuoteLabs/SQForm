@@ -12,8 +12,8 @@ import {
   SQFormCheckbox,
   SQFormDialogStep,
   SQFormDialogStepper,
-  SQFormCheckboxGroup,
-  SQFormCheckboxGroupItem,
+  SQFormInclusionList,
+  SQFormInclusionListItem,
   SQFormResetInitialValuesButton
 } from '../src';
 
@@ -148,7 +148,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
               informativeHeading="Select up to 5 dependents to be added"
               title="Dependants"
             />
-            <SQFormCheckboxGroup
+            <SQFormInclusionList
               name="friends"
               useSelectAll={true}
               selectAllData={names} // whatever you'd want 'select all' to include
@@ -177,7 +177,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
                     {names.map(name => {
                       return (
                         <Grid item key={name}>
-                          <SQFormCheckboxGroupItem
+                          <SQFormInclusionListItem
                             name="friends"
                             label={name}
                             isChecked={values.friends.includes(name)}
@@ -196,7 +196,7 @@ export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
                   </Grid>
                 );
               }}
-            </SQFormCheckboxGroup>
+            </SQFormInclusionList>
           </div>
         </SQFormDialogStep>
       </SQFormDialogStepper>

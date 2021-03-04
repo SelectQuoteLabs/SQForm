@@ -23,10 +23,11 @@ import {
   SQFormDropdown,
   SQFormReadOnlyField,
   SQFormResetButtonWithConfirmation,
-  SQFormCheckboxGroup,
-  SQFormCheckboxGroupItem,
+  SQFormInclusionList,
+  SQFormInclusionListItem,
   SQFormMultiSelect,
-  SQFormRadioButtonGroup
+  SQFormRadioButtonGroup,
+  SQFormCheckboxGroup
 } from '../src';
 
 export default {
@@ -57,7 +58,8 @@ const MOCK_FORM_ENTITY = {
   state: '',
   tenThousandOptions: '',
   note: '',
-  preferredPet: ''
+  preferredPet: '',
+  warrantyOptions: []
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
@@ -117,6 +119,13 @@ const RADIO_GROUP_OPTIONS = [
   {label: 'Both', value: 'both', isDisabled: true}
 ];
 
+const CHECKBOX_GROUP_OPTIONS = [
+  {label: 'Glass', value: 'glass'},
+  {label: 'Drivetrain', value: 'drivetrain'},
+  {label: 'Brakes', value: 'brakes'},
+  {label: 'Interior', value: 'interior', isDisabled: true}
+];
+
 const handleSubmit = (values, actions) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
@@ -162,6 +171,13 @@ export const basicForm = () => {
         >
           {RADIO_GROUP_OPTIONS}
         </SQFormRadioButtonGroup>
+        <SQFormCheckboxGroup
+          name="warrantyOptions"
+          groupLabel="Warranty Options"
+          shouldDisplayInRow={true}
+        >
+          {CHECKBOX_GROUP_OPTIONS}
+        </SQFormCheckboxGroup>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormResetButtonWithConfirmation
@@ -190,6 +206,9 @@ export const formWithValidation = () => {
     state: Yup.string().required('Required'),
     tenThousandOptions: Yup.string().required('Required'),
     preferredPet: Yup.string().required('Required'),
+    warrantyOptions: Yup.array()
+      .min(1, 'One option required')
+      .required('Required'),
     note: Yup.string().required('Required')
   };
 
@@ -253,6 +272,14 @@ export const formWithValidation = () => {
         >
           {RADIO_GROUP_OPTIONS}
         </SQFormRadioButtonGroup>
+        <SQFormCheckboxGroup
+          name="warrantyOptions"
+          groupLabel="Warranty Options"
+          shouldDisplayInRow={true}
+          isRequired={true}
+        >
+          {CHECKBOX_GROUP_OPTIONS}
+        </SQFormCheckboxGroup>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormButton title="Reset" type="reset">
@@ -320,7 +347,7 @@ const names = [
   'Jill'
 ];
 
-export const formWithCheckboxGroup = () => {
+export const formWithInclusionlist = () => {
   return (
     <Card raised style={{padding: 16}}>
       <SectionHeader title="Friends" />
@@ -331,7 +358,7 @@ export const formWithCheckboxGroup = () => {
         muiGridProps={{spacing: 4}}
       >
         {/* the group's `name` string should always match the item's `name` string */}
-        <SQFormCheckboxGroup
+        <SQFormInclusionList
           name="friends"
           useSelectAll={true}
           selectAllData={names} // whatever you'd want 'select all' to include
@@ -344,7 +371,7 @@ export const formWithCheckboxGroup = () => {
             }
           }}
           selectAllProps={
-            // any props that a SQFormCheckboxGroupItem accepts
+            // any props that a SQFormInclusionListItem accepts
             // realistically, these would only include `isDisabled`, `size`, `label`,
             {
               label: 'ALL THE PEEPS'
@@ -367,7 +394,7 @@ export const formWithCheckboxGroup = () => {
                 {names.map(name => {
                   return (
                     <Grid item key={name}>
-                      <SQFormCheckboxGroupItem
+                      <SQFormInclusionListItem
                         name="friends"
                         label={name}
                         isChecked={values.friends.includes(name)}
@@ -386,7 +413,7 @@ export const formWithCheckboxGroup = () => {
               </Grid>
             );
           }}
-        </SQFormCheckboxGroup>
+        </SQFormInclusionList>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormResetButtonWithConfirmation
@@ -575,6 +602,46 @@ export const applyAnAction = () => {
         />
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
           <SQFormIconButton IconComponent={CheckMarkIcon} />
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const SQFormCheckboxGroupExample = () => {
+  const initialValues = {
+    warrantyOptions: ['brakes'],
+    selectAll: false
+  };
+
+  const isGroupRequired = boolean('Is group required', false);
+
+  const validationSchema = {
+    warrantyOptions: Yup.array()
+      .min(1, 'Must select at least 1 option')
+      .required('Required')
+  };
+
+  return (
+    <Card raised style={{padding: '16px', minWidth: '250px'}}>
+      <SQForm
+        initialValues={initialValues}
+        validationSchema={isGroupRequired ? validationSchema : {}}
+        onSubmit={handleSubmit}
+      >
+        <SQFormCheckboxGroup
+          name="warrantyOptions"
+          groupLabel="Warranty Options"
+          isRequired={isGroupRequired}
+          shouldDisplayInRow={boolean('Should display in row', false)}
+          shouldUseSelectAll={boolean('Should use select all', false)}
+        >
+          {CHECKBOX_GROUP_OPTIONS}
+        </SQFormCheckboxGroup>
+        <Grid item sm={12}>
+          <Grid container justify="flex-end">
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
         </Grid>
       </SQForm>
     </Card>

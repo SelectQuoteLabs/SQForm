@@ -1,58 +1,78 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Grid from '@material-ui/core/Grid';
-
+import Checkbox from '@material-ui/core/Checkbox';
+import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
 
+const useStyles = makeStyles({
+  checkboxGroupItem: {
+    marginRight: 30
+  }
+});
+
 function SQFormCheckboxGroupItem({
-  isChecked = false,
-  isDisabled = false,
+  groupName,
   label,
-  name,
+  value,
   onChange,
-  size = 'auto'
+  isRowDisplay = false,
+  isDisabled = false,
+  inputProps = {}
 }) {
   const {
+    formikField: {field},
     fieldHelpers: {handleChange}
   } = useForm({
-    name,
+    name: groupName,
     isRequired: false,
     onChange
   });
 
+  const classes = useStyles();
+
+  const isChecked = React.useMemo(() => {
+    if (Array.isArray(field.value)) {
+      return field.value.includes(value);
+    }
+
+    return field.value;
+  }, [value, field]);
+
   return (
-    <Grid item sm={size}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isChecked}
-            color="primary"
-            disabled={isDisabled}
-            name={name}
-            onChange={handleChange}
-          />
-        }
-        label={label}
-      />
-    </Grid>
+    <FormControlLabel
+      className={isRowDisplay ? classes.checkboxGroupItem : ''}
+      label={label}
+      control={
+        <Checkbox
+          name={groupName}
+          checked={isChecked}
+          value={value}
+          color="primary"
+          disabled={isDisabled}
+          onChange={handleChange}
+          {...inputProps}
+        />
+      }
+    />
   );
 }
 
 SQFormCheckboxGroupItem.propTypes = {
-  /** evaluation of whether the box should be checked */
-  isChecked: PropTypes.bool.isRequired,
-  /** Disabled state of the checkbox */
-  isDisabled: PropTypes.bool,
-  /** Descriptive label text for the checkbox */
+  /** The name of the group this checkbox is a part of */
+  groupName: PropTypes.string.isRequired,
+  /** Label for the checkbox */
   label: PropTypes.string.isRequired,
-  /** name of the checkbox array in `initialValues` */
-  name: PropTypes.string.isRequired,
-  /** Custom onChange event callback */
+  /** Value for the checkbox */
+  value: PropTypes.any.isRequired,
+  /** Function to call when input value is changed */
   onChange: PropTypes.func.isRequired,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  /** Whether this group item is part of a group displayed in a row */
+  isRowDisplay: PropTypes.bool,
+  /** Whether the checkbox is disabled */
+  isDisabled: PropTypes.bool,
+  /** Props for the checkbox input */
+  inputProps: PropTypes.object
 };
 
 export default SQFormCheckboxGroupItem;
