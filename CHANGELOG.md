@@ -1,3 +1,14 @@
+## [4.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.4.0...v4.0.0) (2021-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Rename SQFormCheckboxGroup(Item) to SQFormInclusionList(Item)
+
+### Features
+
+* 🎸 Rename SQFormCheckboxGroup and replace it ([2c3efea](https://github.com/SelectQuoteLabs/SQForm/commit/2c3efea44892dc3a0b24b75a3674ca953716c441)), closes [#101](https://github.com/SelectQuoteLabs/SQForm/issues/101)
+
 ## [3.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.1...v3.4.0) (2021-03-04)
 
 
