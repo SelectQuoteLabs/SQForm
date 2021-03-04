@@ -17,18 +17,43 @@ function SQFormTextarea({
   onChange,
   rows = 3,
   rowsMax = 3,
+  maxCharacters,
+  inputProps = {},
   muiFieldProps = {}
 }) {
   const {values} = useFormikContext();
   const {
     fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {
+      handleBlur,
+      handleChange: handleChangeHelper,
+      HelperTextComponent
+    }
   } = useForm({
     name,
     isRequired,
     onBlur,
     onChange
   });
+
+  const [valueLength, setValueLength] = React.useState(
+    values[name]?.length || 0
+  );
+
+  const handleChange = event => {
+    setValueLength(event.target.value.length);
+    handleChangeHelper(event);
+  };
+
+  const maxCharactersValue = inputProps.maxLength || maxCharacters;
+  const characterCounter =
+    maxCharactersValue && `: ${valueLength}/${maxCharactersValue}`;
+
+  const labelText = (
+    <span>
+      {label} {characterCounter}
+    </span>
+  );
 
   return (
     <Grid item sm={size}>
@@ -40,7 +65,7 @@ function SQFormTextarea({
         InputLabelProps={{shrink: true}}
         FormHelperTextProps={{error: isFieldError}}
         name={name}
-        label={label}
+        label={labelText}
         multiline={true}
         helperText={HelperTextComponent}
         placeholder={placeholder}
@@ -51,6 +76,10 @@ function SQFormTextarea({
         rowsMax={rowsMax}
         variant="outlined"
         value={values[name]}
+        inputProps={{
+          maxLength: maxCharacters,
+          ...inputProps
+        }}
         {...muiFieldProps}
       />
     </Grid>
@@ -78,6 +107,10 @@ SQFormTextarea.propTypes = {
   rows: PropTypes.number,
   /** Maximum number of rows to display when multiline option is set to true. */
   rowsMax: PropTypes.number,
+  /** Attributes applied to the `textarea` element */
+  inputProps: PropTypes.object,
+  /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
+  maxCharacters: PropTypes.number,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps: PropTypes.object
 };
