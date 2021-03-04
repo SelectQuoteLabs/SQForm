@@ -1,3 +1,10 @@
+### [3.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.0...v3.3.1) (2021-03-03)
+
+
+### Bug Fixes
+
+* 🐛 add optional chaining to initial value of useState ([c7a0f4f](https://github.com/SelectQuoteLabs/SQForm/commit/c7a0f4f1fb4aac1fbe75eed03517c7ecdc0d1f9e)), closes [#105](https://github.com/SelectQuoteLabs/SQForm/issues/105)
+
 ## [3.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.1...v3.3.0) (2021-03-02)
 
 
