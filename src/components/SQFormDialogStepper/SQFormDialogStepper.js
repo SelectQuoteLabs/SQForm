@@ -39,6 +39,7 @@ const useStyles = makeStyles({
   root: {
     padding: 20,
     width: '100%',
+    maxWidth: ({steps}) => `${300 * steps.length}px`,
     '& svg': {
       fontSize: 30,
       '& text': {
@@ -99,7 +100,7 @@ export function SQFormDialogStepper({
     ? Yup.object().shape(currentChild.props.validationSchema)
     : null;
 
-  const classes = useStyles();
+  const classes = useStyles({steps});
   const actionsClasses = useActionsStyles();
   const stepperClasses = useStepperStyles();
 
