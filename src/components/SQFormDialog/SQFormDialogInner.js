@@ -10,6 +10,7 @@ import {
   Slide,
   makeStyles
 } from '@material-ui/core';
+import {useTheme} from '@material-ui/core/styles';
 import {Form} from 'formik';
 import {RoundedButton, DialogAlert, useDialog} from 'scplus-shared-components';
 import {useSQFormContext} from '../../index';
@@ -19,12 +20,28 @@ const Transition = React.forwardRef((props, ref) => {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
+const stickyStyles = {
+  position: 'sticky',
+  background: ({palette}) => palette.background.paper,
+  zIndex: 1
+};
+
+const useTitleStyles = makeStyles({
+  root: {
+    ...stickyStyles,
+    top: 0,
+    borderBottom: ({palette}) => `1px solid ${palette.divider}`
+  }
+});
 const useActionsStyles = makeStyles({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
     flex: '1 1 100%',
-    padding: '16px 24px'
+    padding: '16px 24px',
+    ...stickyStyles,
+    bottom: 0,
+    borderTop: ({palette}) => `1px solid ${palette.divider}`
   }
 });
 
@@ -42,7 +59,9 @@ function SQFormDialogInner({
   title,
   muiGridProps
 }) {
-  const actionsClasses = useActionsStyles();
+  const theme = useTheme();
+  const titleClasses = useTitleStyles(theme);
+  const actionsClasses = useActionsStyles(theme);
   const {resetForm, dirty: isDirty} = useSQFormContext();
 
   const [
@@ -74,10 +93,10 @@ function SQFormDialogInner({
         onClose={handleCancel}
       >
         <Form>
-          <DialogTitle disableTypography={true}>
+          <DialogTitle disableTypography={true} classes={titleClasses}>
             <Typography variant="h4">{title}</Typography>
           </DialogTitle>
-          <DialogContent dividers={true}>
+          <DialogContent>
             <Grid
               {...muiGridProps}
               container
