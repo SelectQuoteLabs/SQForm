@@ -27,7 +27,8 @@ import {
   SQFormInclusionListItem,
   SQFormMultiSelect,
   SQFormRadioButtonGroup,
-  SQFormCheckboxGroup
+  SQFormCheckboxGroup,
+  SQFormMaskedTextField
 } from '../src';
 
 export default {
@@ -112,6 +113,12 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
 ];
+
+const MOCK_FORM_MASKED_FIELDS = {
+  phone: '',
+  zip: '',
+  currency: ''
+};
 
 const RADIO_GROUP_OPTIONS = [
   {label: 'Cat', value: 'cat'},
@@ -459,6 +466,68 @@ export const basicFormWithMultiSelect = () => {
         </SQFormMultiSelect>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
           <SQFormIconButton IconComponent={CheckMarkIcon} />
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const basicFormWithMaskedFields = () => {
+  const validationSchema = {
+    phone: Yup.string()
+      .required('Required')
+      .transform(value => value.replace(/[^\d]/g, ''))
+      .min(10, 'Phone number must be 10 digits'),
+    zip: Yup.string()
+      .required('Required')
+      .transform(value => value.replace(/[^\d]/g, ''))
+      .min(5, 'Zip code must be 5 digits'),
+    currency: Yup.string().required('Required')
+  };
+
+  return (
+    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+      <SQForm
+        initialValues={MOCK_FORM_MASKED_FIELDS}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        muiGridProps={{
+          spacing: 2,
+          justify: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <SQFormMaskedTextField
+          name="phone"
+          label="Phone"
+          size={4}
+          mask="phone"
+          isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="zip"
+          label="Zip Code"
+          size={4}
+          mask="zip"
+          isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="currency"
+          label="Currency"
+          size={4}
+          mask="currency"
+          isRequired={true}
+        />
+        <Grid item sm={12}>
+          <Grid container justify="space-between">
+            <SQFormResetButtonWithConfirmation
+              variant="outlined"
+              confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+            >
+              RESET
+            </SQFormResetButtonWithConfirmation>
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
         </Grid>
       </SQForm>
     </Card>
