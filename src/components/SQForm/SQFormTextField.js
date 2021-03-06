@@ -18,6 +18,7 @@ function SQFormTextField({
   startAdornment,
   endAdornment,
   type = 'text',
+  InputProps,
   inputProps = {},
   maxCharacters,
   muiFieldProps = {}
@@ -68,6 +69,7 @@ function SQFormTextField({
         fullWidth={true}
         InputLabelProps={{shrink: true}}
         InputProps={{
+          ...InputProps,
           startAdornment: startAdornment ? (
             <InputAdornment position="start">{startAdornment}</InputAdornment>
           ) : null,
@@ -118,6 +120,8 @@ SQFormTextField.propTypes = {
   endAdornment: PropTypes.node,
   /** Defines the input type for the text field. Must be a valid HTML5 input type */
   type: PropTypes.string,
+  /** Props applied to the Input element */
+  InputProps: PropTypes.object,
   /** Attributes applied to the `input` element */
   inputProps: PropTypes.object,
   /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
