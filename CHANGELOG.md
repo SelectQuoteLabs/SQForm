@@ -1,3 +1,10 @@
+### [4.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.0...v4.0.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 ?? operator instead of || for grid spacing prop check ([1c061d7](https://github.com/SelectQuoteLabs/SQForm/commit/1c061d7834f56abcf063a51e5b45c10b0a445244))
+
 ## [4.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.4.0...v4.0.0) (2021-03-04)
 
 
