@@ -31,16 +31,20 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
+const selectedDisplayValue = (values, options) => {
+  return values
+    .map(value => {
+      return options.find(option => option.value === value).label;
+    })
+    .join(', ');
+};
+
 const getToolTipTitle = (formikFieldValue, options) => {
   if (!formikFieldValue.length) {
     return 'No value(s) selected';
   }
 
-  return formikFieldValue
-    .map(value => {
-      return options.find(option => option.value === value).label;
-    })
-    .join(', ');
+  return selectedDisplayValue(formikFieldValue, options);
 };
 
 function SQFormMultiSelect({
@@ -117,10 +121,7 @@ function SQFormMultiSelect({
       return EMPTY_LABEL;
     }
 
-    return children
-      ?.filter(child => selected.includes(child.value))
-      ?.map(child => child.label)
-      ?.join(', ');
+    return selectedDisplayValue(selected, children);
   };
 
   return (
