@@ -1,3 +1,10 @@
+## [4.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.1...v4.1.0) (2021-03-09)
+
+
+### Features
+
+* 🎸 add max width to Stepper steps ([24244bd](https://github.com/SelectQuoteLabs/SQForm/commit/24244bd9615a41df2911e6f2c263042fb4660abe)), closes [#67](https://github.com/SelectQuoteLabs/SQForm/issues/67)
+
 ### [4.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.0...v4.0.1) (2021-03-09)
 
 
