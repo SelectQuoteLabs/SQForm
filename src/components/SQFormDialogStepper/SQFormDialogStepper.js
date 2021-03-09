@@ -221,7 +221,7 @@ export function SQFormDialogStepper({
               <Grid
                 {...muiGridProps}
                 container
-                spacing={muiGridProps.spacing || 3}
+                spacing={muiGridProps.spacing ?? 3}
                 justify="center"
               >
                 {currentChild}
