@@ -1,3 +1,10 @@
+### [4.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.0...v4.1.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 make only dialog body scroll ([60beb7b](https://github.com/SelectQuoteLabs/SQForm/commit/60beb7b1e1bcf4da4fd01a2debb6fd50310504ae)), closes [#17](https://github.com/SelectQuoteLabs/SQForm/issues/17)
+
 ## [4.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.1...v4.1.0) (2021-03-09)
 
 
