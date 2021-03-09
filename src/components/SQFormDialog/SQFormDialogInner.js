@@ -100,7 +100,7 @@ function SQFormDialogInner({
             <Grid
               {...muiGridProps}
               container
-              spacing={muiGridProps.spacing || 2}
+              spacing={muiGridProps.spacing ?? 2}
             >
               {children}
             </Grid>
