@@ -56,6 +56,10 @@ As shown in the component prop-types, the `children` of this component must be a
 
 If you want an empty option in the dropdown list options, set the `displayEmpty` prop to `true`.
 
+**SQFormMaskedTextField**
+
+Acts as an `SQFormTextField` with the addition of a `mask` prop, which allows text masking for phone numbers, zip codes, etc. An object of common masks can be imported from `src/utils/masks.js` whose properties can be passed into the `mask` prop, e.g., `mask={MASKS.phone}`. Alternatively, a custom mask can be used - see the aforementioned object in `masks.js` for a reference on how the prop expects the mask to be structured.
+
 ## Library Documentation
 
 - [Formik](https://jaredpalmer.com/formik/docs/overview)

@@ -11,6 +11,7 @@ import {SectionHeader} from 'scplus-shared-components';
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import markdown from '../notes/SQForm.md';
+import {MASKS} from '../src/utils/masks';
 
 import {
   SQForm,
@@ -117,7 +118,8 @@ const MOCK_FRIENDS_OPTIONS = [
 const MOCK_FORM_MASKED_FIELDS = {
   phone: '',
   zip: '',
-  currency: ''
+  currency: '',
+  custom: ''
 };
 
 const RADIO_GROUP_OPTIONS = [
@@ -501,22 +503,29 @@ export const basicFormWithMaskedFields = () => {
           name="phone"
           label="Phone"
           size={4}
-          mask="phone"
+          mask={MASKS.phone}
           isRequired={true}
         />
         <SQFormMaskedTextField
           name="zip"
           label="Zip Code"
           size={4}
-          mask="zip"
+          mask={MASKS.zip}
           isRequired={true}
         />
         <SQFormMaskedTextField
           name="currency"
           label="Currency"
           size={4}
-          mask="currency"
+          mask={MASKS.currency}
           isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="custom"
+          label="Custom mask (ex: Canadian postal code)"
+          size={4}
+          placeholder="A1B 2C3"
+          mask={[/[A-Z]/i, /\d/, /[A-Z]/i, ' ', /\d/, /[A-Z]/i, /\d/]}
         />
         <Grid item sm={12}>
           <Grid container justify="space-between">

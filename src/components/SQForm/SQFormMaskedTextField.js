@@ -1,32 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-
 import SQFormTextField from './SQFormTextField';
-
-const MASKS = {
-  phone: [
-    '(',
-    /[1-9]/,
-    /\d/,
-    /\d/,
-    ')',
-    ' ',
-    /\d/,
-    /\d/,
-    /\d/,
-    '-',
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/
-  ],
-  zip: [/\d/, /\d/, /\d/, /\d/, /\d/],
-  currency: createNumberMask({
-    allowDecimal: true
-  })
-};
 
 function TextFieldMask({inputRef, mask, ...rest}) {
   return (
@@ -78,7 +53,7 @@ function SQFormMaskedTextField({
       }}
       inputProps={{
         ...inputProps,
-        mask: MASKS[mask]
+        mask
       }}
       muiFieldProps={muiFieldProps}
     />
@@ -86,7 +61,8 @@ function SQFormMaskedTextField({
 }
 
 SQFormMaskedTextField.propTypes = {
-  mask: PropTypes.oneOf(['phone', 'zip', 'currency']).isRequired
+  /** Valid mask array; custom or from utils/masks.js */
+  mask: PropTypes.array.isRequired
 };
 
 export default SQFormMaskedTextField;
