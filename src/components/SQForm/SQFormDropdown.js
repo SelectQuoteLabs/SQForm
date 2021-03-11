@@ -79,7 +79,11 @@ function SQFormDropdown({
       >
         {options.map(option => {
           return (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem
+              key={option.value}
+              disabled={option.isDisabled}
+              value={option.value}
+            >
               {option.label}
             </MenuItem>
           );
