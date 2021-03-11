@@ -79,7 +79,11 @@ function SQFormDropdown({
       >
         {options.map(option => {
           return (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem
+              key={option.value}
+              disabled={option.isDisabled}
+              value={option.value}
+            >
               {option.label}
             </MenuItem>
           );
@@ -97,7 +101,8 @@ SQFormDropdown.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      isDisabled: PropTypes.bool
     })
   ),
   /** Whether to display empty option - - in options */
