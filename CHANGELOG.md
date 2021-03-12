@@ -1,3 +1,10 @@
+### [4.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.1...v4.1.2) (2021-03-12)
+
+
+### Bug Fixes
+
+* 🐛 make multiselect renderValue and tooltip order match ([33db1dd](https://github.com/SelectQuoteLabs/SQForm/commit/33db1dd17e41c57032f79cf6a30489eec860ee8d)), closes [#113](https://github.com/SelectQuoteLabs/SQForm/issues/113)
+
 ### [4.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.0...v4.1.1) (2021-03-09)
 
 
