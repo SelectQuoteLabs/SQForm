@@ -1,3 +1,24 @@
+### [4.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.0...v4.1.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 make only dialog body scroll ([60beb7b](https://github.com/SelectQuoteLabs/SQForm/commit/60beb7b1e1bcf4da4fd01a2debb6fd50310504ae)), closes [#17](https://github.com/SelectQuoteLabs/SQForm/issues/17)
+
+## [4.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.1...v4.1.0) (2021-03-09)
+
+
+### Features
+
+* 🎸 add max width to Stepper steps ([24244bd](https://github.com/SelectQuoteLabs/SQForm/commit/24244bd9615a41df2911e6f2c263042fb4660abe)), closes [#67](https://github.com/SelectQuoteLabs/SQForm/issues/67)
+
+### [4.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.0...v4.0.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 ?? operator instead of || for grid spacing prop check ([1c061d7](https://github.com/SelectQuoteLabs/SQForm/commit/1c061d7834f56abcf063a51e5b45c10b0a445244))
+
 ## [4.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.4.0...v4.0.0) (2021-03-04)
 
 
