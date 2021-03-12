@@ -40,7 +40,7 @@ const selectedDisplayValue = (values, options) => {
 };
 
 const getToolTipTitle = (formikFieldValue, options) => {
-  if (!formikFieldValue.length) {
+  if (!formikFieldValue?.length) {
     return 'No value(s) selected';
   }
 
@@ -83,7 +83,7 @@ function SQFormMultiSelect({
     value
   ) => {
     if (isSelectAllChecked) {
-      return children.map(option => option.value);
+      return children?.map(option => option.value);
     }
 
     if (isSelectNoneChecked) {
@@ -117,7 +117,7 @@ function SQFormMultiSelect({
    * e.g., if value is an "ID"
    */
   const getRenderValue = selected => {
-    if (!selected.length) {
+    if (!selected?.length) {
       return EMPTY_LABEL;
     }
 
@@ -138,7 +138,7 @@ function SQFormMultiSelect({
           multiple
           displayEmpty
           input={<Input disabled={isDisabled} name={name} />}
-          value={field.value}
+          value={field.value || []}
           onBlur={handleBlur}
           onChange={handleMultiSelectChange}
           fullWidth={true}
@@ -151,19 +151,19 @@ function SQFormMultiSelect({
         >
           {useSelectAll && (
             <MenuItem
-              value={children.length === field.value.length ? 'NONE' : 'ALL'}
+              value={children?.length === field.value?.length ? 'NONE' : 'ALL'}
             >
-              <Checkbox checked={children.length === field.value.length} />
+              <Checkbox checked={children?.length === field.value?.length} />
               <ListItemText
                 primary="Select All"
                 primaryTypographyProps={{variant: 'body2'}}
               />
             </MenuItem>
           )}
-          {children.map(option => {
+          {children?.map(option => {
             return (
               <MenuItem key={option.value} value={option.value}>
-                <Checkbox checked={field.value.includes(option.value)} />
+                <Checkbox checked={field.value?.includes(option.value)} />
                 <ListItemText
                   primary={option.label}
                   primaryTypographyProps={{variant: 'body2'}}
