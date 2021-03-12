@@ -119,6 +119,9 @@ const MOCK_FORM_MASKED_FIELDS = {
   phone: '',
   zip: '',
   currency: '',
+  percent: '',
+  email: '',
+  date: '',
   custom: ''
 };
 
@@ -519,6 +522,24 @@ export const basicFormWithMaskedFields = () => {
           size={4}
           mask={MASKS.currency}
           isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="percent"
+          label="Percent"
+          size={4}
+          mask={MASKS.percent}
+        />
+        <SQFormMaskedTextField
+          name="email"
+          label="Email"
+          size={4}
+          mask={MASKS.email}
+        />
+        <SQFormMaskedTextField
+          name="date"
+          label="Date"
+          size={4}
+          mask={MASKS.date}
         />
         <SQFormMaskedTextField
           name="custom"

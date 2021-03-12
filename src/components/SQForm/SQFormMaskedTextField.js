@@ -62,7 +62,11 @@ function SQFormMaskedTextField({
 
 SQFormMaskedTextField.propTypes = {
   /** Valid mask array; custom or from utils/masks.js */
-  mask: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+  mask: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.func
+  ]),
   /** Name of the field will be the Object key of the key/value pair form payload */
   name: PropTypes.string.isRequired,
   /** Descriptive label of the input */
