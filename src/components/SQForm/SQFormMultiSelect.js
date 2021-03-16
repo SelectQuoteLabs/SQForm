@@ -12,6 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
+import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
 
 /**
  * Material UI has a jank issue with the multi select form,
@@ -31,12 +32,19 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
-const selectedDisplayValue = (values, options) => {
-  return values
+const selectedDisplayValue = (values, options, name) => {
+  const selectedValues = values
     .map(value => {
-      return options.find(option => option.value === value).label;
+      return options.find(option => option.value === value)?.label;
     })
     .join(', ');
+
+    if (!selectedValues) {
+      console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
+      return [];
+    }
+
+    return selectedValues;
 };
 
 const getToolTipTitle = (formikFieldValue, options) => {
@@ -69,6 +77,16 @@ function SQFormMultiSelect({
     name,
     isRequired
   });
+
+  React.useEffect(() => {
+    if (!children) {
+      console.warn(getUndefinedChildrenWarning('SQFormMultiSelect', name));
+    }
+
+    if (field.value === undefined || field.value === null) {
+      console.warn(getUndefinedValueWarning('SQFormMultiSelect', name));
+    }
+  }, [children, field.value, name]);
 
   const labelID = label.toLowerCase();
   const toolTipTitle = getToolTipTitle(field.value, children);
@@ -121,7 +139,7 @@ function SQFormMultiSelect({
       return EMPTY_LABEL;
     }
 
-    return selectedDisplayValue(selected, children);
+    return selectedDisplayValue(selected, children, name);
   };
 
   return (
