@@ -27,6 +27,10 @@ The commit will be validated through a linter pre-commit hook and will reject an
 
 [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/#summary) formatted messages are required for proper versioning and automatic generation of release notes / CHANGELOG. Currently, only `feat` and `fix` will bump the version.
 
+For **BREAKING CHANGES** Type a brief description of the breaking change when asked if there is a breaking change. Otherwise, press the `ENTER` key to skip over the breaking change optional question.
+
+- A breaking change will cause a `MAJOR` SemVer bump. Ex: 3.0.5 -> 4.0.0
+
 ## Consuming
 
 - `> npm install @selectquotelabs/sqform`
