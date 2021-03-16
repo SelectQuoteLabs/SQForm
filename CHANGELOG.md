@@ -1,3 +1,10 @@
+### [4.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.2...v4.1.3) (2021-03-16)
+
+
+### Bug Fixes
+
+* 🐛 Gracefully handle unexpeced initialValues and children ([c81368d](https://github.com/SelectQuoteLabs/SQForm/commit/c81368d4a9e9fda6c074c05d9fe30a8db6984003)), closes [#124](https://github.com/SelectQuoteLabs/SQForm/issues/124)
+
 ### [4.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.1...v4.1.2) (2021-03-12)
 
 
