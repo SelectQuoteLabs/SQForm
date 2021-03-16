@@ -526,7 +526,7 @@ export const applyAnAction = () => {
           label="Actions with a default value"
           size={5}
           isRequired={true}
-          isDisabled
+          isDisabled={boolean('Disable autocomplete', true)}
         >
           {ACTIONS_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
