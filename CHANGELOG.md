@@ -1,3 +1,10 @@
+### [4.1.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.3...v4.1.4) (2021-03-16)
+
+
+### Bug Fixes
+
+* 🐛 made autocomplete component fully disabled when disabled ([3ab3cca](https://github.com/SelectQuoteLabs/SQForm/commit/3ab3ccad68c6522a4bb626779acf5b15ea5c404d)), closes [#135](https://github.com/SelectQuoteLabs/SQForm/issues/135)
+
 ### [4.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.2...v4.1.3) (2021-03-16)
 
 
