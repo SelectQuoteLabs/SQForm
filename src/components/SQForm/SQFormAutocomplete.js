@@ -164,6 +164,8 @@ function SQFormAutocomplete({
         onInputChange={handleInputChange}
         inputValue={inputValue}
         value={initialValue}
+        disableClearable={isDisabled}
+        freeSolo={isDisabled}
         getOptionLabel={option => option.label}
         renderInput={params => {
           return (
