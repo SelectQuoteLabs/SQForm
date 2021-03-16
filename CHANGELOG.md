@@ -1,3 +1,84 @@
+### [4.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.2...v4.1.3) (2021-03-16)
+
+
+### Bug Fixes
+
+* 🐛 Gracefully handle unexpeced initialValues and children ([c81368d](https://github.com/SelectQuoteLabs/SQForm/commit/c81368d4a9e9fda6c074c05d9fe30a8db6984003)), closes [#124](https://github.com/SelectQuoteLabs/SQForm/issues/124)
+
+### [4.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.1...v4.1.2) (2021-03-12)
+
+
+### Bug Fixes
+
+* 🐛 make multiselect renderValue and tooltip order match ([33db1dd](https://github.com/SelectQuoteLabs/SQForm/commit/33db1dd17e41c57032f79cf6a30489eec860ee8d)), closes [#113](https://github.com/SelectQuoteLabs/SQForm/issues/113)
+
+### [4.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.0...v4.1.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 make only dialog body scroll ([60beb7b](https://github.com/SelectQuoteLabs/SQForm/commit/60beb7b1e1bcf4da4fd01a2debb6fd50310504ae)), closes [#17](https://github.com/SelectQuoteLabs/SQForm/issues/17)
+
+## [4.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.1...v4.1.0) (2021-03-09)
+
+
+### Features
+
+* 🎸 add max width to Stepper steps ([24244bd](https://github.com/SelectQuoteLabs/SQForm/commit/24244bd9615a41df2911e6f2c263042fb4660abe)), closes [#67](https://github.com/SelectQuoteLabs/SQForm/issues/67)
+
+### [4.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.0.0...v4.0.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* 🐛 ?? operator instead of || for grid spacing prop check ([1c061d7](https://github.com/SelectQuoteLabs/SQForm/commit/1c061d7834f56abcf063a51e5b45c10b0a445244))
+
+## [4.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.4.0...v4.0.0) (2021-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Rename SQFormCheckboxGroup(Item) to SQFormInclusionList(Item)
+
+### Features
+
+* 🎸 Rename SQFormCheckboxGroup and replace it ([2c3efea](https://github.com/SelectQuoteLabs/SQForm/commit/2c3efea44892dc3a0b24b75a3674ca953716c441)), closes [#101](https://github.com/SelectQuoteLabs/SQForm/issues/101)
+
+## [3.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.1...v3.4.0) (2021-03-04)
+
+
+### Features
+
+* 🎸 add maxCharacters prop to SQFormTextarea ([dc0aa60](https://github.com/SelectQuoteLabs/SQForm/commit/dc0aa601312cc6955661cef1ca58aae2c3fbf05e)), closes [#104](https://github.com/SelectQuoteLabs/SQForm/issues/104)
+
+### [3.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.3.0...v3.3.1) (2021-03-03)
+
+
+### Bug Fixes
+
+* 🐛 add optional chaining to initial value of useState ([c7a0f4f](https://github.com/SelectQuoteLabs/SQForm/commit/c7a0f4f1fb4aac1fbe75eed03517c7ecdc0d1f9e)), closes [#105](https://github.com/SelectQuoteLabs/SQForm/issues/105)
+
+## [3.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.1...v3.3.0) (2021-03-02)
+
+
+### Features
+
+* 🎸 add maxCharacters prop to TextField, rendered in label ([cd78a17](https://github.com/SelectQuoteLabs/SQForm/commit/cd78a177dd3ea976fceb8a3df2a655c974c44588)), closes [#19](https://github.com/SelectQuoteLabs/SQForm/issues/19)
+
+### [3.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.2.0...v3.2.1) (2021-03-02)
+
+
+### Bug Fixes
+
+* 🐛 add error props to InputLabel and Select ([6285af0](https://github.com/SelectQuoteLabs/SQForm/commit/6285af06559ed1d41eedf4f62e17c1d803132e13)), closes [#92](https://github.com/SelectQuoteLabs/SQForm/issues/92)
+
+## [3.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.1...v3.2.0) (2021-03-02)
+
+
+### Features
+
+* 🎸 Added SQFormRadioButtonGroup component ([aea8208](https://github.com/SelectQuoteLabs/SQForm/commit/aea82087190491f664be9e1072b2f3db65fa7ac2)), closes [#64](https://github.com/SelectQuoteLabs/SQForm/issues/64)
+
 ### [3.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v3.1.0...v3.1.1) (2021-02-24)
 
 

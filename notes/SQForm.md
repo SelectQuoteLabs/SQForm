@@ -30,7 +30,11 @@ Use like any other checkbox. The value is provided from SQForm like the rest of 
 
 **SQFormCheckboxGroup & SQFormCheckboxGroupItem**
 
-`SQFormCheckboxGroup` acts as `SQFieldArray` does, using render props to pass `arrayHelpers` to your array of `SQFormCheckboxGroupItem`s. The required `name` prop must match the `initialValues` array property to store the checked items to be saved. `useSelectAll` triggers the 'Select All' checkbox at the top of the list, and if set to `true`, it must also receive an array `selectAllData` that represent the list of items to save if 'Select All' is checked. See 'Form With Checkbox Group' story for full example.
+`SQFormCheckboxGroup` formats and handles keeping track of what values in the group are checked. This component is able to be displayed vertically or in a row with a prop `shouldDisplayInRow`. A "Select All" option is also available via the prop `shouldUseSelectAll`. To properly handle resetting this form element `selectAll: <defaultValue>` must be included in your `initialValues` object supplied to the top level `SQForm` component with a boolean value.
+
+**SQFormInclusionList & SQFormInclusionListItem**
+
+`SQFormInclusionList` acts as `SQFieldArray` does, using render props to pass `arrayHelpers` to your array of `SQFormInclusionListItem`s. The required `name` prop must match the `initialValues` array property to store the checked items to be saved. `useSelectAll` triggers the 'Select All' checkbox at the top of the list, and if set to `true`, it must also receive an array `selectAllData` that represent the list of items to save if 'Select All' is checked. See 'Form With Checkbox Group' story for full example.
 
 **SQFormMultiSelect**
 

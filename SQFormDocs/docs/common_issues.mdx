@@ -1,0 +1,107 @@
+---
+id: common_issues
+title: Common Issues
+---
+
+This section will try to help you debug and decipher common issues, warnings, and errors you might see while using SQForm.
+
+Have a suggestion for a common error or warning you'd like to see in this section? [Open an issue!](https://github.com/SelectQuoteLabs/SQForm/issues)
+
+## Warnings
+
+### Warning: out-of-range value for the select component
+
+#### The warning
+`Material-UI: You have provided an out-of-range value [someValue] for the select (name="[someName]") component`
+
+Potentially affected components: [SQFormDropdown](https://github.com/SelectQuoteLabs/SQForm/blob/master/src/components/SQForm/SQFormDropdown.js), [SQFormMultiSelect](https://github.com/SelectQuoteLabs/SQForm/blob/master/src/components/SQForm/SQFormMultiSelect.js)
+
+#### Most Likely Cause
+This warning happens when the initialValue you provide to SQForm for component [someName] does not match one of the provided options to the dropdown component. 
+
+```jsx {4,7-10}
+/* some component definition */
+
+const initialValues = {
+  someName: 'someUnknownValue',
+};
+
+const SQFormDropdownOptions = [
+  { label: 'someLabel', value: 'someValue' },
+  { label: 'anotherLabel', value: 'anotherLabel' },
+];
+
+return (
+  <SQForm
+    onSubmit={() => {}}
+    initialValues={initialValues}
+  >
+    <SQFormDropdown name="someName", label="Some Label">
+      {SQFormDropdownOptions}
+    </SQFormDropdown>
+  </SQForm>
+);
+```
+:::info
+
+This is causing a warning because the options provided to `SQFormDropdown` as children does not include an option that has the value `someUnkownValue` as used in our `initialValues` object.
+:::
+
+#### Potential Fix
+
+To fix this we would need to set our `someName` initialValue to an empty string, `''`, or one of the options defined in the `SQFormDropdownOptions` array.
+
+```jsx
+const initialValues = {
+  someName: 'someValue',
+};
+```
+
+### Warning: A component is changing an uncontrolled input of type undefined to be controlled.
+
+#### The warning
+
+`A component is changing an uncontrolled input of type text to be controlled. Input elements should not switch from uncontrolled to controlled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components`
+
+Potentially affected components: **All components**
+
+#### Most Likely Cause
+
+This warning happens when the initialValue for a particular form element is undefined.
+
+```jsx {3}
+/* some component definition */
+
+const initialValues = {};
+
+return (
+  <SQForm
+    onSubmit={() => {}}
+    initialValues={initialValues}
+  >
+    <SQFormTextField name="someName", label="Text Label" />
+  </SQForm>
+);
+```
+:::info
+
+This is causing a warning because the `initialValues` object does not contain a key of `someName` so that `initialValues.someName` is `undefined`.
+:::
+
+#### Potential Fix
+
+To fix this we would need to add the key `someName` to our `initialValues` and provided it a non-undefined value. If want an empty value us an empty string, `''`.
+
+## Runtime Errors
+
+### TypeError: Cannot read property 'toLowerCase' of undefined
+
+Potentially affected components: [SQFormCheckboxGroup](https://github.com/SelectQuoteLabs/SQForm/blob/3a2bf1e22c6d778fefc24b9b334ca6685658996a/src/components/SQForm/SQFormCheckboxGroup.js), [SQFormDropdown](https://github.com/SelectQuoteLabs/SQForm/blob/54e5207a3b1cfc137420c53a9ccbbfa7889bcf13/src/components/SQForm/SQFormDropdown.js), [SQFormMultiSelect](https://github.com/SelectQuoteLabs/SQForm/blob/d785e93895d9075a42fd1357fe4db15070818451/src/components/SQForm/SQFormMultiSelect.js), [SQFormRadioButtonGroup](https://github.com/SelectQuoteLabs/SQForm/blob/c4fc1275c03b55c71c2a6b6994891e674ba76434/src/components/SQForm/SQFormRadioButtonGroup.js)
+
+#### Most Likely Cause
+
+This runtime error usually occurs when the required prop `label` is not provided to the component. 
+
+#### Potential Fix
+
+To fix this error we would need to provide a string to the `label` prop of the component. If you don't want to display a label you should pass an empty string `''`.

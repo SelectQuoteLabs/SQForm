@@ -15,5 +15,6 @@ module.exports = {
       'text_field',
     ],
     Hooks: ['use_form', 'use_form_button'],
+    'Component Support': ['common_issues'],
   },
 };
