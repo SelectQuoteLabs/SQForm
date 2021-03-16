@@ -12,6 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
+import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
 
 /**
  * Material UI has a jank issue with the multi select form,
@@ -31,16 +32,27 @@ const MenuProps = {
   getContentAnchorEl: null
 };
 
+const selectedDisplayValue = (values, options, name) => {
+  const selectedValues = values
+    .map(value => {
+      return options.find(option => option.value === value)?.label;
+    })
+    .join(', ');
+
+    if (!selectedValues) {
+      console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
+      return [];
+    }
+
+    return selectedValues;
+};
+
 const getToolTipTitle = (formikFieldValue, options) => {
-  if (!formikFieldValue.length) {
+  if (!formikFieldValue?.length) {
     return 'No value(s) selected';
   }
 
-  return formikFieldValue
-    .map(value => {
-      return options.find(option => option.value === value).label;
-    })
-    .join(', ');
+  return selectedDisplayValue(formikFieldValue, options);
 };
 
 function SQFormMultiSelect({
@@ -66,6 +78,16 @@ function SQFormMultiSelect({
     isRequired
   });
 
+  React.useEffect(() => {
+    if (!children) {
+      console.warn(getUndefinedChildrenWarning('SQFormMultiSelect', name));
+    }
+
+    if (field.value === undefined || field.value === null) {
+      console.warn(getUndefinedValueWarning('SQFormMultiSelect', name));
+    }
+  }, [children, field.value, name]);
+
   const labelID = label.toLowerCase();
   const toolTipTitle = getToolTipTitle(field.value, children);
 
@@ -79,7 +101,7 @@ function SQFormMultiSelect({
     value
   ) => {
     if (isSelectAllChecked) {
-      return children.map(option => option.value);
+      return children?.map(option => option.value);
     }
 
     if (isSelectNoneChecked) {
@@ -113,14 +135,11 @@ function SQFormMultiSelect({
    * e.g., if value is an "ID"
    */
   const getRenderValue = selected => {
-    if (!selected.length) {
+    if (!selected?.length) {
       return EMPTY_LABEL;
     }
 
-    return children
-      ?.filter(child => selected.includes(child.value))
-      ?.map(child => child.label)
-      ?.join(', ');
+    return selectedDisplayValue(selected, children, name);
   };
 
   return (
@@ -137,7 +156,7 @@ function SQFormMultiSelect({
           multiple
           displayEmpty
           input={<Input disabled={isDisabled} name={name} />}
-          value={field.value}
+          value={field.value || []}
           onBlur={handleBlur}
           onChange={handleMultiSelectChange}
           fullWidth={true}
@@ -150,19 +169,19 @@ function SQFormMultiSelect({
         >
           {useSelectAll && (
             <MenuItem
-              value={children.length === field.value.length ? 'NONE' : 'ALL'}
+              value={children?.length === field.value?.length ? 'NONE' : 'ALL'}
             >
-              <Checkbox checked={children.length === field.value.length} />
+              <Checkbox checked={children?.length === field.value?.length} />
               <ListItemText
                 primary="Select All"
                 primaryTypographyProps={{variant: 'body2'}}
               />
             </MenuItem>
           )}
-          {children.map(option => {
+          {children?.map(option => {
             return (
               <MenuItem key={option.value} value={option.value}>
-                <Checkbox checked={field.value.includes(option.value)} />
+                <Checkbox checked={field.value?.includes(option.value)} />
                 <ListItemText
                   primary={option.label}
                   primaryTypographyProps={{variant: 'body2'}}

@@ -8,6 +8,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 
 import {useForm} from './useForm';
+import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
 
 const EMPTY_VALUE = '';
@@ -38,6 +39,11 @@ function SQFormDropdown({
   const labelID = label.toLowerCase();
 
   const options = React.useMemo(() => {
+    if (!children) {
+      console.warn(getUndefinedChildrenWarning('SQFormDropdown', name));
+      return [];
+    }
+
     if (!displayEmpty) return children;
 
     const [firstOption] = children;
@@ -50,19 +56,32 @@ function SQFormDropdown({
     }
 
     return [EMPTY_OPTION, ...children];
-  }, [children, displayEmpty]);
+  }, [children, displayEmpty, name]);
 
   const renderValue = value => {
+    if (value === undefined || value === null) {
+      console.warn(getUndefinedValueWarning('SQFormDropdown', name));
+      return EMPTY_LABEL
+    }
+
     if (value === EMPTY_VALUE) {
       return EMPTY_LABEL;
     }
 
-    return options.find(option => option.value === value).label;
+    const valueToRender = options.find(option => option.value === value)?.label;
+    if (!valueToRender) {
+      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value))
+      return undefined;
+    }
+
+    return valueToRender;
   };
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={labelID}>{label}</InputLabel>
+      <InputLabel error={isFieldError} id={labelID}>
+        {label}
+      </InputLabel>
       <Select
         displayEmpty={true}
         input={<Input disabled={isDisabled} name={name} />}
@@ -72,11 +91,16 @@ function SQFormDropdown({
         fullWidth={true}
         labelId={labelID}
         renderValue={renderValue}
+        error={isFieldError}
         {...muiFieldProps}
       >
         {options.map(option => {
           return (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem
+              key={option.value}
+              disabled={option.isDisabled}
+              value={option.value}
+            >
               {option.label}
             </MenuItem>
           );
@@ -94,7 +118,8 @@ SQFormDropdown.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      isDisabled: PropTypes.bool
     })
   ),
   /** Whether to display empty option - - in options */
