@@ -49,7 +49,9 @@ SQFormButton.propTypes = {
   /** The title of the button */
   title: PropTypes.string,
   /** Type of button, defaults to 'submit' */
-  type: PropTypes.oneOf(['submit', 'reset'])
+  type: PropTypes.oneOf(['submit', 'reset']),
+  /** Standard React event handler */
+  onClick: PropTypes.func
 };
 
 export default SQFormButton;

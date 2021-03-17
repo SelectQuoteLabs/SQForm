@@ -40,7 +40,9 @@ SQFormIconButton.propTypes = {
   /** The title of the button */
   title: PropTypes.string,
   /** Type of button, defaults to 'submit' */
-  type: PropTypes.string
+  type: PropTypes.string,
+  /** Standard React event handler */
+  onClick: PropTypes.func
 };
 
 export default SQFormIconButton;
