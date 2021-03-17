@@ -11,6 +11,7 @@ import {SectionHeader} from 'scplus-shared-components';
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import markdown from '../notes/SQForm.md';
+import {MASKS} from '../src/utils/masks';
 
 import {
   SQForm,
@@ -27,7 +28,8 @@ import {
   SQFormInclusionListItem,
   SQFormMultiSelect,
   SQFormRadioButtonGroup,
-  SQFormCheckboxGroup
+  SQFormCheckboxGroup,
+  SQFormMaskedTextField
 } from '../src';
 
 export default {
@@ -112,6 +114,17 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
 ];
+
+const MOCK_FORM_MASKED_FIELDS = {
+  phone: '',
+  zip: '',
+  currency: '',
+  percent: '',
+  email: '',
+  date: '',
+  ssn: '',
+  custom: ''
+};
 
 const RADIO_GROUP_OPTIONS = [
   {label: 'Cat', value: 'cat'},
@@ -459,6 +472,99 @@ export const basicFormWithMultiSelect = () => {
         </SQFormMultiSelect>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
           <SQFormIconButton IconComponent={CheckMarkIcon} />
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const basicFormWithMaskedFields = () => {
+  const validationSchema = {
+    phone: Yup.string()
+      .required('Required')
+      .transform(value => value.replace(/[^\d]/g, ''))
+      .min(10, 'Phone number must be 10 digits'),
+    zip: Yup.string()
+      .required('Required')
+      .transform(value => value.replace(/[^\d]/g, ''))
+      .min(5, 'Zip code must be 5 digits'),
+    currency: Yup.string().required('Required')
+  };
+
+  return (
+    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+      <SQForm
+        initialValues={MOCK_FORM_MASKED_FIELDS}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        muiGridProps={{
+          spacing: 2,
+          justify: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <SQFormMaskedTextField
+          name="phone"
+          label="Phone"
+          size={4}
+          mask={MASKS.phone}
+          isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="zip"
+          label="Zip Code"
+          size={4}
+          mask={MASKS.zip}
+          isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="currency"
+          label="Currency"
+          size={4}
+          mask={MASKS.currency}
+          isRequired={true}
+        />
+        <SQFormMaskedTextField
+          name="percent"
+          label="Percent"
+          size={4}
+          mask={MASKS.percent}
+        />
+        <SQFormMaskedTextField
+          name="email"
+          label="Email"
+          size={4}
+          mask={MASKS.email}
+        />
+        <SQFormMaskedTextField
+          name="date"
+          label="Date"
+          size={4}
+          mask={MASKS.date}
+        />
+        <SQFormMaskedTextField
+          name="ssn"
+          label="SSN"
+          size={4}
+          mask={MASKS.ssn}
+        />
+        <SQFormMaskedTextField
+          name="custom"
+          label="Custom mask (ex: Canadian postal code)"
+          size={4}
+          placeholder="A1B 2C3"
+          mask={[/[A-Z]/i, /\d/, /[A-Z]/i, ' ', /\d/, /[A-Z]/i, /\d/]}
+        />
+        <Grid item sm={12}>
+          <Grid container justify="space-between">
+            <SQFormResetButtonWithConfirmation
+              variant="outlined"
+              confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
+            >
+              RESET
+            </SQFormResetButtonWithConfirmation>
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
         </Grid>
       </SQForm>
     </Card>
