@@ -9,11 +9,13 @@ function SQFormIconButton({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
-  type = 'submit'
+  type = 'submit',
+  onClick
 }) {
-  const {isButtonDisabled} = useFormButton(
+  const {isButtonDisabled, handleClick} = useFormButton(
     isDisabled,
-    shouldRequireFieldUpdates
+    shouldRequireFieldUpdates,
+    onClick
   );
 
   return (
@@ -22,6 +24,7 @@ function SQFormIconButton({
       title={title}
       type={type}
       isDisabled={isButtonDisabled}
+      onClick={onClick ? handleClick : undefined}
     />
   );
 }

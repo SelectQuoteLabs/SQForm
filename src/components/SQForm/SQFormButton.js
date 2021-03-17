@@ -8,11 +8,13 @@ function SQFormButton({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
-  type = 'submit'
+  type = 'submit',
+  onClick
 }) {
-  const {dirty, isButtonDisabled, handleReset} = useFormButton(
+  const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
     isDisabled,
-    shouldRequireFieldUpdates
+    shouldRequireFieldUpdates,
+    onClick
   );
 
   const isSQFormButtonDisabled = React.useMemo(() => {
@@ -28,7 +30,9 @@ function SQFormButton({
       title={title}
       type={type}
       isDisabled={isSQFormButtonDisabled}
-      onClick={type === 'reset' ? handleReset : undefined}
+      onClick={
+        type === 'reset' ? handleReset : onClick ? handleClick : undefined
+      }
     >
       {children}
     </RoundedButton>
