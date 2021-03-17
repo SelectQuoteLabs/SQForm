@@ -1,3 +1,11 @@
+## [4.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.4...v4.2.0) (2021-03-17)
+
+
+### Features
+
+* 🎸 add input masking component ([4aa90ee](https://github.com/SelectQuoteLabs/SQForm/commit/4aa90ee6265443041275cba566306c7efaecd0b6)), closes [#18](https://github.com/SelectQuoteLabs/SQForm/issues/18)
+* 🎸 add percent, email, and date masks ([35e537c](https://github.com/SelectQuoteLabs/SQForm/commit/35e537c33373b79b1651d33bdf57b2f0e2e0b779))
+
 ### [4.1.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.3...v4.1.4) (2021-03-16)
 
 
