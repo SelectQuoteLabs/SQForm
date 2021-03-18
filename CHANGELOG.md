@@ -1,3 +1,10 @@
+### [4.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.0...v4.2.1) (2021-03-18)
+
+
+### Bug Fixes
+
+* 🐛 correctly export MASKS from utils ([ddf2766](https://github.com/SelectQuoteLabs/SQForm/commit/ddf27663fabb7cd9a9f9d0fc4a5bb3b8284a0d9c)), closes [#140](https://github.com/SelectQuoteLabs/SQForm/issues/140)
+
 ## [4.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.1.4...v4.2.0) (2021-03-17)
 
 
