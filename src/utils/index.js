@@ -23,3 +23,5 @@ export function serializeFormValues(formValues) {
 export function hasUpdated(initialValues, values) {
   return !deepEqual(initialValues, values);
 }
+
+export {MASKS} from './masks';
