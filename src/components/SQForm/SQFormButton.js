@@ -25,14 +25,20 @@ function SQFormButton({
     return isButtonDisabled;
   }, [dirty, isButtonDisabled, type]);
 
+  const getClickHandler = (...args) => {
+    if (type === 'reset') {
+      return handleReset;
+    } else if (typeof onClick !== 'undefined') {
+      return handleClick(...args);
+    }
+  };
+
   return (
     <RoundedButton
       title={title}
       type={type}
       isDisabled={isSQFormButtonDisabled}
-      onClick={
-        type === 'reset' ? handleReset : onClick ? handleClick : undefined
-      }
+      onClick={getClickHandler}
     >
       {children}
     </RoundedButton>
