@@ -11,7 +11,6 @@ import {SectionHeader} from 'scplus-shared-components';
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import markdown from '../notes/SQForm.md';
-import {MASKS} from '../src/utils/masks';
 
 import {
   SQForm,
@@ -29,7 +28,8 @@ import {
   SQFormMultiSelect,
   SQFormRadioButtonGroup,
   SQFormCheckboxGroup,
-  SQFormMaskedTextField
+  SQFormMaskedTextField,
+  MASKS
 } from '../src';
 
 export default {
