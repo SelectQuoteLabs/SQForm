@@ -115,6 +115,10 @@ function SQFormAutocomplete({
   const prevValue = usePrevious(value);
 
   React.useEffect(() => {
+    setInputValue(initialValue?.label || '');
+  }, [initialValue]);
+
+  React.useEffect(() => {
     // Form Reset
     if (prevValue && inputValue && !value) {
       setInputValue('');
