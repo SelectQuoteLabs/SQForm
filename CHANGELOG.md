@@ -1,3 +1,10 @@
+### [4.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.2...v4.2.3) (2021-03-22)
+
+
+### Bug Fixes
+
+* 🐛 DialogContent overflow causing double scrollbars ([e99f010](https://github.com/SelectQuoteLabs/SQForm/commit/e99f01054f6f7c1dd6691e911bf28f92259548fb)), closes [#139](https://github.com/SelectQuoteLabs/SQForm/issues/139)
+
 ### [4.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.1...v4.2.2) (2021-03-22)
 
 
