@@ -1,3 +1,10 @@
+### [4.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.3...v4.2.4) (2021-03-22)
+
+
+### Bug Fixes
+
+* 🐛 run date validation on date picker window close ([4088b30](https://github.com/SelectQuoteLabs/SQForm/commit/4088b30982b7b74dfbb3edd809d576f4900149eb)), closes [#127](https://github.com/SelectQuoteLabs/SQForm/issues/127)
+
 ### [4.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.2...v4.2.3) (2021-03-22)
 
 
