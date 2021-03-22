@@ -1,3 +1,10 @@
+### [4.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.1...v4.2.2) (2021-03-22)
+
+
+### Bug Fixes
+
+* 🐛 setFieldValue now updates inputValue on SQFormAutocomple ([c6c4a4e](https://github.com/SelectQuoteLabs/SQForm/commit/c6c4a4ed458bd8f728db27ff3f660b1ab6f82bab)), closes [#144](https://github.com/SelectQuoteLabs/SQForm/issues/144)
+
 ### [4.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.0...v4.2.1) (2021-03-18)
 
 
