@@ -46,3 +46,26 @@ export const basicDatePicker = () => {
     </SQForm>
   );
 };
+
+const schemaBefore2024 = {
+  date: Yup.date()
+    .required()
+    .max(new Date('2024-01-01'), 'Date must be before 2024')
+    .typeError('Invalid date')
+};
+
+export const datePickerBefore2024 = () => {
+  return (
+    <SQForm
+      initialValues={MOCK_INITIAL_STATE}
+      onSubmit={handleSubmit}
+      validationSchema={schemaBefore2024}
+    >
+      <SQFormDatePicker
+        name="date"
+        label="Date"
+        isDisabled={boolean('isDisabled')}
+      />
+    </SQForm>
+  );
+};

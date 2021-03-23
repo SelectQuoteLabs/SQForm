@@ -96,7 +96,7 @@ function SQFormDialogInner({
           <DialogTitle disableTypography={true} classes={titleClasses}>
             <Typography variant="h4">{title}</Typography>
           </DialogTitle>
-          <DialogContent>
+          <DialogContent style={{overflowY: 'visible'}}>
             <Grid
               {...muiGridProps}
               container
