@@ -1,3 +1,10 @@
+## [4.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.4...v4.3.0) (2021-03-23)
+
+
+### Features
+
+* 🎸 add debounce to SQForm onSubmit and buttons onClick ([093142b](https://github.com/SelectQuoteLabs/SQForm/commit/093142b1c217349ceb271fb46355a66d06ed56d0)), closes [#123](https://github.com/SelectQuoteLabs/SQForm/issues/123)
+
 ### [4.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.3...v4.2.4) (2021-03-22)
 
 
