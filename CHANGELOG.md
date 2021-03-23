@@ -1,3 +1,17 @@
+### [4.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.3...v4.2.4) (2021-03-22)
+
+
+### Bug Fixes
+
+* 🐛 run date validation on date picker window close ([4088b30](https://github.com/SelectQuoteLabs/SQForm/commit/4088b30982b7b74dfbb3edd809d576f4900149eb)), closes [#127](https://github.com/SelectQuoteLabs/SQForm/issues/127)
+
+### [4.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.2...v4.2.3) (2021-03-22)
+
+
+### Bug Fixes
+
+* 🐛 DialogContent overflow causing double scrollbars ([e99f010](https://github.com/SelectQuoteLabs/SQForm/commit/e99f01054f6f7c1dd6691e911bf28f92259548fb)), closes [#139](https://github.com/SelectQuoteLabs/SQForm/issues/139)
+
 ### [4.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.1...v4.2.2) (2021-03-22)
 
 

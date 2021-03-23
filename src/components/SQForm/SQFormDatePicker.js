@@ -58,6 +58,9 @@ function SQFormDatePicker({
         shouldDisableDate={setDisabledDate}
         value={value}
         onChange={handleChange}
+        onClose={() => {
+          helpers.setTouched();
+        }}
         renderInput={inputProps => {
           return (
             <TextField
