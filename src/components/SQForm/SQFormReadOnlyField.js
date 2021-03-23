@@ -12,7 +12,7 @@ function SQFormReadOnlyField({label, name, size = 'auto', muiFieldProps = {}}) {
   return (
     <Grid item sm={size}>
       <TextField
-        id={label.toLowerCase()}
+        id={label.toLowerCase().replaceAll(' ', '-')}
         label={label}
         name={name}
         value={field.value || '- -'}
