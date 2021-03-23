@@ -69,6 +69,7 @@
     "react-text-mask": "^5.4.3",
     "react-window": "^1.8.5",
     "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/4.17.0",
+    "use-debounce": "^6.0.0",
     "text-mask-addons": "^3.8.0"
   },
   "peerDependencies": {
