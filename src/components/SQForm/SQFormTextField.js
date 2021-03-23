@@ -63,6 +63,7 @@ function SQFormTextField({
   return (
     <Grid item sm={size}>
       <TextField
+        id={label.toLowerCase()}
         color="primary"
         disabled={isDisabled}
         error={isFieldError}
