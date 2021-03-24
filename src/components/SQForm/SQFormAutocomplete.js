@@ -14,6 +14,8 @@ import {useForm} from './useForm';
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
 
+const EMPTY_OPTION = {label: '', value: ''};
+
 const useStyles = makeStyles({
   listbox: {
     '& ul': {
@@ -162,12 +164,12 @@ function SQFormAutocomplete({
         disableListWrap
         classes={classes}
         ListboxComponent={ListboxVirtualizedComponent}
-        options={children}
+        options={[...children, EMPTY_OPTION]}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
         inputValue={inputValue}
-        value={initialValue}
+        value={initialValue || EMPTY_OPTION}
         disableClearable={isDisabled}
         freeSolo={isDisabled}
         getOptionLabel={option => option.label}
