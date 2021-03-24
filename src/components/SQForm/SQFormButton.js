@@ -8,11 +8,13 @@ function SQFormButton({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
-  type = 'submit'
+  type = 'submit',
+  onClick
 }) {
-  const {dirty, isButtonDisabled, handleReset} = useFormButton(
+  const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
     isDisabled,
-    shouldRequireFieldUpdates
+    shouldRequireFieldUpdates,
+    onClick
   );
 
   const isSQFormButtonDisabled = React.useMemo(() => {
@@ -23,12 +25,20 @@ function SQFormButton({
     return isButtonDisabled;
   }, [dirty, isButtonDisabled, type]);
 
+  const getClickHandler = (...args) => {
+    if (type === 'reset') {
+      return handleReset;
+    } else if (typeof onClick !== 'undefined') {
+      return handleClick(...args);
+    }
+  };
+
   return (
     <RoundedButton
       title={title}
       type={type}
       isDisabled={isSQFormButtonDisabled}
-      onClick={type === 'reset' ? handleReset : undefined}
+      onClick={getClickHandler}
     >
       {children}
     </RoundedButton>
@@ -45,7 +55,9 @@ SQFormButton.propTypes = {
   /** The title of the button */
   title: PropTypes.string,
   /** Type of button, defaults to 'submit' */
-  type: PropTypes.oneOf(['submit', 'reset'])
+  type: PropTypes.oneOf(['submit', 'reset']),
+  /** Standard React event handler */
+  onClick: PropTypes.func
 };
 
 export default SQFormButton;

@@ -1,3 +1,17 @@
+### [4.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.0...v4.3.1) (2021-03-24)
+
+
+### Bug Fixes
+
+* 🐛 Autocomplete no longer uncontrolled with '' initialValue ([2b6100c](https://github.com/SelectQuoteLabs/SQForm/commit/2b6100c7c0d40d35da86f84522bff874cae2762f)), closes [#132](https://github.com/SelectQuoteLabs/SQForm/issues/132)
+
+## [4.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.4...v4.3.0) (2021-03-23)
+
+
+### Features
+
+* 🎸 add debounce to SQForm onSubmit and buttons onClick ([093142b](https://github.com/SelectQuoteLabs/SQForm/commit/093142b1c217349ceb271fb46355a66d06ed56d0)), closes [#123](https://github.com/SelectQuoteLabs/SQForm/issues/123)
+
 ### [4.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.3...v4.2.4) (2021-03-22)
 
 

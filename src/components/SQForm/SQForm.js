@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
+import {useDebouncedCallback} from 'use-debounce';
 import * as Yup from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
@@ -27,12 +28,18 @@ function SQForm({
     document && document.activeElement && document.activeElement.blur();
   };
 
+  const handleSubmit = useDebouncedCallback(
+    (...args) => onSubmit(...args),
+    500,
+    {leading: true, trailing: false}
+  );
+
   return (
     <Formik
       enableReinitialize={enableReinitialize}
       initialErrors={initialErrors}
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       onReset={handleReset}
       validationSchema={validationYupSchema}
       validateOnMount={true}
