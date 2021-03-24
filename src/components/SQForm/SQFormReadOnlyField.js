@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {useForm} from './useForm';
+import {toKebabCase} from '../../utils';
 
 function SQFormReadOnlyField({label, name, size = 'auto', muiFieldProps = {}}) {
   const {
@@ -12,7 +13,7 @@ function SQFormReadOnlyField({label, name, size = 'auto', muiFieldProps = {}}) {
   return (
     <Grid item sm={size}>
       <TextField
-        id={label.toLowerCase().replaceAll(' ', '-')}
+        id={toKebabCase(label)}
         label={label}
         name={name}
         value={field.value || '- -'}
