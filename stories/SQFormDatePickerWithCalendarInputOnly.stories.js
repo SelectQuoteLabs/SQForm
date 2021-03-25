@@ -1,5 +1,5 @@
 import React from 'react';
-import {withKnobs} from '@storybook/addon-knobs';
+import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 import {SQForm, SQFormDatePickerWithCalendarInputOnly} from '../src';
@@ -10,7 +10,7 @@ export default {
 };
 
 const MOCK_INITIAL_STATE = {
-  date: ''
+  date: '12/01/1990'
 };
 
 const handleSubmit = (values, actions) => {
@@ -32,7 +32,11 @@ export const basicDatePicker = () => {
       onSubmit={handleSubmit}
       validationSchema={basicSchema}
     >
-      <SQFormDatePickerWithCalendarInputOnly name="date" label="Date" />
+      <SQFormDatePickerWithCalendarInputOnly
+        name="date"
+        label="Date"
+        isDisabled={boolean('Date Picker Disabled', false)}
+      />
     </SQForm>
   );
 };
