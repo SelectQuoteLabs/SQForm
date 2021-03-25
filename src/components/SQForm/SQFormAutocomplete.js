@@ -192,7 +192,7 @@ function SQFormAutocomplete({
               FormHelperTextProps={{error: isFieldError}}
               name={name}
               label={label}
-              helperText={HelperTextComponent}
+              helperText={!isDisabled && HelperTextComponent}
               required={isRequired}
             />
           );
