@@ -3,15 +3,30 @@
     "react-app",
     "eslint:recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:testing-library/recommended",
+    "plugin:testing-library/react"
   ],
-  "plugins": ["import", "flowtype", "jsx-a11y", "react", "react-hooks"],
+  "plugins": [
+    "import",
+    "flowtype",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "testing-library"
+  ],
   "rules": {
     "no-useless-computed-key": "off",
     "no-useless-rename": "off",
     "import/no-unresolved": "off",
     "no-extra-boolean-cast": "off",
     "no-prototype-builtins": "off",
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "testing-library/no-await-sync-events": "warn",
+    "testing-library/no-wait-for-snapshot": "error",
+    "testing-library/prefer-explicit-assert": "warn",
+    "testing-library/prefer-presence-queries": "error",
+    "testing-library/prefer-screen-queries": "error",
+    "testing-library/prefer-wait-for": "error"
   }
 }
