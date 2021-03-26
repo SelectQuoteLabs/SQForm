@@ -18,8 +18,9 @@ function SQFormRadioButtonGroup({
   children
 }) {
   const {
+    fieldState: {isFieldError},
     formikField: {field},
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -44,7 +45,11 @@ function SQFormRadioButtonGroup({
 
   return (
     <Grid item sm={size}>
-      <FormControl component="fieldset">
+      <FormControl
+        error={isFieldError}
+        onBlur={handleBlur}
+        component="fieldset"
+      >
         <FormLabel component="legend" classes={{root: 'MuiInputLabel-root'}}>
           {groupLabel}
         </FormLabel>

@@ -19,7 +19,8 @@ function SQFormCheckboxGroup({
   children
 }) {
   const {
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldState: {isFieldError},
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -81,7 +82,11 @@ function SQFormCheckboxGroup({
 
   return (
     <Grid item sm={size}>
-      <FormControl component="fieldset">
+      <FormControl
+        error={isFieldError}
+        onBlur={handleBlur}
+        component="fieldset"
+      >
         <FormLabel component="legend" classes={{root: 'MuiInputLabel-root'}}>
           {groupLabel}
         </FormLabel>
