@@ -87,7 +87,7 @@ function SQFormTextField({
         name={name}
         type={type}
         label={labelText}
-        helperText={HelperTextComponent}
+        helperText={!isDisabled && HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}
