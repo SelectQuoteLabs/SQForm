@@ -31,7 +31,8 @@
           "fix",
           "docs",
           "chore",
-          "refactor"
+          "refactor",
+          "test"
         ]
       ]
     }
