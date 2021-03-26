@@ -7,11 +7,11 @@ import SQFormTextField from '../SQFormTextField';
 import SQForm from '../SQForm';
 
 const render = (ui, options = {}) => {
-  const {initialValue, validationSchema} = options;
+  const {initialValue = '', validationSchema} = options;
 
   return rtlRender(
     <SQForm
-      initialValues={{test: initialValue || ''}}
+      initialValues={{test: initialValue}}
       validationSchema={validationSchema}
       onSubmit={() => {}}
     >
@@ -20,32 +20,30 @@ const render = (ui, options = {}) => {
   );
 };
 
+const defaultProps = {
+  name: 'test',
+  label: 'Test Label'
+};
+
 it('should render with initial value', () => {
   const value = 'blah';
-  const {container} = render(
-    <SQFormTextField name="test" label="Test Label" />,
-    {initialValue: value}
-  );
+  render(<SQFormTextField {...defaultProps} />, {
+    initialValue: value
+  });
 
-  expect(container.querySelector('input[name="test"]')).toHaveValue(value);
+  expect(screen.getByLabelText(/test label/i)).toHaveValue(value);
 });
 
 it('should render disabled', () => {
-  const {container} = render(
-    <SQFormTextField isDisabled={true} name="test" label="Test Label" />
-  );
+  render(<SQFormTextField {...defaultProps} isDisabled={true} />);
 
-  expect(container.querySelector('input[name="test"]')).toBeDisabled();
+  expect(screen.getByLabelText(/test label/i)).toBeDisabled();
 });
 
 it('should render required', () => {
-  const {container} = render(
-    <SQFormTextField isRequired={true} name="test" label="Test Label" />
-  );
+  render(<SQFormTextField {...defaultProps} isRequired={true} />);
 
-  expect(container.querySelector('input[name="test"]')).toHaveAttribute(
-    'required'
-  );
+  expect(screen.getByLabelText(/test label/i)).toHaveAttribute('required');
   expect(screen.getByText(/Required/)).toBeInTheDocument();
 });
 
@@ -53,15 +51,9 @@ it('should render max characters', () => {
   const maxCharacters = 10;
   const word = 'hello';
   const phrase = 'hello world!';
-  const {container} = render(
-    <SQFormTextField
-      maxCharacters={maxCharacters}
-      name="test"
-      label="Test Label"
-    />
-  );
+  render(<SQFormTextField {...defaultProps} maxCharacters={maxCharacters} />);
 
-  const textField = container.querySelector('input[name="test"]');
+  const textField = screen.getByLabelText(/test label/i);
 
   expect(screen.getByText(`: 0/${maxCharacters}`)).toBeInTheDocument();
 
@@ -84,18 +76,18 @@ it('should render error state', () => {
   const validationSchema = {
     test: Yup.string().required('Required')
   };
-  const {container} = render(
-    <SQFormTextField isRequired={true} name="test" label="Test Label" />,
-    {validationSchema}
-  );
+  const errorClass = 'Mui-error';
+  render(<SQFormTextField {...defaultProps} isRequired={true} />, {
+    validationSchema
+  });
 
   expect(screen.getByText(/test label/i).parentNode).not.toHaveClass(
-    'Mui-error'
+    errorClass
   );
-  expect(screen.getByText('Required')).not.toHaveClass('Mui-error');
+  expect(screen.getByText(/Required/)).not.toHaveClass(errorClass);
 
-  userEvent.click(container.querySelector('input[name="test"]'));
+  userEvent.click(screen.getByLabelText(/test label/i));
   userEvent.tab();
-  expect(screen.getByText(/test label/i).parentNode).toHaveClass('Mui-error');
-  expect(screen.getByText('Required')).toHaveClass('Mui-error');
+  expect(screen.getByText(/test label/i).parentNode).toHaveClass(errorClass);
+  expect(screen.getByText(/Required/)).toHaveClass(errorClass);
 });

@@ -22,37 +22,35 @@ const mockData = {
 };
 
 it('renders BasicForm and calls alert on submit', async () => {
-  const {container} = render(<BasicForm />);
+  render(<BasicForm />);
 
-  // userEvent.type(screen.getByLabelText(/first name/i), 'First');
-  userEvent.type(
-    container.querySelector('input[name="firstName"]'),
-    mockData.firstName
-  );
-  userEvent.type(
-    container.querySelector('input[name="lastName"]'),
-    mockData.lastName
-  );
-  userEvent.type(
-    container.querySelector('input[name="hobby"]'),
-    mockData.hobby
-  );
-  userEvent.type(
-    container.querySelector('input[name="age"]'),
-    mockData.age.toString()
-  );
+  userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
+  userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
+  userEvent.type(screen.getByLabelText(/hobby/i), mockData.hobby);
+  userEvent.type(screen.getByLabelText(/age/i), mockData.age.toString());
+
   userEvent.click(screen.getByRole('button', {name: /state/i}));
   userEvent.click(screen.getByRole('option', {name: /kansas/i}));
+
   userEvent.click(screen.getByRole('checkbox', {name: /cool/i}));
+
   userEvent.click(
     within(
-      screen.getByRole('radiogroup', {
-        name: 'SQFormRadioButtonGroup_preferredPet'
+      screen.getByRole('group', {
+        name: /cat or dog/i
       })
     ).getByRole('radio', {name: /dog/i})
   );
-  userEvent.click(screen.getByRole('checkbox', {name: /drivetrain/i}));
-  userEvent.click(screen.getByRole('checkbox', {name: /brakes/i}));
+
+  const warrantyOptions = screen.getByRole('group', {
+    name: /warranty options/i
+  });
+  userEvent.click(
+    within(warrantyOptions).getByRole('checkbox', {name: /drivetrain/i})
+  );
+  userEvent.click(
+    within(warrantyOptions).getByRole('checkbox', {name: /brakes/i})
+  );
 
   userEvent.click(screen.getByRole('button', {name: /form submission/i}));
 
