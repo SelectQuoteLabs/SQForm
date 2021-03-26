@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import {useForm} from './useForm';
+import {toKebabCase} from '../../utils';
 
 function SQFormTextField({
   name,
@@ -63,6 +64,7 @@ function SQFormTextField({
   return (
     <Grid item sm={size}>
       <TextField
+        id={toKebabCase(label)}
         color="primary"
         disabled={isDisabled}
         error={isFieldError}
@@ -85,7 +87,7 @@ function SQFormTextField({
         name={name}
         type={type}
         label={labelText}
-        helperText={HelperTextComponent}
+        helperText={!isDisabled && HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}

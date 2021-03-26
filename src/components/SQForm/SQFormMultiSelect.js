@@ -197,9 +197,11 @@ function SQFormMultiSelect({
           })}
         </Select>
       </Tooltip>
-      <FormHelperText error={isFieldError} required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+      {!isDisabled && (
+        <FormHelperText error={isFieldError} required={isRequired}>
+          {HelperTextComponent}
+        </FormHelperText>
+      )}
     </Grid>
   );
 }
