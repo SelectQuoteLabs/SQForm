@@ -72,7 +72,7 @@ function SQFormDatePickerWithCalendarInputOnly({
             <IconButton
               classes={clearButtonClasses}
               onClick={clearField}
-              disabled={!values[name]}
+              disabled={isDisabled || !values[name]}
             >
               <ClearIcon color="disabled" fontSize="small" />
             </IconButton>
