@@ -1,3 +1,10 @@
+### [4.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.2...v4.3.3) (2021-03-26)
+
+
+### Bug Fixes
+
+* 🐛 HelperText no longer shows on disabled components ([52dd557](https://github.com/SelectQuoteLabs/SQForm/commit/52dd5579c8768b83b304b2fa9687c372acb21c61)), closes [#153](https://github.com/SelectQuoteLabs/SQForm/issues/153)
+
 ### [4.3.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.1...v4.3.2) (2021-03-26)
 
 
