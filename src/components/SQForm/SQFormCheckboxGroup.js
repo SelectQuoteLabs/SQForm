@@ -81,16 +81,20 @@ function SQFormCheckboxGroup({
 
   return (
     <Grid item sm={size}>
-      <FormControl component="fieldset">
-        <FormLabel component="legend" classes={{root: 'MuiInputLabel-root'}}>
+      <FormControl component="fieldset" required={isRequired}>
+        <FormLabel
+          component="legend"
+          classes={{
+            root: 'MuiInputLabel-root',
+            asterisk: 'MuiInputLabel-asterisk'
+          }}
+        >
           {groupLabel}
         </FormLabel>
         <FormGroup row={shouldDisplayInRow}>
           {childrenToCheckboxGroupItems()}
         </FormGroup>
-        <FormHelperText required={isRequired}>
-          {HelperTextComponent}
-        </FormHelperText>
+        <FormHelperText>{HelperTextComponent}</FormHelperText>
       </FormControl>
     </Grid>
   );
