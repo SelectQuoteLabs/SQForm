@@ -83,7 +83,7 @@ function SQFormDropdown({
 
   return (
     <Grid item sm={size}>
-      <InputLabel error={isFieldError} id={labelID}>
+      <InputLabel error={isFieldError} id={labelID} disabled={isDisabled}>
         {label}
       </InputLabel>
       <Select

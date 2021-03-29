@@ -148,7 +148,9 @@ function SQFormMultiSelect({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={labelID}>{label}</InputLabel>
+      <InputLabel id={labelID} disabled={isDisabled}>
+        {label}
+      </InputLabel>
       <Tooltip
         placement={toolTipPlacement}
         arrow
