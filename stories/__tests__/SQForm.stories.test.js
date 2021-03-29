@@ -1,5 +1,11 @@
 import React from 'react';
-import {render, screen, waitFor, within} from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+  within
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import {BasicForm} from '../SQForm.stories';
@@ -69,6 +75,44 @@ it('renders BasicForm and calls alert on submit', async () => {
           warrantyOptions: mockData.warrantyOptions,
           hobby: mockData.hobby,
           cool: mockData.cool,
+          lame: false
+        },
+        null,
+        2
+      )
+    )
+  );
+});
+
+it('shows confirmation and resets form', async () => {
+  render(<BasicForm />);
+
+  userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
+  userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
+
+  userEvent.click(screen.getByRole('button', {name: /form reset/i}));
+
+  await screen.findByText('Reset Form');
+  userEvent.click(screen.getByRole('button', {name: /reset/i}));
+
+  await waitForElementToBeRemoved(() => screen.queryByText('Reset Form'));
+  userEvent.click(screen.getByRole('button', {name: /form submission/i}));
+
+  await waitFor(() =>
+    expect(window.alert).toHaveBeenCalledWith(
+      JSON.stringify(
+        {
+          firstName: '',
+          lastName: '',
+          city: '',
+          age: '',
+          state: '',
+          tenThousandOptions: '',
+          note: '',
+          preferredPet: '',
+          warrantyOptions: [],
+          hobby: '',
+          cool: false,
           lame: false
         },
         null,
