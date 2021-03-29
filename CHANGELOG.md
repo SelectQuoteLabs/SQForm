@@ -1,3 +1,10 @@
+### [4.3.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.4...v4.3.5) (2021-03-29)
+
+
+### Bug Fixes
+
+* 🐛 add error visual cues to SQFormCheckbox/RadioButtonGroup ([43e56b7](https://github.com/SelectQuoteLabs/SQForm/commit/43e56b704b3d567843587d3c742f8d453e1dce92)), closes [#152](https://github.com/SelectQuoteLabs/SQForm/issues/152)
+
 ### [4.3.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.3...v4.3.4) (2021-03-29)
 
 
