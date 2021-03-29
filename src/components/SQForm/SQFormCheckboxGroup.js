@@ -19,7 +19,8 @@ function SQFormCheckboxGroup({
   children
 }) {
   const {
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldState: {isFieldError},
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -81,7 +82,12 @@ function SQFormCheckboxGroup({
 
   return (
     <Grid item sm={size}>
-      <FormControl component="fieldset" required={isRequired}>
+      <FormControl
+        component="fieldset"
+        required={isRequired}
+        error={isFieldError}
+        onBlur={handleBlur}
+      >
         <FormLabel
           component="legend"
           classes={{

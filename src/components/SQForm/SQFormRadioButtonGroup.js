@@ -18,8 +18,9 @@ function SQFormRadioButtonGroup({
   children
 }) {
   const {
+    fieldState: {isFieldError},
     formikField: {field},
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -44,7 +45,12 @@ function SQFormRadioButtonGroup({
 
   return (
     <Grid item sm={size}>
-      <FormControl component="fieldset" required={isRequired}>
+      <FormControl
+        component="fieldset"
+        required={isRequired}
+        error={isFieldError}
+        onBlur={handleBlur}
+      >
         <FormLabel
           component="legend"
           classes={{
