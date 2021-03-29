@@ -72,7 +72,7 @@ function SQFormDatePicker({
               inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
               InputLabelProps={{shrink: true}}
               FormHelperTextProps={{error: isFieldError}}
-              helperText={HelperTextComponent}
+              helperText={!isDisabled && HelperTextComponent}
               placeholder={placeholder}
               onBlur={handleBlur}
               required={isRequired}

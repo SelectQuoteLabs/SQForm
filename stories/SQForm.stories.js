@@ -145,7 +145,7 @@ const handleSubmit = (values, actions) => {
   actions.resetForm();
 };
 
-export const basicForm = () => {
+export const BasicForm = () => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm

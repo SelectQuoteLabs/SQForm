@@ -12,7 +12,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
-import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
+import {
+  getOutOfRangeValueWarning,
+  getUndefinedChildrenWarning,
+  getUndefinedValueWarning
+} from '../../utils/consoleWarnings';
 
 /**
  * Material UI has a jank issue with the multi select form,
@@ -39,12 +43,12 @@ const selectedDisplayValue = (values, options, name) => {
     })
     .join(', ');
 
-    if (!selectedValues) {
-      console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
-      return [];
-    }
+  if (!selectedValues) {
+    console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
+    return [];
+  }
 
-    return selectedValues;
+  return selectedValues;
 };
 
 const getToolTipTitle = (formikFieldValue, options) => {
@@ -144,7 +148,9 @@ function SQFormMultiSelect({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={labelID}>{label}</InputLabel>
+      <InputLabel id={labelID} disabled={isDisabled}>
+        {label}
+      </InputLabel>
       <Tooltip
         placement={toolTipPlacement}
         arrow
@@ -191,9 +197,11 @@ function SQFormMultiSelect({
           })}
         </Select>
       </Tooltip>
-      <FormHelperText error={isFieldError} required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+      {!isDisabled && (
+        <FormHelperText error={isFieldError} required={isRequired}>
+          {HelperTextComponent}
+        </FormHelperText>
+      )}
     </Grid>
   );
 }

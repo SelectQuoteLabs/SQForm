@@ -8,7 +8,11 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 
 import {useForm} from './useForm';
-import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
+import {
+  getOutOfRangeValueWarning,
+  getUndefinedChildrenWarning,
+  getUndefinedValueWarning
+} from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
 
 const EMPTY_VALUE = '';
@@ -61,7 +65,7 @@ function SQFormDropdown({
   const renderValue = value => {
     if (value === undefined || value === null) {
       console.warn(getUndefinedValueWarning('SQFormDropdown', name));
-      return EMPTY_LABEL
+      return EMPTY_LABEL;
     }
 
     if (value === EMPTY_VALUE) {
@@ -70,7 +74,7 @@ function SQFormDropdown({
 
     const valueToRender = options.find(option => option.value === value)?.label;
     if (!valueToRender) {
-      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value))
+      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value));
       return undefined;
     }
 
@@ -79,7 +83,7 @@ function SQFormDropdown({
 
   return (
     <Grid item sm={size}>
-      <InputLabel error={isFieldError} id={labelID}>
+      <InputLabel error={isFieldError} id={labelID} disabled={isDisabled}>
         {label}
       </InputLabel>
       <Select
@@ -106,9 +110,11 @@ function SQFormDropdown({
           );
         })}
       </Select>
-      <FormHelperText error={isFieldError} required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+      {!isDisabled && (
+        <FormHelperText error={isFieldError} required={isRequired}>
+          {HelperTextComponent}
+        </FormHelperText>
+      )}
     </Grid>
   );
 }
