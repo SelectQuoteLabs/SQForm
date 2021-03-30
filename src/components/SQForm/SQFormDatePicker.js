@@ -58,9 +58,6 @@ function SQFormDatePicker({
         shouldDisableDate={setDisabledDate}
         value={value}
         onChange={handleChange}
-        onClose={() => {
-          helpers.setTouched();
-        }}
         renderInput={inputProps => {
           return (
             <TextField
@@ -81,6 +78,10 @@ function SQFormDatePicker({
           );
         }}
         {...muiFieldProps}
+        onClose={() => {
+          helpers.setTouched();
+          muiFieldProps.onClose && muiFieldProps.onClose();
+        }}
       />
     </Grid>
   );

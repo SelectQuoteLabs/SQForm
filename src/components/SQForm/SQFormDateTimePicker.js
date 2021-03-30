@@ -75,6 +75,10 @@ function SQFormDateTimePicker({
           );
         }}
         {...muiFieldProps}
+        onClose={() => {
+          helpers.setTouched();
+          muiFieldProps.onClose && muiFieldProps.onClose();
+        }}
       />
     </Grid>
   );
