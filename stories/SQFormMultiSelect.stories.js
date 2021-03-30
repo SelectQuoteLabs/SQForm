@@ -5,6 +5,11 @@ import {SQForm, SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
 export default {
   title: 'Components/SQFormMultiSelect',
   component: SQFormMultiSelectComponent,
+  argTypes: {
+    children: {
+      control: null
+    }
+  },
   parameters: {
     docs: {
       source: {
@@ -12,10 +17,6 @@ export default {
       }
     }
   }
-};
-
-const MOCK_FORM_FOR_MULTISELECT = {
-  friends: []
 };
 
 const MOCK_FRIENDS_OPTIONS = [
@@ -37,16 +38,26 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
 ];
 
+const defaultArgs = {
+  label: 'Friends',
+  name: 'friends'
+};
+
 export const SQFormMultiSelect = args => (
   <div style={{minWidth: 250}}>
-    <SQForm initialValues={MOCK_FORM_FOR_MULTISELECT} onSubmit={() => {}}>
-      <SQFormMultiSelectComponent name="friends" label="Friends" {...args}>
+    <SQForm initialValues={{[defaultArgs.name]: []}} onSubmit={() => {}}>
+      <SQFormMultiSelectComponent
+        name={defaultArgs.name}
+        label={defaultArgs.label}
+        {...args}
+      >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>
     </SQForm>
   </div>
 );
 SQFormMultiSelect.storyName = 'SQFormMultiSelect';
+SQFormMultiSelect.args = defaultArgs;
 
 function random(length) {
   const characters =

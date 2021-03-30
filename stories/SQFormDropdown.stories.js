@@ -44,6 +44,4 @@ export const SQFormDropdown = args => (
   </div>
 );
 SQFormDropdown.storyName = 'SQFormDropdown';
-SQFormDropdown.args = {
-  ...defaultArgs
-};
+SQFormDropdown.args = defaultArgs;
