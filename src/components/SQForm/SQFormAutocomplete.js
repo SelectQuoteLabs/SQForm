@@ -173,6 +173,7 @@ function SQFormAutocomplete({
         disableClearable={isDisabled}
         freeSolo={isDisabled}
         getOptionLabel={option => option.label}
+        getOptionDisabled={option => option.isDisabled}
         renderInput={params => {
           return (
             <TextField
