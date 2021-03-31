@@ -166,6 +166,7 @@ function SQFormAsyncAutocomplete({
         onClose={onClose}
         inputValue={inputValue}
         getOptionLabel={option => option.label}
+        getOptionDisabled={option => option.isDisabled}
         renderInput={params => {
           return (
             <TextField
