@@ -1,3 +1,10 @@
+## [4.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.7...v4.4.0) (2021-03-31)
+
+
+### Features
+
+* 🎸 SQFormAutocomplete options are now disableable ([c1a7ac5](https://github.com/SelectQuoteLabs/SQForm/commit/c1a7ac53fcbc89a37466fa22951370e0dde34ff5)), closes [#172](https://github.com/SelectQuoteLabs/SQForm/issues/172)
+
 ### [4.3.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.6...v4.3.7) (2021-03-31)
 
 
