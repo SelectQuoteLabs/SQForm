@@ -44,7 +44,7 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   const isTouched = getIn(meta, 'touched');
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
-  const isFieldError = isTouched && isError;
+  const isFieldError = (isTouched || hasValue) && isError;
   const isFieldRequired = isRequired && !hasValue;
   const isFulfilled = _getIsFulfilled(hasValue, isError);
 

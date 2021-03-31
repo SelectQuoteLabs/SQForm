@@ -1,3 +1,10 @@
+### [4.3.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.5...v4.3.6) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 correct error state when initial values provided ([61c277b](https://github.com/SelectQuoteLabs/SQForm/commit/61c277bfa58b1575777ab302d1720ee4eae3c28f)), closes [#165](https://github.com/SelectQuoteLabs/SQForm/issues/165)
+
 ### [4.3.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.4...v4.3.5) (2021-03-29)
 
 
