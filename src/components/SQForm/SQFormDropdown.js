@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -83,38 +84,39 @@ function SQFormDropdown({
 
   return (
     <Grid item sm={size}>
-      <InputLabel error={isFieldError} id={labelID} disabled={isDisabled}>
-        {label}
-      </InputLabel>
-      <Select
-        displayEmpty={true}
-        input={<Input disabled={isDisabled} name={name} />}
-        value={field.value}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        fullWidth={true}
-        labelId={labelID}
-        renderValue={renderValue}
+      <FormControl
         error={isFieldError}
-        {...muiFieldProps}
+        required={isRequired}
+        disabled={isDisabled}
+        fullWidth={true}
       >
-        {options.map(option => {
-          return (
-            <MenuItem
-              key={option.value}
-              disabled={option.isDisabled}
-              value={option.value}
-            >
-              {option.label}
-            </MenuItem>
-          );
-        })}
-      </Select>
-      {!isDisabled && (
-        <FormHelperText error={isFieldError} required={isRequired}>
-          {HelperTextComponent}
-        </FormHelperText>
-      )}
+        <InputLabel shrink={true} id={labelID}>
+          {label}
+        </InputLabel>
+        <Select
+          displayEmpty={true}
+          input={<Input name={name} />}
+          value={field.value}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          labelId={labelID}
+          renderValue={renderValue}
+          {...muiFieldProps}
+        >
+          {options.map(option => {
+            return (
+              <MenuItem
+                key={option.value}
+                disabled={option.isDisabled}
+                value={option.value}
+              >
+                {option.label}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        {!isDisabled && <FormHelperText>{HelperTextComponent}</FormHelperText>}
+      </FormControl>
     </Grid>
   );
 }
