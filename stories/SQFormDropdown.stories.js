@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import {withKnobs, boolean, number} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import Card from '@material-ui/core/Card';
@@ -19,12 +20,20 @@ export const BasicDropdown = () => {
   const initialValues = {
     dropdownExample: ''
   };
+
+  const validationSchema = {
+    dropdownExample: boolean('Require Dropdown')
+      ? Yup.string().required('Required')
+      : Yup.string()
+  };
+
   return (
     <Card raised style={{padding: 16}}>
       <SQForm
         initialValues={initialValues}
         onSubmit={handleSubmit}
         muiGridProps={{spacing: 4}}
+        validationSchema={validationSchema}
       >
         <SQFormDropdown
           name="dropdownExample"
