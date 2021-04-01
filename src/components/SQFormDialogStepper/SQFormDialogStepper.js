@@ -85,6 +85,7 @@ export function SQFormDialogStepper({
   title,
   enableReinitialize = false,
   muiGridProps = {},
+  dialogProps = {},
   setValues,
   fullWidth = true,
   contentStyle,
@@ -183,6 +184,7 @@ export function SQFormDialogStepper({
           open={isOpen}
           onClose={onClose}
           fullWidth={fullWidth}
+          {...dialogProps}
         >
           <Form>
             <DialogTitle disableTypography={true}>
@@ -288,6 +290,8 @@ SQFormDialogStepper.propTypes = {
   setValues: PropTypes.func,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
+  /** Any prop from https://material-ui.com/api/dialog/#props */
+  dialogProps: PropTypes.object,
   /** Optional styling on the dialog */
   contentStyle: PropTypes.object
 };
