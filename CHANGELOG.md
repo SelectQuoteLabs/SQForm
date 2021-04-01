@@ -1,3 +1,60 @@
+## [4.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.7...v4.4.0) (2021-03-31)
+
+
+### Features
+
+* 🎸 SQFormAutocomplete options are now disableable ([c1a7ac5](https://github.com/SelectQuoteLabs/SQForm/commit/c1a7ac53fcbc89a37466fa22951370e0dde34ff5)), closes [#172](https://github.com/SelectQuoteLabs/SQForm/issues/172)
+
+### [4.3.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.6...v4.3.7) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 change components to use `FormControl` for state props ([dd24f30](https://github.com/SelectQuoteLabs/SQForm/commit/dd24f305f340ba9f1ccab8ddcff28cd2cca1f434)), closes [#160](https://github.com/SelectQuoteLabs/SQForm/issues/160)
+
+### [4.3.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.5...v4.3.6) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 correct error state when initial values provided ([61c277b](https://github.com/SelectQuoteLabs/SQForm/commit/61c277bfa58b1575777ab302d1720ee4eae3c28f)), closes [#165](https://github.com/SelectQuoteLabs/SQForm/issues/165)
+
+### [4.3.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.4...v4.3.5) (2021-03-29)
+
+
+### Bug Fixes
+
+* 🐛 add error visual cues to SQFormCheckbox/RadioButtonGroup ([43e56b7](https://github.com/SelectQuoteLabs/SQForm/commit/43e56b704b3d567843587d3c742f8d453e1dce92)), closes [#152](https://github.com/SelectQuoteLabs/SQForm/issues/152)
+
+### [4.3.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.3...v4.3.4) (2021-03-29)
+
+
+### Bug Fixes
+
+* 🐛 CalendarInputOnly clear button disabled with field ([1380104](https://github.com/SelectQuoteLabs/SQForm/commit/138010419eb9f531a37e4989100df31ca845cee5)), closes [#154](https://github.com/SelectQuoteLabs/SQForm/issues/154)
+* 🐛 Dropdown and Multiselect component labels disabling ([72e08ba](https://github.com/SelectQuoteLabs/SQForm/commit/72e08baa128d4ff64d751e1f9ea7e6c4ab73736a)), closes [#155](https://github.com/SelectQuoteLabs/SQForm/issues/155)
+
+### [4.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.2...v4.3.3) (2021-03-26)
+
+
+### Bug Fixes
+
+* 🐛 HelperText no longer shows on disabled components ([52dd557](https://github.com/SelectQuoteLabs/SQForm/commit/52dd5579c8768b83b304b2fa9687c372acb21c61)), closes [#153](https://github.com/SelectQuoteLabs/SQForm/issues/153)
+
+### [4.3.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.1...v4.3.2) (2021-03-26)
+
+
+### Bug Fixes
+
+* 🐛 improve components structure for better test querying ([00781e7](https://github.com/SelectQuoteLabs/SQForm/commit/00781e749c321cdc9146b2805e9db5e236d9714f))
+
+### [4.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.0...v4.3.1) (2021-03-24)
+
+
+### Bug Fixes
+
+* 🐛 Autocomplete no longer uncontrolled with '' initialValue ([2b6100c](https://github.com/SelectQuoteLabs/SQForm/commit/2b6100c7c0d40d35da86f84522bff874cae2762f)), closes [#132](https://github.com/SelectQuoteLabs/SQForm/issues/132)
+
 ## [4.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.2.4...v4.3.0) (2021-03-23)
 
 

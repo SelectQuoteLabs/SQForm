@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,7 +13,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {useSQFormContext} from '../../../src';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
-import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
+import {
+  getOutOfRangeValueWarning,
+  getUndefinedChildrenWarning,
+  getUndefinedValueWarning
+} from '../../utils/consoleWarnings';
 
 /**
  * Material UI has a jank issue with the multi select form,
@@ -39,12 +44,12 @@ const selectedDisplayValue = (values, options, name) => {
     })
     .join(', ');
 
-    if (!selectedValues) {
-      console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
-      return [];
-    }
+  if (!selectedValues) {
+    console.warn(getOutOfRangeValueWarning('SQFormMultiSelect', name, values));
+    return [];
+  }
 
-    return selectedValues;
+  return selectedValues;
 };
 
 const getToolTipTitle = (formikFieldValue, options) => {
@@ -144,56 +149,65 @@ function SQFormMultiSelect({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={labelID}>{label}</InputLabel>
-      <Tooltip
-        placement={toolTipPlacement}
-        arrow
-        enterDelay={1000}
-        leaveDelay={100}
-        title={toolTipEnabled ? toolTipTitle : ''}
+      <FormControl
+        error={isFieldError}
+        disabled={isDisabled}
+        required={isRequired}
+        fullWidth={true}
       >
-        <Select
-          multiple
-          displayEmpty
-          input={<Input disabled={isDisabled} name={name} />}
-          value={field.value || []}
-          onBlur={handleBlur}
-          onChange={handleMultiSelectChange}
-          fullWidth={true}
-          labelId={labelID}
-          renderValue={getRenderValue}
-          MenuProps={MenuProps}
-          onOpen={toggleTooltip}
-          onClose={toggleTooltip}
-          {...muiFieldProps}
+        <InputLabel shrink={true} id={labelID}>
+          {label}
+        </InputLabel>
+        <Tooltip
+          placement={toolTipPlacement}
+          arrow
+          enterDelay={1000}
+          leaveDelay={100}
+          title={toolTipEnabled ? toolTipTitle : ''}
         >
-          {useSelectAll && (
-            <MenuItem
-              value={children?.length === field.value?.length ? 'NONE' : 'ALL'}
-            >
-              <Checkbox checked={children?.length === field.value?.length} />
-              <ListItemText
-                primary="Select All"
-                primaryTypographyProps={{variant: 'body2'}}
-              />
-            </MenuItem>
-          )}
-          {children?.map(option => {
-            return (
-              <MenuItem key={option.value} value={option.value}>
-                <Checkbox checked={field.value?.includes(option.value)} />
+          <Select
+            multiple
+            displayEmpty
+            input={<Input disabled={isDisabled} name={name} />}
+            value={field.value || []}
+            onBlur={handleBlur}
+            onChange={handleMultiSelectChange}
+            fullWidth={true}
+            labelId={labelID}
+            renderValue={getRenderValue}
+            MenuProps={MenuProps}
+            onOpen={toggleTooltip}
+            onClose={toggleTooltip}
+            {...muiFieldProps}
+          >
+            {useSelectAll && (
+              <MenuItem
+                value={
+                  children?.length === field.value?.length ? 'NONE' : 'ALL'
+                }
+              >
+                <Checkbox checked={children?.length === field.value?.length} />
                 <ListItemText
-                  primary={option.label}
+                  primary="Select All"
                   primaryTypographyProps={{variant: 'body2'}}
                 />
               </MenuItem>
-            );
-          })}
-        </Select>
-      </Tooltip>
-      <FormHelperText error={isFieldError} required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+            )}
+            {children?.map(option => {
+              return (
+                <MenuItem key={option.value} value={option.value}>
+                  <Checkbox checked={field.value?.includes(option.value)} />
+                  <ListItemText
+                    primary={option.label}
+                    primaryTypographyProps={{variant: 'body2'}}
+                  />
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </Tooltip>
+        {!isDisabled && <FormHelperText>{HelperTextComponent}</FormHelperText>}
+      </FormControl>
     </Grid>
   );
 }

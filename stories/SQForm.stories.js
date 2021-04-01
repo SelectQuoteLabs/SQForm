@@ -43,7 +43,11 @@ export default {
 const MOCK_AUTOCOMPLETE_OPTIONS = Array.from(new Array(10000))
   .map(() => {
     const randomValue = random(10 + Math.ceil(Math.random() * 20));
-    return {label: randomValue, value: randomValue};
+    return {
+      label: randomValue,
+      value: randomValue,
+      isDisabled: Math.random() > 0.8
+    };
   })
   .sort((a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase()));
 
@@ -145,7 +149,7 @@ const handleSubmit = (values, actions) => {
   actions.resetForm();
 };
 
-export const basicForm = () => {
+export const BasicForm = () => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm

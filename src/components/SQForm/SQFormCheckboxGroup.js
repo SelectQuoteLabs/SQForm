@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -18,7 +19,8 @@ function SQFormCheckboxGroup({
   children
 }) {
   const {
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldState: {isFieldError},
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -80,13 +82,26 @@ function SQFormCheckboxGroup({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={groupLabel.toLowerCase()}>{groupLabel}</InputLabel>
-      <FormGroup row={shouldDisplayInRow}>
-        {childrenToCheckboxGroupItems()}
-      </FormGroup>
-      <FormHelperText required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+      <FormControl
+        component="fieldset"
+        required={isRequired}
+        error={isFieldError}
+        onBlur={handleBlur}
+      >
+        <FormLabel
+          component="legend"
+          classes={{
+            root: 'MuiInputLabel-root',
+            asterisk: 'MuiInputLabel-asterisk'
+          }}
+        >
+          {groupLabel}
+        </FormLabel>
+        <FormGroup row={shouldDisplayInRow}>
+          {childrenToCheckboxGroupItems()}
+        </FormGroup>
+        <FormHelperText>{HelperTextComponent}</FormHelperText>
+      </FormControl>
     </Grid>
   );
 }
