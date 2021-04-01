@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import {SQFormRadioButtonGroupItem} from '../../../src';
 import {useForm} from './useForm';
 
@@ -17,8 +18,9 @@ function SQFormRadioButtonGroup({
   children
 }) {
   const {
+    fieldState: {isFieldError},
     formikField: {field},
-    fieldHelpers: {handleChange, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
   } = useForm({
     name,
     isRequired,
@@ -43,19 +45,32 @@ function SQFormRadioButtonGroup({
 
   return (
     <Grid item sm={size}>
-      <InputLabel id={groupLabel.toLowerCase()}>{groupLabel}</InputLabel>
-      <RadioGroup
-        value={field.value}
-        row={shouldDisplayInRow}
-        aria-label={`SQFormRadioButtonGroup_${name}`}
-        name={name}
-        onChange={handleChange}
+      <FormControl
+        component="fieldset"
+        required={isRequired}
+        error={isFieldError}
+        onBlur={handleBlur}
       >
-        {childrenToRadioGroupItems()}
-      </RadioGroup>
-      <FormHelperText required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+        <FormLabel
+          component="legend"
+          classes={{
+            root: 'MuiInputLabel-root',
+            asterisk: 'MuiInputLabel-asterisk'
+          }}
+        >
+          {groupLabel}
+        </FormLabel>
+        <RadioGroup
+          value={field.value}
+          row={shouldDisplayInRow}
+          aria-label={`SQFormRadioButtonGroup_${name}`}
+          name={name}
+          onChange={handleChange}
+        >
+          {childrenToRadioGroupItems()}
+        </RadioGroup>
+        <FormHelperText>{HelperTextComponent}</FormHelperText>
+      </FormControl>
     </Grid>
   );
 }

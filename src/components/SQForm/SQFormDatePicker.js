@@ -58,9 +58,6 @@ function SQFormDatePicker({
         shouldDisableDate={setDisabledDate}
         value={value}
         onChange={handleChange}
-        onClose={() => {
-          helpers.setTouched();
-        }}
         renderInput={inputProps => {
           return (
             <TextField
@@ -72,7 +69,7 @@ function SQFormDatePicker({
               inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
               InputLabelProps={{shrink: true}}
               FormHelperTextProps={{error: isFieldError}}
-              helperText={HelperTextComponent}
+              helperText={!isDisabled && HelperTextComponent}
               placeholder={placeholder}
               onBlur={handleBlur}
               required={isRequired}

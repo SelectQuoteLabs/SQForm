@@ -67,7 +67,7 @@ function SQFormTextarea({
         name={name}
         label={labelText}
         multiline={true}
-        helperText={HelperTextComponent}
+        helperText={!isDisabled && HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}

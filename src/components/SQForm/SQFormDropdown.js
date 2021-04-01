@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -8,7 +9,11 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 
 import {useForm} from './useForm';
-import { getOutOfRangeValueWarning, getUndefinedChildrenWarning, getUndefinedValueWarning } from '../../utils/consoleWarnings';
+import {
+  getOutOfRangeValueWarning,
+  getUndefinedChildrenWarning,
+  getUndefinedValueWarning
+} from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
 
 const EMPTY_VALUE = '';
@@ -61,7 +66,7 @@ function SQFormDropdown({
   const renderValue = value => {
     if (value === undefined || value === null) {
       console.warn(getUndefinedValueWarning('SQFormDropdown', name));
-      return EMPTY_LABEL
+      return EMPTY_LABEL;
     }
 
     if (value === EMPTY_VALUE) {
@@ -70,7 +75,7 @@ function SQFormDropdown({
 
     const valueToRender = options.find(option => option.value === value)?.label;
     if (!valueToRender) {
-      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value))
+      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value));
       return undefined;
     }
 
@@ -79,36 +84,39 @@ function SQFormDropdown({
 
   return (
     <Grid item sm={size}>
-      <InputLabel error={isFieldError} id={labelID}>
-        {label}
-      </InputLabel>
-      <Select
-        displayEmpty={true}
-        input={<Input disabled={isDisabled} name={name} />}
-        value={field.value}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        fullWidth={true}
-        labelId={labelID}
-        renderValue={renderValue}
+      <FormControl
         error={isFieldError}
-        {...muiFieldProps}
+        required={isRequired}
+        disabled={isDisabled}
+        fullWidth={true}
       >
-        {options.map(option => {
-          return (
-            <MenuItem
-              key={option.value}
-              disabled={option.isDisabled}
-              value={option.value}
-            >
-              {option.label}
-            </MenuItem>
-          );
-        })}
-      </Select>
-      <FormHelperText error={isFieldError} required={isRequired}>
-        {HelperTextComponent}
-      </FormHelperText>
+        <InputLabel shrink={true} id={labelID}>
+          {label}
+        </InputLabel>
+        <Select
+          displayEmpty={true}
+          input={<Input name={name} />}
+          value={field.value}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          labelId={labelID}
+          renderValue={renderValue}
+          {...muiFieldProps}
+        >
+          {options.map(option => {
+            return (
+              <MenuItem
+                key={option.value}
+                disabled={option.isDisabled}
+                value={option.value}
+              >
+                {option.label}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        {!isDisabled && <FormHelperText>{HelperTextComponent}</FormHelperText>}
+      </FormControl>
     </Grid>
   );
 }

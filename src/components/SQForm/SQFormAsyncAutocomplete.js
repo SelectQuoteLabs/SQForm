@@ -166,6 +166,7 @@ function SQFormAsyncAutocomplete({
         onClose={onClose}
         inputValue={inputValue}
         getOptionLabel={option => option.label}
+        getOptionDisabled={option => option.isDisabled}
         renderInput={params => {
           return (
             <TextField
@@ -196,7 +197,7 @@ function SQFormAsyncAutocomplete({
               FormHelperTextProps={{error: isFieldError}}
               name={name}
               label={label}
-              helperText={HelperTextComponent}
+              helperText={!isDisabled && HelperTextComponent}
               required={isRequired}
             />
           );
