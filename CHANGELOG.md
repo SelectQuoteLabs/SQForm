@@ -1,3 +1,24 @@
+## [4.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.7...v4.4.0) (2021-03-31)
+
+
+### Features
+
+* 🎸 SQFormAutocomplete options are now disableable ([c1a7ac5](https://github.com/SelectQuoteLabs/SQForm/commit/c1a7ac53fcbc89a37466fa22951370e0dde34ff5)), closes [#172](https://github.com/SelectQuoteLabs/SQForm/issues/172)
+
+### [4.3.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.6...v4.3.7) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 change components to use `FormControl` for state props ([dd24f30](https://github.com/SelectQuoteLabs/SQForm/commit/dd24f305f340ba9f1ccab8ddcff28cd2cca1f434)), closes [#160](https://github.com/SelectQuoteLabs/SQForm/issues/160)
+
+### [4.3.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.5...v4.3.6) (2021-03-31)
+
+
+### Bug Fixes
+
+* 🐛 correct error state when initial values provided ([61c277b](https://github.com/SelectQuoteLabs/SQForm/commit/61c277bfa58b1575777ab302d1720ee4eae3c28f)), closes [#165](https://github.com/SelectQuoteLabs/SQForm/issues/165)
+
 ### [4.3.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.4...v4.3.5) (2021-03-29)
 
 
