@@ -1,21 +1,19 @@
 import React from 'react';
 
 import {SQForm, SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {createDocsPage} from './utils/createDocsPage';
+import markdown from '../notes/SQFormDropdown.md';
 
 export default {
   title: 'Components/SQFormDropdown',
   component: SQFormDropdownComponent,
   argTypes: {
-    children: {
-      control: null
-    }
+    children: {table: {disable: true}},
+    onBlur: {action: 'blurred', table: {disable: true}},
+    onChange: {action: 'changed', table: {disable: true}}
   },
   parameters: {
-    docs: {
-      source: {
-        type: 'code'
-      }
-    }
+    docs: {page: createDocsPage({markdown})}
   }
 };
 

@@ -1,14 +1,17 @@
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
-import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 
 import {SQFormDialog, SQFormDatePicker, SQFormTextField} from '../src';
+import {createDocsPage} from './utils/createDocsPage';
 
 export default {
-  title: 'SQFormDialog',
-  decorators: [withInfo, withKnobs]
+  title: 'Forms/SQFormDialog',
+  decorators: [withKnobs],
+  parameters: {
+    docs: {page: createDocsPage()}
+  }
 };
 
 const MOCK_INITIAL_STATE = {
