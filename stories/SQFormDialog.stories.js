@@ -4,7 +4,12 @@ import {action} from '@storybook/addon-actions';
 import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 
-import {SQFormDialog, SQFormDatePicker, SQFormTextField} from '../src';
+import {
+  SQFormDialog,
+  SQFormDatePicker,
+  SQFormTextField,
+  SQFormDateTimePicker
+} from '../src';
 
 export default {
   title: 'SQFormDialog',
@@ -56,6 +61,34 @@ export const sqFormDialog = () => (
     >
       <SQFormDatePicker name="startDate" label="Start Date" />
       <SQFormDatePicker name="endDate" label="End Date" />
+    </SQFormDialog>
+  </>
+);
+
+export const sqFormDialogWithDateTimePicker = () => (
+  <>
+    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
+    <SQFormDialog
+      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
+      isDisabled={boolean(
+        'isDisabled',
+        false,
+        'Toggle disabled state of Save Button'
+      )}
+      shouldRequireFieldUpdates={true}
+      maxWidth="sm"
+      onClose={action('Close button clicked')}
+      onSave={handleSubmit}
+      title="SQ Dialog Form"
+      initialValues={MOCK_INITIAL_STATE}
+      muiGridProps={{
+        spacing: 2,
+        alignItems: 'center'
+      }}
+      validationSchema={schema}
+    >
+      <SQFormDateTimePicker name="startDate" label="Start Date" />
+      <SQFormDateTimePicker name="endDate" label="End Date" />
     </SQFormDialog>
   </>
 );
