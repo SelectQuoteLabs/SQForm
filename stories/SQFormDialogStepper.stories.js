@@ -232,6 +232,10 @@ export const SQDialogStepperWithValidation = () => {
           justify: 'space-between',
           spacing: 6
         }}
+        dialogProps={{
+          style: {width: 'calc(100% - 90px)'},
+          BackdropProps: {style: {position: 'absolute'}}
+        }}
         initialValues={{
           ...personalDataInitialValues,
           ...accountDetailsInitValues
