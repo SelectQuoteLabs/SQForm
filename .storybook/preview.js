@@ -13,7 +13,7 @@ const centerStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  padding: '3rem'
+  padding: '48px'
 };
 const CenterComponentsInStorybook = ({children}) => {
   return <div style={centerStyle}>{children}</div>;
