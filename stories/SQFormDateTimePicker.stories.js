@@ -6,7 +6,7 @@ import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
 
 export default {
-  title: 'Forms/SQFormDateTimePicker',
+  title: 'Components/SQFormDateTimePicker',
   decorators: [withKnobs],
   parameters: {
     docs: {page: createDocsPage({markdown})}

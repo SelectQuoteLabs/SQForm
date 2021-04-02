@@ -5,7 +5,7 @@ import {SQForm, SQFormDatePickerWithCalendarInputOnly} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 
 export default {
-  title: 'Forms/SQFormDatePickerWithCalendarInputOnly',
+  title: 'Components/SQFormDatePickerWithCalendarInputOnly',
   decorators: [withKnobs],
   parameters: {
     docs: {page: createDocsPage()}
