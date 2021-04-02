@@ -19,7 +19,7 @@ import {
 } from '../src';
 
 export default {
-  title: 'SQFormDisableableComponents',
+  title: 'Forms/SQFormDisableableComponents',
   decorators: [withKnobs]
 };
 

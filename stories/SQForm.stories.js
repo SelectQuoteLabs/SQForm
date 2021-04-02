@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {withInfo} from '@storybook/addon-info';
 import {action} from '@storybook/addon-actions';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +9,7 @@ import {SectionHeader} from 'scplus-shared-components';
 
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
+import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQForm.md';
 
 import {
@@ -33,10 +33,10 @@ import {
 } from '../src';
 
 export default {
-  title: 'SQForm',
-  decorators: [withKnobs, withInfo],
+  title: 'Forms/SQForm',
+  decorators: [withKnobs],
   parameters: {
-    notes: {markdown}
+    docs: {page: createDocsPage({markdown})}
   }
 };
 

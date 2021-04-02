@@ -1,15 +1,15 @@
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 import {SQForm, SQFormDatePicker} from '../src';
+import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
 
 export default {
-  title: 'SQFormDatePicker',
-  decorators: [withKnobs, withInfo],
+  title: 'Components/SQFormDatePicker',
+  decorators: [withKnobs],
   parameters: {
-    notes: {markdown}
+    docs: {page: createDocsPage({markdown})}
   }
 };
 

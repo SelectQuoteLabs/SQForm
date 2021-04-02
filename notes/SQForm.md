@@ -12,7 +12,7 @@ The SQ Form system leverages Formik to control the state of a form.
 
 **SQForm**
 
-The `onSubmit` prop is very important to understand. It is passed your forms values and the "FormikBag", which includes an object containing a subset of the injected props and methods (i.e. all the methods with names that start with set<Thing> + resetForm) and any props that were passed to the wrapped component.
+The `onSubmit` prop is very important to understand. It is passed your forms values and the "FormikBag", which includes an object containing a subset of the injected props and methods (i.e. all the methods with names that start with setThing + resetForm) and any props that were passed to the wrapped component.
 
 ```
 Form Submission Handler |
