@@ -86,6 +86,7 @@ function SQFormDatePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isRequired}
+                onClick={handleClickAway}
                 classes={classes}
               />
             );
