@@ -1,12 +1,15 @@
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {withInfo} from '@storybook/addon-info';
 import * as Yup from 'yup';
 import {SQForm, SQFormDatePickerWithCalendarInputOnly} from '../src';
+import {createDocsPage} from './utils/createDocsPage';
 
 export default {
-  title: 'SQFormDatePickerWithCalendarInputOnly',
-  decorators: [withKnobs, withInfo]
+  title: 'Components/SQFormDatePickerWithCalendarInputOnly',
+  decorators: [withKnobs],
+  parameters: {
+    docs: {page: createDocsPage()}
+  }
 };
 
 const MOCK_INITIAL_STATE = {

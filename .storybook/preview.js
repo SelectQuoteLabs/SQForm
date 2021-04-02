@@ -1,10 +1,9 @@
 import React from 'react';
-import {addDecorator, addParameters} from '@storybook/react';
 import {MuiThemeProvider, StylesProvider} from '@material-ui/core/styles';
 import {LocalizationProvider} from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 
-import selectQuoteTheme from './selectQuoteTheme';
+import './storybook.css';
 
 import {muiTheme} from 'scplus-shared-components';
 
@@ -14,14 +13,14 @@ const centerStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  padding: '15rem'
+  padding: '48px'
 };
 const CenterComponentsInStorybook = ({children}) => {
   return <div style={centerStyle}>{children}</div>;
 };
 
 // Provides Material UI Theme to all stories
-addDecorator(storyFn => {
+const withTheme = storyFn => {
   return (
     <StylesProvider injectFirst>
       <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
@@ -29,15 +28,24 @@ addDecorator(storyFn => {
       </LocalizationProvider>
     </StylesProvider>
   );
-});
+};
 
 // Visually centers the component for every story
-addDecorator(storyFn => {
+const withCenteredComponents = storyFn => {
   return <CenterComponentsInStorybook>{storyFn()}</CenterComponentsInStorybook>;
-});
+};
 
-addParameters({
+export const decorators = [withTheme, withCenteredComponents];
+
+export const parameters = {
   options: {
-    theme: selectQuoteTheme
+    storySort: {
+      order: ['Welcome', ['Intro']]
+    }
+  },
+  docs: {
+    source: {
+      type: 'code'
+    }
   }
-});
+};

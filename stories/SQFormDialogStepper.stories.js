@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {withInfo} from '@storybook/addon-info';
 import {action} from '@storybook/addon-actions';
 import {Grid} from '@material-ui/core';
 import {CardList, SectionHeader} from 'scplus-shared-components';
+import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDialogStepper.md';
 
 import {
@@ -18,10 +18,10 @@ import {
 } from '../src';
 
 export default {
-  title: 'SQFormDialogStepper',
-  decorators: [withKnobs, withInfo],
+  title: 'Forms/SQFormDialogStepper',
+  decorators: [withKnobs],
   parameters: {
-    notes: {markdown}
+    docs: {page: createDocsPage({markdown, showStories: false})}
   }
 };
 

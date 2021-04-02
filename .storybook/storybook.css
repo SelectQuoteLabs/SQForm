@@ -1,0 +1,4 @@
+.sb-show-main {
+  /* overrides `overflow: hidden;` on body */
+  overflow: visible;
+}
