@@ -1,3 +1,10 @@
+### [4.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.0...v4.5.1) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 Adds ClickAway Listener to SQFormDatePicker ([ddcf38e](https://github.com/SelectQuoteLabs/SQForm/commit/ddcf38e0099b6b2403de5d6de769de96bf3cb15c))
+
 ## [4.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.4.0...v4.5.0) (2021-04-01)
 
 
