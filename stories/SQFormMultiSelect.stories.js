@@ -46,6 +46,7 @@ export const SQFormMultiSelect = args => (
         name={defaultArgs.name}
         label={defaultArgs.label}
         {...args}
+        size={Number(args.size)}
       >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>

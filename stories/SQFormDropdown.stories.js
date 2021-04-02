@@ -35,6 +35,7 @@ export const SQFormDropdown = args => (
         label={defaultArgs.label}
         name={defaultArgs.name}
         {...args}
+        size={Number(args.size)}
       >
         {MOCK_STATE_OPTIONS}
       </SQFormDropdownComponent>
