@@ -1,21 +1,17 @@
 import React from 'react';
 
 import {SQForm, SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
+import {createDocsPage} from './utils/createDocsPage';
 
 export default {
   title: 'Components/SQFormMultiSelect',
   component: SQFormMultiSelectComponent,
   argTypes: {
-    children: {
-      control: null
-    }
+    children: {table: {disable: true}},
+    onChange: {action: 'changed', table: {disable: true}}
   },
   parameters: {
-    docs: {
-      source: {
-        type: 'code'
-      }
-    }
+    docs: {page: createDocsPage()}
   }
 };
 
@@ -50,6 +46,7 @@ export const SQFormMultiSelect = args => (
         name={defaultArgs.name}
         label={defaultArgs.label}
         {...args}
+        size={Number(args.size)}
       >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>

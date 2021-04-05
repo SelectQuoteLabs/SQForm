@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DateTimePicker} from '@material-ui/pickers';
-import {makeStyles} from '@material-ui/core';
+import {ClickAwayListener, makeStyles} from '@material-ui/core';
 import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
@@ -43,40 +43,55 @@ function SQFormDateTimePicker({
     onChange && onChange(date);
   };
 
+  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
+  const handleClose = () => setIsCalendarOpen(false);
+  const toggleCalendar = () => setIsCalendarOpen(!isCalendarOpen);
+  const handleClickAway = () => {
+    if (isCalendarOpen) {
+      setIsCalendarOpen(false);
+    }
+  };
+
   const classes = useStyles();
 
   // An empty string will not reset the DatePicker so we have to pass null
   const value = field.value || null;
 
   return (
-    <Grid item sm={size}>
-      <DateTimePicker
-        label={label}
-        disabled={isDisabled}
-        value={value}
-        onChange={handleChange}
-        renderInput={inputProps => {
-          return (
-            <TextField
-              {...inputProps}
-              name={name}
-              color="primary"
-              disabled={isDisabled}
-              error={isFieldError}
-              fullWidth={true}
-              InputLabelProps={{shrink: true}}
-              FormHelperTextProps={{error: isFieldError}}
-              helperText={!isDisabled && HelperTextComponent}
-              placeholder={placeholder}
-              onBlur={handleBlur}
-              required={isRequired}
-              classes={classes}
-            />
-          );
-        }}
-        {...muiFieldProps}
-      />
-    </Grid>
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <Grid item sm={size}>
+        <DateTimePicker
+          label={label}
+          disabled={isDisabled}
+          value={value}
+          onChange={handleChange}
+          onClose={handleClose}
+          onOpen={toggleCalendar}
+          open={isCalendarOpen}
+          renderInput={inputProps => {
+            return (
+              <TextField
+                {...inputProps}
+                name={name}
+                color="primary"
+                disabled={isDisabled}
+                error={isFieldError}
+                fullWidth={true}
+                InputLabelProps={{shrink: true}}
+                FormHelperTextProps={{error: isFieldError}}
+                helperText={!isDisabled && HelperTextComponent}
+                placeholder={placeholder}
+                onBlur={handleBlur}
+                onClick={handleClickAway}
+                required={isRequired}
+                classes={classes}
+              />
+            );
+          }}
+          {...muiFieldProps}
+        />
+      </Grid>
+    </ClickAwayListener>
   );
 }
 

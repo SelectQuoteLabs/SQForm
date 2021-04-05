@@ -1,3 +1,17 @@
+### [4.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.0...v4.5.1) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 Adds ClickAway Listener to SQFormDatePicker ([ddcf38e](https://github.com/SelectQuoteLabs/SQForm/commit/ddcf38e0099b6b2403de5d6de769de96bf3cb15c))
+
+## [4.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.4.0...v4.5.0) (2021-04-01)
+
+
+### Features
+
+* 🎸 Added dialogProps to the stepper and story to example ([751aeaa](https://github.com/SelectQuoteLabs/SQForm/commit/751aeaaef80ca1527bf71e717463da009d61e185)), closes [#175](https://github.com/SelectQuoteLabs/SQForm/issues/175)
+
 ## [4.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.3.7...v4.4.0) (2021-03-31)
 
 

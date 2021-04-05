@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "4.4.0",
+  "version": "4.5.1",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "private": false,
@@ -33,7 +33,8 @@
           "docs",
           "chore",
           "refactor",
-          "test"
+          "test",
+          "ci"
         ]
       ]
     }
@@ -102,11 +103,10 @@
     "@semantic-release/npm": "^7.0.6",
     "@semantic-release/release-notes-generator": "^9.0.1",
     "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-controls": "^6.2.1",
     "@storybook/addon-docs": "^6.0.26",
-    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.0.26",
     "@storybook/addon-links": "^6.0.26",
-    "@storybook/addon-notes": "^5.3.21",
     "@storybook/addons": "^6.0.26",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.0.26",
