@@ -30,18 +30,25 @@ const defaultArgs = {
   name: 'state'
 };
 
-export const SQFormDropdown = args => (
-  <div style={{minWidth: 250}}>
-    <SQForm initialValues={{[defaultArgs.name]: ''}} onSubmit={() => {}}>
-      <SQFormDropdownComponent
-        label={defaultArgs.label}
-        name={defaultArgs.name}
-        {...args}
+export const SQFormDropdown = args => {
+  const {validationSchema} = args;
+  return (
+    <div style={{minWidth: 250}}>
+      <SQForm
+        initialValues={{[defaultArgs.name]: ''}}
+        onSubmit={() => {}}
+        validationSchema={validationSchema}
       >
-        {MOCK_STATE_OPTIONS}
-      </SQFormDropdownComponent>
-    </SQForm>
-  </div>
-);
+        <SQFormDropdownComponent
+          label={defaultArgs.label}
+          name={defaultArgs.name}
+          {...args}
+        >
+          {MOCK_STATE_OPTIONS}
+        </SQFormDropdownComponent>
+      </SQForm>
+    </div>
+  );
+};
 SQFormDropdown.storyName = 'SQFormDropdown';
 SQFormDropdown.args = defaultArgs;
