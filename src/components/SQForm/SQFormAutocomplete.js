@@ -14,7 +14,7 @@ import {useForm} from './useForm';
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
 
-const EMPTY_OPTION = {label: '', value: ''};
+const EMPTY_OPTION = {label: '- -', value: ''};
 
 const useStyles = makeStyles({
   listbox: {
@@ -84,10 +84,27 @@ const ListboxVirtualizedComponent = React.forwardRef(
   }
 );
 
+const getInitialValue = (children, value, displayEmpty) => {
+  const optionInitialValue = children.find(option => {
+    if (option.value === value) {
+      return option;
+    }
+
+    return null;
+  });
+
+  if (!optionInitialValue && displayEmpty) {
+    return EMPTY_OPTION;
+  }
+
+  return optionInitialValue;
+};
+
 function SQFormAutocomplete({
   children,
   isDisabled = false,
   isRequired = false,
+  displayEmpty = false,
   label,
   name,
   onBlur,
@@ -106,12 +123,7 @@ function SQFormAutocomplete({
     isRequired
   });
 
-  const initialValue = children.find(option => {
-    if (option.value === value) {
-      return option;
-    }
-    return null;
-  });
+  const initialValue = getInitialValue(children, value, displayEmpty);
 
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
@@ -155,6 +167,8 @@ function SQFormAutocomplete({
     [onInputChange]
   );
 
+  const options = displayEmpty ? [EMPTY_OPTION, ...children] : children;
+
   return (
     <Grid item sm={size}>
       <Autocomplete
@@ -164,15 +178,15 @@ function SQFormAutocomplete({
         disableListWrap
         classes={classes}
         ListboxComponent={ListboxVirtualizedComponent}
-        options={[...children, EMPTY_OPTION]}
+        options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
         inputValue={inputValue}
-        value={initialValue || EMPTY_OPTION}
+        value={initialValue || null}
         disableClearable={isDisabled}
         freeSolo={isDisabled}
-        getOptionLabel={option => option.label}
+        getOptionLabel={option => option.label || ''}
         getOptionDisabled={option => option.isDisabled}
         renderInput={params => {
           return (
@@ -220,6 +234,8 @@ SQFormAutocomplete.propTypes = {
   isDisabled: PropTypes.bool,
   /** Required property used to highlight input and label if not fulfilled */
   isRequired: PropTypes.bool,
+  /** Whether to display empty option */
+  displayEmpty: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
   /** Name identifier of the input field */
