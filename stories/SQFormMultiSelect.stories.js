@@ -13,7 +13,12 @@ export default {
     name: {table: {disable: true}}
   },
   parameters: {
-    docs: {page: createDocsPage()}
+    docs: {
+      page: createDocsPage(),
+      source: {
+        type: 'code'
+      }
+    }
   }
 };
 
@@ -48,7 +53,7 @@ export const SQFormMultiSelect = args => (
         name={defaultArgs.name}
         label={defaultArgs.label}
         {...args}
-        size={Number(args.size)}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
       >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>

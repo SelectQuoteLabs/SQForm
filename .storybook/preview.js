@@ -42,10 +42,5 @@ export const parameters = {
     storySort: {
       order: ['Welcome', ['Intro']]
     }
-  },
-  docs: {
-    source: {
-      type: 'code'
-    }
   }
 };
