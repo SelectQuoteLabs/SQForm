@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {SQFormDateTimePicker as SQFormDateTimePickerComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 
 export default {
   title: 'Components/SQFormDateTimePicker',
@@ -30,6 +30,11 @@ const schema = {
     .typeError('Invalid date')
 };
 
+const defaultArgs = {
+  label: 'Date/Time',
+  name: 'datetime'
+};
+
 export const BasicDateTimePicker = args => {
   return (
     <SQFormStoryWrapper
@@ -37,10 +42,11 @@ export const BasicDateTimePicker = args => {
       validationSchema={schema}
     >
       <SQFormDateTimePickerComponent
-        name="datetime"
-        label="Date/Time"
+        name={defaultArgs.name}
+        label={defaultArgs.label}
         {...args}
       />
     </SQFormStoryWrapper>
   );
 };
+BasicDateTimePicker.args = defaultArgs;

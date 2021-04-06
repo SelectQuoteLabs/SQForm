@@ -27,6 +27,11 @@ const basicSchema = {
     .typeError('Invalid date')
 };
 
+const defaultArgs = {
+  label: 'Date',
+  name: 'date'
+};
+
 const Template = args => {
   return (
     <SQFormStoryWrapper
@@ -34,8 +39,8 @@ const Template = args => {
       validationSchema={basicSchema}
     >
       <SQFormDatePickerWithCalendarInputOnlyComponent
-        name="date"
-        label="Date"
+        name={defaultArgs.name}
+        label={defaultArgs.label}
         {...args}
       />
     </SQFormStoryWrapper>
@@ -43,9 +48,11 @@ const Template = args => {
 };
 
 export const BasicDatePicker = Template.bind({});
+BasicDatePicker.args = defaultArgs;
 
 export const DisableWeekendsDatePicker = Template.bind({});
 DisableWeekendsDatePicker.args = {
+  ...defaultArgs,
   setDisabledDate: date => {
     if (date.day() === 0 || date.day() === 6) {
       return true;
@@ -56,6 +63,7 @@ DisableWeekendsDatePicker.args = {
 
 export const OnlyEnableFirstDayOfMonthDatePicker = Template.bind({});
 OnlyEnableFirstDayOfMonthDatePicker.args = {
+  ...defaultArgs,
   setDisabledDate: date => {
     // disable all days EXCEPT first day of the month
     if (date.date() !== 1) {
