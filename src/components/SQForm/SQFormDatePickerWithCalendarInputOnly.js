@@ -62,6 +62,8 @@ function SQFormDatePickerWithCalendarInputOnly({
       onBlur={onBlur}
       onChange={onChange}
       setDisabledDate={setDisabledDate}
+      isOpen={isOpen}
+      closeCalendar={closeCalendar}
       muiFieldProps={{
         ...muiFieldProps,
         open: isOpen,
