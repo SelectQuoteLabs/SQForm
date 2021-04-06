@@ -2,16 +2,16 @@ module.exports = {
   stories: ['../stories/*.stories.{js,mdx}'],
   addons: [
     '@storybook/preset-create-react-app',
-    '@storybook/addon-controls',
-    '@storybook/addon-actions',
-    '@storybook/addon-knobs',
-    'storybook-addon-material-ui',
     {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true
       }
-    }
+    },
+    '@storybook/addon-controls',
+    '@storybook/addon-actions',
+    '@storybook/addon-knobs',
+    'storybook-addon-material-ui'
   ],
   webpackFinal: config => {
     config.module.rules = [
