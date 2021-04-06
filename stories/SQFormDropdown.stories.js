@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {SQForm, SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDropdown.md';
 
@@ -10,7 +11,8 @@ export default {
   argTypes: {
     children: {table: {disable: true}},
     onBlur: {action: 'blurred', table: {disable: true}},
-    onChange: {action: 'changed', table: {disable: true}}
+    onChange: {action: 'changed', table: {disable: true}},
+    name: {table: {disable: true}}
   },
   parameters: {
     docs: {
@@ -35,7 +37,7 @@ const defaultArgs = {
 
 export const SQFormDropdown = args => (
   <div style={{minWidth: 250}}>
-    <SQForm initialValues={{[defaultArgs.name]: ''}} onSubmit={() => {}}>
+    <SQFormStoryWrapper initialValues={{[defaultArgs.name]: ''}}>
       <SQFormDropdownComponent
         label={defaultArgs.label}
         name={defaultArgs.name}
@@ -44,7 +46,7 @@ export const SQFormDropdown = args => (
       >
         {MOCK_STATE_OPTIONS}
       </SQFormDropdownComponent>
-    </SQForm>
+    </SQFormStoryWrapper>
   </div>
 );
 SQFormDropdown.storyName = 'SQFormDropdown';

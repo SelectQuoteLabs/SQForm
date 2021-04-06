@@ -1,3 +1,10 @@
+### [4.5.2](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.1...v4.5.2) (2021-04-06)
+
+
+### Bug Fixes
+
+* 🐛 SQFormautocomplete autocomplete displayEmpty prop ([ecb9e32](https://github.com/SelectQuoteLabs/SQForm/commit/ecb9e32e00532386abbf4038abb9eb30a09b2fe0)), closes [#179](https://github.com/SelectQuoteLabs/SQForm/issues/179)
+
 ### [4.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.0...v4.5.1) (2021-04-02)
 
 
