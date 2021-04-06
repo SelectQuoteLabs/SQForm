@@ -60,14 +60,6 @@ function SQFormDatePicker({
   // An empty string will not reset the DatePicker so we have to pass null
   const value = field.value || null;
 
-  const handleClickTextField = () => {
-    if (isCalendarOnly) {
-      setIsCalendarOpen(!isCalendarOpen);
-    } else {
-      handleClickAway();
-    }
-  };
-
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Grid item sm={size}>
@@ -95,7 +87,7 @@ function SQFormDatePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isRequired}
-                onClick={handleClickTextField}
+                onClick={isCalendarOnly ? toggleCalendar : handleClickAway}
                 classes={classes}
               />
             );
