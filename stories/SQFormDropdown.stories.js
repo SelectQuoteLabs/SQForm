@@ -15,7 +15,12 @@ export default {
     name: {table: {disable: true}}
   },
   parameters: {
-    docs: {page: createDocsPage({markdown})}
+    docs: {
+      page: createDocsPage({markdown}),
+      source: {
+        type: 'code'
+      }
+    }
   }
 };
 
@@ -37,7 +42,7 @@ export const SQFormDropdown = args => (
         label={defaultArgs.label}
         name={defaultArgs.name}
         {...args}
-        size={Number(args.size)}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
       >
         {MOCK_STATE_OPTIONS}
       </SQFormDropdownComponent>
