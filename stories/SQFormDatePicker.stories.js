@@ -1,71 +1,68 @@
 import React from 'react';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
 import * as Yup from 'yup';
-import {SQForm, SQFormDatePicker} from '../src';
+import {SQFormDatePicker as SQFormDatePickerComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import markdown from '../notes/SQFormDatePicker.md';
 
 export default {
   title: 'Components/SQFormDatePicker',
-  decorators: [withKnobs],
+  component: SQFormDatePickerComponent,
+  argTypes: {
+    onBlur: {action: 'blurred', table: {disable: true}},
+    onChange: {action: 'changed', table: {disable: true}},
+    schema: {table: {disable: true}},
+    name: {table: {disable: true}}
+  },
   parameters: {
     docs: {page: createDocsPage({markdown})}
   }
 };
 
-const MOCK_INITIAL_STATE = {
+const MOCK_INITIAL_VALUE = {
   date: '09/22/2020'
 };
 
-const handleSubmit = (values, actions) => {
-  window.alert(JSON.stringify(values, null, 2));
-  actions.setSubmitting(false);
-  actions.resetForm();
+const defaultArgs = {
+  label: 'Date',
+  name: 'date'
 };
 
-const schema = {
-  date: Yup.date()
-    .required()
-    .min(new Date())
-    .max(new Date('2100-10-10'))
-    .typeError('Invalid date')
-};
-
-export const basicDatePicker = () => {
+const Template = args => {
+  const {schema, ...rest} = args;
   return (
-    <SQForm
-      initialValues={MOCK_INITIAL_STATE}
-      onSubmit={handleSubmit}
+    <SQFormStoryWrapper
+      initialValues={MOCK_INITIAL_VALUE}
       validationSchema={schema}
     >
-      <SQFormDatePicker
-        name="date"
-        label="Date"
-        isDisabled={boolean('isDisabled')}
+      <SQFormDatePickerComponent
+        name={defaultArgs.name}
+        label={defaultArgs.label}
+        {...rest}
       />
-    </SQForm>
+    </SQFormStoryWrapper>
   );
 };
 
-const schemaBefore2024 = {
-  date: Yup.date()
-    .required()
-    .max(new Date('2024-01-01'), 'Date must be before 2024')
-    .typeError('Invalid date')
+export const BasicDatePicker = Template.bind({});
+BasicDatePicker.args = {
+  ...defaultArgs,
+  schema: {
+    date: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'))
+      .max(new Date('2100-10-10'))
+      .typeError('Invalid date')
+  }
 };
 
-export const datePickerBefore2024 = () => {
-  return (
-    <SQForm
-      initialValues={MOCK_INITIAL_STATE}
-      onSubmit={handleSubmit}
-      validationSchema={schemaBefore2024}
-    >
-      <SQFormDatePicker
-        name="date"
-        label="Date"
-        isDisabled={boolean('isDisabled')}
-      />
-    </SQForm>
-  );
+export const DatePickerBefore2024 = Template.bind({});
+DatePickerBefore2024.args = {
+  ...defaultArgs,
+  schema: {
+    date: Yup.date()
+      .required()
+      .max(new Date('2024-01-01'), 'Date must be before 2024')
+      .typeError('Invalid date')
+  }
 };

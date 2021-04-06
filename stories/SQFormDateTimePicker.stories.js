@@ -1,13 +1,18 @@
 import React from 'react';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
 import * as Yup from 'yup';
-import {SQForm, SQFormDateTimePicker} from '../src';
+import {SQFormDateTimePicker as SQFormDateTimePickerComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 
 export default {
   title: 'Components/SQFormDateTimePicker',
-  decorators: [withKnobs],
+  component: SQFormDateTimePickerComponent,
+  argTypes: {
+    onBlur: {action: 'blurred', table: {disable: true}},
+    onChange: {action: 'changed', table: {disable: true}},
+    name: {table: {disable: true}}
+  },
   parameters: {
     docs: {page: createDocsPage({markdown})}
   }
@@ -17,32 +22,25 @@ const MOCK_INITIAL_STATE = {
   datetime: '09/22/2020 02:20 PM'
 };
 
-const handleSubmit = (values, actions) => {
-  window.alert(JSON.stringify(values, null, 2));
-  actions.setSubmitting(false);
-  actions.resetForm();
-};
-
 const schema = {
   datetime: Yup.date()
     .required()
-    .min(new Date())
+    .min(new Date('2020-09-22'))
     .max(new Date('2100-10-10'))
     .typeError('Invalid date')
 };
 
-export const basicDateTimePicker = () => {
+export const BasicDateTimePicker = args => {
   return (
-    <SQForm
+    <SQFormStoryWrapper
       initialValues={MOCK_INITIAL_STATE}
-      onSubmit={handleSubmit}
       validationSchema={schema}
     >
-      <SQFormDateTimePicker
+      <SQFormDateTimePickerComponent
         name="datetime"
         label="Date/Time"
-        isDisabled={boolean('isDisabled')}
+        {...args}
       />
-    </SQForm>
+    </SQFormStoryWrapper>
   );
 };
