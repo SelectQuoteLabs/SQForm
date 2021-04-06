@@ -39,14 +39,7 @@ function SQFormDatePickerWithCalendarInputOnly({
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
   const {values, setFieldValue} = useSQFormContext();
-  const [isOpen, setIsOpen] = React.useState(false);
 
-  const openCalendar = () => {
-    setIsOpen(true);
-  };
-  const closeCalendar = () => {
-    setIsOpen(false);
-  };
   const clearField = () => {
     setFieldValue(name, '');
   };
@@ -62,11 +55,9 @@ function SQFormDatePickerWithCalendarInputOnly({
       onBlur={onBlur}
       onChange={onChange}
       setDisabledDate={setDisabledDate}
+      isCalendarOnly={true}
       muiFieldProps={{
         ...muiFieldProps,
-        open: isOpen,
-        onOpen: openCalendar,
-        onClose: closeCalendar,
         InputProps: {
           startAdornment: (
             <IconButton
@@ -85,7 +76,6 @@ function SQFormDatePickerWithCalendarInputOnly({
       }}
       muiTextInputProps={{
         readOnly: true,
-        onClick: openCalendar,
         style: {cursor: isDisabled ? 'default' : 'pointer'}
       }}
     />
