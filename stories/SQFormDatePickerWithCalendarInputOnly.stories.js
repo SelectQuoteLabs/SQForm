@@ -1,12 +1,17 @@
 import React from 'react';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
 import * as Yup from 'yup';
-import {SQForm, SQFormDatePickerWithCalendarInputOnly} from '../src';
+import {SQFormDatePickerWithCalendarInputOnly as SQFormDatePickerWithCalendarInputOnlyComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
 export default {
   title: 'Components/SQFormDatePickerWithCalendarInputOnly',
-  decorators: [withKnobs],
+  component: SQFormDatePickerWithCalendarInputOnlyComponent,
+  argTypes: {
+    onBlur: {action: 'blurred', table: {disable: true}},
+    onChange: {action: 'changed', table: {disable: true}},
+    name: {table: {disable: true}}
+  },
   parameters: {
     docs: {page: createDocsPage()}
   }
@@ -16,77 +21,54 @@ const MOCK_INITIAL_STATE = {
   date: '12/01/1990'
 };
 
-const handleSubmit = (values, actions) => {
-  window.alert(JSON.stringify(values, null, 2));
-  actions.setSubmitting(false);
-  actions.resetForm();
-};
-
 const basicSchema = {
   date: Yup.date()
     .required()
     .typeError('Invalid date')
 };
 
-export const basicDatePicker = () => {
+const defaultArgs = {
+  label: 'Date',
+  name: 'date'
+};
+
+const Template = args => {
   return (
-    <SQForm
+    <SQFormStoryWrapper
       initialValues={MOCK_INITIAL_STATE}
-      onSubmit={handleSubmit}
       validationSchema={basicSchema}
     >
-      <SQFormDatePickerWithCalendarInputOnly
-        name="date"
-        label="Date"
-        isDisabled={boolean('Date Picker Disabled', false)}
+      <SQFormDatePickerWithCalendarInputOnlyComponent
+        name={defaultArgs.name}
+        label={defaultArgs.label}
+        {...args}
       />
-    </SQForm>
+    </SQFormStoryWrapper>
   );
 };
 
-export const disableWeekendsDatePicker = () => {
-  const setDisabledDate = date => {
+export const BasicDatePicker = Template.bind({});
+BasicDatePicker.args = defaultArgs;
+
+export const DisableWeekendsDatePicker = Template.bind({});
+DisableWeekendsDatePicker.args = {
+  ...defaultArgs,
+  setDisabledDate: date => {
     if (date.day() === 0 || date.day() === 6) {
       return true;
     }
     return false;
-  };
-
-  return (
-    <SQForm
-      initialValues={MOCK_INITIAL_STATE}
-      onSubmit={handleSubmit}
-      validationSchema={basicSchema}
-    >
-      <SQFormDatePickerWithCalendarInputOnly
-        name="date"
-        label="Date"
-        setDisabledDate={setDisabledDate}
-      />
-    </SQForm>
-  );
+  }
 };
 
-export const onlyEnableFirstDayOfMonthDatePicker = () => {
-  const setDisabledDate = date => {
+export const OnlyEnableFirstDayOfMonthDatePicker = Template.bind({});
+OnlyEnableFirstDayOfMonthDatePicker.args = {
+  ...defaultArgs,
+  setDisabledDate: date => {
     // disable all days EXCEPT first day of the month
     if (date.date() !== 1) {
       return true;
     }
     return false;
-  };
-
-  return (
-    <SQForm
-      initialValues={{date: ''}}
-      onSubmit={handleSubmit}
-      validationSchema={basicSchema}
-    >
-      <SQFormDatePickerWithCalendarInputOnly
-        name="date"
-        label="Date"
-        setDisabledDate={setDisabledDate}
-      />
-    </SQForm>
-  );
+  }
 };
