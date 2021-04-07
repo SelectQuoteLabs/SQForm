@@ -27,7 +27,8 @@ function SQFormDatePicker({
   onChange,
   setDisabledDate,
   muiFieldProps = {},
-  muiTextInputProps = {}
+  muiTextInputProps = {},
+  isCalendarOnly = false
 }) {
   const {
     formikField: {field, helpers},
@@ -86,7 +87,7 @@ function SQFormDatePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isRequired}
-                onClick={handleClickAway}
+                onClick={isCalendarOnly ? toggleCalendar : handleClickAway}
                 classes={classes}
               />
             );
@@ -123,7 +124,9 @@ SQFormDatePicker.propTypes = {
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps: PropTypes.object,
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
-  muiTextInputProps: PropTypes.object
+  muiTextInputProps: PropTypes.object,
+  /** A Boolean flag used when using calendar only; disabled text filed input */
+  isCalendarOnly: PropTypes.bool
 };
 
 export default SQFormDatePicker;

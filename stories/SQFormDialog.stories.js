@@ -7,7 +7,8 @@ import {
   SQFormDialog,
   SQFormDatePicker,
   SQFormTextField,
-  SQFormDateTimePicker
+  SQFormDateTimePicker,
+  SQFormDatePickerWithCalendarInputOnly
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -63,6 +64,10 @@ export const sqFormDialog = () => (
       validationSchema={schema}
     >
       <SQFormDatePicker name="startDate" label="Start Date" />
+      <SQFormDatePickerWithCalendarInputOnly
+        label="Middle Date"
+        name="middleDate"
+      />
       <SQFormDatePicker name="endDate" label="End Date" />
     </SQFormDialog>
   </>

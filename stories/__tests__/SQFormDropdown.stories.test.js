@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import {SQFormDropdown} from '../SQFormDropdown.stories';
 
 it('should render list of options', () => {
-  render(<SQFormDropdown />);
+  render(<SQFormDropdown size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 
@@ -17,14 +17,14 @@ it('should render list of options', () => {
 });
 
 it('should render with empty initial value', () => {
-  render(<SQFormDropdown />);
+  render(<SQFormDropdown size="auto" />);
 
   const labelValue = screen.getByRole('button', {name: /state/i});
   expect(labelValue).toHaveTextContent('- -');
 });
 
 it('should update when option is selected', () => {
-  render(<SQFormDropdown />);
+  render(<SQFormDropdown size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
   expect(expandButton).toHaveTextContent('- -');
@@ -39,7 +39,7 @@ it('should update when option is selected', () => {
 });
 
 it('should disable option', () => {
-  render(<SQFormDropdown />);
+  render(<SQFormDropdown size="auto" />);
 
   const disabledOptionBefore = screen.queryByRole('option', /kansas/i);
   expect(disabledOptionBefore).not.toBeInTheDocument();
@@ -60,7 +60,7 @@ it('should disable option', () => {
 
 //This is on by default in the story, so it's already tested by the initial value test
 it('should display an empty option when displayEmpty is true', () => {
-  render(<SQFormDropdown displayEmpty />);
+  render(<SQFormDropdown displayEmpty size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
   userEvent.click(expandButton);
@@ -75,7 +75,7 @@ it('should display an empty option when displayEmpty is true', () => {
 it('should not be selectable if it is disabled', () => {
   const handleChange = jest.fn();
 
-  render(<SQFormDropdown isDisabled onChange={handleChange} />);
+  render(<SQFormDropdown isDisabled onChange={handleChange} size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
   expect(expandButton).toHaveAttribute('aria-disabled', 'true');
@@ -88,7 +88,7 @@ it('should not be selectable if it is disabled', () => {
 });
 
 it('should be selectable if it is not disabled', () => {
-  render(<SQFormDropdown isDisabled={false} />);
+  render(<SQFormDropdown isDisabled={false} size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
   expect(expandButton).not.toHaveAttribute('aria-disabled', 'true');
@@ -100,14 +100,14 @@ it('should be selectable if it is not disabled', () => {
 });
 
 it('should display icon and text if field is required', () => {
-  render(<SQFormDropdown isRequired />);
+  render(<SQFormDropdown isRequired size="auto" />);
 
   const required = screen.getByText(/required/i);
   expect(required).toBeVisible();
 });
 
 it('should not display icon and text if field is not required', () => {
-  render(<SQFormDropdown isRequired={false} />);
+  render(<SQFormDropdown isRequired={false} size="auto" />);
 
   const required = screen.queryByText(/required/i);
   expect(required).not.toBeInTheDocument();
@@ -118,7 +118,13 @@ it('should highlight field if required but no value selected', () => {
     state: Yup.string().required('Required')
   };
 
-  render(<SQFormDropdown isRequired validationSchema={validationSchema} />);
+  render(
+    <SQFormDropdown
+      isRequired
+      validationSchema={validationSchema}
+      size="auto"
+    />
+  );
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 

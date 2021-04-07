@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {SQForm, SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDropdown.md';
 
@@ -10,10 +11,16 @@ export default {
   argTypes: {
     children: {table: {disable: true}},
     onBlur: {action: 'blurred', table: {disable: true}},
-    onChange: {action: 'changed', table: {disable: true}}
+    onChange: {action: 'changed', table: {disable: true}},
+    name: {table: {disable: true}}
   },
   parameters: {
-    docs: {page: createDocsPage({markdown})}
+    docs: {
+      page: createDocsPage({markdown}),
+      source: {
+        type: 'code'
+      }
+    }
   }
 };
 
@@ -28,26 +35,22 @@ const defaultArgs = {
   name: 'state'
 };
 
-export const SQFormDropdown = args => {
-  const {validationSchema} = args;
-  return (
-    <div style={{minWidth: 250}}>
-      <SQForm
-        initialValues={{[defaultArgs.name]: ''}}
-        onSubmit={() => {}}
-        validationSchema={validationSchema}
+export const SQFormDropdown = args => (
+  <div style={{minWidth: 250}}>
+    <SQFormStoryWrapper
+      initialValues={{[defaultArgs.name]: ''}}
+      validationSchema={args.validationSchema}
+    >
+      <SQFormDropdownComponent
+        label={defaultArgs.label}
+        name={defaultArgs.name}
+        {...args}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
       >
-        <SQFormDropdownComponent
-          label={defaultArgs.label}
-          name={defaultArgs.name}
-          {...args}
-          size={Number(args.size || 1)}
-        >
-          {MOCK_STATE_OPTIONS}
-        </SQFormDropdownComponent>
-      </SQForm>
-    </div>
-  );
-};
+        {MOCK_STATE_OPTIONS}
+      </SQFormDropdownComponent>
+    </SQFormStoryWrapper>
+  </div>
+);
 SQFormDropdown.storyName = 'SQFormDropdown';
 SQFormDropdown.args = defaultArgs;

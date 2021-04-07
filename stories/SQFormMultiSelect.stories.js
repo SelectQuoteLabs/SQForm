@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {SQForm, SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
+import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
 export default {
@@ -8,10 +9,16 @@ export default {
   component: SQFormMultiSelectComponent,
   argTypes: {
     children: {table: {disable: true}},
-    onChange: {action: 'changed', table: {disable: true}}
+    onChange: {action: 'changed', table: {disable: true}},
+    name: {table: {disable: true}}
   },
   parameters: {
-    docs: {page: createDocsPage()}
+    docs: {
+      page: createDocsPage(),
+      source: {
+        type: 'code'
+      }
+    }
   }
 };
 
@@ -41,16 +48,16 @@ const defaultArgs = {
 
 export const SQFormMultiSelect = args => (
   <div style={{minWidth: 250}}>
-    <SQForm initialValues={{[defaultArgs.name]: []}} onSubmit={() => {}}>
+    <SQFormStoryWrapper initialValues={{[defaultArgs.name]: []}}>
       <SQFormMultiSelectComponent
         name={defaultArgs.name}
         label={defaultArgs.label}
         {...args}
-        size={Number(args.size)}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
       >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>
-    </SQForm>
+    </SQFormStoryWrapper>
   </div>
 );
 SQFormMultiSelect.storyName = 'SQFormMultiSelect';
