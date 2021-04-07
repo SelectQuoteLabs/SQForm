@@ -19,7 +19,7 @@ export const SQFormStoryWrapper = ({
     <SQForm
       initialValues={initialValues}
       validationSchema={validationSchema}
-      muiGridProps={muiGridProps}
+      muiGridProps={{wrap: 'nowrap', ...muiGridProps}}
       onSubmit={withFormikActions('submitted')}
     >
       {children}
