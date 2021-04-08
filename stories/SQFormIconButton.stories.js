@@ -28,12 +28,19 @@ export default {
   }
 };
 
+// prevents synthetic event warnings
+const handleClick = event => event.persist();
+
 export const Default = args => {
   const {exampleIcons, ...rest} = args;
 
   return (
-    <SQFormStoryWrapper initialValues={{}}>
-      <SQFormIconButtonComponent {...rest} IconComponent={exampleIcons} />
+    <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
+      <SQFormIconButtonComponent
+        {...rest}
+        IconComponent={exampleIcons}
+        onClick={handleClick}
+      />
     </SQFormStoryWrapper>
   );
 };
@@ -57,13 +64,17 @@ Default.argTypes = {
 
 export const WithTestField = args => {
   return (
-    <SQFormStoryWrapper initialValues={{testField: ''}}>
+    <SQFormStoryWrapper initialValues={{testField: ''}} showSubmit={false}>
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <SQFormTextField name="testField" label="Test Field" />
         </Grid>
         <Grid item>
-          <SQFormIconButtonComponent {...args} IconComponent={CheckCircle} />
+          <SQFormIconButtonComponent
+            {...args}
+            IconComponent={CheckCircle}
+            onClick={handleClick}
+          />
         </Grid>
       </Grid>
     </SQFormStoryWrapper>

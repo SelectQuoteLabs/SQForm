@@ -22,10 +22,13 @@ const defaultArgs = {
   children: 'Submit'
 };
 
+// prevents synthetic event warnings
+const handleClick = event => event.persist();
+
 export const Default = args => {
   return (
-    <SQFormStoryWrapper initialValues={{}}>
-      <SQFormButtonComponent {...args} />
+    <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
+      <SQFormButtonComponent {...args} onClick={handleClick} />
     </SQFormStoryWrapper>
   );
 };
@@ -33,13 +36,13 @@ Default.args = defaultArgs;
 
 export const WithTestField = args => {
   return (
-    <SQFormStoryWrapper initialValues={{testField: ''}}>
+    <SQFormStoryWrapper initialValues={{testField: ''}} showSubmit={false}>
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <SQFormTextField name="testField" label="Test Field" />
         </Grid>
         <Grid item>
-          <SQFormButtonComponent {...args} />
+          <SQFormButtonComponent {...args} onClick={handleClick} />
         </Grid>
       </Grid>
     </SQFormStoryWrapper>
