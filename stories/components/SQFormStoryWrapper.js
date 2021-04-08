@@ -36,20 +36,18 @@ export const SQFormStoryWrapper = ({
           </Grid>
         )}
       </SQForm>
-      {showSubmit && (
-        <SnackBar
-          open={snackBarIsOpen}
-          autoHideDuration={5000}
-          TransitionComponent={Slide}
-          onClose={() => setSnackBarIsOpen(false)}
-        >
-          <Alert severity="success" variant="filled">
-            <pre style={{fontSize: '1rem', margin: 0}}>
-              {JSON.stringify(value, null, 2)}
-            </pre>
-          </Alert>
-        </SnackBar>
-      )}
+      <SnackBar
+        open={snackBarIsOpen}
+        autoHideDuration={5000}
+        TransitionComponent={Slide}
+        onClose={() => setSnackBarIsOpen(false)}
+      >
+        <Alert severity="success" variant="filled">
+          <pre style={{fontSize: '1rem', margin: 0}}>
+            {JSON.stringify(value, null, 2)}
+          </pre>
+        </Alert>
+      </SnackBar>
     </>
   );
 };
