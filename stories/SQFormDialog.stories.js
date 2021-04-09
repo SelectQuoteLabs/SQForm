@@ -1,6 +1,4 @@
 import React from 'react';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
 import * as Yup from 'yup';
 
 import {
@@ -14,124 +12,103 @@ import {createDocsPage} from './utils/createDocsPage';
 
 export default {
   title: 'Forms/SQFormDialog',
-  decorators: [withKnobs],
+  component: SQFormDialog,
+  argTypes: {
+    onSave: {action: 'onSave', table: {disable: true}},
+    onClose: {action: 'onClose', table: {disable: true}},
+    children: {table: {disable: true}},
+    validationSchema: {table: {disable: true}}
+  },
   parameters: {
-    docs: {page: createDocsPage()}
+    docs: {page: createDocsPage({showStories: false})}
   }
 };
 
-const MOCK_INITIAL_STATE = {
-  startDate: '09/22/2020',
-  endDate: '09/30/2020'
+const defaultArgs = {
+  title: 'Default',
+  initialValues: {hello: ''},
+  muiGridProps: {
+    spacing: 2,
+    alignItems: 'center'
+  }
 };
 
-const schema = {
-  startDate: Yup.date()
-    .required()
-    .typeError('Invalid date'),
+const Template = args => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
 
-  endDate: Yup.date()
-    .required()
-    .typeError('Invalid date')
+      <SQFormDialog {...args}>
+        <SQFormTextField
+          name="hello"
+          label="Hello"
+          isRequired={Boolean(args.validationSchema)}
+        />
+      </SQFormDialog>
+    </>
+  );
 };
 
-const handleSubmit = (values, actions) => {
-  window.alert(JSON.stringify(values, null, 2));
-  actions.setSubmitting(false);
-  actions.resetForm();
+export const Default = Template.bind({});
+Default.args = defaultArgs;
+
+export const WithValidation = Template.bind({});
+WithValidation.args = {
+  ...defaultArgs,
+  title: 'With Validation',
+  validationSchema: {
+    hello: Yup.string().required('Required')
+  }
 };
 
-export const sqFormDialog = () => (
-  <>
-    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
-    <SQFormDialog
-      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-      isDisabled={boolean(
-        'isDisabled',
-        false,
-        'Toggle disabled state of Save Button'
-      )}
-      shouldRequireFieldUpdates={true}
-      maxWidth="sm"
-      onClose={action('Close button clicked')}
-      onSave={handleSubmit}
-      title="SQ Dialog Form"
-      initialValues={MOCK_INITIAL_STATE}
-      muiGridProps={{
-        spacing: 2,
-        alignItems: 'center'
-      }}
-      validationSchema={schema}
-    >
-      <SQFormDatePicker name="startDate" label="Start Date" />
-      <SQFormDatePickerWithCalendarInputOnly
-        label="Middle Date"
-        name="middleDate"
-      />
-      <SQFormDatePicker name="endDate" label="End Date" />
-    </SQFormDialog>
-  </>
-);
+export const WithAutoFocus = args => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
 
-export const sqFormDialogWithDateTimePicker = () => (
-  <>
-    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
-    <SQFormDialog
-      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-      isDisabled={boolean(
-        'isDisabled',
-        false,
-        'Toggle disabled state of Save Button'
-      )}
-      shouldRequireFieldUpdates={true}
-      maxWidth="sm"
-      onClose={action('Close button clicked')}
-      onSave={handleSubmit}
-      title="SQ Dialog Form"
-      initialValues={MOCK_INITIAL_STATE}
-      muiGridProps={{
-        spacing: 2,
-        alignItems: 'center'
-      }}
-      validationSchema={schema}
-    >
-      <SQFormDateTimePicker name="startDate" label="Start Date" />
-      <SQFormDateTimePicker name="endDate" label="End Date" />
-    </SQFormDialog>
-  </>
-);
-
-const MOCK_EMPTY_USER_STATE = {
-  firstName: '',
-  lastName: ''
+      <SQFormDialog {...args}>
+        <SQFormTextField
+          name="hello"
+          label="Hello"
+          muiFieldProps={{autoFocus: true}}
+        />
+      </SQFormDialog>
+    </>
+  );
+};
+WithAutoFocus.args = {
+  ...defaultArgs,
+  title: 'With Auto Focus'
 };
 
-export const sqFormDialogWithAutoFocus = () => (
-  <>
-    <h1>Click the Knobs tab below to toggle the open state of the Dialog</h1>
-    <SQFormDialog
-      isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-      isDisabled={boolean(
-        'isDisabled',
-        false,
-        'Toggle disabled state of Save Button'
-      )}
-      maxWidth="sm"
-      onClose={action('Close button clicked')}
-      onSave={handleSubmit}
-      title="Create New User"
-      initialValues={MOCK_EMPTY_USER_STATE}
-      muiGridProps={{
-        spacing: 2,
-        alignItems: 'center'
-      }}
-    >
-      <SQFormTextField
-        name="firstName"
-        label="First Name (Auto Focused)"
-        muiFieldProps={{autoFocus: true}}
-      />
-      <SQFormTextField name="lastName" label="Last Name" />
-    </SQFormDialog>
-  </>
-);
+export const WithDatePickers = args => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormDatePicker name="datePicker" label="DatePicker" />
+        <SQFormDateTimePicker name="dateTimePicker" label="DateTimePicker" />
+        <SQFormDatePickerWithCalendarInputOnly
+          name="datePickerCalendarOnly"
+          label="DatePickerWithCalendarInputOnly"
+        />
+      </SQFormDialog>
+    </>
+  );
+};
+WithDatePickers.args = {
+  ...defaultArgs,
+  title: 'With Date Pickers',
+  initialValues: {
+    datePicker: '',
+    dateTimePicker: '',
+    datePickerCalendarOnly: ''
+  }
+};
