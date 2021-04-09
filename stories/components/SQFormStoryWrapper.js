@@ -1,25 +1,60 @@
 import React from 'react';
 import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 import Grid from '@material-ui/core/Grid';
-import SnackBar from '@material-ui/core/SnackBar';
-import Alert from '@material-ui/lab/Alert';
 import {SQForm, SQFormIconButton} from '../../src';
-import Slide from '@material-ui/core/Slide';
+import {
+  Snackbar,
+  SnackbarProvider,
+  useSnackbar
+} from 'scplus-shared-components';
 
-export const SQFormStoryWrapper = ({
+export function SQFormStoryWrapper({
   children,
   initialValues,
   validationSchema,
   muiGridProps,
   showSubmit = true
-}) => {
-  const [value, setValue] = React.useState('');
-  const [snackBarIsOpen, setSnackBarIsOpen] = React.useState(false);
+}) {
+  return (
+    <SnackbarProvider>
+      <Form
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        muiGridProps={muiGridProps}
+        showSubmit={showSubmit}
+      >
+        {children}
+      </Form>
+    </SnackbarProvider>
+  );
+}
 
+function Form({
+  children,
+  initialValues,
+  validationSchema,
+  muiGridProps,
+  showSubmit = true
+}) {
+  const [value, setValue] = React.useState('');
+
+  const [snackbarState, {snackbar, closeSnackBar}] = useSnackbar();
   const handleSubmit = values => {
     setValue(values);
-    setSnackBarIsOpen(true);
   };
+
+  const firstUpdate = React.useRef(true);
+  React.useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+    } else {
+      snackbar.success(
+        <pre style={{fontSize: '14px', margin: 0}}>
+          {JSON.stringify(value, null, 2)}
+        </pre>
+      );
+    }
+  }, [snackbar, value]);
 
   return (
     <>
@@ -36,18 +71,7 @@ export const SQFormStoryWrapper = ({
           </Grid>
         )}
       </SQForm>
-      <SnackBar
-        open={snackBarIsOpen}
-        autoHideDuration={5000}
-        TransitionComponent={Slide}
-        onClose={() => setSnackBarIsOpen(false)}
-      >
-        <Alert severity="success" variant="filled">
-          <pre style={{fontSize: '1rem', margin: 0}}>
-            {JSON.stringify(value, null, 2)}
-          </pre>
-        </Alert>
-      </SnackBar>
+      <Snackbar snackbarState={snackbarState} closeSnackBar={closeSnackBar} />
     </>
   );
-};
+}
