@@ -1,31 +1,77 @@
 import React from 'react';
-import {action} from '@storybook/addon-actions';
 import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 import Grid from '@material-ui/core/Grid';
 import {SQForm, SQFormIconButton} from '../../src';
+import {
+  Snackbar,
+  SnackbarProvider,
+  useSnackbar
+} from 'scplus-shared-components';
 
-const withFormikActions = name => (values, formikActions) => {
-  formikActions.setSubmitting(false);
-  action(name)(values);
-};
-
-export const SQFormStoryWrapper = ({
+export function SQFormStoryWrapper({
   children,
   initialValues,
   validationSchema,
-  muiGridProps
-}) => {
+  muiGridProps,
+  showSubmit = true
+}) {
   return (
-    <SQForm
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      muiGridProps={muiGridProps}
-      onSubmit={withFormikActions('submitted')}
-    >
-      {children}
-      <Grid item size={2} style={{alignSelf: 'center'}}>
-        <SQFormIconButton IconComponent={CheckMarkIcon} />
-      </Grid>
-    </SQForm>
+    <SnackbarProvider>
+      <Form
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        muiGridProps={muiGridProps}
+        showSubmit={showSubmit}
+      >
+        {children}
+      </Form>
+    </SnackbarProvider>
   );
-};
+}
+
+function Form({
+  children,
+  initialValues,
+  validationSchema,
+  muiGridProps,
+  showSubmit = true
+}) {
+  const [value, setValue] = React.useState('');
+
+  const [snackbarState, {snackbar, closeSnackBar}] = useSnackbar();
+  const handleSubmit = values => {
+    setValue(values);
+  };
+
+  const firstUpdate = React.useRef(true);
+  React.useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+    } else {
+      snackbar.success(
+        <pre style={{fontSize: '14px', margin: 0}}>
+          {JSON.stringify(value, null, 2)}
+        </pre>
+      );
+    }
+  }, [snackbar, value]);
+
+  return (
+    <>
+      <SQForm
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        muiGridProps={{wrap: 'nowrap', ...muiGridProps}}
+        onSubmit={handleSubmit}
+      >
+        {children}
+        {showSubmit && (
+          <Grid item size={2} style={{alignSelf: 'center'}}>
+            <SQFormIconButton IconComponent={CheckMarkIcon} />
+          </Grid>
+        )}
+      </SQForm>
+      <Snackbar snackbarState={snackbarState} closeSnackBar={closeSnackBar} />
+    </>
+  );
+}
