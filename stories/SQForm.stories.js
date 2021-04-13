@@ -808,6 +808,24 @@ export const ccaChecklist = () => {
   );
 };
 
+export const dropdownBaselineIssue = () => {
+  return (
+    <Card raised style={{padding: '16px', minWidth: '768'}}>
+      <SQForm initialValues={{}} onSubmit={handleSubmit} validationSchema={{}}>
+        <SQFormTextField label="valueOne" name="value one" />
+        <SQFormTextField label="valueTwo" name="value two" />
+        <SQFormDropdown label="State" name="state" displayEmpty>
+          {[
+            {label: 'Alabama', value: 'AL'},
+            {label: 'Alaska', value: 'AK'},
+            {label: 'Arizona', value: 'AZ'}
+          ]}
+        </SQFormDropdown>
+      </SQForm>
+    </Card>
+  );
+};
+
 function random(length) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
