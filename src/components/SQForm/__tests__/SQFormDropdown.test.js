@@ -84,7 +84,7 @@ it('should update when option is selected', () => {
   expect(labelValue).toHaveTextContent(DEFAULT_OPTIONS[0].label);
 });
 
-it('should disable option', () => {
+it('should display disabled option', () => {
   const options = [
     {label: 'Test 1', value: 1},
     {label: 'Test 2', value: 2, isDisabled: true},
@@ -106,18 +106,32 @@ it('should disable option', () => {
 
   const disabledOption = within(optionsList).getAllByRole('option')[1];
   expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
+});
 
-  /*
-    This actually still fires the event! So everything after this fails
-    I found this when trying to research why:
-    https://github.com/testing-library/dom-testing-library/issues/92#issuecomment-530524324
-  
-    userEvent.click(disabledOption);
+it('should not let the disabled option be selected', async () => {
+  const options = [
+    {label: 'Test 1', value: 1},
+    {label: 'Test 2', value: 2, isDisabled: true},
+    {label: 'Test 3', value: 3}
+  ];
 
-    const optionsListAfter = screen.getByRole('listbox');
-    expect(optionsListAfter).toBeInTheDocument();
-    expect(optionsListAfter).toBeVisible();
-  */
+  const fieldProps = {
+    ...DEFAULT_PROPS
+  };
+
+  const sqFormDropdown = renderDropdown(options, fieldProps);
+
+  renderSQForm(sqFormDropdown, DEFAULT_INTITIAL_VALUES);
+
+  const expandButton = screen.getByRole('button', {name: EMPTY_OPTION});
+
+  // Disabled option is skipped
+  userEvent.type(expandButton, '{tab}{enter}{arrowdown}{arrowdown}{enter}');
+  const updatedExpandButton = await screen.findByRole('button', {
+    name: /test 3/i
+  });
+
+  expect(updatedExpandButton).toBeInTheDocument();
 });
 
 it('should display an empty option when displayEmpty is true', () => {
@@ -237,4 +251,27 @@ it('should highlight field if required but no value selected', () => {
   const required = screen.getByText(/required/i);
   expect(required).toBeVisible();
   expect(required).toHaveClass('Mui-error');
+});
+
+it('should show empty list if no options are given', () => {
+  const nullSQFormDropdown = renderDropdown(null, DEFAULT_PROPS);
+
+  renderSQForm(nullSQFormDropdown, DEFAULT_INTITIAL_VALUES);
+
+  const expandButton = screen.getByRole('button', {name: EMPTY_OPTION});
+  userEvent.click(expandButton);
+
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+it('should show empty value if initial value not in options', () => {
+  const initialValues = {
+    dropdownExample: 5
+  };
+
+  renderSQForm(renderDropdown(), {initialValues});
+
+  const expandButton = screen.queryByRole('button', {name: EMPTY_OPTION});
+
+  expect(expandButton).not.toBeInTheDocument();
 });
