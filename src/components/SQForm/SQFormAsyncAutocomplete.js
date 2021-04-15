@@ -165,6 +165,7 @@ function SQFormAsyncAutocomplete({
         onOpen={onOpen}
         onClose={onClose}
         inputValue={inputValue}
+        disabled={isDisabled}
         getOptionLabel={option => option.label}
         getOptionDisabled={option => option.isDisabled}
         renderInput={params => {
