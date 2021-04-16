@@ -254,6 +254,10 @@ it('should highlight field if required but no value selected', () => {
 });
 
 it('should show empty list if no options are given', () => {
+  const consoleWarnSpy = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => {});
+
   const nullSQFormDropdown = renderDropdown(null, DEFAULT_PROPS);
 
   renderSQForm(nullSQFormDropdown, DEFAULT_INTITIAL_VALUES);
@@ -262,9 +266,18 @@ it('should show empty list if no options are given', () => {
   userEvent.click(expandButton);
 
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+  expect(consoleWarnSpy).toHaveBeenCalledWith(
+    expect.stringMatching(/the children you provided.*was undefined/i)
+  );
+
+  consoleWarnSpy.mockRestore();
 });
 
 it('should show empty value if initial value not in options', () => {
+  const consoleWarnSpy = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => {});
+
   const initialValues = {
     dropdownExample: 5
   };
@@ -274,4 +287,9 @@ it('should show empty value if initial value not in options', () => {
   const expandButton = screen.queryByRole('button', {name: EMPTY_OPTION});
 
   expect(expandButton).not.toBeInTheDocument();
+  expect(consoleWarnSpy).toHaveBeenCalledWith(
+    expect.stringMatching(/requested display value.*could not be found/i)
+  );
+
+  consoleWarnSpy.mockRestore();
 });

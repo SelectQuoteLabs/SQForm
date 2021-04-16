@@ -211,7 +211,7 @@ export const BasicForm = () => {
   );
 };
 
-export const formWithValidation = () => {
+export const FormWithValidation = () => {
   const validationSchema = {
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),

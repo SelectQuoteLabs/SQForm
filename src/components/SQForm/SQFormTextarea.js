@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import {useFormikContext} from 'formik';
 
 import {useForm} from './useForm';
+import {toKebabCase} from '../../utils';
 
 function SQFormTextarea({
   name,
@@ -58,6 +59,7 @@ function SQFormTextarea({
   return (
     <Grid item sm={size}>
       <TextField
+        id={toKebabCase(label)}
         color="primary"
         disabled={isDisabled}
         error={isFieldError}
