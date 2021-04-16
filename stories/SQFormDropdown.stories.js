@@ -12,7 +12,8 @@ export default {
     children: {table: {disable: true}},
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
+    SQFormProps: {table: {disable: true}}
   },
   parameters: {
     docs: {
@@ -32,22 +33,25 @@ const MOCK_STATE_OPTIONS = [
 
 const defaultArgs = {
   label: 'State',
-  name: 'state'
+  name: 'state',
+  children: MOCK_STATE_OPTIONS,
+  SQFormProps: {
+    initialValues: {state: ''}
+  }
 };
 
-export const SQFormDropdown = args => (
-  <div style={{minWidth: 250}}>
-    <SQFormStoryWrapper initialValues={{[defaultArgs.name]: ''}}>
-      <SQFormDropdownComponent
-        label={defaultArgs.label}
-        name={defaultArgs.name}
-        {...args}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
-      >
-        {MOCK_STATE_OPTIONS}
-      </SQFormDropdownComponent>
-    </SQFormStoryWrapper>
-  </div>
-);
+export const SQFormDropdown = args => {
+  const {SQFormProps, ...dropdownProps} = args;
+  return (
+    <div style={{minWidth: 250}}>
+      <SQFormStoryWrapper {...defaultArgs.SQFormProps} {...SQFormProps}>
+        <SQFormDropdownComponent
+          {...dropdownProps}
+          size={args.size !== 'auto' ? Number(args.size) : args.size}
+        />
+      </SQFormStoryWrapper>
+    </div>
+  );
+};
 SQFormDropdown.storyName = 'SQFormDropdown';
 SQFormDropdown.args = defaultArgs;
