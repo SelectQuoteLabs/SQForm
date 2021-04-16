@@ -1,8 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {render, screen, within} from '@testing-library/react';
+import {composeStories} from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import {SQFormDropdown} from '../SQFormDropdown.stories';
+import * as stories from '../SQFormDropdown.stories';
+
+const {SQFormDropdown} = composeStories(stories);
 
 it('should render list of options', () => {
   render(<SQFormDropdown size="auto" />);
@@ -23,11 +26,14 @@ it('should render with empty initial value', () => {
   expect(labelValue).toHaveTextContent('- -');
 });
 
-/* There's not a way for me to test non-empty intiial values
-   since there's no way for me to pass value to the SQForm
 it('should render with non-empty initial value', () => {
+  render(
+    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'MO'}}} />
+  );
 
-});*/
+  const labelValue = screen.getByRole('button', {name: /state/i});
+  expect(labelValue).toHaveTextContent('Missouri');
+});
 
 it('should update when option is selected', () => {
   render(<SQFormDropdown size="auto" />);
@@ -71,7 +77,6 @@ it('should not let the disabled option be selected', async () => {
   expect(updatedExpandButton).toBeInTheDocument();
 });
 
-//This is on by default in the story, so it's already tested by the initial value test
 it('should display an empty option when displayEmpty is true', () => {
   render(<SQFormDropdown displayEmpty size="auto" />);
 
@@ -132,11 +137,7 @@ it('should highlight field if required but no value selected', () => {
   };
 
   render(
-    <SQFormDropdown
-      isRequired
-      validationSchema={validationSchema}
-      size="auto"
-    />
+    <SQFormDropdown isRequired SQFormProps={{validationSchema}} size="auto" />
   );
 
   const expandButton = screen.getByRole('button', {name: /state/i});
@@ -152,26 +153,39 @@ it('should highlight field if required but no value selected', () => {
   expect(required).toHaveClass('Mui-error');
 });
 
-/* Can't test these as there's no way to pass in a different options list
 it('should show empty list if no options are given', () => {
-  const nullSQFormDropdown = renderDropdown(null, DEFAULT_PROPS);
+  const consoleWarnSpy = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => {});
 
-  renderSQForm(nullSQFormDropdown, DEFAULT_INTITIAL_VALUES);
+  render(<SQFormDropdown size="auto" children={null} />);
 
-  const expandButton = screen.getByRole('button', {name: EMPTY_OPTION});
+  const expandButton = screen.getByRole('button', {name: /- -/i});
   userEvent.click(expandButton);
 
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+  expect(consoleWarnSpy).toHaveBeenCalledWith(
+    expect.stringMatching(/the children you provided.*was undefined/i)
+  );
+
+  consoleWarnSpy.mockRestore();
 });
 
 it('should show empty value if initial value not in options', () => {
-  const initialValues = {
-    dropdownExample: 5
-  };
+  const consoleWarnSpy = jest
+    .spyOn(console, 'warn')
+    .mockImplementation(() => {});
 
-  renderSQForm(renderDropdown(), {initialValues});
+  render(
+    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'TX'}}} />
+  );
 
-  const expandButton = screen.queryByRole('button', {name: EMPTY_OPTION});
+  const expandButton = screen.queryByRole('button', {name: /- -/i});
 
   expect(expandButton).not.toBeInTheDocument();
-});*/
+  expect(consoleWarnSpy).toHaveBeenCalledWith(
+    expect.stringMatching(/requested display value.*could not be found/i)
+  );
+
+  consoleWarnSpy.mockRestore();
+});
