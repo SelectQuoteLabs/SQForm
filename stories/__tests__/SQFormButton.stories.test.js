@@ -9,153 +9,152 @@ const {
   WithTestField: SQFormButtonWithField
 } = composeStories(stories);
 
-describe('Default Tests', () => {
-  it('should render a button with text', () => {
-    render(<SQFormButton />);
+describe('SQFormButton Tests', () => {
+  describe('Button Only', () => {
+    it('should render a button with text', () => {
+      render(<SQFormButton />);
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
 
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toHaveTextContent('Submit');
+      expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toHaveTextContent('Submit');
+    });
+
+    it('should render a reset button given the type reset', () => {
+      render(<SQFormButton type="reset" />);
+
+      const resetButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      expect(resetButton).toBeInTheDocument();
+      expect(resetButton).toHaveAttribute('type', 'reset');
+    });
+
+    it('should be disabled when button is type reset', () => {
+      render(<SQFormButton type="reset" />);
+
+      const resetButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      expect(resetButton).toBeInTheDocument();
+      expect(resetButton).toHaveAttribute('type', 'reset');
+      expect(resetButton).toBeDisabled();
+    });
+
+    it('should disable when shouldRequireFieldUpdates is true', () => {
+      render(<SQFormButton shouldRequireFieldUpdates={true} />);
+
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      expect(submitButton).toBeDisabled();
+    });
+
+    it('should call a function when clicked', () => {
+      const onClickSpy = jest.fn();
+      render(<SQFormButton onClick={onClickSpy} />);
+
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      userEvent.click(submitButton);
+
+      expect(onClickSpy).toHaveBeenCalled();
+    });
+
+    it('should show as disabled when isDisabled is true', () => {
+      render(<SQFormButton isDisabled={true} />);
+
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      expect(submitButton).toBeDisabled();
+    });
+
+    it('should not fire onClick when disabled', () => {
+      const onClickSpy = jest.fn();
+      render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
+
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      userEvent.click(submitButton);
+
+      expect(onClickSpy).not.toHaveBeenCalled();
+    });
   });
 
-  it('should render a reset button given the type', () => {
-    render(<SQFormButton type="reset" />);
+  describe('Button with Test Field', () => {
+    it('should render a button and a text field', () => {
+      render(<SQFormButtonWithField />);
 
-    const resetButton = screen.getByRole('button', {name: /form submission/i});
+      const testField = screen.getByLabelText(/test field/i);
 
-    expect(resetButton).toBeInTheDocument();
-    expect(resetButton).toHaveAttribute('type', 'reset');
-  });
+      expect(testField).toBeInTheDocument();
 
-  it('should call a function when clicked', () => {
-    const onClickSpy = jest.fn();
-    render(<SQFormButton onClick={onClickSpy} />);
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+      expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toHaveTextContent('Submit');
+    });
 
-    userEvent.click(submitButton);
+    it('should enable after field value is changed when shouldRequireFieldUpdates is true', () => {
+      render(<SQFormButtonWithField shouldRequireFieldUpdates={true} />);
 
-    expect(onClickSpy).toHaveBeenCalled();
-  });
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+      expect(submitButton).toBeDisabled();
 
-  it('should show as disabled', () => {
-    render(<SQFormButton isDisabled={true} />);
+      const testField = screen.getByLabelText(/test field/i);
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+      userEvent.type(testField, 'Hello');
 
-    expect(submitButton).toBeDisabled();
-  });
+      expect(submitButton).toBeEnabled();
+    });
 
-  it('should not fire onClick when disabled', () => {
-    const onClickSpy = jest.fn();
-    render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
+    it('should enable when data entered into field and type is reset', () => {
+      render(<SQFormButtonWithField type="reset" />);
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+      const resetButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+      expect(resetButton).toHaveAttribute('type', 'reset');
+      expect(resetButton).toBeDisabled();
 
-    userEvent.click(submitButton);
+      const testField = screen.getByLabelText(/test field/i);
+      userEvent.type(testField, 'Hello');
 
-    expect(onClickSpy).not.toHaveBeenCalled();
-  });
-});
+      expect(resetButton).toBeEnabled();
+    });
 
-describe('Button with Test Field Tests', () => {
-  it('should render a button and a text field', () => {
-    render(<SQFormButtonWithField />);
+    it('should reset field when clicked', () => {
+      render(<SQFormButtonWithField type="reset" />);
 
-    const testField = screen.getByLabelText(/test field/i);
+      const resetButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+      expect(resetButton).toHaveAttribute('type', 'reset');
+      expect(resetButton).toBeDisabled();
 
-    expect(testField).toBeInTheDocument();
+      const testField = screen.getByLabelText(/test field/i);
+      userEvent.type(testField, 'Hello');
+      expect(testField).toHaveValue('Hello');
+      expect(resetButton).toBeEnabled();
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+      userEvent.click(resetButton);
 
-    expect(submitButton).toBeInTheDocument();
-    expect(submitButton).toHaveTextContent('Submit');
-  });
-
-  it('should disable when shouldRequireFieldUpdates is true', () => {
-    render(<SQFormButtonWithField shouldRequireFieldUpdates={true} />);
-
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
-
-    expect(submitButton).toBeDisabled();
-  });
-
-  it('should enable when text field is filled out', () => {
-    render(<SQFormButtonWithField shouldRequireFieldUpdates={true} />);
-
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
-    expect(submitButton).toBeDisabled();
-
-    const testField = screen.getByLabelText(/test field/i);
-
-    userEvent.type(testField, 'Hello');
-
-    expect(submitButton).toBeEnabled();
-  });
-
-  it('should submit form when submit button clicked', () => {
-    const onClickSpy = jest.fn();
-    //const onClickOverride = jest.
-    render(
-      <SQFormButtonWithField
-        shouldRequireFieldUpdates={true}
-        onClick={onClickSpy}
-      />
-    );
-
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
-    expect(submitButton).toBeDisabled();
-
-    userEvent.click(submitButton);
-    expect(onClickSpy).not.toHaveBeenCalled();
-
-    const testField = screen.getByLabelText(/test field/i);
-
-    userEvent.type(testField, 'Hello');
-    expect(submitButton).toBeEnabled();
-
-    userEvent.click(submitButton);
-
-    expect(onClickSpy).toHaveBeenCalled();
-  });
-
-  it('should be disabled when button is type reset', () => {
-    render(<SQFormButtonWithField type="reset" />);
-
-    const resetButton = screen.getByRole('button', {name: /form submission/i});
-
-    expect(resetButton).toBeInTheDocument();
-    expect(resetButton).toHaveAttribute('type', 'reset');
-    expect(resetButton).toBeDisabled();
-  });
-
-  it('should enable when data entered into field', () => {
-    render(<SQFormButtonWithField type="reset" />);
-
-    const resetButton = screen.getByRole('button', {name: /form submission/i});
-    expect(resetButton).toHaveAttribute('type', 'reset');
-    expect(resetButton).toBeDisabled();
-
-    const testField = screen.getByLabelText(/test field/i);
-    userEvent.type(testField, 'Hello');
-
-    expect(resetButton).toBeEnabled();
-  });
-
-  it('should reset field when clicked', () => {
-    render(<SQFormButtonWithField type="reset" />);
-
-    const resetButton = screen.getByRole('button', {name: /form submission/i});
-    expect(resetButton).toHaveAttribute('type', 'reset');
-    expect(resetButton).toBeDisabled();
-
-    const testField = screen.getByLabelText(/test field/i);
-    userEvent.type(testField, 'Hello');
-    expect(resetButton).toBeEnabled();
-
-    userEvent.click(resetButton);
-
-    expect(testField).toHaveValue('');
+      expect(testField).toHaveValue('');
+    });
   });
 });
