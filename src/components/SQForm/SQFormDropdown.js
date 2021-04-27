@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
+import {makeStyles} from '@material-ui/core/styles';
 
 import {useForm} from './useForm';
 import {
@@ -18,6 +19,14 @@ import {EMPTY_LABEL} from '../../utils/constants';
 
 const EMPTY_VALUE = '';
 const EMPTY_OPTION = {label: EMPTY_LABEL, value: EMPTY_VALUE};
+
+const useStyles = makeStyles({
+  selectHeight: {
+    '& .MuiSelect-selectMenu': {
+      height: '1.1876em'
+    }
+  }
+});
 
 function SQFormDropdown({
   children,
@@ -31,6 +40,8 @@ function SQFormDropdown({
   size = 'auto',
   muiFieldProps = {}
 }) {
+  const classes = useStyles();
+
   const {
     formikField: {field},
     fieldState: {isFieldError},
@@ -94,6 +105,7 @@ function SQFormDropdown({
           {label}
         </InputLabel>
         <Select
+          className={classes.selectHeight}
           displayEmpty={true}
           input={<Input name={name} />}
           value={field.value}
