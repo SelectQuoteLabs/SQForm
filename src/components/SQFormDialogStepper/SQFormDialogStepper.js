@@ -141,7 +141,7 @@ export function SQFormDialogStepper({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-      const stepValues = currentStepKeys.some(step => {
+      const stepValues = currentStepKeys.every(step => {
         return !!values[step];
       });
 

@@ -185,7 +185,7 @@ function SQFormAutocomplete({
         inputValue={inputValue}
         value={initialValue || null}
         disableClearable={isDisabled}
-        freeSolo={isDisabled}
+        disabled={isDisabled}
         getOptionLabel={option => option.label || ''}
         getOptionDisabled={option => option.isDisabled}
         renderInput={params => {

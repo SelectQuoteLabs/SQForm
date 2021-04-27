@@ -1,3 +1,17 @@
+### [4.5.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.4...v4.5.5) (2021-04-17)
+
+
+### Bug Fixes
+
+* 🐛 DialogStepper next step validation ([ba4c9f0](https://github.com/SelectQuoteLabs/SQForm/commit/ba4c9f049800209dda376f52c00c52dd4d5bdbd4)), closes [#81](https://github.com/SelectQuoteLabs/SQForm/issues/81)
+
+### [4.5.4](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.3...v4.5.4) (2021-04-17)
+
+
+### Bug Fixes
+
+* 🐛 dropdown arrow visible when autocomplete disabled ([a73098e](https://github.com/SelectQuoteLabs/SQForm/commit/a73098e4257196293192ba17de51603c393b33df)), closes [#213](https://github.com/SelectQuoteLabs/SQForm/issues/213)
+
 ### [4.5.3](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.2...v4.5.3) (2021-04-06)
 
 

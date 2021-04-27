@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
+import {makeStyles} from '@material-ui/core/styles';
 import {useSQFormContext} from '../../../src';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
@@ -60,6 +61,14 @@ const getToolTipTitle = (formikFieldValue, options) => {
   return selectedDisplayValue(formikFieldValue, options);
 };
 
+const useStyles = makeStyles({
+  selectHeight: {
+    '& .MuiSelect-selectMenu': {
+      height: '1.1876em'
+    }
+  }
+});
+
 function SQFormMultiSelect({
   children,
   isDisabled = false,
@@ -72,6 +81,8 @@ function SQFormMultiSelect({
   toolTipPlacement = 'bottom',
   muiFieldProps = {}
 }) {
+  const classes = useStyles();
+
   const {setFieldValue} = useSQFormContext();
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
@@ -166,6 +177,7 @@ function SQFormMultiSelect({
           title={toolTipEnabled ? toolTipTitle : ''}
         >
           <Select
+            className={classes.selectHeight}
             multiple
             displayEmpty
             input={<Input disabled={isDisabled} name={name} />}
