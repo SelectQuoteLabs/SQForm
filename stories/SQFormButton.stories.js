@@ -28,7 +28,7 @@ const handleClick = event => event.persist();
 export const Default = args => {
   return (
     <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
-      <SQFormButtonComponent {...args} onClick={handleClick} />
+      <SQFormButtonComponent onClick={handleClick} {...args} />
     </SQFormStoryWrapper>
   );
 };
@@ -42,7 +42,7 @@ export const WithTestField = args => {
           <SQFormTextField name="testField" label="Test Field" />
         </Grid>
         <Grid item>
-          <SQFormButtonComponent {...args} onClick={handleClick} />
+          <SQFormButtonComponent onClick={handleClick} {...args} />
         </Grid>
       </Grid>
     </SQFormStoryWrapper>
