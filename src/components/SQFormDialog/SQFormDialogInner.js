@@ -11,9 +11,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
-import {Form} from 'formik';
+import {Form, useFormikContext} from 'formik';
 import {RoundedButton, DialogAlert, useDialog} from 'scplus-shared-components';
-import {useSQFormContext} from '../../index';
 import SQFormButton from '../SQForm/SQFormButton';
 
 const Transition = React.forwardRef((props, ref) => {
@@ -62,7 +61,7 @@ function SQFormDialogInner({
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
-  const {resetForm, dirty: isDirty} = useSQFormContext();
+  const {resetForm, dirty: isDirty} = useFormikContext();
 
   const [
     isDialogAlertOpen,
