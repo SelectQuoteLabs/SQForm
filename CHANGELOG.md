@@ -1,3 +1,10 @@
+### [4.5.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.5...v4.5.6) (2021-04-30)
+
+
+### Bug Fixes
+
+* 🐛 Fix circular dependencies ([dcd74b4](https://github.com/SelectQuoteLabs/SQForm/commit/dcd74b4f6b0598a72e5b6ded44f68d04b1ea6629)), closes [#233](https://github.com/SelectQuoteLabs/SQForm/issues/233)
+
 ### [4.5.5](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.4...v4.5.5) (2021-04-17)
 
 
