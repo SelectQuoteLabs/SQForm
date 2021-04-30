@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Grid} from '@material-ui/core';
-import {
-  SQFieldArray,
-  SQFormInclusionListItem,
-  useSQFormContext
-} from '../../../src';
+import {useFormikContext, FieldArray} from 'formik';
+import SQFormInclusionListItem from './SQFormInclusionListItem';
 
 export default function SQFormInclusionList({
   name,
@@ -15,7 +12,7 @@ export default function SQFormInclusionList({
   selectAllContainerProps = {},
   selectAllProps = {}
 }) {
-  const {values, setFieldValue} = useSQFormContext();
+  const {values, setFieldValue} = useFormikContext();
 
   const handleSelectAllChange = event => {
     if (event.target.checked) {
@@ -27,7 +24,7 @@ export default function SQFormInclusionList({
   };
 
   if (!useSelectAll) {
-    return <SQFieldArray name={name}>{children}</SQFieldArray>;
+    return <FieldArray name={name}>{children}</FieldArray>;
   }
 
   return (
@@ -41,7 +38,7 @@ export default function SQFormInclusionList({
           {...selectAllProps}
         />
       </Grid>
-      <SQFieldArray name={name}>{children}</SQFieldArray>
+      <FieldArray name={name}>{children}</FieldArray>
     </>
   );
 }

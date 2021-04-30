@@ -11,7 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import {makeStyles} from '@material-ui/core/styles';
-import {useSQFormContext} from '../../../src';
+import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
 import {
@@ -83,7 +83,7 @@ function SQFormMultiSelect({
 }) {
   const classes = useStyles();
 
-  const {setFieldValue} = useSQFormContext();
+  const {setFieldValue} = useFormikContext();
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
     formikField: {field},
