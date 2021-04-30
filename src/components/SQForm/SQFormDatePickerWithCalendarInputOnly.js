@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClearIcon from '@material-ui/icons/HighlightOff';
+import {useFormikContext} from 'formik';
 import {IconButton, makeStyles} from '@material-ui/core';
 import SQFormDatePicker from './SQFormDatePicker';
-import {useSQFormContext} from '../../../src';
 
 const useClearButtonStyles = makeStyles({
   root: {
@@ -38,7 +38,7 @@ function SQFormDatePickerWithCalendarInputOnly({
 }) {
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
-  const {values, setFieldValue} = useSQFormContext();
+  const {values, setFieldValue} = useFormikContext();
 
   const clearField = () => {
     setFieldValue(name, '');

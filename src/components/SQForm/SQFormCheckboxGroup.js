@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useFormikContext} from 'formik';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
-import {SQFormCheckboxGroupItem, useSQFormContext} from '../../../src';
+import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
 import {useForm} from './useForm';
 
 function SQFormCheckboxGroup({
@@ -27,7 +28,7 @@ function SQFormCheckboxGroup({
     onChange
   });
 
-  const {setFieldValue} = useSQFormContext();
+  const {setFieldValue} = useFormikContext();
 
   const handleSelectAllChange = event => {
     if (!event.target.checked) {
