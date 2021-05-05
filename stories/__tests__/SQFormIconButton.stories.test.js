@@ -17,7 +17,7 @@ describe('SQFormIconButton Tests', () => {
         <SQFormIconButton exampleIcons={CheckCircle} />
       );
 
-      const iconButton = screen.getByRole('button', /form submission/i);
+      const iconButton = screen.getByRole('button', {name: /form submission/i});
       const svg = container.getElementsByTagName('svg');
 
       expect(iconButton).toBeInTheDocument();
