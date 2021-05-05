@@ -13,10 +13,12 @@ const {
 describe('SQFormIconButton Tests', () => {
   describe('Button Only', () => {
     it('should render a button with an icon', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} />);
+      const {container} = render(
+        <SQFormIconButton exampleIcons={CheckCircle} />
+      );
 
       const iconButton = screen.getByRole('button', /form submission/i);
-      const svg = document.getElementsByTagName('svg');
+      const svg = container.getElementsByTagName('svg');
 
       expect(iconButton).toBeInTheDocument();
       expect(svg.length).toEqual(1);
