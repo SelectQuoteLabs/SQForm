@@ -37,9 +37,9 @@ export const Default = args => {
   return (
     <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
       <SQFormIconButtonComponent
-        {...rest}
         IconComponent={exampleIcons}
         onClick={handleClick}
+        {...rest}
       />
     </SQFormStoryWrapper>
   );
