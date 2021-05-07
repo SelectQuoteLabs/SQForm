@@ -33,7 +33,7 @@ function SQFormCheckboxGroupItem({
 
   const isChecked = React.useMemo(() => {
     if (Array.isArray(field.value)) {
-      return field.value.includes(value);
+      return field.value.includes(value.toString());
     }
 
     return field.value;

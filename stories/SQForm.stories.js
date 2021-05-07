@@ -137,10 +137,10 @@ const RADIO_GROUP_OPTIONS = [
 ];
 
 const CHECKBOX_GROUP_OPTIONS = [
-  {label: 'Glass', value: 'glass'},
-  {label: 'Drivetrain', value: 'drivetrain'},
-  {label: 'Brakes', value: 'brakes'},
-  {label: 'Interior', value: 'interior', isDisabled: true}
+  {label: 'Glass', value: 1},
+  {label: 'Drivetrain', value: 2},
+  {label: 'Brakes', value: 3},
+  {label: 'Interior', value: 4, isDisabled: true}
 ];
 
 const handleSubmit = (values, actions) => {
