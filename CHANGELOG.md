@@ -1,3 +1,10 @@
+### [4.5.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.6...v4.5.7) (2021-05-07)
+
+
+### Bug Fixes
+
+* 🐛 SQFormCheckboxGroup properly accepts non string values ([3e1dc1c](https://github.com/SelectQuoteLabs/SQForm/commit/3e1dc1ce76df5b3eb4643223197b3ace71a305ac)), closes [#231](https://github.com/SelectQuoteLabs/SQForm/issues/231)
+
 ### [4.5.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.5...v4.5.6) (2021-04-30)
 
 
