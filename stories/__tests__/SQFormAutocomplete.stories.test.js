@@ -23,11 +23,6 @@ describe('SQFormAutocomplete Tests', () => {
 
       const openButton = screen.getByRole('button', {name: /open/i});
       expect(openButton).toBeInTheDocument();
-
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-      expect(submitButton).toBeInTheDocument();
     });
 
     it('should render with empty initial value', () => {
