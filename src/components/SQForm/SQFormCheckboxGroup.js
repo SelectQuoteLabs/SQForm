@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
 import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
+import SQFormCheckbox from './SQFormCheckbox';
 import {useForm} from './useForm';
 
 function SQFormCheckboxGroup({
@@ -39,12 +40,11 @@ function SQFormCheckboxGroup({
     const enabledGroupValues = children.reduce((acc, checkboxOption) => {
       const {value, isDisabled} = checkboxOption;
       if (!isDisabled) {
-        return [...acc, value];
+        return [...acc, value.toString()];
       }
 
       return acc;
     }, []);
-
     setFieldValue(name, enabledGroupValues);
   };
 
@@ -67,11 +67,9 @@ function SQFormCheckboxGroup({
     });
     if (shouldUseSelectAll) {
       return [
-        <SQFormCheckboxGroupItem
-          groupName="selectAll"
+        <SQFormCheckbox
+          name={`${name}SelectAll`}
           label="All"
-          value="selectAll"
-          isRowDisplay={shouldDisplayInRow}
           onChange={handleSelectAllChange}
         />,
         ...providedCheckboxItems
