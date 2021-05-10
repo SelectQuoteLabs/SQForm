@@ -1,3 +1,10 @@
+### [4.5.8](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.7...v4.5.8) (2021-05-10)
+
+
+### Bug Fixes
+
+* 🐛 SQFormCheckboxGroup select all is a normal checkbox ([1d74fdf](https://github.com/SelectQuoteLabs/SQForm/commit/1d74fdf9a21382af4553c2944bcaa8b28e60c518)), closes [#234](https://github.com/SelectQuoteLabs/SQForm/issues/234)
+
 ### [4.5.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.6...v4.5.7) (2021-05-07)
 
 
