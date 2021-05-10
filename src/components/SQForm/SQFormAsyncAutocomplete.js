@@ -83,18 +83,6 @@ const ListboxVirtualizedComponent = React.forwardRef(
   }
 );
 
-const getInitialValue = (children, value) => {
-  const optionInitialValue = children.find(option => {
-    if (option.value === value) {
-      return option;
-    }
-
-    return null;
-  });
-
-  return optionInitialValue;
-};
-
 function SQFormAsyncAutocomplete({
   children,
   isDisabled = false,
@@ -122,7 +110,17 @@ function SQFormAsyncAutocomplete({
     isRequired
   });
 
-  const initialValue = getInitialValue(children, value);
+  const initialValue = React.useMemo(() => {
+    const optionInitialValue = children.find(option => {
+      if (option.value === value) {
+        return option;
+      }
+
+      return null;
+    });
+
+    return optionInitialValue;
+  }, [children, value]);
 
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
