@@ -65,7 +65,8 @@ const MOCK_FORM_ENTITY = {
   tenThousandOptions: '',
   note: '',
   preferredPet: '',
-  warrantyOptions: []
+  warrantyOptions: [],
+  warrantyOptionsSelectAll: false
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
@@ -192,6 +193,7 @@ export const BasicForm = () => {
           name="warrantyOptions"
           groupLabel="Warranty Options"
           shouldDisplayInRow={true}
+          shouldUseSelectAll={true}
         >
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
