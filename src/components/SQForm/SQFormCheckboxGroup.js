@@ -71,6 +71,7 @@ function SQFormCheckboxGroup({
           name={`${name}SelectAll`}
           label="All"
           onChange={handleSelectAllChange}
+          key={`${name}_selectAll`}
         />,
         ...providedCheckboxItems
       ];
