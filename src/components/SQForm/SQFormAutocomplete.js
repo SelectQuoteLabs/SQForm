@@ -7,8 +7,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {VariableSizeList} from 'react-window';
 import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
-
-import {usePrevious} from '../../hooks/usePrevious';
+import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
 
 // MUI uses px, a numeric value is needed for calculations
