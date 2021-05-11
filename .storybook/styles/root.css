@@ -1,0 +1,154 @@
+/*css vars here*/
+:root {
+  --color-cerulean: #01a1b7;
+  --color-sqahGreen: #183a37;
+  --color-seniorOrange: #b24200;
+  --color-recruitViolet: #432534;
+  --color-srtsGreen: #5a7e44;
+  --color-teal: #017788;
+  --color-lightTeal: #34a1b6;
+  --color-frenchBleu: #0066ff;
+  --color-oysterBay: #d9f1f4;
+  --color-lightBlue: #ecf5f7;
+  --color-orange: #f17c21;
+  --color-granite: #5b5858;
+
+  --color-textSuccessGreen: #3C7107;
+  --color-textWarningYellow: #C67000;
+  --color-textErrorRed: #AD0010;
+  --color-textInfoBlue: #006CCB;
+
+  --color-brightYellow: #ff9f1c;
+  --color-sienna: #c46c2a;
+  --color-spanishOrange: #eb7100;
+
+  --color-black: #000000;
+  --color-richBlack: #050404;
+  --color-jetBlack: #322f2f;
+  --color-charlestonGreen: #2e282a;
+
+  --color-lightGray: #d3d3d3;
+  --color-whiteSmoke: #f5f5f5;
+  --color-white: #ffffff;
+
+  --color-stone: #8a8889;
+  --color-slate: #b3b4b3;
+  --color-concrete: #b8b2a9;
+  --color-gainsboro: #e0e0e0;
+
+  --color-roseMadder: #e71d36; /* used for errors */
+  --color-lightError: #fae5e8;
+  --color-palmLeaf: #6ca03b; /* used for success */
+  --color-green: #76b041;
+  --color-green-hover: #9dd169;
+
+  --color-button-hover: rgba(1, 161, 183, 0.1);
+  --color-button-cerulean-hover: #2bb2c6;
+  --color-button-teal-hover: #d8f1f4;
+  --color-button-frenchBleu-hover: #006ccb;
+  --color-button-hover-white: rgba(255, 255, 255, 0.2);
+  --color-button-disabled: #a09d9e;
+  --color-button-hover-success: #9dd169;
+
+  --base-font-size: 12px;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --zindex-1: 100;
+  --zindex-2: 200;
+  --zindex-3: 300;
+  --zindex-4: 400;
+  --zindex-5: 500;
+  --date-picker-z-index: 9;
+
+  /* Agent, Admin View height related variables */
+  --nav-height: 4.063rem;
+  --nav-margin-bottom: 1.5rem;
+  --agent-toolbar-height: 5rem;
+  --container-padding-bottom: 1.5rem; /* Admin and Agent Container */
+
+  --react-virtualized-list-height: 300px;
+
+  --card-header-height: 4rem;
+
+  --size-label: 12px;
+  --size-label-with-offset: 1.34rem;
+  --size-input: 14px;
+  --color-label-size: 1.167rem;
+
+  --full-width: 100%;
+
+  --box-shaddow-card: 0.083rem 0.083rem 0.417rem var(--color-stone); /* Misspelled in SQAH */
+  --top-input: 3.1666rem;
+
+  /* derived */
+  --color-disabled: var(--color-slate);
+  --color-inactive: var(--color-stone);
+  --color-label: var(--color-jetBlack);
+  --color-textInput: var(--color-richBlack);
+
+  --font-weight-label: var(--font-weight-normal);
+  --font-weight-input: var(--font-weight-semibold);
+
+  /* Button */
+  --button-accent: var(--color-frenchBleu);
+  --button-accent-hover: var(--color-button-frenchBleu-hover);
+  --button-primary: var(--color-teal);
+  --button-primary-hover: var(--color-button-cerulean-hover);
+  --button-primaryEmpty-hover: var(--color-oysterBay);
+
+  --button-secondary: var(--color-teal);
+  --button-secondary-hover: var(--color-button-teal-hover);
+
+  --button-font-weight: var(--font-weight-semibold);
+  --button-font-size: 1.1667rem;
+
+  --transition-duration-shortest: 150ms;
+}
+
+html {
+  box-sizing: border-box;
+  font: 400 12px 'Open Sans', sans-serif;
+  color: var(--color-richBlack);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 1000px;
+  overflow-x: auto;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--color-whiteSmoke);
+  height: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+#root {
+  height: inherit;
+}
