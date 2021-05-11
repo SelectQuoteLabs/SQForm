@@ -1,3 +1,10 @@
+### [4.5.12](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.11...v4.5.12) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add spacing below radio/checkbox items ([af96ba4](https://github.com/SelectQuoteLabs/SQForm/commit/af96ba4391ecf92f4d116a975262b492aa4d5ac6)), closes [#227](https://github.com/SelectQuoteLabs/SQForm/issues/227)
+
 ### [4.5.11](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.10...v4.5.11) (2021-05-11)
 
 
