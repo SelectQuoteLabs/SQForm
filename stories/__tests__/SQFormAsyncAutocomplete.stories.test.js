@@ -11,7 +11,7 @@ const {
 
 describe('SQFormAsyncAutocomplete Tests', () => {
   describe('AsyncAutocomplete Only', () => {
-    it('should render a dropdown, title, and 2 buttons', () => {
+    it('should render a dropdown, title, and button', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const label = screen.getByText(/async autocomplete/i);
@@ -33,6 +33,21 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       });
 
       expect(textField).toHaveTextContent('');
+    });
+
+    it('should render with non-empty initial value', () => {
+      const SQFormProps = {
+        initialValues: {
+          asyncAutocomplete: 'fifth'
+        }
+      };
+
+      render(<SQFormAsyncAutocomplete size="auto" SQFormProps={SQFormProps} />);
+
+      const textField = screen.getByRole('textbox', {
+        name: /async autocomplete/i
+      });
+      expect(textField).toHaveValue('Fifth');
     });
 
     it('should render a list of options when the open button is clicked', () => {

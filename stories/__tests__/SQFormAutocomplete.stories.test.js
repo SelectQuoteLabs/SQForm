@@ -11,7 +11,7 @@ const {
 
 describe('SQFormAutocomplete Tests', () => {
   describe('Autocomplete Only', () => {
-    it('should render a dropdown, title, and 2 buttons', () => {
+    it('should render a dropdown, title, and button', () => {
       render(<SQFormAutocomplete size="auto" />);
 
       const label = screen.getByText(/autocomplete/i);
