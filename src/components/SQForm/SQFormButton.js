@@ -7,7 +7,7 @@ function SQFormButton({
   children,
   isDisabled = false,
   shouldRequireFieldUpdates = false,
-  title = 'Form Submission',
+  title,
   type = 'submit',
   onClick
 }) {
@@ -33,9 +33,20 @@ function SQFormButton({
     }
   };
 
+  const getTitle = () => {
+    switch (true) {
+      case Boolean(title):
+        return title;
+      case type === 'reset':
+        return 'Reset Form';
+      default:
+        return 'Form Submission';
+    }
+  };
+
   return (
     <RoundedButton
-      title={title}
+      title={getTitle()}
       type={type}
       isDisabled={isSQFormButtonDisabled}
       onClick={getClickHandler}

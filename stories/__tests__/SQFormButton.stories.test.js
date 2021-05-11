@@ -22,11 +22,19 @@ describe('SQFormButton Tests', () => {
       expect(submitButton).toHaveTextContent('Submit');
     });
 
+    it('should render a button with a given title', () => {
+      render(<SQFormButton title="Hello world" />);
+
+      const button = screen.getByTitle(/hello world/i);
+
+      expect(button).toBeInTheDocument();
+    });
+
     it('should render a reset button given the type reset', () => {
       render(<SQFormButton type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /reset form/i
       });
 
       expect(resetButton).toBeInTheDocument();
@@ -37,7 +45,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /reset form/i
       });
 
       expect(resetButton).toBeInTheDocument();
@@ -127,7 +135,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /reset form/i
       });
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();
@@ -142,7 +150,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /reset form/i
       });
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();
