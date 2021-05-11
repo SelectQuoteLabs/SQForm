@@ -1,4 +1,5 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "react-app",
     "eslint:recommended",
@@ -13,7 +14,8 @@
     "jsx-a11y",
     "react",
     "react-hooks",
-    "testing-library"
+    "testing-library",
+    "@typescript-eslint"
   ],
   "rules": {
     "no-useless-computed-key": "off",
@@ -27,6 +29,8 @@
     "testing-library/prefer-explicit-assert": "warn",
     "testing-library/prefer-presence-queries": "error",
     "testing-library/prefer-screen-queries": "error",
-    "testing-library/prefer-wait-for": "error"
+    "testing-library/prefer-wait-for": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
   }
 }
