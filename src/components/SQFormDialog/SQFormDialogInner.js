@@ -12,7 +12,8 @@ import {
 } from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
-import {RoundedButton, DialogAlert, useDialog} from 'scplus-shared-components';
+import {useDialog} from '@selectquotelabs/sqhooks';
+import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 
 const Transition = React.forwardRef((props, ref) => {
@@ -63,10 +64,11 @@ function SQFormDialogInner({
   const actionsClasses = useActionsStyles(theme);
   const {resetForm, dirty: isDirty} = useFormikContext();
 
-  const [
-    isDialogAlertOpen,
-    {openDialog: openDialogAlert, closeDialog: closeDialogAlert}
-  ] = useDialog();
+  const {
+    isDialogOpen: isDialogAlertOpen,
+    openDialog: openDialogAlert,
+    closeDialog: closeDialogAlert
+  } = useDialog();
 
   const handleCancel = () => {
     if (!isDirty) {
