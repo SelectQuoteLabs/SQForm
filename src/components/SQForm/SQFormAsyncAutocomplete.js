@@ -109,8 +109,25 @@ function SQFormAsyncAutocomplete({
     name,
     isRequired
   });
+
+  const initialValue = React.useMemo(() => {
+    const optionInitialValue = children.find(option => {
+      if (option.value === value) {
+        return option;
+      }
+
+      return null;
+    });
+
+    return optionInitialValue;
+  }, [children, value]);
+
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
+
+  React.useEffect(() => {
+    setInputValue(initialValue?.label || '');
+  }, [initialValue]);
 
   React.useEffect(() => {
     // Form Reset
