@@ -1,3 +1,11 @@
+### [4.5.9](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.8...v4.5.9) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Add initialValues display to SQFormAsyncAutocomplete ([c49861f](https://github.com/SelectQuoteLabs/SQForm/commit/c49861f7a85501ddf2169248cd23e31cc6fade6b)), closes [#236](https://github.com/SelectQuoteLabs/SQForm/issues/236)
+* 🐛 Convert getInitialValue to useMemo ([fe88103](https://github.com/SelectQuoteLabs/SQForm/commit/fe88103beefe9fd3c941553f5cf52228bc6849df)), closes [#237](https://github.com/SelectQuoteLabs/SQForm/issues/237)
+
 ### [4.5.8](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.7...v4.5.8) (2021-05-10)
 
 
