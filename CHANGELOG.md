@@ -1,3 +1,10 @@
+### [4.5.10](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.9...v4.5.10) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Updates to latest SSC & SQHooks version ([edbe7e6](https://github.com/SelectQuoteLabs/SQForm/commit/edbe7e60b252057759f536e1eb4bdea82172208b)), closes [#233](https://github.com/SelectQuoteLabs/SQForm/issues/233)
+
 ### [4.5.9](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.8...v4.5.9) (2021-05-11)
 
 
