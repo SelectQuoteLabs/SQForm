@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormIconButton.stories';
 
@@ -13,15 +13,13 @@ const {
 describe('SQFormIconButton Tests', () => {
   describe('Button Only', () => {
     it('should render a button with an icon', () => {
-      const {container} = render(
-        <SQFormIconButton exampleIcons={CheckCircle} />
-      );
+      render(<SQFormIconButton exampleIcons={CheckCircle} />);
 
       const iconButton = screen.getByRole('button', {name: /form submission/i});
-      const svg = container.getElementsByTagName('svg');
+      const svg = within(iconButton).getByTitle(/form submission/i);
 
       expect(iconButton).toBeInTheDocument();
-      expect(svg.length).toEqual(1);
+      expect(svg).toBeInTheDocument();
     });
 
     it('should render a submit button', () => {
