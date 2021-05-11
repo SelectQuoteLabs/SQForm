@@ -1,3 +1,31 @@
+### [4.5.13](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.12...v4.5.13) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 pass title to IconComponent svg, update IconButton tests ([6db7c19](https://github.com/SelectQuoteLabs/SQForm/commit/6db7c191c1cfbd80a68e966fa89dc8ad0248a33e)), closes [#228](https://github.com/SelectQuoteLabs/SQForm/issues/228)
+
+### [4.5.12](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.11...v4.5.12) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add spacing below radio/checkbox items ([af96ba4](https://github.com/SelectQuoteLabs/SQForm/commit/af96ba4391ecf92f4d116a975262b492aa4d5ac6)), closes [#227](https://github.com/SelectQuoteLabs/SQForm/issues/227)
+
+### [4.5.11](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.10...v4.5.11) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add Reset Form title to SQFormButton if type is 'reset' ([7fdd059](https://github.com/SelectQuoteLabs/SQForm/commit/7fdd059259025aa20782b47d565845951c9ff10f)), closes [#220](https://github.com/SelectQuoteLabs/SQForm/issues/220)
+
+### [4.5.10](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.9...v4.5.10) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Updates to latest SSC & SQHooks version ([edbe7e6](https://github.com/SelectQuoteLabs/SQForm/commit/edbe7e60b252057759f536e1eb4bdea82172208b)), closes [#233](https://github.com/SelectQuoteLabs/SQForm/issues/233)
+
 ### [4.5.9](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.8...v4.5.9) (2021-05-11)
 
 
