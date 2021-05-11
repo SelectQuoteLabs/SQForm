@@ -1,3 +1,10 @@
+### [4.5.11](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.10...v4.5.11) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add Reset Form title to SQFormButton if type is 'reset' ([7fdd059](https://github.com/SelectQuoteLabs/SQForm/commit/7fdd059259025aa20782b47d565845951c9ff10f)), closes [#220](https://github.com/SelectQuoteLabs/SQForm/issues/220)
+
 ### [4.5.10](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.9...v4.5.10) (2021-05-11)
 
 
