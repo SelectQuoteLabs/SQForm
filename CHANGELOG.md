@@ -1,3 +1,10 @@
+### [4.5.13](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.12...v4.5.13) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 pass title to IconComponent svg, update IconButton tests ([6db7c19](https://github.com/SelectQuoteLabs/SQForm/commit/6db7c191c1cfbd80a68e966fa89dc8ad0248a33e)), closes [#228](https://github.com/SelectQuoteLabs/SQForm/issues/228)
+
 ### [4.5.12](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.11...v4.5.12) (2021-05-11)
 
 
