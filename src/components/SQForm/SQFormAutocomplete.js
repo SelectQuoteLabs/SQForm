@@ -104,6 +104,7 @@ function SQFormAutocomplete({
   isDisabled = false,
   isRequired = false,
   displayEmpty = false,
+  shouldUseFreeSolo = false,
   label,
   name,
   onBlur,
@@ -162,8 +163,9 @@ function SQFormAutocomplete({
     (_event, value) => {
       setInputValue(value);
       onInputChange && onInputChange(_event, value);
+      shouldUseFreeSolo && setFieldValue(name, value);
     },
-    [onInputChange]
+    [onInputChange, shouldUseFreeSolo, setFieldValue, name]
   );
 
   const options = displayEmpty ? [EMPTY_OPTION, ...children] : children;
@@ -187,6 +189,7 @@ function SQFormAutocomplete({
         disabled={isDisabled}
         getOptionLabel={option => option.label || ''}
         getOptionDisabled={option => option.isDisabled}
+        freeSolo={shouldUseFreeSolo}
         renderInput={params => {
           return (
             <TextField
@@ -235,6 +238,8 @@ SQFormAutocomplete.propTypes = {
   isRequired: PropTypes.bool,
   /** Whether to display empty option */
   displayEmpty: PropTypes.bool,
+  /** Whether to use free solo autocomplete */
+  shouldUseFreeSolo: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
   /** Name identifier of the input field */

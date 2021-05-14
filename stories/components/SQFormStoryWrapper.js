@@ -40,6 +40,7 @@ function Form({
 
   const [snackbarState, {snackbar, closeSnackBar}] = useSnackbar();
   const handleSubmit = values => {
+    console.log(values);
     setValue(values);
   };
 
