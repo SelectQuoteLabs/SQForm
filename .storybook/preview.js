@@ -2,10 +2,9 @@ import React from 'react';
 import {MuiThemeProvider, StylesProvider} from '@material-ui/core/styles';
 import {LocalizationProvider} from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
-
-import './storybook.css';
-
 import {muiTheme} from 'scplus-shared-components';
+
+import './styles/index.css';
 
 // For Storybook usage ONLY
 const centerStyle = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import {DialogAlert, TextButton, useDialog} from 'scplus-shared-components';
+import {useDialog} from '@selectquotelabs/sqhooks';
+import {DialogAlert, TextButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
 function SQFormResetInitialValuesButton({
@@ -14,7 +14,7 @@ function SQFormResetInitialValuesButton({
   initialValuesObject = {},
   ...props
 }) {
-  const [isOpen, {openDialog, closeDialog}] = useDialog();
+  const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {values, resetForm} = useFormButton(isDisabled);
 
   const handlePrimaryButtonClick = () => {
@@ -40,7 +40,7 @@ function SQFormResetInitialValuesButton({
         {children}
       </TextButton>
       <DialogAlert
-        isOpen={isOpen}
+        isOpen={isDialogOpen}
         title={confirmationTitle}
         primaryButtonText="Reset"
         onPrimaryButtonClick={handlePrimaryButtonClick}

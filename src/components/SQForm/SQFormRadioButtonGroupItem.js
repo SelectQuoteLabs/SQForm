@@ -4,11 +4,14 @@ import Radio from '@material-ui/core/Radio';
 import {makeStyles} from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   radioButton: {
-    marginRight: 30
+    marginBottom: theme.spacing(1.5)
+  },
+  rowDisplay: {
+    marginRight: theme.spacing(3.75)
   }
-});
+}));
 
 function SQFormRadioButtonGroupItem({
   value,
@@ -21,7 +24,10 @@ function SQFormRadioButtonGroupItem({
 
   return (
     <FormControlLabel
-      className={isRowDisplay ? classes.radioButton : ''}
+      className={`
+        ${classes.radioButton}
+        ${isRowDisplay ? classes.rowDisplay : ''}
+      `}
       value={value}
       label={label}
       control={<Radio disabled={isDisabled} {...inputProps} />}

@@ -8,8 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {VariableSizeList} from 'react-window';
 import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
-
-import {usePrevious} from '../../hooks/usePrevious';
+import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
 
 // MUI uses px, a numeric value is needed for calculations
@@ -109,8 +108,25 @@ function SQFormAsyncAutocomplete({
     name,
     isRequired
   });
+
+  const initialValue = React.useMemo(() => {
+    const optionInitialValue = children.find(option => {
+      if (option.value === value) {
+        return option;
+      }
+
+      return null;
+    });
+
+    return optionInitialValue;
+  }, [children, value]);
+
   const [inputValue, setInputValue] = React.useState('');
   const prevValue = usePrevious(value);
+
+  React.useEffect(() => {
+    setInputValue(initialValue?.label || '');
+  }, [initialValue]);
 
   React.useEffect(() => {
     // Form Reset

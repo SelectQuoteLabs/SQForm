@@ -1,3 +1,60 @@
+### [4.5.14](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.13...v4.5.14) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 SQFormCheckboxGroup Select all missing key ([962691c](https://github.com/SelectQuoteLabs/SQForm/commit/962691cab408283a07bcf008e368a5eba4c35c35))
+
+### [4.5.13](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.12...v4.5.13) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 pass title to IconComponent svg, update IconButton tests ([6db7c19](https://github.com/SelectQuoteLabs/SQForm/commit/6db7c191c1cfbd80a68e966fa89dc8ad0248a33e)), closes [#228](https://github.com/SelectQuoteLabs/SQForm/issues/228)
+
+### [4.5.12](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.11...v4.5.12) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add spacing below radio/checkbox items ([af96ba4](https://github.com/SelectQuoteLabs/SQForm/commit/af96ba4391ecf92f4d116a975262b492aa4d5ac6)), closes [#227](https://github.com/SelectQuoteLabs/SQForm/issues/227)
+
+### [4.5.11](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.10...v4.5.11) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 add Reset Form title to SQFormButton if type is 'reset' ([7fdd059](https://github.com/SelectQuoteLabs/SQForm/commit/7fdd059259025aa20782b47d565845951c9ff10f)), closes [#220](https://github.com/SelectQuoteLabs/SQForm/issues/220)
+
+### [4.5.10](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.9...v4.5.10) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Updates to latest SSC & SQHooks version ([edbe7e6](https://github.com/SelectQuoteLabs/SQForm/commit/edbe7e60b252057759f536e1eb4bdea82172208b)), closes [#233](https://github.com/SelectQuoteLabs/SQForm/issues/233)
+
+### [4.5.9](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.8...v4.5.9) (2021-05-11)
+
+
+### Bug Fixes
+
+* 🐛 Add initialValues display to SQFormAsyncAutocomplete ([c49861f](https://github.com/SelectQuoteLabs/SQForm/commit/c49861f7a85501ddf2169248cd23e31cc6fade6b)), closes [#236](https://github.com/SelectQuoteLabs/SQForm/issues/236)
+* 🐛 Convert getInitialValue to useMemo ([fe88103](https://github.com/SelectQuoteLabs/SQForm/commit/fe88103beefe9fd3c941553f5cf52228bc6849df)), closes [#237](https://github.com/SelectQuoteLabs/SQForm/issues/237)
+
+### [4.5.8](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.7...v4.5.8) (2021-05-10)
+
+
+### Bug Fixes
+
+* 🐛 SQFormCheckboxGroup select all is a normal checkbox ([1d74fdf](https://github.com/SelectQuoteLabs/SQForm/commit/1d74fdf9a21382af4553c2944bcaa8b28e60c518)), closes [#234](https://github.com/SelectQuoteLabs/SQForm/issues/234)
+
+### [4.5.7](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.6...v4.5.7) (2021-05-07)
+
+
+### Bug Fixes
+
+* 🐛 SQFormCheckboxGroup properly accepts non string values ([3e1dc1c](https://github.com/SelectQuoteLabs/SQForm/commit/3e1dc1ce76df5b3eb4643223197b3ace71a305ac)), closes [#231](https://github.com/SelectQuoteLabs/SQForm/issues/231)
+
 ### [4.5.6](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.5...v4.5.6) (2021-04-30)
 
 

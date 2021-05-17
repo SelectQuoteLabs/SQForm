@@ -5,11 +5,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   checkboxGroupItem: {
-    marginRight: 30
+    marginBottom: theme.spacing(1.5)
+  },
+  rowDisplay: {
+    marginRight: theme.spacing(3.75)
   }
-});
+}));
 
 function SQFormCheckboxGroupItem({
   groupName,
@@ -33,7 +36,7 @@ function SQFormCheckboxGroupItem({
 
   const isChecked = React.useMemo(() => {
     if (Array.isArray(field.value)) {
-      return field.value.includes(value);
+      return field.value.includes(value.toString());
     }
 
     return field.value;
@@ -41,7 +44,10 @@ function SQFormCheckboxGroupItem({
 
   return (
     <FormControlLabel
-      className={isRowDisplay ? classes.checkboxGroupItem : ''}
+      className={`
+        ${classes.checkboxGroupItem}
+        ${isRowDisplay ? classes.rowDisplay : ''}
+      `}
       label={label}
       control={
         <Checkbox

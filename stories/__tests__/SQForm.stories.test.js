@@ -25,7 +25,7 @@ const mockData = {
   state: 'KS',
   cool: true,
   preferredPet: 'dog',
-  warrantyOptions: ['drivetrain', 'brakes'],
+  warrantyOptions: ['2', '3'],
   note: 'Hello World!'
 };
 
@@ -76,6 +76,7 @@ describe('Tests for BasicForm', () => {
             note: '',
             preferredPet: mockData.preferredPet,
             warrantyOptions: mockData.warrantyOptions,
+            warrantyOptionsSelectAll: false,
             hobby: mockData.hobby,
             cool: mockData.cool,
             lame: false
@@ -114,6 +115,7 @@ describe('Tests for BasicForm', () => {
             note: '',
             preferredPet: '',
             warrantyOptions: [],
+            warrantyOptionsSelectAll: false,
             hobby: '',
             cool: false,
             lame: false
@@ -229,7 +231,8 @@ describe('Tests for FormWithValidation', () => {
             tenThousandOptions: firstOption.textContent,
             note: 'Hello World!',
             preferredPet: 'cat',
-            warrantyOptions: ['drivetrain']
+            warrantyOptions: ['2'],
+            warrantyOptionsSelectAll: false
           },
           null,
           2

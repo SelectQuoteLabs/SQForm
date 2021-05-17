@@ -1,0 +1,103 @@
+/* ag-grid theme override css */
+.ag-header-cell {
+  font-size: 12px;
+  background-color: var(--color-stone);
+  color: var(--color-white);
+  width: auto;
+  font-family: 'Open Sans';
+  font-weight: 400;
+}
+
+.ag-theme-balham .ag-row-hover {
+  background-color: var(--color-lightBlue) !important;
+}
+
+.ag-theme-balham {
+  font-family: 'Open Sans' !important;
+}
+
+.ag-theme-balham
+  .ag-ltr
+  .ag-has-focus
+  .ag-cell-focus:not(.ag-cell-range-selected),
+.ag-theme-balham .ag-ltr .ag-has-focus .ag-cell-focus.ag-cell-range-single-cell,
+.ag-theme-balham
+  .ag-ltr
+  .ag-cell-focus.ag-cell-range-single-cell.ag-cell-range-handle,
+.ag-theme-balham
+  .ag-rtl
+  .ag-has-focus
+  .ag-cell-focus:not(.ag-cell-range-selected),
+.ag-theme-balham .ag-rtl .ag-has-focus .ag-cell-focus.ag-cell-range-single-cell,
+.ag-theme-balham
+  .ag-rtl
+  .ag-cell-focus.ag-cell-range-single-cell.ag-cell-range-handle {
+  border: none !important;
+  outline: none !important;
+}
+
+.ag-theme-balham .ag-row-selected {
+  background-color: var(--color-lightBlue) !important;
+}
+
+.ag-icon {
+  color: var(--color-white) !important;
+}
+
+.ag-layout-normal {
+  border: none !important;
+}
+
+.ag-paging-row-summary-panel {
+  color: var(--color-jetBlack);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Open Sans';
+}
+
+.ag-paging-page-summary-panel {
+  color: var(--color-jetBlack);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Open Sans';
+}
+
+.ag-icon-previous {
+  color: var(--color-jetBlack) !important;
+}
+
+.ag-icon-first,
+.ag-icon-next,
+.ag-icon-last {
+  color: var(--color-jetBlack) !important;
+}
+
+.ag-header {
+  background-color: var(--color-stone) !important;
+}
+
+.columnList__hyperlink {
+  color: var(--color-teal);
+  cursor: pointer;
+}
+
+.columnList__number {
+  text-align: right;
+}
+
+.columnList__rows {
+  color: var(--color-jetBlack);
+}
+
+.dataTable__rows {
+  color: var(--color-jetBlack);
+}
+
+.dataTable__hyperlink {
+  color: var(--color-teal);
+  cursor: pointer;
+}
+
+.dataTable__number {
+  text-align: right;
+}
