@@ -9,13 +9,14 @@ const {
   WithValidation: SQFormTextareaWithValidation
 } = composeStories(stories);
 
-describe('SQFormTextField Tests', () => {
-  describe('Text Field Only', () => {
+describe('SQFormTextarea Tests', () => {
+  describe('Textarea Only', () => {
     it('should render a label and text box', () => {
       render(<SQFormTextarea size="auto" />);
 
-      //There's 2 labels but one has a parent with aria-hidden
-      const label = screen.getAllByText(/textarea/i)[0];
+      const label = screen
+        .getAllByText(/textarea/i)
+        .find(item => item.parentElement.tagName === 'LABEL');
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent('Textarea');
 
@@ -86,7 +87,9 @@ describe('SQFormTextField Tests', () => {
 
       render(<SQFormTextarea size="auto" maxCharacters={maxCharacters} />);
 
-      const charCount = screen.getAllByText(`Textarea : 0/${maxCharacters}`)[0];
+      const charCount = screen
+        .getAllByText(`Textarea : 0/${maxCharacters}`)
+        .find(item => item.parentElement.tagName === 'LABEL');
       expect(charCount).toBeInTheDocument();
 
       const textbox = screen.getByRole('textbox', {name: /textarea/i});
@@ -94,9 +97,9 @@ describe('SQFormTextField Tests', () => {
       userEvent.type(textbox, 'Hello World');
 
       expect(textbox).toHaveValue('Hello');
-      const charCountAfter = screen.getAllByText(
-        `Textarea : ${maxCharacters}/${maxCharacters}`
-      )[0];
+      const charCountAfter = screen
+        .getAllByText(`Textarea : ${maxCharacters}/${maxCharacters}`)
+        .find(item => item.parentElement.tagName === 'LABEL');
       expect(charCountAfter).toBeInTheDocument();
     });
 
@@ -111,7 +114,7 @@ describe('SQFormTextField Tests', () => {
     });
   });
 
-  describe('Text Field With Validation', () => {
+  describe('Textarea With Validation', () => {
     it('should highlight field if required by no value selected', () => {
       render(<SQFormTextareaWithValidation size="auto" />);
 
