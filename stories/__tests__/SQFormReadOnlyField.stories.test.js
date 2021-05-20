@@ -10,7 +10,7 @@ const {
 } = composeStories(stories);
 
 describe('SQFormReadOnlyField Tests', () => {
-  describe('Field Only', () => {
+  describe('Default ReadOnly Field', () => {
     it('should render a label and read-only text field', () => {
       render(<SQFormReadOnlyField size="auto" />);
 
@@ -22,7 +22,7 @@ describe('SQFormReadOnlyField Tests', () => {
       expect(textField).toBeInTheDocument();
     });
 
-    it('should render with "- -" initial value', () => {
+    it('should render with default "- -" initialValue', () => {
       render(<SQFormReadOnlyField size="auto" />);
 
       const textField = screen.getByRole('textbox', {name: /readonly field/i});
@@ -39,8 +39,8 @@ describe('SQFormReadOnlyField Tests', () => {
     });
   });
 
-  describe('ReadOnly Field With Initial Value', () => {
-    it('should render with the initialValue provided', () => {
+  describe('ReadOnly Field With Custom Initial Value', () => {
+    it('should render with the custom initialValue provided', () => {
       const initialValue = 'Hello world!';
       render(
         <SQFormReadOnlyFieldWithInitialValue
