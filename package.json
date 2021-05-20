@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "4.5.14",
+  "version": "4.5.15",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "private": false,
@@ -76,7 +76,7 @@
     "react-text-mask": "^5.4.3",
     "react-weekly-schedule": "0.0.0-development",
     "react-window": "^1.8.5",
-    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.0.4",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.0.6",
     "text-mask-addons": "^3.8.0",
     "use-debounce": "^6.0.0"
   },
