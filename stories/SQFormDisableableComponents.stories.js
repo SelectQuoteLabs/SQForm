@@ -1,5 +1,4 @@
 import React from 'react';
-import {SQForm} from 'scplus-shared-components';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import * as Yup from 'yup';
 import Card from '@material-ui/core/Card';
@@ -15,7 +14,8 @@ import {
   SQFormMultiSelect,
   SQFormTextField,
   SQFormTextarea,
-  SQFormCheckbox
+  SQFormCheckbox,
+  SQForm
 } from '../src';
 
 export default {
