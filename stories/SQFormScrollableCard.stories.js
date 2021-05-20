@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 
 import {SQFormScrollableCard, SQFormTextField} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
@@ -131,12 +130,3 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
-
-export const WithValidation = Template.bind({});
-WithValidation.args = {
-  ...defaultArgs,
-  title: 'With Validation',
-  validationSchema: {
-    hello: Yup.string().required('Required')
-  }
-};

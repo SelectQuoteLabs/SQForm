@@ -34,4 +34,5 @@ export {default as SQFormTextarea} from './components/SQForm/SQFormTextarea';
 export {default as SQFormTextField} from './components/SQForm/SQFormTextField';
 export {default as SQFormMultiSelect} from './components/SQForm/SQFormMultiSelect';
 export {default as SQFormMaskedTextField} from './components/SQForm/SQFormMaskedTextField';
+export {default as SQFormHelperText} from './components/SQForm/SQFormHelperText';
 export {default as SQFormScrollableCard} from './components/SQFormScrollableCard';
