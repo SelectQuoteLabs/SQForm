@@ -1,3 +1,10 @@
+### [4.5.15](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.14...v4.5.15) (2021-05-20)
+
+
+### Bug Fixes
+
+* 🐛 Upgrade SSC version to receive button style fix ([c91067f](https://github.com/SelectQuoteLabs/SQForm/commit/c91067f68fe552c20dc2041c200d8b59e7aae8db))
+
 ### [4.5.14](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.13...v4.5.14) (2021-05-11)
 
 
