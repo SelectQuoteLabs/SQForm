@@ -87,7 +87,11 @@ function SQFormDatePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isRequired}
-                onClick={isCalendarOnly ? toggleCalendar : handleClickAway}
+                onClick={
+                  isCalendarOnly && !isDisabled
+                    ? toggleCalendar
+                    : handleClickAway
+                }
                 classes={classes}
               />
             );
