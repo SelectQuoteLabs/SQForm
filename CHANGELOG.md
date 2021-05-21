@@ -1,3 +1,10 @@
+### [4.5.16](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.15...v4.5.16) (2021-05-21)
+
+
+### Bug Fixes
+
+* 🐛 Ensure users cant open calendar input on disabled picker ([35c38a2](https://github.com/SelectQuoteLabs/SQForm/commit/35c38a2c2b3988f92c2b77f88d84187d675c3725)), closes [#260](https://github.com/SelectQuoteLabs/SQForm/issues/260)
+
 ### [4.5.15](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.14...v4.5.15) (2021-05-20)
 
 
