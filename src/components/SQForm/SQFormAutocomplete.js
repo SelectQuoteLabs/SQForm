@@ -134,9 +134,9 @@ function SQFormAutocomplete({
   React.useEffect(() => {
     // Form Reset
     if (prevValue && inputValue && !value) {
-      setInputValue('');
+      setInputValue(displayEmpty ? EMPTY_OPTION.label : '');
     }
-  }, [value, inputValue, name, prevValue, values]);
+  }, [value, inputValue, name, prevValue, values, displayEmpty]);
 
   const handleAutocompleteBlur = React.useCallback(
     event => {
