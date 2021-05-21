@@ -1,3 +1,10 @@
+### [4.5.17](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.16...v4.5.17) (2021-05-21)
+
+
+### Bug Fixes
+
+* 🐛 Correctly reset displayempty autocomplete to '- -' ([5fb289c](https://github.com/SelectQuoteLabs/SQForm/commit/5fb289ce442e7d1f4aec37a9996f906cd0e00d79)), closes [#250](https://github.com/SelectQuoteLabs/SQForm/issues/250)
+
 ### [4.5.16](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.15...v4.5.16) (2021-05-21)
 
 
