@@ -21,18 +21,18 @@ function SQFormMaskedTextField({
   mask,
   name,
   label,
-  isDisabled,
-  isRequired,
+  isDisabled = false,
+  isRequired = false,
   placeholder,
-  size,
+  size = 'auto',
   onBlur,
   onChange,
   startAdornment,
   endAdornment,
-  type,
+  type = 'text',
   InputProps,
-  inputProps,
-  muiFieldProps
+  inputProps = {},
+  muiFieldProps = {}
 }) {
   return (
     <SQFormTextField
