@@ -1,250 +1,103 @@
 import React from 'react';
 import * as Yup from 'yup';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
-import {Grid} from '@material-ui/core';
-import {CardList, SectionHeader} from 'scplus-shared-components';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDialogStepper.md';
 
 import {
   SQFormTextField,
-  SQFormCheckbox,
   SQFormDialogStep,
-  SQFormDialogStepper,
-  SQFormInclusionList,
-  SQFormInclusionListItem,
-  SQFormResetInitialValuesButton
+  SQFormDialogStepper as SQFormDialogStepperComponent,
+  SQFormDropdown
 } from '../src';
 
 export default {
   title: 'Forms/SQFormDialogStepper',
-  decorators: [withKnobs],
+  component: SQFormDialogStepperComponent,
+  argTypes: {
+    onClose: {action: 'onClose', table: {disable: true}},
+    onSubmit: {action: 'onSubmit', table: {disable: true}},
+    children: {table: {disable: true}}
+  },
   parameters: {
-    docs: {page: createDocsPage({markdown, showStories: false})}
+    docs: {
+      page: createDocsPage({markdown, showStories: false}),
+      source: {
+        type: 'code'
+      }
+    }
   }
 };
 
-const handleSubmit = (values, actions) => {
+const handleSubmit = values => {
   window.alert(JSON.stringify(values, null, 2));
 };
 
-export const SQFormDialogStepperWithValidationAndHeightStyle = () => {
-  const quotesList = [
-    {
-      id: 1,
-      accountId: 1273123,
-      name: 'Ashley Payne',
-      PLRule: 'Quoted - LowInterest - Attempt2'
-    },
-    {
-      id: 2,
-      accountId: 1277773123,
-      name: 'Tom Payne',
-      PLRule: 'Quoted - LowInterest - Attempt2'
-    },
-    {
-      id: 3,
-      accountId: 1277773123,
-      name: 'Tom Tim',
-      PLRule: 'Quoted - LowInterest - Attempt2'
-    },
-    {
-      id: 4,
-      accountId: 1277773123,
-      name: 'Tom Thumb',
-      PLRule: 'Quoted - LowInterest - Attempt2'
-    }
-  ];
+const personalDataInitialValues = {
+  firstName: '',
+  lastName: ''
+};
 
-  const quotedList = () => {
-    const mappedList = quotesList.map(listItem => ({
-      id: listItem.id,
-      header: `Acct ID : ${listItem.accountId}`,
-      secondaryRows: [
-        `Name : ${listItem.name}`,
-        `PV Rule : ${listItem.PLRule}`
-      ],
-      onClick: () => {
-        console.log(`Account ${listItem.accountId}`);
-      }
-    }));
-    return [
-      {
-        header: 'Create a New Quote',
-        id: 123,
-        onClick: () => {
-          console.log(`Create new account`);
-        }
-      },
-      ...mappedList
-    ];
-  };
+const accountDetailsInitValues = {
+  newPatient: '',
+  accountID: ''
+};
+const booleanOptions = [
+  {
+    label: 'Yes',
+    value: 'yes'
+  },
+  {
+    label: 'No',
+    value: 'no'
+  }
+];
 
-  const tabOptions = [
-    {
-      label: 'Agent PV',
-      value: 'agentPV',
-      listItems: quotedList(),
-      isSelectable: true
-    }
-  ];
+const defaultArgs = {
+  onSubmit: handleSubmit,
+  initialValues: {...personalDataInitialValues, ...accountDetailsInitValues}
+};
 
-  const initialValues = {
-    friends: ['Joe', 'Jane', 'Jack', 'Jill']
-  };
-  const names = [
-    'Jim',
-    'Jake',
-    'John',
-    'Jose',
-    'Jaipal',
-    'Joe',
-    'Jane',
-    'Jack',
-    'Jill'
-  ];
-
+export const Default = args => {
   return (
     <>
-      <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
-      <SQFormDialogStepper
-        title="Quote Tool"
-        isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-        onClose={action('Close button clicked')}
-        contentStyle={{
-          height: '100%',
-          padding: '15px 15px'
-        }}
-        fullWidth
-        muiGridProps={{
-          justify: 'space-between'
-        }}
-        initialValues={initialValues}
-        setValues={() => {
-          console.log('values set');
-        }}
-        onSubmit={handleSubmit}
-      >
-        <SQFormDialogStep label="Quotes">
-          <CardList
-            shouldRenderHeader={false}
-            contentWidth="100%"
-            contentHeight="250px"
-            cardStyle={{minWidth: 'auto', paddingLeft: '15px'}}
-            isInitiallyExpanded={true}
-            isExpandable={boolean('isExpandable', true)}
-            tabs={tabOptions}
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialogStepperComponent {...args}>
+        <SQFormDialogStep label="Personal Data">
+          <SQFormTextField fullWidth name="firstName" label="First Name" />
+          <SQFormTextField fullWidth name="lastName" label="Last Name" />
+        </SQFormDialogStep>
+        <SQFormDialogStep label="Account Info">
+          <SQFormDropdown
+            name="newPatient"
+            label="New patient"
+            size={4}
+            children={booleanOptions}
+          />
+          <SQFormTextField
+            fullWidth
+            name="accountID"
+            type="number"
+            label="Account ID"
           />
         </SQFormDialogStep>
-        <SQFormDialogStep
-          label="Dependents"
-          validationSchema={{
-            friends: Yup.array()
-          }}
-        >
-          <div style={{padding: '15px 15px 0px 15px', width: '100%'}}>
-            <SectionHeader
-              informativeHeading="Select up to 5 dependents to be added"
-              title="Dependants"
-            />
-            <SQFormInclusionList
-              name="friends"
-              useSelectAll={true}
-              selectAllData={names} // whatever you'd want 'select all' to include
-              selectAllContainerProps={{
-                // MUI Grid container props, plus a style prop if you're feeling fancy
-                direction: 'column',
-                wrap: 'nowrap',
-                style: {
-                  paddingLeft: '15px'
-                }
-              }}
-            >
-              {arrayHelpers => {
-                const {values} = arrayHelpers.form;
-                return (
-                  <Grid
-                    container
-                    direction="column"
-                    wrap="nowrap"
-                    style={{
-                      height: 180,
-                      overflow: 'auto',
-                      padding: '0 16px'
-                    }}
-                  >
-                    {names.map(name => {
-                      return (
-                        <Grid item key={name}>
-                          <SQFormInclusionListItem
-                            name="friends"
-                            label={name}
-                            isChecked={values.friends.includes(name)}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                arrayHelpers.push(name);
-                              } else {
-                                const idx = values.friends.indexOf(name);
-                                arrayHelpers.remove(idx);
-                              }
-                            }}
-                          />
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                );
-              }}
-            </SQFormInclusionList>
-          </div>
-        </SQFormDialogStep>
-      </SQFormDialogStepper>
+      </SQFormDialogStepperComponent>
     </>
   );
 };
 
-export const SQDialogStepperWithValidation = () => {
-  const personalDataInitialValues = {
-    firstName: '',
-    lastName: '',
-    middleI: '',
-    newAccount: false,
-    description: ''
-  };
+Default.args = defaultArgs;
 
-  const accountDetailsInitValues = {
-    accountID: '',
-    age: ''
-  };
-
+export const WithValidation = args => {
   return (
     <>
-      <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
-      <SQFormDialogStepper
-        title="SQ Stepper Form"
-        isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-        onClose={action('Close button clicked')}
-        contentStyle={{height: '300px'}}
-        fullWidth
-        maxWidth="md"
-        muiGridProps={{
-          justify: 'space-between',
-          spacing: 6
-        }}
-        dialogProps={{
-          style: {width: 'calc(100% - 90px)'},
-          BackdropProps: {style: {position: 'absolute'}}
-        }}
-        initialValues={{
-          ...personalDataInitialValues,
-          ...accountDetailsInitValues
-        }}
-        setValues={formValues => {
-          console.log('values set', formValues);
-        }}
-        onSubmit={handleSubmit}
-      >
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialogStepperComponent {...args}>
         <SQFormDialogStep
           label="Personal Data"
           validationSchema={{
@@ -252,18 +105,6 @@ export const SQDialogStepperWithValidation = () => {
             lastName: Yup.string().required('Required')
           }}
         >
-          <SectionHeader title="Prefill Address">
-            <div style={{marginRight: '10px'}}>
-              <SQFormResetInitialValuesButton
-                tooltip="Clear Addresses"
-                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-                initialValuesObject={personalDataInitialValues}
-              >
-                Clear Addresses
-              </SQFormResetInitialValuesButton>
-            </div>
-          </SectionHeader>
-
           <SQFormTextField
             fullWidth
             name="firstName"
@@ -276,110 +117,71 @@ export const SQDialogStepperWithValidation = () => {
             label="Last Name"
             isRequired={true}
           />
-          <SQFormTextField fullWidth name="middleI" label="Middle Initial" />
-          <SQFormTextField fullWidth name="nickname" label="Nick-name" />
-          <SQFormTextField fullWidth name="alias" label="Alias" />
-          <SQFormCheckbox
-            name="newAccount"
-            type="checkbox"
-            label="New Account"
-          />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
           validationSchema={{
-            accountID: Yup.mixed().when('newAccount', {
-              is: true,
+            accountID: Yup.mixed().when('newPatient', {
+              is: value => value === 'yes',
               then: Yup.number()
                 .required('Required for new account')
                 .min(100, 'Required for new account')
-            }),
-            age: Yup.string().required('Required')
+            })
           }}
         >
-          <SectionHeader title="Prefill Address">
-            <div style={{marginRight: '10px'}}>
-              <SQFormResetInitialValuesButton
-                tooltip="Reset Accounts"
-                confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
-                initialValuesObject={accountDetailsInitValues}
-              >
-                Reset Accounts
-              </SQFormResetInitialValuesButton>
-            </div>
-          </SectionHeader>
-
+          <SQFormDropdown
+            name="newPatient"
+            label="New patient"
+            size={4}
+            children={booleanOptions}
+          />
           <SQFormTextField
             fullWidth
             name="accountID"
             type="number"
             label="Account ID"
           />
-          <SQFormTextField name="age" label="Age" size={2} isRequired />
         </SQFormDialogStep>
-        <SQFormDialogStep
-          label="More Info"
-          validationSchema={{
-            description: Yup.string().required('Required')
-          }}
-        >
-          <SQFormTextField fullWidth name="description" label="Description" />
-        </SQFormDialogStep>
-      </SQFormDialogStepper>
+      </SQFormDialogStepperComponent>
     </>
   );
 };
 
-export const SQDialogStepperLoading = () => {
+WithValidation.args = defaultArgs;
+
+export const WithLoadingStep = args => {
   return (
     <>
-      <h3>Toggle the isOpen checkbox in the Knobs tab to view the Stepper</h3>
-      <SQFormDialogStepper
-        title="SQ Stepper Form"
-        isOpen={boolean('isOpen', false, 'Open/Close Dialog')}
-        onClose={action('Close button clicked')}
-        fullWidth
-        maxWidth="md"
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          text: ''
-        }}
-        onSubmit={handleSubmit}
-      >
-        <SQFormDialogStep
-          label="First Name"
-          validationSchema={{
-            firstName: Yup.string().required('Required')
-          }}
-          isLoading={false}
-        >
-          <div>
-            <SQFormTextField
-              fullWidth
-              name="firstName"
-              label="First Name"
-              isRequired={true}
-            />
-            <SQFormTextField fullWidth name="text" label="Text" />
-          </div>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialogStepperComponent {...args}>
+        <SQFormDialogStep label="Personal Data">
+          <SQFormTextField fullWidth name="firstName" label="First Name" />
+          <SQFormTextField fullWidth name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
-          label="Last Name"
-          validationSchema={{
-            lastName: Yup.string().required('Required')
-          }}
+          label="Account Info"
           isLoading={true}
           loadingMessage="Loading data for the step"
         >
+          <SQFormDropdown
+            name="newPatient"
+            label="New patient"
+            size={4}
+            children={booleanOptions}
+          />
           <SQFormTextField
             fullWidth
-            name="lastName"
-            label="Last Name"
-            isRequired={true}
+            name="accountID"
+            type="number"
+            label="Account ID"
           />
         </SQFormDialogStep>
-      </SQFormDialogStepper>
+      </SQFormDialogStepperComponent>
     </>
   );
 };
+
+WithLoadingStep.args = defaultArgs;
