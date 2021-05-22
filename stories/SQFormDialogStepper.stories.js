@@ -16,6 +16,7 @@ export default {
   argTypes: {
     onClose: {action: 'onClose', table: {disable: true}},
     onSubmit: {action: 'onSubmit', table: {disable: true}},
+    setValues: {action: 'setValues', table: {disable: true}},
     children: {table: {disable: true}}
   },
   parameters: {
@@ -88,7 +89,10 @@ export const Default = args => {
   );
 };
 
-Default.args = defaultArgs;
+Default.args = {
+  ...defaultArgs,
+  title: 'Default'
+};
 
 export const WithValidation = args => {
   return (
@@ -147,7 +151,10 @@ export const WithValidation = args => {
   );
 };
 
-WithValidation.args = defaultArgs;
+WithValidation.args = {
+  ...defaultArgs,
+  title: 'With Validation'
+};
 
 export const WithLoadingStep = args => {
   return (
@@ -184,4 +191,7 @@ export const WithLoadingStep = args => {
   );
 };
 
-WithLoadingStep.args = defaultArgs;
+WithLoadingStep.args = {
+  ...defaultArgs,
+  title: 'With Loading Step'
+};
