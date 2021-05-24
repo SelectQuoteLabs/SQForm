@@ -1,25 +1,20 @@
 import React from 'react';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-  within
-} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
 
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDialog.stories';
 
-const {Default} = composeStories(stories);
+const {Default, WithValidation, WithAutoFocus} = composeStories(stories);
 
 window.alert = jest.fn();
 const handleClose = jest.fn();
+const handleSave = jest.fn();
 
 afterEach(() => {
   window.alert.mockClear();
   handleClose.mockClear();
+  handleSave.mockClear();
 });
 
 const mockData = {
@@ -27,76 +22,73 @@ const mockData = {
 };
 
 describe('Tests for Default', () => {
-  /**
-   * 1. it renders default when the `isOpen` value changes to true,
-   * 2. the Title is correct,
-   * 3. the cancel button closes the dialog,
-   * 4. and the save button submits form and closes dialog
-   */
-  it('renders Default and calls Save on submit', async () => {
-    render(<Default onClose={handleClose} isOpen={true} />);
+  it('renders Default with correct Title, form updates, and calls onSave on submit', async () => {
+    render(<Default isOpen={true} onSave={handleSave} onClose={handleClose} />);
 
-    userEvent.type(screen.getByLabelText(/hello/i), mockData.hello);
-    // screen.debug();
-    fireEvent.click(screen.getByRole('button', {name: /cancel/i}));
-    expect(handleClose).toHaveBeenCalledTimes(1);
-    // await waitFor(() =>
-    //   expect(window.alert).toHaveBeenCalledWith(
-    //     JSON.stringify(
-    //       {
-    //         hello: mockData.hello
-    //       },
-    //       null,
-    //       2
-    //     )
-    //   )
-    // );
+    const dialogTitleValue = 'Default';
+    const dialogTitle = screen.getByText(dialogTitleValue);
+    expect(dialogTitle.textContent).toEqual(dialogTitleValue);
+
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
+
+    const saveButton = screen.getByRole('button', {name: /save/i});
+    userEvent.click(saveButton);
+
+    await waitFor(() => {
+      expect(handleSave).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('renders Default and calls onClose on cancel', async () => {
+    render(<Default isOpen={true} onSave={handleSave} onClose={handleClose} />);
+
+    const cancelButton = screen.getByRole('button', {name: /cancel/i});
+    userEvent.click(cancelButton);
+
+    await waitFor(() => {
+      expect(handleClose).toHaveBeenCalledTimes(1);
+    });
   });
 });
 
-// describe('Tests for WithValidation', () => {
-//   /**
-//    * 1. When the form validationSchema is not satisfied, the Save button is disabled
-//    * 2. When the validationSchema IS satisfied, the Save button is enabled
-//    * 3. onClick of save button, submits form values
-//    */
-//   it('should not submit until all required fields are filled out', async () => {
-//     render(<WithValidation />);
+describe('Tests for WithValidation', () => {
+  it('renders WithValidation with correct Title, save is disabled before completing the textfield, enabled after, and calls onSave on submit', async () => {
+    render(
+      <WithValidation isOpen={true} onSave={handleSave} onClose={handleClose} />
+    );
 
-//     // Name
-//     userEvent.type(screen.getByLabelText(/hello/i), mockData.name);
-//     expect(screen.getByLabelText(/hello/i)).toHaveValue(mockData);
-//     expect(
-//       screen.getByRole('button', {
-//         name: /form submission/i
-//       })
-//     ).toBeDisabled();
+    const dialogTitleValue = 'With Validation';
+    const dialogTitle = screen.getByText(dialogTitleValue);
+    expect(dialogTitle.textContent).toEqual(dialogTitleValue);
 
-//     // Submit enabled
-//     await waitFor(() =>
-//       expect(
-//         screen.getByRole('button', {
-//           name: /save/i
-//         })
-//       ).toBeEnabled()
-//     );
+    const saveButton = screen.getByRole('button', {name: /save/i});
+    expect(saveButton).toBeDisabled();
 
-//     userEvent.click(
-//       screen.getByRole('button', {
-//         name: /save/i
-//       })
-//     );
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
 
-//     await waitFor(() =>
-//       expect(window.alert).toHaveBeenCalledWith(
-//         JSON.stringify(
-//           {
-//             name: mockData.name
-//           },
-//           null,
-//           2
-//         )
-//       )
-//     );
-//   });
-// });
+    await waitFor(() => expect(saveButton).toBeEnabled());
+
+    userEvent.click(saveButton);
+
+    await waitFor(() => {
+      expect(handleSave).toHaveBeenCalledTimes(1);
+    });
+  });
+});
+
+describe('Tests for WithAutoFocus', () => {
+  it('renders WithAutoFocus with correct Title, textfield is focused element', async () => {
+    render(
+      <WithAutoFocus isOpen={true} onSave={handleSave} onClose={handleClose} />
+    );
+
+    const dialogTitleValue = 'With Auto Focus';
+    const dialogTitle = screen.getByText(dialogTitleValue);
+    expect(dialogTitle.textContent).toEqual(dialogTitleValue);
+
+    const textfield = screen.getByLabelText(/hello/i);
+    expect(textfield).toBe(document.activeElement);
+  });
+});
