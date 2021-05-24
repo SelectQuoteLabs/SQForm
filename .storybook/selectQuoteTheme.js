@@ -1,6 +1,7 @@
 import {create} from '@storybook/theming/create';
+import SQLogo from '../src/images/SQ-logo-slogan.png';
 
 export default create({
   base: 'light',
-  brandImage: require('../src/images/SQ-logo-slogan.png')
+  brandImage: SQLogo
 });
