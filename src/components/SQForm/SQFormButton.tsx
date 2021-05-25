@@ -5,10 +5,10 @@ import {useFormButton} from './useFormButton';
 interface Props {
   children: React.ReactNode;
   isDisabled?: boolean;
-  shouldRequireFieldUpdates: boolean;
-  title: string;
-  type: 'submit' | 'reset';
-  onClick: () => void;
+  shouldRequireFieldUpdates?: boolean;
+  title?: string;
+  type?: 'submit' | 'reset';
+  onClick?: () => void;
 }
 
 function SQFormButton({
