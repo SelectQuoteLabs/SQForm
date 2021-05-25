@@ -2,8 +2,14 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["jest"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [
+      "jest"
+    ],
     "allowJs": true, // TODO: Change to false once fully migrated to TS
     "skipLibCheck": false,
     "esModuleInterop": true,
@@ -19,6 +25,10 @@
     "emitDeclarationOnly": true,
     "outDir": "dist"
   },
-  "include": ["./src"],
-  "exclude": ["**/*.test.ts"]
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "**/*.test.ts"
+  ]
 }
