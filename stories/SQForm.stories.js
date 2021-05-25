@@ -29,6 +29,7 @@ import {
   SQFormRadioButtonGroup,
   SQFormCheckboxGroup,
   SQFormMaskedTextField,
+  useSQFormContext,
   MASKS
 } from '../src';
 
@@ -148,6 +149,52 @@ const handleSubmit = (values, actions) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
   actions.resetForm();
+};
+
+export const SQFormIsValidExample = () => {
+  const initialValuesaba = {
+    name: '',
+    gender: ''
+  };
+
+  const validationSchemaaba = {
+    name: Yup.string().required('Required'),
+    gender: Yup.string().required('Required')
+  };
+  function FormButtons() {
+    const {isValid} = useSQFormContext();
+
+    console.log('isValid: ', isValid);
+
+    return (
+      <Grid item sm={12}>
+        <Grid container justify="space-between">
+          <SQFormButton title="Reset" type="reset">
+            RESET
+          </SQFormButton>
+          <SQFormButton>Submit</SQFormButton>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  return (
+    <SQForm
+      initialValues={initialValuesaba}
+      validationSchema={validationSchemaaba}
+      validateOnMount={true}
+      onSubmit={() => {}}
+    >
+      <SQFormTextField name="name" label="Name" isRequired />
+      <SQFormDropdown name="gender" label="Gender" isRequired displayEmpty>
+        {[
+          {label: 'Male', value: 'male'},
+          {label: 'Female', value: 'female'}
+        ]}
+      </SQFormDropdown>
+      <FormButtons />
+    </SQForm>
+  );
 };
 
 export const BasicForm = () => {
