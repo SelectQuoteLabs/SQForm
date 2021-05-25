@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Yup from 'yup';
 import {
   Card,
   CardHeader,
@@ -9,8 +10,10 @@ import {
   makeStyles
 } from '@material-ui/core';
 import {Formik, Form} from 'formik';
+import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
+import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
 const useStyles = makeStyles(theme => {
   return {
@@ -68,17 +71,33 @@ function SQFormScrollableCard({
   validationSchema
 }) {
   const hasSubHeader = Boolean(SubHeaderComponent);
+
+  const validationYupSchema = React.useMemo(() => {
+    if (!validationSchema) return;
+
+    return Yup.object().shape(validationSchema);
+  }, [validationSchema]);
+
+  const initialErrors = useInitialRequiredErrors(validationSchema);
+
   const classes = useStyles({hasSubHeader});
+
+  const handleSubmit = useDebouncedCallback(
+    (...args) => onSubmit(...args),
+    500,
+    {leading: true, trailing: false}
+  );
 
   return (
     <Formik
       enableReinitialize={enableReinitialize}
+      initialErrors={initialErrors}
       initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+      validationSchema={validationYupSchema}
       validateOnMount={true}
     >
-      {() => {
+      {_props => {
         return (
           <Form className={classes.form}>
             <Card
@@ -95,27 +114,23 @@ function SQFormScrollableCard({
               <CardContent className={classes.cardContent}>
                 {SubHeaderComponent}
                 <Grid
+                  {...muiGridProps}
                   container
                   spacing={muiGridProps.spacing ?? 2}
-                  {...muiGridProps}
                 >
                   {children}
                 </Grid>
               </CardContent>
               <CardActions className={classes.cardFooter}>
-                <SQFormButton
-                  variant="outlined" // TODO: Make it Ghost Button
-                  type="reset"
-                  title="Reset Form"
-                >
+                <SQFormButton type="reset" title="Reset Form">
                   {resetButtonText}
                 </SQFormButton>
                 {shouldRenderHelperText && (
                   <SQFormHelperText
                     isFailedState={isFailedState}
-                    helperErrorText={helperErrorText}
-                    helperFailText={helperFailText}
-                    helperValidText={helperValidText}
+                    errorText={helperErrorText}
+                    failText={helperFailText}
+                    validText={helperValidText}
                   />
                 )}
                 <SQFormButton isDisabled={isDisabled}>
@@ -132,8 +147,7 @@ function SQFormScrollableCard({
 
 SQFormScrollableCard.propTypes = {
   /** Form related Field(s) and components */
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType])
-    .isRequired,
+  children: PropTypes.node.isRequired,
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize: PropTypes.bool,
   /** Helper text to display in the Footer when the Form is in an Error state */

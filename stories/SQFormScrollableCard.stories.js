@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 
 import {SQFormScrollableCard, SQFormTextField} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
@@ -22,7 +23,9 @@ const defaultArgs = {
   muiGridProps: {
     spacing: 2,
     alignItems: 'center'
-  }
+  },
+  onSubmit: () => {},
+  validationSchema: {hello: Yup.string().required('Required')}
 };
 
 const Template = args => {
