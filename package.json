@@ -3,11 +3,12 @@
   "version": "4.5.14",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
+  "types": "dist/index.d.ts",
   "private": false,
   "sideEffects": false,
   "scripts": {
     "test": "jest --watch",
-    "build": "rollup --config",
+    "build": "rollup --config && tsc",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "lint.fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
     "lint.staged": "lint-staged",
