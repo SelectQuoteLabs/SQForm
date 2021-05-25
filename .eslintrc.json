@@ -6,7 +6,8 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:testing-library/recommended",
-    "plugin:testing-library/react"
+    "plugin:testing-library/react",
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": [
     "import",
@@ -31,6 +32,8 @@
     "testing-library/prefer-screen-queries": "error",
     "testing-library/prefer-wait-for": "error",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ]
   }
 }
