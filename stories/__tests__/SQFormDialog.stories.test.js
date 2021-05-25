@@ -2,7 +2,7 @@ import React from 'react';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
 
-import userEvent, {specialChars} from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDialog.stories';
 
 const {Default, WithValidation, WithAutoFocus} = composeStories(stories);
@@ -34,8 +34,10 @@ describe('Tests for Default', () => {
       />
     );
 
-    const dialogTitle = screen.getByText(dialogTitleValue);
-    expect(dialogTitle.textContent).toEqual(dialogTitleValue);
+    const dialogTitle = await waitFor(() =>
+      screen.findByText(dialogTitleValue)
+    );
+    expect(dialogTitle).toHaveTextContent(dialogTitleValue);
   });
 
   it('should handle form updates and submit said updates on save button click', async () => {
@@ -59,7 +61,7 @@ describe('Tests for Default', () => {
     userEvent.type(textField, mockData.hello);
 
     // https://testing-library.com/docs/ecosystem-user-event/#specialchars
-    userEvent.type(textField, `${specialChars.enter}`);
+    userEvent.type(textField, '{enter}');
 
     await waitFor(() => {
       expect(handleSave).toHaveBeenCalledTimes(1);
@@ -117,8 +119,10 @@ describe('Tests for WithAutoFocus', () => {
     );
 
     const dialogTitleValue = 'With Auto Focus';
-    const dialogTitle = screen.getByText(dialogTitleValue);
-    expect(dialogTitle.textContent).toEqual(dialogTitleValue);
+    const dialogTitle = await waitFor(() =>
+      screen.findByText(dialogTitleValue)
+    );
+    expect(dialogTitle).toHaveTextContent(dialogTitleValue);
 
     const textfield = screen.getByLabelText(/hello/i);
     expect(textfield).toBe(document.activeElement);
