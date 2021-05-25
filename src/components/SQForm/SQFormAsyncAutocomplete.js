@@ -237,8 +237,8 @@ SQFormAsyncAutocomplete.propTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     })
   ),
-  /** updates parent's local state value passed to useSWR query */
-  handleAsyncInputChange: PropTypes.func,
+  /** updates consumer's local state value for the input, which is passed to a useQuery hook */
+  handleAsyncInputChange: PropTypes.func.isRequired,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
   /** Required property used to highlight input and label if not fulfilled */

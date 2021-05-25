@@ -26,11 +26,12 @@ const defaultArgs = {
 };
 
 const Template = args => {
-  const {schema, ...rest} = args;
+  const {schema, SQFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
       validationSchema={schema}
+      {...SQFormProps}
     >
       <SQFormTextareaComponent
         {...rest}
