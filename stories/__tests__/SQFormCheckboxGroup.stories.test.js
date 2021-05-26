@@ -29,6 +29,25 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(checkboxes.length).toBe(SHOPPING_LIST_OPTIONS.length);
     });
 
+    it('should display as checked when initial values are set', () => {
+      const initialValues = {
+        shoppingList: [SHOPPING_LIST_OPTIONS[0].value]
+      };
+
+      render(<SQFormCheckboxGroup SQFormProps={{initialValues}} size="auto" />);
+
+      const checkboxLabel = screen.getByLabelText(
+        SHOPPING_LIST_OPTIONS[0].label
+      );
+
+      expect(checkboxLabel).toBeChecked();
+
+      const nextCheckboxLabel = screen.getByLabelText(
+        SHOPPING_LIST_OPTIONS[1].label
+      );
+      expect(nextCheckboxLabel).not.toBeChecked();
+    });
+
     it('should show as checked when a checkbox is clicked', () => {
       render(<SQFormCheckboxGroup size="auto" />);
 
