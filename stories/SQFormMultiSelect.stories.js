@@ -43,7 +43,8 @@ const MOCK_FRIENDS_OPTIONS = [
 
 const defaultArgs = {
   label: 'Friends',
-  name: 'friends'
+  name: 'friends',
+  children: MOCK_FRIENDS_OPTIONS
 };
 
 export const SQFormMultiSelect = args => (
@@ -54,9 +55,7 @@ export const SQFormMultiSelect = args => (
         label={defaultArgs.label}
         {...args}
         size={args.size !== 'auto' ? Number(args.size) : args.size}
-      >
-        {MOCK_FRIENDS_OPTIONS}
-      </SQFormMultiSelectComponent>
+      />
     </SQFormStoryWrapper>
   </div>
 );
