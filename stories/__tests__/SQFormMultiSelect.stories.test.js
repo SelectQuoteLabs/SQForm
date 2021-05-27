@@ -109,14 +109,14 @@ describe('Tests for SQFormMultiSelect', () => {
     expect(expandButton).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('should display icon and text if field is required', async () => {
+  it('should display "required" helper text if field is required', async () => {
     render(<SQFormMultiSelect isRequired={true} size="auto" />);
 
     const required = await screen.findByText(/required/i);
     expect(required).toBeVisible();
   });
 
-  it('should not display icon and text if field is not required', async () => {
+  it('should not display "required" helper text if field is not required', async () => {
     render(<SQFormMultiSelect isRequired={false} size="auto" />);
 
     const required = screen.queryByText(/required/i);
@@ -131,7 +131,6 @@ describe('Tests for SQFormMultiSelect', () => {
     render(
       <SQFormMultiSelect
         size="auto"
-        isRequired
         SQFormProps={{
           validationSchema
         }}
@@ -150,6 +149,6 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const required = screen.getByText(/required/i);
     expect(required).toBeVisible();
-    expect(required).toHaveClass('Mui-required');
+    expect(required).toHaveClass('Mui-error');
   });
 });
