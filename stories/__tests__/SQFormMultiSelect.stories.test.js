@@ -22,11 +22,11 @@ describe('Tests for SQFormMultiSelect', () => {
 
     userEvent.click(expandButton);
 
-    const optionsList = await screen.findByRole('listbox');
-    await waitFor(() => expect(optionsList).toBeInTheDocument());
+    const optionsList = screen.getByRole('listbox');
+    expect(optionsList).toBeInTheDocument();
 
-    const options = await within(optionsList).findAllByRole('option');
-    await waitFor(() => expect(options).toHaveLength(17)); // initial '- -' + 16 MOCK_FRIENDS_OPTIONS
+    const options = within(optionsList).getAllByRole('option');
+    expect(options).toHaveLength(17); // initial '- -' + 16 MOCK_FRIENDS_OPTIONS
   });
 
   it('should render the multiselect with default initial value "- -"', async () => {
@@ -35,9 +35,8 @@ describe('Tests for SQFormMultiSelect', () => {
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {name: /friends/i})
     );
-    await waitFor(() =>
-      expect(expandButton).toHaveTextContent(initialDropdownValue)
-    );
+
+    expect(expandButton).toHaveTextContent(initialDropdownValue);
   });
 
   it('should show empty value "- -" if provided initial value not in options', async () => {
@@ -46,9 +45,8 @@ describe('Tests for SQFormMultiSelect', () => {
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {name: /friends/i})
     );
-    await waitFor(() =>
-      expect(expandButton).toHaveTextContent(initialDropdownValue)
-    );
+
+    expect(expandButton).toHaveTextContent(initialDropdownValue);
   });
 
   it('should show empty list if no options passed', async () => {
@@ -80,10 +78,10 @@ describe('Tests for SQFormMultiSelect', () => {
 
     userEvent.click(expandButton);
 
-    const option1 = await screen.findByText('Jack');
+    const option1 = screen.getByText('Jack');
     userEvent.click(option1);
 
-    const option2 = await screen.findByText('Jill');
+    const option2 = screen.getByText('Jill');
     userEvent.click(option2);
 
     await waitFor(() => expect(expandButton).toHaveTextContent('Jack, Jill'));
