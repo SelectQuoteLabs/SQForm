@@ -10,8 +10,6 @@ const {SQFormMultiSelect} = composeStories(stories);
 
 const initialDropdownValue = '- -';
 
-afterEach(() => {});
-
 describe('Tests for SQFormMultiSelect', () => {
   it('should render a form with a multiselect input and dropdown options', async () => {
     render(<SQFormMultiSelect size="auto" />);
