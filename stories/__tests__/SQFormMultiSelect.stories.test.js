@@ -74,7 +74,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await screen.findByRole('button', {name: /friends/i});
 
-    expect(expandButton).toHaveTextContent('- -');
+    expect(expandButton).toHaveTextContent(initialDropdownValue);
 
     userEvent.click(expandButton);
 
