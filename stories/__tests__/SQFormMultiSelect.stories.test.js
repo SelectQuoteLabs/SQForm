@@ -39,14 +39,29 @@ describe('Tests for SQFormMultiSelect', () => {
     expect(expandButton).toHaveTextContent(initialDropdownValue);
   });
 
-  it('should show empty value "- -" if provided initial value not in options', async () => {
-    render(<SQFormMultiSelect size="auto" initialValue={{friends: [0]}} />);
+  it('should show console warning if provided initial value not in options', async () => {
+    const consoleWarnSpy = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
 
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {name: /friends/i})
+    render(
+      <SQFormMultiSelect
+        size="auto"
+        SQFormProps={{
+          initialValues: {friends: [0]}
+        }}
+      />
     );
 
-    expect(expandButton).toHaveTextContent(initialDropdownValue);
+    await waitFor(() =>
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        expect.stringMatching(
+          /the requested display value.*could not be found/i
+        )
+      )
+    );
+
+    consoleWarnSpy.mockRestore();
   });
 
   it('should show empty list if no options passed', async () => {
@@ -91,7 +106,7 @@ describe('Tests for SQFormMultiSelect', () => {
     render(<SQFormMultiSelect size="auto" isDisabled={true} />);
 
     const expandButton = await screen.findByRole('button', {name: /friends/i});
-    expect(expandButton).toHaveAttribute('aria-disabled');
+    expect(expandButton).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('should display icon and text if field is required', async () => {
@@ -117,7 +132,9 @@ describe('Tests for SQFormMultiSelect', () => {
       <SQFormMultiSelect
         size="auto"
         isRequired
-        validationSchema={validationSchema}
+        SQFormProps={{
+          validationSchema
+        }}
       />
     );
 

@@ -47,18 +47,24 @@ const defaultArgs = {
   children: MOCK_FRIENDS_OPTIONS
 };
 
-export const SQFormMultiSelect = args => (
-  <div style={{minWidth: 250}}>
-    <SQFormStoryWrapper initialValues={{[defaultArgs.name]: []}}>
-      <SQFormMultiSelectComponent
-        name={defaultArgs.name}
-        label={defaultArgs.label}
-        {...args}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
-      />
-    </SQFormStoryWrapper>
-  </div>
-);
+export const SQFormMultiSelect = args => {
+  const {SQFormProps, ...rest} = args;
+  return (
+    <div style={{minWidth: 250}}>
+      <SQFormStoryWrapper
+        initialValues={{[defaultArgs.name]: []}}
+        {...SQFormProps}
+      >
+        <SQFormMultiSelectComponent
+          name={defaultArgs.name}
+          label={defaultArgs.label}
+          {...rest}
+          size={rest.size !== 'auto' ? Number(rest.size) : rest.size}
+        />
+      </SQFormStoryWrapper>
+    </div>
+  );
+};
 SQFormMultiSelect.storyName = 'SQFormMultiSelect';
 SQFormMultiSelect.args = defaultArgs;
 
