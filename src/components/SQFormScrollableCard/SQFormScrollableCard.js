@@ -36,10 +36,13 @@ const useStyles = makeStyles(theme => {
     cardContent: {
       gridArea: 'content',
       overflowY: 'auto',
+      padding: `${theme.spacing(2)}px`
+    },
+    childrenContainer: {
+      marginLeft: 0,
+      marginRight: 0,
       padding: ({hasSubHeader}) => {
-        return hasSubHeader
-          ? theme.spacing(2)
-          : `${theme.spacing(2)}px ${theme.spacing(4)}px`;
+        return hasSubHeader ? `${theme.spacing(2)}px ${theme.spacing(4)}px` : 0;
       }
     },
     cardFooter: {
@@ -68,7 +71,9 @@ function SQFormScrollableCard({
   submitButtonText = 'Submit',
   SubHeaderComponent,
   title,
-  validationSchema
+  validationSchema,
+  isSelfBounding,
+  height
 }) {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
@@ -88,60 +93,74 @@ function SQFormScrollableCard({
     {leading: true, trailing: false}
   );
 
+  const topOffset = document
+    .getElementById(`sqform-scrollable-card-id-${title}`)
+    ?.getBoundingClientRect().top;
+  const calculatedHeight = topOffset
+    ? `calc(100vh - ${topOffset}px - 24px)`
+    : '100%';
+  const heightToUse = height || (isSelfBounding && calculatedHeight) || '100%';
+
   return (
-    <Formik
-      enableReinitialize={enableReinitialize}
-      initialErrors={initialErrors}
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={validationYupSchema}
-      validateOnMount={true}
+    <div
+      id={`sqform-scrollable-card-id-${title}`}
+      style={{height: heightToUse}}
     >
-      {_props => {
-        return (
-          <Form className={classes.form}>
-            <Card
-              raised={true}
-              elevation={1}
-              square={true}
-              className={classes.card}
-            >
-              <CardHeader
-                title={title}
-                className={classes.cardHeader}
-                titleTypographyProps={{variant: 'h4'}}
-              />
-              <CardContent className={classes.cardContent}>
-                {SubHeaderComponent}
-                <Grid
-                  {...muiGridProps}
-                  container
-                  spacing={muiGridProps.spacing ?? 2}
-                >
-                  {children}
-                </Grid>
-              </CardContent>
-              <CardActions className={classes.cardFooter}>
-                <SQFormButton type="reset" title="Reset Form">
-                  {resetButtonText}
-                </SQFormButton>
-                {shouldRenderHelperText && (
-                  <SQFormHelperText
-                    isFailedState={isFailedState}
-                    errorText={helperErrorText}
-                    failText={helperFailText}
-                    validText={helperValidText}
-                  />
-                )}
-                <SQFormButton isDisabled={isDisabled}>
-                  {submitButtonText}
-                </SQFormButton>
-              </CardActions>
-            </Card>
-          </Form>
-        );
-      }}
-    </Formik>
+      <Formik
+        enableReinitialize={enableReinitialize}
+        initialErrors={initialErrors}
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationYupSchema}
+        validateOnMount={true}
+      >
+        {_props => {
+          return (
+            <Form className={classes.form}>
+              <Card
+                raised={true}
+                elevation={1}
+                square={true}
+                className={classes.card}
+              >
+                <CardHeader
+                  title={title}
+                  className={classes.cardHeader}
+                  titleTypographyProps={{variant: 'h4'}}
+                />
+                <CardContent className={classes.cardContent}>
+                  {SubHeaderComponent}
+                  <Grid
+                    {...muiGridProps}
+                    container
+                    spacing={muiGridProps.spacing ?? 2}
+                    className={classes.childrenContainer}
+                  >
+                    {children}
+                  </Grid>
+                </CardContent>
+                <CardActions className={classes.cardFooter}>
+                  <SQFormButton type="reset" title="Reset Form">
+                    {resetButtonText}
+                  </SQFormButton>
+                  {shouldRenderHelperText && (
+                    <SQFormHelperText
+                      isFailedState={isFailedState}
+                      errorText={helperErrorText}
+                      failText={helperFailText}
+                      validText={helperValidText}
+                    />
+                  )}
+                  <SQFormButton isDisabled={isDisabled}>
+                    {submitButtonText}
+                  </SQFormButton>
+                </CardActions>
+              </Card>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
   );
 }
 
@@ -183,7 +202,11 @@ SQFormScrollableCard.propTypes = {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
+  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
+  isSelfBounding: PropTypes.bool,
+  /** Number overriding the height of the component */
+  height: PropTypes.number
 };
 
 export default SQFormScrollableCard;
