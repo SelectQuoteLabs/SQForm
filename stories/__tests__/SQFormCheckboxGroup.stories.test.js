@@ -19,14 +19,14 @@ const SHOPPING_LIST_OPTIONS = [
 
 describe('SQFormCheckboxGroup Tests', () => {
   describe('Checkboxes Only', () => {
-    it('should render a label and a list of checkboxes', () => {
+    it('should render a group and a list of checkboxes', () => {
       render(<SQFormCheckboxGroup size="auto" />);
 
-      const groupLabel = screen.getByText('Shopping List');
-      expect(groupLabel).toBeInTheDocument();
+      const group = screen.getByRole('group', {name: /shopping list/i});
+      expect(group).toBeInTheDocument();
 
       const checkboxes = screen.getAllByRole('checkbox');
-      expect(checkboxes.length).toBe(SHOPPING_LIST_OPTIONS.length);
+      expect(checkboxes).toHaveLength(SHOPPING_LIST_OPTIONS.length);
     });
 
     it('should display as checked when initial values are set', () => {
@@ -36,16 +36,19 @@ describe('SQFormCheckboxGroup Tests', () => {
 
       render(<SQFormCheckboxGroup SQFormProps={{initialValues}} size="auto" />);
 
-      const checkboxLabel = screen.getByLabelText(
+      const checkboxes = screen.getAllByRole('checkbox');
+
+      const targetCheckbox = screen.getByLabelText(
         SHOPPING_LIST_OPTIONS[0].label
       );
 
-      expect(checkboxLabel).toBeChecked();
-
-      const nextCheckboxLabel = screen.getByLabelText(
-        SHOPPING_LIST_OPTIONS[1].label
+      const filteredCheckboxes = checkboxes.filter(checkbox =>
+        checkbox.hasAttribute('checked')
       );
-      expect(nextCheckboxLabel).not.toBeChecked();
+      expect(filteredCheckboxes).toEqual(
+        expect.arrayContaining([targetCheckbox])
+      );
+      expect(filteredCheckboxes).toHaveLength(1);
     });
 
     it('should show as checked when a checkbox is clicked', () => {
