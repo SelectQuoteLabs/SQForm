@@ -42,8 +42,8 @@ describe('SQFormCheckboxGroup Tests', () => {
         SHOPPING_LIST_OPTIONS[0].label
       );
 
-      const filteredCheckboxes = checkboxes.filter(checkbox =>
-        checkbox.hasAttribute('checked')
+      const filteredCheckboxes = checkboxes.filter(
+        checkbox => checkbox.checked
       );
       expect(filteredCheckboxes).toEqual(
         expect.arrayContaining([targetCheckbox])
@@ -96,55 +96,97 @@ describe('SQFormCheckboxGroup Tests', () => {
     it('should check all checkboxes when select all checkbox checked', () => {
       render(<SQFormCheckboxGroup size="auto" shouldUseSelectAll />);
 
+      const checkboxes = screen.getAllByRole('checkbox');
+
+      const filteredCheckboxes = checkboxes.filter(
+        checkbox => checkbox.checked
+      );
+      expect(filteredCheckboxes).toEqual([]);
+      expect(filteredCheckboxes).toHaveLength(0);
+
       const selectAllCheckbox = screen.getByLabelText('All');
-      const cb1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[0].label);
-      const cb2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
-      const cb3 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[2].label);
-      const cb4 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[3].label);
-      const cb5 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
-      expect(selectAllCheckbox).not.toBeChecked();
-      expect(cb1).not.toBeChecked();
-      expect(cb2).not.toBeChecked();
-      expect(cb3).not.toBeChecked();
-      expect(cb4).not.toBeChecked();
-      expect(cb5).not.toBeChecked();
 
       userEvent.click(selectAllCheckbox);
 
-      expect(selectAllCheckbox).toBeChecked();
-      expect(cb1).toBeChecked();
-      expect(cb2).toBeChecked();
-      expect(cb3).toBeChecked();
-      expect(cb4).toBeChecked();
-      expect(cb5).toBeChecked();
+      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      expect(checkedCheckboxes).toEqual(
+        expect.arrayContaining([selectAllCheckbox])
+      );
+      expect(checkedCheckboxes).toHaveLength(6);
+    });
+
+    it('should check all checkboxes even if some are already checked', () => {
+      const initialValues = {
+        shoppingList: [
+          SHOPPING_LIST_OPTIONS[1].value,
+          SHOPPING_LIST_OPTIONS[4].value
+        ]
+      };
+      render(
+        <SQFormCheckboxGroup
+          size="auto"
+          SQFormProps={{initialValues}}
+          shouldUseSelectAll
+        />
+      );
+
+      const checkboxes = screen.getAllByRole('checkbox');
+      const targetBox1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
+      const targetBox2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
+      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+
+      expect(checkedCheckboxes).toEqual(
+        expect.arrayContaining([targetBox1, targetBox2])
+      );
+      expect(checkedCheckboxes).toHaveLength(2);
+
+      const selectAllCheckbox = screen.getByLabelText('All');
+      userEvent.click(selectAllCheckbox);
+
+      const updatedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      expect(updatedCheckboxes).toEqual(
+        expect.arrayContaining([selectAllCheckbox])
+      );
+      expect(updatedCheckboxes).toHaveLength(6);
     });
 
     it('should uncheck all checkboxes when select all checkbox is unchecked', () => {
-      render(<SQFormCheckboxGroup size="auto" shouldUseSelectAll />);
+      const initialValues = {
+        shoppingList: [
+          SHOPPING_LIST_OPTIONS[0].value,
+          SHOPPING_LIST_OPTIONS[1].value,
+          SHOPPING_LIST_OPTIONS[2].value,
+          SHOPPING_LIST_OPTIONS[3].value,
+          SHOPPING_LIST_OPTIONS[4].value
+        ],
+        shoppingListSelectAll: true
+      };
+      render(
+        <SQFormCheckboxGroup
+          size="auto"
+          SQFormProps={{initialValues}}
+          shouldUseSelectAll
+        />
+      );
+
+      const checkboxes = screen.getAllByRole('checkbox');
 
       const selectAllCheckbox = screen.getByLabelText('All');
-      const cb1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[0].label);
-      const cb2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
-      const cb3 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[2].label);
-      const cb4 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[3].label);
-      const cb5 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
-
-      userEvent.click(selectAllCheckbox);
-      expect(selectAllCheckbox).toBeChecked();
-      expect(cb1).toBeChecked();
-      expect(cb2).toBeChecked();
-      expect(cb3).toBeChecked();
-      expect(cb4).toBeChecked();
-      expect(cb5).toBeChecked();
+      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      expect(checkedCheckboxes).toEqual(
+        expect.arrayContaining([selectAllCheckbox])
+      );
+      expect(checkedCheckboxes).toHaveLength(6);
 
       userEvent.click(selectAllCheckbox);
 
-      expect(selectAllCheckbox).not.toBeChecked();
-      expect(cb1).not.toBeChecked();
-      expect(cb2).not.toBeChecked();
-      expect(cb3).not.toBeChecked();
-      expect(cb4).not.toBeChecked();
-      expect(cb5).not.toBeChecked();
+      const uncheckedCheckboxes = checkboxes.filter(
+        checkbox => !checkbox.checked
+      );
+      expect(uncheckedCheckboxes).toEqual(
+        expect.arrayContaining([selectAllCheckbox])
+      );
+      expect(uncheckedCheckboxes).toHaveLength(6);
     });
   });
 
