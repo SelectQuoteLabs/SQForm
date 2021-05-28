@@ -23,8 +23,8 @@ export default {
 };
 
 const MOCK_FRIENDS_OPTIONS = [
-  {label: 'Joe', value: random(10 + Math.ceil(Math.random() * 20))},
-  {label: 'Jane', value: random(10 + Math.ceil(Math.random() * 20))},
+  {label: 'Joe', value: 1},
+  {label: 'Jane', value: 2},
   {label: 'Jack', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jill', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'John', value: random(10 + Math.ceil(Math.random() * 20))},
