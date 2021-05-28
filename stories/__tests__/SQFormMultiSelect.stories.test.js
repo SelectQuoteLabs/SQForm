@@ -11,7 +11,7 @@ const {SQFormMultiSelect} = composeStories(stories);
 const initialDropdownValue = '- -';
 
 describe('Tests for SQFormMultiSelect', () => {
-  it('should render a form with a multiselect input and dropdown options', async () => {
+  it('should render a form with a multiselect input', async () => {
     render(<SQFormMultiSelect size="auto" />);
 
     const expandButton = await waitFor(() =>
@@ -25,6 +25,22 @@ describe('Tests for SQFormMultiSelect', () => {
     const optionsList = screen.getByRole('listbox');
     expect(optionsList).toBeInTheDocument();
 
+    const options = within(optionsList).getAllByRole('option');
+    expect(options).toHaveLength(17); // initial '- -' + 16 MOCK_FRIENDS_OPTIONS
+  });
+
+  it('should render dropdown options', async () => {
+    render(<SQFormMultiSelect size="auto" />);
+
+    const expandButton = await waitFor(() =>
+      screen.findByRole('button', {
+        name: /friends/i
+      })
+    );
+
+    userEvent.click(expandButton);
+
+    const optionsList = screen.getByRole('listbox');
     const options = within(optionsList).getAllByRole('option');
     expect(options).toHaveLength(17); // initial '- -' + 16 MOCK_FRIENDS_OPTIONS
   });
