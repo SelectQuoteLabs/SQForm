@@ -112,7 +112,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
-      expect(checkedCheckboxes).toHaveLength(6);
+      expect(checkedCheckboxes).toHaveLength(SHOPPING_LIST_OPTIONS.length + 1);
     });
 
     it('should check all checkboxes even if some are already checked', () => {
@@ -147,7 +147,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(updatedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
-      expect(updatedCheckboxes).toHaveLength(6);
+      expect(updatedCheckboxes).toHaveLength(SHOPPING_LIST_OPTIONS.length + 1);
     });
 
     it('should uncheck all checkboxes when select all checkbox is unchecked', () => {
@@ -176,7 +176,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
-      expect(checkedCheckboxes).toHaveLength(6);
+      expect(checkedCheckboxes).toHaveLength(SHOPPING_LIST_OPTIONS.length + 1);
 
       userEvent.click(selectAllCheckbox);
 
@@ -186,7 +186,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(uncheckedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
-      expect(uncheckedCheckboxes).toHaveLength(6);
+      expect(uncheckedCheckboxes).toHaveLength(
+        SHOPPING_LIST_OPTIONS.length + 1
+      );
     });
   });
 
