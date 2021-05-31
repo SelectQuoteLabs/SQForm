@@ -37,7 +37,7 @@ export const Default = args => {
   return (
     <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
       <SQFormIconButtonComponent
-        IconComponent={exampleIcons}
+        IconComponent={CheckCircle}
         onClick={handleClick}
         {...rest}
       />
@@ -72,6 +72,7 @@ export const WithTestField = args => {
         <Grid item>
           <SQFormIconButtonComponent
             {...args}
+            isIconTeal={true}
             IconComponent={CheckCircle}
             onClick={handleClick}
           />
