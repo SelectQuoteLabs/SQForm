@@ -72,7 +72,6 @@ export const WithTestField = args => {
         <Grid item>
           <SQFormIconButtonComponent
             {...args}
-            isIconTeal={true}
             IconComponent={CheckCircle}
             onClick={handleClick}
           />
