@@ -37,7 +37,7 @@ const defaultArgs = {
   name: 'shoppingList',
   children: SHOPPING_LIST_OPTIONS,
   SQFormProps: {
-    initialValues: {shoppingList: ''}
+    initialValues: {shoppingList: []}
   }
 };
 
