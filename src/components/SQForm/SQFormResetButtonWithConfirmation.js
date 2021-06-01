@@ -11,7 +11,7 @@ function SQFormResetButtonWithConfirmation({
   confirmationContent,
   confirmationTitle = 'Reset Form',
   variant = 'contained',
-  onReset = () => {}
+  onReset
 }) {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {dirty, handleReset} = useFormButton(isDisabled);
@@ -20,7 +20,7 @@ function SQFormResetButtonWithConfirmation({
     handleReset();
 
     // optional function prop consumer can pass to handle any additional side effects when resetting form
-    onReset();
+    onReset && onReset();
 
     closeDialog();
   };

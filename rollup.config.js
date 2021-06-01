@@ -3,18 +3,20 @@ import css from 'rollup-plugin-css-only';
 import commonjs from '@rollup/plugin-commonjs';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import del from 'rollup-plugin-delete';
+import typescript from '@rollup/plugin-typescript';
 import {terser} from 'rollup-plugin-terser';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 
 export default [
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: {
       file: pkg.main,
       format: 'cjs'
     },
     plugins: [
+      typescript(),
       del({targets: 'dist/*'}), // Cleans dist folder before building a new bundle
       peerDepsExternal(), // Keeps peer dependencies out of the bundle
       nodeResolve(), // Loads npm packages from node_modules
