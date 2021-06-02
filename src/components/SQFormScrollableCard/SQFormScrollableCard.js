@@ -39,9 +39,8 @@ const useStyles = makeStyles(theme => {
       padding: `${theme.spacing(2)}px`
     },
     childrenContainer: {
-      marginLeft: 0,
-      marginRight: 0,
-      padding: ({hasSubHeader}) => {
+      width: 'auto',
+      margin: ({hasSubHeader}) => {
         return hasSubHeader ? `${theme.spacing(2)}px ${theme.spacing(4)}px` : 0;
       }
     },
@@ -93,17 +92,36 @@ function SQFormScrollableCard({
     {leading: true, trailing: false}
   );
 
-  const topOffset = document
-    .getElementById(`sqform-scrollable-card-id-${title}`)
-    ?.getBoundingClientRect().top;
-  const calculatedHeight = topOffset
-    ? `calc(100vh - ${topOffset}px - 24px)`
-    : '100%';
+  const formattedTitle = React.useMemo(() => title.replace(/\s/g, '-'), [
+    title
+  ]);
+
+  const [calculatedHeight, setCalculatedHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    const currentElement = document.getElementById(
+      `sqform-scrollable-card-id-${formattedTitle}`
+    );
+
+    const topOffset = currentElement?.getBoundingClientRect().top;
+    const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
+
+    const parentHeight = currentElement.parentElement.clientHeight;
+    const parentTopOffset = currentElement.parentElement.getBoundingClientRect()
+      .top;
+    const topDifferential = topOffset - parentTopOffset;
+    const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
+
+    const calculatedHeight = `min(${offsetBasedHeight}, ${maxOffsetBasedHeight})`;
+
+    setCalculatedHeight(calculatedHeight);
+  }, [formattedTitle]);
+
   const heightToUse = height || (isSelfBounding && calculatedHeight) || '100%';
 
   return (
     <div
-      id={`sqform-scrollable-card-id-${title}`}
+      id={`sqform-scrollable-card-id-${formattedTitle}`}
       style={{height: heightToUse}}
     >
       <Formik
