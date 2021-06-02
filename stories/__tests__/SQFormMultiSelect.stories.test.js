@@ -142,6 +142,9 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await screen.findByRole('button', {name: /friends/i});
     expect(expandButton).toHaveAttribute('aria-disabled', 'true');
+
+    const optionsList = screen.queryByRole('listbox');
+    expect(optionsList).not.toBeInTheDocument();
   });
 
   it('should display "required" helper text if field is required', async () => {
