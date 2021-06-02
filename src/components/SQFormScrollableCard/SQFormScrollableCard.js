@@ -179,6 +179,8 @@ SQFormScrollableCard.propTypes = {
   initialValues: PropTypes.object.isRequired,
   /** Imperatively disable the Form Submit button */
   isDisabled: PropTypes.bool,
+  /** Override the failure/success state of the form's footer helper text. Default: false */
+  isFailedState: PropTypes.bool,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
   /**
@@ -192,12 +194,14 @@ SQFormScrollableCard.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   /** Label text for the reset button */
   resetButtonText: PropTypes.string,
+  /** Conditionally the render of the form's footer helper text. Default: true */
+  shouldRenderHelperText: PropTypes.bool,
   /** Label text for the Submit button */
   submitButtonText: PropTypes.string,
-  /** The Title for the Header component */
-  title: PropTypes.string.isRequired,
   /** Component to render as the Subheader */
   SubHeaderComponent: PropTypes.element,
+  /** The Title for the Header component */
+  title: PropTypes.string.isRequired,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
