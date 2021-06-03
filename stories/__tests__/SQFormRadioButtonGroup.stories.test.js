@@ -16,7 +16,6 @@ describe('SQFormRadioButtonGroup Tests', () => {
 
       const label = screen.getByText(/Pandas/i);
       expect(label).toBeInTheDocument();
-      expect(label).toHaveTextContent('Pandas');
 
       const radioGroup = screen.getByRole('radiogroup', {name: /pandas/i});
       expect(radioGroup).toBeInTheDocument();
@@ -34,27 +33,17 @@ describe('SQFormRadioButtonGroup Tests', () => {
         render(<SQFormRadioButtonGroup size="auto" />);
 
         const radioButtons = screen.getAllByRole('radio');
+        const giantPandaLabel = screen.getByLabelText(/Giant Panda/i);
+        const redPandaLabel = screen.getByLabelText(/Red Panda/i);
+        const kungFuPandaLabel = screen.getByLabelText(/Kung Fu Panda/i);
 
-        const giantPandaButton = radioButtons[0];
-        const giantPandaLabel = screen.getByText(/Giant Panda/i);
-
-        const redPandaButton = radioButtons[1];
-        const redPandaLabel = screen.getByText(/Red Panda/i);
-
-        const kungFuPandaButton = radioButtons[2];
-        const kungFuPandaLabel = screen.getByText(/Kung Fu Panda/i);
-
-        expect(giantPandaButton).toBeInTheDocument();
-        expect(giantPandaLabel).toBeInTheDocument();
-        expect(giantPandaLabel).toHaveTextContent('Giant Panda');
-
-        expect(redPandaButton).toBeInTheDocument();
-        expect(redPandaLabel).toBeInTheDocument();
-        expect(redPandaLabel).toHaveTextContent('Red Panda');
-
-        expect(kungFuPandaButton).toBeInTheDocument();
-        expect(kungFuPandaLabel).toBeInTheDocument();
-        expect(kungFuPandaLabel).toHaveTextContent('Kung Fu Panda');
+        expect(radioButtons).toEqual(
+          expect.arrayContaining([
+            giantPandaLabel,
+            redPandaLabel,
+            kungFuPandaLabel
+          ])
+        );
       });
     });
 
@@ -71,7 +60,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
       it('allows selection via label', () => {
         render(<SQFormRadioButtonGroup size="auto" />);
 
-        const giantPandaRadioButton = screen.getAllByRole('radio')[0];
+        const giantPandaRadioButton = screen.getByLabelText(/Giant Panda/i);
         const giantPandaLabel = screen.getByText(/Giant Panda/i);
 
         expect(giantPandaRadioButton).not.toBeChecked();
@@ -114,25 +103,25 @@ describe('SQFormRadioButtonGroup Tests', () => {
         expect(onChangeMock).toHaveBeenCalledTimes(1);
       });
     });
-  });
 
-  it('Has default value with an initialValue', () => {
-    const initialValues = {
-      pandas: 'red panda'
-    };
-    render(
-      <SQFormRadioButtonGroup size="auto" SQFormProps={{initialValues}} />
-    );
+    it('Has default value with an initialValue', () => {
+      const initialValues = {
+        pandas: 'red panda'
+      };
+      render(
+        <SQFormRadioButtonGroup size="auto" SQFormProps={{initialValues}} />
+      );
 
-    const radioButtons = screen.getAllByRole('radio');
+      const radioButtons = screen.getAllByRole('radio');
 
-    const firstRadioButton = radioButtons[0];
-    const secondRadioButton = radioButtons[1];
-    const thirdRadioButton = radioButtons[2];
+      const firstRadioButton = radioButtons[0];
+      const secondRadioButton = radioButtons[1];
+      const thirdRadioButton = radioButtons[2];
 
-    expect(firstRadioButton).not.toBeChecked();
-    expect(secondRadioButton).toBeChecked();
-    expect(thirdRadioButton).not.toBeChecked();
+      expect(firstRadioButton).not.toBeChecked();
+      expect(secondRadioButton).toBeChecked();
+      expect(thirdRadioButton).not.toBeChecked();
+    });
   });
 
   describe('With validation', () => {
@@ -153,6 +142,24 @@ describe('SQFormRadioButtonGroup Tests', () => {
         const requiredText = screen.getByText('Required');
         expect(requiredText).toBeInTheDocument();
         expect(requiredText).toHaveClass('Mui-required');
+      });
+    });
+
+    describe('touched and no value selected', () => {
+      it('has error styles on label and helper text', () => {
+        render(<SQFormRadioButtonGroupWithValidation size="auto" />);
+
+        const label = screen.getByText(/Pandas/i);
+        const requiredText = screen.getByText(/Required/i);
+
+        // Tab into radio group
+        userEvent.tab();
+
+        // Tab out of radio group
+        userEvent.tab();
+
+        expect(label).toHaveClass('Mui-error');
+        expect(requiredText).toHaveClass('Mui-error');
       });
     });
 
