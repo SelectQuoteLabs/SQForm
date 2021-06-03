@@ -53,6 +53,28 @@ describe('SQFormIconButton Tests', () => {
       expect(iconButton).toHaveAttribute('type', 'button');
     });
 
+    it('should render a button with teal color', () => {
+      render(
+        <SQFormIconButton
+          exampleIcons={CheckCircle}
+          isIconTeal={true}
+          type="button"
+        />
+      );
+
+      const iconButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+      const svg = within(iconButton).getByTitle(/Form Submission/i);
+
+      expect(iconButton).toBeInTheDocument();
+      expect(svg).toHaveStyle({
+        color: 'var(--color-teal)',
+        width: '2.5rem',
+        height: '2.5rem'
+      });
+    });
+
     it('should call a function when clicked', () => {
       const onClickSpy = jest.fn();
       render(

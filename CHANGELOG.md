@@ -1,3 +1,10 @@
+## [4.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.17...v4.6.0) (2021-06-02)
+
+
+### Features
+
+* 🎸 fix test for icon button ([0228bb8](https://github.com/SelectQuoteLabs/SQForm/commit/0228bb8cc1909a74f51775553e737a4560ced08e))
+
 ### [4.5.17](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.16...v4.5.17) (2021-05-21)
 
 
