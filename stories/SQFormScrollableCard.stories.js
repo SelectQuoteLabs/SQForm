@@ -29,7 +29,7 @@ const defaultArgs = {
   validationSchema: {hello: Yup.string().required('Required')}
 };
 
-const Template = (args = {}) => {
+const Template = args => {
   const {wrapper, validationSchema, ...restArgs} = args;
 
   const basicCard = (
