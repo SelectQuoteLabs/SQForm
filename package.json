@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "private": false,

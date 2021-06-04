@@ -1,3 +1,10 @@
+## [4.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.6.0...v4.7.0) (2021-06-04)
+
+
+### Features
+
+* 🎸 ScrollableCard that always maintains full height ([584aba2](https://github.com/SelectQuoteLabs/SQForm/commit/584aba23482b6254653143adb56e49e534613757)), closes [#226](https://github.com/SelectQuoteLabs/SQForm/issues/226)
+
 ## [4.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.5.17...v4.6.0) (2021-06-02)
 
 
