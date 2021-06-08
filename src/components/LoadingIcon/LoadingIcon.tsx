@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -39,7 +38,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LoadingIcon = ({height = '10rem'}) => {
+const LoadingIcon = ({height = '10rem'}: LoadingIconProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -97,9 +96,9 @@ const LoadingIcon = ({height = '10rem'}) => {
   );
 };
 
-LoadingIcon.propTypes = {
+interface LoadingIconProps {
   /** The height of the loading icon */
-  height: PropTypes.string
-};
+  height: string;
+}
 
 export default LoadingIcon;
