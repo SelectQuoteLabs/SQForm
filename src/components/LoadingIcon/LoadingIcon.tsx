@@ -38,6 +38,11 @@ const useStyles = makeStyles({
   }
 });
 
+interface LoadingIconProps {
+  /** The height of the loading icon */
+  height?: string;
+}
+
 const LoadingIcon = ({height = '10rem'}: LoadingIconProps): JSX.Element => {
   const classes = useStyles();
 
@@ -95,10 +100,5 @@ const LoadingIcon = ({height = '10rem'}: LoadingIconProps): JSX.Element => {
     </svg>
   );
 };
-
-interface LoadingIconProps {
-  /** The height of the loading icon */
-  height: string;
-}
 
 export default LoadingIcon;
