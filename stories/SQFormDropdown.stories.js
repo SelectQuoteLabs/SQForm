@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
@@ -40,11 +41,30 @@ const defaultArgs = {
   }
 };
 
-export const SQFormDropdown = args => {
-  const {SQFormProps, ...dropdownProps} = args;
+const YES_NO_OPTIONS = [
+  {label: 'Yes', value: true},
+  {label: 'No', value: false}
+];
+
+const booleanValueArgs = {
+  label: 'Opt in?',
+  name: 'isOptIn',
+  children: YES_NO_OPTIONS,
+  schema: {isOptIn: Yup.bool().required('Required')},
+  SQFormProps: {
+    initialValues: {isOptIn: false}
+  }
+};
+
+const Template = args => {
+  const {SQFormProps, schema, ...dropdownProps} = args;
   return (
     <div style={{minWidth: 250}}>
-      <SQFormStoryWrapper {...defaultArgs.SQFormProps} {...SQFormProps}>
+      <SQFormStoryWrapper
+        {...defaultArgs.SQFormProps}
+        {...SQFormProps}
+        validationSchema={schema}
+      >
         <SQFormDropdownComponent
           {...dropdownProps}
           size={args.size !== 'auto' ? Number(args.size) : args.size}
@@ -53,5 +73,11 @@ export const SQFormDropdown = args => {
     </div>
   );
 };
-SQFormDropdown.storyName = 'SQFormDropdown';
-SQFormDropdown.args = defaultArgs;
+
+export const Default = Template.bind({});
+Default.args = defaultArgs;
+Default.storyName = 'SQFormDropdown';
+
+export const BooleanValued = Template.bind({});
+BooleanValued.args = booleanValueArgs;
+BooleanValued.storyName = 'BooleanValues';
