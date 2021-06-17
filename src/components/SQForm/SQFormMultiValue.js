@@ -77,6 +77,13 @@ const useStyles = makeStyles({
   }
 });
 
+const clearButtonStyles = makeStyles({
+  clearButton: {
+    top: 'auto',
+    bottom: '8px'
+  }
+});
+
 function SQFormMultiValue({
   children,
   name,
@@ -89,6 +96,7 @@ function SQFormMultiValue({
   onBlur
 }) {
   const classes = useStyles();
+  const clearButtonClasses = clearButtonStyles();
   const [{value: fieldValue}] = useField(name);
   const {setFieldValue, setTouched, touched} = useFormikContext();
   const {
@@ -216,26 +224,40 @@ function SQFormMultiValue({
         getOptionDisabled={option => option.isDisabled}
         disabled={isDisabled}
         disableClearable={isDisabled}
-        renderInput={params => (
-          <TextField
-            {...params}
-            name={name}
-            color="primary"
-            disabled={isDisabled}
-            fullWidth={true}
-            label={label}
-            InputLabelProps={{
-              ...params.InputLabelProps,
-              shrink: true
-            }}
-            inputProps={{
-              ...params.inputProps,
-              disabled: isDisabled
-            }}
-            FormHelperTextProps={{error: isFieldError}}
-            helperText={!isDisabled && HelperTextComponent}
-          />
-        )}
+        renderInput={params => {
+          const textField = (
+            <TextField
+              {...params}
+              name={name}
+              color="primary"
+              disabled={isDisabled}
+              fullWidth={true}
+              label={label}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: {
+                  ...params.InputProps.endAdornment,
+                  props: {
+                    ...params.InputProps.endAdornment.props,
+                    className: `${params.InputProps.endAdornment.props.className} ${clearButtonClasses.clearButton}`
+                  }
+                }
+              }}
+              InputLabelProps={{
+                ...params.InputLabelProps,
+                shrink: true
+              }}
+              inputProps={{
+                ...params.inputProps,
+                disabled: isDisabled
+              }}
+              FormHelperTextProps={{error: isFieldError}}
+              helperText={!isDisabled && HelperTextComponent}
+            />
+          );
+          console.log('textField', textField);
+          return textField;
+        }}
       />
     </Grid>
   );
