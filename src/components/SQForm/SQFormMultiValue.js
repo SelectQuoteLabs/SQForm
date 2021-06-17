@@ -31,9 +31,9 @@ const ListboxVirtualizedComponent = React.forwardRef(
     const {children, ...listboxProps} = props;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
     const LIST_OVERSCAN_COUNT = 5;
+    const ITEM_SIZE = 36;
     const items = React.Children.toArray(children);
     const ITEM_COUNT = items.length;
-    const ITEM_SIZE = 36;
 
     const height = React.useMemo(() => {
       if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {

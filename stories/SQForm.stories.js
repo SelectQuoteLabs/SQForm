@@ -29,8 +29,8 @@ import {
   SQFormRadioButtonGroup,
   SQFormCheckboxGroup,
   SQFormMaskedTextField,
-  MASKS,
-  SQFormMultiValue
+  SQFormMultiValue,
+  MASKS
 } from '../src';
 
 export default {
@@ -214,7 +214,7 @@ export const BasicForm = () => {
         <SQFormMultiValue
           name="favoriteColors"
           label="Your Favorite Colors"
-          size={12}
+          size={4}
         >
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
@@ -331,7 +331,7 @@ export const FormWithValidation = () => {
         <SQFormMultiValue
           name="favoriteColors"
           label="Your Favorite Colors"
-          size={12}
+          size={4}
           isRequired={true}
         >
           {MOCK_MULTI_VALUE_OPTIONS}
