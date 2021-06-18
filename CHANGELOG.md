@@ -1,3 +1,10 @@
+### [4.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.0...v4.8.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* 🐛 SQFormMultiValue accepts custom initial values ([632ed3c](https://github.com/SelectQuoteLabs/SQForm/commit/632ed3c007d9aff9dad8c1c0dde23ebdd2ee22fb)), closes [#308](https://github.com/SelectQuoteLabs/SQForm/issues/308)
+
 ## [4.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.7.0...v4.8.0) (2021-06-17)
 
 
