@@ -5,6 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import {VariableSizeList} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {useForm} from './useForm';
+import {usePrevious} from '@selectquotelabs/sqhooks';
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
@@ -97,7 +98,7 @@ function SQFormMultiValue({
 }) {
   const classes = useStyles();
   const clearButtonClasses = clearButtonStyles();
-  const [{value: fieldValue}] = useField(name);
+  const [{value: fieldValue}, {initialValue}] = useField(name);
   const {setFieldValue, setTouched, touched} = useFormikContext();
   const {
     fieldState: {isFieldError},
@@ -109,8 +110,40 @@ function SQFormMultiValue({
 
   const [inputValue, setInputValue] = React.useState('');
   const [customOptions, setCustomOptions] = React.useState([]);
+  const displayOptions = React.useMemo(() => [...children, ...customOptions], [
+    children,
+    customOptions
+  ]);
+  const previousInitialValue = usePrevious(initialValue);
 
-  const initialValue = [];
+  React.useEffect(() => {
+    // Don't run this effect every time displayOptions changes
+    // This also prevents infinite rerenders
+    if (JSON.stringify(previousInitialValue) === JSON.stringify(initialValue)) {
+      return;
+    }
+
+    const displayValues = displayOptions.map(option => {
+      return option.value;
+    });
+
+    const newCustomOptions = initialValue.reduce((acc, value) => {
+      if (displayValues.includes(value)) {
+        return acc;
+      }
+
+      acc.push({
+        label: value,
+        value
+      });
+
+      return acc;
+    }, []);
+
+    setCustomOptions(previousCustomOptions => {
+      return [...previousCustomOptions, ...newCustomOptions];
+    });
+  }, [initialValue, displayOptions, previousInitialValue]);
 
   const handleAutocompleteBlur = React.useCallback(
     event => {
@@ -190,21 +223,24 @@ function SQFormMultiValue({
     [onInputChange]
   );
 
-  const autocompleteOptions = [...children, ...customOptions];
-
   return (
     <Grid item sm={size}>
       <Autocomplete
         classes={classes}
         multiple={true}
         id={name}
-        options={autocompleteOptions}
+        options={children}
         freeSolo={true}
         renderTags={(value, getTagProps) => {
           return value.map((optionValue, index) => {
-            const tagOption = autocompleteOptions.find(autocompleteOption => {
+            const tagOption = displayOptions.find(autocompleteOption => {
               return autocompleteOption.value === optionValue;
             });
+
+            if (!tagOption) {
+              return null;
+            }
+
             return (
               <Chip
                 variant="outlined"
@@ -216,7 +252,7 @@ function SQFormMultiValue({
         }}
         ListboxComponent={ListboxVirtualizedComponent}
         getOptionLabel={option => option.label || ''}
-        value={fieldValue || initialValue || []}
+        value={fieldValue || []}
         inputValue={inputValue}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}

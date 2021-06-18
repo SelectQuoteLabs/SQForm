@@ -45,7 +45,7 @@ const Template = args => {
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
-        initialValues={{[defaultArgs.name]: ['red', 'green']}}
+        initialValues={{[defaultArgs.name]: ['red', 'green', 'Custom Option']}}
         validationSchema={validationSchema}
         {...SQFormProps}
       >
