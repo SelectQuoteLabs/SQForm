@@ -128,16 +128,18 @@ function SQFormMultiValue({
       return acc;
     }, []);
 
-    const nonOptionValues = initialValue.filter(value => {
-      return !displayValues.includes(value);
-    });
+    const newCustomOptions = initialValue.reduce((acc, value) => {
+      if (displayValues.includes(value)) {
+        return acc;
+      }
 
-    const newCustomOptions = nonOptionValues.map(newCustomOptionValue => {
-      return {
-        label: newCustomOptionValue,
-        value: newCustomOptionValue
-      };
-    });
+      acc.push({
+        label: value,
+        value
+      });
+
+      return acc;
+    }, []);
 
     setCustomOptions(previousCustomOptions => {
       return [...previousCustomOptions, ...newCustomOptions];
