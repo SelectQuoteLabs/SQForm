@@ -123,10 +123,9 @@ function SQFormMultiValue({
       return;
     }
 
-    const displayValues = displayOptions.reduce((acc, option) => {
-      acc.push(option.value);
-      return acc;
-    }, []);
+    const displayValues = displayOptions.map(option => {
+      return option.value;
+    });
 
     const newCustomOptions = initialValue.reduce((acc, value) => {
       if (displayValues.includes(value)) {
