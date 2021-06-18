@@ -38,28 +38,15 @@
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
       ],
-      "globals": {"Atomics": "readonly", "SharedArrayBuffer": "readonly"},
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "ecmaFeatures": {"jsx": true},
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2021,
         "sourceType": "module",
         "project": "./tsconfig.json"
       },
       "plugins": ["@typescript-eslint"],
       "rules": {
-        "no-useless-computed-key": "off",
-        "no-useless-rename": "off",
-        "import/no-unresolved": "off",
-        "no-extra-boolean-cast": "off",
-        "no-prototype-builtins": "off",
-        "no-case-declarations": "off",
-        "testing-library/no-await-sync-events": "warn",
-        "testing-library/no-wait-for-snapshot": "error",
-        "testing-library/prefer-explicit-assert": "warn",
-        "testing-library/prefer-presence-queries": "error",
-        "testing-library/prefer-screen-queries": "error",
-        "testing-library/prefer-wait-for": "error",
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"]
       }
