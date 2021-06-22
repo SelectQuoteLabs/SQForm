@@ -1,3 +1,10 @@
+## [4.9.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.1...v4.9.0) (2021-06-22)
+
+
+### Features
+
+* 🎸 support for boolean valued dropdown ([cc2dca9](https://github.com/SelectQuoteLabs/SQForm/commit/cc2dca939b0ad4ecbd783154738bbc45a7c5e2b5)), closes [#174](https://github.com/SelectQuoteLabs/SQForm/issues/174)
+
 ### [4.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.0...v4.8.1) (2021-06-18)
 
 
