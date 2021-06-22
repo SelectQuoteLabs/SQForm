@@ -44,6 +44,12 @@ const useActionsStyles = makeStyles({
     borderTop: ({palette}) => `1px solid ${palette.divider}`
   }
 });
+const useDialogContentStyles = makeStyles({
+  root: {
+    overflowY: 'visible',
+    padding: '20px'
+  }
+});
 
 function SQFormDialogInner({
   cancelButtonText,
@@ -62,6 +68,7 @@ function SQFormDialogInner({
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
+  const dialogContentClasses = useDialogContentStyles(theme);
   const {resetForm, dirty: isDirty} = useFormikContext();
 
   const {
@@ -97,7 +104,7 @@ function SQFormDialogInner({
           <DialogTitle disableTypography={true} classes={titleClasses}>
             <Typography variant="h4">{title}</Typography>
           </DialogTitle>
-          <DialogContent style={{overflowY: 'visible'}}>
+          <DialogContent classes={dialogContentClasses}>
             <Grid
               {...muiGridProps}
               container
