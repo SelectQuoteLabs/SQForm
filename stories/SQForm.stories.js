@@ -29,6 +29,7 @@ import {
   SQFormRadioButtonGroup,
   SQFormCheckboxGroup,
   SQFormMaskedTextField,
+  SQFormMultiValue,
   MASKS
 } from '../src';
 
@@ -66,7 +67,8 @@ const MOCK_FORM_ENTITY = {
   note: '',
   preferredPet: '',
   warrantyOptions: [],
-  warrantyOptionsSelectAll: false
+  warrantyOptionsSelectAll: false,
+  favoriteColors: []
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
@@ -78,7 +80,8 @@ const MOCK_FORM_WITH_BOOLEANS_ENTITY = {
   ...MOCK_FORM_ENTITY,
   hobby: '',
   cool: false,
-  lame: false
+  lame: false,
+  favoriteColors: [2, 4]
 };
 
 const MOCK_FORM_FOR_FIELD_ARRAY = {
@@ -118,6 +121,17 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Judah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
+];
+
+const MOCK_MULTI_VALUE_OPTIONS = [
+  {label: 'Green', value: 0},
+  {label: 'Red', value: 1},
+  {label: 'Orange', value: 2},
+  {label: 'Pink', value: 3},
+  {label: 'Purple', value: 4},
+  {label: 'Black', value: 5},
+  {label: 'White', value: 6},
+  {label: 'Blue', value: 7}
 ];
 
 const MOCK_FORM_MASKED_FIELDS = {
@@ -197,6 +211,13 @@ export const BasicForm = () => {
         >
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
+        <SQFormMultiValue
+          name="favoriteColors"
+          label="Your Favorite Colors"
+          size={4}
+        >
+          {MOCK_MULTI_VALUE_OPTIONS}
+        </SQFormMultiValue>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormResetButtonWithConfirmation
@@ -228,7 +249,15 @@ export const FormWithValidation = () => {
     warrantyOptions: Yup.array()
       .min(1, 'One option required')
       .required('Required'),
-    note: Yup.string().required('Required')
+    note: Yup.string().required('Required'),
+    favoriteColors: Yup.array()
+      .of(
+        Yup.lazy(value => {
+          return typeof value === 'number' ? Yup.number() : Yup.string();
+        })
+      )
+      .min(1)
+      .required('Required')
   };
 
   return (
@@ -299,6 +328,14 @@ export const FormWithValidation = () => {
         >
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
+        <SQFormMultiValue
+          name="favoriteColors"
+          label="Your Favorite Colors"
+          size={4}
+          isRequired={true}
+        >
+          {MOCK_MULTI_VALUE_OPTIONS}
+        </SQFormMultiValue>
         <Grid item sm={12}>
           <Grid container justify="space-between">
             <SQFormButton title="Reset" type="reset">

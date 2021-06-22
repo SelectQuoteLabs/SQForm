@@ -226,7 +226,8 @@ SQFormAutocomplete.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      isDisabled: PropTypes.bool
     })
   ),
   /** Disabled property to disable the input if true */
