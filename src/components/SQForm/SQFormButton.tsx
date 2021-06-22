@@ -18,7 +18,7 @@ function SQFormButton({
   title,
   type = 'submit',
   onClick
-}: Props) {
+}: Props): JSX.Element {
   const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
     isDisabled,
     shouldRequireFieldUpdates,
