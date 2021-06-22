@@ -1,3 +1,14 @@
+## [5.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.9.0...v5.0.0) (2021-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Adding 20px padding to SQFormDialog content instead of 8px 24px
+
+### Features
+
+* 🎸 Adding 20px padding to dialog content ([24df034](https://github.com/SelectQuoteLabs/SQForm/commit/24df0347d1870a44048ca049177ec77924662ba8)), closes [#88](https://github.com/SelectQuoteLabs/SQForm/issues/88)
+
 ## [4.9.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.1...v4.9.0) (2021-06-22)
 
 
