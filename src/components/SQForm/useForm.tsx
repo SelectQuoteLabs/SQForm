@@ -56,7 +56,7 @@ function _getIsFulfilled(hasValue: boolean, isError: boolean) {
   return false;
 }
 
-function _getHasValue(meta: any) {
+function _getHasValue(meta: unknown) {
   const fieldValue = getIn(meta, 'value');
 
   if (Array.isArray(fieldValue)) {
