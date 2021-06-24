@@ -1,9 +1,9 @@
 import {GridSize} from '@material-ui/core';
 
-interface CommonComponentProps {
+interface BaseFieldProps {
   name: string;
   label: string;
   size?: GridSize;
 }
 
-export default CommonComponentProps;
+export default BaseFieldProps;

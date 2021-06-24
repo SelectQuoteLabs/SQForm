@@ -2,12 +2,12 @@ import React from 'react';
 import {Grid, TextFieldProps} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import {useForm} from './useForm';
-import CommonComponentProps from '../../types/CommonComponentProps';
+import BaseFieldProps from '../../types/BaseFieldProps';
 import {toKebabCase} from '../../utils';
 
 type SQFormReadOnlyFieldProps = {
   muiFieldProps?: TextFieldProps;
-} & CommonComponentProps;
+} & BaseFieldProps;
 
 function SQFormReadOnlyField({
   label,

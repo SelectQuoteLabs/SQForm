@@ -9,18 +9,18 @@ import {
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
-interface useFormParam {
+interface UseFormParam {
   name: string;
   isRequired: boolean;
   onBlur?: React.FocusEventHandler;
   onChange?: React.ChangeEventHandler;
 }
 
-interface useFormReturn {
+interface UseFormReturn {
   formikField: {
-    field: FieldInputProps<any>;
-    meta: FieldMetaProps<any>;
-    helpers: FieldHelperProps<any>;
+    field: FieldInputProps<unknown>;
+    meta: FieldMetaProps<unknown>;
+    helpers: FieldHelperProps<unknown>;
   };
   fieldState: {
     errorMessage: string;
@@ -75,7 +75,7 @@ export function useForm({
   isRequired,
   onBlur,
   onChange
-}: useFormParam): useFormReturn {
+}: UseFormParam): UseFormReturn {
   _handleError(name, isRequired);
 
   const [field, meta, helpers] = useField(name);
