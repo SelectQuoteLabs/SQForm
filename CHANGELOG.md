@@ -1,3 +1,10 @@
+### [5.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.0...v5.0.1) (2021-06-25)
+
+
+### Bug Fixes
+
+* 🐛 Updated id values to name instead of label for more uniq ([14764b9](https://github.com/SelectQuoteLabs/SQForm/commit/14764b9520fd8bd7d0e4c5c7885e8b4b223ec656)), closes [#318](https://github.com/SelectQuoteLabs/SQForm/issues/318)
+
 ## [5.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.9.0...v5.0.0) (2021-06-22)
 
 
