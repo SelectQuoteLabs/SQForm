@@ -213,8 +213,6 @@ describe('Tests for FormWithValidation', () => {
     ).toBeChecked();
 
     //Favorite Colors
-    //const favoriteColors = screen.getByLabelText(/your favorite colors/i);
-    //userEvent.click(favoriteColors);
     userEvent.click(screen.getByLabelText(/your favorite colors/i));
     userEvent.click(screen.getByRole('option', {name: /green/i}));
     expect(screen.getByText('Green')).toBeInTheDocument();
