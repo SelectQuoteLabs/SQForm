@@ -77,6 +77,7 @@ describe('Tests for BasicForm', () => {
             preferredPet: mockData.preferredPet,
             warrantyOptions: mockData.warrantyOptions,
             warrantyOptionsSelectAll: false,
+            favoriteColors: [2, 4],
             hobby: mockData.hobby,
             cool: mockData.cool,
             lame: false
@@ -116,6 +117,7 @@ describe('Tests for BasicForm', () => {
             preferredPet: '',
             warrantyOptions: [],
             warrantyOptionsSelectAll: false,
+            favoriteColors: [2, 4],
             hobby: '',
             cool: false,
             lame: false
@@ -210,6 +212,16 @@ describe('Tests for FormWithValidation', () => {
       within(warrantyOptions).getByRole('checkbox', {name: /drivetrain/i})
     ).toBeChecked();
 
+    //Favorite Colors
+    //const favoriteColors = screen.getByLabelText(/your favorite colors/i);
+    //userEvent.click(favoriteColors);
+    userEvent.click(screen.getByLabelText(/your favorite colors/i));
+    userEvent.click(screen.getByRole('option', {name: /green/i}));
+    expect(screen.getByText('Green')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', {name: /form submission/i})
+    ).toBeDisabled();
+
     //Submit enabled
     await waitFor(() =>
       expect(
@@ -232,7 +244,8 @@ describe('Tests for FormWithValidation', () => {
             note: 'Hello World!',
             preferredPet: 'cat',
             warrantyOptions: ['2'],
-            warrantyOptionsSelectAll: false
+            warrantyOptionsSelectAll: false,
+            favoriteColors: [0]
           },
           null,
           2
