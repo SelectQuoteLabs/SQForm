@@ -1,11 +1,45 @@
 import React from 'react';
-import {getIn, useField} from 'formik';
+import {
+  FieldHelperProps,
+  FieldInputProps,
+  FieldMetaProps,
+  getIn,
+  useField
+} from 'formik';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
+interface UseFormParam {
+  name: string;
+  isRequired: boolean;
+  onBlur?: React.FocusEventHandler;
+  onChange?: React.ChangeEventHandler;
+}
+
+interface UseFormReturn {
+  formikField: {
+    field: FieldInputProps<unknown>;
+    meta: FieldMetaProps<unknown>;
+    helpers: FieldHelperProps<unknown>;
+  };
+  fieldState: {
+    errorMessage: string;
+    isTouched: boolean;
+    isError: boolean;
+    isFieldError: boolean;
+    isFieldRequired: boolean;
+    isFulfilled: boolean;
+  };
+  fieldHelpers: {
+    handleBlur: React.FocusEventHandler;
+    handleChange: React.ChangeEventHandler;
+    HelperTextComponent: React.ReactElement | string;
+  };
+}
+
 const SPACE_STYLE = {marginRight: '0.3333rem'};
 
-function _handleError(name, isRequired) {
+function _handleError(name: string, isRequired: boolean) {
   if (typeof name !== 'string') {
     throw new Error('Name is a required param and must be a String!');
   }
@@ -14,7 +48,7 @@ function _handleError(name, isRequired) {
   }
 }
 
-function _getIsFulfilled(hasValue, isError) {
+function _getIsFulfilled(hasValue: boolean, isError: boolean) {
   if (hasValue && !isError) {
     return true;
   }
@@ -22,7 +56,7 @@ function _getIsFulfilled(hasValue, isError) {
   return false;
 }
 
-function _getHasValue(meta) {
+function _getHasValue(meta: unknown) {
   const fieldValue = getIn(meta, 'value');
 
   if (Array.isArray(fieldValue)) {
@@ -36,7 +70,12 @@ function _getHasValue(meta) {
   return !!fieldValue;
 }
 
-export function useForm({name, isRequired, onBlur, onChange}) {
+export function useForm({
+  name,
+  isRequired,
+  onBlur,
+  onChange
+}: UseFormParam): UseFormReturn {
   _handleError(name, isRequired);
 
   const [field, meta, helpers] = useField(name);
@@ -89,7 +128,7 @@ export function useForm({name, isRequired, onBlur, onChange}) {
       );
     }
     return ' '; // return something so UI space always exists
-  }, [errorMessage, isFieldError, isFieldRequired, isFulfilled]);
+  }, [isFieldError, isFieldRequired, isFulfilled, errorMessage]);
 
   return {
     formikField: {field, meta, helpers},
