@@ -62,8 +62,8 @@ const Template = args => {
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         {...defaultArgs.SQFormProps}
-        {...SQFormProps}
         validationSchema={schema}
+        {...SQFormProps}
       >
         <SQFormDropdownComponent
           {...dropdownProps}

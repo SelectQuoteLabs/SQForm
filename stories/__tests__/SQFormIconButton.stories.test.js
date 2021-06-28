@@ -70,8 +70,8 @@ describe('SQFormIconButton Tests', () => {
       expect(iconButton).toBeInTheDocument();
       expect(svg).toHaveStyle({
         color: 'var(--color-teal)',
-        width: '2.5rem',
-        height: '2.5rem'
+        width: '1em',
+        height: '1em'
       });
     });
 
