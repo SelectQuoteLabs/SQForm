@@ -1,3 +1,10 @@
+### [5.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.1...v5.0.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* 🐛 Removed unused props from the stepper component ([ad6df58](https://github.com/SelectQuoteLabs/SQForm/commit/ad6df585ad60a36439e73393c70abe23b75b47b1)), closes [#279](https://github.com/SelectQuoteLabs/SQForm/issues/279)
+
 ### [5.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.0...v5.0.1) (2021-06-25)
 
 
