@@ -5,14 +5,14 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
-import {CheckboxProps} from '@material-ui/core';
+import {CheckboxProps, GridSize} from '@material-ui/core';
 import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
 import SQFormCheckbox from './SQFormCheckbox';
 import {useForm} from './useForm';
 
 interface CheckboxOption {
   label: string;
-  value: unknown;
+  value: string | boolean | number;
   isDisabled?: boolean;
   inputProps?: CheckboxProps;
 }
@@ -22,7 +22,7 @@ interface SQFormCheckboxGroupProps {
   name: string;
   /** Label to display above the group */
   groupLabel: string;
-  /** Whether this a selection in this group is required */
+  /** Whether a selection in this group is required */
   isRequired?: boolean;
   /** Function to call on value change */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -31,7 +31,7 @@ interface SQFormCheckboxGroupProps {
   /** Whether to display the select all checkbox */
   shouldUseSelectAll?: boolean;
   /** Size of the input given full-width is 12. */
-  size?: 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  size?: GridSize;
   /** Children must be an array of object with checkbox label and value information */
   children: CheckboxOption[];
 }
