@@ -81,7 +81,6 @@ export function SQFormDialogStepper({
   maxWidth = 'sm',
   onClose,
   onSubmit,
-  saveButtonText = 'Save',
   title,
   enableReinitialize = false,
   muiGridProps = {},
@@ -278,10 +277,6 @@ SQFormDialogStepper.propTypes = {
   onClose: PropTypes.func.isRequired,
   /** Callback function invoked when user clicks primary submit button */
   onSubmit: PropTypes.func.isRequired,
-  /** Callback function invoke when the user clicks the primary button */
-  onSave: PropTypes.func,
-  /** The primary button text (Button located on right side of Dialog) */
-  saveButtonText: PropTypes.string,
   /** Title text at the top of the Dialog */
   title: PropTypes.string.isRequired,
   /** Form Entity Object */
