@@ -5,7 +5,7 @@ import {AgentScriptPropTypes} from './PropTypes';
 
 function AgentScript({
   actionButton,
-  headerTitle,
+  title,
   infoText,
   warningText,
   errorText,
@@ -17,7 +17,7 @@ function AgentScript({
     <Section>
       <Header
         actionButton={actionButton}
-        title={headerTitle}
+        title={title}
         infoText={infoText}
         warningText={warningText}
         errorText={errorText}

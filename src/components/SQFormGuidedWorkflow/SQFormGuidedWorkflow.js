@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Formik, Form} from 'formik';
-import {CardActions, makeStyles} from '@material-ui/core';
+import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
   Section,
@@ -85,8 +85,10 @@ function SQFormGuidedWorkflow({
         >
           {_props => (
             <Form>
-              <AgentScript {...taskModule.scriptedTextProps} />
-              <OutcomeForm {...taskModule.outcomeProps} />
+              <CardContent>
+                <AgentScript {...taskModule.scriptedTextProps} />
+                <OutcomeForm {...taskModule.outcomeProps} />
+              </CardContent>
               <CardActions className={classes.panelFooter}>
                 <SQFormButton type="reset" title="Reset Form">
                   {taskModule?.resetButtonText ?? 'Reset'}
@@ -103,16 +105,11 @@ function SQFormGuidedWorkflow({
   });
 
   return (
-    <Section>
-      <SectionHeader
-        title={mainTitle}
-        type={mainSubtitle ? 'info' : 'initial'}
-        informativeHeading={mainSubtitle}
-      >
-        <SectionBody>
-          <Accordion accordionPanels={transformedTaskModules} />
-        </SectionBody>
-      </SectionHeader>
+    <Section style={{padding: '20px'}}>
+      <SectionHeader title={mainTitle} informativeHeading={mainSubtitle} />
+      <SectionBody>
+        <Accordion accordionPanels={transformedTaskModules} />
+      </SectionBody>
     </Section>
   );
 }

@@ -12,7 +12,7 @@ const helperTextType = {
 
 function Header({
   actionButton,
-  headerTitle,
+  title,
   infoText,
   warningText,
   errorText,
@@ -62,7 +62,7 @@ function Header({
 
   return (
     <SectionHeader
-      title={headerTitle}
+      title={title}
       informativeHeading={getInformativeHeadingText()}
       type={informativeHeadingType}
     >

@@ -62,7 +62,7 @@ const Template = args => {
   ];
 
   return (
-    <div style={{width: '45rem', height: '80vh'}}>
+    <div style={{width: '90%', height: '95vh'}}>
       <ExpandingCardList>
         <ExpandingCard title="Guided Workflow" name="guidedWorkflow">
           <SQFormGuidedWorkflow
