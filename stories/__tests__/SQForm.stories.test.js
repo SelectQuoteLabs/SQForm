@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  fireEvent,
   render,
   screen,
   waitFor,
@@ -151,7 +152,7 @@ describe('Tests for FormWithValidation', () => {
     //Ten Thousand Options
     userEvent.click(screen.getByLabelText(/ten thousand options/i));
     const firstOption = screen.getAllByRole('option')[0];
-    userEvent.click(screen.getAllByRole('option')[0]);
+    fireEvent.click(screen.getAllByRole('option')[0]);
     expect(screen.getByLabelText(/ten thousand options/i)).toHaveValue(
       firstOption.textContent
     );
