@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {ReactElement} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
@@ -8,6 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
+import BaseFieldProps from '../../types/BaseFieldProps';
+import {InputBaseProps} from '@material-ui/core';
 
 import {useForm} from './useForm';
 import {
@@ -18,7 +19,28 @@ import {
 import {EMPTY_LABEL} from '../../utils/constants';
 
 const EMPTY_VALUE = '';
-const EMPTY_OPTION = {label: EMPTY_LABEL, value: EMPTY_VALUE};
+const EMPTY_OPTION = {
+  label: EMPTY_LABEL,
+  value: EMPTY_VALUE,
+  isDisabled: false
+};
+
+type Children = Array<{
+  label: string;
+  value: string | number;
+  isDisabled?: boolean;
+}>;
+type Options = Children | [];
+
+interface Props extends BaseFieldProps {
+  children: Children;
+  displayEmpty?: boolean;
+  isDisabled?: boolean;
+  isRequired?: boolean;
+  onBlur?: React.FocusEventHandler;
+  onChange?: React.ChangeEventHandler;
+  muiFieldProps?: InputBaseProps;
+}
 
 const useStyles = makeStyles({
   selectHeight: {
@@ -39,7 +61,7 @@ function SQFormDropdown({
   onChange,
   size = 'auto',
   muiFieldProps = {}
-}) {
+}: Props): ReactElement {
   const classes = useStyles();
 
   const {
@@ -54,7 +76,7 @@ function SQFormDropdown({
   });
   const labelID = label.toLowerCase();
 
-  const options = React.useMemo(() => {
+  const options = React.useMemo<Options>(() => {
     if (!children) {
       console.warn(getUndefinedChildrenWarning('SQFormDropdown', name));
       return [];
@@ -74,7 +96,7 @@ function SQFormDropdown({
     return [EMPTY_OPTION, ...children];
   }, [children, displayEmpty, name]);
 
-  const renderValue = value => {
+  const renderValue = (value: unknown) => {
     if (value === undefined || value === null) {
       console.warn(getUndefinedValueWarning('SQFormDropdown', name));
       return EMPTY_LABEL;
@@ -119,7 +141,7 @@ function SQFormDropdown({
             return (
               <MenuItem
                 key={option.value}
-                disabled={option.isDisabled}
+                disabled={option?.isDisabled}
                 value={option.value}
               >
                 {option.label}
@@ -132,34 +154,5 @@ function SQFormDropdown({
     </Grid>
   );
 }
-
-SQFormDropdown.propTypes = {
-  /** Dropdown options to select from */
-  children: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      isDisabled: PropTypes.bool
-    })
-  ),
-  /** Whether to display empty option - - in options */
-  displayEmpty: PropTypes.bool,
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Label text */
-  label: PropTypes.string.isRequired,
-  /** Name identifier of the input field */
-  name: PropTypes.string.isRequired,
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
-  muiFieldProps: PropTypes.object
-};
 
 export default SQFormDropdown;
