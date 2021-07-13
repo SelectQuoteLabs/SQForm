@@ -1,8 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import {useFormButton} from './useFormButton';
 import {IconButton} from 'scplus-shared-components';
+
+interface SQFormIconButtonProps {
+  /** The Material UI Icon to render inside the button */
+  IconComponent: React.ElementType;
+  /** Custom disabled state */
+  isDisabled: boolean;
+  /** Whether or not the form requires updates to the form to enable the submit button */
+  shouldRequireFieldUpdates: boolean;
+  /** The title of the button */
+  title: string;
+  /** Type of button, defaults to 'submit' */
+  type: string;
+  /** Standard React event handler */
+  onClick?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 function SQFormIconButton({
   IconComponent,
@@ -11,7 +24,7 @@ function SQFormIconButton({
   title = 'Form Submission',
   type = 'submit',
   onClick
-}) {
+}: SQFormIconButtonProps): JSX.Element {
   const {isButtonDisabled, handleClick} = useFormButton(
     isDisabled,
     shouldRequireFieldUpdates,
@@ -32,21 +45,5 @@ function SQFormIconButton({
     />
   );
 }
-
-SQFormIconButton.propTypes = {
-  /** The Material UI Icon to render inside the button */
-  IconComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType])
-    .isRequired,
-  /** Custom disabled state */
-  isDisabled: PropTypes.bool,
-  /** Whether or not the form requires updates to the form to enable the submit button */
-  shouldRequireFieldUpdates: PropTypes.bool,
-  /** The title of the button */
-  title: PropTypes.string,
-  /** Type of button, defaults to 'submit' */
-  type: PropTypes.string,
-  /** Standard React event handler */
-  onClick: PropTypes.func
-};
 
 export default SQFormIconButton;
