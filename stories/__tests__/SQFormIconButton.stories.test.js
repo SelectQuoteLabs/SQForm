@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen, within} from '@testing-library/react';
+import {render, screen, within, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormIconButton.stories';
 
@@ -53,6 +53,28 @@ describe('SQFormIconButton Tests', () => {
       expect(iconButton).toHaveAttribute('type', 'button');
     });
 
+    it('should render a button with teal color', () => {
+      render(
+        <SQFormIconButton
+          exampleIcons={CheckCircle}
+          isIconTeal={true}
+          type="button"
+        />
+      );
+
+      const iconButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+      const svg = within(iconButton).getByTitle(/Form Submission/i);
+
+      expect(iconButton).toBeInTheDocument();
+      expect(svg).toHaveStyle({
+        color: 'var(--color-teal)',
+        width: '1em',
+        height: '1em'
+      });
+    });
+
     it('should call a function when clicked', () => {
       const onClickSpy = jest.fn();
       render(
@@ -92,7 +114,7 @@ describe('SQFormIconButton Tests', () => {
         name: /form submission/i
       });
 
-      userEvent.click(iconButton);
+      fireEvent.click(iconButton);
 
       expect(onClickSpy).not.toHaveBeenCalled();
     });

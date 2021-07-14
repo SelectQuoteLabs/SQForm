@@ -11,6 +11,7 @@ function SQFormButton({
   type = 'submit',
   onClick
 }) {
+  const isResetButton = type === 'reset';
   const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
     isDisabled,
     shouldRequireFieldUpdates,
@@ -18,15 +19,15 @@ function SQFormButton({
   );
 
   const isSQFormButtonDisabled = React.useMemo(() => {
-    if (type === 'reset') {
+    if (isResetButton) {
       return !dirty;
     }
 
     return isButtonDisabled;
-  }, [dirty, isButtonDisabled, type]);
+  }, [dirty, isButtonDisabled, isResetButton]);
 
   const getClickHandler = (...args) => {
-    if (type === 'reset') {
+    if (isResetButton) {
       return handleReset;
     } else if (typeof onClick !== 'undefined') {
       return handleClick(...args);
@@ -37,7 +38,7 @@ function SQFormButton({
     switch (true) {
       case Boolean(title):
         return title;
-      case type === 'reset':
+      case isResetButton:
         return 'Reset Form';
       default:
         return 'Form Submission';
@@ -50,6 +51,7 @@ function SQFormButton({
       type={type}
       isDisabled={isSQFormButtonDisabled}
       onClick={getClickHandler}
+      variant={isResetButton ? 'outlined' : 'contained'}
     >
       {children}
     </RoundedButton>
