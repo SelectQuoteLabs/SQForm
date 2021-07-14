@@ -5,7 +5,7 @@ import {FormControlLabel, RadioProps} from '@material-ui/core';
 
 interface SQFormRadioButtonGroupItemProps {
   /** Value of the radio button */
-  value: any;
+  value: string | boolean | number;
   /** Label for the radio button */
   label: string;
   /** Whether this radio button is disabled */
@@ -31,7 +31,7 @@ function SQFormRadioButtonGroupItem({
   isDisabled = false,
   isRowDisplay = false,
   inputProps = {}
-}: SQFormRadioButtonGroupItemProps) {
+}: SQFormRadioButtonGroupItemProps): JSX.Element {
   const classes = useStyles();
 
   return (
