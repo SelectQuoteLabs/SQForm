@@ -6,8 +6,10 @@ import {hasUpdated} from '../../utils';
 export function useFormButton(
   isDisabled: boolean,
   shouldRequireFieldUpdates: boolean,
-  onClick: <TArgs extends any[], TResult>(...args: TArgs) => TResult
-) {
+  onClick: <TArgs extends React.MouseEvent<HTMLInputElement>[], TResult>(
+    ...args: TArgs
+  ) => TResult
+): Record<string, unknown> {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
