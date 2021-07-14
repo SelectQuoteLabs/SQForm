@@ -12,6 +12,8 @@ import SQFormButton from '../SQForm/SQFormButton';
 import AgentScript from './AgentScript';
 import OutcomeForm from './OutcomeForm';
 import {GuidedWorkflowProps} from './PropTypes';
+import {useManageTaskModules} from './useManageTaskModules';
+import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
 
 const useStyles = makeStyles(() => {
   return {
@@ -43,47 +45,78 @@ function SQFormGuidedWorkflow({
   taskModules,
   mainTitle,
   mainSubtitle,
-  completedTasks = 0
+  initialCompletedTasks = 0,
+  isStrictMode = false,
+  onError
 }) {
   const classes = useStyles();
-  const [currentTask, setCurrentTask] = React.useState(completedTasks || 1);
+
+  const [
+    taskModulesContext,
+    updateTaskModuleContextByID
+  ] = useGuidedWorkflowContext(taskModules);
+
+  const {
+    taskModulesState,
+    updateActiveTaskModule,
+    enableNextTaskModule
+  } = useManageTaskModules(initialCompletedTasks, taskModulesContext);
 
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
+    const taskName = taskModule.name;
     const validationYupSchema = getTaskModuleFormSchema(
       taskModule.formikProps?.validationSchema
     );
     const initialErrors = getFormikInitialRequiredErrors(
       taskModule.formikProps?.validationSchema
     );
-    const handleSubmit = () => {
-      setCurrentTask(prevCurrentTask => {
-        // Already on final task
-        if (prevCurrentTask === taskModules.length) {
-          return prevCurrentTask;
-        }
-        return (prevCurrentTask += 1);
-      });
-      taskModule.formikProps.onSubmit();
+    const isPanelExpanded =
+      taskModulesContext[taskModulesState.activeTaskModuleID].name === taskName;
+    const getIsDisabled = () => {
+      if (isStrictMode && taskModulesState.activeTaskModuleID !== taskNumber) {
+        return true;
+      }
+      if (
+        taskModule.isDisabled ||
+        taskModulesState.progressTaskModuleID < taskNumber
+      ) {
+        return true;
+      }
+      return false;
+    };
+    const handleSubmit = async (values, formikBag) => {
+      try {
+        // TODO: Render centered loading spinner
+        await taskModule.formikProps.onSubmit(values, formikBag);
+        updateTaskModuleContextByID(taskNumber, values);
+        enableNextTaskModule();
+      } catch (error) {
+        onError(error);
+      } finally {
+        // TODO: cancel loading spinner
+      }
     };
 
     return {
       ...taskModule,
-      isDisabled: taskModule.isDisabled || currentTask < taskNumber,
-      isInitiallyExpanded:
-        taskModule.isInitiallyExpanded || currentTask === taskNumber,
+      isDisabled: getIsDisabled(),
+      isInitiallyExpanded: taskModule.isInitiallyExpanded || isPanelExpanded,
+      expandPanel: () => {}, // Faulty logic in the Accordion SSC requires precense of a function for isPanelExpanded to work
+      isPanelExpanded,
+      onClick: () => {
+        updateActiveTaskModule(taskNumber);
+      },
       body: (
         <Formik
-          enableReinitialize={
-            taskModule.formikProps?.enableReinitialize ?? false
-          }
+          enableReinitialize={true}
           initialErrors={initialErrors}
-          initialValues={taskModule.formikProps.initialValues}
+          initialValues={taskModulesContext[taskNumber].data}
           onSubmit={handleSubmit}
           validationSchema={validationYupSchema}
           validateOnMount={true}
         >
-          {_props => (
+          {({isSubmitting}) => (
             <Form>
               <CardContent>
                 <AgentScript {...taskModule.scriptedTextProps} />
@@ -93,7 +126,12 @@ function SQFormGuidedWorkflow({
                 <SQFormButton type="reset" title="Reset Form">
                   {taskModule?.resetButtonText ?? 'Reset'}
                 </SQFormButton>
-                <SQFormButton isDisabled={taskModule?.isSubmitButtonDisabled}>
+                <SQFormButton
+                  shouldRequireFieldUpdates={true}
+                  isDisabled={
+                    taskModule?.isSubmitButtonDisabled || isSubmitting
+                  }
+                >
                   {taskModule?.submitButtonText ?? 'Next'}
                 </SQFormButton>
               </CardActions>

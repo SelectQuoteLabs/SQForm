@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {ExpandingCardList, ExpandingCard} from 'scplus-shared-components';
-import {SQFormGuidedWorkflow, SQFormTextarea} from '../src';
+import {SQFormGuidedWorkflow, SQFormDropdown, SQFormTextarea} from '../src';
 
 export default {
   title: 'Forms/SQFormGuidedWorkflow',
@@ -16,19 +16,20 @@ export default {
   // }
 };
 
-const Template = args => {
+const outcomeDropdownOptions = [
+  {label: 'Not Interested', value: 'not-interested'},
+  {label: 'Interested', value: 'interested'}
+];
+
+const Template = () => {
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
     planName: 'Super Cheap Med+'
   };
-  // const outcomeDropdownOptions = [
-  //   {label: 'Not Interested', value: 'not-interested'},
-  //   {label: 'Interested', value: 'interested'}
-  // ];
   const taskModules = [
     {
-      name: 'Intro',
+      name: 'intro',
       title: 'Introduction',
       formikProps: {
         initialValues: {
@@ -50,9 +51,41 @@ const Template = args => {
       outcomeProps: {
         FormElements: (
           <>
-            {/* <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
               {outcomeDropdownOptions}
-            </SQFormDropdown> */}
+            </SQFormDropdown>
+            <SQFormTextarea name="notes" label="Notes" />
+          </>
+        ),
+        title: 'Confirm Info'
+      }
+    },
+    {
+      name: 'cancellation',
+      title: 'Policy Cancellation Statement',
+      formikProps: {
+        initialValues: {
+          outcome: '',
+          notes: ''
+        },
+        onSubmit: async values => {
+          console.log(JSON.stringify(values));
+        },
+        validationSchema: {
+          outcome: Yup.string().required('Required'),
+          notes: Yup.string()
+        }
+      },
+      scriptedTextProps: {
+        text: `Stuff about policy cancellation documents`,
+        title: 'Agent Script'
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+              {outcomeDropdownOptions}
+            </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
@@ -70,6 +103,9 @@ const Template = args => {
             mainSubtitle="Please review these Services with you client, then confirm their responses."
             completedTasks={0}
             taskModules={taskModules}
+            onError={error => {
+              console.error(error);
+            }}
           />
         </ExpandingCard>
       </ExpandingCardList>

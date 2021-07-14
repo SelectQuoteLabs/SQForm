@@ -16,17 +16,15 @@ export const AgentScriptPropTypes = {
 };
 
 export const OutcomePropTypes = {
-  FormElements: PropTypes.oneOf(
+  FormElements: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
-  ).isRequired,
+  ]).isRequired,
   muiGridProps: PropTypes.object,
   ...HeaderPropTypes
 };
 
 export const FormikProps = {
-  /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
-  enableReinitialize: PropTypes.bool,
   /** Form Entity Object aka initial values of the form */
   initialValues: PropTypes.object.isRequired,
   /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag) => void | Promise<any> */
@@ -71,7 +69,17 @@ export const GuidedWorkflowProps = {
   /** Main Subtitle Informative Text */
   mainSubtitle: PropTypes.string,
   /** Number of tasks completed (Default is zero) */
-  completedTasks: PropTypes.number,
+  initialCompletedTasks: PropTypes.number,
+  /**
+   * Disables all Task Modules except the current Active Task module
+   * This prevents the user from returning to a previous task module
+   */
+  isStrictMode: PropTypes.bool,
+  /**
+   * Callback function which passes the error as an argument for the consumer to handle
+   * Usually the consumer will render an alert to signal an error occured
+   */
+  onError: PropTypes.func.isRequired,
   /** Task Module configuration Object(s) */
   taskModules: PropTypes.arrayOf(PropTypes.shape(TaskModuleProps).isRequired)
     .isRequired
