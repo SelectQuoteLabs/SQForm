@@ -1,24 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 
 import {useForm} from './useForm';
-
-interface SQFormInclusionListItemProps {
-  /** evaluation of whether the box should be checked */
-  isChecked: boolean;
-  /** Disabled state of the checkbox */
-  isDisabled?: boolean;
-  /** Descriptive label text for the checkbox */
-  label: string;
-  /** name of the checkbox array in `initialValues` */
-  name: string;
-  /** Custom onChange event callback */
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  /** Size of the input given full-width is 12. */
-  size?: 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-}
 
 function SQFormInclusionListItem({
   isChecked = false,
@@ -27,7 +13,7 @@ function SQFormInclusionListItem({
   name,
   onChange,
   size = 'auto'
-}: SQFormInclusionListItemProps): JSX.Element {
+}) {
   const {
     fieldHelpers: {handleChange}
   } = useForm({
@@ -53,5 +39,20 @@ function SQFormInclusionListItem({
     </Grid>
   );
 }
+
+SQFormInclusionListItem.propTypes = {
+  /** evaluation of whether the box should be checked */
+  isChecked: PropTypes.bool.isRequired,
+  /** Disabled state of the checkbox */
+  isDisabled: PropTypes.bool,
+  /** Descriptive label text for the checkbox */
+  label: PropTypes.string.isRequired,
+  /** name of the checkbox array in `initialValues` */
+  name: PropTypes.string.isRequired,
+  /** Custom onChange event callback */
+  onChange: PropTypes.func.isRequired,
+  /** Size of the input given full-width is 12. */
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+};
 
 export default SQFormInclusionListItem;
