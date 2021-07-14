@@ -3,23 +3,26 @@ import {
   FieldHelperProps,
   FieldInputProps,
   FieldMetaProps,
-  FormikHandlers,
   getIn,
   useField
 } from 'formik';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
-import {SelectProps} from '@material-ui/core';
 
-interface UseFormParam {
+type ChangeHandler<ChangeEventType> = (
+  event: React.ChangeEvent<ChangeEventType>,
+  ...args: any[]
+) => void;
+
+interface UseFormParam<Value, ChangeEventType> {
   name: string;
   isRequired: boolean;
-  onBlur?: FormikHandlers['handleBlur'];
-  onChange?: FormikHandlers['handleChange'];
-  onSelectChange?: SelectProps['onChange'];
+  onBlur?: React.FocusEventHandler;
+  onChange?: ChangeHandler<ChangeEventType>;
+  value?: Value;
 }
 
-interface UseFormReturn<Value> {
+interface UseFormReturn<Value, ChangeEventType> {
   formikField: {
     field: FieldInputProps<Value>;
     meta: FieldMetaProps<Value>;
@@ -34,9 +37,8 @@ interface UseFormReturn<Value> {
     isFulfilled: boolean;
   };
   fieldHelpers: {
-    handleBlur: FormikHandlers['handleBlur'];
-    handleChange: FormikHandlers['handleChange'];
-    handleSelectChange: SelectProps['onChange'];
+    handleBlur: React.FocusEventHandler;
+    handleChange: ChangeHandler<ChangeEventType>;
     HelperTextComponent: React.ReactElement | string;
   };
 }
@@ -74,13 +76,16 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm<Value = unknown>({
+export function useForm<Value, ChangeEventType>({
   name,
   isRequired,
   onBlur,
   onChange,
-  onSelectChange
-}: UseFormParam): UseFormReturn<Value> {
+  value
+}: UseFormParam<Value, ChangeEventType>): UseFormReturn<
+  Value,
+  ChangeEventType
+> {
   _handleError(name, isRequired);
 
   const [field, meta, helpers] = useField<Value>(name);
@@ -92,24 +97,16 @@ export function useForm<Value = unknown>({
   const isFieldRequired = isRequired && !hasValue;
   const isFulfilled = _getIsFulfilled(hasValue, isError);
 
-  const handleChange: FormikHandlers['handleChange'] = React.useCallback(
-    (event: unknown) => {
+  const handleChange: ChangeHandler<ChangeEventType> = React.useCallback(
+    event => {
       field.onChange(event);
       onChange && onChange(event);
     },
     [field, onChange]
   );
 
-  const handleSelectChange: SelectProps['onChange'] = React.useCallback(
-    (event, child: React.ReactNode) => {
-      field.onChange(event);
-      onSelectChange && onSelectChange(event, child);
-    },
-    [field, onSelectChange]
-  );
-
-  const handleBlur: FormikHandlers['handleBlur'] = React.useCallback(
-    (event: unknown) => {
+  const handleBlur = React.useCallback(
+    event => {
       field.onBlur(event);
       onBlur && onBlur(event);
     },
@@ -153,11 +150,6 @@ export function useForm<Value = unknown>({
       isFieldRequired,
       isFulfilled
     },
-    fieldHelpers: {
-      handleBlur,
-      handleChange,
-      handleSelectChange,
-      HelperTextComponent
-    }
+    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
   };
 }
