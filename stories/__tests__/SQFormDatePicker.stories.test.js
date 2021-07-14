@@ -2,7 +2,7 @@ import React from 'react';
 import {LocalizationProvider} from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDatePicker.stories';
 
@@ -83,5 +83,76 @@ describe('SQFormDatePicker Tests', () => {
 
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
+    expect(calendarDialog).toBeVisible();
+  });
+
+  it('should display new date after selecting from the calendar', async () => {
+    const initialValues = {
+      date: ''
+    };
+
+    renderDatePicker({SQFormProps: {initialValues}});
+
+    const textField = screen.getByRole('textbox', {name: /date/i});
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    userEvent.click(textField);
+
+    const calendarDialog = screen.getByRole('dialog');
+    expect(calendarDialog).toBeInTheDocument();
+    expect(calendarDialog).toBeVisible();
+
+    const dateOptions = within(calendarDialog).getAllByRole('cell');
+    const selectedDate = dateOptions[0];
+
+    //This doesn't close the calendar/dialog??
+    userEvent.click(selectedDate);
+    // It's still showing as visible
+    //await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeVisible());
+    //expect(screen.queryByRole('dialog')).not.toBeVisible();
+
+    //Data setup so the test won't need updating all the time
+
+    const getTestDay = () => {
+      const today = new Date();
+      const month = today.getMonth() + 1; //January is 0
+      const currentMonth = month.toString().padStart(2, '0');
+      const day = today.getDate();
+
+      if (day === 1) {
+        return `${currentMonth}/02/${today.getFullYear()}`;
+      }
+
+      return `${currentMonth}/01/${today.getFullYear()}`;
+    };
+
+    const testDate = getTestDay();
+    expect(textField).toHaveValue(testDate);
+  });
+
+  it('should show as disabled when isDisabled is true', () => {
+    const SQFormProps = {
+      initialValues: {
+        date: ''
+      }
+    };
+
+    renderDatePicker({SQFormProps, isDisabled: true});
+
+    const textField = screen.getByRole('textbox', {name: /date/i});
+    expect(textField).toBeDisabled();
+  });
+
+  it('should display required text when isRequired is true', () => {
+    const SQFormProps = {
+      initialValues: {
+        date: ''
+      }
+    };
+
+    renderDatePicker({SQFormProps, isRequired: true});
+
+    const required = screen.getByText(/required/i);
+    expect(required).toBeVisible();
   });
 });
