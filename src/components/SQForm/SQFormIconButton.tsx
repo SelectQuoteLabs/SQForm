@@ -6,13 +6,13 @@ interface SQFormIconButtonProps {
   /** The Material UI Icon to render inside the button */
   IconComponent: React.ElementType;
   /** Custom disabled state */
-  isDisabled: boolean;
+  isDisabled?: boolean;
   /** Whether or not the form requires updates to the form to enable the submit button */
-  shouldRequireFieldUpdates: boolean;
+  shouldRequireFieldUpdates?: boolean;
   /** The title of the button */
-  title: string;
+  title?: string;
   /** Type of button, defaults to 'submit' */
-  type: string;
+  type?: string;
   /** Standard React event handler */
   onClick?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
