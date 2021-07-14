@@ -3,20 +3,23 @@ import {
   FieldHelperProps,
   FieldInputProps,
   FieldMetaProps,
+  FormikHandlers,
   getIn,
   useField
 } from 'formik';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
+import {SelectProps} from '@material-ui/core';
 
-interface UseFormParam<ChangeEventType, BlurEventType> {
+interface UseFormParam {
   name: string;
   isRequired: boolean;
-  onBlur?: React.FocusEventHandler<BlurEventType>;
-  onChange?: React.ChangeEventHandler<ChangeEventType>;
+  onBlur?: FormikHandlers['handleBlur'];
+  onChange?: FormikHandlers['handleChange'];
+  onSelectChange?: SelectProps['onChange'];
 }
 
-interface UseFormReturn<Value, ChangeEventType, BlurEventType> {
+interface UseFormReturn<Value> {
   formikField: {
     field: FieldInputProps<Value>;
     meta: FieldMetaProps<Value>;
@@ -31,8 +34,9 @@ interface UseFormReturn<Value, ChangeEventType, BlurEventType> {
     isFulfilled: boolean;
   };
   fieldHelpers: {
-    handleBlur: React.FocusEventHandler<BlurEventType>;
-    handleChange: React.ChangeEventHandler<ChangeEventType>;
+    handleBlur: FormikHandlers['handleBlur'];
+    handleChange: FormikHandlers['handleChange'];
+    handleSelectChange: SelectProps['onChange'];
     HelperTextComponent: React.ReactElement | string;
   };
 }
@@ -70,20 +74,13 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm<
-  Value = unknown,
-  ChangeEventType = unknown,
-  BlurEventType = unknown
->({
+export function useForm<Value = unknown>({
   name,
   isRequired,
   onBlur,
-  onChange
-}: UseFormParam<ChangeEventType, BlurEventType>): UseFormReturn<
-  Value,
-  ChangeEventType,
-  BlurEventType
-> {
+  onChange,
+  onSelectChange
+}: UseFormParam): UseFormReturn<Value> {
   _handleError(name, isRequired);
 
   const [field, meta, helpers] = useField<Value>(name);
@@ -95,16 +92,24 @@ export function useForm<
   const isFieldRequired = isRequired && !hasValue;
   const isFulfilled = _getIsFulfilled(hasValue, isError);
 
-  const handleChange: React.ChangeEventHandler<ChangeEventType> = React.useCallback(
-    event => {
+  const handleChange: FormikHandlers['handleChange'] = React.useCallback(
+    (event: unknown) => {
       field.onChange(event);
       onChange && onChange(event);
     },
     [field, onChange]
   );
 
-  const handleBlur: React.FocusEventHandler<BlurEventType> = React.useCallback(
-    event => {
+  const handleSelectChange: SelectProps['onChange'] = React.useCallback(
+    (event, child: React.ReactNode) => {
+      field.onChange(event);
+      onSelectChange && onSelectChange(event, child);
+    },
+    [field, onSelectChange]
+  );
+
+  const handleBlur: FormikHandlers['handleBlur'] = React.useCallback(
+    (event: unknown) => {
       field.onBlur(event);
       onBlur && onBlur(event);
     },
@@ -148,6 +153,11 @@ export function useForm<
       isFieldRequired,
       isFulfilled
     },
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {
+      handleBlur,
+      handleChange,
+      handleSelectChange,
+      HelperTextComponent
+    }
   };
 }
