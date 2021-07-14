@@ -9,18 +9,18 @@ import {
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
-interface UseFormParam {
+interface UseFormParam<ChangeEventType, BlurEventType> {
   name: string;
   isRequired: boolean;
-  onBlur?: React.FocusEventHandler;
-  onChange?: React.ChangeEventHandler;
+  onBlur?: React.FocusEventHandler<BlurEventType>;
+  onChange?: React.ChangeEventHandler<ChangeEventType>;
 }
 
-interface UseFormReturn {
+interface UseFormReturn<Value, ChangeEventType, BlurEventType> {
   formikField: {
-    field: FieldInputProps<unknown>;
-    meta: FieldMetaProps<unknown>;
-    helpers: FieldHelperProps<unknown>;
+    field: FieldInputProps<Value>;
+    meta: FieldMetaProps<Value>;
+    helpers: FieldHelperProps<Value>;
   };
   fieldState: {
     errorMessage: string;
@@ -31,8 +31,8 @@ interface UseFormReturn {
     isFulfilled: boolean;
   };
   fieldHelpers: {
-    handleBlur: React.FocusEventHandler;
-    handleChange: React.ChangeEventHandler;
+    handleBlur: React.FocusEventHandler<BlurEventType>;
+    handleChange: React.ChangeEventHandler<ChangeEventType>;
     HelperTextComponent: React.ReactElement | string;
   };
 }
@@ -70,15 +70,23 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm({
+export function useForm<
+  Value = unknown,
+  ChangeEventType = unknown,
+  BlurEventType = unknown
+>({
   name,
   isRequired,
   onBlur,
   onChange
-}: UseFormParam): UseFormReturn {
+}: UseFormParam<ChangeEventType, BlurEventType>): UseFormReturn<
+  Value,
+  ChangeEventType,
+  BlurEventType
+> {
   _handleError(name, isRequired);
 
-  const [field, meta, helpers] = useField(name);
+  const [field, meta, helpers] = useField<Value>(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
   const hasValue = _getHasValue(meta);
@@ -87,7 +95,7 @@ export function useForm({
   const isFieldRequired = isRequired && !hasValue;
   const isFulfilled = _getIsFulfilled(hasValue, isError);
 
-  const handleChange = React.useCallback(
+  const handleChange: React.ChangeEventHandler<ChangeEventType> = React.useCallback(
     event => {
       field.onChange(event);
       onChange && onChange(event);
@@ -95,7 +103,7 @@ export function useForm({
     [field, onChange]
   );
 
-  const handleBlur = React.useCallback(
+  const handleBlur: React.FocusEventHandler<BlurEventType> = React.useCallback(
     event => {
       field.onBlur(event);
       onBlur && onBlur(event);
