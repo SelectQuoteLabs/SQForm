@@ -7,13 +7,17 @@ import {
   within
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {mocked} from 'ts-jest/utils';
 
 import {BasicForm, FormWithValidation} from '../SQForm.stories';
 
-window.alert = jest.fn();
+const mockedWindow = mocked(window, true);
+
+//window.alert = jest.fn();
+mockedWindow.alert = jest.fn();
 
 afterEach(() => {
-  window.alert.mockClear();
+  mockedWindow.alert.mockClear();
 });
 
 const mockData = {

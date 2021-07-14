@@ -53,7 +53,7 @@ it('should update when option is selected', () => {
 it('should display disabled option', () => {
   render(<SQFormDropdown size="auto" />);
 
-  const disabledOptionBefore = screen.queryByRole('option', /kansas/i);
+  const disabledOptionBefore = screen.queryByRole('option', {name: /kansas/i});
   expect(disabledOptionBefore).not.toBeInTheDocument();
 
   const expandButton = screen.getByRole('button', {name: /state/i});
@@ -154,9 +154,9 @@ it('should highlight field if required but no value selected', () => {
 });
 
 it('should show empty list if no options are given', () => {
-  const consoleWarnSpy = jest
-    .spyOn(console, 'warn')
-    .mockImplementation(() => {});
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    /* Mock function */
+  });
 
   render(<SQFormDropdown size="auto" children={null} />);
 
@@ -172,9 +172,9 @@ it('should show empty list if no options are given', () => {
 });
 
 it('should show empty value if initial value not in options', () => {
-  const consoleWarnSpy = jest
-    .spyOn(console, 'warn')
-    .mockImplementation(() => {});
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    /** Mock function */
+  });
 
   render(
     <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'TX'}}} />
