@@ -3,7 +3,11 @@ import {useFormikContext} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import {hasUpdated} from '../../utils';
 
-export function useFormButton(isDisabled, shouldRequireFieldUpdates, onClick) {
+export function useFormButton(
+  isDisabled: boolean,
+  shouldRequireFieldUpdates: boolean,
+  onClick: <TArgs extends any[], TResult>(...args: TArgs) => TResult
+) {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
