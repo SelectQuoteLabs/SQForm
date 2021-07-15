@@ -1,11 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import {useFormikContext} from 'formik';
-
 import {useForm} from './useForm';
+import {TextareaAutosizeProps, TextFieldProps} from '@material-ui/core'
+import BaseFieldProps from '../../types/BaseFieldProps';
 import {toKebabCase} from '../../utils';
+
+interface SQFormTextareaProps extends BaseFieldProps {
+  /** Placeholder text used inside the input field to provide hints to the user */
+  placeholder: string;
+  /** Disabled property to disable the input if true */
+  isDisabled: boolean;
+  /** Required property used to highlight input and label if not fulfilled */
+  isRequired: boolean;
+  /** Custom onBlur event callback */
+  onBlur: React.FocusEventHandler;
+  /** Custom onChange event callback */
+  onChange: React.ChangeEventHandler;
+  /** Number of rows to display when multiline option is set to true. */
+  rows: number;
+  /** Maximum number of rows to display when multiline option is set to true. */
+  rowsMax: number;
+  /** Attributes applied to the `textarea` element */
+  inputProps: TextareaAutosizeProps;
+  /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
+  maxCharacters: number;
+  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
+  muiFieldProps: TextFieldProps;
+}
 
 function SQFormTextarea({
   name,
@@ -21,8 +44,8 @@ function SQFormTextarea({
   maxCharacters,
   inputProps = {},
   muiFieldProps = {}
-}) {
-  const {values} = useFormikContext();
+} : SQFormTextareaProps): JSX.Element {
+  const {values}: { [field: string]: any } = useFormikContext();
   const {
     fieldState: {isFieldError},
     fieldHelpers: {
@@ -37,11 +60,11 @@ function SQFormTextarea({
     onChange
   });
 
-  const [valueLength, setValueLength] = React.useState(
+  const [valueLength, setValueLength] = React.useState<number>(
     values[name]?.length || 0
   );
 
-  const handleChange = event => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
     setValueLength(event.target.value.length);
     handleChangeHelper(event);
   };
@@ -87,34 +110,5 @@ function SQFormTextarea({
     </Grid>
   );
 }
-
-SQFormTextarea.propTypes = {
-  /** Name of the field will be the Object key of the key/value pair form payload */
-  name: PropTypes.string.isRequired,
-  /** Descriptive label of the input */
-  label: PropTypes.string.isRequired,
-  /** Placeholder text used inside the input field to provide hints to the user */
-  placeholder: PropTypes.string,
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Number of rows to display when multiline option is set to true. */
-  rows: PropTypes.number,
-  /** Maximum number of rows to display when multiline option is set to true. */
-  rowsMax: PropTypes.number,
-  /** Attributes applied to the `textarea` element */
-  inputProps: PropTypes.object,
-  /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
-  maxCharacters: PropTypes.number,
-  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
-};
 
 export default SQFormTextarea;
