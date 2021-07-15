@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
+import {useFormikContext} from 'formik';
 import SQFormTextField from './SQFormTextField';
 
 function TextFieldMask({inputRef, mask, ...rest}) {
@@ -32,8 +33,16 @@ function SQFormMaskedTextField({
   type = 'text',
   InputProps,
   inputProps = {},
-  muiFieldProps = {}
+  muiFieldProps = {},
+  stripNonNumeric = false
 }) {
+  const {setFieldValue} = useFormikContext();
+
+  const handleChangeStripNonNumeric = event => {
+    onChange && onChange(event);
+    setFieldValue(name, event.target.value.replace(/[^\d]/g, ''));
+  };
+
   return (
     <SQFormTextField
       name={name}
@@ -43,7 +52,7 @@ function SQFormMaskedTextField({
       placeholder={placeholder}
       size={size}
       onBlur={onBlur}
-      onChange={onChange}
+      onChange={stripNonNumeric ? handleChangeStripNonNumeric : onChange}
       startAdornment={startAdornment}
       endAdornment={endAdornment}
       type={type}
@@ -94,7 +103,9 @@ SQFormMaskedTextField.propTypes = {
   /** Attributes applied to the `input` element */
   inputProps: PropTypes.object,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
+  /** The submitted value from the input will have all non-numeric charactes removed */
+  stripNonNumeric: PropTypes.bool
 };
 
 export default SQFormMaskedTextField;
