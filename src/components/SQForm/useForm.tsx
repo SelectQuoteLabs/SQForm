@@ -9,19 +9,24 @@ import {
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
-interface UseFormParam {
+type ChangeHandler<ChangeEventType> = (
+  event: React.ChangeEvent<ChangeEventType>,
+  ...args: any[]
+) => void;
+
+interface UseFormParam<ChangeEventType> {
   name: string;
   isRequired: boolean;
   onBlur?: React.FocusEventHandler;
-  onChange?: React.ChangeEventHandler;
+  onChange?: ChangeHandler<ChangeEventType>;
 }
 
-interface UseFormReturn {
-  formikField: {
-    field: FieldInputProps<unknown>;
-    meta: FieldMetaProps<unknown>;
-    helpers: FieldHelperProps<unknown>;
-  };
+interface UseFormReturn<ChangeEventType> {
+  useFormikField: <Value extends unknown>() => [
+    FieldInputProps<Value>,
+    FieldMetaProps<Value>,
+    FieldHelperProps<Value>
+  ];
   fieldState: {
     errorMessage: string;
     isTouched: boolean;
@@ -32,7 +37,7 @@ interface UseFormReturn {
   };
   fieldHelpers: {
     handleBlur: React.FocusEventHandler;
-    handleChange: React.ChangeEventHandler;
+    handleChange: ChangeHandler<ChangeEventType>;
     HelperTextComponent: React.ReactElement | string;
   };
 }
@@ -56,7 +61,7 @@ function _getIsFulfilled(hasValue: boolean, isError: boolean) {
   return false;
 }
 
-function _getHasValue(meta: unknown) {
+function _getHasValue(meta: FieldMetaProps<unknown>) {
   const fieldValue = getIn(meta, 'value');
 
   if (Array.isArray(fieldValue)) {
@@ -70,15 +75,16 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm({
+export function useForm<ChangeEventType>({
   name,
   isRequired,
   onBlur,
   onChange
-}: UseFormParam): UseFormReturn {
+}: UseFormParam<ChangeEventType>): UseFormReturn<ChangeEventType> {
   _handleError(name, isRequired);
 
-  const [field, meta, helpers] = useField(name);
+  const useFormikField = <Value extends unknown>() => useField<Value>(name);
+  const [field, meta] = useField(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
   const hasValue = _getHasValue(meta);
@@ -87,7 +93,7 @@ export function useForm({
   const isFieldRequired = isRequired && !hasValue;
   const isFulfilled = _getIsFulfilled(hasValue, isError);
 
-  const handleChange = React.useCallback(
+  const handleChange: ChangeHandler<ChangeEventType> = React.useCallback(
     event => {
       field.onChange(event);
       onChange && onChange(event);
@@ -131,7 +137,7 @@ export function useForm({
   }, [isFieldError, isFieldRequired, isFulfilled, errorMessage]);
 
   return {
-    formikField: {field, meta, helpers},
+    useFormikField,
     fieldState: {
       errorMessage,
       isTouched,

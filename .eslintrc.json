@@ -31,8 +31,15 @@
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "env": {"browser": true, "es6": true, "node": true},
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
@@ -40,15 +47,27 @@
       ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "ecmaFeatures": {"jsx": true},
+        "ecmaFeatures": {
+          "jsx": true
+        },
         "ecmaVersion": 2021,
         "sourceType": "module",
         "project": "./tsconfig.json"
       },
-      "plugins": ["@typescript-eslint"],
+      "plugins": [
+        "@typescript-eslint"
+      ],
       "rules": {
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"]
+        "@typescript-eslint/no-use-before-define": [
+          "error"
+        ],
+        "@typescript-eslint/no-explicit-any": [
+          "error",
+          {
+            "ignoreRestArgs": true
+          }
+        ]
       }
     }
   ]
