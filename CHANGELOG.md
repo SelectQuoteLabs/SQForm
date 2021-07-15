@@ -1,3 +1,10 @@
+### [5.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.2...v5.0.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* 🐛 correctly pass props to Icon ([01df7fa](https://github.com/SelectQuoteLabs/SQForm/commit/01df7fa4526270bb96661da04e4d2ea74bb6bff2)), closes [#331](https://github.com/SelectQuoteLabs/SQForm/issues/331)
+
 ### [5.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.1...v5.0.2) (2021-06-30)
 
 
