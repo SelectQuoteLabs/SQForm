@@ -5,7 +5,7 @@ import {useForm} from './useForm';
 import BaseFieldProps from '../../types/BaseFieldProps';
 import {toKebabCase} from '../../utils';
 
-type SQFormReadOnlyFieldProps = {
+export type SQFormReadOnlyFieldProps = {
   muiFieldProps?: TextFieldProps;
 } & BaseFieldProps;
 

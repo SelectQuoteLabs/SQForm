@@ -23,7 +23,6 @@ const defaultArgs = {
   children: 'Submit'
 };
 
-// prevents synthetic event warnings
 const handleClick = () => {
   /* noop */
 };
