@@ -1,6 +1,6 @@
 import React from 'react';
 import Radio from '@material-ui/core/Radio';
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {FormControlLabel, RadioProps} from '@material-ui/core';
 
 interface SQFormRadioButtonGroupItemProps {
@@ -16,7 +16,7 @@ interface SQFormRadioButtonGroupItemProps {
   inputProps?: RadioProps;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   radioButton: {
     marginBottom: theme.spacing(1.5)
   },
