@@ -14,20 +14,19 @@ type ChangeHandler<ChangeEventType> = (
   ...args: any[]
 ) => void;
 
-interface UseFormParam<Value, ChangeEventType> {
+interface UseFormParam<ChangeEventType> {
   name: string;
   isRequired: boolean;
   onBlur?: React.FocusEventHandler;
   onChange?: ChangeHandler<ChangeEventType>;
-  value?: Value;
 }
 
-interface UseFormReturn<Value, ChangeEventType> {
-  formikField: {
-    field: FieldInputProps<Value>;
-    meta: FieldMetaProps<Value>;
-    helpers: FieldHelperProps<Value>;
-  };
+interface UseFormReturn<ChangeEventType> {
+  useFormikField: <Value extends unknown>() => [
+    FieldInputProps<Value>,
+    FieldMetaProps<Value>,
+    FieldHelperProps<Value>
+  ];
   fieldState: {
     errorMessage: string;
     isTouched: boolean;
@@ -62,7 +61,7 @@ function _getIsFulfilled(hasValue: boolean, isError: boolean) {
   return false;
 }
 
-function _getHasValue(meta: unknown) {
+function _getHasValue(meta: FieldMetaProps<unknown>) {
   const fieldValue = getIn(meta, 'value');
 
   if (Array.isArray(fieldValue)) {
@@ -76,19 +75,16 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm<Value, ChangeEventType>({
+export function useForm<ChangeEventType>({
   name,
   isRequired,
   onBlur,
-  onChange,
-  value
-}: UseFormParam<Value, ChangeEventType>): UseFormReturn<
-  Value,
-  ChangeEventType
-> {
+  onChange
+}: UseFormParam<ChangeEventType>): UseFormReturn<ChangeEventType> {
   _handleError(name, isRequired);
 
-  const [field, meta, helpers] = useField<Value>(name);
+  const useFormikField = <Value extends unknown>() => useField<Value>(name);
+  const [field, meta] = useField(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
   const hasValue = _getHasValue(meta);
@@ -141,7 +137,7 @@ export function useForm<Value, ChangeEventType>({
   }, [isFieldError, isFieldRequired, isFulfilled, errorMessage]);
 
   return {
-    formikField: {field, meta, helpers},
+    useFormikField,
     fieldState: {
       errorMessage,
       isTouched,
