@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import {useFormikContext} from 'formik';
+import {useFormikContext, FormikProps} from 'formik';
 import {useForm} from './useForm';
 import {TextareaAutosizeProps, TextFieldProps} from '@material-ui/core'
 import BaseFieldProps from '../../types/BaseFieldProps';
@@ -30,6 +30,10 @@ interface SQFormTextareaProps extends BaseFieldProps {
   muiFieldProps: TextFieldProps;
 }
 
+interface FormValues {
+  [field: string]: string
+}
+
 function SQFormTextarea({
   name,
   label,
@@ -45,7 +49,7 @@ function SQFormTextarea({
   inputProps = {},
   muiFieldProps = {}
 } : SQFormTextareaProps): JSX.Element {
-  const {values}: { [field: string]: any } = useFormikContext();
+  const {values}: FormikProps<FormValues> = useFormikContext();
   const {
     fieldState: {isFieldError},
     fieldHelpers: {
