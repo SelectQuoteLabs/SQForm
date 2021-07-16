@@ -1,8 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import {makeStyles} from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {FormControlLabel, RadioProps} from '@material-ui/core';
+
+interface SQFormRadioButtonGroupItemProps {
+  /** Value of the radio button */
+  value: string | boolean | number;
+  /** Label for the radio button */
+  label: string;
+  /** Whether this radio button is disabled */
+  isDisabled?: boolean;
+  /** Whether the group this button is in is displayed in a row */
+  isRowDisplay?: boolean;
+  /** Props for the radio input */
+  inputProps?: RadioProps;
+}
 
 const useStyles = makeStyles(theme => ({
   radioButton: {
@@ -19,7 +31,7 @@ function SQFormRadioButtonGroupItem({
   isDisabled = false,
   isRowDisplay = false,
   inputProps = {}
-}) {
+}: SQFormRadioButtonGroupItemProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -34,18 +46,5 @@ function SQFormRadioButtonGroupItem({
     />
   );
 }
-
-SQFormRadioButtonGroupItem.propTypes = {
-  /** Value of the radio button */
-  value: PropTypes.any.isRequired,
-  /** Label for the radio button */
-  label: PropTypes.string.isRequired,
-  /** Whether this radio button is disabled */
-  isDisabled: PropTypes.bool,
-  /** Whether the group this button is in is displayed in a row */
-  isRowDisplay: PropTypes.bool,
-  /** Props for the radio input */
-  inputProps: PropTypes.object
-};
 
 export default SQFormRadioButtonGroupItem;
