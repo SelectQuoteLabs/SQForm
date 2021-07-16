@@ -3,13 +3,21 @@ import {useFormikContext} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import {hasUpdated} from '../../utils';
 
+type UseFormButtonReturnType = {
+  isButtonDisabled: boolean;
+  hasFormBeenUpdated: boolean;
+  values: unknown;
+  initialValues: unknown;
+  isValid: boolean;
+  handleClick: (...args: unknown[]) => void;
+  [key: string]: unknown;
+};
+
 export function useFormButton(
   isDisabled: boolean,
   shouldRequireFieldUpdates: boolean,
-  onClick: <TArgs extends React.MouseEvent<HTMLInputElement>[], TResult>(
-    ...args: TArgs
-  ) => TResult
-): Record<string, unknown> {
+  onClick?: (...event: React.MouseEvent<HTMLButtonElement>[]) => void
+): UseFormButtonReturnType {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
@@ -25,10 +33,14 @@ export function useFormButton(
     return false;
   }, [hasFormBeenUpdated, isDisabled, isValid, shouldRequireFieldUpdates]);
 
-  const handleClick = useDebouncedCallback((...args) => onClick(...args), 500, {
-    leading: true,
-    trailing: false
-  });
+  const handleClick = useDebouncedCallback(
+    (...event) => onClick && onClick(...event),
+    500,
+    {
+      leading: true,
+      trailing: false
+    }
+  );
 
   return {
     isButtonDisabled,
