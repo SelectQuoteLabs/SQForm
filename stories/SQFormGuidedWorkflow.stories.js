@@ -1,6 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
-import {ExpandingCardList, ExpandingCard} from 'scplus-shared-components';
+import {
+  ExpandingCardList,
+  ExpandingCard,
+  RoundedButton,
+  TextButton
+} from 'scplus-shared-components';
 import {SQFormGuidedWorkflow, SQFormDropdown, SQFormTextarea} from '../src';
 
 export default {
@@ -22,6 +27,7 @@ const outcomeDropdownOptions = [
 ];
 
 const Template = () => {
+  const [isIneligible, setIneligible] = React.useState(false);
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
@@ -63,6 +69,7 @@ const Template = () => {
     {
       name: 'cancellation',
       title: 'Policy Cancellation Statement',
+      subtitles: ['Cancelling policy'],
       formikProps: {
         initialValues: {
           outcome: '',
@@ -78,7 +85,8 @@ const Template = () => {
       },
       scriptedTextProps: {
         text: `Stuff about policy cancellation documents`,
-        title: 'Agent Script'
+        title: 'Agent Script',
+        actionButton: <TextButton tooltip="View">View Doc</TextButton>
       },
       outcomeProps: {
         FormElements: (
@@ -87,9 +95,21 @@ const Template = () => {
               {outcomeDropdownOptions}
             </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" />
+            <RoundedButton
+              title="Ineligible"
+              onClick={() => setIneligible(true)}
+            >
+              Ineligible? Click here
+            </RoundedButton>
           </>
         ),
-        title: 'Confirm Info'
+        title: 'Confirm Info',
+        infoText:
+          'Interact with the form to see me change colors based on form state',
+        warningText: 'Form needs your attention',
+        successText: 'Form is ready to submit',
+        errorText: 'Do not pass go, do not collect $200',
+        isFailedState: isIneligible
       }
     }
   ];

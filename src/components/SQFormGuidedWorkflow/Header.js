@@ -19,12 +19,12 @@ function Header({
   successText,
   isFailedState = false
 }) {
-  const {isValid} = useFormikContext();
+  const {isValid, touched} = useFormikContext();
+  const isFormTouched = Object.keys(touched).length;
 
   const shouldRenderInformativeHeading =
     infoText || warningText || errorText || successText;
-  const isStaticInformativeHeading =
-    infoText && !warningText && !errorText && !successText;
+  const isStaticInformativeHeading = infoText && !isFormTouched;
 
   const getInformativeHeadingType = () => {
     if (!shouldRenderInformativeHeading) {
@@ -32,10 +32,10 @@ function Header({
     }
 
     switch (true) {
-      case isStaticInformativeHeading:
-        return helperTextType.info;
       case isFailedState:
         return helperTextType.error;
+      case isStaticInformativeHeading:
+        return helperTextType.info;
       case isValid:
         return helperTextType.success;
       default:
