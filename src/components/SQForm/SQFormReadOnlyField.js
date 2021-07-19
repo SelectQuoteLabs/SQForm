@@ -13,7 +13,7 @@ function SQFormReadOnlyField({label, name, size = 'auto', muiFieldProps = {}}) {
   return (
     <Grid item sm={size}>
       <TextField
-        id={toKebabCase(label)}
+        id={toKebabCase(name)}
         label={label}
         name={name}
         value={field.value || '- -'}

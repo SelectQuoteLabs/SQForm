@@ -37,3 +37,4 @@ export {default as SQFormMaskedTextField} from './components/SQForm/SQFormMasked
 export {default as SQFormHelperText} from './components/SQForm/SQFormHelperText';
 export {default as SQFormScrollableCard} from './components/SQFormScrollableCard';
 export {default as SQFormGuidedWorkflow} from './components/SQFormGuidedWorkflow';
+export {default as SQFormMultiValue} from './components/SQForm/SQFormMultiValue';

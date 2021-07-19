@@ -1,3 +1,56 @@
+### [5.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.2...v5.0.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* 🐛 correctly pass props to Icon ([01df7fa](https://github.com/SelectQuoteLabs/SQForm/commit/01df7fa4526270bb96661da04e4d2ea74bb6bff2)), closes [#331](https://github.com/SelectQuoteLabs/SQForm/issues/331)
+
+### [5.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.1...v5.0.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* 🐛 Removed unused props from the stepper component ([ad6df58](https://github.com/SelectQuoteLabs/SQForm/commit/ad6df585ad60a36439e73393c70abe23b75b47b1)), closes [#279](https://github.com/SelectQuoteLabs/SQForm/issues/279)
+
+### [5.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.0...v5.0.1) (2021-06-25)
+
+
+### Bug Fixes
+
+* 🐛 Updated id values to name instead of label for more uniq ([14764b9](https://github.com/SelectQuoteLabs/SQForm/commit/14764b9520fd8bd7d0e4c5c7885e8b4b223ec656)), closes [#318](https://github.com/SelectQuoteLabs/SQForm/issues/318)
+
+## [5.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.9.0...v5.0.0) (2021-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Adding 20px padding to SQFormDialog content instead of 8px 24px
+
+### Features
+
+* 🎸 Adding 20px padding to dialog content ([24df034](https://github.com/SelectQuoteLabs/SQForm/commit/24df0347d1870a44048ca049177ec77924662ba8)), closes [#88](https://github.com/SelectQuoteLabs/SQForm/issues/88)
+
+## [4.9.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.1...v4.9.0) (2021-06-22)
+
+
+### Features
+
+* 🎸 support for boolean valued dropdown ([cc2dca9](https://github.com/SelectQuoteLabs/SQForm/commit/cc2dca939b0ad4ecbd783154738bbc45a7c5e2b5)), closes [#174](https://github.com/SelectQuoteLabs/SQForm/issues/174)
+
+### [4.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v4.8.0...v4.8.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* 🐛 SQFormMultiValue accepts custom initial values ([632ed3c](https://github.com/SelectQuoteLabs/SQForm/commit/632ed3c007d9aff9dad8c1c0dde23ebdd2ee22fb)), closes [#308](https://github.com/SelectQuoteLabs/SQForm/issues/308)
+
+## [4.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.7.0...v4.8.0) (2021-06-17)
+
+
+### Features
+
+* 🎸 Add SQFormMultiValue component ([50583c9](https://github.com/SelectQuoteLabs/SQForm/commit/50583c9887326c2945d841cd59b5dcbfc982e8a8)), closes [#303](https://github.com/SelectQuoteLabs/SQForm/issues/303) [#304](https://github.com/SelectQuoteLabs/SQForm/issues/304)
+
 ## [4.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v4.6.0...v4.7.0) (2021-06-04)
 
 
