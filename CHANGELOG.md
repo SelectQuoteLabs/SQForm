@@ -1,3 +1,10 @@
+## [5.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.3...v5.1.0) (2021-07-19)
+
+
+### Features
+
+* 🎸 add `stripNonNumeric` prop to `SQFormMaskedTextField` ([c770072](https://github.com/SelectQuoteLabs/SQForm/commit/c7700720cd245d976fc118939ba024f3354398c3)), closes [#224](https://github.com/SelectQuoteLabs/SQForm/issues/224)
+
 ### [5.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.2...v5.0.3) (2021-07-15)
 
 
