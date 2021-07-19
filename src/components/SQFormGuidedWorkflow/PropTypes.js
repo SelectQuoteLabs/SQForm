@@ -44,6 +44,10 @@ export const TaskModuleProps = {
   isDisabled: PropTypes.bool,
   /** Is initially expanded */
   isInitiallyExpanded: PropTypes.bool,
+  /** Controlled loading */
+  isLoading: PropTypes.bool,
+  /** Custom loading message for controlled loading */
+  isLoadingMessage: PropTypes.string,
   /** expandPanel callback synchronizes consumer state with Accordion state.
    * Requires isPanelExpanded prop. */
   expandPanel: PropTypes.func,

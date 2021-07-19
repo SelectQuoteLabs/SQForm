@@ -4,6 +4,7 @@ import {Formik, Form} from 'formik';
 import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
+  ComponentLoadingSpinner,
   Section,
   SectionHeader,
   SectionBody
@@ -11,9 +12,9 @@ import {
 import SQFormButton from '../SQForm/SQFormButton';
 import AgentScript from './AgentScript';
 import OutcomeForm from './OutcomeForm';
-import {GuidedWorkflowProps} from './PropTypes';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
+import {GuidedWorkflowProps} from './PropTypes';
 
 const useStyles = makeStyles(() => {
   return {
@@ -87,14 +88,11 @@ function SQFormGuidedWorkflow({
     };
     const handleSubmit = async (values, formikBag) => {
       try {
-        // TODO: Render centered loading spinner
         await taskModule.formikProps.onSubmit(values, formikBag);
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {
         onError(error);
-      } finally {
-        // TODO: cancel loading spinner
       }
     };
 
@@ -119,8 +117,20 @@ function SQFormGuidedWorkflow({
           {({isSubmitting}) => (
             <Form>
               <CardContent>
-                <AgentScript {...taskModule.scriptedTextProps} />
-                <OutcomeForm {...taskModule.outcomeProps} />
+                {isSubmitting || taskModule.isLoading ? (
+                  <ComponentLoadingSpinner
+                    message={
+                      isSubmitting
+                        ? `Saving ${taskModule.title} outcome`
+                        : taskModule.isLoadingMessage
+                    }
+                  />
+                ) : (
+                  <>
+                    <AgentScript {...taskModule.scriptedTextProps} />
+                    <OutcomeForm {...taskModule.outcomeProps} />
+                  </>
+                )}
               </CardContent>
               <CardActions className={classes.panelFooter}>
                 <SQFormButton type="reset" title="Reset Form">

@@ -8,6 +8,10 @@ import {
 } from 'scplus-shared-components';
 import {SQFormGuidedWorkflow, SQFormDropdown, SQFormTextarea} from '../src';
 
+const sleep = milliseconds => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
+
 export default {
   title: 'Forms/SQFormGuidedWorkflow',
   component: SQFormGuidedWorkflow,
@@ -43,6 +47,7 @@ const Template = () => {
           notes: ''
         },
         onSubmit: async values => {
+          await sleep(3000); // Simulate API call to see loading spinner
           console.log(JSON.stringify(values));
         },
         validationSchema: {
