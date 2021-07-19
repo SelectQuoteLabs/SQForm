@@ -14,15 +14,7 @@ const sleep = milliseconds => {
 
 export default {
   title: 'Forms/SQFormGuidedWorkflow',
-  component: SQFormGuidedWorkflow,
-  argTypes: {
-    // onSave: {action: 'onSave', table: {disable: true}},
-    // children: {table: {disable: true}},
-    // validationSchema: {table: {disable: true}}
-  }
-  // parameters: {
-  //   docs: {page: createDocsPage({showStories: false})}
-  // }
+  component: SQFormGuidedWorkflow
 };
 
 const outcomeDropdownOptions = [
@@ -75,6 +67,7 @@ const Template = () => {
       name: 'cancellation',
       title: 'Policy Cancellation Statement',
       subtitles: ['Cancelling policy'],
+      isFailedState: isIneligible,
       formikProps: {
         initialValues: {
           outcome: '',
@@ -113,8 +106,42 @@ const Template = () => {
           'Interact with the form to see me change colors based on form state',
         warningText: 'Form needs your attention',
         successText: 'Form is ready to submit',
-        errorText: 'Do not pass go, do not collect $200',
-        isFailedState: isIneligible
+        errorText: 'Do not pass go, do not collect $200'
+      }
+    },
+    {
+      name: 'providers',
+      title: 'Verify Providers',
+      subtitles: ['Please verify the providers'],
+      formikProps: {
+        initialValues: {
+          outcome: '',
+          notes: ''
+        },
+        onSubmit: async values => {
+          console.log(JSON.stringify(values));
+        },
+        validationSchema: {
+          outcome: Yup.string().required('Required'),
+          notes: Yup.string()
+        }
+      },
+      scriptedTextProps: {
+        text:
+          'Before proceeding, please verify the list of providers is correct',
+        title: 'Agent Script',
+        actionButton: <TextButton tooltip="View">View Providers</TextButton>
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+              {outcomeDropdownOptions}
+            </SQFormDropdown>
+            <SQFormTextarea name="notes" label="Notes" />
+          </>
+        ),
+        title: 'Confirm Info'
       }
     }
   ];
@@ -126,7 +153,8 @@ const Template = () => {
           <SQFormGuidedWorkflow
             mainTitle="CCA Guided Workflow"
             mainSubtitle="Please review these Services with you client, then confirm their responses."
-            completedTasks={0}
+            initialCompletedTasks={0}
+            isStrictMode={false}
             taskModules={taskModules}
             onError={error => {
               console.error(error);

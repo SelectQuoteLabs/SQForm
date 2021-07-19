@@ -127,8 +127,14 @@ function SQFormGuidedWorkflow({
                   />
                 ) : (
                   <>
-                    <AgentScript {...taskModule.scriptedTextProps} />
-                    <OutcomeForm {...taskModule.outcomeProps} />
+                    <AgentScript
+                      {...taskModule.scriptedTextProps}
+                      isFailedState={taskModule.isFailedState}
+                    />
+                    <OutcomeForm
+                      {...taskModule.outcomeProps}
+                      isFailedState={taskModule.isFailedState}
+                    />
                   </>
                 )}
               </CardContent>
@@ -139,7 +145,9 @@ function SQFormGuidedWorkflow({
                 <SQFormButton
                   shouldRequireFieldUpdates={true}
                   isDisabled={
-                    taskModule?.isSubmitButtonDisabled || isSubmitting
+                    taskModule.isFailedState ||
+                    taskModule?.isSubmitButtonDisabled ||
+                    isSubmitting
                   }
                 >
                   {taskModule?.submitButtonText ?? 'Next'}

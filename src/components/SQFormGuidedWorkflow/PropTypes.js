@@ -1,25 +1,42 @@
 import PropTypes from 'prop-types';
 
 export const HeaderPropTypes = {
+  /** Optional Text button to display in the section header */
   actionButton: PropTypes.node,
+  /** Title to display in the section header */
   title: PropTypes.string.isRequired,
+  /** Informative text to display as a subheader next to the Title */
   infoText: PropTypes.string,
+  /** Warning text to display as a subheader next to the Title */
   warningText: PropTypes.string,
+  /** Error text to display as a subheader next to the Title
+   * if the form is in a failed state
+   */
   errorText: PropTypes.string,
+  /** Success text to display as a subheader next to the Title
+   * if the form has no errors and is in a Valid state
+   */
   successText: PropTypes.string,
+  /** This prop is controlled by taskModules.isFailedState
+   * Red failure text to display as a subheader next to the Title
+   * if the form is in a failed state where the user cannot continue
+   */
   isFailedState: PropTypes.bool
 };
 
 export const AgentScriptPropTypes = {
+  /** Scripted Text for the user to read */
   text: PropTypes.string.isRequired,
   ...HeaderPropTypes
 };
 
 export const OutcomePropTypes = {
+  /** SQForm Elements to render inside the Form */
   FormElements: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]).isRequired,
+  /** Any props from MUI <Grid> component */
   muiGridProps: PropTypes.object,
   ...HeaderPropTypes
 };
@@ -60,10 +77,15 @@ export const TaskModuleProps = {
   resetButtonText: PropTypes.string,
   /** Submit button text */
   submitButtonText: PropTypes.string,
+  /** Flag for if the form is in a failed state where the user cannot continue */
+  isFailedState: PropTypes.bool,
   /** Manually disable submit button */
   isSubmitButtonDisabled: PropTypes.bool,
+  /** The props used to configure SQForm */
   formikProps: PropTypes.shape(FormikProps).isRequired,
+  /** The props used to configure the Scripted Text section */
   scriptedTextProps: PropTypes.shape(AgentScriptPropTypes).isRequired,
+  /** The props used to configure the Outcome form section */
   outcomeProps: PropTypes.shape(OutcomePropTypes).isRequired
 };
 
