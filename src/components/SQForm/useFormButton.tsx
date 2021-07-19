@@ -16,7 +16,7 @@ type UseFormButtonReturnType = {
 export function useFormButton(
   isDisabled: boolean,
   shouldRequireFieldUpdates: boolean,
-  onClick?: (...event: React.MouseEvent<HTMLButtonElement>[]) => void
+  onClick?: (event: React.ChangeEvent<HTMLInputElement>) => void
 ): UseFormButtonReturnType {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
@@ -34,7 +34,7 @@ export function useFormButton(
   }, [hasFormBeenUpdated, isDisabled, isValid, shouldRequireFieldUpdates]);
 
   const handleClick = useDebouncedCallback(
-    (...event) => onClick && onClick(...event),
+    event => onClick && onClick(event),
     500,
     {
       leading: true,
