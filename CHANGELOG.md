@@ -1,3 +1,10 @@
+## [5.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.1.0...v5.2.0) (2021-07-20)
+
+
+### Features
+
+* 🎸 Guided Workflow feature ([777346a](https://github.com/SelectQuoteLabs/SQForm/commit/777346acd40718ef5258f127cf51e0c6d3f349cd))
+
 ## [5.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.3...v5.1.0) (2021-07-19)
 
 
