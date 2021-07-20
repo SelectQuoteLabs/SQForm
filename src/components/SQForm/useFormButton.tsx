@@ -16,7 +16,7 @@ type UseFormButtonReturnType = {
 export function useFormButton(
   isDisabled: boolean,
   shouldRequireFieldUpdates: boolean,
-  onClick?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onClick?: (...event: React.MouseEvent<HTMLButtonElement>[]) => void
 ): UseFormButtonReturnType {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
