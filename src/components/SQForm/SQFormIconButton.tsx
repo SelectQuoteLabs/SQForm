@@ -14,7 +14,7 @@ interface SQFormIconButtonProps {
   /** Type of button, defaults to 'submit' */
   type?: string;
   /** Standard React event handler */
-  onClick?: (...event: React.MouseEvent<HTMLButtonElement>[]) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function SQFormIconButton({
