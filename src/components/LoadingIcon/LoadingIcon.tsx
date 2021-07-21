@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   '@keyframes bumpit': {
     '0%': {
       transform: 'scale(1)'
@@ -17,16 +17,16 @@ const useStyles = makeStyles({
     }
   },
   orange: {
-    animation: 'bumpit 2s linear 0.66s infinite'
+    animation: `$bumpit 2000ms ${theme.transitions.easing.easeInOut} 666ms infinite`
   },
   sqLoadingIcon: {
     opacity: '0.65'
   },
   brown: {
-    animation: 'bumpit 2s linear 0s infinite'
+    animation: `$bumpit 2000ms ${theme.transitions.easing.easeInOut} 0ms infinite`
   },
   yellow: {
-    animation: 'bumpit 2s linear 1.33s infinite'
+    animation: `$bumpit 2000ms ${theme.transitions.easing.easeInOut} 1333ms infinite`
   },
   root: {
     display: 'flex',
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     animation: '0.45s fade-in',
     alignItems: 'center'
   }
-});
+}));
 
 interface LoadingIconProps {
   /** The height of the loading icon */
