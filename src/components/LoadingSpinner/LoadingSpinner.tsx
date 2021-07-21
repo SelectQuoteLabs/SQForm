@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-
 import LoadingIcon from '../LoadingIcon';
 import {Grid, Typography} from '@material-ui/core';
+
+interface LoadingSpinnerProps {
+  message?: string;
+}
 
 const gridStyles = makeStyles({
   root: {
@@ -22,7 +24,7 @@ const typographyStyles = makeStyles({
   }
 });
 
-function LoadingSpinner({message}) {
+function LoadingSpinner({message}: LoadingSpinnerProps): JSX.Element {
   const gridClasses = gridStyles();
   const typographyClasses = typographyStyles();
 
@@ -37,10 +39,5 @@ function LoadingSpinner({message}) {
     </Grid>
   );
 }
-
-LoadingSpinner.propTypes = {
-  /** The loading message */
-  message: PropTypes.string
-};
 
 export default LoadingSpinner;
