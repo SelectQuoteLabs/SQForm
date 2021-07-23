@@ -3,35 +3,35 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import {useFormikContext, FormikProps} from 'formik';
 import {useForm} from './useForm';
-import {TextareaAutosizeProps, TextFieldProps} from '@material-ui/core'
+import {TextFieldProps} from '@material-ui/core';
 import BaseFieldProps from '../../types/BaseFieldProps';
 import {toKebabCase} from '../../utils';
 
 interface SQFormTextareaProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */
-  placeholder: string;
+  placeholder?: string;
   /** Disabled property to disable the input if true */
-  isDisabled: boolean;
+  isDisabled?: boolean;
   /** Required property used to highlight input and label if not fulfilled */
-  isRequired: boolean;
+  isRequired?: boolean;
   /** Custom onBlur event callback */
-  onBlur: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   /** Custom onChange event callback */
-  onChange: React.ChangeEventHandler;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   /** Number of rows to display when multiline option is set to true. */
-  rows: number;
+  rows?: number;
   /** Maximum number of rows to display when multiline option is set to true. */
-  rowsMax: number;
+  rowsMax?: number;
   /** Attributes applied to the `textarea` element */
-  inputProps: TextareaAutosizeProps;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
-  maxCharacters: number;
+  maxCharacters?: number;
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: TextFieldProps;
+  muiFieldProps?: TextFieldProps;
 }
 
 interface FormValues {
-  [field: string]: string
+  [field: string]: string;
 }
 
 function SQFormTextarea({
@@ -48,7 +48,7 @@ function SQFormTextarea({
   maxCharacters,
   inputProps = {},
   muiFieldProps = {}
-} : SQFormTextareaProps): JSX.Element {
+}: SQFormTextareaProps): JSX.Element {
   const {values}: FormikProps<FormValues> = useFormikContext();
   const {
     fieldState: {isFieldError},
