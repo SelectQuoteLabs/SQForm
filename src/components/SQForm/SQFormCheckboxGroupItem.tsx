@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {FormControlLabel, CheckboxProps} from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
@@ -14,6 +13,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+interface SQFormCheckboxGroupItemProps {
+  /** The name of the group this checkbox is a part of */
+  groupName: string;
+  /** Label for the checkbox */
+  label: string;
+  /** Value for the checkbox */
+  value: string | boolean | number;
+  /** Function to call when input value is changed */
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /** Whether this group item is part of a group displayed in a row */
+  isRowDisplay?: boolean;
+  /** Whether the checkbox is disabled */
+  isDisabled?: boolean;
+  /** Props for the checkbox input */
+  inputProps?: CheckboxProps;
+}
+
 function SQFormCheckboxGroupItem({
   groupName,
   label,
@@ -22,7 +38,7 @@ function SQFormCheckboxGroupItem({
   isRowDisplay = false,
   isDisabled = false,
   inputProps = {}
-}) {
+}: SQFormCheckboxGroupItemProps): JSX.Element {
   const {
     formikField: {field},
     fieldHelpers: {handleChange}
@@ -39,7 +55,7 @@ function SQFormCheckboxGroupItem({
       return field.value.includes(value.toString());
     }
 
-    return field.value;
+    return !!field.value;
   }, [value, field]);
 
   return (
@@ -63,22 +79,5 @@ function SQFormCheckboxGroupItem({
     />
   );
 }
-
-SQFormCheckboxGroupItem.propTypes = {
-  /** The name of the group this checkbox is a part of */
-  groupName: PropTypes.string.isRequired,
-  /** Label for the checkbox */
-  label: PropTypes.string.isRequired,
-  /** Value for the checkbox */
-  value: PropTypes.any.isRequired,
-  /** Function to call when input value is changed */
-  onChange: PropTypes.func.isRequired,
-  /** Whether this group item is part of a group displayed in a row */
-  isRowDisplay: PropTypes.bool,
-  /** Whether the checkbox is disabled */
-  isDisabled: PropTypes.bool,
-  /** Props for the checkbox input */
-  inputProps: PropTypes.object
-};
 
 export default SQFormCheckboxGroupItem;
