@@ -12,10 +12,7 @@ export default {
   }
 };
 
-export const LoadingSpinnerWithoutMessage = () => {
-  return <LoadingSpinner />;
+export const Default = args => {
+  return <LoadingSpinner {...args} />;
 };
-
-export const LoadingSpinnerWithMessage = args => {
-  return <LoadingSpinner message={args.message ?? 'Loading...'} />;
-};
+Default.storyName = 'LoadingSpinner';
