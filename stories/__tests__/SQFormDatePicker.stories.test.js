@@ -57,11 +57,6 @@ describe('SQFormDatePicker Tests', () => {
 
     const textField = screen.getByRole('textbox', {name: /date/i});
     expect(textField).toHaveValue('');
-
-    //Doing this doesn't type, it just opens the dialog
-    //userEvent.type(textField, '01/01/2021');
-
-    //expect(textField).toHaveValue('01/01/2021');
   });
 
   it('should open calendar view when calendar button is clicked', () => {
@@ -71,12 +66,6 @@ describe('SQFormDatePicker Tests', () => {
 
     renderDatePicker({SQFormProps: {initialValues}});
 
-    //Not found????
-    //const calendar = screen.getByRole('button', {name: /date/i});
-    //expect(calendar).toBeInTheDocument();
-
-    //It looks like the testing library just merged the textfield and
-    //calendar button into 1 hybrid input
     const textField = screen.getByRole('textbox', {name: /date/i});
 
     userEvent.click(textField);
@@ -105,14 +94,9 @@ describe('SQFormDatePicker Tests', () => {
     const dateOptions = within(calendarDialog).getAllByRole('cell');
     const selectedDate = dateOptions[0];
 
-    //This doesn't close the calendar/dialog??
     userEvent.click(selectedDate);
-    // It's still showing as visible
-    //await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeVisible());
-    //expect(screen.queryByRole('dialog')).not.toBeVisible();
 
     //Data setup so the test won't need updating all the time
-
     const getTestDay = () => {
       const today = new Date();
       const month = today.getMonth() + 1; //January is 0
