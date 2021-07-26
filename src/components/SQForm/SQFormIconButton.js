@@ -19,8 +19,8 @@ function SQFormIconButton({
     onClick
   );
 
-  function Icon() {
-    return <IconComponent title={title} />;
+  function Icon(props) {
+    return <IconComponent title={title} {...props} />;
   }
 
   return (

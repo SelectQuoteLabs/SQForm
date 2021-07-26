@@ -1,3 +1,24 @@
+## [5.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.1.0...v5.2.0) (2021-07-20)
+
+
+### Features
+
+* 🎸 Guided Workflow feature ([777346a](https://github.com/SelectQuoteLabs/SQForm/commit/777346acd40718ef5258f127cf51e0c6d3f349cd))
+
+## [5.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.3...v5.1.0) (2021-07-19)
+
+
+### Features
+
+* 🎸 add `stripNonNumeric` prop to `SQFormMaskedTextField` ([c770072](https://github.com/SelectQuoteLabs/SQForm/commit/c7700720cd245d976fc118939ba024f3354398c3)), closes [#224](https://github.com/SelectQuoteLabs/SQForm/issues/224)
+
+### [5.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.2...v5.0.3) (2021-07-15)
+
+
+### Bug Fixes
+
+* 🐛 correctly pass props to Icon ([01df7fa](https://github.com/SelectQuoteLabs/SQForm/commit/01df7fa4526270bb96661da04e4d2ea74bb6bff2)), closes [#331](https://github.com/SelectQuoteLabs/SQForm/issues/331)
+
 ### [5.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.0.1...v5.0.2) (2021-06-30)
 
 
