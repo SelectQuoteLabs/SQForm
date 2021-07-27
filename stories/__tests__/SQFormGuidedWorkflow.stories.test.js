@@ -101,4 +101,50 @@ describe('SQFormGuidedWorkflow Tests', () => {
     expect(introText).not.toBeVisible();
     expect(screen.getByText(/stuff about policy cancellation/i)).toBeVisible();
   });
+
+  it("should allow user to go reopen the 1st section after it's completed", async () => {
+    render(<SQFormGuidedWorkflow />);
+
+    const introText = screen.getByText(/hi, bob smith, my name is/i);
+    expect(introText).toBeVisible();
+
+    const outcome = screen.getByRole('button', {name: /outcome/i});
+    userEvent.click(outcome);
+
+    const interested = screen.getByText('Interested');
+    userEvent.click(interested);
+
+    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    userEvent.click(nextButton);
+
+    await waitFor(
+      () =>
+        expect(
+          screen.getByText(/stuff about policy cancellation/i)
+        ).toBeVisible(),
+      {timeout: 5000}
+    );
+
+    const policyText = screen.getByText(/stuff about policy cancellation/i);
+    expect(policyText).toBeVisible();
+
+    const toggleButtons = screen.getAllByRole('button', {
+      name: /toggle-expansion/i
+    });
+    const firstSection = toggleButtons[0];
+
+    userEvent.click(firstSection);
+
+    await waitFor(
+      () =>
+        expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible(),
+      {timeout: 2000}
+    );
+
+    expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible();
+    //expect(screen.queryByText(/stuff about policy cancellation/i)).not.toBeVisible();
+    expect(screen.getByText(/stuff about policy/i)).toBeVisible();
+  });
+
+  //it('should ')
 });
