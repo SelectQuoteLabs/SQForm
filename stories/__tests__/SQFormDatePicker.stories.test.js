@@ -41,22 +41,15 @@ describe('SQFormDatePicker Tests', () => {
   });
 
   it('should render value with non-empty initial value', () => {
-    renderDatePicker();
-
-    const textField = screen.getByRole('textbox', {name: /date/i});
-    expect(textField).toBeInTheDocument();
-    expect(textField).toHaveValue('09/22/2020');
-  });
-
-  it('should update when text is entered', () => {
     const initialValues = {
-      date: ''
+      date: '09/15/2022'
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
 
     const textField = screen.getByRole('textbox', {name: /date/i});
-    expect(textField).toHaveValue('');
+    expect(textField).toBeInTheDocument();
+    expect(textField).toHaveValue('09/15/2022');
   });
 
   it('should open calendar view when calendar button is clicked', () => {
