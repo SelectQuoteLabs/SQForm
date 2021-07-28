@@ -1,19 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import {TextField, TextFieldProps, InputProps} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import BaseFieldProps from '../../types/BaseFieldProps';
 
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
 
+interface SQFormTextFieldProps extends BaseFieldProps {
+  /** Placeholder text used inside the input field to provide hints to the user */
+  placeholder?: string;
+  /** Disabled property to disable the input if true */
+  isDisabled?: boolean;
+  /** Required property used to highlight input and label if not fulfilled */
+  isRequired?: boolean;
+  /** Custom onBlur event callback */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Custom onChange event callback */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /** Adornment that appears at the start of the input */
+  startAdornment?: React.ReactElement;
+  /** Adornment that appears at the end of the input */
+  endAdornment?: React.ReactElement;
+  /** Defines the input type for the text field. Must be a valid HTML5 input type */
+  type?: string;
+  /** Props applied to the Input element */
+  InputProps?: InputProps;
+  /** Attributes applied to the `input` element */
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
+  maxCharacters?: number;
+  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
+  muiFieldProps?: TextFieldProps;
+}
+
 function SQFormTextField({
   name,
   label,
+  size = 'auto',
   isDisabled = false,
   isRequired = false,
   placeholder = '- -',
-  size = 'auto',
   onBlur,
   onChange,
   startAdornment,
@@ -23,7 +50,7 @@ function SQFormTextField({
   inputProps = {},
   maxCharacters,
   muiFieldProps = {}
-}) {
+}: SQFormTextFieldProps): React.ReactElement {
   const {
     formikField: {field},
     fieldState: {isFieldError},
@@ -39,9 +66,13 @@ function SQFormTextField({
     onChange
   });
 
-  const [valueLength, setValueLength] = React.useState(
-    field.value?.length || 0
-  );
+  const [valueLength, setValueLength] = React.useState(() => {
+    if (typeof field.value === 'string') {
+      return field.value.length;
+    }
+
+    return 0;
+  });
 
   const handleChange = e => {
     setValueLength(e.target.value.length);
@@ -98,38 +129,5 @@ function SQFormTextField({
     </Grid>
   );
 }
-
-SQFormTextField.propTypes = {
-  /** Name of the field will be the Object key of the key/value pair form payload */
-  name: PropTypes.string.isRequired,
-  /** Descriptive label of the input */
-  label: PropTypes.string.isRequired,
-  /** Placeholder text used inside the input field to provide hints to the user */
-  placeholder: PropTypes.string,
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Adornment that appears at the start of the input */
-  startAdornment: PropTypes.node,
-  /** Adornment that appears at the end of the input */
-  endAdornment: PropTypes.node,
-  /** Defines the input type for the text field. Must be a valid HTML5 input type */
-  type: PropTypes.string,
-  /** Props applied to the Input element */
-  InputProps: PropTypes.object,
-  /** Attributes applied to the `input` element */
-  inputProps: PropTypes.object,
-  /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
-  maxCharacters: PropTypes.number,
-  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
-};
 
 export default SQFormTextField;
