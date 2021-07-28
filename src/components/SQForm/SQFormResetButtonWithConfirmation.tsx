@@ -1,8 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
+import {useDialog} from '@selectquotelabs/sqhooks';
+
+type SQFormResetButtonWithConfirmationTypes = {
+  /** The contents of the form button; usually text */
+  children: React.ReactNode;
+  /** Title of the confirmation dialog */
+  confirmationTitle?: string;
+  /** Content of the confirmation dialog */
+  confirmationContent: React.ReactNode;
+  /** Whether the button is disabled */
+  isDisabled?: boolean;
+  /** Title of the button */
+  buttonTitle?: string;
+  /** Callback for reset*/
+  onReset?: () => void;
+
+  variant?: string;
+};
 
 function SQFormResetButtonWithConfirmation({
   children,
@@ -12,13 +28,12 @@ function SQFormResetButtonWithConfirmation({
   confirmationTitle = 'Reset Form',
   variant = 'contained',
   onReset
-}) {
+}: SQFormResetButtonWithConfirmationTypes): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {dirty, handleReset} = useFormButton(isDisabled);
 
-  const handlePrimaryButtonClick = () => {
+  const handlePrimaryButtonClick = (): void => {
     handleReset();
-
     // optional function prop consumer can pass to handle any additional side effects when resetting form
     onReset && onReset();
 
@@ -48,20 +63,5 @@ function SQFormResetButtonWithConfirmation({
     </>
   );
 }
-
-SQFormResetButtonWithConfirmation.propTypes = {
-  /** The contents of the form button; usually text */
-  children: PropTypes.node.isRequired,
-  /** Title of the confirmation dialog */
-  confirmationTitle: PropTypes.string,
-  /** Content of the confirmation dialog */
-  confirmationContent: PropTypes.node.isRequired,
-  /** Whether the button is disabled */
-  isDisabled: PropTypes.bool,
-  /** Title of the button */
-  buttonTitle: PropTypes.string,
-  /** Callback for reset*/
-  onReset: PropTypes.func
-};
 
 export default SQFormResetButtonWithConfirmation;

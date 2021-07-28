@@ -12,11 +12,12 @@ type UseFormButtonReturnType = {
   isValid: boolean;
   handleClick: DebouncedState<React.MouseEventHandler<HTMLButtonElement>>;
   [key: string]: unknown;
+  handleReset: () => void;
 };
 
 export function useFormButton(
   isDisabled: boolean,
-  shouldRequireFieldUpdates: boolean,
+  shouldRequireFieldUpdates?: boolean,
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 ): UseFormButtonReturnType {
   const {values, initialValues, isValid, ...rest} = useFormikContext();
