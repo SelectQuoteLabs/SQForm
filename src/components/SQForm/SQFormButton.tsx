@@ -8,7 +8,7 @@ interface Props {
   shouldRequireFieldUpdates?: boolean;
   title?: string;
   type?: 'submit' | 'reset';
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function SQFormButton({
@@ -33,11 +33,11 @@ function SQFormButton({
     return isButtonDisabled;
   }, [dirty, isButtonDisabled, type]);
 
-  const getClickHandler = (...args: unknown[]) => {
+  const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (type === 'reset') {
       return handleReset;
     } else if (typeof onClick !== 'undefined') {
-      return handleClick(...args);
+      return handleClick(event);
     }
   };
 
