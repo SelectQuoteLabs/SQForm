@@ -32,7 +32,7 @@ function SQFormResetInitialValuesButton({
   tooltip = 'Reset Button',
   initialValuesObject = {},
   ...props
-}: Props): React.ReactElement {
+}: Props): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {values, resetForm} = useFormButton(isDisabled, false);
 
