@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import {
+  TextField,
+  Grid,
+  Typography,
+  Tooltip,
+  makeStyles
+} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import Grid from '@material-ui/core/Grid';
-import {makeStyles} from '@material-ui/core/styles';
 import {VariableSizeList} from 'react-window';
-import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
@@ -17,10 +20,22 @@ const EMPTY_OPTION = {label: '- -', value: ''};
 
 const useStyles = makeStyles({
   listbox: {
+    width: 'initial !important',
+    overflowX: 'hidden !important',
+
     '& ul': {
       padding: 0,
       margin: 0
     }
+  },
+  popper: {
+    borderRadius: '4px',
+    boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
+    width: 'initial !important',
+    overflowX: 'hidden !important'
+  },
+  paper: {
+    margin: 0
   }
 });
 
@@ -28,22 +43,62 @@ const OuterElementContext = React.createContext({});
 
 const OuterElementType = React.forwardRef((props, ref) => {
   const outerProps = React.useContext(OuterElementContext);
-  return <div ref={ref} {...props} {...outerProps} />;
+  return (
+    <div
+      ref={ref}
+      {...props}
+      {...outerProps}
+      className={`${props?.className || ''} ${outerProps?.className || ''}`}
+      style={{...props?.style, ...outerProps?.style}}
+    />
+  );
 });
 
 function renderRow({data, index, style}) {
-  return React.cloneElement(data[index], {
+  const elToClone = data[index];
+  const value = elToClone.props.children.props.children;
+  const clone = React.cloneElement(elToClone, {
     style: {
       ...style,
       top: style.top + LISTBOX_PADDING
     }
   });
+
+  return (
+    <Tooltip
+      title={value || ''}
+      id={`FINDME-${index}`}
+      key={`${value}-${index}-with-tooltip`}
+    >
+      {clone}
+    </Tooltip>
+  );
 }
+
+const calculateWidth = (baseWidth, left) => {
+  if (baseWidth) {
+    return `min(${baseWidth * 2}px, ${
+      window.innerWidth
+    }px - ${left}px - 24px) !important`;
+  }
+
+  return 'initial !important';
+};
+
+const useListStyles = makeStyles({
+  list: {
+    '& > ul': {
+      width: ({baseWidth, left}) => calculateWidth(baseWidth, left),
+      overflowX: 'hidden !important'
+    }
+  }
+});
 
 // Adapter for react-window
 const ListboxVirtualizedComponent = React.forwardRef(
-  function ListboxVirtualizedComponent(props, ref) {
-    const {children, ...listboxProps} = props;
+  function ListboxVirtualizedComponent({basewidth, left, ...restProps}, ref) {
+    const classes = useListStyles({baseWidth: basewidth, left});
+    const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
     const LIST_OVERSCAN_COUNT = 5;
     const items = React.Children.toArray(children);
@@ -65,9 +120,10 @@ const ListboxVirtualizedComponent = React.forwardRef(
       <div ref={ref}>
         <OuterElementContext.Provider value={listboxProps}>
           <VariableSizeList
+            className={classes.list}
             itemData={items}
             height={height}
-            width="100%"
+            width="auto"
             key={ITEM_COUNT}
             outerElementType={OuterElementType}
             innerElementType="ul"
@@ -112,6 +168,9 @@ function SQFormAutocomplete({
   size = 'auto'
 }) {
   const classes = useStyles();
+  const gridContainerRef = React.useRef();
+  const baseWidth = gridContainerRef.current?.offsetWidth;
+  const left = gridContainerRef.current?.getBoundingClientRect().left;
   const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
@@ -169,14 +228,17 @@ function SQFormAutocomplete({
   const options = displayEmpty ? [EMPTY_OPTION, ...children] : children;
 
   return (
-    <Grid item sm={size}>
+    <Grid item sm={size} ref={gridContainerRef}>
       <Autocomplete
         id={name}
         name={name}
         style={{width: '100%'}}
         disableListWrap
+        disablePortal
         classes={classes}
         ListboxComponent={ListboxVirtualizedComponent}
+        // Note: basewidth is not camel cased because React doesn't like it here
+        ListboxProps={{basewidth: baseWidth, left}}
         options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
