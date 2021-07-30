@@ -89,7 +89,10 @@ const calculateWidth = (baseWidth, left) => {
 const useListStyles = makeStyles({
   list: {
     '& > ul': {
-      width: ({baseWidth, left}) => calculateWidth(baseWidth, left),
+      width: ({baseWidth, left, lockWidthToField}) =>
+        lockWidthToField
+          ? `${baseWidth}px !important`
+          : calculateWidth(baseWidth, left),
       overflowX: 'hidden !important'
     }
   }
@@ -97,8 +100,15 @@ const useListStyles = makeStyles({
 
 // Adapter for react-window
 const ListboxVirtualizedComponent = React.forwardRef(
-  function ListboxVirtualizedComponent({basewidth, left, ...restProps}, ref) {
-    const classes = useListStyles({baseWidth: basewidth, left});
+  function ListboxVirtualizedComponent(
+    {basewidth, left, lockWidthToField, ...restProps},
+    ref
+  ) {
+    const classes = useListStyles({
+      baseWidth: basewidth,
+      left,
+      lockWidthToField
+    });
     const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
     const LIST_OVERSCAN_COUNT = 5;
@@ -156,6 +166,31 @@ const getInitialValue = (children, value, displayEmpty) => {
   return optionInitialValue;
 };
 
+const calculateBaseWidth = ref => {
+  if (!ref) {
+    return;
+  }
+
+  const {
+    marginLeft,
+    paddingLeft,
+    width,
+    paddingRight,
+    marginRight
+  } = window.getComputedStyle(ref);
+
+  const baseWidth =
+    parseFloat(width) -
+    parseFloat(marginLeft) -
+    parseFloat(paddingLeft) -
+    parseFloat(paddingRight) -
+    parseFloat(marginRight) -
+    // Note: 8px is the amount of padding inside the dropdown
+    8;
+
+  return baseWidth;
+};
+
 function SQFormAutocomplete({
   children,
   isDisabled = false,
@@ -166,11 +201,12 @@ function SQFormAutocomplete({
   onBlur,
   onChange,
   onInputChange,
-  size = 'auto'
+  size = 'auto',
+  lockWidthToField
 }) {
   const classes = useStyles();
   const gridContainerRef = React.useRef();
-  const baseWidth = gridContainerRef.current?.offsetWidth;
+  const baseWidth = calculateBaseWidth(gridContainerRef.current);
   const left = gridContainerRef.current?.getBoundingClientRect().left;
   const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
@@ -239,7 +275,7 @@ function SQFormAutocomplete({
         classes={classes}
         ListboxComponent={ListboxVirtualizedComponent}
         // Note: basewidth is not camel cased because React doesn't like it here
-        ListboxProps={{basewidth: baseWidth, left}}
+        ListboxProps={{basewidth: baseWidth, left, lockWidthToField}}
         options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
@@ -310,7 +346,9 @@ SQFormAutocomplete.propTypes = {
   /** Custom onInputChange event callback (key pressed) */
   onInputChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  /** Lock width to the width of the field in the form */
+  lockWidthToField: PropTypes.bool
 };
 
 export default SQFormAutocomplete;
