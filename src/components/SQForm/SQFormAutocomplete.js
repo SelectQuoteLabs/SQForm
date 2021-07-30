@@ -69,6 +69,7 @@ function renderRow({data, index, style}) {
       title={value || ''}
       id={`FINDME-${index}`}
       key={`${value}-${index}-with-tooltip`}
+      placement="bottom-start"
     >
       {clone}
     </Tooltip>
