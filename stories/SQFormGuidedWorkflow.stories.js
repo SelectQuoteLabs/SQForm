@@ -6,7 +6,12 @@ import {
   RoundedButton,
   TextButton
 } from 'scplus-shared-components';
-import {SQFormGuidedWorkflow, SQFormDropdown, SQFormTextarea} from '../src';
+import {
+  SQFormGuidedWorkflow,
+  SQFormDropdown,
+  SQFormTextarea,
+  SQFormTextField
+} from '../src';
 
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -14,7 +19,11 @@ const sleep = milliseconds => {
 
 export default {
   title: 'Forms/SQFormGuidedWorkflow',
-  component: SQFormGuidedWorkflow
+  component: SQFormGuidedWorkflow,
+  argTypes: {
+    onError: {action: 'error', table: {disable: true}},
+    taskModules: {table: {disable: true}}
+  }
 };
 
 const outcomeDropdownOptions = [
@@ -167,3 +176,91 @@ const Template = () => {
 };
 
 export const Default = Template.bind({});
+
+const TestTemplate = args => {
+  const {mainTitle, ...rest} = args;
+
+  const taskModules = [
+    {
+      name: 'firstSection',
+      title: 'First Section',
+      formikProps: {
+        initialValues: {
+          firstText: '',
+          secondText: ''
+        },
+        onSubmit: async values => {
+          await sleep(1000); // Simulate API call to see loading spinner
+          console.log(JSON.stringify(values));
+        },
+        validationSchema: {
+          firstText: Yup.string().required('Required'),
+          secondText: Yup.string()
+        }
+      },
+      scriptedTextProps: {
+        text: 'This is some text',
+        title: 'Script Title'
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormTextField name="firstText" label="First Text" />
+            <SQFormTextField name="secondText" label="Second Text" />
+          </>
+        ),
+        title: 'Outcome Test'
+      }
+    },
+    {
+      name: 'secondSection',
+      title: 'Second Section',
+      formikProps: {
+        initialValues: {
+          testText: '',
+          outcome: '',
+          notes: ''
+        }
+      },
+      scriptedTextProps: {
+        text: 'This is some more text',
+        title: 'Another Script Title'
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormTextField name="testText" label="Test Text" />
+            <SQFormTextarea name="notes" label="Notes" />
+          </>
+        ),
+        title: 'Outcome Test'
+      }
+    }
+  ];
+
+  return (
+    <div style={{width: '90%', height: '95vh'}}>
+      <ExpandingCardList>
+        <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
+          <SQFormGuidedWorkflow
+            {...rest}
+            mainTitle={mainTitle}
+            onError={error => {
+              console.error(error);
+            }}
+            taskModules={taskModules}
+          />
+        </ExpandingCard>
+      </ExpandingCardList>
+    </div>
+  );
+};
+
+export const Testing = TestTemplate.bind({});
+Testing.args = {
+  mainTitle: 'CCA Guided Workflow',
+  mainSubtitle:
+    'Please review these Services with you client, then confirm their responses.',
+  initialCompletedTasks: 0,
+  isStrictMode: false
+};

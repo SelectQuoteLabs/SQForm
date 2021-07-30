@@ -4,7 +4,7 @@ import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormGuidedWorkflow.stories';
 
-const {Default: SQFormGuidedWorkflow} = composeStories(stories);
+const {Default: SQFormGuidedWorkflow, Testing} = composeStories(stories);
 
 describe('SQFormGuidedWorkflow Tests', () => {
   it('should render a title, subtitle, and 3 sections', () => {
@@ -142,9 +142,60 @@ describe('SQFormGuidedWorkflow Tests', () => {
     );
 
     expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible();
-    //expect(screen.queryByText(/stuff about policy cancellation/i)).not.toBeVisible();
-    expect(screen.getByText(/stuff about policy/i)).toBeVisible();
+  });
+});
+
+describe('Testing new story', () => {
+  it('should render with new given options', () => {
+    render(
+      <Testing
+        mainTitle="Something"
+        mainSubtitle="Something else"
+        isStrictMode={true}
+      />
+    );
+
+    const mainTitle = screen.getByText('Something');
+    expect(mainTitle).toBeVisible();
+
+    const mainSubtitle = screen.getByText('Something else');
+    expect(mainSubtitle).toBeVisible();
   });
 
-  //it('should ')
+  it('should not allow reopen of first section if strict mode is on', async () => {
+    render(
+      <Testing
+        mainTitle="Main Title"
+        mainSubtitle="Subtitle goes here"
+        isStrictMode={true}
+      />
+    );
+
+    const firstScript = screen.getByText(/this is some text/i);
+    expect(firstScript).toBeVisible();
+
+    const textbox = screen.getByRole('textbox', {name: /first text/i});
+    userEvent.type(textbox, 'Hello');
+
+    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    userEvent.click(nextButton);
+
+    await waitFor(
+      () => expect(screen.getByText('This is some more text')).toBeVisible(),
+      {timeout: 5000}
+    );
+
+    const secondScript = screen.getByText('This is some more text');
+    expect(secondScript).toBeVisible();
+
+    const toggleButtons = screen.getAllByRole('button', {
+      name: /toggle-expansion/i
+    });
+    const firstSection = toggleButtons[0];
+
+    userEvent.click(firstSection);
+
+    expect(firstScript).not.toBeVisible();
+    expect(secondScript).toBeVisible();
+  });
 });
