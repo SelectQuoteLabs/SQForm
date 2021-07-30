@@ -74,7 +74,7 @@ function SQFormTextField({
     return 0;
   });
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueLength(e.target.value.length);
     handleChangeHelper(e);
   };
