@@ -2,7 +2,7 @@ import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;

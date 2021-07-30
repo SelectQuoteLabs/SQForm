@@ -1,7 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-
+import {Story, Meta} from '@storybook/react';
 import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
+import {Props as ButtonProps} from '../src/components/SQForm/SQFormButton';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -16,16 +17,16 @@ export default {
       page: createDocsPage()
     }
   }
-};
+} as Meta;
 
 const defaultArgs = {
   children: 'Submit'
 };
 
 // prevents synthetic event warnings
-const handleClick = (event: {persist: () => any}) => event.persist();
+const handleClick = (event: React.FormEvent) => event.persist();
 
-export const Default = args => {
+export const Default: Story<ButtonProps> = args => {
   return (
     <SQFormStoryWrapper
       initialValues={{}}
@@ -39,7 +40,7 @@ export const Default = args => {
 };
 Default.args = defaultArgs;
 
-export const WithTestField = args => {
+export const WithTestField: Story<ButtonProps> = args => {
   return (
     <SQFormStoryWrapper
       initialValues={{testField: ''}}
