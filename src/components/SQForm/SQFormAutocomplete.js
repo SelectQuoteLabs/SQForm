@@ -347,7 +347,7 @@ SQFormAutocomplete.propTypes = {
   onInputChange: PropTypes.func,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Lock width to the width of the field in the form */
+  /** Lock width of the dropdown to the width of the field in the form */
   lockWidthToField: PropTypes.bool
 };
 
