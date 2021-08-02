@@ -202,7 +202,7 @@ function SQFormAutocomplete({
   onChange,
   onInputChange,
   size = 'auto',
-  lockWidthToField
+  lockWidthToField = false
 }) {
   const classes = useStyles();
   const gridContainerRef = React.useRef();
