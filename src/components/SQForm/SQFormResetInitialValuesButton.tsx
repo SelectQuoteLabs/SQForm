@@ -37,6 +37,7 @@ function SQFormResetInitialValuesButton({
   const {values, resetForm} = useFormButton(isDisabled, false);
 
   const handlePrimaryButtonClick = (): void => {
+    //TODO: Remove ResetForm and FormikValues once useFormButton is TSified
     (resetForm as ResetForm)({
       values: {
         ...(values as FormikValues),
