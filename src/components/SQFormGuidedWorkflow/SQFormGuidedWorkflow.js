@@ -18,6 +18,9 @@ import {GuidedWorkflowProps} from './PropTypes';
 
 const useStyles = makeStyles(() => {
   return {
+    root: {
+      padding: '16px !important' /* material-ui override */
+    },
     panelFooter: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -116,7 +119,7 @@ function SQFormGuidedWorkflow({
         >
           {({isSubmitting}) => (
             <Form>
-              <CardContent>
+              <CardContent className={classes.root}>
                 {isSubmitting || taskModule.isLoading ? (
                   <ComponentLoadingSpinner
                     message={
