@@ -1,3 +1,10 @@
+### [5.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.0...v5.2.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* **SQFormGuidedWorkflow.js:** add padding and update shared component version ([3eebe22](https://github.com/SelectQuoteLabs/SQForm/commit/3eebe2218c667bac12e729a03c3153f2830c5769))
+
 ## [5.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.1.0...v5.2.0) (2021-07-20)
 
 
