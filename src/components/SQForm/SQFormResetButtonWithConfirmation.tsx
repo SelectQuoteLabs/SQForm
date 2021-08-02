@@ -17,7 +17,7 @@ type SQFormResetButtonWithConfirmationTypes = {
   /** Callback for reset*/
   onReset?: () => void;
   /** style variant, "contained" or "outlined"*/
-  variant?: string;
+  variant?: 'contained' | 'outlined';
 };
 
 function SQFormResetButtonWithConfirmation({
