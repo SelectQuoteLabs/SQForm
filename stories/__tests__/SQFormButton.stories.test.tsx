@@ -85,19 +85,6 @@ describe('SQFormButton Tests', () => {
 
       expect(submitButton).toBeDisabled();
     });
-
-    it('should not fire onClick when disabled', () => {
-      const onClickSpy = jest.fn();
-      render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
-
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-
-      userEvent.click(submitButton);
-
-      expect(onClickSpy).not.toHaveBeenCalled();
-    });
   });
 
   describe('Button with Test Field', () => {

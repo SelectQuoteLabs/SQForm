@@ -78,25 +78,6 @@ describe('SQFormIconButton Tests', () => {
       expect(iconButton).toBeDisabled();
     });
 
-    it('should not fire onClick when disabled', () => {
-      const onClickSpy = jest.fn();
-      render(
-        <SQFormIconButton
-          exampleIcons={CheckCircle}
-          isDisabled={true}
-          onClick={onClickSpy}
-        />
-      );
-
-      const iconButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-
-      userEvent.click(iconButton);
-
-      expect(onClickSpy).not.toHaveBeenCalled();
-    });
-
     it('should disable when shouldRequireFieldUpdates is true', () => {
       render(
         <SQFormIconButton
