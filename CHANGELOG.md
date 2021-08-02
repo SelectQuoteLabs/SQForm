@@ -1,3 +1,10 @@
+### [5.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.1...v5.2.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* 🐛 gave autocomplete dropdown tooltips and larger size ([13dff61](https://github.com/SelectQuoteLabs/SQForm/commit/13dff615b4849b6134a0e32ec080a5d8e22768e0))
+
 ### [5.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.0...v5.2.1) (2021-08-02)
 
 
