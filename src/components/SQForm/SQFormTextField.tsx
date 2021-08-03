@@ -2,8 +2,7 @@ import React from 'react';
 import {TextField, TextFieldProps, InputProps} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import BaseFieldProps from '../../types/BaseFieldProps';
-import {maskProp} from '../../types/MaskTypes';
+import {BaseFieldProps, maskProp} from 'types';
 
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
@@ -50,7 +49,7 @@ function SQFormTextField({
   InputProps,
   inputProps = {},
   maxCharacters,
-  muiFieldProps = {}
+  muiFieldProps = {},
 }: SQFormTextFieldProps): React.ReactElement {
   const {
     formikField: {field},
@@ -58,13 +57,13 @@ function SQFormTextField({
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
-      HelperTextComponent
-    }
+      HelperTextComponent,
+    },
   } = useForm({
     name,
     isRequired,
     onBlur,
-    onChange
+    onChange,
   });
 
   const [valueLength, setValueLength] = React.useState(() => {
@@ -109,11 +108,11 @@ function SQFormTextField({
           ) : null,
           endAdornment: endAdornment ? (
             <InputAdornment position="end">{endAdornment}</InputAdornment>
-          ) : null
+          ) : null,
         }}
         inputProps={{
           maxLength: maxCharacters,
-          ...inputProps
+          ...inputProps,
         }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}

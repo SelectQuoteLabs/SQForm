@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 import markdown from '../notes/SQFormDropdown.md';
 
 export default {
@@ -14,22 +15,22 @@ export default {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
     name: {table: {disable: true}},
-    SQFormProps: {table: {disable: true}}
+    SQFormProps: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage({markdown}),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const MOCK_STATE_OPTIONS = [
   {label: 'Arizona', value: 'AZ'},
   {label: 'Kansas', value: 'KS', isDisabled: true},
-  {label: 'Missouri', value: 'MO'}
+  {label: 'Missouri', value: 'MO'},
 ];
 
 const defaultArgs = {
@@ -37,13 +38,13 @@ const defaultArgs = {
   name: 'state',
   children: MOCK_STATE_OPTIONS,
   SQFormProps: {
-    initialValues: {state: ''}
-  }
+    initialValues: {state: ''},
+  },
 };
 
 const YES_NO_OPTIONS = [
   {label: 'Yes', value: true},
-  {label: 'No', value: false}
+  {label: 'No', value: false},
 ];
 
 const booleanValueArgs = {
@@ -52,12 +53,12 @@ const booleanValueArgs = {
   children: YES_NO_OPTIONS,
   schema: {isOptIn: Yup.bool().required('Required')},
   SQFormProps: {
-    initialValues: {isOptIn: false}
-  }
+    initialValues: {isOptIn: false},
+  },
 };
 
-const Template = args => {
-  const {SQFormProps, schema, ...dropdownProps} = args;
+const Template = (args) => {
+  const {SQFormProps, schema, size, ...dropdownProps} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
@@ -65,10 +66,7 @@ const Template = args => {
         validationSchema={schema}
         {...SQFormProps}
       >
-        <SQFormDropdownComponent
-          {...dropdownProps}
-          size={args.size !== 'auto' ? Number(args.size) : args.size}
-        />
+        <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
       </SQFormStoryWrapper>
     </div>
   );

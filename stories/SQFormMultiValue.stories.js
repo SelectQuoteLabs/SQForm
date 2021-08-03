@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import {SQFormMultiValue as SQFormMultiValueComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 import markdown from '../notes/SQFormMultiValue.md';
 
 export default {
@@ -11,16 +12,16 @@ export default {
   argTypes: {
     children: {table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage({markdown}),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const MOCK_COLOR_OPTIONS = [
@@ -30,17 +31,17 @@ const MOCK_COLOR_OPTIONS = [
   {label: 'Green', value: 'green'},
   {label: 'Blue', value: 'blue'},
   {label: 'Indigo', value: 'indigo'},
-  {label: 'Violet', value: 'violet'}
+  {label: 'Violet', value: 'violet'},
 ];
 
 const defaultArgs = {
   label: 'Favorite Colors',
   name: 'favoriteColors',
-  children: MOCK_COLOR_OPTIONS
+  children: MOCK_COLOR_OPTIONS,
 };
 
-const Template = args => {
-  const {SQFormProps, validationSchema, ...componentProps} = args;
+const Template = (args) => {
+  const {SQFormProps, validationSchema, size, ...componentProps} = args;
 
   return (
     <div style={{minWidth: 250}}>
@@ -53,7 +54,7 @@ const Template = args => {
           {...componentProps}
           name={defaultArgs.name}
           label={defaultArgs.label}
-          size={args.size !== 'auto' ? Number(args.size) : args.size}
+          size={getSizeProp(size)}
         />
       </SQFormStoryWrapper>
     </div>
@@ -70,14 +71,14 @@ WithValidation.args = {
   validationSchema: {
     favoriteColors: Yup.array()
       .of(
-        Yup.lazy(value => {
+        Yup.lazy((value) => {
           return typeof value === 'number' ? Yup.number() : Yup.string();
         })
       )
       .min(1)
-      .required('Required')
+      .required('Required'),
   },
   SQFormProps: {
-    initialValues: {favoriteColors: []}
-  }
+    initialValues: {favoriteColors: []},
+  },
 };
