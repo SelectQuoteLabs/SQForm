@@ -32,7 +32,7 @@ interface SQFormDatePickerProps extends BaseFieldProps {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
   onChange?: (
-    date: React.ChangeEvent<Element | moment.Moment> | unknown
+    date: React.ChangeEvent<moment.Moment> | unknown
   ) => void;
   /** Disable specific date(s) (day: DateIOType) => boolean
    * This is a predicate function called for every day of the month
@@ -73,7 +73,7 @@ function SQFormDatePicker({
   });
 
   const handleChange = (
-    date: React.ChangeEvent<Element | moment.Moment> | unknown
+    date: React.ChangeEvent<moment.Moment> | unknown
   ) => {
     helpers.setValue(date);
     onChange && onChange(date);
