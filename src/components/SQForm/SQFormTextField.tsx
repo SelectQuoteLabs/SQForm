@@ -8,7 +8,7 @@ import {maskProp} from '../../types/MaskTypes';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
 
-interface SQFormTextFieldProps extends BaseFieldProps {
+export interface SQFormTextFieldProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Disabled property to disable the input if true */
