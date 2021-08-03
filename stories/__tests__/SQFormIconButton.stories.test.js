@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import {composeStories} from '@storybook/testing-react';
-import {fireEvent, render, screen, within} from '@testing-library/react';
+import {render, screen, within, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormIconButton.stories';
 
