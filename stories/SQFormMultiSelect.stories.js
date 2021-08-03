@@ -3,6 +3,7 @@ import React from 'react';
 import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 
 export default {
   title: 'Components/SQFormMultiSelect',
@@ -10,16 +11,16 @@ export default {
   argTypes: {
     children: {table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage(),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const MOCK_FRIENDS_OPTIONS = [
@@ -38,22 +39,22 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jonah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Judah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
-  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
+  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))},
 ];
 
 const defaultArgs = {
   label: 'Friends',
-  name: 'friends'
+  name: 'friends',
 };
 
-export const SQFormMultiSelect = args => (
+export const SQFormMultiSelect = (args) => (
   <div style={{minWidth: 250}}>
     <SQFormStoryWrapper initialValues={{[defaultArgs.name]: []}}>
       <SQFormMultiSelectComponent
         name={defaultArgs.name}
         label={defaultArgs.label}
         {...args}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
+        size={getSizeProp(args.size)}
       >
         {MOCK_FRIENDS_OPTIONS}
       </SQFormMultiSelectComponent>

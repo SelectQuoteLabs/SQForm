@@ -1,0 +1,17 @@
+diff a/src/types/Option.ts b/src/types/Option.ts	(rejected hunks)
+@@ -1 +1 @@
+-export type optionValue = string | number | boolean
++export type optionValue = string | number | boolean;
+@@ -5 +5 @@ interface Option {
+-  label: string,
++  label: string;
+@@ -7 +7 @@ interface Option {
+-  value: optionValue,
++  value: optionValue;
+@@ -9 +9 @@ interface Option {
+-  isDisabled?: boolean,
++  isDisabled?: boolean;
+@@ -12 +12 @@ interface Option {
+-export default Option
+\ No newline at end of file
++export default Option;

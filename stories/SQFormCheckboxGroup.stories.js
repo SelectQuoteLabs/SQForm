@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {SQFormCheckboxGroup as SQFormCheckboxGroupComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 
 export default {
   title: 'Components/SQFormCheckboxGroup',
@@ -12,16 +13,16 @@ export default {
     name: {table: {disable: true}},
     children: {table: {disable: true}},
     SQFormProps: {table: {disable: true}},
-    onChange: {action: 'changed', table: {disable: true}}
+    onChange: {action: 'changed', table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage(),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const SHOPPING_LIST_OPTIONS = [
@@ -29,7 +30,7 @@ const SHOPPING_LIST_OPTIONS = [
   {label: 'Sunshroom', value: 'sunshroom'},
   {label: 'Bokoblin Guts', value: 'bokoblin guts'},
   {label: 'Lynel Hoof', value: 'lynel hoof'},
-  {label: 'Stealthfin Trout', value: 'stealthfin trout'}
+  {label: 'Stealthfin Trout', value: 'stealthfin trout'},
 ];
 
 const defaultArgs = {
@@ -37,12 +38,12 @@ const defaultArgs = {
   name: 'shoppingList',
   children: SHOPPING_LIST_OPTIONS,
   SQFormProps: {
-    initialValues: {shoppingList: ''}
-  }
+    initialValues: {shoppingList: ''},
+  },
 };
 
-const Template = args => {
-  const {SQFormProps, schema, ...componentProps} = args;
+const Template = (args) => {
+  const {SQFormProps, schema, size, ...componentProps} = args;
   return (
     <SQFormStoryWrapper
       {...defaultArgs.SQFormProps}
@@ -51,7 +52,7 @@ const Template = args => {
     >
       <SQFormCheckboxGroupComponent
         {...componentProps}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
+        size={getSizeProp(size)}
       />
     </SQFormStoryWrapper>
   );
@@ -65,9 +66,9 @@ WithValidation.args = {
   ...defaultArgs,
   isRequired: true,
   schema: {
-    [defaultArgs.name]: Yup.string().required('Required')
-  }
+    [defaultArgs.name]: Yup.string().required('Required'),
+  },
 };
 WithValidation.parameters = {
-  controls: {exclude: 'schema'}
+  controls: {exclude: 'schema'},
 };

@@ -26,7 +26,8 @@
     "outDir": "dist"
   },
   "include": [
-    "./src"
+    "./src",
+    "./stories"
   ],
   "exclude": [
     "**/*.test.ts"

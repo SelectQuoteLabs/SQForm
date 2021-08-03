@@ -1,14 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, {
+  AutocompleteChangeReason,
+} from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
-import {VariableSizeList} from 'react-window';
+import {ListChildComponentProps, VariableSizeList} from 'react-window';
 import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
+import {BaseFieldProps, Option, optionValue} from '../../types/';
 import {useForm} from './useForm';
+
+interface SQFormAutocompleteProps extends BaseFieldProps {
+  /** Dropdown menu options to select from */
+  children: Option[];
+  /** Disabled property to disable the input if true */
+  isDisabled?: boolean;
+  /** Required property used to highlight input and label if not fulfilled */
+  isRequired?: boolean;
+  /** Whether to display empty option */
+  displayEmpty?: boolean;
+  /** Custom onBlur event callback */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Custom onChange event callback */
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    selectedValue: optionValue,
+    reason: AutocompleteChangeReason
+  ) => void;
+  /** Custom onInputChange event callback (key pressed) */
+  onInputChange?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    value: optionValue
+  ) => void;
+}
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
@@ -19,29 +45,35 @@ const useStyles = makeStyles({
   listbox: {
     '& ul': {
       padding: 0,
-      margin: 0
-    }
-  }
+      margin: 0,
+    },
+  },
 });
 
 const OuterElementContext = React.createContext({});
+/*
+function OuterElementType(props: HTMLAttributes<HTMLDivElement>) {
+  const outerProps = React.useContext(OuterElementContext);
+  const divRef = React.useRef(null);
+  return <div ref={divRef} {...props} {...outerProps} />
+}*/
 
-const OuterElementType = React.forwardRef((props, ref) => {
+const OuterElementType = React.forwardRef<HTMLDivElement>((props, ref) => {
   const outerProps = React.useContext(OuterElementContext);
   return <div ref={ref} {...props} {...outerProps} />;
 });
 
-function renderRow({data, index, style}) {
+function renderRow({data, index, style}: ListChildComponentProps) {
   return React.cloneElement(data[index], {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: (style.top as number) + LISTBOX_PADDING,
+    },
   });
 }
 
 // Adapter for react-window
-const ListboxVirtualizedComponent = React.forwardRef(
+const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
   function ListboxVirtualizedComponent(props, ref) {
     const {children, ...listboxProps} = props;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
@@ -54,9 +86,8 @@ const ListboxVirtualizedComponent = React.forwardRef(
       if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {
         return LIST_MAX_VIEWABLE_ITEMS * ITEM_SIZE;
       }
-      return (
-        items.reduce((acc, _item) => acc + ITEM_SIZE, 0) + 2 * LISTBOX_PADDING
-      );
+
+      return items.length * ITEM_SIZE + 2 * LISTBOX_PADDING;
     }, [ITEM_COUNT, items]);
 
     const getItemSize = React.useCallback(() => ITEM_SIZE, []);
@@ -65,7 +96,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
       <div ref={ref}>
         <OuterElementContext.Provider value={listboxProps}>
           <VariableSizeList
-            itemData={items}
+            itemData={children}
             height={height}
             width="100%"
             key={ITEM_COUNT}
@@ -83,8 +114,12 @@ const ListboxVirtualizedComponent = React.forwardRef(
   }
 );
 
-const getInitialValue = (children, value, displayEmpty) => {
-  const optionInitialValue = children.find(option => {
+const getInitialValue = (
+  children: Option[],
+  value: optionValue,
+  displayEmpty: boolean
+) => {
+  const optionInitialValue = children.find((option) => {
     if (option.value === value) {
       return option;
     }
@@ -109,17 +144,17 @@ function SQFormAutocomplete({
   onBlur,
   onChange,
   onInputChange,
-  size = 'auto'
-}) {
+  size = 'auto',
+}: SQFormAutocompleteProps): React.ReactElement {
   const classes = useStyles();
   const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError},
-    fieldHelpers: {HelperTextComponent}
+    fieldHelpers: {HelperTextComponent},
   } = useForm({
     name,
-    isRequired
+    isRequired,
   });
 
   const initialValue = getInitialValue(children, value, displayEmpty);
@@ -139,7 +174,7 @@ function SQFormAutocomplete({
   }, [value, inputValue, name, prevValue, values, displayEmpty]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
@@ -172,11 +207,15 @@ function SQFormAutocomplete({
     <Grid item sm={size}>
       <Autocomplete
         id={name}
-        name={name}
         style={{width: '100%'}}
         disableListWrap
         classes={classes}
-        ListboxComponent={ListboxVirtualizedComponent}
+        // This type casting is how MUI handles the type issue https://material-ui.com/components/autocomplete/#virtualization, https://github.com/mui-org/material-ui/issues/26342
+        ListboxComponent={
+          ListboxVirtualizedComponent as React.ComponentType<
+            React.HTMLAttributes<HTMLElement>
+          >
+        }
         options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
@@ -185,9 +224,9 @@ function SQFormAutocomplete({
         value={initialValue || null}
         disableClearable={isDisabled}
         disabled={isDisabled}
-        getOptionLabel={option => option.label || ''}
-        getOptionDisabled={option => option.isDisabled}
-        renderInput={params => {
+        getOptionLabel={(option) => option.label || ''}
+        getOptionDisabled={(option: Option) => option.isDisabled || false}
+        renderInput={(params) => {
           return (
             <TextField
               {...params}
@@ -197,11 +236,11 @@ function SQFormAutocomplete({
               fullWidth={true}
               InputLabelProps={{
                 ...params.InputLabelProps,
-                shrink: true
+                shrink: true,
               }}
               inputProps={{
                 ...params.inputProps,
-                disabled: isDisabled
+                disabled: isDisabled,
               }}
               FormHelperTextProps={{error: isFieldError}}
               name={name}
@@ -211,7 +250,7 @@ function SQFormAutocomplete({
             />
           );
         }}
-        renderOption={option => (
+        renderOption={(option) => (
           <Typography variant="body2" noWrap>
             {option.label}
           </Typography>
@@ -220,33 +259,5 @@ function SQFormAutocomplete({
     </Grid>
   );
 }
-
-SQFormAutocomplete.propTypes = {
-  /** Dropdown menu options to select from */
-  children: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Whether to display empty option */
-  displayEmpty: PropTypes.bool,
-  /** Label text */
-  label: PropTypes.string.isRequired,
-  /** Name identifier of the input field */
-  name: PropTypes.string.isRequired,
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Custom onInputChange event callback (key pressed) */
-  onInputChange: PropTypes.func,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-};
 
 export default SQFormAutocomplete;

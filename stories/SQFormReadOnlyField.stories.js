@@ -4,32 +4,30 @@ import {SQFormReadOnlyField as SQFormReadOnlyFieldComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormReadOnlyField.md';
+import getSizeProp from './utils/getSizeProp';
 
 export default {
   title: 'Components/SQFormReadOnlyField',
   component: SQFormReadOnlyFieldComponent,
   argTypes: {
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
-      page: createDocsPage({markdown})
-    }
-  }
+      page: createDocsPage({markdown}),
+    },
+  },
 };
 
 const defaultArgs = {
   label: 'ReadOnly Field',
-  name: 'readOnlyField'
+  name: 'readOnlyField',
 };
 
 const Template = ({initialValue = '', ...args}) => {
   return (
     <SQFormStoryWrapper initialValues={{[defaultArgs.name]: initialValue}}>
-      <SQFormReadOnlyFieldComponent
-        {...args}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
-      />
+      <SQFormReadOnlyFieldComponent {...args} size={getSizeProp(args.size)} />
     </SQFormStoryWrapper>
   );
 };
@@ -40,8 +38,8 @@ Default.args = defaultArgs;
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
   ...defaultArgs,
-  initialValue: 'Hello world!'
+  initialValue: 'Hello world!',
 };
 WithInitialValue.parameters = {
-  controls: {exclude: 'initialValue'}
+  controls: {exclude: 'initialValue'},
 };

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {useFormikContext, FormikProps} from 'formik';
 import {useForm} from './useForm';
 import {TextFieldProps} from '@material-ui/core';
-import BaseFieldProps from '../../types/BaseFieldProps';
+import {BaseFieldProps} from '../../types/';
 import {toKebabCase} from '../../utils';
 
 interface SQFormTextareaProps extends BaseFieldProps {
@@ -47,7 +47,7 @@ function SQFormTextarea({
   rowsMax = 3,
   maxCharacters,
   inputProps = {},
-  muiFieldProps = {}
+  muiFieldProps = {},
 }: SQFormTextareaProps): JSX.Element {
   const {values}: FormikProps<FormValues> = useFormikContext();
   const {
@@ -55,20 +55,20 @@ function SQFormTextarea({
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
-      HelperTextComponent
-    }
+      HelperTextComponent,
+    },
   } = useForm({
     name,
     isRequired,
     onBlur,
-    onChange
+    onChange,
   });
 
   const [valueLength, setValueLength] = React.useState<number>(
     values[name]?.length || 0
   );
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setValueLength(event.target.value.length);
     handleChangeHelper(event);
   };
@@ -107,7 +107,7 @@ function SQFormTextarea({
         value={values[name]}
         inputProps={{
           maxLength: maxCharacters,
-          ...inputProps
+          ...inputProps,
         }}
         {...muiFieldProps}
       />
