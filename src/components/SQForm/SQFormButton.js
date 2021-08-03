@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {RoundedButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
 function SQFormButton({
   children,
@@ -11,20 +11,13 @@ function SQFormButton({
   type = 'submit',
   onClick
 }) {
-  const isResetButton = type === 'reset';
-  const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
+  const isResetButton = type === BUTTON_TYPES.RESET;
+  const {isButtonDisabled, handleReset, handleClick} = useFormButton(
     isDisabled,
     shouldRequireFieldUpdates,
-    onClick
+    onClick,
+    type
   );
-
-  const isSQFormButtonDisabled = React.useMemo(() => {
-    if (isResetButton) {
-      return !dirty;
-    }
-
-    return isButtonDisabled;
-  }, [dirty, isButtonDisabled, isResetButton]);
 
   const getClickHandler = (...args) => {
     if (isResetButton) {
@@ -49,7 +42,7 @@ function SQFormButton({
     <RoundedButton
       title={getTitle()}
       type={type}
-      isDisabled={isSQFormButtonDisabled}
+      isDisabled={isButtonDisabled}
       onClick={getClickHandler}
       variant={isResetButton ? 'outlined' : 'contained'}
     >
@@ -68,7 +61,7 @@ SQFormButton.propTypes = {
   /** The title of the button */
   title: PropTypes.string,
   /** Type of button, defaults to 'submit' */
-  type: PropTypes.oneOf(['submit', 'reset']),
+  type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   /** Standard React event handler */
   onClick: PropTypes.func
 };
