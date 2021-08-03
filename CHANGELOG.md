@@ -1,3 +1,24 @@
+### [5.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.2...v5.2.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* 🐛 bug in SQFormButton to prioritize isDisabled over state ([6a5abb2](https://github.com/SelectQuoteLabs/SQForm/commit/6a5abb2c8b96aa812e3055cd9cf1db9ccdec57a1)), closes [#355](https://github.com/SelectQuoteLabs/SQForm/issues/355)
+
+### [5.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.1...v5.2.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* 🐛 gave autocomplete dropdown tooltips and larger size ([13dff61](https://github.com/SelectQuoteLabs/SQForm/commit/13dff615b4849b6134a0e32ec080a5d8e22768e0))
+
+### [5.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.0...v5.2.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* **SQFormGuidedWorkflow.js:** add padding and update shared component version ([3eebe22](https://github.com/SelectQuoteLabs/SQForm/commit/3eebe2218c667bac12e729a03c3153f2830c5769))
+
 ## [5.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.1.0...v5.2.0) (2021-07-20)
 
 
