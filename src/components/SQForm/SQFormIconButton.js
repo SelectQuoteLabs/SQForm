@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import {IconButton} from 'scplus-shared-components';
 
 function SQFormIconButton({
@@ -10,14 +10,15 @@ function SQFormIconButton({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
-  type = 'submit',
+  type = BUTTON_TYPES.SUBMIT,
   onClick
 }) {
-  const {isButtonDisabled, handleClick} = useFormButton(
+  const {isButtonDisabled, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
-    onClick
-  );
+    onClick,
+    buttonType: type
+  });
 
   function Icon(props) {
     return <IconComponent title={title} {...props} />;
@@ -48,7 +49,7 @@ SQFormIconButton.propTypes = {
   /** The title of the button */
   title: PropTypes.string,
   /** Type of button, defaults to 'submit' */
-  type: PropTypes.string,
+  type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   /** Standard React event handler */
   onClick: PropTypes.func
 };
