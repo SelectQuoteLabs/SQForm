@@ -15,12 +15,10 @@ function SQFormResetInitialValuesButton({
   ...props
 }) {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {values, resetForm} = useFormButton(
+  const {values, resetForm} = useFormButton({
     isDisabled,
-    undefined,
-    undefined,
-    BUTTON_TYPES.RESET
-  );
+    buttonType: BUTTON_TYPES.RESET
+  });
 
   const handlePrimaryButtonClick = () => {
     resetForm({

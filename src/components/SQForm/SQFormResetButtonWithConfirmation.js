@@ -14,12 +14,10 @@ function SQFormResetButtonWithConfirmation({
   onReset = () => {}
 }) {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {dirty, handleReset} = useFormButton(
+  const {dirty, handleReset} = useFormButton({
     isDisabled,
-    undefined,
-    undefined,
-    BUTTON_TYPES.RESET
-  );
+    buttonType: BUTTON_TYPES.RESET
+  });
 
   const handlePrimaryButtonClick = () => {
     handleReset();

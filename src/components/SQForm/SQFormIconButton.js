@@ -13,12 +13,12 @@ function SQFormIconButton({
   type = BUTTON_TYPES.SUBMIT,
   onClick
 }) {
-  const {isButtonDisabled, handleClick} = useFormButton(
+  const {isButtonDisabled, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    type
-  );
+    buttonType: type
+  });
 
   function Icon(props) {
     return <IconComponent title={title} {...props} />;

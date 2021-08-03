@@ -8,12 +8,12 @@ export const BUTTON_TYPES = {
   RESET: 'reset'
 };
 
-export function useFormButton(
-  isDisabled,
-  shouldRequireFieldUpdates,
+export function useFormButton({
+  isDisabled = false,
+  shouldRequireFieldUpdates = false,
   onClick,
   buttonType
-) {
+}) {
   const {values, initialValues, isValid, dirty, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
@@ -48,10 +48,14 @@ export function useFormButton(
     dirty
   ]);
 
-  const handleClick = useDebouncedCallback((...args) => onClick(...args), 500, {
-    leading: true,
-    trailing: false
-  });
+  const handleClick = useDebouncedCallback(
+    (...args) => onClick?.(...args),
+    500,
+    {
+      leading: true,
+      trailing: false
+    }
+  );
 
   return {
     isButtonDisabled,

@@ -12,12 +12,12 @@ function SQFormButton({
   onClick
 }) {
   const isResetButton = type === BUTTON_TYPES.RESET;
-  const {isButtonDisabled, handleReset, handleClick} = useFormButton(
+  const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    type
-  );
+    buttonType: type
+  });
 
   const getClickHandler = (...args) => {
     if (isResetButton) {
