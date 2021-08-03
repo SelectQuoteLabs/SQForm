@@ -1,7 +1,6 @@
 import React from 'react';
 import {useFormikContext} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
-import {hasUpdated} from '../../utils';
 
 export const BUTTON_TYPES = {
   SUBMIT: 'submit',
@@ -15,7 +14,6 @@ export function useFormButton({
   buttonType
 }) {
   const {values, initialValues, isValid, dirty, ...rest} = useFormikContext();
-  const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
   const isButtonDisabled = React.useMemo(() => {
     if (isDisabled) {
@@ -27,7 +25,7 @@ export function useFormButton({
         return true;
       }
 
-      if (shouldRequireFieldUpdates && !hasFormBeenUpdated) {
+      if (shouldRequireFieldUpdates && !dirty) {
         return true;
       }
     }
@@ -39,14 +37,7 @@ export function useFormButton({
     }
 
     return false;
-  }, [
-    hasFormBeenUpdated,
-    isDisabled,
-    isValid,
-    shouldRequireFieldUpdates,
-    buttonType,
-    dirty
-  ]);
+  }, [isDisabled, isValid, shouldRequireFieldUpdates, buttonType, dirty]);
 
   const handleClick = useDebouncedCallback(
     (...args) => onClick?.(...args),
@@ -59,7 +50,6 @@ export function useFormButton({
 
   return {
     isButtonDisabled,
-    hasFormBeenUpdated,
     values,
     initialValues,
     isValid,
