@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen, within} from '@testing-library/react';
+import {fireEvent, render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormIconButton.stories';
 
@@ -76,6 +76,25 @@ describe('SQFormIconButton Tests', () => {
       });
 
       expect(iconButton).toBeDisabled();
+    });
+
+    it('should not fire onClick when disabled', () => {
+      const onClickSpy = jest.fn();
+      render(
+        <SQFormIconButton
+          exampleIcons={CheckCircle}
+          isDisabled={true}
+          onClick={onClickSpy}
+        />
+      );
+
+      const iconButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      fireEvent.click(iconButton);
+
+      expect(onClickSpy).not.toHaveBeenCalled();
     });
 
     it('should disable when shouldRequireFieldUpdates is true', () => {

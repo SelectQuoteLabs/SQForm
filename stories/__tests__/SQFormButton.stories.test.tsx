@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {composeStories} from '@storybook/testing-react';
 import * as stories from '../SQFormButton.stories';
@@ -84,6 +84,19 @@ describe('SQFormButton Tests', () => {
       });
 
       expect(submitButton).toBeDisabled();
+    });
+
+    it('should not fire onClick when disabled', () => {
+      const onClickSpy = jest.fn();
+      render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
+
+      const submitButton = screen.getByRole('button', {
+        name: /form submission/i
+      });
+
+      fireEvent.click(submitButton);
+
+      expect(onClickSpy).not.toHaveBeenCalled();
     });
   });
 
