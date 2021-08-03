@@ -95,7 +95,7 @@ function SQFormTextField({
   return (
     <Grid item sm={size}>
       <TextField
-        id={toKebabCase(label)}
+        id={toKebabCase(name)}
         color="primary"
         disabled={isDisabled}
         error={isFieldError}

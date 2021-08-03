@@ -67,6 +67,10 @@ function _getHasValue(meta: unknown) {
     return true;
   }
 
+  if (typeof fieldValue === 'boolean') {
+    return true;
+  }
+
   return !!fieldValue;
 }
 

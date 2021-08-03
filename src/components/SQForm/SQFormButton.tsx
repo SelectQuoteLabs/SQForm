@@ -58,6 +58,7 @@ function SQFormButton({
       type={type}
       isDisabled={isSQFormButtonDisabled}
       onClick={getClickHandler}
+      variant={type === 'reset' ? 'outlined' : 'contained'}
     >
       {children}
     </RoundedButton>
