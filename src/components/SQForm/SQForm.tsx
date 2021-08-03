@@ -1,18 +1,18 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {GridProps} from '@material-ui/core';
-import {Formik, Form} from 'formik';
+import {Formik, Form, FormikHelpers} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import * as Yup from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-interface SQFormProps {
+interface SQFormProps<Values> {
   /** Form Input(s) */
   children: React.ReactNode;
   /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize?: boolean;
   /** Form Entity Object */
-  initialValues: Record<string, unknown>;
+  initialValues: Values;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
   /**
@@ -23,23 +23,28 @@ interface SQFormProps {
    *
    * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
    * */
-  onSubmit: (event: React.SyntheticEvent) => void;
+  onSubmit: (
+    values: Values,
+    formikHelpers: FormikHelpers<Values>
+  ) => void | Promise<unknown>;
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validationSchema?: Record<string, any>;
+  validationSchema?: Record<
+    keyof Values,
+    Yup.AnySchema<Values[keyof Values] | null | undefined>
+  >;
 }
 
-function SQForm({
+function SQForm<Values>({
   children,
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
   onSubmit,
   validationSchema
-}: SQFormProps): JSX.Element {
+}: SQFormProps<Values>): JSX.Element {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
 
@@ -57,10 +62,13 @@ function SQForm({
   };
 
   const handleSubmit = useDebouncedCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (...args: [any]) => onSubmit(...args),
+    (values: Values, formikHelpers: FormikHelpers<Values>) =>
+      onSubmit(values, formikHelpers),
     500,
-    {leading: true, trailing: false}
+    {
+      leading: true,
+      trailing: false
+    }
   );
 
   return (
