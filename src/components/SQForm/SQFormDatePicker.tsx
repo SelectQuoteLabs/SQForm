@@ -75,7 +75,6 @@ function SQFormDatePicker({
   const handleChange = (
     date: React.ChangeEvent<Element | moment.Moment> | unknown
   ) => {
-    console.log(typeof date);
     helpers.setValue(date);
     onChange && onChange(date);
   };
