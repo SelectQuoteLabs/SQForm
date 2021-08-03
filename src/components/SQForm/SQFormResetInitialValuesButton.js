@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
 function SQFormResetInitialValuesButton({
   children,
@@ -15,7 +15,12 @@ function SQFormResetInitialValuesButton({
   ...props
 }) {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {values, resetForm} = useFormButton(isDisabled);
+  const {values, resetForm} = useFormButton(
+    isDisabled,
+    undefined,
+    undefined,
+    BUTTON_TYPES.RESET
+  );
 
   const handlePrimaryButtonClick = () => {
     resetForm({
