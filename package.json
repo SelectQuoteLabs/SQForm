@@ -137,7 +137,6 @@
     "@typescript-eslint/parser": "^4.23.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-react-docgen": "^4.1.0",
-    "csstype": "^3.0.8",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-plugin-flowtype": "^4.3.0",
