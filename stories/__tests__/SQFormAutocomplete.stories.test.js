@@ -107,7 +107,7 @@ describe('SQFormAutocomplete Tests', () => {
       userEvent.click(optionToSelect);
       expect(textField).toHaveValue('Fifth');
 
-      const clearButton = screen.getByRole('button', {name: /clear/i});
+      const clearButton = screen.getByLabelText(/clear/i);
       expect(clearButton).toBeInTheDocument();
 
       userEvent.click(clearButton);
