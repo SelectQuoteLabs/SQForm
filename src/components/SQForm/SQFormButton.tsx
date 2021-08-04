@@ -2,7 +2,7 @@ import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
@@ -58,6 +58,7 @@ function SQFormButton({
       type={type}
       isDisabled={isSQFormButtonDisabled}
       onClick={getClickHandler}
+      variant={type === 'reset' ? 'outlined' : 'contained'}
     >
       {children}
     </RoundedButton>

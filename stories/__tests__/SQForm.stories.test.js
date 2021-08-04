@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  fireEvent,
   render,
   screen,
   waitFor,
@@ -77,6 +78,7 @@ describe('Tests for BasicForm', () => {
             preferredPet: mockData.preferredPet,
             warrantyOptions: mockData.warrantyOptions,
             warrantyOptionsSelectAll: false,
+            favoriteColors: [2, 4],
             hobby: mockData.hobby,
             cool: mockData.cool,
             lame: false
@@ -116,6 +118,7 @@ describe('Tests for BasicForm', () => {
             preferredPet: '',
             warrantyOptions: [],
             warrantyOptionsSelectAll: false,
+            favoriteColors: [2, 4],
             hobby: '',
             cool: false,
             lame: false
@@ -149,7 +152,7 @@ describe('Tests for FormWithValidation', () => {
     //Ten Thousand Options
     userEvent.click(screen.getByLabelText(/ten thousand options/i));
     const firstOption = screen.getAllByRole('option')[0];
-    userEvent.click(screen.getAllByRole('option')[0]);
+    fireEvent.click(screen.getAllByRole('option')[0]);
     expect(screen.getByLabelText(/ten thousand options/i)).toHaveValue(
       firstOption.textContent
     );
@@ -210,6 +213,14 @@ describe('Tests for FormWithValidation', () => {
       within(warrantyOptions).getByRole('checkbox', {name: /drivetrain/i})
     ).toBeChecked();
 
+    //Favorite Colors
+    userEvent.click(screen.getByLabelText(/your favorite colors/i));
+    userEvent.click(screen.getByRole('option', {name: /green/i}));
+    expect(screen.getByText('Green')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', {name: /form submission/i})
+    ).toBeDisabled();
+
     //Submit enabled
     await waitFor(() =>
       expect(
@@ -232,7 +243,8 @@ describe('Tests for FormWithValidation', () => {
             note: 'Hello World!',
             preferredPet: 'cat',
             warrantyOptions: ['2'],
-            warrantyOptionsSelectAll: false
+            warrantyOptionsSelectAll: false,
+            favoriteColors: [0]
           },
           null,
           2

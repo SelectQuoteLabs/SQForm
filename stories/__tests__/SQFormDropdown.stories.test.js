@@ -5,7 +5,7 @@ import {composeStories} from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDropdown.stories';
 
-const {SQFormDropdown} = composeStories(stories);
+const {Default: SQFormDropdown} = composeStories(stories);
 
 it('should render list of options', () => {
   render(<SQFormDropdown size="auto" />);
