@@ -186,6 +186,7 @@ export const BasicForm = () => {
           label="Ten Thousand Options"
           size={6}
           onInputChange={action('Update local state')}
+          lockWidthToField
         >
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>

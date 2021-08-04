@@ -3,26 +3,59 @@ import {useFormikContext} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import {hasUpdated} from '../../utils';
 
-export function useFormButton(isDisabled, shouldRequireFieldUpdates, onClick) {
-  const {values, initialValues, isValid, ...rest} = useFormikContext();
+export const BUTTON_TYPES = {
+  SUBMIT: 'submit',
+  RESET: 'reset'
+};
+
+export function useFormButton({
+  isDisabled = false,
+  shouldRequireFieldUpdates = false,
+  onClick,
+  buttonType
+}) {
+  const {values, initialValues, isValid, dirty, ...rest} = useFormikContext();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
   const isButtonDisabled = React.useMemo(() => {
-    if (isDisabled || !isValid) {
+    if (isDisabled) {
       return true;
     }
 
-    if (shouldRequireFieldUpdates && !hasFormBeenUpdated) {
-      return true;
+    if (buttonType === BUTTON_TYPES.SUBMIT) {
+      if (!isValid) {
+        return true;
+      }
+
+      if (shouldRequireFieldUpdates && !hasFormBeenUpdated) {
+        return true;
+      }
+    }
+
+    if (buttonType === BUTTON_TYPES.RESET) {
+      if (!dirty) {
+        return true;
+      }
     }
 
     return false;
-  }, [hasFormBeenUpdated, isDisabled, isValid, shouldRequireFieldUpdates]);
+  }, [
+    hasFormBeenUpdated,
+    isDisabled,
+    isValid,
+    shouldRequireFieldUpdates,
+    buttonType,
+    dirty
+  ]);
 
-  const handleClick = useDebouncedCallback((...args) => onClick(...args), 500, {
-    leading: true,
-    trailing: false
-  });
+  const handleClick = useDebouncedCallback(
+    (...args) => onClick?.(...args),
+    500,
+    {
+      leading: true,
+      trailing: false
+    }
+  );
 
   return {
     isButtonDisabled,
@@ -31,6 +64,7 @@ export function useFormButton(isDisabled, shouldRequireFieldUpdates, onClick) {
     initialValues,
     isValid,
     handleClick,
+    dirty,
     ...rest
   };
 }
