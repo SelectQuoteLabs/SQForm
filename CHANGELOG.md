@@ -1,3 +1,10 @@
+### [5.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.2...v5.2.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* 🐛 bug in SQFormButton to prioritize isDisabled over state ([6a5abb2](https://github.com/SelectQuoteLabs/SQForm/commit/6a5abb2c8b96aa812e3055cd9cf1db9ccdec57a1)), closes [#355](https://github.com/SelectQuoteLabs/SQForm/issues/355)
+
 ### [5.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.1...v5.2.2) (2021-08-02)
 
 
