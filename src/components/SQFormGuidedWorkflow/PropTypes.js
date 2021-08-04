@@ -44,7 +44,7 @@ export const OutcomePropTypes = {
 export const FormikProps = {
   /** Form Entity Object aka initial values of the form */
   initialValues: PropTypes.object.isRequired,
-  /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag) => void | Promise<any> */
+  /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag, context) => void | Promise<any> */
   onSubmit: PropTypes.func.isRequired,
   /** Yup validation schema shape */
   validationSchema: PropTypes.object
