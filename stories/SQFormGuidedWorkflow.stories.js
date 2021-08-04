@@ -47,9 +47,10 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async values => {
+        onSubmit: async (values, _formikBag, context) => {
           await sleep(3000); // Simulate API call to see loading spinner
-          console.log(JSON.stringify(values));
+          console.log(values);
+          console.log(context);
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
@@ -82,8 +83,9 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
+        onSubmit: async (values, _formikBag, context) => {
+          console.log(values);
+          console.log(context);
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
@@ -127,8 +129,9 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
+        onSubmit: async (values, _formikBag, context) => {
+          console.log(values);
+          console.log(context);
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),

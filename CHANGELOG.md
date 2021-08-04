@@ -1,3 +1,10 @@
+### [5.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.3...v5.2.4) (2021-08-04)
+
+
+### Bug Fixes
+
+* 🐛 Provide task modules context to user on submit ([fae3bdb](https://github.com/SelectQuoteLabs/SQForm/commit/fae3bdb8c50968061b55d83697fdf90dcae6d3c1)), closes [#390](https://github.com/SelectQuoteLabs/SQForm/issues/390)
+
 ### [5.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.2...v5.2.3) (2021-08-03)
 
 
