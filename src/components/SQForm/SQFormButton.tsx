@@ -2,13 +2,13 @@ import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
   title?: string;
   type?: 'submit' | 'reset';
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function SQFormButton({
@@ -33,11 +33,11 @@ function SQFormButton({
     return isButtonDisabled;
   }, [dirty, isButtonDisabled, type]);
 
-  const getClickHandler = (...args: unknown[]) => {
+  const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (type === 'reset') {
       return handleReset;
     } else if (typeof onClick !== 'undefined') {
-      return handleClick(...args);
+      return handleClick(event);
     }
   };
 
@@ -58,6 +58,7 @@ function SQFormButton({
       type={type}
       isDisabled={isSQFormButtonDisabled}
       onClick={getClickHandler}
+      variant={type === 'reset' ? 'outlined' : 'contained'}
     >
       {children}
     </RoundedButton>

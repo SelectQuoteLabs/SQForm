@@ -72,6 +72,10 @@ function _getHasValue(meta: FieldMetaProps<unknown>) {
     return true;
   }
 
+  if (typeof fieldValue === 'boolean') {
+    return true;
+  }
+
   return !!fieldValue;
 }
 
