@@ -48,9 +48,13 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md}": [
+    "*.{js,ts,tsx}": [
       "prettier --write",
       "npm run lint",
+      "git add"
+    ],
+    "*.{md}": [
+      "prettier --write",
       "git add"
     ]
   },
@@ -115,13 +119,13 @@
     "@storybook/addon-docs": "^6.3.2",
     "@storybook/addon-knobs": "^6.2.9",
     "@storybook/addon-links": "^6.3.2",
-    "@storybook/addons": "^6.3.2",
+    "@storybook/addons": "^6.4.0-alpha.17",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.2",
     "@storybook/testing-react": "0.0.18",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^13.0.7",
+    "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
