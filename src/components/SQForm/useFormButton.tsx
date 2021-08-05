@@ -1,25 +1,23 @@
 import React from 'react';
 import {DebouncedState} from 'use-debounce/lib/useDebouncedCallback';
 import {useDebouncedCallback} from 'use-debounce';
-import {useFormikContext} from 'formik';
+import {FormikContextType, useFormikContext} from 'formik';
 import {hasUpdated} from '../../utils';
 
-type UseFormButtonReturnType = {
+type UseFormButtonReturnType<Values> = {
   isButtonDisabled: boolean;
   hasFormBeenUpdated: boolean;
-  values: unknown;
-  initialValues: unknown;
+  initialValues: Values;
   isValid: boolean;
   handleClick: DebouncedState<React.MouseEventHandler<HTMLButtonElement>>;
-  [key: string]: unknown;
-};
+} & FormikContextType<Values>;
 
-export function useFormButton(
+export function useFormButton<Values>(
   isDisabled: boolean,
   shouldRequireFieldUpdates: boolean,
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-): UseFormButtonReturnType {
-  const {values, initialValues, isValid, ...rest} = useFormikContext();
+): UseFormButtonReturnType<Values> {
+  const {values, initialValues, isValid, ...rest} = useFormikContext<Values>();
   const hasFormBeenUpdated = hasUpdated(initialValues, values);
 
   const isButtonDisabled = React.useMemo(() => {
