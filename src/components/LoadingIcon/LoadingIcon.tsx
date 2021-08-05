@@ -17,16 +17,16 @@ const useStyles = makeStyles({
     }
   },
   orange: {
-    animation: 'bumpit 2s linear 0.66s infinite'
+    animation: `$bumpit 2s linear 0.66s infinite`
   },
   sqLoadingIcon: {
     opacity: '0.65'
   },
   brown: {
-    animation: 'bumpit 2s linear 0s infinite'
+    animation: `$bumpit 2s linear 0s infinite`
   },
   yellow: {
-    animation: 'bumpit 2s linear 1.33s infinite'
+    animation: `$bumpit 2s linear 1.33s infinite`
   },
   root: {
     display: 'flex',
