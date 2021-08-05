@@ -32,13 +32,15 @@ function SQFormResetInitialValuesButton({
   ...props
 }: SQFormResetInitialValuesButtonProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {values, resetForm} = useFormButton(isDisabled, false);
+  const {values, resetForm} = useFormButton<typeof initialValuesObject>(
+    isDisabled,
+    false
+  );
 
   const handlePrimaryButtonClick = (): void => {
-    //TODO: Remove FormikValues once useFormButton types are improved
     resetForm({
       values: {
-        ...(values as FormikValues),
+        ...values,
         ...initialValuesObject
       }
     });
