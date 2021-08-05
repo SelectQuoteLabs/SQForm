@@ -223,6 +223,10 @@ const TestTemplate = args => {
           testText: '',
           outcome: '',
           notes: ''
+        },
+        onSubmit: async values => {
+          await sleep(1000); // Simulate API call to see loading spinner
+          console.log(JSON.stringify(values));
         }
       },
       scriptedTextProps: {

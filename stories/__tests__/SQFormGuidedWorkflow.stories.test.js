@@ -198,4 +198,14 @@ describe('Testing new story', () => {
     expect(firstScript).not.toBeVisible();
     expect(secondScript).toBeVisible();
   });
+
+  it('should skip the first section and open the second section when there is 1 completed task', () => {
+    render(
+      <Testing
+        mainTitle="Something"
+        mainSubtitle="Something else"
+        isStrictMode={true}
+      />
+    );
+  });
 });
