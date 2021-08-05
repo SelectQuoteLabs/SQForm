@@ -1,10 +1,10 @@
 import React from 'react';
-import {FormikValues, FormikState} from 'formik';
+import {FormikValues} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
 import {useFormButton} from './useFormButton';
 
-interface Props {
+interface SQFormResetInitialValuesButtonProps {
   /** Content for the button; usually text */
   children: React.ReactNode;
   /** Title for the confirmation dialog */
@@ -21,8 +21,6 @@ interface Props {
   tooltip?: string;
 }
 
-type ResetForm = (nextState?: Partial<FormikState<FormikValues>>) => void;
-
 function SQFormResetInitialValuesButton({
   children,
   isDisabled = false,
@@ -32,13 +30,13 @@ function SQFormResetInitialValuesButton({
   tooltip = 'Reset Button',
   initialValuesObject = {},
   ...props
-}: Props): JSX.Element {
+}: SQFormResetInitialValuesButtonProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {values, resetForm} = useFormButton(isDisabled, false);
 
   const handlePrimaryButtonClick = (): void => {
-    //TODO: Remove ResetForm and FormikValues once useFormButton types are improved
-    (resetForm as ResetForm)({
+    //TODO: Remove FormikValues once useFormButton types are improved
+    resetForm({
       values: {
         ...(values as FormikValues),
         ...initialValuesObject
