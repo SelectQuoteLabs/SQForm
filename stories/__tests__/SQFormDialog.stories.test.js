@@ -103,7 +103,7 @@ describe('Tests for WithValidation', () => {
     );
 
     const saveButton = screen.getByRole('button', {name: /save/i});
-    expect(saveButton).toBeDisabled();
+    await waitFor(() => expect(saveButton).toBeDisabled());
 
     const textField = screen.getByLabelText(/hello/i);
     userEvent.type(textField, mockData.hello);

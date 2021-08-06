@@ -126,14 +126,14 @@ describe('SQFormRadioButtonGroup Tests', () => {
 
   describe('With validation', () => {
     describe('Not touched', () => {
-      it('has submit button disabled', () => {
+      it('has submit button disabled', async () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
         const submitButton = screen.getByRole('button', {
           name: /form submission/i
         });
 
-        expect(submitButton).toBeDisabled();
+        await waitFor(() => expect(submitButton).toBeDisabled());
       });
 
       it('displays required helper text', () => {
@@ -146,7 +146,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
     });
 
     describe('touched and no value selected', () => {
-      it('has error styles on label and helper text', () => {
+      it('has error styles on label and helper text', async () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
         const label = screen.getByText(/Pandas/i);
@@ -157,9 +157,10 @@ describe('SQFormRadioButtonGroup Tests', () => {
 
         // Tab out of radio group
         userEvent.tab();
-
-        expect(label).toHaveClass('Mui-error');
-        expect(requiredText).toHaveClass('Mui-error');
+        await waitFor(() => {
+          expect(label).toHaveClass('Mui-error');
+          expect(requiredText).toHaveClass('Mui-error');
+        });
       });
     });
 
