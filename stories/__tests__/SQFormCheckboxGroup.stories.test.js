@@ -193,14 +193,12 @@ describe('SQFormCheckboxGroup Tests', () => {
   });
 
   describe('Checkboxes with Validation', () => {
-    it('should have submit button disabled when no checkboxes checked', () => {
+    it('should have submit button disabled when no checkboxes checked', async () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-
-      expect(submitButton).toBeDisabled();
+      expect(
+        await screen.findByRole('button', {name: /form submission/i})
+      ).toBeDisabled();
     });
 
     it('should enable submit button when a checkbox is checked', async () => {
@@ -217,7 +215,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       await waitFor(() => expect(submitButton).toBeEnabled());
     });
 
-    it('should highlight required when unchecked', () => {
+    it('should highlight required when unchecked', async () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
       const checkbox = screen.getByLabelText(SHOPPING_LIST_OPTIONS[3].label);
@@ -229,10 +227,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const required = screen.getByText('Required');
       expect(required).toHaveClass('Mui-required');
 
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-      expect(submitButton).toBeDisabled();
+      expect(
+        await screen.findByRole('button', {name: /form submission/i})
+      ).toBeDisabled();
     });
   });
 });
