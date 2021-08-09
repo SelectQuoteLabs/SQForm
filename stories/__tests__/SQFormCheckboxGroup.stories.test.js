@@ -196,11 +196,9 @@ describe('SQFormCheckboxGroup Tests', () => {
     it('should have submit button disabled when no checkboxes checked', async () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-
-      await waitFor(() => expect(submitButton).toBeDisabled());
+      expect(
+        await screen.findByRole('button', {name: /form submission/i})
+      ).toBeDisabled();
     });
 
     it('should enable submit button when a checkbox is checked', async () => {
@@ -229,10 +227,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const required = screen.getByText('Required');
       expect(required).toHaveClass('Mui-required');
 
-      const submitButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-      await waitFor(() => expect(submitButton).toBeDisabled());
+      expect(
+        await screen.findByRole('button', {name: /form submission/i})
+      ).toBeDisabled();
     });
   });
 });

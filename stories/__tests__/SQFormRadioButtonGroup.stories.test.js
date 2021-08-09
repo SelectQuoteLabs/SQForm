@@ -129,11 +129,9 @@ describe('SQFormRadioButtonGroup Tests', () => {
       it('has submit button disabled', async () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
-        const submitButton = screen.getByRole('button', {
-          name: /form submission/i
-        });
-
-        await waitFor(() => expect(submitButton).toBeDisabled());
+        expect(
+          await screen.findByRole('button', {name: /form submission/i})
+        ).toBeDisabled();
       });
 
       it('displays required helper text', () => {
@@ -170,11 +168,9 @@ describe('SQFormRadioButtonGroup Tests', () => {
         const firstRadioButton = screen.getAllByRole('radio')[0];
         userEvent.click(firstRadioButton);
 
-        const submitButton = screen.getByRole('button', {
-          name: /form submission/i
-        });
-
-        await waitFor(() => expect(submitButton).toBeEnabled());
+        expect(
+          await screen.findByRole('button', {name: /form submission/i})
+        ).toBeEnabled();
       });
     });
   });
