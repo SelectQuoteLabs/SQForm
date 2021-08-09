@@ -5,21 +5,24 @@ import {
   RadioProps,
   FormHelperText,
   FormControl,
-  FormLabel
+  FormLabel,
+  GridSize
 } from '@material-ui/core';
 import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
-import BaseFieldProps from 'types/BaseFieldProps';
 import {useForm} from './useForm';
 
 interface RadioButtonInputItemProps {
   value: string | boolean | number;
   label: string;
   isDisabled?: boolean;
-  isRowDisplay?: boolean;
   inputProps?: RadioProps;
 }
 
-interface SQFormRadioButtonGroupProps extends BaseFieldProps {
+interface SQFormRadioButtonGroupProps {
+  /** Name of the Radio Group */
+  name: string;
+  /** Size of the input given full-width is 12. */
+  size?: GridSize;
   /** Function to call on value change */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** Whether this radio selection is required */
@@ -40,7 +43,7 @@ function SQFormRadioButtonGroup({
   size = 'auto',
   groupLabel,
   children
-}: SQFormRadioButtonGroupProps): JSX.Element {
+}: SQFormRadioButtonGroupProps): React.ReactElement {
   const {
     fieldState: {isFieldError},
     formikField: {field},
