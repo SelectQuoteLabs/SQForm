@@ -1,3 +1,24 @@
+## [5.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.4...v5.3.0) (2021-08-06)
+
+
+### Features
+
+* 🎸 Added showTooltip and tooltipText props to MultiSelect ([8bc967d](https://github.com/SelectQuoteLabs/SQForm/commit/8bc967d6f9bd046a6658e50a008f54dd0eaa8ed1)), closes [#313](https://github.com/SelectQuoteLabs/SQForm/issues/313)
+
+### [5.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.3...v5.2.4) (2021-08-04)
+
+
+### Bug Fixes
+
+* 🐛 Provide task modules context to user on submit ([fae3bdb](https://github.com/SelectQuoteLabs/SQForm/commit/fae3bdb8c50968061b55d83697fdf90dcae6d3c1)), closes [#390](https://github.com/SelectQuoteLabs/SQForm/issues/390)
+
+### [5.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.2...v5.2.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* 🐛 bug in SQFormButton to prioritize isDisabled over state ([6a5abb2](https://github.com/SelectQuoteLabs/SQForm/commit/6a5abb2c8b96aa812e3055cd9cf1db9ccdec57a1)), closes [#355](https://github.com/SelectQuoteLabs/SQForm/issues/355)
+
 ### [5.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.1...v5.2.2) (2021-08-02)
 
 

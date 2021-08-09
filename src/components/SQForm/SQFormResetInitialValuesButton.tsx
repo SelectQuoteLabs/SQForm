@@ -2,7 +2,7 @@ import React from 'react';
 import {FormikValues} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
 interface SQFormResetInitialValuesButtonProps {
   /** Content for the button; usually text */
@@ -32,10 +32,11 @@ function SQFormResetInitialValuesButton({
   ...props
 }: SQFormResetInitialValuesButtonProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {values, resetForm} = useFormButton<typeof initialValuesObject>(
+  const {values, resetForm} = useFormButton<typeof initialValuesObject>({
     isDisabled,
-    false
-  );
+    shouldRequireFieldUpdates: false,
+    buttonType: BUTTON_TYPES.RESET
+  });
 
   const handlePrimaryButtonClick = (): void => {
     resetForm({

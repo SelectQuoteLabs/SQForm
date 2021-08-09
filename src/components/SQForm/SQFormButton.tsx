@@ -1,13 +1,13 @@
 import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES, ButtonType} from './useFormButton';
 
 export interface Props {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
   title?: string;
-  type?: 'submit' | 'reset';
+  type?: ButtonType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -19,22 +19,16 @@ function SQFormButton({
   type = 'submit',
   onClick
 }: Props): JSX.Element {
-  const {dirty, isButtonDisabled, handleReset, handleClick} = useFormButton(
+  const isResetButton = type === BUTTON_TYPES.RESET;
+  const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
-    onClick
-  );
-
-  const isSQFormButtonDisabled = React.useMemo(() => {
-    if (type === 'reset') {
-      return !dirty;
-    }
-
-    return isButtonDisabled;
-  }, [dirty, isButtonDisabled, type]);
+    onClick,
+    buttonType: type
+  });
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (type === 'reset') {
+    if (isResetButton) {
       return handleReset;
     } else if (typeof onClick !== 'undefined') {
       return handleClick(event);
@@ -45,7 +39,7 @@ function SQFormButton({
     switch (true) {
       case Boolean(title):
         return title;
-      case type === 'reset':
+      case isResetButton:
         return 'Reset Form';
       default:
         return 'Form Submission';
@@ -56,9 +50,9 @@ function SQFormButton({
     <RoundedButton
       title={getTitle()}
       type={type}
-      isDisabled={isSQFormButtonDisabled}
+      isDisabled={isButtonDisabled}
       onClick={getClickHandler}
-      variant={type === 'reset' ? 'outlined' : 'contained'}
+      variant={isResetButton ? 'outlined' : 'contained'}
     >
       {children}
     </RoundedButton>

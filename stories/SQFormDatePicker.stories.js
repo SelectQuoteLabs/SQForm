@@ -29,11 +29,13 @@ const defaultArgs = {
 };
 
 const Template = args => {
-  const {schema, ...rest} = args;
+  const {schema, SQFormProps, ...rest} = args;
+
   return (
     <SQFormStoryWrapper
       initialValues={MOCK_INITIAL_VALUE}
       validationSchema={schema}
+      {...SQFormProps}
     >
       <SQFormDatePickerComponent
         name={defaultArgs.name}
