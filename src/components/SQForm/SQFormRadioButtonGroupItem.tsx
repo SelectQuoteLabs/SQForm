@@ -13,7 +13,7 @@ interface SQFormRadioButtonGroupItemProps {
   /** Whether the group this button is in is displayed in a row */
   isRowDisplay?: boolean;
   /** Props for the radio input */
-  inputProps?: RadioProps;
+  InputProps?: RadioProps;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +42,7 @@ function SQFormRadioButtonGroupItem({
       `}
       value={value}
       label={label}
-      control={<Radio disabled={isDisabled} {...inputProps} />}
+      control={<Radio disabled={isDisabled} {...InputProps} />}
     />
   );
 }
