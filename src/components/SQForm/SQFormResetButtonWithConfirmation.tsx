@@ -1,6 +1,6 @@
 import React from 'react';
 import {DialogAlert, RoundedButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import {useDialog} from '@selectquotelabs/sqhooks';
 
 interface SQFormResetButtonWithConfirmationProps {
@@ -30,7 +30,11 @@ function SQFormResetButtonWithConfirmation({
   onReset
 }: SQFormResetButtonWithConfirmationProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {dirty, handleReset} = useFormButton(isDisabled);
+  const {dirty, handleReset} = useFormButton({
+    isDisabled,
+    buttonType: BUTTON_TYPES.RESET,
+    shouldRequireFieldUpdates: false
+  });
 
   const handlePrimaryButtonClick = (): void => {
     handleReset();
