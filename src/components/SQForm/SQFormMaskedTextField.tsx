@@ -1,7 +1,7 @@
 import {useFormikContext} from 'formik';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-import {maskProp} from '../../types/MaskTypes';
+import {maskProp} from 'types';
 import SQFormTextField, {SQFormTextFieldProps} from './SQFormTextField';
 
 interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {
@@ -24,10 +24,10 @@ function TextFieldMask({
   return (
     <MaskedInput
       {...rest}
-      ref={ref => {
+      ref={(ref) => {
         inputRef && inputRef(ref ? ref.inputElement : null);
       }}
-      mask={mask}
+      mask={mask || false}
       placeholderChar={'\u2000'}
       showMask={false}
     />
@@ -50,7 +50,7 @@ function SQFormMaskedTextField({
   InputProps,
   inputProps = {},
   muiFieldProps = {},
-  stripNonNumeric = false
+  stripNonNumeric = false,
 }: SQFormMaskedTextFieldProps): React.ReactElement {
   const {setFieldValue} = useFormikContext();
 
@@ -75,11 +75,11 @@ function SQFormMaskedTextField({
       type={type}
       InputProps={{
         ...InputProps,
-        inputComponent: TextFieldMask
+        inputComponent: TextFieldMask,
       }}
       inputProps={{
         ...inputProps,
-        mask
+        mask,
       }}
       muiFieldProps={muiFieldProps}
     />
