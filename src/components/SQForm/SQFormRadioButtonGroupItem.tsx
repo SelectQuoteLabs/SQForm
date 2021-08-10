@@ -30,7 +30,7 @@ function SQFormRadioButtonGroupItem({
   label,
   isDisabled = false,
   isRowDisplay = false,
-  inputProps = {}
+  InputProps = {}
 }: SQFormRadioButtonGroupItemProps): JSX.Element {
   const classes = useStyles();
 

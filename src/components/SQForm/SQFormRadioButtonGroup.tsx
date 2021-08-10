@@ -15,7 +15,7 @@ interface RadioButtonInputItemProps {
   value: string | boolean | number;
   label: string;
   isDisabled?: boolean;
-  inputProps?: RadioProps;
+  InputProps?: RadioProps;
 }
 
 interface SQFormRadioButtonGroupProps {
@@ -56,14 +56,14 @@ function SQFormRadioButtonGroup({
 
   const childrenToRadioGroupItems = () => {
     return children.map(radioOption => {
-      const {label, value, isDisabled, inputProps} = radioOption;
+      const {label, value, isDisabled, InputProps} = radioOption;
       return (
         <SQFormRadioButtonGroupItem
           label={label}
           value={value}
           isDisabled={isDisabled}
           isRowDisplay={shouldDisplayInRow}
-          inputProps={inputProps}
+          InputProps={InputProps}
           key={`SQFormRadioButtonGroupItem_${value}`}
         />
       );
