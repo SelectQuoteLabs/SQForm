@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
+import {useAutoHeight} from '@selectquotelabs/sqhooks';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
@@ -74,6 +75,7 @@ function SQFormScrollableCard({
   isSelfBounding,
   height
 }) {
+  const {containerRef, height: autoHeight} = useAutoHeight();
   const hasSubHeader = Boolean(SubHeaderComponent);
 
   const validationYupSchema = React.useMemo(() => {
@@ -96,33 +98,13 @@ function SQFormScrollableCard({
     title
   ]);
 
-  const [calculatedHeight, setCalculatedHeight] = React.useState(0);
-
-  React.useEffect(() => {
-    const currentElement = document.getElementById(
-      `sqform-scrollable-card-id-${formattedTitle}`
-    );
-
-    const topOffset = currentElement?.getBoundingClientRect().top;
-    const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
-
-    const parentHeight = currentElement.parentElement.clientHeight;
-    const parentTopOffset = currentElement.parentElement.getBoundingClientRect()
-      .top;
-    const topDifferential = topOffset - parentTopOffset;
-    const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
-
-    const calculatedHeight = `min(${offsetBasedHeight}, ${maxOffsetBasedHeight})`;
-
-    setCalculatedHeight(calculatedHeight);
-  }, [formattedTitle]);
-
-  const heightToUse = height || (isSelfBounding && calculatedHeight) || '100%';
+  const heightToUse = height || (isSelfBounding && autoHeight) || '100%';
 
   return (
     <div
       id={`sqform-scrollable-card-id-${formattedTitle}`}
       style={{height: heightToUse}}
+      ref={containerRef}
     >
       <Formik
         enableReinitialize={enableReinitialize}
