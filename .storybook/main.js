@@ -17,7 +17,7 @@ module.exports = {
     config.module.rules = [
       ...config.module.rules,
       {
-        test: /\.(js|jsx|tsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

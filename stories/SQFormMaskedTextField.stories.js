@@ -2,10 +2,11 @@ import React from 'react';
 
 import {
   MASKS,
-  SQFormMaskedTextField as SQFormMaskedTextFieldComponent
+  SQFormMaskedTextField as SQFormMaskedTextFieldComponent,
 } from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 
 export default {
   title: 'Components/SQFormMaskedTextField',
@@ -13,22 +14,22 @@ export default {
   argTypes: {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
+      page: createDocsPage(),
+    },
+  },
 };
 
 const defaultArgs = {
   label: 'Masked Text Field',
-  name: 'maskedTextField'
+  name: 'maskedTextField',
 };
 
-const Template = args => {
-  const {schema, SQFormProps, exampleMasks, ...rest} = args;
+const Template = (args) => {
+  const {schema, SQFormProps, exampleMasks, size, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
@@ -37,24 +38,11 @@ const Template = args => {
     >
       <SQFormMaskedTextFieldComponent
         {...rest}
-        size={getSizeProp(args.size)}
+        size={getSizeProp(size)}
         mask={exampleMasks}
       />
     </SQFormStoryWrapper>
   );
-};
-
-const getSizeProp = size => {
-  switch (size) {
-    case true:
-    case false:
-    case 'auto':
-      return size;
-    case undefined:
-      return 'auto';
-    default:
-      return Number(size);
-  }
 };
 
 export const Default = Template.bind({});
@@ -66,8 +54,8 @@ Default.argTypes = {
     options: Object.keys(MASKS),
     mapping: MASKS,
     control: {
-      type: 'select'
+      type: 'select',
     },
-    defaultValue: 'phone'
-  }
+    defaultValue: 'phone',
+  },
 };
