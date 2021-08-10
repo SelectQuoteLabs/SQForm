@@ -3,11 +3,12 @@ import {TextField, TextFieldProps, InputProps} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import BaseFieldProps from '../../types/BaseFieldProps';
+import {maskProp} from '../../types/MaskTypes';
 
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
 
-interface SQFormTextFieldProps extends BaseFieldProps {
+export interface SQFormTextFieldProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Disabled property to disable the input if true */
@@ -27,7 +28,7 @@ interface SQFormTextFieldProps extends BaseFieldProps {
   /** Props applied to the Input element */
   InputProps?: InputProps;
   /** Attributes applied to the `input` element */
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement> & {mask?: maskProp};
   /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
   maxCharacters?: number;
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */

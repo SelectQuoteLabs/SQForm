@@ -90,8 +90,15 @@ function SQFormGuidedWorkflow({
       return false;
     };
     const handleSubmit = async (values, formikBag) => {
+      const context = {
+        ...taskModulesContext,
+        [taskNumber]: {
+          ...taskModulesContext[taskNumber],
+          data: values
+        }
+      };
       try {
-        await taskModule.formikProps.onSubmit(values, formikBag);
+        await taskModule.formikProps.onSubmit(values, formikBag, context);
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {

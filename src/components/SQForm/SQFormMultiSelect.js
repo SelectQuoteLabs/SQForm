@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Grid from '@material-ui/core/Grid';
-import Checkbox from '@material-ui/core/Checkbox';
-import ListItemText from '@material-ui/core/ListItemText';
-import Tooltip from '@material-ui/core/Tooltip';
-import {makeStyles} from '@material-ui/core/styles';
+import {
+  FormControl,
+  Select,
+  Input,
+  MenuItem,
+  InputLabel,
+  FormHelperText,
+  Grid,
+  Checkbox,
+  ListItemText,
+  Tooltip,
+  makeStyles
+} from '@material-ui/core';
 import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
@@ -79,7 +81,9 @@ function SQFormMultiSelect({
   size = 'auto',
   useSelectAll = true,
   toolTipPlacement = 'bottom',
-  muiFieldProps = {}
+  muiFieldProps = {},
+  showTooltip = true,
+  tooltipText
 }) {
   const classes = useStyles();
 
@@ -158,6 +162,14 @@ function SQFormMultiSelect({
     return selectedDisplayValue(selected, children, name);
   };
 
+  const renderTooltip = () => {
+    if (!showTooltip || !toolTipEnabled) {
+      return '';
+    }
+
+    return tooltipText || toolTipTitle;
+  };
+
   return (
     <Grid item sm={size}>
       <FormControl
@@ -171,10 +183,10 @@ function SQFormMultiSelect({
         </InputLabel>
         <Tooltip
           placement={toolTipPlacement}
-          arrow
+          arrow={true}
           enterDelay={1000}
           leaveDelay={100}
-          title={toolTipEnabled ? toolTipTitle : ''}
+          title={renderTooltip()}
         >
           <Select
             className={classes.selectHeight}
@@ -249,7 +261,13 @@ SQFormMultiSelect.propTypes = {
   /** Use MUI's Tooltip Position Values */
   toolTipPlacement: PropTypes.string,
   /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
+  /** Whether or not to show the tooltip */
+  showTooltip: PropTypes.bool,
+  /** String to show as the tooltip.
+   * Note: Default behavior is to show the selected value(s)
+   */
+  tooltipText: PropTypes.string
 };
 
 export default SQFormMultiSelect;

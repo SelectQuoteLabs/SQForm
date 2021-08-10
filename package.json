@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "5.2.2",
+  "version": "5.3.0",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "types": "dist/index.d.ts",
@@ -70,7 +70,7 @@
   "license": "MIT",
   "homepage": "https://github.com/SelectQuoteLabs/SQForm#readme",
   "dependencies": {
-    "@selectquotelabs/sqhooks": "^1.8.0",
+    "@selectquotelabs/sqhooks": "^2.1.0",
     "@tippy.js/react": "^3.1.1",
     "ag-grid-community": "^25.2.1",
     "ag-grid-react": "^25.2.0",
@@ -84,7 +84,8 @@
     "react-window": "^1.8.5",
     "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.3.1",
     "text-mask-addons": "^3.8.0",
-    "use-debounce": "^6.0.0"
+    "use-debounce": "^6.0.0",
+    "yup": "^0.32.9"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.0",
@@ -92,8 +93,7 @@
     "@material-ui/lab": "^4.0.0-alpha.46",
     "@material-ui/pickers": "^4.0.0-alpha.11",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "yup": "^0.28.3"
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -129,6 +129,7 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
+    "@types/react-text-mask": "^5.4.8",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "^4.23.0",

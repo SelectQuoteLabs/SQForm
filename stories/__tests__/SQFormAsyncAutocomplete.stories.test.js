@@ -1,6 +1,6 @@
 import React from 'react';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen, within} from '@testing-library/react';
+import {render, screen, waitFor, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormAsyncAutocomplete.stories';
 
@@ -180,7 +180,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
   });
 
   describe('Autocomplete With Validation', () => {
-    it('should highlight field if required but no value selected', () => {
+    it('should highlight field if required but no value selected', async () => {
       render(<SQFormAsyncAutocompleteWithValidation size="auto" />);
 
       const textField = screen.getByRole('textbox', {
@@ -194,8 +194,10 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       userEvent.tab();
 
       const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-error');
+      await waitFor(() => {
+        expect(requiredText).toBeVisible();
+        expect(requiredText).toHaveClass('Mui-error');
+      });
     });
   });
 });
