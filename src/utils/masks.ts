@@ -28,17 +28,17 @@ export const MASKS = {
     /\d/,
     /\d/,
     /\d/,
-    /\d/
+    /\d/,
   ],
   zip: zipMask,
   currency: createNumberMask({
-    allowDecimal: true
+    allowDecimal: true,
   }),
   percent: createNumberMask({
     prefix: '',
-    suffix: '%'
+    suffix: '%',
   }),
   email: emailMask,
   date: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
-  ssn: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  ssn: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
 };

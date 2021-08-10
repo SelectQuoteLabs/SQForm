@@ -29,7 +29,10 @@ export const DATE_TIME_FORMATS = {
  * @param {string} fromFormat - The format to convert from (if moment needs a hint to convert)
  * @returns {string} The date/time as a utc ISO string
  */
-export function getDateWithoutTimezone(dateTime, fromFormat) {
+export function getDateWithoutTimezone(
+  dateTime: moment.Moment | string,
+  fromFormat: string
+): string {
   if (!dateTime) {
     dateTime = moment();
   }
@@ -37,7 +40,7 @@ export function getDateWithoutTimezone(dateTime, fromFormat) {
   const momentToConvert =
     typeof dateTime === 'string' ? moment(dateTime, fromFormat) : dateTime;
 
-  return momentToConvert;
+  return momentToConvert.toISOString();
 }
 
 /**
@@ -48,7 +51,10 @@ export function getDateWithoutTimezone(dateTime, fromFormat) {
  * @param {string} fromFormat - The format to convert from (if moment needs a hint to convert)
  * @returns {Moment} A Moment object converted to local browser time
  */
-export function applyBrowserTimezoneToDate(dateTime, fromFormat) {
+export function applyBrowserTimezoneToDate(
+  dateTime: moment.Moment | string,
+  fromFormat: string
+): moment.Moment {
   if (!dateTime) {
     dateTime = moment();
   }
@@ -69,10 +75,10 @@ export function applyBrowserTimezoneToDate(dateTime, fromFormat) {
  * @returns {string} The date/time as a utc ISO string
  */
 export function clientMomentToSpecialServerFormat(
-  dateTime,
-  toFormat,
-  fromFormat
-) {
+  dateTime: moment.Moment | string,
+  toFormat: string,
+  fromFormat: string
+): string {
   if (!toFormat) {
     throw Error(
       'clientMomentToSpecialServerFormat must have toFormat to work properly'
@@ -85,7 +91,14 @@ export function clientMomentToSpecialServerFormat(
   return momentToConvert.format(toFormat);
 }
 
-export function getDateAsMomentIfValid(date) {
+/**
+ *  Converts a date string to a momement if valid
+ * @param {string} date - the string date time to convert.
+ * @returns {Moment} - a Moment date time object.
+ */
+export function getDateAsMomentIfValid(
+  date: string
+): moment.Moment | undefined {
   if (!date) {
     return undefined;
   }
