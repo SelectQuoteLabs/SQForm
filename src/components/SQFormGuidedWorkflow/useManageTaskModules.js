@@ -30,11 +30,37 @@ export function useManageTaskModules(
       return prevTaskID === taskModulesLength;
     };
 
+    const isTaskDisabled = taskID => {
+      return taskModulesContext[taskID].isDisabled;
+    };
+
+    const findNextTask = prevTaskID => {
+      if (isTaskIDTheFinalTask(prevTaskID)) {
+        return;
+      }
+
+      const nextTaskID = prevTaskID + 1;
+      //const nextTask = taskModulesContext[nextTaskID];
+
+      if (isTaskDisabled(nextTaskID)) {
+        return findNextTask(nextTaskID);
+      }
+
+      return nextTaskID;
+    };
+
     const incrementTaskModuleID = prevTaskID => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
         return prevTaskID;
       }
-      return (prevTaskID += 1);
+
+      const nextTaskModuleID = findNextTask(prevTaskID);
+
+      if (nextTaskModuleID) {
+        return nextTaskModuleID;
+      }
+
+      return prevTaskID;
     };
 
     const incrementActiveTaskModuleID = () => {
@@ -54,6 +80,12 @@ export function useManageTaskModules(
     };
 
     const updateActiveTaskModuleID = id => {
+      console.log('taskModulesContext', taskModulesContext);
+      console.log('isTaskDisabled(id)', isTaskDisabled(id));
+      if (isTaskDisabled(id)) {
+        console.log('findNextTask(id)', findNextTask(id));
+        return {...prevState, activeTaskModuleID: findNextTask(id)};
+      }
       return {...prevState, activeTaskModuleID: id};
     };
 
@@ -64,6 +96,7 @@ export function useManageTaskModules(
         if (prevState.activeTaskModuleID === prevState.progressTaskModuleID) {
           return enableNextTaskModule();
         }
+
         return updateActiveTaskModuleID(prevState.progressTaskModuleID);
       case 'RESET_TO_INITIAL_STATE':
         return initialState;

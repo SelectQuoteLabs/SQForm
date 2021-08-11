@@ -24,6 +24,7 @@ const outcomeDropdownOptions = [
 
 const Template = () => {
   const [isIneligible, setIneligible] = React.useState(false);
+  const [isModuleDisabled, setIsModuleDisabled] = React.useState(false);
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
@@ -42,6 +43,11 @@ const Template = () => {
           await sleep(3000); // Simulate API call to see loading spinner
           console.log(values);
           console.log(context);
+          if (values.outcome === 'not-interested') {
+            setIsModuleDisabled(true);
+          } else {
+            setIsModuleDisabled(false);
+          }
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
@@ -58,6 +64,13 @@ const Template = () => {
             <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
+            <RoundedButton
+              title="Test Disable"
+              onClick={() => setIsModuleDisabled(true)}
+            >
+              Test Disable
+            </RoundedButton>
+            <RoundedButton>{`${isModuleDisabled}`}</RoundedButton>
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
@@ -69,6 +82,7 @@ const Template = () => {
       title: 'Policy Cancellation Statement',
       subtitles: ['Cancelling policy'],
       isFailedState: isIneligible,
+      isDisabled: isModuleDisabled,
       formikProps: {
         initialValues: {
           outcome: '',
@@ -113,8 +127,12 @@ const Template = () => {
     },
     {
       name: 'providers',
-      title: 'Verify Providers',
-      subtitles: ['Please verify the providers'],
+      title: isModuleDisabled ? 'Dont Verify Providers' : 'Verify Providers',
+      subtitles: [
+        'Please verify the providers',
+        isModuleDisabled ? 'Disabled' : 'Not Disabled'
+      ],
+      isDisabled: true,
       formikProps: {
         initialValues: {
           outcome: '',
@@ -145,6 +163,40 @@ const Template = () => {
           </>
         ),
         title: 'Confirm Info'
+      }
+    },
+    {
+      name: 'yetAnother',
+      title: 'Yet Another Test',
+      subtitles: ['Testing . . .'],
+      formikProps: {
+        initialValues: {
+          outcome: '',
+          notes: ''
+        },
+        onSubmit: async (values, _formikBag, context) => {
+          console.log(values);
+          console.log(context);
+        },
+        validationSchema: {
+          outcome: Yup.string().required('Required'),
+          notes: Yup.string()
+        }
+      },
+      scriptedTextProps: {
+        text: 'Scripted Text goes here',
+        title: 'Title of the Script'
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+              {outcomeDropdownOptions}
+            </SQFormDropdown>
+            <SQFormTextarea name="notes" label="Notes" />
+          </>
+        ),
+        title: 'Last Info'
       }
     }
   ];
