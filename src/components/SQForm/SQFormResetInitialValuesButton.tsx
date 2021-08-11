@@ -1,8 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {FormikValues} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
+
+interface SQFormResetInitialValuesButtonProps {
+  /** Content for the button; usually text */
+  children: React.ReactNode;
+  /** Title for the confirmation dialog */
+  confirmationTitle?: string;
+  /** Content for the confirmation dialog */
+  confirmationContent: React.ReactNode;
+  /** Whether the button is disabled */
+  isDisabled?: boolean;
+  /** Title for the button */
+  buttonTitle?: string;
+  /** initial form values */
+  initialValuesObject?: FormikValues;
+  /** Button tooltip */
+  tooltip?: string;
+}
 
 function SQFormResetInitialValuesButton({
   children,
@@ -13,11 +30,15 @@ function SQFormResetInitialValuesButton({
   tooltip = 'Reset Button',
   initialValuesObject = {},
   ...props
-}) {
+}: SQFormResetInitialValuesButtonProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {values, resetForm} = useFormButton(isDisabled);
+  const {values, resetForm} = useFormButton<typeof initialValuesObject>({
+    isDisabled,
+    shouldRequireFieldUpdates: false,
+    buttonType: BUTTON_TYPES.RESET
+  });
 
-  const handlePrimaryButtonClick = () => {
+  const handlePrimaryButtonClick = (): void => {
     resetForm({
       values: {
         ...values,
@@ -52,22 +73,5 @@ function SQFormResetInitialValuesButton({
     </>
   );
 }
-
-SQFormResetInitialValuesButton.propTypes = {
-  /** Content for the button; usually text */
-  children: PropTypes.node.isRequired,
-  /** Title for the confirmation dialog */
-  confirmationTitle: PropTypes.string,
-  /** Content for the confirmation dialog */
-  confirmationContent: PropTypes.node.isRequired,
-  /** Whether the button is disabled */
-  isDisabled: PropTypes.bool,
-  /** Title for the button */
-  buttonTitle: PropTypes.string,
-  /** initial form values */
-  initialValuesObject: PropTypes.object,
-  /** Button tooltip */
-  tooltip: PropTypes.string
-};
 
 export default SQFormResetInitialValuesButton;

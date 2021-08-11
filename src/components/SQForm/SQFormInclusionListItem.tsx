@@ -2,7 +2,7 @@ import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import BaseFieldProps from '../../types/BaseFieldProps';
+import {BaseFieldProps} from 'types';
 
 import {useForm} from './useForm';
 
@@ -21,14 +21,14 @@ function SQFormInclusionListItem({
   label,
   name,
   onChange,
-  size = 'auto'
+  size = 'auto',
 }: SQFormInclusionListItemProps): JSX.Element {
   const {
-    fieldHelpers: {handleChange}
+    fieldHelpers: {handleChange},
   } = useForm({
     name,
     isRequired: false,
-    onChange
+    onChange,
   });
 
   return (

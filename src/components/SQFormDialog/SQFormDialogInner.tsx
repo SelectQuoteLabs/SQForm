@@ -1,28 +1,68 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Dialog,
+  DialogProps,
   DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
   Grid,
   Slide,
-  makeStyles
+  makeStyles,
+  GridProps
 } from '@material-ui/core';
-import {useTheme} from '@material-ui/core/styles';
+import {TransitionProps} from '@material-ui/core/transitions';
+import {Theme, useTheme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 
-const Transition = React.forwardRef((props, ref) => {
+interface SQFormDialogInnerProps {
+  /** The secondary button text (Button located on left side of Dialog) */
+  cancelButtonText?: string;
+  /** The content to be rendered in the dialog body */
+  children: React.ReactNode;
+  /** If true, clicking the backdrop will not fire the onClose callback. */
+  disableBackdropClick?: boolean;
+  /** The current disabled state of the Dialog Save Button */
+  isDisabled?: boolean;
+  /** The current open/closed state of the Dialog */
+  isOpen: boolean;
+  /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
+  maxWidth?: DialogProps['maxWidth'];
+  /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
+  onClose: (
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => void;
+  /** Whether to show save/submit button */
+  shouldDisplaySaveButton: boolean;
+  /** The primary button text (Button located on right side of Dialog) */
+  saveButtonText?: string;
+  /** Whether or not the dialog form requires updates to the form to enable the submit button */
+  shouldRequireFieldUpdates?: boolean;
+  /** Title text at the top of the Dialog */
+  title: string;
+  /** Any prop from https://material-ui.com/api/grid */
+  muiGridProps?: GridProps;
+}
+
+/*
+const Transition = React.forwardRef<HTMLDivElement>((props, ref) => {
+  return <Slide direction="down" ref={ref} {...props}>{undefined}</Slide>;
+});
+*/
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {children?: React.ReactElement<unknown, string>},
+  ref: React.Ref<unknown>
+) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
 const stickyStyles = {
-  position: 'sticky',
-  background: ({palette}) => palette.background.paper,
+  position: 'sticky' as React.CSSProperties['position'],
+  background: ({palette}: Theme) => palette.background.paper,
   zIndex: 1
 };
 
@@ -30,7 +70,7 @@ const useTitleStyles = makeStyles({
   root: {
     ...stickyStyles,
     top: 0,
-    borderBottom: ({palette}) => `1px solid ${palette.divider}`
+    borderBottom: ({palette}: Theme) => `1px solid ${palette.divider}`
   }
 });
 const useActionsStyles = makeStyles({
@@ -59,12 +99,12 @@ function SQFormDialogInner({
   isOpen,
   maxWidth,
   onClose,
-  onSave,
+  shouldDisplaySaveButton,
   saveButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps
-}) {
+}: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
@@ -77,9 +117,12 @@ function SQFormDialogInner({
     closeDialog: closeDialogAlert
   } = useDialog();
 
-  const handleCancel = () => {
+  const handleCancel = (
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown'
+  ) => {
     if (!isDirty) {
-      onClose();
+      onClose && onClose(event, reason);
     } else {
       openDialogAlert();
     }
@@ -87,7 +130,7 @@ function SQFormDialogInner({
 
   const confirmCancel = () => {
     resetForm();
-    onClose();
+    onClose && onClose({}, 'escapeKeyDown');
     closeDialogAlert();
   };
 
@@ -108,7 +151,7 @@ function SQFormDialogInner({
             <Grid
               {...muiGridProps}
               container
-              spacing={muiGridProps.spacing ?? 2}
+              spacing={muiGridProps?.spacing ?? 2}
             >
               {children}
             </Grid>
@@ -122,7 +165,7 @@ function SQFormDialogInner({
             >
               {cancelButtonText}
             </RoundedButton>
-            {onSave && (
+            {shouldDisplaySaveButton && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}
@@ -148,32 +191,5 @@ function SQFormDialogInner({
     </>
   );
 }
-
-SQFormDialogInner.propTypes = {
-  /** The secondary button text (Button located on left side of Dialog) */
-  cancelButtonText: PropTypes.string,
-  /** The content to be rendered in the dialog body */
-  children: PropTypes.node.isRequired,
-  /** If true, clicking the backdrop will not fire the onClose callback. */
-  disableBackdropClick: PropTypes.bool,
-  /** The current disabled state of the Dialog Save Button */
-  isDisabled: PropTypes.bool,
-  /** The current open/closed state of the Dialog */
-  isOpen: PropTypes.bool.isRequired,
-  /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
-  maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', false]),
-  /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
-  onClose: PropTypes.func.isRequired,
-  /** Callback function invoke when the user clicks the primary button */
-  onSave: PropTypes.func,
-  /** The primary button text (Button located on right side of Dialog) */
-  saveButtonText: PropTypes.string,
-  /** Whether or not the dialog form requires updates to the form to enable the submit button */
-  shouldRequireFieldUpdates: PropTypes.bool,
-  /** Title text at the top of the Dialog */
-  title: PropTypes.string.isRequired,
-  /** Any prop from https://material-ui.com/api/grid */
-  muiGridProps: PropTypes.object
-};
 
 export default SQFormDialogInner;

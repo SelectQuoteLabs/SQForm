@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, RoundedButton} from 'scplus-shared-components';
-import {useFormButton} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
 function SQFormResetButtonWithConfirmation({
   children,
@@ -14,7 +14,10 @@ function SQFormResetButtonWithConfirmation({
   onReset
 }) {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
-  const {dirty, handleReset} = useFormButton(isDisabled);
+  const {dirty, handleReset} = useFormButton({
+    isDisabled,
+    buttonType: BUTTON_TYPES.RESET
+  });
 
   const handlePrimaryButtonClick = () => {
     handleReset();

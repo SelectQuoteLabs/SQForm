@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import {render, screen, within} from '@testing-library/react';
+import {render, screen, waitFor, within} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDropdown.stories';
@@ -131,7 +131,7 @@ it('should not display icon and text if field is not required', () => {
   expect(required).not.toBeInTheDocument();
 });
 
-it('should highlight field if required but no value selected', () => {
+it('should highlight field if required but no value selected', async () => {
   const validationSchema = {
     state: Yup.string().required('Required')
   };
@@ -143,10 +143,10 @@ it('should highlight field if required but no value selected', () => {
   const expandButton = screen.getByRole('button', {name: /state/i});
 
   userEvent.tab();
-  expect(expandButton).toHaveFocus();
+  await waitFor(() => expect(expandButton).toHaveFocus());
 
   userEvent.tab();
-  expect(expandButton).not.toHaveFocus();
+  await waitFor(() => expect(expandButton).not.toHaveFocus());
 
   const required = screen.getByText(/required/i);
   expect(required).toBeVisible();

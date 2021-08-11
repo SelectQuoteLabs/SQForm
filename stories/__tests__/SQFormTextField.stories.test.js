@@ -1,6 +1,6 @@
 import React from 'react';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormTextField.stories';
 
@@ -109,7 +109,7 @@ describe('SQFormTextField Tests', () => {
   });
 
   describe('Text Field With Validation', () => {
-    it('should highlight field if required by no value selected', () => {
+    it('should highlight field if required by no value selected', async () => {
       render(<SQFormTextFieldWithValidation size="auto" />);
 
       userEvent.tab();
@@ -121,7 +121,8 @@ describe('SQFormTextField Tests', () => {
       expect(textField).not.toHaveFocus();
 
       const required = screen.getByText('Required');
-      expect(required).toHaveClass('Mui-error');
+
+      await waitFor(() => expect(required).toHaveClass('Mui-error'));
     });
   });
 });
