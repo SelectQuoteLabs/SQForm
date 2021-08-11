@@ -1,15 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, {AutocompleteProps} from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
-import {VariableSizeList} from 'react-window';
+import {ListChildComponentProps, VariableSizeList} from 'react-window';
 import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
+import {Option} from 'types';
+import {
+  ListboxVirtualizedComponentProps,
+  OuterElementContextInterface,
+  OuterElementTypeProps,
+  SQFormAutocompleteProps,
+} from './SQFormAutocomplete';
+
+interface SQFormAsyncAutocomplete extends SQFormAutocompleteProps {
+  /** updates consumer's local state value for the input, which is passed to a useQuery hook */
+  handleAsyncInputChange: (value: string | number | boolean) => void;
+  /** Whether the component is loading */
+  loading: boolean;
+  /** Whether the popup is open */
+  open: boolean;
+  /** Callback for when the popup requests to be opened */
+  onOpen: AutocompleteProps<
+    string | number | boolean,
+    false,
+    false,
+    false
+  >['onOpen'];
+  /** Callback for when the popup requests to be closed */
+  onClose: AutocompleteProps<
+    string | number | boolean,
+    false,
+    false,
+    false
+  >['onClose'];
+}
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
@@ -18,31 +47,42 @@ const useStyles = makeStyles({
   listbox: {
     '& ul': {
       padding: 0,
-      margin: 0
-    }
+      margin: 0,
+    },
+  },
+});
+
+const OuterElementContext =
+  React.createContext<OuterElementContextInterface | null>({});
+
+const OuterElementType = React.forwardRef<HTMLDivElement>(
+  (props: OuterElementTypeProps, ref) => {
+    const outerProps = React.useContext(OuterElementContext);
+    return <div ref={ref} {...props} {...outerProps} />;
   }
-});
+);
 
-const OuterElementContext = React.createContext({});
-
-const OuterElementType = React.forwardRef((props, ref) => {
-  const outerProps = React.useContext(OuterElementContext);
-  return <div ref={ref} {...props} {...outerProps} />;
-});
-
-function renderRow({data, index, style}) {
+function renderRow({data, index, style}: ListChildComponentProps) {
   return React.cloneElement(data[index], {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: (style.top as number) + LISTBOX_PADDING,
+    },
   });
 }
 
 // Adapter for react-window
-const ListboxVirtualizedComponent = React.forwardRef(
-  function ListboxVirtualizedComponent(props, ref) {
-    const {children, ...listboxProps} = props;
+const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
+  function ListboxVirtualizedComponent(
+    {
+      basewidth,
+      left,
+      lockWidthToField,
+      ...restProps
+    }: ListboxVirtualizedComponentProps,
+    ref
+  ): React.ReactElement {
+    const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
     const LIST_OVERSCAN_COUNT = 5;
     const items = React.Children.toArray(children);
@@ -53,9 +93,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
       if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {
         return LIST_MAX_VIEWABLE_ITEMS * ITEM_SIZE;
       }
-      return (
-        items.reduce((acc, _item) => acc + ITEM_SIZE, 0) + 2 * LISTBOX_PADDING
-      );
+      return items.length * ITEM_SIZE + 2 * LISTBOX_PADDING;
     }, [ITEM_COUNT, items]);
 
     const getItemSize = React.useCallback(() => ITEM_SIZE, []);
@@ -79,7 +117,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
         </OuterElementContext.Provider>
       </div>
     );
-  }
+  } as React.ForwardRefRenderFunction<HTMLDivElement>
 );
 
 function SQFormAsyncAutocomplete({
@@ -96,21 +134,21 @@ function SQFormAsyncAutocomplete({
   open,
   onOpen,
   onClose,
-  size = 'auto'
-}) {
+  size = 'auto',
+}: SQFormAsyncAutocomplete): React.ReactElement {
   const classes = useStyles();
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError},
-    fieldHelpers: {HelperTextComponent}
+    fieldHelpers: {HelperTextComponent},
   } = useForm({
     name,
-    isRequired
+    isRequired,
   });
 
   const initialValue = React.useMemo(() => {
-    const optionInitialValue = children.find(option => {
+    const optionInitialValue = children.find((option) => {
       if (option.value === value) {
         return option;
       }
@@ -136,7 +174,7 @@ function SQFormAsyncAutocomplete({
   }, [value, inputValue, name, prevValue, values]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({[name]: true});
       onBlur && onBlur(event);
     },
@@ -156,10 +194,10 @@ function SQFormAsyncAutocomplete({
   );
 
   const handleInputChange = React.useCallback(
-    (_event, value) => {
+    (event, value) => {
       setInputValue(value);
       handleAsyncInputChange(value);
-      onInputChange && onInputChange();
+      onInputChange && onInputChange(event, value);
     },
     [handleAsyncInputChange, onInputChange]
   );
@@ -168,11 +206,14 @@ function SQFormAsyncAutocomplete({
     <Grid item sm={size}>
       <Autocomplete
         id={name}
-        name={name}
         style={{width: '100%'}}
         disableListWrap
         classes={classes}
-        ListboxComponent={ListboxVirtualizedComponent}
+        ListboxComponent={
+          ListboxVirtualizedComponent as React.ComponentType<
+            React.HTMLAttributes<HTMLElement>
+          >
+        }
         options={children}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
@@ -182,9 +223,9 @@ function SQFormAsyncAutocomplete({
         onClose={onClose}
         inputValue={inputValue}
         disabled={isDisabled}
-        getOptionLabel={option => option.label}
-        getOptionDisabled={option => option.isDisabled}
-        renderInput={params => {
+        getOptionLabel={(option) => option.label}
+        getOptionDisabled={(option: Option) => option.isDisabled || false}
+        renderInput={(params) => {
           return (
             <TextField
               {...params}
@@ -194,11 +235,11 @@ function SQFormAsyncAutocomplete({
               fullWidth={true}
               InputLabelProps={{
                 ...params.InputLabelProps,
-                shrink: true
+                shrink: true,
               }}
               inputProps={{
                 ...params.inputProps,
-                disabled: isDisabled
+                disabled: isDisabled,
               }}
               InputProps={{
                 ...params.InputProps,
@@ -209,7 +250,7 @@ function SQFormAsyncAutocomplete({
                     ) : null}
                     {params.InputProps.endAdornment}
                   </>
-                )
+                ),
               }}
               FormHelperTextProps={{error: isFieldError}}
               name={name}
@@ -219,7 +260,7 @@ function SQFormAsyncAutocomplete({
             />
           );
         }}
-        renderOption={option => (
+        renderOption={(option) => (
           <Typography variant="body2" noWrap>
             {option.label}
           </Typography>
@@ -228,41 +269,5 @@ function SQFormAsyncAutocomplete({
     </Grid>
   );
 }
-
-SQFormAsyncAutocomplete.propTypes = {
-  /** Dropdown menu options to select from */
-  children: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  /** updates consumer's local state value for the input, which is passed to a useQuery hook */
-  handleAsyncInputChange: PropTypes.func.isRequired,
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Whether the component is loading */
-  loading: PropTypes.bool,
-  /** Label text */
-  label: PropTypes.string.isRequired,
-  /** Name identifier of the input field */
-  name: PropTypes.string.isRequired,
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Custom onInputChange event callback (key pressed)*/
-  onInputChange: PropTypes.func,
-  /** Whether the popup is open */
-  open: PropTypes.bool,
-  /** Callback for when the popup requests to be opened */
-  onOpen: PropTypes.func,
-  /** Callback for when the popup requests to be closed */
-  onClose: PropTypes.func,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-};
 
 export default SQFormAsyncAutocomplete;
