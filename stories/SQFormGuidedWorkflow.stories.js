@@ -64,13 +64,6 @@ const Template = () => {
             <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
-            <RoundedButton
-              title="Test Disable"
-              onClick={() => setIsModuleDisabled(true)}
-            >
-              Test Disable
-            </RoundedButton>
-            <RoundedButton>{`${isModuleDisabled}`}</RoundedButton>
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
@@ -79,7 +72,9 @@ const Template = () => {
     },
     {
       name: 'cancellation',
-      title: 'Policy Cancellation Statement',
+      title: isModuleDisabled
+        ? 'Dont Verify Providers'
+        : 'Policy Cancellation Statement',
       subtitles: ['Cancelling policy'],
       isFailedState: isIneligible,
       isDisabled: isModuleDisabled,
@@ -127,11 +122,8 @@ const Template = () => {
     },
     {
       name: 'providers',
-      title: isModuleDisabled ? 'Dont Verify Providers' : 'Verify Providers',
-      subtitles: [
-        'Please verify the providers',
-        isModuleDisabled ? 'Disabled' : 'Not Disabled'
-      ],
+      title: 'Verify Providers',
+      subtitles: ['Please verify the providers'],
       isDisabled: true,
       formikProps: {
         initialValues: {

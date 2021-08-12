@@ -57,7 +57,8 @@ function SQFormGuidedWorkflow({
 
   const [
     taskModulesContext,
-    updateTaskModuleContextByID
+    updateTaskModuleContextByID,
+    updateTaskModuleContext
   ] = useGuidedWorkflowContext(taskModules);
 
   const {
@@ -79,11 +80,9 @@ function SQFormGuidedWorkflow({
       taskModulesContext[taskModulesState.activeTaskModuleID].name === taskName;
 
     const getIsDisabled = () => {
-      console.log('taskNumber', taskNumber);
       if (isStrictMode && taskModulesState.activeTaskModuleID !== taskNumber) {
         return true;
       }
-      console.log('taskModule.isDisabled', taskModule.isDisabled);
       if (
         taskModule.isDisabled ||
         taskModulesState.progressTaskModuleID < taskNumber
@@ -101,18 +100,11 @@ function SQFormGuidedWorkflow({
           data: values
         }
       };
-      console.log('handleSubmit context', context);
+
       try {
         await taskModule.formikProps.onSubmit(values, formikBag, context);
-        console.log(
-          'handleSubmit taskModulesContext[taskNumber].isDisabled',
-          taskModulesContext[taskNumber].isDisabled
-        );
-        updateTaskModuleContextByID(
-          taskNumber,
-          values,
-          taskModulesContext[taskNumber].isDisabled
-        );
+        updateTaskModuleContext();
+        updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {
         onError(error);

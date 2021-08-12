@@ -19,9 +19,13 @@ export function useGuidedWorkflowContext(taskModules) {
           ...prevState,
           [action.id]: {
             ...prevState[action.id],
-            data: action.data,
-            isDisabled: action.isDisabled
+            data: action.data
           }
+        };
+      case 'UPDATE_MODULES':
+        return {
+          ...prevState,
+          ...initialData
         };
       default:
         throw new Error(
@@ -32,10 +36,13 @@ export function useGuidedWorkflowContext(taskModules) {
 
   const [state, dispatch] = React.useReducer(reducer, initialData);
 
-  const updateDataByID = (id, data, isDisabled) => {
-    console.log('updateDataByID', id, data, isDisabled);
-    dispatch({type: 'UPDATE', id, data, isDisabled});
+  const updateDataByID = (id, data) => {
+    dispatch({type: 'UPDATE', id, data});
   };
 
-  return [state, updateDataByID];
+  const updateTaskModules = () => {
+    dispatch({type: 'UPDATE_MODULES'});
+  };
+
+  return [state, updateDataByID, updateTaskModules];
 }

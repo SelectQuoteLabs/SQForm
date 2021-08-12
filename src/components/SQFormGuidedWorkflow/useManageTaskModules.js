@@ -40,7 +40,6 @@ export function useManageTaskModules(
       }
 
       const nextTaskID = prevTaskID + 1;
-      //const nextTask = taskModulesContext[nextTaskID];
 
       if (isTaskDisabled(nextTaskID)) {
         return findNextTask(nextTaskID);
@@ -80,10 +79,7 @@ export function useManageTaskModules(
     };
 
     const updateActiveTaskModuleID = id => {
-      console.log('taskModulesContext', taskModulesContext);
-      console.log('isTaskDisabled(id)', isTaskDisabled(id));
       if (isTaskDisabled(id)) {
-        console.log('findNextTask(id)', findNextTask(id));
         return {...prevState, activeTaskModuleID: findNextTask(id)};
       }
       return {...prevState, activeTaskModuleID: id};
