@@ -80,7 +80,12 @@ export function useManageTaskModules(
 
     const updateActiveTaskModuleID = id => {
       if (isTaskDisabled(id)) {
-        return {...prevState, activeTaskModuleID: findNextTask(id)};
+        const nextID = findNextTask(id);
+        return {
+          ...prevState,
+          activeTaskModuleID: nextID,
+          progressTaskModuleID: nextID
+        };
       }
       return {...prevState, activeTaskModuleID: id};
     };
@@ -92,7 +97,6 @@ export function useManageTaskModules(
         if (prevState.activeTaskModuleID === prevState.progressTaskModuleID) {
           return enableNextTaskModule();
         }
-
         return updateActiveTaskModuleID(prevState.progressTaskModuleID);
       case 'RESET_TO_INITIAL_STATE':
         return initialState;
