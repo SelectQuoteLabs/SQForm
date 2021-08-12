@@ -133,20 +133,31 @@ describe('Tests for BasicForm', () => {
 
 describe('Tests for FormWithValidation', () => {
   it('should not submit until all required fields are filled out', async () => {
+    /*
+     * This is a slow test and needs a bit more time to allow for async operations (yup validation) to complete
+     * Locally this test takes my machine ~25 seconds to complete, giving it 30. May need to be adjusted if CI or
+     * several local machines need higher. This is the price we pay for a big form with lots of yup validation.
+     * This line will only affect this test.
+     */
+    jest.setTimeout(30000); // Default was 5000ms, not enough.
     render(<FormWithValidation />);
 
     //First Name
     userEvent.type(screen.getByLabelText(/first name/i), 'Laurel');
     expect(screen.getByLabelText(/first name/i)).toHaveValue('Laurel');
+
+    // Wait for the button to be disabled after async yup validation completes
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Last Name
     userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
     expect(screen.getByLabelText(/last name/i)).toHaveValue(mockData.lastName);
+
+    // async wait each time in case yup validation isn't complete. Safer this way.
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Ten Thousand Options
@@ -157,7 +168,7 @@ describe('Tests for FormWithValidation', () => {
       firstOption.textContent
     );
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //State
@@ -167,14 +178,14 @@ describe('Tests for FormWithValidation', () => {
       'Kansas'
     );
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Age
     userEvent.type(screen.getByLabelText(/age/i), '32');
     expect(screen.getByLabelText(/age/i)).toHaveValue(32);
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Note
@@ -186,7 +197,7 @@ describe('Tests for FormWithValidation', () => {
       'Hello World!'
     );
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Cat or Dog
@@ -199,7 +210,7 @@ describe('Tests for FormWithValidation', () => {
     );
     expect(screen.getByRole('radio', {name: /cat/i})).toBeChecked();
     expect(
-      screen.getByRole('button', {name: /form submission/i})
+      await screen.findByRole('button', {name: /form submission/i})
     ).toBeDisabled();
 
     //Warranty Options
@@ -217,16 +228,11 @@ describe('Tests for FormWithValidation', () => {
     userEvent.click(screen.getByLabelText(/your favorite colors/i));
     userEvent.click(screen.getByRole('option', {name: /green/i}));
     expect(screen.getByText('Green')).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', {name: /form submission/i})
-    ).toBeDisabled();
 
-    //Submit enabled
-    await waitFor(() =>
-      expect(
-        screen.getByRole('button', {name: /form submission/i})
-      ).toBeEnabled()
-    );
+    // Submit should be enabled, wait for yup validation to catch up
+    expect(
+      await screen.findByRole('button', {name: /form submission/i})
+    ).toBeEnabled();
 
     userEvent.click(screen.getByRole('button', {name: /form submission/i}));
 

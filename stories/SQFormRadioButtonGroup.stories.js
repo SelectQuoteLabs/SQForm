@@ -2,8 +2,9 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 
 export default {
   title: 'Components/SQFormRadioButtonGroup',
@@ -12,22 +13,22 @@ export default {
     name: {table: {disable: true}},
     children: {table: {disable: true}},
     SQFormProps: {table: {disable: true}},
-    onChange: {action: 'changed', table: {disable: true}}
+    onChange: {action: 'changed', table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage(),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const PANDA_GROUP_OPTIONS = [
   {label: 'Giant Panda', value: 'giant panda'},
   {label: 'Red Panda', value: 'red panda'},
-  {label: 'Kung Fu Panda', value: 'kung fu panda'}
+  {label: 'Kung Fu Panda', value: 'kung fu panda'},
 ];
 
 const defaultArgs = {
@@ -35,12 +36,12 @@ const defaultArgs = {
   name: 'pandas',
   children: PANDA_GROUP_OPTIONS,
   SQFormProps: {
-    initialValues: {pandas: ''}
-  }
+    initialValues: {pandas: ''},
+  },
 };
 
-const Template = args => {
-  const {SQFormProps, schema, ...componentProps} = args;
+const Template = (args) => {
+  const {SQFormProps, schema, size, ...componentProps} = args;
   return (
     <SQFormStoryWrapper
       {...defaultArgs.SQFormProps}
@@ -49,7 +50,7 @@ const Template = args => {
     >
       <SQFormRadioButtonGroupComponent
         {...componentProps}
-        size={args.size !== 'auto' ? Number(args.size) : args.size}
+        size={getSizeProp(size)}
       />
     </SQFormStoryWrapper>
   );
@@ -63,9 +64,9 @@ WithValidation.args = {
   ...defaultArgs,
   isRequired: true,
   schema: {
-    [defaultArgs.name]: Yup.string().required('Required')
-  }
+    [defaultArgs.name]: Yup.string().required('Required'),
+  },
 };
 WithValidation.parameters = {
-  controls: {exclude: 'schema'}
+  controls: {exclude: 'schema'},
 };

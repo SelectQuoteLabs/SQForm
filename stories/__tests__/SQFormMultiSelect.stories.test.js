@@ -163,11 +163,14 @@ describe('Tests for SQFormMultiSelect', () => {
 
   it('should highlight field if required but no value selected', async () => {
     const validationSchema = {
-      friends: Yup.string().required('Required')
+      friends: Yup.array()
+        .min(1, 'Required')
+        .required('Required')
     };
 
     render(
       <SQFormMultiSelect
+        isRequired={true}
         size="auto"
         SQFormProps={{
           validationSchema

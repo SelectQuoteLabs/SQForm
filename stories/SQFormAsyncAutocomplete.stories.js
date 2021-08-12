@@ -3,8 +3,9 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import {SQFormAsyncAutocomplete} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 
 export default {
   title: 'Components/SQFormAsyncAutocomplete',
@@ -16,16 +17,16 @@ export default {
     onOpen: {action: 'opened', table: {disable: true}},
     onClose: {action: 'closed', table: {disable: true}},
     name: {table: {disable: true}},
-    handleAsyncInputChange: {table: {disable: true}}
+    handleAsyncInputChange: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage(),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const defaultArgs = {
@@ -34,30 +35,30 @@ const defaultArgs = {
   children: [
     {
       label: 'First',
-      value: 'first'
+      value: 'first',
     },
     {
       label: 'Second',
-      value: 'second'
+      value: 'second',
     },
     {
       label: 'Third',
-      value: 'third'
+      value: 'third',
     },
     {
       label: 'Fourth',
-      value: 'fourth'
+      value: 'fourth',
     },
     {
       label: 'Fifth',
-      value: 'fifth'
-    }
+      value: 'fifth',
+    },
   ],
-  handleAsyncInputChange: action('handleAsyncInputChange')
+  handleAsyncInputChange: action('handleAsyncInputChange'),
 };
 
-const Template = args => {
-  const {schema, SQFormProps, ...rest} = args;
+const Template = (args) => {
+  const {schema, SQFormProps, size, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
@@ -65,10 +66,7 @@ const Template = args => {
         validationSchema={schema}
         {...SQFormProps}
       >
-        <SQFormAsyncAutocomplete
-          {...rest}
-          size={args.size !== 'auto' ? Number(args.size) : args.size}
-        />
+        <SQFormAsyncAutocomplete {...rest} size={getSizeProp(size)} />
       </SQFormStoryWrapper>
     </div>
   );
@@ -82,9 +80,9 @@ WithValidation.args = {
   ...defaultArgs,
   isRequired: true,
   schema: {
-    [defaultArgs.name]: Yup.string().required('Required')
-  }
+    [defaultArgs.name]: Yup.string().required('Required'),
+  },
 };
 WithValidation.parameters = {
-  controls: {exclude: 'schema'}
+  controls: {exclude: 'schema'},
 };
