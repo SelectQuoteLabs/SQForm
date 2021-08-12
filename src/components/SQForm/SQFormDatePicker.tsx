@@ -31,14 +31,12 @@ interface SQFormDatePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: (
-    date: React.ChangeEvent<moment.Moment> | unknown
-  ) => void;
+  onChange?: (date: React.ChangeEvent<moment.Moment> | unknown) => void;
   /** Disable specific date(s) (day: DateIOType) => boolean
    * This is a predicate function called for every day of the month
    * Return true to disable that day or false to enable that day
    */
-  setDisabledDate: (day: unknown) => boolean;
+  setDisabledDate?: (day: unknown) => boolean;
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps?: BaseDatePickerProps;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
@@ -72,9 +70,7 @@ function SQFormDatePicker({
     onChange
   });
 
-  const handleChange = (
-    date: React.ChangeEvent<moment.Moment> | unknown
-  ) => {
+  const handleChange = (date: React.ChangeEvent<moment.Moment> | unknown) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
