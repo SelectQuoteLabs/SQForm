@@ -1,20 +1,30 @@
 import React from 'react';
 import CheckMarkIcon from '@material-ui/icons/CheckCircle';
-import Grid from '@material-ui/core/Grid';
+import Grid, {GridProps} from '@material-ui/core/Grid';
 import {SQForm, SQFormIconButton} from '../../src';
 import {
   Snackbar,
   SnackbarProvider,
-  useSnackbar
+  useSnackbar,
 } from 'scplus-shared-components';
+import {FormikValues} from 'formik';
+import {AnySchema} from 'yup';
+
+interface SQFormStoryWrapperProps {
+  children: React.ReactNode;
+  initialValues: FormikValues;
+  validationSchema: AnySchema;
+  muiGridProps: GridProps;
+  showSubmit: boolean;
+}
 
 export function SQFormStoryWrapper({
   children,
   initialValues,
   validationSchema,
   muiGridProps,
-  showSubmit = true
-}) {
+  showSubmit = true,
+}: SQFormStoryWrapperProps): React.ReactElement {
   return (
     <SnackbarProvider>
       <Form
@@ -34,12 +44,12 @@ function Form({
   initialValues,
   validationSchema,
   muiGridProps,
-  showSubmit = true
-}) {
-  const [value, setValue] = React.useState('');
+  showSubmit = true,
+}: SQFormStoryWrapperProps): React.ReactElement {
+  const [value, setValue] = React.useState({});
 
   const [snackbarState, {snackbar, closeSnackBar}] = useSnackbar();
-  const handleSubmit = values => {
+  const handleSubmit = (values: FormikValues) => {
     setValue(values);
   };
 
@@ -66,7 +76,7 @@ function Form({
       >
         {children}
         {showSubmit && (
-          <Grid item size={2} style={{alignSelf: 'center'}}>
+          <Grid item sm={2} style={{alignSelf: 'center'}}>
             <SQFormIconButton IconComponent={CheckMarkIcon} />
           </Grid>
         )}
