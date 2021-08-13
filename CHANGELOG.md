@@ -1,3 +1,10 @@
+### [5.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.0...v5.3.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* 🐛 SQFormGuidedWorkflow isDisabled now skips the module ([74fd037](https://github.com/SelectQuoteLabs/SQForm/commit/74fd037f34b6001efcc39cc2acfe5f8ac248dc52)), closes [#405](https://github.com/SelectQuoteLabs/SQForm/issues/405)
+
 ## [5.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.4...v5.3.0) (2021-08-06)
 
 
