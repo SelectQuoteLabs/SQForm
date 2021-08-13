@@ -15,7 +15,7 @@ import {usePrevious} from '@selectquotelabs/sqhooks';
 import {BaseFieldProps, Option, optionValue} from 'types';
 import {useForm} from './useForm';
 
-interface SQFormAutocompleteProps extends BaseFieldProps {
+export interface SQFormAutocompleteProps extends BaseFieldProps {
   /** Dropdown menu options to select from */
   children: Option[];
   /** Disabled property to disable the input if true */
@@ -41,13 +41,13 @@ interface SQFormAutocompleteProps extends BaseFieldProps {
   lockWidthToField?: boolean;
 }
 
-interface OuterElementTypeProps {
+export interface OuterElementTypeProps {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 }
 
-interface ListboxVirtualizedComponentProps {
+export interface ListboxVirtualizedComponentProps {
   children?: React.ReactNode;
   basewidth: number;
   left: number;
@@ -56,7 +56,7 @@ interface ListboxVirtualizedComponentProps {
   style?: React.CSSProperties;
 }
 
-interface OuterElementContextInterface {
+export interface OuterElementContextInterface {
   className?: string;
   style?: React.CSSProperties;
 }
@@ -316,9 +316,9 @@ function SQFormAutocomplete({
   );
 
   const handleInputChange = React.useCallback(
-    (_event, value) => {
+    (event, value) => {
       setInputValue(value);
-      onInputChange && onInputChange(_event, value);
+      onInputChange && onInputChange(event, value);
     },
     [onInputChange]
   );
