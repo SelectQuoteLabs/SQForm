@@ -8,21 +8,21 @@ module.exports = {
       {
         preset: 'conventionalcommits',
         commit: 'commits',
-        issue: 'issue'
-      }
+        issue: 'issue',
+      },
     ],
     [
       '@semantic-release/changelog',
       {
-        changelogFile: 'CHANGELOG.md'
-      }
+        changelogFile: 'CHANGELOG.md',
+      },
     ],
     '@semantic-release/npm',
     [
       '@semantic-release/github',
       {
-        successComment: false
-      }
+        successComment: false,
+      },
     ],
     [
       '@semantic-release/git',
@@ -30,8 +30,8 @@ module.exports = {
         assets: ['docs', 'CHANGELOG.md', 'package.json', 'package-lock.json'],
         message:
           // eslint-disable-next-line no-template-curly-in-string
-          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-      }
-    ]
-  ]
+          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+      },
+    ],
+  ],
 };

@@ -28,7 +28,8 @@
   "include": [
     "./src",
     "./jest-setup.ts",
-    "./stories"
+    "./stories",
+    ".",
   ],
   "exclude": [
     "**/*.test.ts"
