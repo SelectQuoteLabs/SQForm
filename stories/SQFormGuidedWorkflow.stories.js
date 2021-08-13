@@ -124,7 +124,7 @@ const Template = () => {
       name: 'providers',
       title: 'Verify Providers',
       subtitles: ['Please verify the providers'],
-      isDisabled: true,
+      isDisabled: false,
       formikProps: {
         initialValues: {
           outcome: '',
@@ -155,40 +155,6 @@ const Template = () => {
           </>
         ),
         title: 'Confirm Info'
-      }
-    },
-    {
-      name: 'yetAnother',
-      title: 'Yet Another Test',
-      subtitles: ['Testing . . .'],
-      formikProps: {
-        initialValues: {
-          outcome: '',
-          notes: ''
-        },
-        onSubmit: async (values, _formikBag, context) => {
-          console.log(values);
-          console.log(context);
-        },
-        validationSchema: {
-          outcome: Yup.string().required('Required'),
-          notes: Yup.string()
-        }
-      },
-      scriptedTextProps: {
-        text: 'Scripted Text goes here',
-        title: 'Title of the Script'
-      },
-      outcomeProps: {
-        FormElements: (
-          <>
-            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
-              {outcomeDropdownOptions}
-            </SQFormDropdown>
-            <SQFormTextarea name="notes" label="Notes" />
-          </>
-        ),
-        title: 'Last Info'
       }
     }
   ];
