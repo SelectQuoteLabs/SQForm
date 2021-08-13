@@ -58,7 +58,7 @@ function SQFormGuidedWorkflow({
   const [
     taskModulesContext,
     updateTaskModuleContextByID,
-    updateTaskModuleContext
+    updateModuleDisabledContext
   ] = useGuidedWorkflowContext(taskModules);
 
   const {
@@ -103,7 +103,7 @@ function SQFormGuidedWorkflow({
 
       try {
         await taskModule.formikProps.onSubmit(values, formikBag, context);
-        updateTaskModuleContext();
+        updateModuleDisabledContext();
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {

@@ -22,7 +22,7 @@ export function useGuidedWorkflowContext(taskModules) {
             data: action.data
           }
         };
-      case 'UPDATE_MODULES':
+      case 'UPDATE_DISABLED_STATUS':
         return taskModules.reduce((acc, taskModule, index) => {
           return {
             ...acc,
@@ -46,9 +46,9 @@ export function useGuidedWorkflowContext(taskModules) {
     dispatch({type: 'UPDATE', id, data});
   };
 
-  const updateTaskModules = () => {
-    dispatch({type: 'UPDATE_MODULES'});
+  const updateDisabledModules = () => {
+    dispatch({type: 'UPDATE_DISABLED_STATUS'});
   };
 
-  return [state, updateDataByID, updateTaskModules];
+  return [state, updateDataByID, updateDisabledModules];
 }
