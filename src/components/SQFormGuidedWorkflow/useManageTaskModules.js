@@ -34,7 +34,7 @@ export function useManageTaskModules(
       return taskModulesContext[taskID].isDisabled;
     };
 
-    const findNextTask = prevTaskID => {
+    const findNextTaskID = prevTaskID => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
         return;
       }
@@ -42,7 +42,7 @@ export function useManageTaskModules(
       const nextTaskID = prevTaskID + 1;
 
       if (isTaskDisabled(nextTaskID)) {
-        return findNextTask(nextTaskID);
+        return findNextTaskID(nextTaskID);
       }
 
       return nextTaskID;
@@ -53,7 +53,7 @@ export function useManageTaskModules(
         return prevTaskID;
       }
 
-      const nextTaskModuleID = findNextTask(prevTaskID);
+      const nextTaskModuleID = findNextTaskID(prevTaskID);
 
       if (nextTaskModuleID) {
         return nextTaskModuleID;
@@ -79,25 +79,27 @@ export function useManageTaskModules(
     };
 
     const updateActiveTaskModuleID = id => {
-      if (isTaskDisabled(id)) {
-        const nextID = findNextTask(id);
+      const nextID = findNextTaskID(id);
+
+      if (isTaskDisabled(nextID)) {
+        const nextTaskID = findNextTaskID(nextID);
         return {
           ...prevState,
-          activeTaskModuleID: nextID,
-          progressTaskModuleID: nextID
+          activeTaskModuleID: nextTaskID,
+          progressTaskModuleID: nextTaskID
         };
       }
-      return {...prevState, activeTaskModuleID: id};
+      return {...prevState, activeTaskModuleID: nextID};
     };
 
     switch (action.type) {
       case 'UPDATE_ACTIVE_TASK_MODULE':
-        return updateActiveTaskModuleID(action.id);
+        return {...prevState, activeTaskModuleID: action.id};
       case 'ENABLE_NEXT_TASK_MODULE':
         if (prevState.activeTaskModuleID === prevState.progressTaskModuleID) {
           return enableNextTaskModule();
         }
-        return updateActiveTaskModuleID(prevState.progressTaskModuleID);
+        return updateActiveTaskModuleID(prevState.activeTaskModuleID);
       case 'RESET_TO_INITIAL_STATE':
         return initialState;
       default:

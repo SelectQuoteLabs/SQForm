@@ -23,10 +23,16 @@ export function useGuidedWorkflowContext(taskModules) {
           }
         };
       case 'UPDATE_MODULES':
-        return {
-          ...prevState,
-          ...initialData
-        };
+        return taskModules.reduce((acc, taskModule, index) => {
+          return {
+            ...acc,
+            [index + 1]: {
+              name: taskModule.name,
+              data: prevState[index + 1].data,
+              isDisabled: taskModule.isDisabled || false
+            }
+          };
+        }, {});
       default:
         throw new Error(
           `The ${action.type} type provided to useGuidedWorkflow is not valid`
