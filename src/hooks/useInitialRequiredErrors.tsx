@@ -2,7 +2,7 @@ import React from 'react';
 import {FormikErrors} from 'formik';
 
 type ValidationSchema = {
-  [key: string]: unknown;
+  [key: string]: string;
 };
 
 // Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
