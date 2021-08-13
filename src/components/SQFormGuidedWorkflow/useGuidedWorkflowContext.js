@@ -15,21 +15,15 @@ export function useGuidedWorkflowContext(taskModules) {
   const reducer = (prevState, action) => {
     switch (action.type) {
       case 'UPDATE':
-        return {
-          ...prevState,
-          [action.id]: {
-            ...prevState[action.id],
-            data: action.data
-          }
-        };
-      case 'UPDATE_DISABLED_STATUS':
-        return taskModules.reduce((acc, taskModule, index) => {
+        return taskModules.reduce((acc, taskModlue, index) => {
+          const taskID = index + 1;
+          const prevData = prevState[taskID].data;
           return {
             ...acc,
-            [index + 1]: {
-              name: taskModule.name,
-              data: prevState[index + 1].data,
-              isDisabled: taskModule.isDisabled || false
+            [taskID]: {
+              name: taskModlue.name,
+              data: action.id === taskID ? action.data : prevData,
+              isDisabled: taskModlue.isDisabled || false
             }
           };
         }, {});
@@ -46,9 +40,5 @@ export function useGuidedWorkflowContext(taskModules) {
     dispatch({type: 'UPDATE', id, data});
   };
 
-  const updateDisabledModules = () => {
-    dispatch({type: 'UPDATE_DISABLED_STATUS'});
-  };
-
-  return [state, updateDataByID, updateDisabledModules];
+  return [state, updateDataByID];
 }
