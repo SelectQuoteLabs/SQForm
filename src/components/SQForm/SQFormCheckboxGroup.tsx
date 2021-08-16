@@ -17,7 +17,7 @@ interface CheckboxOption {
   inputProps?: CheckboxProps;
 }
 
-interface SQFormCheckboxGroupProps {
+export interface SQFormCheckboxGroupProps {
   /** Name of the checkbox group */
   name: string;
   /** Label to display above the group */

@@ -1,10 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
-
+import {Story, Meta} from '@storybook/react';
 import {SQFormCheckboxGroup as SQFormCheckboxGroupComponent} from '../src';
-import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {SQFormCheckboxGroupProps} from '../src/components/SQForm/SQFormCheckboxGroup';
+import { AnySchema } from 'yup';
 
 export default {
   title: 'Components/SQFormCheckboxGroup',
@@ -23,7 +24,7 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
 const SHOPPING_LIST_OPTIONS = [
   {label: 'Voltfruit', value: 'voltfruit'},
@@ -37,37 +38,48 @@ const defaultArgs = {
   groupLabel: 'Shopping List',
   name: 'shoppingList',
   children: SHOPPING_LIST_OPTIONS,
-  SQFormProps: {
-    initialValues: {shoppingList: []},
-  },
+  initialValues: {shoppingList: []},
 };
 
-const Template = (args) => {
-  const {SQFormProps, schema, size, ...componentProps} = args;
+interface CheckboxGroupTestProps extends SQFormCheckboxGroupProps {
+  initialValues: Record<string, string[] | boolean>;
+  schema: Record<string, AnySchema>;
+}
+
+export const Default: Story<CheckboxGroupTestProps> = (args) => {
   return (
     <SQFormStoryWrapper
-      {...defaultArgs.SQFormProps}
-      {...SQFormProps}
-      validationSchema={schema}
+      initialValues={args.initialValues}
+      showSubmit={true}
+      validationSchema={undefined}
+      muiGridProps={{}}
     >
-      <SQFormCheckboxGroupComponent
-        {...componentProps}
-        size={getSizeProp(size)}
-      />
+      <SQFormCheckboxGroupComponent {...args} />
     </SQFormStoryWrapper>
   );
 };
 
-export const Default = Template.bind({});
 Default.args = defaultArgs;
 
-export const WithValidation = Template.bind({});
+export const WithValidation: Story<CheckboxGroupTestProps> = (args) => {
+  return (
+    <SQFormStoryWrapper
+      initialValues={args.initialValues}
+      showSubmit={true}
+      validationSchema={args.schema}
+      muiGridProps={{}}
+    >
+      <SQFormCheckboxGroupComponent {...args} />
+    </SQFormStoryWrapper>
+  );
+};
+
 WithValidation.args = {
   ...defaultArgs,
   schema: {
-    [defaultArgs.name]: Yup.array().required().min(1, 'Required'),
-  },
-};
+    [defaultArgs.name]: Yup.array().required().min(1, 'Required')}
+  };
+
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
 };

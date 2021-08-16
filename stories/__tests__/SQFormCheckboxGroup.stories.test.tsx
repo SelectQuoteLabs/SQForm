@@ -25,7 +25,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       const group = screen.getByRole('group', {name: /shopping list/i});
       expect(group).toBeInTheDocument();
 
-      const checkboxes = screen.getAllByRole('checkbox');
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
       expect(checkboxes).toHaveLength(SHOPPING_LIST_OPTIONS.length);
     });
 
@@ -34,9 +34,9 @@ describe('SQFormCheckboxGroup Tests', () => {
         shoppingList: [SHOPPING_LIST_OPTIONS[0].value],
       };
 
-      render(<SQFormCheckboxGroup SQFormProps={{initialValues}} size="auto" />);
+      render(<SQFormCheckboxGroup initialValues={initialValues} size="auto" />);
 
-      const checkboxes = screen.getAllByRole('checkbox');
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
 
       const targetCheckbox = screen.getByLabelText(
         SHOPPING_LIST_OPTIONS[0].label
@@ -89,7 +89,7 @@ describe('SQFormCheckboxGroup Tests', () => {
     it('should check all checkboxes when select all checkbox checked', () => {
       render(<SQFormCheckboxGroup size="auto" shouldUseSelectAll />);
 
-      const checkboxes = screen.getAllByRole('checkbox');
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
 
       const filteredCheckboxes = checkboxes.filter(
         (checkbox) => checkbox.checked
@@ -120,12 +120,12 @@ describe('SQFormCheckboxGroup Tests', () => {
       render(
         <SQFormCheckboxGroup
           size="auto"
-          SQFormProps={{initialValues}}
+          initialValues={initialValues}
           shouldUseSelectAll
         />
       );
 
-      const checkboxes = screen.getAllByRole('checkbox');
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
       const targetBox1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
       const targetBox2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
       const checkedCheckboxes = checkboxes.filter(
@@ -163,12 +163,12 @@ describe('SQFormCheckboxGroup Tests', () => {
       render(
         <SQFormCheckboxGroup
           size="auto"
-          SQFormProps={{initialValues}}
+          initialValues={initialValues}
           shouldUseSelectAll
         />
       );
 
-      const checkboxes = screen.getAllByRole('checkbox');
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
 
       const selectAllCheckbox = screen.getByLabelText('All');
       const checkedCheckboxes = checkboxes.filter(
