@@ -4,7 +4,7 @@ import {GridSize} from '@material-ui/core';
  * Storybook handles `undefined` in dropdown options.
  * Weird, I know. Otherwise we get console errors.
  */
-type gridOptions =
+export type gridOptions =
   | 'auto'
   | 'undefined'
   | undefined

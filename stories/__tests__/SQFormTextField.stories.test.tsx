@@ -6,7 +6,7 @@ import * as stories from '../SQFormTextField.stories';
 
 const {
   Default: SQFormTextField,
-  WithValidation: SQFormTextFieldWithValidation
+  WithValidation: SQFormTextFieldWithValidation,
 } = composeStories(stories);
 
 describe('SQFormTextField Tests', () => {

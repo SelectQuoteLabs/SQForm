@@ -1,10 +1,24 @@
 import React from 'react';
 import * as Yup from 'yup';
+import {Story, Meta} from '@storybook/react';
 
 import {SQFormTextField as SQFormTextFieldComponent} from '../src';
-import getSizeProp from './utils/getSizeProp';
+import getSizeProp, {gridOptions} from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {
+  SQFormStoryWrapper,
+  SQFormStoryWrapperProps,
+} from './components/SQFormStoryWrapper';
+import {SQFormTextFieldProps} from '../src/components/SQForm/SQFormTextField';
+
+type SQFormTextFieldStoryType = Story<
+  Omit<SQFormTextFieldProps, 'size'> & {
+    size?: gridOptions;
+    SQFormProps?: {
+      initialValues?: SQFormStoryWrapperProps['initialValues'];
+    } & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
+  }
+>;
 
 export default {
   title: 'Components/SQFormTextField',
@@ -19,19 +33,18 @@ export default {
       page: createDocsPage(),
     },
   },
-};
+} as Meta;
 
 const defaultArgs = {
   label: 'Text Field',
   name: 'textField',
 };
 
-const Template = (args) => {
-  const {schema, SQFormProps, size, ...rest} = args;
+const Template: SQFormTextFieldStoryType = (args) => {
+  const {SQFormProps, size, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
-      validationSchema={schema}
       {...SQFormProps}
     >
       <SQFormTextFieldComponent {...rest} size={getSizeProp(size)} />
@@ -39,15 +52,17 @@ const Template = (args) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default: SQFormTextFieldStoryType = Template.bind({});
 Default.args = defaultArgs;
 
-export const WithValidation = Template.bind({});
+export const WithValidation: SQFormTextFieldStoryType = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   isRequired: true,
-  schema: {
-    [defaultArgs.name]: Yup.string().required('Required'),
+  SQFormProps: {
+    validationSchema: {
+      [defaultArgs.name]: Yup.string().required('required'),
+    },
   },
 };
 WithValidation.parameters = {
