@@ -7,10 +7,12 @@ import History from '@material-ui/icons/History';
 
 import {
   SQFormIconButton as SQFormIconButtonComponent,
-  SQFormTextField
+  SQFormTextField,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import {SQFormIconButtonProps} from '../src/components/SQForm/SQFormIconButton';
+import {Story, Meta} from '@storybook/react';
 
 const icons = {CheckCircle, Close, AddCircle, History};
 
@@ -19,25 +21,26 @@ export default {
   component: SQFormIconButtonComponent,
   argTypes: {
     onClick: {action: 'clicked', table: {disable: true}},
-    IconComponent: {table: {disable: true}}
+    IconComponent: {table: {disable: true}},
   },
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
-};
+      page: createDocsPage(),
+    },
+  },
+} as Meta;
 
 // prevents synthetic event warnings
-const handleClick = event => event.persist();
+const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>
+  event.persist();
 
-export const Default = args => {
-  const {exampleIcons, ...rest} = args;
+export const Default: Story<SQFormIconButtonProps> = (args) => {
+  const {IconComponent, ...rest} = args;
 
   return (
     <SQFormStoryWrapper initialValues={{}} showSubmit={false}>
       <SQFormIconButtonComponent
-        IconComponent={exampleIcons}
+        IconComponent={IconComponent}
         onClick={handleClick}
         {...rest}
       />
@@ -45,7 +48,7 @@ export const Default = args => {
   );
 };
 Default.argTypes = {
-  exampleIcons: {
+  IconComponent: {
     name: 'Example icons:',
     options: Object.keys(icons),
     mapping: icons,
@@ -55,14 +58,14 @@ Default.argTypes = {
         CheckCircle: 'CheckCircle',
         Close: 'Close',
         AddCircle: 'AddCircle',
-        History: 'History'
-      }
+        History: 'History',
+      },
     },
-    defaultValue: 'CheckCircle'
-  }
+    defaultValue: 'CheckCircle',
+  },
 };
 
-export const WithTestField = args => {
+export const WithTestField: Story<SQFormIconButtonProps> = (args) => {
   return (
     <SQFormStoryWrapper initialValues={{testField: ''}} showSubmit={false}>
       <Grid container alignItems="center" spacing={2}>
