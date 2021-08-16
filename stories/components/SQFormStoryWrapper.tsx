@@ -13,9 +13,9 @@ import {AnySchema} from 'yup';
 interface SQFormStoryWrapperProps {
   children: React.ReactNode;
   initialValues: FormikValues;
-  validationSchema: AnySchema;
-  muiGridProps: GridProps;
-  showSubmit: boolean;
+  validationSchema?: AnySchema;
+  muiGridProps?: GridProps;
+  showSubmit?: boolean;
 }
 
 export function SQFormStoryWrapper({
