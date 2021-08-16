@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
@@ -7,15 +6,19 @@ import {IconButton} from 'scplus-shared-components';
 
 import {SQFieldArray} from '../../src';
 
+interface FriendsFieldArrayProps {
+  /** The name or path to the relevant key in Formik values */
+  name: string;
+}
 /**
  * Example Component using the FieldArray from Formik
  * https://formik.org/docs/api/fieldarray
  * */
-function FriendsFieldArray({name}) {
+function FriendsFieldArray({name}: FriendsFieldArrayProps): React.ReactElement {
   return (
     <SQFieldArray name={name}>
-      {arrayHelpers => {
-        const {friends} = arrayHelpers.form.values;
+      {(arrayHelpers) => {
+        const {friends}: {friends: string[]} = arrayHelpers.form.values;
         return (
           <Grid container spacing={4}>
             {friends?.length
@@ -46,10 +49,5 @@ function FriendsFieldArray({name}) {
     </SQFieldArray>
   );
 }
-
-FriendsFieldArray.propTypes = {
-  /** The name or path to the relevant key in Formik values */
-  name: PropTypes.string.isRequired
-};
 
 export default FriendsFieldArray;
