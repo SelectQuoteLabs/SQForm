@@ -276,7 +276,7 @@ function SQFormAutocomplete({
         name={name}
         style={{width: '100%'}}
         disableListWrap
-        disablePortal
+        disablePortal={!lockWidthToField}
         classes={autocompleteClasses}
         ListboxComponent={ListboxVirtualizedComponent}
         // Note: basewidth is not camel cased because React doesn't like it here
