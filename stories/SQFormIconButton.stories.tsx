@@ -4,6 +4,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import Close from '@material-ui/icons/Close';
 import AddCircle from '@material-ui/icons/AddCircle';
 import History from '@material-ui/icons/History';
+import {Story, Meta} from '@storybook/react';
 
 import {
   SQFormIconButton as SQFormIconButtonComponent,
@@ -12,7 +13,6 @@ import {
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormIconButtonProps} from '../src/components/SQForm/SQFormIconButton';
-import {Story, Meta} from '@storybook/react';
 
 const icons = {CheckCircle, Close, AddCircle, History};
 
