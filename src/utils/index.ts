@@ -1,11 +1,8 @@
+import {FormikValues} from 'formik';
 // Note - Formik fields expect empty strings and not nulls
 
-import {FormikValues} from 'formik';
-
 // When initializing the forms initialValues we can use this function to replace all nulls with empty strings
-export function sanitizeInitialValues<ValuesType>(
-  valuesObject: ValuesType
-): string {
+export function sanitizeInitialValues(valuesObject: FormikValues): string {
   return JSON.parse(
     JSON.stringify(valuesObject, (_key, value) => {
       return value === null ? '' : value;
