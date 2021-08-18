@@ -52,7 +52,7 @@ const defaultArgs = {
 };
 
 const Template = args => {
-  const {schema, SQFormProps, ...rest} = args;
+  const {schema, SQFormProps, size, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
@@ -62,7 +62,7 @@ const Template = args => {
       >
         <SQFormAutocomplete
           {...rest}
-          size={args.size !== 'auto' ? Number(args.size) : args.size}
+          size={size && (size !== 'auto' ? Number(size) : size)}
         />
       </SQFormStoryWrapper>
     </div>
@@ -87,5 +87,13 @@ WithValidation.parameters = {
 export const WithAutoSizePopper = Template.bind({});
 WithAutoSizePopper.args = {
   ...defaultArgs,
-  lockWidthToField: false
+  lockWidthToField: false,
+  size: 6
+};
+
+export const WithNoOptions = Template.bind({});
+WithNoOptions.args = {
+  ...defaultArgs,
+  children: undefined,
+  size: 12
 };
