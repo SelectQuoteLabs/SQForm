@@ -2,21 +2,21 @@ import React from 'react';
 import {Grid, TextFieldProps} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import {useForm} from './useForm';
-import BaseFieldProps from '../../types/BaseFieldProps';
+import {BaseFieldProps} from 'types';
 import {toKebabCase} from '../../utils';
 
-type SQFormReadOnlyFieldProps = {
+interface SQFormReadOnlyFieldProps extends BaseFieldProps {
   muiFieldProps?: TextFieldProps;
-} & BaseFieldProps;
+}
 
 function SQFormReadOnlyField({
   label,
   name,
   size = 'auto',
-  muiFieldProps = {}
+  muiFieldProps = {},
 }: SQFormReadOnlyFieldProps): React.ReactElement {
   const {
-    formikField: {field}
+    formikField: {field},
   } = useForm({name, isRequired: false});
 
   return (
@@ -30,7 +30,7 @@ function SQFormReadOnlyField({
         InputLabelProps={{shrink: true}}
         InputProps={{
           readOnly: true,
-          disableUnderline: true
+          disableUnderline: true,
         }}
         style={{marginBottom: 21}}
         {...muiFieldProps}

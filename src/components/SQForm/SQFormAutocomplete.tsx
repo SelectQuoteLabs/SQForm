@@ -1,17 +1,65 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   TextField,
   Grid,
   Typography,
   Tooltip,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import {VariableSizeList} from 'react-window';
+import Autocomplete, {
+  AutocompleteChangeReason,
+} from '@material-ui/lab/Autocomplete';
+import {ListChildComponentProps, VariableSizeList} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
+import {BaseFieldProps, Option, optionValue} from 'types';
 import {useForm} from './useForm';
+
+export interface SQFormAutocompleteProps extends BaseFieldProps {
+  /** Dropdown menu options to select from */
+  children: Option[];
+  /** Disabled property to disable the input if true */
+  isDisabled?: boolean;
+  /** Required property used to highlight input and label if not fulfilled */
+  isRequired?: boolean;
+  /** Whether to display empty option */
+  displayEmpty?: boolean;
+  /** Custom onBlur event callback */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Custom onChange event callback */
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    selectedValue: optionValue,
+    reason: AutocompleteChangeReason
+  ) => void;
+  /** Custom onInputChange event callback (key pressed) */
+  onInputChange?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    value: optionValue
+  ) => void;
+  /** Lock width of the dropdown to the width of the field in the form */
+  lockWidthToField?: boolean;
+}
+
+export interface OuterElementTypeProps {
+  children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ListboxVirtualizedComponentProps {
+  children?: React.ReactNode;
+  basewidth: number;
+  left: number;
+  lockWidthToField: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface OuterElementContextInterface {
+  className?: string;
+  style?: React.CSSProperties;
+}
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
@@ -21,47 +69,50 @@ const EMPTY_OPTION = {label: '- -', value: ''};
 const useStyles = makeStyles({
   listbox: {
     width: 'initial !important',
-    overflowX: 'hidden !important',
+    overflowX: 'hidden !important' as 'hidden',
 
     '& ul': {
       padding: 0,
-      margin: 0
-    }
+      margin: 0,
+    },
   },
   popper: {
     borderRadius: '4px',
     boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
     width: 'initial !important',
-    overflowX: 'hidden !important'
+    overflowX: 'hidden !important' as 'hidden',
   },
   paper: {
-    margin: 0
+    margin: 0,
+  },
+});
+
+const OuterElementContext =
+  React.createContext<OuterElementContextInterface | null>({});
+
+const OuterElementType = React.forwardRef<HTMLDivElement>(
+  (props: OuterElementTypeProps, ref) => {
+    const outerProps = React.useContext(OuterElementContext);
+    return (
+      <div
+        ref={ref}
+        {...props}
+        {...outerProps}
+        className={`${props?.className || ''} ${outerProps?.className || ''}`}
+        style={{...props?.style, ...outerProps?.style}}
+      />
+    );
   }
-});
+);
 
-const OuterElementContext = React.createContext({});
-
-const OuterElementType = React.forwardRef((props, ref) => {
-  const outerProps = React.useContext(OuterElementContext);
-  return (
-    <div
-      ref={ref}
-      {...props}
-      {...outerProps}
-      className={`${props?.className || ''} ${outerProps?.className || ''}`}
-      style={{...props?.style, ...outerProps?.style}}
-    />
-  );
-});
-
-function renderRow({data, index, style}) {
+function renderRow({data, index, style}: ListChildComponentProps) {
   const elToClone = data[index];
   const value = elToClone.props.children.props.children;
   const clone = React.cloneElement(elToClone, {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: (style.top as number) + LISTBOX_PADDING,
+    },
   });
 
   return (
@@ -76,7 +127,7 @@ function renderRow({data, index, style}) {
   );
 }
 
-const calculateWidth = (baseWidth, left) => {
+const calculateWidth = (baseWidth: number, left: number) => {
   if (baseWidth) {
     return `min(${baseWidth * 2}px, ${
       window.innerWidth
@@ -89,25 +140,38 @@ const calculateWidth = (baseWidth, left) => {
 const useListStyles = makeStyles({
   list: {
     '& > ul': {
-      width: ({baseWidth, left, lockWidthToField}) =>
+      width: ({
+        baseWidth,
+        left,
+        lockWidthToField,
+      }: {
+        baseWidth: number;
+        left: number;
+        lockWidthToField: boolean;
+      }) =>
         lockWidthToField
           ? `${baseWidth}px !important`
           : calculateWidth(baseWidth, left),
-      overflowX: 'hidden !important'
-    }
-  }
+      overflowX: 'hidden !important',
+    },
+  },
 });
 
 // Adapter for react-window
-const ListboxVirtualizedComponent = React.forwardRef(
+const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
   function ListboxVirtualizedComponent(
-    {basewidth, left, lockWidthToField, ...restProps},
+    {
+      basewidth,
+      left,
+      lockWidthToField,
+      ...restProps
+    }: ListboxVirtualizedComponentProps,
     ref
-  ) {
+  ): React.ReactElement {
     const classes = useListStyles({
       baseWidth: basewidth,
       left,
-      lockWidthToField
+      lockWidthToField,
     });
     const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
@@ -120,9 +184,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
       if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {
         return LIST_MAX_VIEWABLE_ITEMS * ITEM_SIZE;
       }
-      return (
-        items.reduce((acc, _item) => acc + ITEM_SIZE, 0) + 2 * LISTBOX_PADDING
-      );
+      return items.length * ITEM_SIZE + 2 * LISTBOX_PADDING;
     }, [ITEM_COUNT, items]);
 
     const getItemSize = React.useCallback(() => ITEM_SIZE, []);
@@ -147,11 +209,15 @@ const ListboxVirtualizedComponent = React.forwardRef(
         </OuterElementContext.Provider>
       </div>
     );
-  }
+  } as React.ForwardRefRenderFunction<HTMLDivElement>
 );
 
-const getInitialValue = (children, value, displayEmpty) => {
-  const optionInitialValue = children.find(option => {
+const getInitialValue = (
+  children: Option[],
+  value: optionValue,
+  displayEmpty: boolean
+) => {
+  const optionInitialValue = children.find((option) => {
     if (option.value === value) {
       return option;
     }
@@ -166,18 +232,13 @@ const getInitialValue = (children, value, displayEmpty) => {
   return optionInitialValue;
 };
 
-const calculateBaseWidth = ref => {
+const calculateBaseWidth = (ref: HTMLDivElement | null) => {
   if (!ref) {
     return;
   }
 
-  const {
-    marginLeft,
-    paddingLeft,
-    width,
-    paddingRight,
-    marginRight
-  } = window.getComputedStyle(ref);
+  const {marginLeft, paddingLeft, width, paddingRight, marginRight} =
+    window.getComputedStyle(ref);
 
   const baseWidth =
     parseFloat(width) -
@@ -202,20 +263,20 @@ function SQFormAutocomplete({
   onChange,
   onInputChange,
   size = 'auto',
-  lockWidthToField = false
-}) {
+  lockWidthToField = false,
+}: SQFormAutocompleteProps): React.ReactElement {
   const classes = useStyles();
-  const gridContainerRef = React.useRef();
+  const gridContainerRef = React.useRef<HTMLDivElement>(null);
   const baseWidth = calculateBaseWidth(gridContainerRef.current);
   const left = gridContainerRef.current?.getBoundingClientRect().left;
   const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError},
-    fieldHelpers: {HelperTextComponent}
+    fieldHelpers: {HelperTextComponent},
   } = useForm({
     name,
-    isRequired
+    isRequired,
   });
 
   const initialValue = getInitialValue(children, value, displayEmpty);
@@ -235,7 +296,7 @@ function SQFormAutocomplete({
   }, [value, inputValue, name, prevValue, values, displayEmpty]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
@@ -255,9 +316,9 @@ function SQFormAutocomplete({
   );
 
   const handleInputChange = React.useCallback(
-    (_event, value) => {
+    (event, value) => {
       setInputValue(value);
-      onInputChange && onInputChange(_event, value);
+      onInputChange && onInputChange(event, value);
     },
     [onInputChange]
   );
@@ -268,12 +329,15 @@ function SQFormAutocomplete({
     <Grid item sm={size} ref={gridContainerRef}>
       <Autocomplete
         id={name}
-        name={name}
         style={{width: '100%'}}
         disableListWrap
         disablePortal
         classes={classes}
-        ListboxComponent={ListboxVirtualizedComponent}
+        ListboxComponent={
+          ListboxVirtualizedComponent as React.ComponentType<
+            React.HTMLAttributes<HTMLElement>
+          >
+        }
         // Note: basewidth is not camel cased because React doesn't like it here
         ListboxProps={{basewidth: baseWidth, left, lockWidthToField}}
         options={options}
@@ -284,9 +348,9 @@ function SQFormAutocomplete({
         value={initialValue || null}
         disableClearable={isDisabled}
         disabled={isDisabled}
-        getOptionLabel={option => option.label || ''}
-        getOptionDisabled={option => option.isDisabled}
-        renderInput={params => {
+        getOptionLabel={(option) => option.label || ''}
+        getOptionDisabled={(option: Option) => option?.isDisabled || false}
+        renderInput={(params) => {
           return (
             <TextField
               {...params}
@@ -296,11 +360,11 @@ function SQFormAutocomplete({
               fullWidth={true}
               InputLabelProps={{
                 ...params.InputLabelProps,
-                shrink: true
+                shrink: true,
               }}
               inputProps={{
                 ...params.inputProps,
-                disabled: isDisabled
+                disabled: isDisabled,
               }}
               FormHelperTextProps={{error: isFieldError}}
               name={name}
@@ -310,7 +374,7 @@ function SQFormAutocomplete({
             />
           );
         }}
-        renderOption={option => (
+        renderOption={(option) => (
           <Typography variant="body2" noWrap>
             {option.label}
           </Typography>
@@ -319,36 +383,5 @@ function SQFormAutocomplete({
     </Grid>
   );
 }
-
-SQFormAutocomplete.propTypes = {
-  /** Dropdown menu options to select from */
-  children: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      isDisabled: PropTypes.bool
-    })
-  ),
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Whether to display empty option */
-  displayEmpty: PropTypes.bool,
-  /** Label text */
-  label: PropTypes.string.isRequired,
-  /** Name identifier of the input field */
-  name: PropTypes.string.isRequired,
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Custom onInputChange event callback (key pressed) */
-  onInputChange: PropTypes.func,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Lock width of the dropdown to the width of the field in the form */
-  lockWidthToField: PropTypes.bool
-};
 
 export default SQFormAutocomplete;

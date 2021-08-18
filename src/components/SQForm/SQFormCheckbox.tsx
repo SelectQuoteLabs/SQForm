@@ -2,7 +2,7 @@ import React from 'react';
 import {Checkbox, CheckboxProps} from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import BaseFieldProps from '../../types/BaseFieldProps';
+import {BaseFieldProps} from 'types';
 
 import {useForm} from './useForm';
 
@@ -21,15 +21,15 @@ function SQFormCheckbox({
   name,
   onChange,
   size = 'auto',
-  muiFieldProps = {}
+  muiFieldProps = {},
 }: SQFormCheckboxProps): JSX.Element {
   const {
     formikField: {field},
-    fieldHelpers: {handleChange}
+    fieldHelpers: {handleChange},
   } = useForm({
     name,
     isRequired: false,
-    onChange
+    onChange,
   });
 
   return (

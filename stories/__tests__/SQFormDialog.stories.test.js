@@ -102,13 +102,12 @@ describe('Tests for WithValidation', () => {
       <WithValidation isOpen={true} onSave={handleSave} onClose={handleClose} />
     );
 
-    const saveButton = screen.getByRole('button', {name: /save/i});
-    expect(saveButton).toBeDisabled();
+    expect(await screen.findByRole('button', {name: /save/i})).toBeDisabled();
 
     const textField = screen.getByLabelText(/hello/i);
     userEvent.type(textField, mockData.hello);
 
-    await waitFor(() => expect(saveButton).toBeEnabled());
+    expect(await screen.findByRole('button', {name: /save/i})).toBeEnabled();
   });
 });
 
