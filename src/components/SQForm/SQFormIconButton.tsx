@@ -28,13 +28,13 @@ function SQFormIconButton({
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
   type = BUTTON_TYPES.SUBMIT,
-  onClick
+  onClick,
 }: SQFormIconButtonProps): JSX.Element {
   const {isButtonDisabled, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   function Icon(props: IconProps) {

@@ -6,7 +6,7 @@ import * as stories from '../SQFormAsyncAutocomplete.stories';
 
 const {
   Default: SQFormAsyncAutocomplete,
-  WithValidation: SQFormAsyncAutocompleteWithValidation
+  WithValidation: SQFormAsyncAutocompleteWithValidation,
 } = composeStories(stories);
 
 describe('SQFormAsyncAutocomplete Tests', () => {
@@ -29,7 +29,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       expect(textField).toHaveTextContent('');
@@ -38,14 +38,14 @@ describe('SQFormAsyncAutocomplete Tests', () => {
     it('should render with non-empty initial value', () => {
       const SQFormProps = {
         initialValues: {
-          asyncAutocomplete: 'fifth'
-        }
+          asyncAutocomplete: 'fifth',
+        },
       };
 
       render(<SQFormAsyncAutocomplete size="auto" SQFormProps={SQFormProps} />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('Fifth');
     });
@@ -66,7 +66,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       userEvent.type(textField, 'F');
@@ -80,7 +80,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('');
 
@@ -102,7 +102,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       userEvent.click(optionToSelect);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('Second');
     });
@@ -111,7 +111,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       userEvent.type(textField, 'F');
 
@@ -132,7 +132,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" isDisabled={true} />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       expect(textField).toBeDisabled();
@@ -156,7 +156,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       userEvent.type(textField, '2');
 
@@ -184,7 +184,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocompleteWithValidation size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).not.toHaveFocus();
 

@@ -18,7 +18,7 @@ afterEach(() => {
 });
 
 const mockData = {
-  hello: 'howdy'
+  hello: 'howdy',
 };
 
 describe('Tests for Default', () => {
@@ -87,7 +87,7 @@ describe('Tests for Default', () => {
     // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
     fireEvent.keyDown(screen.getByRole('presentation'), {
       key: 'Escape',
-      code: 'Escape'
+      code: 'Escape',
     });
 
     await waitFor(() => {

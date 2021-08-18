@@ -4,10 +4,8 @@ import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormTextarea.stories';
 
-const {
-  Default: SQFormTextarea,
-  WithValidation: SQFormTextareaWithValidation
-} = composeStories(stories);
+const {Default: SQFormTextarea, WithValidation: SQFormTextareaWithValidation} =
+  composeStories(stories);
 
 describe('SQFormTextarea Tests', () => {
   describe('Textarea Only', () => {
@@ -16,7 +14,7 @@ describe('SQFormTextarea Tests', () => {
 
       const label = screen
         .getAllByText(/textarea/i)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent('Textarea');
 
@@ -89,7 +87,7 @@ describe('SQFormTextarea Tests', () => {
 
       const charCount = screen
         .getAllByText(`Textarea : 0/${maxCharacters}`)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(charCount).toBeInTheDocument();
 
       const textbox = screen.getByRole('textbox', {name: /textarea/i});
@@ -99,7 +97,7 @@ describe('SQFormTextarea Tests', () => {
       expect(textbox).toHaveValue('Hello');
       const charCountAfter = screen
         .getAllByText(`Textarea : ${maxCharacters}/${maxCharacters}`)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(charCountAfter).toBeInTheDocument();
     });
 

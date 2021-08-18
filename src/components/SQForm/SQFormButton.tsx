@@ -17,14 +17,14 @@ function SQFormButton({
   shouldRequireFieldUpdates = false,
   title,
   type = 'submit',
-  onClick
+  onClick,
 }: Props): JSX.Element {
   const isResetButton = type === BUTTON_TYPES.RESET;
   const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

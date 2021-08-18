@@ -7,7 +7,7 @@ import {
   CardContent,
   CardActions,
   Grid,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
@@ -16,42 +16,42 @@ import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     form: {
       height: '100%',
-      width: '100%'
+      width: '100%',
     },
     card: {
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: 'auto 1fr auto',
       gridTemplateAreas: `'header' 'content' 'footer'`,
-      height: '100%'
+      height: '100%',
     },
     cardHeader: {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
     },
     cardContent: {
       gridArea: 'content',
       overflowY: 'auto',
-      padding: `${theme.spacing(2)}px`
+      padding: `${theme.spacing(2)}px`,
     },
     childrenContainer: {
       width: 'auto',
       margin: ({hasSubHeader}) => {
         return hasSubHeader ? `${theme.spacing(2)}px ${theme.spacing(4)}px` : 0;
-      }
+      },
     },
     cardFooter: {
       gridArea: 'footer',
       display: 'flex',
       justifyContent: 'space-between',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
-    }
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+    },
   };
 });
 
@@ -73,7 +73,7 @@ function SQFormScrollableCard({
   title,
   validationSchema,
   isSelfBounding,
-  height
+  height,
 }) {
   const {containerRef, height: autoHeight} = useAutoHeight();
   const hasSubHeader = Boolean(SubHeaderComponent);
@@ -94,9 +94,10 @@ function SQFormScrollableCard({
     {leading: true, trailing: false}
   );
 
-  const formattedTitle = React.useMemo(() => title.replace(/\s/g, '-'), [
-    title
-  ]);
+  const formattedTitle = React.useMemo(
+    () => title.replace(/\s/g, '-'),
+    [title]
+  );
 
   const heightToUse = height || (isSelfBounding && autoHeight) || '100%';
 
@@ -114,7 +115,7 @@ function SQFormScrollableCard({
         validationSchema={validationYupSchema}
         validateOnMount={true}
       >
-        {_props => {
+        {(_props) => {
           return (
             <Form className={classes.form}>
               <Card
@@ -210,7 +211,7 @@ SQFormScrollableCard.propTypes = {
   /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
   isSelfBounding: PropTypes.bool,
   /** Number overriding the height of the component */
-  height: PropTypes.number
+  height: PropTypes.number,
 };
 
 export default SQFormScrollableCard;

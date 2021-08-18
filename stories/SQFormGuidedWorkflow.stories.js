@@ -4,22 +4,22 @@ import {
   ExpandingCardList,
   ExpandingCard,
   RoundedButton,
-  TextButton
+  TextButton,
 } from 'scplus-shared-components';
 import {SQFormGuidedWorkflow, SQFormDropdown, SQFormTextarea} from '../src';
 
-const sleep = milliseconds => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
 export default {
   title: 'Forms/SQFormGuidedWorkflow',
-  component: SQFormGuidedWorkflow
+  component: SQFormGuidedWorkflow,
 };
 
 const outcomeDropdownOptions = [
   {label: 'Not Interested', value: 'not-interested'},
-  {label: 'Interested', value: 'interested'}
+  {label: 'Interested', value: 'interested'},
 ];
 
 const Template = () => {
@@ -27,7 +27,7 @@ const Template = () => {
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
-    planName: 'Super Cheap Med+'
+    planName: 'Super Cheap Med+',
   };
   const taskModules = [
     {
@@ -36,7 +36,7 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
         onSubmit: async (values, _formikBag, context) => {
           await sleep(3000); // Simulate API call to see loading spinner
@@ -45,12 +45,12 @@ const Template = () => {
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
       },
       scriptedTextProps: {
         text: `Hi, ${scriptedTextMap.customerName}, my name is ${scriptedTextMap.agentName}, and I am calling to discuss ${scriptedTextMap.planName}.\n Are you available right now to talk through some things with me, today?`,
-        title: 'Agent Script'
+        title: 'Agent Script',
       },
       outcomeProps: {
         FormElements: (
@@ -61,8 +61,8 @@ const Template = () => {
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
-        title: 'Confirm Info'
-      }
+        title: 'Confirm Info',
+      },
     },
     {
       name: 'cancellation',
@@ -72,7 +72,7 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
         onSubmit: async (values, _formikBag, context) => {
           console.log(values);
@@ -80,13 +80,13 @@ const Template = () => {
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
       },
       scriptedTextProps: {
         text: `Stuff about policy cancellation documents`,
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Doc</TextButton>
+        actionButton: <TextButton tooltip="View">View Doc</TextButton>,
       },
       outcomeProps: {
         FormElements: (
@@ -108,8 +108,8 @@ const Template = () => {
           'Interact with the form to see me change colors based on form state',
         warningText: 'Form needs your attention',
         successText: 'Form is ready to submit',
-        errorText: 'Do not pass go, do not collect $200'
-      }
+        errorText: 'Do not pass go, do not collect $200',
+      },
     },
     {
       name: 'providers',
@@ -118,7 +118,7 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
         onSubmit: async (values, _formikBag, context) => {
           console.log(values);
@@ -126,14 +126,13 @@ const Template = () => {
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
       },
       scriptedTextProps: {
-        text:
-          'Before proceeding, please verify the list of providers is correct',
+        text: 'Before proceeding, please verify the list of providers is correct',
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Providers</TextButton>
+        actionButton: <TextButton tooltip="View">View Providers</TextButton>,
       },
       outcomeProps: {
         FormElements: (
@@ -144,9 +143,9 @@ const Template = () => {
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
-        title: 'Confirm Info'
-      }
-    }
+        title: 'Confirm Info',
+      },
+    },
   ];
 
   return (
@@ -159,7 +158,7 @@ const Template = () => {
             initialCompletedTasks={0}
             isStrictMode={false}
             taskModules={taskModules}
-            onError={error => {
+            onError={(error) => {
               console.error(error);
             }}
           />

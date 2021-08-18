@@ -6,7 +6,7 @@ import {
   FormHelperText,
   FormControl,
   FormLabel,
-  GridSize
+  GridSize,
 } from '@material-ui/core';
 import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
@@ -42,20 +42,20 @@ function SQFormRadioButtonGroup({
   shouldDisplayInRow = false,
   size = 'auto',
   groupLabel,
-  children
+  children,
 }: SQFormRadioButtonGroupProps): React.ReactElement {
   const {
     fieldState: {isFieldError},
     formikField: {field},
-    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
   } = useForm({
     name,
     isRequired,
-    onChange
+    onChange,
   });
 
   const childrenToRadioGroupItems = () => {
-    return children.map(radioOption => {
+    return children.map((radioOption) => {
       const {label, value, isDisabled, InputProps} = radioOption;
       return (
         <SQFormRadioButtonGroupItem
@@ -82,7 +82,7 @@ function SQFormRadioButtonGroup({
           component="legend"
           classes={{
             root: 'MuiInputLabel-root',
-            asterisk: 'MuiInputLabel-asterisk'
+            asterisk: 'MuiInputLabel-asterisk',
           }}
         >
           {groupLabel}

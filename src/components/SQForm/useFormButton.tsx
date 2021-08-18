@@ -5,7 +5,7 @@ import {FormikContextType, useFormikContext} from 'formik';
 
 export const BUTTON_TYPES = {
   SUBMIT: 'submit',
-  RESET: 'reset'
+  RESET: 'reset',
 } as const;
 
 export type ButtonType = typeof BUTTON_TYPES[keyof typeof BUTTON_TYPES];
@@ -28,11 +28,10 @@ export function useFormButton<Values>({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   onClick,
-  buttonType
+  buttonType,
 }: UseFormButtonProps): UseFormButtonReturnType<Values> {
-  const {values, initialValues, isValid, dirty, ...rest} = useFormikContext<
-    Values
-  >();
+  const {values, initialValues, isValid, dirty, ...rest} =
+    useFormikContext<Values>();
 
   const isButtonDisabled = React.useMemo(() => {
     if (isDisabled) {
@@ -60,9 +59,9 @@ export function useFormButton<Values>({
 
   const handleClick = useDebouncedCallback<
     React.MouseEventHandler<HTMLButtonElement>
-  >(event => onClick && onClick(event), 500, {
+  >((event) => onClick && onClick(event), 500, {
     leading: true,
-    trailing: false
+    trailing: false,
   });
 
   return {
@@ -72,6 +71,6 @@ export function useFormButton<Values>({
     isValid,
     handleClick,
     dirty,
-    ...rest
+    ...rest,
   };
 }

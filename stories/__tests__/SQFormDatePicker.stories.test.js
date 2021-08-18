@@ -8,7 +8,7 @@ import * as stories from '../SQFormDatePicker.stories';
 
 const {BasicDatePicker} = composeStories(stories);
 
-const renderDatePicker = props => {
+const renderDatePicker = (props) => {
   render(
     <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
       <BasicDatePicker {...props} />
@@ -31,7 +31,7 @@ describe('SQFormDatePicker Tests', () => {
 
   it('should render default with empty initial value', () => {
     const initialValues = {
-      date: ''
+      date: '',
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
@@ -42,7 +42,7 @@ describe('SQFormDatePicker Tests', () => {
 
   it('should render value with non-empty initial value', () => {
     const initialValues = {
-      date: '09/15/2022'
+      date: '09/15/2022',
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
@@ -54,7 +54,7 @@ describe('SQFormDatePicker Tests', () => {
 
   it('should open calendar view when calendar button is clicked', () => {
     const initialValues = {
-      date: ''
+      date: '',
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
@@ -70,7 +70,7 @@ describe('SQFormDatePicker Tests', () => {
 
   it('should display new date after selecting from the calendar', async () => {
     const initialValues = {
-      date: ''
+      date: '',
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
@@ -110,8 +110,8 @@ describe('SQFormDatePicker Tests', () => {
   it('should show as disabled when isDisabled is true', () => {
     const SQFormProps = {
       initialValues: {
-        date: ''
-      }
+        date: '',
+      },
     };
 
     renderDatePicker({SQFormProps, isDisabled: true});
@@ -123,8 +123,8 @@ describe('SQFormDatePicker Tests', () => {
   it('should display required text when isRequired is true', () => {
     const SQFormProps = {
       initialValues: {
-        date: ''
-      }
+        date: '',
+      },
     };
 
     renderDatePicker({SQFormProps, isRequired: true});

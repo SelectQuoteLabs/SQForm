@@ -27,13 +27,13 @@ function SQFormResetButtonWithConfirmation({
   confirmationContent,
   confirmationTitle = 'Reset Form',
   variant = 'contained',
-  onReset
+  onReset,
 }: SQFormResetButtonWithConfirmationProps): JSX.Element {
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {dirty, handleReset} = useFormButton({
     isDisabled,
     buttonType: BUTTON_TYPES.RESET,
-    shouldRequireFieldUpdates: false
+    shouldRequireFieldUpdates: false,
   });
 
   const handlePrimaryButtonClick = () => {

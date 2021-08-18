@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-  within
+  within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -27,7 +27,7 @@ const mockData = {
   cool: true,
   preferredPet: 'dog',
   warrantyOptions: ['2', '3'],
-  note: 'Hello World!'
+  note: 'Hello World!',
 };
 
 describe('Tests for BasicForm', () => {
@@ -47,13 +47,13 @@ describe('Tests for BasicForm', () => {
     userEvent.click(
       within(
         screen.getByRole('group', {
-          name: /cat or dog/i
+          name: /cat or dog/i,
         })
       ).getByRole('radio', {name: /dog/i})
     );
 
     const warrantyOptions = screen.getByRole('group', {
-      name: /warranty options/i
+      name: /warranty options/i,
     });
     userEvent.click(
       within(warrantyOptions).getByRole('checkbox', {name: /drivetrain/i})
@@ -81,7 +81,7 @@ describe('Tests for BasicForm', () => {
             favoriteColors: [2, 4],
             hobby: mockData.hobby,
             cool: mockData.cool,
-            lame: false
+            lame: false,
           },
           null,
           2
@@ -121,7 +121,7 @@ describe('Tests for BasicForm', () => {
             favoriteColors: [2, 4],
             hobby: '',
             cool: false,
-            lame: false
+            lame: false,
           },
           null,
           2
@@ -204,7 +204,7 @@ describe('Tests for FormWithValidation', () => {
     userEvent.click(
       within(
         screen.getByRole('group', {
-          name: /cat or dog/i
+          name: /cat or dog/i,
         })
       ).getByRole('radio', {name: /cat/i})
     );
@@ -215,7 +215,7 @@ describe('Tests for FormWithValidation', () => {
 
     //Warranty Options
     const warrantyOptions = screen.getByRole('group', {
-      name: /warranty options/i
+      name: /warranty options/i,
     });
     userEvent.click(
       within(warrantyOptions).getByRole('checkbox', {name: /drivetrain/i})
@@ -250,7 +250,7 @@ describe('Tests for FormWithValidation', () => {
             preferredPet: 'cat',
             warrantyOptions: ['2'],
             warrantyOptionsSelectAll: false,
-            favoriteColors: [0]
+            favoriteColors: [0],
           },
           null,
           2

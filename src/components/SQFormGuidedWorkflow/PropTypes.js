@@ -21,24 +21,24 @@ export const HeaderPropTypes = {
    * Red failure text to display as a subheader next to the Title
    * if the form is in a failed state where the user cannot continue
    */
-  isFailedState: PropTypes.bool
+  isFailedState: PropTypes.bool,
 };
 
 export const AgentScriptPropTypes = {
   /** Scripted Text for the user to read */
   text: PropTypes.string.isRequired,
-  ...HeaderPropTypes
+  ...HeaderPropTypes,
 };
 
 export const OutcomePropTypes = {
   /** SQForm Elements to render inside the Form */
   FormElements: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node)
+    PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   /** Any props from MUI <Grid> component */
   muiGridProps: PropTypes.object,
-  ...HeaderPropTypes
+  ...HeaderPropTypes,
 };
 
 export const FormikProps = {
@@ -47,7 +47,7 @@ export const FormikProps = {
   /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag, context) => void | Promise<any> */
   onSubmit: PropTypes.func.isRequired,
   /** Yup validation schema shape */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
 };
 
 export const TaskModuleProps = {
@@ -86,7 +86,7 @@ export const TaskModuleProps = {
   /** The props used to configure the Scripted Text section */
   scriptedTextProps: PropTypes.shape(AgentScriptPropTypes).isRequired,
   /** The props used to configure the Outcome form section */
-  outcomeProps: PropTypes.shape(OutcomePropTypes).isRequired
+  outcomeProps: PropTypes.shape(OutcomePropTypes).isRequired,
 };
 
 export const GuidedWorkflowProps = {
@@ -108,5 +108,5 @@ export const GuidedWorkflowProps = {
   onError: PropTypes.func.isRequired,
   /** Task Module configuration Object(s) */
   taskModules: PropTypes.arrayOf(PropTypes.shape(TaskModuleProps).isRequired)
-    .isRequired
+    .isRequired,
 };

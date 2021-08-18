@@ -16,13 +16,13 @@ interface SQFormRadioButtonGroupItemProps {
   InputProps?: RadioProps;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   radioButton: {
-    marginBottom: theme.spacing(1.5)
+    marginBottom: theme.spacing(1.5),
   },
   rowDisplay: {
-    marginRight: theme.spacing(3.75)
-  }
+    marginRight: theme.spacing(3.75),
+  },
 }));
 
 function SQFormRadioButtonGroupItem({
@@ -30,7 +30,7 @@ function SQFormRadioButtonGroupItem({
   label,
   isDisabled = false,
   isRowDisplay = false,
-  InputProps = {}
+  InputProps = {},
 }: SQFormRadioButtonGroupItemProps): JSX.Element {
   const classes = useStyles();
 

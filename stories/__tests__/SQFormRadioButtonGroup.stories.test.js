@@ -6,7 +6,7 @@ import * as stories from '../SQFormRadioButtonGroup.stories';
 
 const {
   Default: SQFormRadioButtonGroup,
-  WithValidation: SQFormRadioButtonGroupWithValidation
+  WithValidation: SQFormRadioButtonGroupWithValidation,
 } = composeStories(stories);
 
 describe('SQFormRadioButtonGroup Tests', () => {
@@ -41,7 +41,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
           expect.arrayContaining([
             giantPandaLabel,
             redPandaLabel,
-            kungFuPandaLabel
+            kungFuPandaLabel,
           ])
         );
       });
@@ -106,7 +106,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
 
     it('Has default value with an initialValue', () => {
       const initialValues = {
-        pandas: 'red panda'
+        pandas: 'red panda',
       };
       render(
         <SQFormRadioButtonGroup size="auto" SQFormProps={{initialValues}} />

@@ -5,15 +5,15 @@ module.exports = {
     {
       name: '@storybook/addon-docs',
       options: {
-        configureJSX: true
-      }
+        configureJSX: true,
+      },
     },
     '@storybook/addon-controls',
     '@storybook/addon-actions',
     '@storybook/addon-knobs',
-    'storybook-addon-material-ui'
+    'storybook-addon-material-ui',
   ],
-  webpackFinal: config => {
+  webpackFinal: (config) => {
     config.module.rules = [
       ...config.module.rules,
       {
@@ -25,13 +25,13 @@ module.exports = {
             presets: [
               '@babel/preset-env',
               '@babel/preset-typescript',
-              '@babel/preset-react'
-            ]
-          }
-        }
-      }
+              '@babel/preset-react',
+            ],
+          },
+        },
+      },
     ];
 
     return config;
-  }
+  },
 };

@@ -68,7 +68,7 @@ function SQFormDialog<Values>({
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
-  validationSchema
+  validationSchema,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;

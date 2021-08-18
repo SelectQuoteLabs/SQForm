@@ -71,7 +71,7 @@ it('should not let the disabled option be selected', async () => {
   // Disabled option is skipped
   userEvent.type(expandButton, '{tab}{enter}{arrowdown}{arrowdown}{enter}');
   const updatedExpandButton = await screen.findByRole('button', {
-    name: /missouri/i
+    name: /missouri/i,
   });
 
   expect(updatedExpandButton).toBeInTheDocument();
@@ -133,7 +133,7 @@ it('should not display icon and text if field is not required', () => {
 
 it('should highlight field if required but no value selected', async () => {
   const validationSchema = {
-    state: Yup.string().required('Required')
+    state: Yup.string().required('Required'),
   };
 
   render(

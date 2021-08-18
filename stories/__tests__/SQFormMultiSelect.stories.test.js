@@ -16,7 +16,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {
-        name: /friends/i
+        name: /friends/i,
       })
     );
 
@@ -34,7 +34,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {
-        name: /friends/i
+        name: /friends/i,
       })
     );
 
@@ -62,7 +62,7 @@ describe('Tests for SQFormMultiSelect', () => {
       <SQFormMultiSelect
         size="auto"
         SQFormProps={{
-          initialValues: {friends: [1, 2]}
+          initialValues: {friends: [1, 2]},
         }}
       />
     );
@@ -83,7 +83,7 @@ describe('Tests for SQFormMultiSelect', () => {
       <SQFormMultiSelect
         size="auto"
         SQFormProps={{
-          initialValues: {friends: [0]}
+          initialValues: {friends: [0]},
         }}
       />
     );
@@ -163,9 +163,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
   it('should highlight field if required but no value selected', async () => {
     const validationSchema = {
-      friends: Yup.array()
-        .min(1, 'Required')
-        .required('Required')
+      friends: Yup.array().min(1, 'Required').required('Required'),
     };
 
     render(
@@ -173,7 +171,7 @@ describe('Tests for SQFormMultiSelect', () => {
         isRequired={true}
         size="auto"
         SQFormProps={{
-          validationSchema
+          validationSchema,
         }}
       />
     );

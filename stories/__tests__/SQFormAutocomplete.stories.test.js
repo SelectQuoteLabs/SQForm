@@ -6,7 +6,7 @@ import * as stories from '../SQFormAutocomplete.stories';
 
 const {
   Default: SQFormAutocomplete,
-  WithValidation: SQFormAutocompleteWithValidation
+  WithValidation: SQFormAutocompleteWithValidation,
 } = composeStories(stories);
 
 describe('SQFormAutocomplete Tests', () => {
@@ -36,8 +36,8 @@ describe('SQFormAutocomplete Tests', () => {
     it('should render with non-empty initial value', () => {
       const SQFormProps = {
         initialValues: {
-          autocomplete: 'first'
-        }
+          autocomplete: 'first',
+        },
       };
 
       render(<SQFormAutocomplete size="auto" SQFormProps={SQFormProps} />);

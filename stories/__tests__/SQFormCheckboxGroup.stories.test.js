@@ -6,7 +6,7 @@ import * as stories from '../SQFormCheckboxGroup.stories';
 
 const {
   Default: SQFormCheckboxGroup,
-  WithValidation: SQFormCheckboxGroupWithValidation
+  WithValidation: SQFormCheckboxGroupWithValidation,
 } = composeStories(stories);
 
 const SHOPPING_LIST_OPTIONS = [
@@ -14,7 +14,7 @@ const SHOPPING_LIST_OPTIONS = [
   {label: 'Sunshroom', value: 'sunshroom'},
   {label: 'Bokoblin Guts', value: 'bokoblin guts'},
   {label: 'Lynel Hoof', value: 'lynel hoof'},
-  {label: 'Stealthfin Trout', value: 'stealthfin trout'}
+  {label: 'Stealthfin Trout', value: 'stealthfin trout'},
 ];
 
 describe('SQFormCheckboxGroup Tests', () => {
@@ -31,7 +31,7 @@ describe('SQFormCheckboxGroup Tests', () => {
 
     it('should display as checked when initial values are set', () => {
       const initialValues = {
-        shoppingList: [SHOPPING_LIST_OPTIONS[0].value]
+        shoppingList: [SHOPPING_LIST_OPTIONS[0].value],
       };
 
       render(<SQFormCheckboxGroup SQFormProps={{initialValues}} size="auto" />);
@@ -43,7 +43,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       );
 
       const filteredCheckboxes = checkboxes.filter(
-        checkbox => checkbox.checked
+        (checkbox) => checkbox.checked
       );
       expect(filteredCheckboxes).toEqual(
         expect.arrayContaining([targetCheckbox])
@@ -99,7 +99,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
 
       const filteredCheckboxes = checkboxes.filter(
-        checkbox => checkbox.checked
+        (checkbox) => checkbox.checked
       );
       expect(filteredCheckboxes).toEqual([]);
       expect(filteredCheckboxes).toHaveLength(0);
@@ -108,7 +108,9 @@ describe('SQFormCheckboxGroup Tests', () => {
 
       userEvent.click(selectAllCheckbox);
 
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -119,8 +121,8 @@ describe('SQFormCheckboxGroup Tests', () => {
       const initialValues = {
         shoppingList: [
           SHOPPING_LIST_OPTIONS[1].value,
-          SHOPPING_LIST_OPTIONS[4].value
-        ]
+          SHOPPING_LIST_OPTIONS[4].value,
+        ],
       };
       render(
         <SQFormCheckboxGroup
@@ -133,7 +135,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
       const targetBox1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
       const targetBox2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
 
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([targetBox1, targetBox2])
@@ -143,7 +147,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const selectAllCheckbox = screen.getByLabelText('All');
       userEvent.click(selectAllCheckbox);
 
-      const updatedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const updatedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(updatedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -157,9 +163,9 @@ describe('SQFormCheckboxGroup Tests', () => {
           SHOPPING_LIST_OPTIONS[1].value,
           SHOPPING_LIST_OPTIONS[2].value,
           SHOPPING_LIST_OPTIONS[3].value,
-          SHOPPING_LIST_OPTIONS[4].value
+          SHOPPING_LIST_OPTIONS[4].value,
         ],
-        shoppingListSelectAll: true
+        shoppingListSelectAll: true,
       };
       render(
         <SQFormCheckboxGroup
@@ -172,7 +178,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
 
       const selectAllCheckbox = screen.getByLabelText('All');
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -181,7 +189,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       userEvent.click(selectAllCheckbox);
 
       const uncheckedCheckboxes = checkboxes.filter(
-        checkbox => !checkbox.checked
+        (checkbox) => !checkbox.checked
       );
       expect(uncheckedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
@@ -209,7 +217,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       userEvent.click(checkbox);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       await waitFor(() => expect(submitButton).toBeEnabled());
