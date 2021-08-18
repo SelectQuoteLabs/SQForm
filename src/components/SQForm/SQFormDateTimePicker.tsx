@@ -73,7 +73,7 @@ function SQFormDateTimePicker({
     date: moment.Moment | null,
     _keyBoardInputValue: string | undefined
   ): void => {
-    helpers.setValue(date)
+    helpers.setValue(date);
   };
 
   return (
