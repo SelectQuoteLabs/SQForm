@@ -16,11 +16,11 @@ interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Custom onBlur event callback */
-  onBlur: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange: React.ChangeEventHandler;
+  onChange?: React.ChangeEventHandler;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: BaseDateTimePickerProps;
+  muiFieldProps?: BaseDateTimePickerProps;
 }
 
 const useStyles = makeStyles(() => ({
