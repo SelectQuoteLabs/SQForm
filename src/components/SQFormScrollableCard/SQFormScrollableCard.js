@@ -124,13 +124,13 @@ function SQFormScrollableCard({
                 square={true}
                 className={classes.card}
               >
-                {!isHeaderDisabled ? (
+                {!isHeaderDisabled && (
                   <CardHeader
                     title={title}
                     className={classes.cardHeader}
                     titleTypographyProps={{variant: 'h4'}}
                   />
-                ) : null}
+                )}
 
                 <CardContent className={classes.cardContent}>
                   {SubHeaderComponent}
