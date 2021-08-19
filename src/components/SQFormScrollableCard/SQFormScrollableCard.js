@@ -73,7 +73,8 @@ function SQFormScrollableCard({
   title,
   validationSchema,
   isSelfBounding,
-  height
+  height,
+  isHeaderDisabled = false
 }) {
   const {containerRef, height: autoHeight} = useAutoHeight();
   const hasSubHeader = Boolean(SubHeaderComponent);
@@ -123,11 +124,14 @@ function SQFormScrollableCard({
                 square={true}
                 className={classes.card}
               >
-                <CardHeader
-                  title={title}
-                  className={classes.cardHeader}
-                  titleTypographyProps={{variant: 'h4'}}
-                />
+                {!isHeaderDisabled ? (
+                  <CardHeader
+                    title={title}
+                    className={classes.cardHeader}
+                    titleTypographyProps={{variant: 'h4'}}
+                  />
+                ) : null}
+
                 <CardContent className={classes.cardContent}>
                   {SubHeaderComponent}
                   <Grid
@@ -201,7 +205,7 @@ SQFormScrollableCard.propTypes = {
   /** Component to render as the Subheader */
   SubHeaderComponent: PropTypes.element,
   /** The Title for the Header component */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
@@ -210,7 +214,9 @@ SQFormScrollableCard.propTypes = {
   /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
   isSelfBounding: PropTypes.bool,
   /** Number overriding the height of the component */
-  height: PropTypes.number
+  height: PropTypes.number,
+  //** Boolean used to determine if title/header is enabled or disabled */
+  isHeaderDisabled: PropTypes.bool
 };
 
 export default SQFormScrollableCard;
