@@ -6,7 +6,8 @@ export function useGuidedWorkflowContext(taskModules) {
       ...acc,
       [index + 1]: {
         name: taskModule.name,
-        data: taskModule.formikProps.initialValues
+        data: taskModule.formikProps.initialValues,
+        isDisabled: taskModule.isDisabled || false
       }
     };
   }, {});
@@ -14,13 +15,18 @@ export function useGuidedWorkflowContext(taskModules) {
   const reducer = (prevState, action) => {
     switch (action.type) {
       case 'UPDATE':
-        return {
-          ...prevState,
-          [action.id]: {
-            ...prevState[action.id],
-            data: action.data
-          }
-        };
+        return taskModules.reduce((acc, taskModlue, index) => {
+          const taskID = index + 1;
+          const prevData = prevState[taskID].data;
+          return {
+            ...acc,
+            [taskID]: {
+              name: taskModlue.name,
+              data: action.id === taskID ? action.data : prevData,
+              isDisabled: taskModlue.isDisabled || false
+            }
+          };
+        }, {});
       default:
         throw new Error(
           `The ${action.type} type provided to useGuidedWorkflow is not valid`
