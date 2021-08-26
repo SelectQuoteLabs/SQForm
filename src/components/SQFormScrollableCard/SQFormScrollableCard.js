@@ -74,7 +74,8 @@ function SQFormScrollableCard({
   submitButtonText = 'Submit',
   SubHeaderComponent,
   title,
-  validationSchema
+  validationSchema,
+  isHeaderDisabled = false
 }) {
   const {containerRef, height: autoHeight} = useAutoHeight();
   const hasSubHeader = Boolean(SubHeaderComponent);
@@ -124,11 +125,14 @@ function SQFormScrollableCard({
                 square={true}
                 className={classes.card}
               >
-                <CardHeader
-                  title={title}
-                  className={classes.cardHeader}
-                  titleTypographyProps={{variant: 'h4'}}
-                />
+                {!isHeaderDisabled && (
+                  <CardHeader
+                    title={title}
+                    className={classes.cardHeader}
+                    titleTypographyProps={{variant: 'h4'}}
+                  />
+                )}
+
                 <CardContent className={classes.cardContent}>
                   {SubHeaderComponent}
                   <Grid
@@ -211,12 +215,14 @@ SQFormScrollableCard.propTypes = {
   /** Component to render as the Subheader */
   SubHeaderComponent: PropTypes.element,
   /** The Title for the Header component */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
+  //** Boolean used to determine if title/header is enabled or disabled */
+  isHeaderDisabled: PropTypes.bool
 };
 
 export default SQFormScrollableCard;
