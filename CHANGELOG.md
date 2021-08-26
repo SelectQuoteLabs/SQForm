@@ -1,3 +1,10 @@
+### [5.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.2...v5.3.3) (2021-08-26)
+
+
+### Bug Fixes
+
+* 🐛 SQFormScrollableCard submit button updates ([4f49162](https://github.com/SelectQuoteLabs/SQForm/commit/4f49162340ab620ca206be13e37b8896770cfee0)), closes [#435](https://github.com/SelectQuoteLabs/SQForm/issues/435)
+
 ### [5.3.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.1...v5.3.2) (2021-08-25)
 
 
