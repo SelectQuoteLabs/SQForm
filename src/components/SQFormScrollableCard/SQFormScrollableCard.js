@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
+import {useAutoHeight} from '@selectquotelabs/sqhooks';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
@@ -57,23 +58,26 @@ const useStyles = makeStyles(theme => {
 function SQFormScrollableCard({
   children,
   enableReinitialize = false,
+  height,
   helperErrorText,
   helperFailText,
   helperValidText,
   initialValues,
   isDisabled = false,
   isFailedState = false,
+  isSelfBounding,
   muiGridProps = {},
   onSubmit,
   resetButtonText = 'Reset',
   shouldRenderHelperText = true,
+  shouldRequireFieldUpdates = false,
   submitButtonText = 'Submit',
   SubHeaderComponent,
   title,
   validationSchema,
-  isSelfBounding,
-  height
+  isHeaderDisabled = false
 }) {
+  const {containerRef, height: autoHeight} = useAutoHeight();
   const hasSubHeader = Boolean(SubHeaderComponent);
 
   const validationYupSchema = React.useMemo(() => {
@@ -96,33 +100,13 @@ function SQFormScrollableCard({
     title
   ]);
 
-  const [calculatedHeight, setCalculatedHeight] = React.useState(0);
-
-  React.useEffect(() => {
-    const currentElement = document.getElementById(
-      `sqform-scrollable-card-id-${formattedTitle}`
-    );
-
-    const topOffset = currentElement?.getBoundingClientRect().top;
-    const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
-
-    const parentHeight = currentElement.parentElement.clientHeight;
-    const parentTopOffset = currentElement.parentElement.getBoundingClientRect()
-      .top;
-    const topDifferential = topOffset - parentTopOffset;
-    const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
-
-    const calculatedHeight = `min(${offsetBasedHeight}, ${maxOffsetBasedHeight})`;
-
-    setCalculatedHeight(calculatedHeight);
-  }, [formattedTitle]);
-
-  const heightToUse = height || (isSelfBounding && calculatedHeight) || '100%';
+  const heightToUse = height || (isSelfBounding && autoHeight) || '100%';
 
   return (
     <div
       id={`sqform-scrollable-card-id-${formattedTitle}`}
       style={{height: heightToUse}}
+      ref={containerRef}
     >
       <Formik
         enableReinitialize={enableReinitialize}
@@ -141,11 +125,14 @@ function SQFormScrollableCard({
                 square={true}
                 className={classes.card}
               >
-                <CardHeader
-                  title={title}
-                  className={classes.cardHeader}
-                  titleTypographyProps={{variant: 'h4'}}
-                />
+                {!isHeaderDisabled && (
+                  <CardHeader
+                    title={title}
+                    className={classes.cardHeader}
+                    titleTypographyProps={{variant: 'h4'}}
+                  />
+                )}
+
                 <CardContent className={classes.cardContent}>
                   {SubHeaderComponent}
                   <Grid
@@ -169,7 +156,10 @@ function SQFormScrollableCard({
                       validText={helperValidText}
                     />
                   )}
-                  <SQFormButton isDisabled={isDisabled}>
+                  <SQFormButton
+                    isDisabled={isDisabled}
+                    shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+                  >
                     {submitButtonText}
                   </SQFormButton>
                 </CardActions>
@@ -187,6 +177,8 @@ SQFormScrollableCard.propTypes = {
   children: PropTypes.node.isRequired,
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize: PropTypes.bool,
+  /** Number overriding the height of the component */
+  height: PropTypes.number,
   /** Helper text to display in the Footer when the Form is in an Error state */
   helperErrorText: PropTypes.string,
   /** Helper text to display in the Footer when the Form is in a Failure state */
@@ -199,6 +191,8 @@ SQFormScrollableCard.propTypes = {
   isDisabled: PropTypes.bool,
   /** Override the failure/success state of the form's footer helper text. Default: false */
   isFailedState: PropTypes.bool,
+  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
+  isSelfBounding: PropTypes.bool,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
   /**
@@ -214,21 +208,21 @@ SQFormScrollableCard.propTypes = {
   resetButtonText: PropTypes.string,
   /** Conditionally the render of the form's footer helper text. Default: true */
   shouldRenderHelperText: PropTypes.bool,
+  /** Pass through to SQFormButton that determines if the button will disable based on form data */
+  shouldRequireFieldUpdates: PropTypes.bool,
   /** Label text for the Submit button */
   submitButtonText: PropTypes.string,
   /** Component to render as the Subheader */
   SubHeaderComponent: PropTypes.element,
   /** The Title for the Header component */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema: PropTypes.object,
-  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
-  isSelfBounding: PropTypes.bool,
-  /** Number overriding the height of the component */
-  height: PropTypes.number
+  //** Boolean used to determine if title/header is enabled or disabled */
+  isHeaderDisabled: PropTypes.bool
 };
 
 export default SQFormScrollableCard;

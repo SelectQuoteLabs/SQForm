@@ -77,6 +77,7 @@ function SQFormGuidedWorkflow({
     );
     const isPanelExpanded =
       taskModulesContext[taskModulesState.activeTaskModuleID].name === taskName;
+
     const getIsDisabled = () => {
       if (isStrictMode && taskModulesState.activeTaskModuleID !== taskNumber) {
         return true;
@@ -89,6 +90,7 @@ function SQFormGuidedWorkflow({
       }
       return false;
     };
+
     const handleSubmit = async (values, formikBag) => {
       const context = {
         ...taskModulesContext,
@@ -97,6 +99,7 @@ function SQFormGuidedWorkflow({
           data: values
         }
       };
+
       try {
         await taskModule.formikProps.onSubmit(values, formikBag, context);
         updateTaskModuleContextByID(taskNumber, values);

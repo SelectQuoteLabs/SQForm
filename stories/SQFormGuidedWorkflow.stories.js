@@ -33,6 +33,7 @@ const outcomeDropdownOptions = [
 
 const Template = () => {
   const [isIneligible, setIneligible] = React.useState(false);
+  const [isModuleDisabled, setIsModuleDisabled] = React.useState(false);
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
@@ -51,6 +52,11 @@ const Template = () => {
           await sleep(3000); // Simulate API call to see loading spinner
           console.log(values);
           console.log(context);
+          if (values.outcome === 'not-interested') {
+            setIsModuleDisabled(true);
+          } else {
+            setIsModuleDisabled(false);
+          }
         },
         validationSchema: {
           outcome: Yup.string().required('Required'),
@@ -75,9 +81,12 @@ const Template = () => {
     },
     {
       name: 'cancellation',
-      title: 'Policy Cancellation Statement',
+      title: isModuleDisabled
+        ? 'Dont Verify Providers'
+        : 'Policy Cancellation Statement',
       subtitles: ['Cancelling policy'],
       isFailedState: isIneligible,
+      isDisabled: isModuleDisabled,
       formikProps: {
         initialValues: {
           outcome: '',
@@ -124,6 +133,7 @@ const Template = () => {
       name: 'providers',
       title: 'Verify Providers',
       subtitles: ['Please verify the providers'],
+      isDisabled: false,
       formikProps: {
         initialValues: {
           outcome: '',

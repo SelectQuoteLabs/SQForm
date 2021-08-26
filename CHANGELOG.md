@@ -1,3 +1,39 @@
+## [5.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.3...v5.4.0) (2021-08-26)
+
+
+### Features
+
+* 🎸 add prop for disabling or enabling cardHeader ([a7046b1](https://github.com/SelectQuoteLabs/SQForm/commit/a7046b1b66e1b7a1b70d69ae48bc476ce97a2713))
+* 🎸 add prop to disable SQFormScrollableCard header ([3378b57](https://github.com/SelectQuoteLabs/SQForm/commit/3378b57ba044f9406e94fb739b3873415133bfa5)), closes [#434](https://github.com/SelectQuoteLabs/SQForm/issues/434)
+
+### [5.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.2...v5.3.3) (2021-08-26)
+
+
+### Bug Fixes
+
+* 🐛 SQFormScrollableCard submit button updates ([4f49162](https://github.com/SelectQuoteLabs/SQForm/commit/4f49162340ab620ca206be13e37b8896770cfee0)), closes [#435](https://github.com/SelectQuoteLabs/SQForm/issues/435)
+
+### [5.3.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.1...v5.3.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* 🐛 fixed autocomplete initial width issues and placement ([990783b](https://github.com/SelectQuoteLabs/SQForm/commit/990783b11482ade4f2e7c7f69729f5ee494c2f19)), closes [#429](https://github.com/SelectQuoteLabs/SQForm/issues/429)
+
+### [5.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.0...v5.3.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* 🐛 SQFormGuidedWorkflow isDisabled now skips the module ([74fd037](https://github.com/SelectQuoteLabs/SQForm/commit/74fd037f34b6001efcc39cc2acfe5f8ac248dc52)), closes [#405](https://github.com/SelectQuoteLabs/SQForm/issues/405)
+
+## [5.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.4...v5.3.0) (2021-08-06)
+
+
+### Features
+
+* 🎸 Added showTooltip and tooltipText props to MultiSelect ([8bc967d](https://github.com/SelectQuoteLabs/SQForm/commit/8bc967d6f9bd046a6658e50a008f54dd0eaa8ed1)), closes [#313](https://github.com/SelectQuoteLabs/SQForm/issues/313)
+
 ### [5.2.4](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.3...v5.2.4) (2021-08-04)
 
 
