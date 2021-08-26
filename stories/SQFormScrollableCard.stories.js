@@ -33,7 +33,11 @@ const Template = args => {
   const {wrapper, validationSchema, ...restArgs} = args;
 
   const basicCard = (
-    <SQFormScrollableCard {...restArgs}>
+    <SQFormScrollableCard
+      validationSchema={validationSchema}
+      shouldRequireFieldUpdates={true}
+      {...restArgs}
+    >
       <SQFormTextField
         name="hello"
         label="Hello"
