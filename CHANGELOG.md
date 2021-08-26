@@ -1,3 +1,11 @@
+## [5.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.3...v5.4.0) (2021-08-26)
+
+
+### Features
+
+* 🎸 add prop for disabling or enabling cardHeader ([a7046b1](https://github.com/SelectQuoteLabs/SQForm/commit/a7046b1b66e1b7a1b70d69ae48bc476ce97a2713))
+* 🎸 add prop to disable SQFormScrollableCard header ([3378b57](https://github.com/SelectQuoteLabs/SQForm/commit/3378b57ba044f9406e94fb739b3873415133bfa5)), closes [#434](https://github.com/SelectQuoteLabs/SQForm/issues/434)
+
 ### [5.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.2...v5.3.3) (2021-08-26)
 
 
