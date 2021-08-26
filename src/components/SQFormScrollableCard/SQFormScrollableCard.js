@@ -58,22 +58,23 @@ const useStyles = makeStyles(theme => {
 function SQFormScrollableCard({
   children,
   enableReinitialize = false,
+  height,
   helperErrorText,
   helperFailText,
   helperValidText,
   initialValues,
   isDisabled = false,
   isFailedState = false,
+  isSelfBounding,
   muiGridProps = {},
   onSubmit,
   resetButtonText = 'Reset',
   shouldRenderHelperText = true,
+  shouldRequireFieldUpdates = false,
   submitButtonText = 'Submit',
   SubHeaderComponent,
   title,
   validationSchema,
-  isSelfBounding,
-  height,
   isHeaderDisabled = false
 }) {
   const {containerRef, height: autoHeight} = useAutoHeight();
@@ -155,7 +156,10 @@ function SQFormScrollableCard({
                       validText={helperValidText}
                     />
                   )}
-                  <SQFormButton isDisabled={isDisabled}>
+                  <SQFormButton
+                    isDisabled={isDisabled}
+                    shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+                  >
                     {submitButtonText}
                   </SQFormButton>
                 </CardActions>
@@ -173,6 +177,8 @@ SQFormScrollableCard.propTypes = {
   children: PropTypes.node.isRequired,
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize: PropTypes.bool,
+  /** Number overriding the height of the component */
+  height: PropTypes.number,
   /** Helper text to display in the Footer when the Form is in an Error state */
   helperErrorText: PropTypes.string,
   /** Helper text to display in the Footer when the Form is in a Failure state */
@@ -185,6 +191,8 @@ SQFormScrollableCard.propTypes = {
   isDisabled: PropTypes.bool,
   /** Override the failure/success state of the form's footer helper text. Default: false */
   isFailedState: PropTypes.bool,
+  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
+  isSelfBounding: PropTypes.bool,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
   /**
@@ -200,6 +208,8 @@ SQFormScrollableCard.propTypes = {
   resetButtonText: PropTypes.string,
   /** Conditionally the render of the form's footer helper text. Default: true */
   shouldRenderHelperText: PropTypes.bool,
+  /** Pass through to SQFormButton that determines if the button will disable based on form data */
+  shouldRequireFieldUpdates: PropTypes.bool,
   /** Label text for the Submit button */
   submitButtonText: PropTypes.string,
   /** Component to render as the Subheader */
@@ -211,10 +221,6 @@ SQFormScrollableCard.propTypes = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema: PropTypes.object,
-  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
-  isSelfBounding: PropTypes.bool,
-  /** Number overriding the height of the component */
-  height: PropTypes.number,
   //** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled: PropTypes.bool
 };
