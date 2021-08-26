@@ -103,6 +103,8 @@ describe('SQFormGuidedWorkflow Tests', () => {
   });
 
   it("should allow user to go reopen the 1st section after it's completed", async () => {
+    //This test runs long so extending the time limit
+    jest.setTimeout(30000);
     render(<SQFormGuidedWorkflow />);
 
     const introText = screen.getByText(/hi, bob smith, my name is/i);
@@ -142,6 +144,35 @@ describe('SQFormGuidedWorkflow Tests', () => {
     );
 
     expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible();
+  });
+
+  it('should display an error when in a failed state', async () => {
+    render(<SQFormGuidedWorkflow />);
+
+    //Completing the 1st module to get to the 2nd
+    const outcome = screen.getByRole('button', {name: /outcome/i});
+    userEvent.click(outcome);
+    const interested = screen.getByText('Interested');
+    userEvent.click(interested);
+    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    userEvent.click(nextButton);
+    await waitFor(
+      () =>
+        expect(
+          screen.getByText(/stuff about policy cancellation/i)
+        ).toBeVisible(),
+      {timeout: 5000}
+    );
+
+    const infoText = screen.getByText(/interact with the form/i);
+    expect(infoText).toBeVisible();
+
+    const ineligibleButton = screen.getByRole('button', {name: /ineligible/i});
+    expect(ineligibleButton).toBeInTheDocument();
+
+    userEvent.click(ineligibleButton);
+
+    expect(infoText).toHaveTextContent(/do not pass go/i);
   });
 });
 
@@ -205,7 +236,14 @@ describe('Testing new story', () => {
         mainTitle="Something"
         mainSubtitle="Something else"
         isStrictMode={true}
+        initialCompletedTasks={1}
       />
     );
+
+    const firstScript = screen.getByText(/this is some text/i);
+    expect(firstScript).not.toBeVisible();
+
+    const secondScript = screen.getByText('This is some more text');
+    expect(secondScript).toBeVisible();
   });
 });

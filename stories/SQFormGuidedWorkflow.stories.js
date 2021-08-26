@@ -203,7 +203,6 @@ const TestTemplate = args => {
           secondText: ''
         },
         onSubmit: async values => {
-          await sleep(1000); // Simulate API call to see loading spinner
           console.log(JSON.stringify(values));
         },
         validationSchema: {
@@ -235,7 +234,6 @@ const TestTemplate = args => {
           notes: ''
         },
         onSubmit: async values => {
-          await sleep(1000); // Simulate API call to see loading spinner
           console.log(JSON.stringify(values));
         }
       },
@@ -278,6 +276,5 @@ Testing.args = {
   mainTitle: 'CCA Guided Workflow',
   mainSubtitle:
     'Please review these Services with you client, then confirm their responses.',
-  initialCompletedTasks: 0,
   isStrictMode: false
 };
