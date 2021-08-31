@@ -5,15 +5,13 @@ import {render, screen, within, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormIconButton.stories';
 
-const {
-  Default: SQFormIconButton,
-  WithTestField: SQFormIconButtonWithField
-} = composeStories(stories);
+const {Default: SQFormIconButton, WithTestField: SQFormIconButtonWithField} =
+  composeStories(stories);
 
 describe('SQFormIconButton Tests', () => {
   describe('Button Only', () => {
     it('should render a button with an icon', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} />);
+      render(<SQFormIconButton IconComponent={CheckCircle} />);
 
       const iconButton = screen.getByRole('button', {name: /form submission/i});
       const svg = within(iconButton).getByTitle(/form submission/i);
@@ -23,7 +21,7 @@ describe('SQFormIconButton Tests', () => {
     });
 
     it('should render a submit button', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} />);
+      render(<SQFormIconButton IconComponent={CheckCircle} />);
 
       const iconButton = screen.getByRole('button', {name: /form submission/i});
 
@@ -32,10 +30,10 @@ describe('SQFormIconButton Tests', () => {
     });
 
     it('should render a reset button given the type reset', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} type="reset" />);
+      render(<SQFormIconButton IconComponent={CheckCircle} type="reset" />);
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(iconButton).toBeInTheDocument();
@@ -43,10 +41,10 @@ describe('SQFormIconButton Tests', () => {
     });
 
     it('should render a button given the type button', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} type="button" />);
+      render(<SQFormIconButton IconComponent={CheckCircle} type="button" />);
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(iconButton).toBeInTheDocument();
@@ -56,11 +54,11 @@ describe('SQFormIconButton Tests', () => {
     it('should call a function when clicked', () => {
       const onClickSpy = jest.fn();
       render(
-        <SQFormIconButton exampleIcons={CheckCircle} onClick={onClickSpy} />
+        <SQFormIconButton IconComponent={CheckCircle} onClick={onClickSpy} />
       );
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       userEvent.click(iconButton);
@@ -69,10 +67,12 @@ describe('SQFormIconButton Tests', () => {
     });
 
     it('should show as disabled when isDisabled is true', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} isDisabled={true} />);
+      render(
+        <SQFormIconButton IconComponent={CheckCircle} isDisabled={true} />
+      );
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(iconButton).toBeDisabled();
@@ -82,14 +82,14 @@ describe('SQFormIconButton Tests', () => {
       const onClickSpy = jest.fn();
       render(
         <SQFormIconButton
-          exampleIcons={CheckCircle}
+          IconComponent={CheckCircle}
           isDisabled={true}
           onClick={onClickSpy}
         />
       );
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       fireEvent.click(iconButton);
@@ -100,13 +100,13 @@ describe('SQFormIconButton Tests', () => {
     it('should disable when shouldRequireFieldUpdates is true', () => {
       render(
         <SQFormIconButton
-          exampleIcons={CheckCircle}
+          IconComponent={CheckCircle}
           shouldRequireFieldUpdates={true}
         />
       );
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(iconButton).toBeDisabled();
@@ -122,7 +122,7 @@ describe('SQFormIconButton Tests', () => {
       expect(testField).toBeInTheDocument();
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(iconButton).toBeInTheDocument();
@@ -132,7 +132,7 @@ describe('SQFormIconButton Tests', () => {
       render(<SQFormIconButtonWithField shouldRequireFieldUpdates={true} />);
 
       const iconButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
       expect(iconButton).toBeDisabled();
 
@@ -147,7 +147,7 @@ describe('SQFormIconButton Tests', () => {
       render(<SQFormIconButtonWithField type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
       expect(resetButton).toHaveAttribute('type', 'reset');
 
