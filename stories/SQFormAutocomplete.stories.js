@@ -81,3 +81,17 @@ WithValidation.args = {
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
 };
+
+export const WithAutoSizePopper = Template.bind({});
+WithAutoSizePopper.args = {
+  ...defaultArgs,
+  lockWidthToField: false,
+  size: 6,
+};
+
+export const WithNoOptions = Template.bind({});
+WithNoOptions.args = {
+  ...defaultArgs,
+  children: undefined,
+  size: 12,
+};

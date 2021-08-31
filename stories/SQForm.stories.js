@@ -30,15 +30,15 @@ import {
   SQFormCheckboxGroup,
   SQFormMaskedTextField,
   SQFormMultiValue,
-  MASKS
+  MASKS,
 } from '../src';
 
 export default {
   title: 'Forms/SQForm',
   decorators: [withKnobs],
   parameters: {
-    docs: {page: createDocsPage({markdown})}
-  }
+    docs: {page: createDocsPage({markdown})},
+  },
 };
 
 const MOCK_AUTOCOMPLETE_OPTIONS = Array.from(new Array(10000))
@@ -47,14 +47,14 @@ const MOCK_AUTOCOMPLETE_OPTIONS = Array.from(new Array(10000))
     return {
       label: randomValue,
       value: randomValue,
-      isDisabled: Math.random() > 0.8
+      isDisabled: Math.random() > 0.8,
     };
   })
   .sort((a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase()));
 
 const ACTIONS_AUTOCOMPLETE_OPTIONS = [
   {label: 'Action 1', value: 1},
-  {label: 'Action 2', value: 2}
+  {label: 'Action 2', value: 2},
 ];
 
 const MOCK_FORM_ENTITY = {
@@ -68,12 +68,12 @@ const MOCK_FORM_ENTITY = {
   preferredPet: '',
   warrantyOptions: [],
   warrantyOptionsSelectAll: false,
-  favoriteColors: []
+  favoriteColors: [],
 };
 
 const MOCK_ACTIONS_FORM_ENTITY = {
   actions: 2,
-  note: ''
+  note: '',
 };
 
 const MOCK_FORM_WITH_BOOLEANS_ENTITY = {
@@ -81,27 +81,27 @@ const MOCK_FORM_WITH_BOOLEANS_ENTITY = {
   hobby: '',
   cool: false,
   lame: false,
-  favoriteColors: [2, 4]
+  favoriteColors: [2, 4],
 };
 
 const MOCK_FORM_FOR_FIELD_ARRAY = {
   ...MOCK_FORM_ENTITY,
-  friends: ['Joe', 'Jane', 'Jack', 'Jill']
+  friends: ['Joe', 'Jane', 'Jack', 'Jill'],
 };
 
 const MOCK_FORM_FOR_CHECKBOX_GROUP = {
   friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-  selectAll: false
+  selectAll: false,
 };
 
 const MOCK_STATE_OPTIONS = [
   {label: 'Arizona', value: 'AZ'},
   {label: 'Kansas', value: 'KS'},
-  {label: 'Missouri', value: 'MO'}
+  {label: 'Missouri', value: 'MO'},
 ];
 
 const MOCK_FORM_FOR_MULTISELECT = {
-  friends: []
+  friends: [],
 };
 
 const MOCK_FRIENDS_OPTIONS = [
@@ -120,7 +120,7 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jonah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Judah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
-  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
+  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))},
 ];
 
 const MOCK_MULTI_VALUE_OPTIONS = [
@@ -131,7 +131,7 @@ const MOCK_MULTI_VALUE_OPTIONS = [
   {label: 'Purple', value: 4},
   {label: 'Black', value: 5},
   {label: 'White', value: 6},
-  {label: 'Blue', value: 7}
+  {label: 'Blue', value: 7},
 ];
 
 const MOCK_FORM_MASKED_FIELDS = {
@@ -142,20 +142,20 @@ const MOCK_FORM_MASKED_FIELDS = {
   email: '',
   date: '',
   ssn: '',
-  custom: ''
+  custom: '',
 };
 
 const RADIO_GROUP_OPTIONS = [
   {label: 'Cat', value: 'cat'},
   {label: 'Dog', value: 'dog'},
-  {label: 'Both', value: 'both', isDisabled: true}
+  {label: 'Both', value: 'both', isDisabled: true},
 ];
 
 const CHECKBOX_GROUP_OPTIONS = [
   {label: 'Glass', value: 1},
   {label: 'Drivetrain', value: 2},
   {label: 'Brakes', value: 3},
-  {label: 'Interior', value: 4, isDisabled: true}
+  {label: 'Interior', value: 4, isDisabled: true},
 ];
 
 const handleSubmit = (values, actions) => {
@@ -186,7 +186,7 @@ export const BasicForm = () => {
           label="Ten Thousand Options"
           size={6}
           onInputChange={action('Update local state')}
-          lockWidthToField
+          lockWidthToField={false}
         >
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
@@ -253,12 +253,12 @@ export const FormWithValidation = () => {
     note: Yup.string().required('Required'),
     favoriteColors: Yup.array()
       .of(
-        Yup.lazy(value => {
+        Yup.lazy((value) => {
           return typeof value === 'number' ? Yup.number() : Yup.string();
         })
       )
       .min(1)
-      .required('Required')
+      .required('Required'),
   };
 
   return (
@@ -401,7 +401,7 @@ const names = [
   'Joe',
   'Jane',
   'Jack',
-  'Jill'
+  'Jill',
 ];
 
 export const formWithInclusionlist = () => {
@@ -424,18 +424,18 @@ export const formWithInclusionlist = () => {
             direction: 'column',
             wrap: 'nowrap',
             style: {
-              padding: '16px 16px 0 16px'
-            }
+              padding: '16px 16px 0 16px',
+            },
           }}
           selectAllProps={
             // any props that a SQFormInclusionListItem accepts
             // realistically, these would only include `isDisabled`, `size`, `label`,
             {
-              label: 'ALL THE PEEPS'
+              label: 'ALL THE PEEPS',
             }
           }
         >
-          {arrayHelpers => {
+          {(arrayHelpers) => {
             const {values} = arrayHelpers.form;
             return (
               <Grid
@@ -445,17 +445,17 @@ export const formWithInclusionlist = () => {
                 style={{
                   height: 200,
                   overflow: 'auto',
-                  padding: '0 16px'
+                  padding: '0 16px',
                 }}
               >
-                {names.map(name => {
+                {names.map((name) => {
                   return (
                     <Grid item key={name}>
                       <SQFormInclusionListItem
                         name="friends"
                         label={name}
                         isChecked={values.friends.includes(name)}
-                        onChange={e => {
+                        onChange={(e) => {
                           if (e.target.checked) {
                             arrayHelpers.push(name);
                           } else {
@@ -489,7 +489,7 @@ export const formWithInclusionlist = () => {
 
 export const basicFormWithMultiSelect = () => {
   const validationSchema = {
-    friends: Yup.string().required('Required')
+    friends: Yup.string().required('Required'),
   };
 
   return (
@@ -501,7 +501,7 @@ export const basicFormWithMultiSelect = () => {
         muiGridProps={{
           spacing: 2,
           justify: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <SQFormMultiSelect
@@ -526,13 +526,13 @@ export const basicFormWithMaskedFields = () => {
   const validationSchema = {
     phone: Yup.string()
       .required('Required')
-      .transform(value => value.replace(/[^\d]/g, ''))
+      .transform((value) => value.replace(/[^\d]/g, ''))
       .min(10, 'Phone number must be 10 digits'),
     zip: Yup.string()
       .required('Required')
-      .transform(value => value.replace(/[^\d]/g, ''))
+      .transform((value) => value.replace(/[^\d]/g, ''))
       .min(5, 'Zip code must be 5 digits'),
-    currency: Yup.string().required('Required')
+    currency: Yup.string().required('Required'),
   };
 
   return (
@@ -544,7 +544,7 @@ export const basicFormWithMaskedFields = () => {
         muiGridProps={{
           spacing: 2,
           justify: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <SQFormMaskedTextField
@@ -719,7 +719,7 @@ export const basicFormWithCustomOnChange = () => {
 
 export const applyAnAction = () => {
   const validationSchema = {
-    actions: Yup.string().required('Required')
+    actions: Yup.string().required('Required'),
   };
 
   return (
@@ -731,7 +731,7 @@ export const applyAnAction = () => {
         muiGridProps={{
           spacing: 2,
           justify: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <SQFormAutocomplete
@@ -762,7 +762,7 @@ export const applyAnAction = () => {
 export const SQFormCheckboxGroupExample = () => {
   const initialValues = {
     warrantyOptions: ['brakes'],
-    selectAll: false
+    selectAll: false,
   };
 
   const isGroupRequired = boolean('Is group required', false);
@@ -770,7 +770,7 @@ export const SQFormCheckboxGroupExample = () => {
   const validationSchema = {
     warrantyOptions: Yup.array()
       .min(1, 'Must select at least 1 option')
-      .required('Required')
+      .required('Required'),
   };
 
   return (
@@ -802,12 +802,12 @@ export const SQFormCheckboxGroupExample = () => {
 export const ccaChecklist = () => {
   const dropdownOptions = [
     {label: 'Pitched', value: 'pitched'},
-    {label: 'Transferred', value: 'transferred'}
+    {label: 'Transferred', value: 'transferred'},
   ];
   const validationSchema = {
     dvh: Yup.string(),
     hra: Yup.string(),
-    shield: Yup.string()
+    shield: Yup.string(),
   };
 
   return (
@@ -816,14 +816,14 @@ export const ccaChecklist = () => {
         initialValues={{
           dvh: '',
           hra: 'pitched',
-          shield: ''
+          shield: '',
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
           justify: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <SQFormDropdown name="dvh" label="DVH" displayEmpty={true} size={2}>

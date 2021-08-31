@@ -66,27 +66,6 @@ const LISTBOX_PADDING = 8; // px
 
 const EMPTY_OPTION = {label: '- -', value: ''};
 
-const useStyles = makeStyles({
-  listbox: {
-    width: 'initial !important',
-    overflowX: 'hidden !important' as 'hidden',
-
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-  popper: {
-    borderRadius: '4px',
-    boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
-    width: 'initial !important',
-    overflowX: 'hidden !important' as 'hidden',
-  },
-  paper: {
-    margin: 0,
-  },
-});
-
 const OuterElementContext =
   React.createContext<OuterElementContextInterface | null>({});
 
@@ -118,7 +97,6 @@ function renderRow({data, index, style}: ListChildComponentProps) {
   return (
     <Tooltip
       title={value || ''}
-      id={`FINDME-${index}`}
       key={`${value}-${index}-with-tooltip`}
       placement="bottom-start"
     >
@@ -196,13 +174,13 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
             className={classes.list}
             itemData={items}
             height={height}
-            width="auto"
             key={ITEM_COUNT}
             outerElementType={OuterElementType}
             innerElementType="ul"
             itemSize={getItemSize}
             overscanCount={LIST_OVERSCAN_COUNT}
             itemCount={ITEM_COUNT}
+            width=""
           >
             {renderRow}
           </VariableSizeList>
@@ -217,7 +195,7 @@ const getInitialValue = (
   value: optionValue,
   displayEmpty: boolean
 ) => {
-  const optionInitialValue = children.find((option) => {
+  const optionInitialValue = children?.find((option) => {
     if (option.value === value) {
       return option;
     }
@@ -252,6 +230,33 @@ const calculateBaseWidth = (ref: HTMLDivElement | null) => {
   return baseWidth;
 };
 
+const useStyles = makeStyles({
+  grid: {
+    position: 'relative',
+  },
+});
+
+const useAutocompleteStyles = makeStyles({
+  listbox: {
+    overflowX: 'hidden !important' as 'hidden',
+
+    '& ul': {
+      padding: 0,
+      margin: 0,
+    },
+  },
+  popper: {
+    borderRadius: '4px',
+    boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
+    width: ({lockWidthToField}: {lockWidthToField: boolean}) =>
+      !lockWidthToField ? 'auto !important' : '',
+    overflowX: 'hidden !important' as 'hidden',
+  },
+  paper: {
+    margin: 0,
+  },
+});
+
 function SQFormAutocomplete({
   children,
   isDisabled = false,
@@ -263,9 +268,11 @@ function SQFormAutocomplete({
   onChange,
   onInputChange,
   size = 'auto',
-  lockWidthToField = false,
+  lockWidthToField = true,
 }: SQFormAutocompleteProps): React.ReactElement {
   const classes = useStyles();
+  const autocompleteClasses = useAutocompleteStyles({lockWidthToField});
+
   const gridContainerRef = React.useRef<HTMLDivElement>(null);
   const baseWidth = calculateBaseWidth(gridContainerRef.current);
   const left = gridContainerRef.current?.getBoundingClientRect().left;
@@ -323,16 +330,17 @@ function SQFormAutocomplete({
     [onInputChange]
   );
 
-  const options = displayEmpty ? [EMPTY_OPTION, ...children] : children;
+  const options = children ? [...children] : [];
+  displayEmpty && options.unshift(EMPTY_OPTION);
 
   return (
-    <Grid item sm={size} ref={gridContainerRef}>
+    <Grid item xs={size} ref={gridContainerRef} className={classes.grid}>
       <Autocomplete
         id={name}
         style={{width: '100%'}}
         disableListWrap
-        disablePortal
-        classes={classes}
+        disablePortal={!lockWidthToField}
+        classes={autocompleteClasses}
         ListboxComponent={
           ListboxVirtualizedComponent as React.ComponentType<
             React.HTMLAttributes<HTMLElement>
