@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from '@material-ui/pickers/adapter/moment';
+import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DateTimePicker, BaseDateTimePickerProps} from '@material-ui/pickers';
@@ -18,7 +18,7 @@ interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: React.ChangeEventHandler;
+  onChange?: (date: React.ChangeEvent<moment.Moment> | unknown) => void;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps?: BaseDateTimePickerProps;
 }
@@ -70,10 +70,10 @@ function SQFormDateTimePicker({
     (field.value as ParsableDate<moment.Moment>) ?? null;
 
   const handleChange = (
-    date: moment.Moment | null,
-    _keyBoardInputValue: string | undefined
+    date: React.ChangeEvent<moment.Moment> | unknown
   ): void => {
     helpers.setValue(date);
+    onChange && onChange(date);
   };
 
   return (
