@@ -69,6 +69,9 @@ export default function SQFormScrollableCardsMenuWrapper({
   return (
     <Card raised={true} elevation={1} square={true} className={classes.card}>
       <CardHeader
+        classes={{
+          action: classes.action
+        }}
         title={title}
         className={classes.cardHeader}
         titleTypographyProps={{variant: 'h4'}}
