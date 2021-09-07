@@ -97,9 +97,11 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
 
 SQFormScrollableCardsMenuWrapper.propTypes = {
   /** At least one instance of SQFormScrollableCard where each has
-   * prop `isHeaderDisabled` === true AND each has a unique string
-   * `value` prop and `label` prop so we have a menu label and can
-   * match the `value` to what's selected in the popover menu
+   * prop `isHeaderDisabled` === true
+   * AND
+   * each has a unique string `value` prop and `label` prop so we
+   * have a menu label and can match the `value` to what's selected
+   * in the popover menu.
    */
   children: PropTypes.oneOfType([
     PropTypes.element,

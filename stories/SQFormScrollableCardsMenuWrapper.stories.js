@@ -18,31 +18,11 @@ export default {
 };
 
 export const sqFormScrollableCardsMenuWrapper = () => {
-  const menuItems = [
-    {
-      label: 'Details',
-      value: 'details'
-    },
-    {
-      label: 'Permissions',
-      value: 'permissions'
-    }
-  ];
-
   return (
     <div style={{width: '100%', height: '100%'}}>
-      <SQFormScrollableCardsMenuWrapper
-        title="[selected user]"
-        menuItems={menuItems}
-      >
-        <ScrollableDetails
-          label="Details" // maps to menuItems[0].label
-          value="details" // maps to menuItems[0].value
-        />
-        <ScrollablePermissions
-          label="Permissions" // maps to menuItems[1].label
-          value="permissions" // maps to menuItems[1].value
-        />
+      <SQFormScrollableCardsMenuWrapper title="[selected user]">
+        <ScrollableDetails label="Details" value="details" />
+        <ScrollablePermissions label="Permissions" value="permissions" />
       </SQFormScrollableCardsMenuWrapper>
     </div>
   );
