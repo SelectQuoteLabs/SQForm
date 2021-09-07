@@ -36,10 +36,12 @@ export const sqFormScrollableCardsMenuWrapper = () => {
         menuItems={menuItems}
       >
         <ScrollableDetails
-          id="details" // maps to menuItems[0].value
+          label="Details" // maps to menuItems[0].label
+          value="details" // maps to menuItems[0].value
         />
         <ScrollablePermissions
-          id="permissions" // maps to menuItems[1].value
+          label="Permissions" // maps to menuItems[1].label
+          value="permissions" // maps to menuItems[1].value
         />
       </SQFormScrollableCardsMenuWrapper>
     </div>

@@ -35,21 +35,28 @@ const useStyles = makeStyles(theme => {
 function getSelectedComponent(selectedTab, children) {
   if (Array.isArray(children)) {
     const selectedFormComponent = children.find(
-      child => child.props.id === selectedTab.value
+      child => child.props.value === selectedTab.value
     );
     return selectedFormComponent;
   }
   return children;
 }
 
-export default function SQFormScrollableCardsMenuWrapper({
-  title,
-  menuItems,
-  children
-}) {
+export default function SQFormScrollableCardsMenuWrapper({title, children}) {
   const classes = useStyles();
 
-  const [selectedTab, setSelectedTab] = React.useState(menuItems[0]);
+  const menuItems = React.useMemo(
+    () =>
+      React.Children.map(children, child => {
+        return {
+          label: child.props.label,
+          value: child.props.value
+        };
+      }),
+    [children]
+  );
+
+  const [selectedTab, setSelectedTab] = React.useState(() => menuItems[0]);
 
   const handleChange = selectedMenuItemValue => {
     const newSelection = menuItems.find(
@@ -91,24 +98,13 @@ export default function SQFormScrollableCardsMenuWrapper({
 SQFormScrollableCardsMenuWrapper.propTypes = {
   /** At least one instance of SQFormScrollableCard where each has
    * prop `isHeaderDisabled` === true AND each has a unique string
-   * `id` prop value that maps to a `value` property of one of the
-   * `menuItems` objects.
+   * `value` prop and `label` prop so we have a menu label and can
+   * match the `value` to what's selected in the popover menu
    */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element)
   ]),
-  /** For each child instance of SQFormScrollableCard, we need a
-   * corresponding menuItem object with whatever the popover menu
-   * item label should be, and a `value` that matches the `id` prop
-   * value in its corresponding SQFormScrollableCard
-   * */
-  menuItems: PropTypes.arrayOf(
-    PropTypes.objectOf({
-      label: PropTypes.string,
-      value: PropTypes.string
-    })
-  ).isRequired,
   /** The Title for the Header component */
   title: PropTypes.string
 };
