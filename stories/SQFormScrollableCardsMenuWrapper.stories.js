@@ -46,6 +46,7 @@ function ScrollableDetails() {
   return (
     <SQFormScrollableCard
       isHeaderDisabled={true}
+      isSelfBounding={true}
       initialValues={initialValues}
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
@@ -80,6 +81,7 @@ function ScrollablePermissions() {
   return (
     <SQFormScrollableCard
       isHeaderDisabled={true}
+      isSelfBounding={true}
       initialValues={initialValues}
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
