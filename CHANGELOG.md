@@ -1,3 +1,10 @@
+## [5.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.4.0...v5.5.0) (2021-09-07)
+
+
+### Features
+
+* 🎸 SQFormScrollableCardsMenuWrapper ([12aa521](https://github.com/SelectQuoteLabs/SQForm/commit/12aa521ba7d8e934b403c8dfd857d0ba6a36205e)), closes [#347](https://github.com/SelectQuoteLabs/SQForm/issues/347)
+
 ## [5.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.3...v5.4.0) (2021-08-26)
 
 
