@@ -43,27 +43,6 @@ function ScrollableDetails() {
     actions.resetForm();
   };
 
-  /**
-   * TODO: This code can/should be removed once this issue is resolved - https://github.com/SelectQuoteLabs/SQForm/issues/436
-   * Once this problem is resolved, we can remove this code block below and also remove the wrapper container around our SQFormScrollableCard
-   */
-  const [calculatedHeight, setCalculatedHeight] = React.useState(0);
-
-  React.useEffect(() => {
-    const currentElement = document.getElementById(`ResultContainer`);
-    const topOffset = currentElement?.getBoundingClientRect().top;
-    const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
-    const parentHeight = currentElement?.parentElement?.clientHeight;
-    const parentTopOffset = currentElement?.parentElement?.getBoundingClientRect()
-      .top;
-    const topDifferential =
-      topOffset && parentTopOffset ? topOffset - parentTopOffset : 0;
-    const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
-    const calculatedContainerHeight = `min(${offsetBasedHeight}, ${maxOffsetBasedHeight})`;
-
-    setCalculatedHeight(calculatedContainerHeight);
-  }, []);
-
   return (
     <SQFormScrollableCard
       isHeaderDisabled={true}
@@ -71,7 +50,6 @@ function ScrollableDetails() {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
-      height={calculatedHeight}
       title="notApplicableBecauseHeaderDisabled" // bug in SQFormScrollableCard bc it errors if no title prop even though it doesn't render its cardheader
     >
       <SQFormTextField
@@ -98,26 +76,6 @@ function ScrollablePermissions() {
     actions.setSubmitting(false);
     actions.resetForm();
   };
-  /**
-   * TODO: This code can/should be removed once this issue is resolved - https://github.com/SelectQuoteLabs/SQForm/issues/436
-   * Once this problem is resolved, we can remove this code block below and also remove the wrapper container around our SQFormScrollableCard
-   */
-  const [calculatedHeight, setCalculatedHeight] = React.useState(0);
-
-  React.useEffect(() => {
-    const currentElement = document.getElementById(`ResultContainer`);
-    const topOffset = currentElement?.getBoundingClientRect().top;
-    const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
-    const parentHeight = currentElement?.parentElement?.clientHeight;
-    const parentTopOffset = currentElement?.parentElement?.getBoundingClientRect()
-      .top;
-    const topDifferential =
-      topOffset && parentTopOffset ? topOffset - parentTopOffset : 0;
-    const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
-    const calculatedContainerHeight = `min(${offsetBasedHeight}, ${maxOffsetBasedHeight})`;
-
-    setCalculatedHeight(calculatedContainerHeight);
-  }, []);
 
   return (
     <SQFormScrollableCard
@@ -126,7 +84,6 @@ function ScrollablePermissions() {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
-      height={calculatedHeight}
       title="notApplicableBecauseHeaderDisabled"
     >
       <SQFormCheckbox name="isAdmin" label="Admin" size={12} />
