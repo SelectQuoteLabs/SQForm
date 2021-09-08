@@ -1,3 +1,10 @@
+### [5.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.0...v5.5.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* 🐛 fix isSelfBounding issue in SQFormScrollableCard ([5124bf2](https://github.com/SelectQuoteLabs/SQForm/commit/5124bf2f5230f2956c6e0602b4b7977464cb6ca7))
+
 ## [5.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.4.0...v5.5.0) (2021-09-07)
 
 
