@@ -4,7 +4,7 @@ import {useFormButton, BUTTON_TYPES, ButtonType} from './useFormButton';
 import {IconButton} from 'scplus-shared-components';
 import {IconProps} from '@material-ui/core';
 
-interface SQFormIconButtonProps {
+export interface SQFormIconButtonProps {
   /** The Material UI Icon to render inside the button */
   IconComponent: React.ElementType;
   /** Custom disabled state */
@@ -28,13 +28,13 @@ function SQFormIconButton({
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
   type = BUTTON_TYPES.SUBMIT,
-  onClick
+  onClick,
 }: SQFormIconButtonProps): JSX.Element {
   const {isButtonDisabled, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   function Icon(props: IconProps) {

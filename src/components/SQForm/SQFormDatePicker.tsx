@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import {DatePicker} from '@material-ui/pickers';
-import {makeStyles, ClickAwayListener} from '@material-ui/core';
+import {DatePicker, BaseDatePickerProps} from '@material-ui/pickers';
+import {
+  makeStyles,
+  ClickAwayListener,
+  InputBaseComponentProps
+} from '@material-ui/core';
+import BaseFieldProps from '../../types/BaseFieldProps';
 import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
@@ -15,6 +20,30 @@ const useStyles = makeStyles(() => ({
     }
   }
 }));
+
+interface SQFormDatePickerProps extends BaseFieldProps {
+  /** Disabled property to disable the input if true */
+  isDisabled?: boolean;
+  /** Required property used to highlight input and label if not fulfilled */
+  isRequired?: boolean;
+  /** Placeholder text used inside the input field to provide hints to the user */
+  placeholder?: string;
+  /** Custom onBlur event callback */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /** Custom onChange event callback */
+  onChange?: (date: React.ChangeEvent<moment.Moment> | unknown) => void;
+  /** Disable specific date(s) (day: DateIOType) => boolean
+   * This is a predicate function called for every day of the month
+   * Return true to disable that day or false to enable that day
+   */
+  setDisabledDate?: (day: unknown) => boolean;
+  /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
+  muiFieldProps?: BaseDatePickerProps;
+  /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
+  muiTextInputProps?: InputBaseComponentProps;
+  /** A Boolean flag used when using calendar only; disabled text filed input */
+  isCalendarOnly?: boolean;
+}
 
 function SQFormDatePicker({
   name,
@@ -29,7 +58,7 @@ function SQFormDatePicker({
   muiFieldProps = {},
   muiTextInputProps = {},
   isCalendarOnly = false
-}) {
+}: SQFormDatePickerProps): JSX.Element {
   const {
     formikField: {field, helpers},
     fieldState: {isFieldError},
@@ -41,7 +70,7 @@ function SQFormDatePicker({
     onChange
   });
 
-  const handleChange = date => {
+  const handleChange = (date: React.ChangeEvent<moment.Moment> | unknown) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
@@ -102,35 +131,5 @@ function SQFormDatePicker({
     </ClickAwayListener>
   );
 }
-
-SQFormDatePicker.propTypes = {
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
-  /** Descriptive label of the input */
-  label: PropTypes.string.isRequired,
-  /** Name of the field will be the Object key of the key/value pair form payload */
-  name: PropTypes.string.isRequired,
-  /** Placeholder text used inside the input field to provide hints to the user */
-  placeholder: PropTypes.string,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Disable specific date(s) (day: DateIOType) => boolean
-   * This is a predicate function called for every day of the month
-   * Return true to disable that day or false to enable that day
-   */
-  setDisabledDate: PropTypes.func,
-  /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: PropTypes.object,
-  /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
-  muiTextInputProps: PropTypes.object,
-  /** A Boolean flag used when using calendar only; disabled text filed input */
-  isCalendarOnly: PropTypes.bool
-};
 
 export default SQFormDatePicker;
