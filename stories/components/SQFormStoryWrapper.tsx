@@ -10,10 +10,10 @@ import {
 import {FormikValues} from 'formik';
 import {AnySchema} from 'yup';
 
-interface SQFormStoryWrapperProps {
+export interface SQFormStoryWrapperProps {
   children: React.ReactNode;
   initialValues: FormikValues;
-  validationSchema?: AnySchema;
+  validationSchema?: Record<string, AnySchema>;
   muiGridProps?: GridProps;
   showSubmit?: boolean;
 }
