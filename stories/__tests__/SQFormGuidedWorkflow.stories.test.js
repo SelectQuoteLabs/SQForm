@@ -127,9 +127,6 @@ describe('SQFormGuidedWorkflow Tests', () => {
       {timeout: 5000}
     );
 
-    const policyText = screen.getByText(/stuff about policy cancellation/i);
-    expect(policyText).toBeVisible();
-
     const toggleButtons = screen.getAllByRole('button', {
       name: /toggle-expansion/i
     });
