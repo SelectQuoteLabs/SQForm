@@ -1,3 +1,10 @@
+## [5.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.1...v5.6.0) (2021-09-28)
+
+
+### Features
+
+* 🎸 New component: SQFormMaskedReadOnlyField ([629848f](https://github.com/SelectQuoteLabs/SQForm/commit/629848fccb412297a824802844b752b35e19be86)), closes [#444](https://github.com/SelectQuoteLabs/SQForm/issues/444)
+
 ### [5.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.0...v5.5.1) (2021-09-08)
 
 
