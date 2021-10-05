@@ -1,3 +1,10 @@
+### [5.6.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.0...v5.6.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* 🐛 Fix dropdown issue with empty children and displayEmpty ([e28b1b6](https://github.com/SelectQuoteLabs/SQForm/commit/e28b1b64183dcca334d15c48f8161ebac42b896d)), closes [#449](https://github.com/SelectQuoteLabs/SQForm/issues/449)
+
 ## [5.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.1...v5.6.0) (2021-09-28)
 
 
