@@ -21,6 +21,7 @@ function SQFormMaskedReadOnlyField({
   mask,
   name,
   label,
+  placeholder = '- -',
   size = 'auto',
   InputProps,
   inputProps = {},
@@ -33,6 +34,7 @@ function SQFormMaskedReadOnlyField({
       size={size}
       InputProps={{
         ...InputProps,
+        placeholder,
         inputComponent: TextFieldMask
       }}
       inputProps={{
@@ -55,6 +57,8 @@ SQFormMaskedReadOnlyField.propTypes = {
   name: PropTypes.string.isRequired,
   /** Descriptive label of the input */
   label: PropTypes.string.isRequired,
+  /** Placeholder text used inside the input field to provide hints to the user */
+  placeholder: PropTypes.string,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Props applied to the Input element */
