@@ -1,6 +1,6 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
+import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from '../SQFormDialogStepper.stories';
@@ -88,11 +88,62 @@ describe('SQFormDialogStepper Tests', () => {
     expect(screen.getByLabelText(/first name/i)).toBeVisible();
   });
 
-  describe('Validation Tests', () => {
-    it('should validate ???', async () => {
-      render(<SQFormDialogStepperWithValidation isOpen={true} />);
+  it('should submit all step values', async () => {
+    render(<SQFormDialogStepper isOpen={true} />);
+    await screen.findByText('Default');
 
+    const firstName = screen.getByLabelText(/first name/i);
+    userEvent.type(firstName, 'First');
+
+    const lastName = screen.getByLabelText(/last name/i);
+    userEvent.type(lastName, 'Last');
+
+    const nextButton = screen.getByRole('button', {name: 'Next'});
+    userEvent.click(nextButton);
+    await screen.findByLabelText(/account id/i);
+
+    const newPatient = screen.getByRole('button', {name: '- -'});
+    userEvent.click(newPatient);
+    const yesOption = screen.getByText('Yes');
+    userEvent.click(yesOption);
+
+    const accountID = screen.getByLabelText(/account id/i);
+    userEvent.type(accountID, '12');
+
+    const submitButton = screen.getByRole('button', {name: 'Submit'});
+    userEvent.click(submitButton);
+
+    await waitFor(() =>
+      expect(window.alert).toHaveBeenCalledWith(
+        JSON.stringify(
+          {
+            firstName: 'First',
+            lastName: 'Last',
+            newPatient: 'yes',
+            accountID: 12
+          },
+          null,
+          2
+        )
+      )
+    );
+  });
+
+  describe('Validation Tests', () => {
+    it('should disable next button until all required fields are valid', async () => {
+      render(<SQFormDialogStepperWithValidation isOpen={true} />);
       await screen.findByText('With Validation');
+
+      const nextButton = screen.getByRole('button', {name: 'Next'});
+      expect(nextButton).toBeDisabled();
+
+      const firstName = screen.getByLabelText(/first name/i);
+      userEvent.type(firstName, 'First');
+
+      const lastName = screen.getByLabelText(/last name/i);
+      userEvent.type(lastName, 'Last');
+
+      expect(nextButton).toBeEnabled();
     });
   });
 });
