@@ -275,6 +275,6 @@ export const Testing = TestTemplate.bind({});
 Testing.args = {
   mainTitle: 'CCA Guided Workflow',
   mainSubtitle:
-    'Please review these Services with you client, then confirm their responses.',
+    'Please review these Services with your client, then confirm their responses.',
   isStrictMode: false
 };

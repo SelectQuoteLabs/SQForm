@@ -1,6 +1,11 @@
 import React from 'react';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen, waitFor} from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormGuidedWorkflow.stories';
 
@@ -41,12 +46,8 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const agentScript = screen.getByRole('heading', {name: /agent script/i});
     expect(agentScript).toBeVisible();
 
-    //Should we also check for the icon and script text?
-
     const outcomeArea = screen.getByRole('heading', {name: /confirm info/i});
     expect(outcomeArea).toBeVisible();
-
-    //Should we also check for the dropdown and textarea?
 
     const resetButton = screen.getByRole('button', {name: /reset form/i});
     expect(resetButton).toBeVisible();
@@ -72,7 +73,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     expect(nextButton).toBeEnabled();
   });
 
-  it('should close curent expanded card and open the next one when next button is clicked', async () => {
+  it('should close current expanded card and open the next one when next button is clicked', async () => {
     render(<SQFormGuidedWorkflow />);
 
     const introText = screen.queryByText(/hi, bob smith, my name is/i);
@@ -90,13 +91,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const nextButton = screen.getByRole('button', {name: /form submission/i});
     userEvent.click(nextButton);
 
-    await waitFor(
-      () =>
-        expect(
-          screen.getByText(/stuff about policy cancellation/i)
-        ).toBeVisible(),
-      {timeout: 5000}
-    );
+    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+      timeout: 3500
+    });
 
     expect(introText).not.toBeVisible();
     expect(screen.getByText(/stuff about policy cancellation/i)).toBeVisible();
@@ -104,7 +101,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
 
   it("should allow user to go reopen the 1st section after it's completed", async () => {
     //This test runs long so extending the time limit
-    jest.setTimeout(30000);
+    jest.setTimeout(10000);
     render(<SQFormGuidedWorkflow />);
 
     const introText = screen.getByText(/hi, bob smith, my name is/i);
@@ -119,13 +116,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const nextButton = screen.getByRole('button', {name: /form submission/i});
     userEvent.click(nextButton);
 
-    await waitFor(
-      () =>
-        expect(
-          screen.getByText(/stuff about policy cancellation/i)
-        ).toBeVisible(),
-      {timeout: 5000}
-    );
+    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+      timeout: 3500
+    });
 
     const toggleButtons = screen.getAllByRole('button', {
       name: /toggle-expansion/i
@@ -153,13 +146,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(interested);
     const nextButton = screen.getByRole('button', {name: /form submission/i});
     userEvent.click(nextButton);
-    await waitFor(
-      () =>
-        expect(
-          screen.getByText(/stuff about policy cancellation/i)
-        ).toBeVisible(),
-      {timeout: 5000}
-    );
+    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+      timeout: 3500
+    });
 
     const infoText = screen.getByText(/interact with the form/i);
     expect(infoText).toBeVisible();

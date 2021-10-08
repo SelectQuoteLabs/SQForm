@@ -131,13 +131,15 @@ function SQFormGuidedWorkflow({
             <Form>
               <CardContent className={classes.root}>
                 {isSubmitting || taskModule.isLoading ? (
-                  <ComponentLoadingSpinner
-                    message={
-                      isSubmitting
-                        ? `Saving ${taskModule.title} outcome`
-                        : taskModule.isLoadingMessage
-                    }
-                  />
+                  <div data-testid="loadingSpinner">
+                    <ComponentLoadingSpinner
+                      message={
+                        isSubmitting
+                          ? `Saving ${taskModule.title} outcome`
+                          : taskModule.isLoadingMessage
+                      }
+                    />
+                  </div>
                 ) : (
                   <>
                     <AgentScript
