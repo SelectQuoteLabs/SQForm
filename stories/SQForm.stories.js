@@ -59,7 +59,7 @@ const ACTIONS_AUTOCOMPLETE_OPTIONS = [
 
 const MOCK_FORM_ENTITY = {
   firstName: '',
-  lastName: '',
+  lastName: 'Doe',
   city: '',
   age: '',
   state: '',
