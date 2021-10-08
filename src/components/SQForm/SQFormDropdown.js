@@ -65,8 +65,8 @@ function SQFormDropdown({
     const [firstOption] = children;
 
     if (
-      firstOption.label === EMPTY_LABEL ||
-      firstOption.label === EMPTY_VALUE
+      firstOption?.label === EMPTY_LABEL ||
+      firstOption?.label === EMPTY_VALUE
     ) {
       return children;
     }

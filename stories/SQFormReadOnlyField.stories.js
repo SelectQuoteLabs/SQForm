@@ -25,7 +25,10 @@ const defaultArgs = {
 
 const Template = ({initialValue = '', ...args}) => {
   return (
-    <SQFormStoryWrapper initialValues={{[defaultArgs.name]: initialValue}}>
+    <SQFormStoryWrapper
+      initialValues={{[defaultArgs.name]: initialValue}}
+      showSubmit={false}
+    >
       <SQFormReadOnlyFieldComponent
         {...args}
         size={args.size !== 'auto' ? Number(args.size) : args.size}
