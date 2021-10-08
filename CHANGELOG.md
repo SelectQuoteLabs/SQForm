@@ -1,3 +1,10 @@
+### [5.6.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.2...v5.6.3) (2021-10-08)
+
+
+### Bug Fixes
+
+* 🐛 Only shows green fulfilled icon if field updated by user ([a9747fb](https://github.com/SelectQuoteLabs/SQForm/commit/a9747fbc9962591c7c8cbc5990cb2ecece6d2b1a)), closes [#459](https://github.com/SelectQuoteLabs/SQForm/issues/459)
+
 ### [5.6.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.1...v5.6.2) (2021-10-06)
 
 
