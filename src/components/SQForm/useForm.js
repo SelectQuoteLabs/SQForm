@@ -44,7 +44,7 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   const isError = !!errorMessage;
 
   const getFieldStatus = () => {
-    if (isRequired && !hasValue && !isDirty) {
+    if (isRequired && !hasValue && !isDirty && !isTouched) {
       return 'REQUIRED';
     }
     if (isError) {
