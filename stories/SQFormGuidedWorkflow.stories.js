@@ -174,7 +174,7 @@ const Template = () => {
         <ExpandingCard title="Guided Workflow" name="guidedWorkflow">
           <SQFormGuidedWorkflow
             mainTitle="CCA Guided Workflow"
-            mainSubtitle="Please review these Services with you client, then confirm their responses."
+            mainSubtitle="Please review these Services with your client, then confirm their responses."
             initialCompletedTasks={0}
             isStrictMode={false}
             taskModules={taskModules}
