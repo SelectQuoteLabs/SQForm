@@ -18,7 +18,6 @@ afterEach(() => {
 
 const mockData = {
   firstName: 'First',
-  lastName: 'Last',
   hobby: 'baseketball',
   age: 99,
   city: 'Overland Park',
@@ -34,7 +33,8 @@ describe('Tests for BasicForm', () => {
     render(<BasicForm />);
 
     userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
-    userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
+
+    const {value: lastNameInputValue} = screen.getByLabelText(/last name/i);
     userEvent.type(screen.getByLabelText(/hobby/i), mockData.hobby);
     userEvent.type(screen.getByLabelText(/age/i), mockData.age.toString());
 
@@ -68,7 +68,7 @@ describe('Tests for BasicForm', () => {
         JSON.stringify(
           {
             firstName: mockData.firstName,
-            lastName: mockData.lastName,
+            lastName: lastNameInputValue,
             city: '',
             age: mockData.age,
             state: mockData.state,
@@ -93,7 +93,8 @@ describe('Tests for BasicForm', () => {
     render(<BasicForm />);
 
     userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
-    userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
+
+    const {value: lastNameInputValue} = screen.getByLabelText(/last name/i);
 
     userEvent.click(screen.getByRole('button', {name: /form reset/i}));
 
@@ -108,7 +109,7 @@ describe('Tests for BasicForm', () => {
         JSON.stringify(
           {
             firstName: '',
-            lastName: '',
+            lastName: lastNameInputValue,
             city: '',
             age: '',
             state: '',
@@ -146,11 +147,7 @@ describe('Tests for BasicForm', () => {
     ).toBeDisabled();
 
     //Last Name
-    userEvent.type(screen.getByLabelText(/last name/i), mockData.lastName);
-    expect(screen.getByLabelText(/last name/i)).toHaveValue(mockData.lastName);
-    expect(
-      screen.getByRole('button', {name: /form submission/i})
-    ).toBeDisabled();
+    const {value: lastNameInputValue} = screen.getByLabelText(/last name/i);
 
     //Ten Thousand Options
     userEvent.click(screen.getByLabelText(/ten thousand options/i));
@@ -238,7 +235,7 @@ describe('Tests for BasicForm', () => {
         JSON.stringify(
           {
             firstName: 'Laurel',
-            lastName: 'Last',
+            lastName: lastNameInputValue,
             city: '',
             age: 32,
             state: 'KS',

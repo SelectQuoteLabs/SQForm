@@ -1,4 +1,5 @@
 import React from 'react';
+import isEqual from 'lodash.isequal';
 import {getIn, useField} from 'formik';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
@@ -12,14 +13,6 @@ function _handleError(name, isRequired) {
   if (typeof isRequired !== 'boolean') {
     throw new Error('isRequired is a required param and must be a Boolean!');
   }
-}
-
-function _getIsFulfilled(hasValue, isError) {
-  if (hasValue && !isError) {
-    return true;
-  }
-
-  return false;
 }
 
 function _getHasValue(meta) {
@@ -46,11 +39,27 @@ export function useForm({name, isRequired, onBlur, onChange}) {
   const [field, meta, helpers] = useField(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
+  const isDirty = !isEqual(meta.initialValue, meta.value);
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
-  const isFieldError = (isTouched || hasValue) && isError;
-  const isFieldRequired = isRequired && !hasValue;
-  const isFulfilled = _getIsFulfilled(hasValue, isError);
+
+  const getFieldStatus = () => {
+    if (isRequired && !hasValue && !isDirty && !isTouched) {
+      return 'REQUIRED';
+    }
+    if (isError) {
+      return 'ERROR';
+    }
+    if (hasValue && !isError && isDirty) {
+      return 'USER_FULFILLED';
+    }
+
+    return 'FULFILLED';
+  };
+
+  const isFieldRequired = getFieldStatus() === 'REQUIRED';
+  const isFieldError = getFieldStatus() === 'ERROR';
+  const isFulfilled = getFieldStatus() === 'USER_FULFILLED';
 
   const handleChange = React.useCallback(
     event => {
