@@ -92,13 +92,8 @@ describe('SQFormDatePicker Tests', () => {
     //Data setup so the test won't need updating all the time
     const getTestDay = () => {
       const today = new Date();
-      const month = today.getMonth() + 1; //January is 0
-      const currentMonth = month.toString().padStart(2, '0');
-      const day = today.getDate();
-
-      if (day === 1) {
-        return `${currentMonth}/02/${today.getFullYear()}`;
-      }
+      const month = today.getMonth(); //January is 0
+      const currentMonth = month === 11 ? month : month + 1;
 
       return `${currentMonth}/01/${today.getFullYear()}`;
     };
