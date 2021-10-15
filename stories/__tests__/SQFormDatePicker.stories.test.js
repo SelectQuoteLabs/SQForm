@@ -52,16 +52,18 @@ describe('SQFormDatePicker Tests', () => {
     expect(textField).toHaveValue('09/15/2022');
   });
 
-  it('should open calendar view when calendar button is clicked', () => {
+  it('should open calendar view when calendar button is clicked', async () => {
     const initialValues = {
       date: ''
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /date/i});
+    const textField = screen.getByRole('textbox', {name: /choose date/i});
 
     userEvent.click(textField);
+
+    await screen.findByRole('dialog');
 
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
@@ -79,6 +81,8 @@ describe('SQFormDatePicker Tests', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
     userEvent.click(textField);
+
+    await screen.findByRole('dialog');
 
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
