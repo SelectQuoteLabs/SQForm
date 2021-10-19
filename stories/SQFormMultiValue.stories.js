@@ -39,6 +39,19 @@ const defaultArgs = {
   children: MOCK_COLOR_OPTIONS
 };
 
+const getSizeProp = size => {
+  switch (size) {
+    case true:
+    case false:
+    case 'auto':
+      return size;
+    case undefined:
+      return 'auto';
+    default:
+      return Number(size);
+  }
+};
+
 const Template = args => {
   const {SQFormProps, validationSchema, ...componentProps} = args;
 
@@ -53,7 +66,7 @@ const Template = args => {
           {...componentProps}
           name={defaultArgs.name}
           label={defaultArgs.label}
-          size={args.size !== 'auto' ? Number(args.size) : args.size}
+          size={getSizeProp(args.size)}
         />
       </SQFormStoryWrapper>
     </div>
