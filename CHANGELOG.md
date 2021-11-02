@@ -1,3 +1,10 @@
+## [5.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.3...v5.7.0) (2021-11-02)
+
+
+### Features
+
+* 🎸 cardContentStyles prop for SQFormScrollableCard ([65fb816](https://github.com/SelectQuoteLabs/SQForm/commit/65fb816619276ae55c88f2f5a763a6d759254402))
+
 ### [5.6.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.2...v5.6.3) (2021-10-08)
 
 
