@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   MASKS,
-  SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent
+  SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
@@ -13,21 +13,21 @@ export default {
   argTypes: {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
+      page: createDocsPage(),
+    },
+  },
 };
 
 const defaultArgs = {
   label: 'Masked Read Only Field',
-  name: 'maskedReadOnlyField'
+  name: 'maskedReadOnlyField',
 };
 
-const Template = args => {
+const Template = (args) => {
   const {schema, SQFormProps, exampleMasks, ...rest} = args;
   return (
     <SQFormStoryWrapper
@@ -45,7 +45,7 @@ const Template = args => {
   );
 };
 
-const getSizeProp = size => {
+const getSizeProp = (size) => {
   switch (size) {
     case true:
     case false:
@@ -67,8 +67,8 @@ Default.argTypes = {
     options: Object.keys(MASKS),
     mapping: MASKS,
     control: {
-      type: 'select'
+      type: 'select',
     },
-    defaultValue: 'phone'
-  }
+    defaultValue: 'phone',
+  },
 };

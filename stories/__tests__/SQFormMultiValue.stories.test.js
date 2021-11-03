@@ -26,7 +26,7 @@ describe('SQFormMultiValue Tests', () => {
     expect(screen.queryByText('Orange')).not.toBeInTheDocument();
 
     const colorsSelect = screen.getByRole('textbox', {
-      name: /favorite colors/i
+      name: /favorite colors/i,
     });
     userEvent.click(colorsSelect);
 
@@ -44,7 +44,7 @@ describe('SQFormMultiValue Tests', () => {
     expect(screen.queryByText('Test')).not.toBeInTheDocument();
 
     const colorsSelect = screen.getByRole('textbox', {
-      name: /favorite colors/i
+      name: /favorite colors/i,
     });
     userEvent.type(colorsSelect, 'Test{enter}'); //type then press enter
 
@@ -71,7 +71,7 @@ describe('SQFormMultiValue Tests', () => {
     render(<SQFormMultiValue isDisabled={true} />);
 
     const colorsSelect = screen.getByRole('textbox', {
-      name: /favorite colors/i
+      name: /favorite colors/i,
     });
     userEvent.click(colorsSelect);
 
@@ -82,8 +82,8 @@ describe('SQFormMultiValue Tests', () => {
   it('does not display required text when field is not required', () => {
     const SQFormProps = {
       initialValues: {
-        favoriteColors: []
-      }
+        favoriteColors: [],
+      },
     };
     render(<SQFormMultiValue SQFormProps={SQFormProps} />);
 
@@ -93,8 +93,8 @@ describe('SQFormMultiValue Tests', () => {
   it('displays required text when field is required', () => {
     const SQFormProps = {
       initialValues: {
-        favoriteColors: []
-      }
+        favoriteColors: [],
+      },
     };
     render(<SQFormMultiValue SQFormProps={SQFormProps} isRequired={true} />);
 

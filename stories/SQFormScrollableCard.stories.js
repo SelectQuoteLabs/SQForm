@@ -151,8 +151,8 @@ export const CardContentStyles = Template.bind({});
 CardContentStyles.args = {
   ...defaultArgs,
   cardContentStyles: {
-    padding: `0 16px`
-  }
+    padding: `0 16px`,
+  },
 };
 
 const SubHeader = () => (

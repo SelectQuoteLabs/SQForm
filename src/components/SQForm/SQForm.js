@@ -12,7 +12,7 @@ function SQForm({
   initialValues,
   muiGridProps = {},
   onSubmit,
-  validationSchema
+  validationSchema,
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -47,7 +47,7 @@ function SQForm({
       validationSchema={validationYupSchema}
       validateOnMount={true}
     >
-      {_props => {
+      {(_props) => {
         return (
           <Form>
             <Grid
@@ -86,7 +86,7 @@ SQForm.propTypes = {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
 };
 
 export default SQForm;

@@ -7,7 +7,7 @@ import * as stories from '../SQFormDialogStepper.stories';
 
 const {
   Default: SQFormDialogStepper,
-  WithValidation: SQFormDialogStepperWithValidation
+  WithValidation: SQFormDialogStepperWithValidation,
 } = composeStories(stories);
 
 window.alert = jest.fn();
@@ -120,7 +120,7 @@ describe('SQFormDialogStepper Tests', () => {
             firstName: 'First',
             lastName: 'Last',
             newPatient: 'yes',
-            accountID: 12
+            accountID: 12,
           },
           null,
           2

@@ -4,7 +4,7 @@ import {
   render,
   screen,
   waitFor,
-  waitForElementToBeRemoved
+  waitForElementToBeRemoved,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormGuidedWorkflow.stories';
@@ -25,21 +25,21 @@ describe('SQFormGuidedWorkflow Tests', () => {
     expect(openButton).toBeInTheDocument();
 
     const toggleButtons = screen.getAllByRole('button', {
-      name: /toggle-expansion/i
+      name: /toggle-expansion/i,
     });
     expect(toggleButtons.length).toBe(3); // x 3
 
     //First section defaults to open
     const introSection = screen.getByRole('button', {
       name: /toggle-expansion/i,
-      expanded: true
+      expanded: true,
     });
     expect(introSection).toBeVisible();
 
     //Other 2 sections not open
     const remainingSections = screen.getAllByRole('button', {
       name: /toggle-expansion/i,
-      expanded: false
+      expanded: false,
     });
     expect(remainingSections.length).toBe(2);
 
@@ -92,7 +92,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(nextButton);
 
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
-      timeout: 3500
+      timeout: 3500,
     });
 
     expect(introText).not.toBeVisible();
@@ -117,11 +117,11 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(nextButton);
 
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
-      timeout: 3500
+      timeout: 3500,
     });
 
     const toggleButtons = screen.getAllByRole('button', {
-      name: /toggle-expansion/i
+      name: /toggle-expansion/i,
     });
     const firstSection = toggleButtons[0];
 
@@ -147,7 +147,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const nextButton = screen.getByRole('button', {name: /form submission/i});
     userEvent.click(nextButton);
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
-      timeout: 3500
+      timeout: 3500,
     });
 
     const infoText = screen.getByText(/interact with the form/i);
@@ -206,7 +206,7 @@ describe('Testing new story', () => {
     expect(secondScript).toBeVisible();
 
     const toggleButtons = screen.getAllByRole('button', {
-      name: /toggle-expansion/i
+      name: /toggle-expansion/i,
     });
     const firstSection = toggleButtons[0];
 
