@@ -76,7 +76,10 @@ function SQFormDialog<Values>({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
-  const initialErrors = useInitialRequiredErrors(validationSchema);
+  const initialErrors = useInitialRequiredErrors(
+    validationSchema,
+    initialValues
+  );
 
   return (
     <Formik

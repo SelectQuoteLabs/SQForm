@@ -147,6 +147,14 @@ Default.args = {
   ...defaultArgs,
 };
 
+export const CardContentStyles = Template.bind({});
+CardContentStyles.args = {
+  ...defaultArgs,
+  cardContentStyles: {
+    padding: `0 16px`
+  }
+};
+
 const SubHeader = () => (
   <Paper elevation={2}>
     <h3 style={{textAlign: 'center', padding: '10px'}}>Sub Header</h3>

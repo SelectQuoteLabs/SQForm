@@ -52,16 +52,18 @@ describe('SQFormDatePicker Tests', () => {
     expect(textField).toHaveValue('09/15/2022');
   });
 
-  it('should open calendar view when calendar button is clicked', () => {
+  it('should open calendar view when calendar button is clicked', async () => {
     const initialValues = {
       date: ''
     };
 
     renderDatePicker({SQFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /date/i});
+    const textField = screen.getByRole('textbox', {name: /choose date/i});
 
     userEvent.click(textField);
+
+    await screen.findByRole('dialog');
 
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
@@ -80,6 +82,8 @@ describe('SQFormDatePicker Tests', () => {
 
     userEvent.click(textField);
 
+    await screen.findByRole('dialog');
+
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
@@ -92,13 +96,8 @@ describe('SQFormDatePicker Tests', () => {
     //Data setup so the test won't need updating all the time
     const getTestDay = () => {
       const today = new Date();
-      const month = today.getMonth() + 1; //January is 0
-      const currentMonth = month.toString().padStart(2, '0');
-      const day = today.getDate();
-
-      if (day === 1) {
-        return `${currentMonth}/02/${today.getFullYear()}`;
-      }
+      const month = today.getMonth(); //January is 0
+      const currentMonth = month === 11 ? month : month + 1;
 
       return `${currentMonth}/01/${today.getFullYear()}`;
     };

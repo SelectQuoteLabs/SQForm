@@ -20,7 +20,10 @@ function SQForm({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
-  const initialErrors = useInitialRequiredErrors(validationSchema);
+  const initialErrors = useInitialRequiredErrors(
+    validationSchema,
+    initialValues
+  );
 
   // HACK: This is a workaround for: https://github.com/mui-org/material-ui-pickers/issues/2112
   // Remove this reset handler when the issue is fixed.

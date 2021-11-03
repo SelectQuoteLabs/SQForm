@@ -7,12 +7,16 @@ import {toKebabCase} from '../../utils';
 
 interface SQFormReadOnlyFieldProps extends BaseFieldProps {
   muiFieldProps?: TextFieldProps;
+  InputProps: TextFieldProps['InputProps'];
+  inputProps: TextFieldProps['inputProps'];
 }
 
 function SQFormReadOnlyField({
   label,
   name,
   size = 'auto',
+  InputProps = {},
+  inputProps = {},
   muiFieldProps = {},
 }: SQFormReadOnlyFieldProps): React.ReactElement {
   const {
@@ -29,9 +33,11 @@ function SQFormReadOnlyField({
         fullWidth={true}
         InputLabelProps={{shrink: true}}
         InputProps={{
+          ...InputProps,
           readOnly: true,
           disableUnderline: true,
         }}
+        inputProps={inputProps}
         style={{marginBottom: 21}}
         {...muiFieldProps}
       />

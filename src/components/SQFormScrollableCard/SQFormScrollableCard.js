@@ -33,11 +33,12 @@ const useStyles = makeStyles((theme) => {
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
     },
-    cardContent: {
+    cardContent: (props) => ({
       gridArea: 'content',
       overflowY: 'auto',
       padding: `${theme.spacing(2)}px`,
-    },
+      ...props.cardContentStyles,
+    }),
     childrenContainer: {
       width: 'auto',
       margin: ({hasSubHeader}) => {
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => {
 });
 
 function SQFormScrollableCard({
+  cardContentStyles = {},
   children,
   enableReinitialize = false,
   height,
@@ -84,9 +86,12 @@ function SQFormScrollableCard({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
-  const initialErrors = useInitialRequiredErrors(validationSchema);
+  const initialErrors = useInitialRequiredErrors(
+    validationSchema,
+    initialValues
+  );
 
-  const classes = useStyles({hasSubHeader});
+  const classes = useStyles({hasSubHeader, cardContentStyles});
 
   const handleSubmit = useDebouncedCallback(
     (...args) => onSubmit(...args),
@@ -110,8 +115,8 @@ function SQFormScrollableCard({
     const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
 
     const parentHeight = currentElement.parentElement.clientHeight;
-    const parentTopOffset = currentElement.parentElement.getBoundingClientRect()
-      .top;
+    const parentTopOffset =
+      currentElement.parentElement.getBoundingClientRect().top;
     const topDifferential = topOffset - parentTopOffset;
     const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
 
@@ -192,6 +197,8 @@ function SQFormScrollableCard({
 }
 
 SQFormScrollableCard.propTypes = {
+  /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
+  cardContentStyles: PropTypes.object,
   /** Form related Field(s) and components */
   children: PropTypes.node.isRequired,
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
