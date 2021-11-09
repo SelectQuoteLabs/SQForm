@@ -46,7 +46,7 @@ const useActionsStyles = makeStyles({
 });
 const useDialogContentStyles = makeStyles({
   root: {
-    overflowY: 'visible',
+    maxHeight: '75vh',
     padding: '20px'
   }
 });
@@ -94,6 +94,7 @@ function SQFormDialogInner({
   return (
     <>
       <Dialog
+        scroll="body"
         disableBackdropClick={disableBackdropClick}
         maxWidth={maxWidth}
         open={isOpen}
