@@ -195,3 +195,17 @@ WithStaticHeight.args = {
   height: 450,
   SubHeaderComponent: <SubHeader />
 };
+
+export const WithTitleVariant = Template.bind({});
+WithTitleVariant.args = {
+  ...defaultArgs,
+  title: 'h2 Title Variant',
+  titleVariant: 'h1'
+};
+
+export const WithRoundedCorners = Template.bind({});
+WithRoundedCorners.args = {
+  ...defaultArgs,
+  title: 'With Rounded Corners',
+  isSquareCorners: false
+};
