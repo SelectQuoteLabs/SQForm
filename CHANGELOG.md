@@ -1,3 +1,10 @@
+## [5.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.7.0...v5.8.0) (2021-11-15)
+
+
+### Features
+
+* 🎸 Configure title variant and square corners ([4c0bc25](https://github.com/SelectQuoteLabs/SQForm/commit/4c0bc25fdf645491f02d532422836cd50be12ba1))
+
 ## [5.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.3...v5.7.0) (2021-11-02)
 
 
