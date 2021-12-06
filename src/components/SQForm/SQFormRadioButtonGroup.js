@@ -11,21 +11,16 @@ import {useForm} from './useForm';
 function SQFormRadioButtonGroup({
   name,
   onChange,
-  isRequired = false,
   shouldDisplayInRow = false,
   size = 'auto',
   groupLabel,
   children
 }) {
   const {
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     formikField: {field},
     fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired,
-    onChange
-  });
+  } = useForm({name, onChange});
 
   const childrenToRadioGroupItems = () => {
     return children.map(radioOption => {
@@ -47,7 +42,7 @@ function SQFormRadioButtonGroup({
     <Grid item sm={size}>
       <FormControl
         component="fieldset"
-        required={isRequired}
+        required={isFieldRequired}
         error={isFieldError}
         onBlur={handleBlur}
       >
@@ -80,8 +75,6 @@ SQFormRadioButtonGroup.propTypes = {
   name: PropTypes.string.isRequired,
   /** Function to call on value change */
   onChange: PropTypes.func,
-  /** Whether this radio selection is required */
-  isRequired: PropTypes.bool,
   /** Whether to display group in row */
   shouldDisplayInRow: PropTypes.bool,
   /** Size of the input given full-width is 12. */

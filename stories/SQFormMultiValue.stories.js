@@ -79,7 +79,6 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  isRequired: true,
   validationSchema: {
     favoriteColors: Yup.array()
       .of(
@@ -87,8 +86,8 @@ WithValidation.args = {
           return typeof value === 'number' ? Yup.number() : Yup.string();
         })
       )
+      .required()
       .min(1)
-      .required('Required')
   },
   SQFormProps: {
     initialValues: {favoriteColors: []}

@@ -26,11 +26,7 @@ function SQFormCheckboxGroupItem({
   const {
     formikField: {field},
     fieldHelpers: {handleChange}
-  } = useForm({
-    name: groupName,
-    isRequired: false,
-    onChange
-  });
+  } = useForm({name: groupName, onChange});
 
   const classes = useStyles();
 

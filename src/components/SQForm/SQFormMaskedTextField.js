@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
 import {useFormikContext} from 'formik';
 import SQFormTextField from './SQFormTextField';
+import {useForm} from './useForm';
 
 function TextFieldMask({inputRef, mask, ...rest}) {
   return (
@@ -23,7 +24,6 @@ function SQFormMaskedTextField({
   name,
   label,
   isDisabled = false,
-  isRequired = false,
   placeholder,
   size = 'auto',
   onBlur,
@@ -36,6 +36,14 @@ function SQFormMaskedTextField({
   muiFieldProps = {},
   stripNonNumeric = false
 }) {
+  const {
+    fieldState: {isFieldRequired},
+    fieldHelpers: {handleBlur, handleChange}
+  } = useForm({
+    name,
+    onBlur,
+    onChange
+  });
   const {setFieldValue} = useFormikContext();
 
   const handleChangeStripNonNumeric = event => {
@@ -48,11 +56,11 @@ function SQFormMaskedTextField({
       name={name}
       label={label}
       isDisabled={isDisabled}
-      isRequired={isRequired}
+      isRequired={isFieldRequired}
       placeholder={placeholder}
       size={size}
-      onBlur={onBlur}
-      onChange={stripNonNumeric ? handleChangeStripNonNumeric : onChange}
+      onBlur={handleBlur}
+      onChange={stripNonNumeric ? handleChangeStripNonNumeric : handleChange}
       startAdornment={startAdornment}
       endAdornment={endAdornment}
       type={type}
@@ -84,8 +92,6 @@ SQFormMaskedTextField.propTypes = {
   placeholder: PropTypes.string,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Custom onBlur event callback */

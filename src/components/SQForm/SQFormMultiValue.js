@@ -90,7 +90,6 @@ function SQFormMultiValue({
   name,
   label,
   size = 'auto',
-  isRequired = false,
   isDisabled = false,
   onInputChange,
   onChange,
@@ -103,10 +102,7 @@ function SQFormMultiValue({
   const {
     fieldState: {isFieldError},
     fieldHelpers: {HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired
-  });
+  } = useForm({name});
 
   const [inputValue, setInputValue] = React.useState('');
   const [customOptions, setCustomOptions] = React.useState([]);
@@ -310,8 +306,6 @@ SQFormMultiValue.propTypes = {
   label: PropTypes.string.isRequired,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Whether the field is required */
-  isRequired: PropTypes.bool,
   /** Whether the field is disabled */
   isDisabled: PropTypes.bool,
   /** Custom handler for input value change */

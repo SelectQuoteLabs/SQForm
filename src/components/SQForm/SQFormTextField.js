@@ -11,7 +11,6 @@ function SQFormTextField({
   name,
   label,
   isDisabled = false,
-  isRequired = false,
   placeholder = '- -',
   size = 'auto',
   onBlur,
@@ -26,7 +25,7 @@ function SQFormTextField({
 }) {
   const {
     formikField: {field},
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
@@ -34,7 +33,6 @@ function SQFormTextField({
     }
   } = useForm({
     name,
-    isRequired,
     onBlur,
     onChange
   });
@@ -91,7 +89,7 @@ function SQFormTextField({
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}
-        required={isRequired}
+        required={isFieldRequired}
         value={field.value}
         {...muiFieldProps}
       />
@@ -108,8 +106,6 @@ SQFormTextField.propTypes = {
   placeholder: PropTypes.string,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Custom onBlur event callback */

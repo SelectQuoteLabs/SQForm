@@ -4,7 +4,10 @@ import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormMultiValue.stories';
 
-const {Default: SQFormMultiValue} = composeStories(stories);
+const {
+  Default: SQFormMultiValue,
+  WithValidation: SQFormMultiValueWithValidation
+} = composeStories(stories);
 
 describe('SQFormMultiValue Tests', () => {
   it('renders a label, an input, and options', () => {
@@ -90,14 +93,15 @@ describe('SQFormMultiValue Tests', () => {
     expect(screen.queryByText('Required')).not.toBeInTheDocument();
   });
 
-  it('displays required text when field is required', () => {
+  it('should initially render "Required" helper text if field is required', () => {
     const SQFormProps = {
       initialValues: {
         favoriteColors: []
       }
     };
-    render(<SQFormMultiValue SQFormProps={SQFormProps} isRequired={true} />);
+    render(<SQFormMultiValueWithValidation SQFormProps={SQFormProps} />);
 
-    expect(screen.getByText('Required')).toBeVisible();
+    const required = screen.getByText('Required');
+    expect(required).toBeVisible();
   });
 });

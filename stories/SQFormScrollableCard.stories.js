@@ -26,7 +26,7 @@ const defaultArgs = {
     alignItems: 'center'
   },
   onSubmit: () => {},
-  validationSchema: {hello: Yup.string().required('Required')}
+  validationSchema: {hello: Yup.string().required()}
 };
 
 const Template = args => {
@@ -38,102 +38,22 @@ const Template = args => {
       shouldRequireFieldUpdates={true}
       {...restArgs}
     >
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
     </SQFormScrollableCard>
   );
 

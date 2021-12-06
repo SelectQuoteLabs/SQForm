@@ -41,11 +41,7 @@ const Template = args => {
       </h1>
 
       <SQFormDialog {...args}>
-        <SQFormTextField
-          name="hello"
-          label="Hello"
-          isRequired={Boolean(args.validationSchema)}
-        />
+        <SQFormTextField name="hello" label="Hello" />
       </SQFormDialog>
     </>
   );
@@ -59,7 +55,7 @@ WithValidation.args = {
   ...defaultArgs,
   title: 'With Validation',
   validationSchema: {
-    hello: Yup.string().required('Required')
+    hello: Yup.string().required()
   }
 };
 

@@ -4,6 +4,7 @@ import ClearIcon from '@material-ui/icons/HighlightOff';
 import {useFormikContext} from 'formik';
 import {IconButton, makeStyles} from '@material-ui/core';
 import SQFormDatePicker from './SQFormDatePicker';
+import {useForm} from './useForm';
 
 const useClearButtonStyles = makeStyles({
   root: {
@@ -29,13 +30,20 @@ function SQFormDatePickerWithCalendarInputOnly({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   onBlur,
   onChange,
   setDisabledDate,
   muiFieldProps = {}
 }) {
+  const {
+    fieldState: {isFieldRequired},
+    fieldHelpers: {handleBlur, handleChange}
+  } = useForm({
+    name,
+    onBlur,
+    onChange
+  });
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
   const {values, setFieldValue} = useFormikContext();
@@ -50,10 +58,10 @@ function SQFormDatePickerWithCalendarInputOnly({
       label={label}
       size={size}
       isDisabled={isDisabled}
-      isRequired={isRequired}
+      isRequired={isFieldRequired}
       placeholder={placeholder}
-      onBlur={onBlur}
-      onChange={onChange}
+      onBlur={handleBlur}
+      onChange={handleChange}
       setDisabledDate={setDisabledDate}
       isCalendarOnly={true}
       muiFieldProps={{
@@ -85,8 +93,6 @@ function SQFormDatePickerWithCalendarInputOnly({
 SQFormDatePickerWithCalendarInputOnly.propTypes = {
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Descriptive label of the input */
   label: PropTypes.string.isRequired,
   /** Name of the field will be the Object key of the key/value pair form payload */
