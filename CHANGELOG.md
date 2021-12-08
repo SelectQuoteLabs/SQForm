@@ -1,3 +1,14 @@
+## [6.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.8.0...v6.0.0) (2021-12-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Removed the isRequired prop
+
+### Bug Fixes
+
+* 🐛 No longer need to pass isRequired to form components ([aa63449](https://github.com/SelectQuoteLabs/SQForm/commit/aa63449f23c864e4ba7d293103088ca00bc62741)), closes [#472](https://github.com/SelectQuoteLabs/SQForm/issues/472)
+
 ## [5.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.7.0...v5.8.0) (2021-11-15)
 
 
