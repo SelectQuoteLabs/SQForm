@@ -11,7 +11,6 @@ function SQFormTextarea({
   name,
   label,
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   size = 'auto',
   onBlur,
@@ -24,7 +23,7 @@ function SQFormTextarea({
 }) {
   const {values} = useFormikContext();
   const {
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
@@ -32,7 +31,6 @@ function SQFormTextarea({
     }
   } = useForm({
     name,
-    isRequired,
     onBlur,
     onChange
   });
@@ -73,7 +71,7 @@ function SQFormTextarea({
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}
-        required={isRequired}
+        required={isFieldRequired}
         rows={rows}
         rowsMax={rowsMax}
         variant="outlined"
@@ -97,8 +95,6 @@ SQFormTextarea.propTypes = {
   placeholder: PropTypes.string,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Custom onBlur event callback */

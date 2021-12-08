@@ -123,20 +123,6 @@ describe('SQFormAutocomplete Tests', () => {
       expect(textField).toBeDisabled();
     });
 
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormAutocomplete size="auto" isRequired={true} />);
-
-      const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-    });
-
-    it('should not render as required when isRequired is false', () => {
-      render(<SQFormAutocomplete size="auto" isRequired={false} />);
-
-      const requiredText = screen.queryByText(/required/i);
-      expect(requiredText).not.toBeInTheDocument();
-    });
-
     it('should display empty value when displayEmpty is true', () => {
       render(<SQFormAutocomplete size="auto" displayEmpty={true} />);
 
@@ -163,6 +149,21 @@ describe('SQFormAutocomplete Tests', () => {
   });
 
   describe('Autocomplete With Validation', () => {
+    it('should render as required when it is a required field', () => {
+      render(<SQFormAutocompleteWithValidation size="auto" />);
+
+      const requiredText = screen.getByText(/required/i);
+      expect(requiredText).toBeVisible();
+      expect(requiredText).toHaveClass('Mui-required');
+    });
+
+    it('should not render as required when it is not a required field', () => {
+      render(<SQFormAutocomplete size="auto" />);
+
+      const requiredText = screen.queryByText(/required/i);
+      expect(requiredText).not.toBeInTheDocument();
+    });
+
     it('should highlight field if required but no value selected', () => {
       render(<SQFormAutocompleteWithValidation size="auto" />);
 

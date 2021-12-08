@@ -85,7 +85,6 @@ const ListboxVirtualizedComponent = React.forwardRef(
 function SQFormAsyncAutocomplete({
   children,
   isDisabled = false,
-  isRequired = false,
   label,
   name,
   onBlur,
@@ -102,12 +101,9 @@ function SQFormAsyncAutocomplete({
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
   const {
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired
-  });
+  } = useForm({name});
 
   const initialValue = React.useMemo(() => {
     const optionInitialValue = children.find(option => {
@@ -215,7 +211,7 @@ function SQFormAsyncAutocomplete({
               name={name}
               label={label}
               helperText={!isDisabled && HelperTextComponent}
-              required={isRequired}
+              required={isFieldRequired}
             />
           );
         }}
@@ -241,8 +237,6 @@ SQFormAsyncAutocomplete.propTypes = {
   handleAsyncInputChange: PropTypes.func.isRequired,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Whether the component is loading */
   loading: PropTypes.bool,
   /** Label text */

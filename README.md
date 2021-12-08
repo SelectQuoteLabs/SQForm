@@ -37,6 +37,50 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 - `> npm install @selectquotelabs/sqform`
 
+## Breaking Changes
+
+### Version 6
+
+In SQForm v6, we no longer need to pass the `isRequired` prop to any form components. The components now derive whether or not they are a required field based on the Yup validation schema of the form.
+
+While removing this boilerplate is nice, this allows us to handle situations where a fields `required` attribute is conditional. We can fully rely on the validation schema rather than also creating a mechanism to make `isRequired` conditional and keeping the `isRequired` prop in sync with the validation schema.
+
+We ALWAYS want a required field to say `Required` in the fields helper text. We are no longer required to specify the `Required` text within our validation schemas as long as we follow the setup below in the consumer app. Otherwise, you'll still need to say for example: `foo: Yup.string().required('Required')`
+
+When updating the consuming applications version of SQForm to v6, please add this code to the root of the client:
+
+```
+// root of the consumer app such as index.js
+import {setLocale} from 'yup';
+
+setLocale({
+  mixed: {
+    required: 'Required',
+  },
+});
+```
+
+During this time, please search the project for validation schemas that use `array()`. If they are `required`.
+Please ensure `.required()` is the FIRST validation method in the chain.
+
+```
+// ✅ Example
+options: Yup.array()
+  .required()
+  .min(1, 'Please choose one option'),
+```
+
+```
+// ⛔️ Example
+options: Yup.array()
+  .min(1, 'Please choose one option')
+  .required(),
+```
+
+When upgrading the consumer application to SQForm v6, we should also cleanup any use of the `isRequired` prop. While this is optional in JavaScript projects, this is extra noise and a possible spot of confusion for future new developers. The `isRequired` prop does nothing in v6.
+
+For TypeScript, please remove the `isRequired` property from any TypeScript `types` and `interfaces`.
+
 ## Migration from SC+ Shared Components Library
 
 - `> npm install @selectquotelabs/sqform`

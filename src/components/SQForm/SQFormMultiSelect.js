@@ -74,7 +74,6 @@ const useStyles = makeStyles({
 function SQFormMultiSelect({
   children,
   isDisabled = false,
-  isRequired = false,
   label,
   name,
   onChange,
@@ -91,12 +90,9 @@ function SQFormMultiSelect({
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
     formikField: {field},
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired
-  });
+  } = useForm({name});
 
   React.useEffect(() => {
     if (!children) {
@@ -175,7 +171,7 @@ function SQFormMultiSelect({
       <FormControl
         error={isFieldError}
         disabled={isDisabled}
-        required={isRequired}
+        required={isFieldRequired}
         fullWidth={true}
       >
         <InputLabel shrink={true} id={labelID}>
@@ -246,8 +242,6 @@ SQFormMultiSelect.propTypes = {
   ),
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
   /** Custom onChange event callback */

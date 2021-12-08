@@ -50,7 +50,7 @@ const booleanValueArgs = {
   label: 'Opt in?',
   name: 'isOptIn',
   children: YES_NO_OPTIONS,
-  schema: {isOptIn: Yup.bool().required('Required')},
+  schema: {isOptIn: Yup.bool().required()},
   SQFormProps: {
     initialValues: {isOptIn: false}
   }

@@ -105,22 +105,12 @@ export const WithValidation = args => {
         <SQFormDialogStep
           label="Personal Data"
           validationSchema={{
-            firstName: Yup.string().required('Required'),
-            lastName: Yup.string().required('Required')
+            firstName: Yup.string().required(),
+            lastName: Yup.string().required()
           }}
         >
-          <SQFormTextField
-            fullWidth
-            name="firstName"
-            label="First Name"
-            isRequired={true}
-          />
-          <SQFormTextField
-            fullWidth
-            name="lastName"
-            label="Last Name"
-            isRequired={true}
-          />
+          <SQFormTextField fullWidth name="firstName" label="First Name" />
+          <SQFormTextField fullWidth name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
@@ -128,7 +118,7 @@ export const WithValidation = args => {
             accountID: Yup.mixed().when('newPatient', {
               is: value => value === 'yes',
               then: Yup.number()
-                .required('Required for new account')
+                .required()
                 .min(100, 'Required for new account')
             })
           }}

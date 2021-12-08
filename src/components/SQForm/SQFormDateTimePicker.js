@@ -21,7 +21,6 @@ function SQFormDateTimePicker({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   onBlur,
   onChange,
@@ -29,11 +28,10 @@ function SQFormDateTimePicker({
 }) {
   const {
     formikField: {field, helpers},
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent}
   } = useForm({
     name,
-    isRequired,
     onBlur,
     onChange
   });
@@ -83,7 +81,7 @@ function SQFormDateTimePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 onClick={handleClickAway}
-                required={isRequired}
+                required={isFieldRequired}
                 classes={classes}
               />
             );
@@ -98,8 +96,6 @@ function SQFormDateTimePicker({
 SQFormDateTimePicker.propTypes = {
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Descriptive label of the input */
   label: PropTypes.string.isRequired,
   /** Name of the field will be the Object key of the key/value pair form payload */

@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 
 import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
@@ -47,12 +48,13 @@ const defaultArgs = {
   children: MOCK_FRIENDS_OPTIONS
 };
 
-export const SQFormMultiSelect = args => {
-  const {SQFormProps, ...rest} = args;
+export const Template = args => {
+  const {SQFormProps, validationSchema, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         initialValues={{[defaultArgs.name]: []}}
+        validationSchema={validationSchema}
         {...SQFormProps}
       >
         <SQFormMultiSelectComponent
@@ -65,8 +67,21 @@ export const SQFormMultiSelect = args => {
     </div>
   );
 };
-SQFormMultiSelect.storyName = 'SQFormMultiSelect';
+
+export const SQFormMultiSelect = Template.bind({});
 SQFormMultiSelect.args = defaultArgs;
+
+export const WithValidation = Template.bind({});
+WithValidation.args = {
+  validationSchema: {
+    friends: Yup.array()
+      .required()
+      .min(1)
+  },
+  SQFormProps: {
+    initialValues: {friends: []}
+  }
+};
 
 function random(length) {
   const characters =

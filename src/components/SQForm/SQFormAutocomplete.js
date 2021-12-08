@@ -198,7 +198,6 @@ const useAutocompleteStyles = makeStyles({
 function SQFormAutocomplete({
   children,
   isDisabled = false,
-  isRequired = false,
   displayEmpty = false,
   label,
   name,
@@ -217,12 +216,9 @@ function SQFormAutocomplete({
   const {setFieldValue, setTouched, values, touched} = useFormikContext();
   const [{value}] = useField(name);
   const {
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired
-  });
+  } = useForm({name});
 
   const initialValue = getInitialValue(children, value, displayEmpty);
 
@@ -313,7 +309,7 @@ function SQFormAutocomplete({
               name={name}
               label={label}
               helperText={!isDisabled && HelperTextComponent}
-              required={isRequired}
+              required={isFieldRequired}
             />
           );
         }}
@@ -338,8 +334,6 @@ SQFormAutocomplete.propTypes = {
   ),
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Whether to display empty option */
   displayEmpty: PropTypes.bool,
   /** Label text */

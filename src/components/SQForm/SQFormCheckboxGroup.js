@@ -13,7 +13,6 @@ import {useForm} from './useForm';
 function SQFormCheckboxGroup({
   name,
   groupLabel,
-  isRequired = false,
   onChange,
   shouldDisplayInRow = false,
   shouldUseSelectAll = false,
@@ -21,13 +20,9 @@ function SQFormCheckboxGroup({
   children
 }) {
   const {
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired,
-    onChange
-  });
+  } = useForm({name, onChange});
 
   const {setFieldValue} = useFormikContext();
 
@@ -84,7 +79,7 @@ function SQFormCheckboxGroup({
     <Grid item sm={size}>
       <FormControl
         component="fieldset"
-        required={isRequired}
+        required={isFieldRequired}
         error={isFieldError}
         onBlur={handleBlur}
       >
@@ -111,8 +106,6 @@ SQFormCheckboxGroup.propTypes = {
   name: PropTypes.string.isRequired,
   /** Label to display above the group */
   groupLabel: PropTypes.string.isRequired,
-  /** Whether this a selection in this group is required */
-  isRequired: PropTypes.bool,
   /** Function to call on value change */
   onChange: PropTypes.func,
   /** Whether to display the group in a row */

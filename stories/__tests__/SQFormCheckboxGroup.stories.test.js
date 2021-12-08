@@ -78,13 +78,6 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(checkboxLabel).not.toBeChecked();
     });
 
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormCheckboxGroup size="auto" isRequired />);
-
-      const required = screen.getByText('Required');
-      expect(required).toBeInTheDocument();
-    });
-
     it('should render an extra checkbox when adding select all capability', () => {
       render(<SQFormCheckboxGroup size="auto" shouldUseSelectAll />);
 
@@ -226,13 +219,28 @@ describe('SQFormCheckboxGroup Tests', () => {
 
       userEvent.click(checkbox);
 
-      const required = screen.getByText('Required');
+      const required = screen.getByText(/Required/i);
       expect(required).toHaveClass('Mui-required');
 
       const submitButton = screen.getByRole('button', {
         name: /form submission/i
       });
       expect(submitButton).toBeDisabled();
+    });
+
+    it('should render as required when when its field is required', () => {
+      render(<SQFormCheckboxGroupWithValidation size="auto" />);
+
+      const required = screen.getByText(/Required/i);
+      expect(required).toBeInTheDocument();
+      expect(required).toHaveClass('Mui-required');
+    });
+
+    it('should not render as required when when its field is not required', () => {
+      render(<SQFormCheckboxGroup size="auto" />);
+
+      const required = screen.queryByText(/Required/i);
+      expect(required).not.toBeInTheDocument();
     });
   });
 });
