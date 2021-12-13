@@ -204,8 +204,8 @@ SQFormScrollableCard.propTypes = {
   children: PropTypes.node.isRequired,
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize: PropTypes.bool,
-  /** Number overriding the height of the component */
-  height: PropTypes.number,
+  /** String/Number overriding the height of the component */
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Helper text to display in the Footer when the Form is in an Error state */
   helperErrorText: PropTypes.string,
   /** Helper text to display in the Footer when the Form is in a Failure state */
