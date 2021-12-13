@@ -1,16 +1,20 @@
 import React from 'react';
 import {Paper, makeStyles} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => {
+interface TopSubHeaderProps {
+  children: React.ReactNode;
+}
+
+const useStyles = makeStyles((theme) => {
   return {
     container: {
       padding: `${theme.spacing(1.5)}px ${theme.spacing(2)}px`,
-      marginBottom: `${theme.spacing(4)}px`
-    }
+      marginBottom: `${theme.spacing(4)}px`,
+    },
   };
 });
 
-function TopSubHeader({children}) {
+function TopSubHeader({children}: TopSubHeaderProps): React.ReactElement {
   const classes = useStyles();
 
   return (
