@@ -20,7 +20,8 @@ function SQFormDialog({
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
-  validationSchema
+  validationSchema,
+  showSecondaryButton = true
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -55,6 +56,7 @@ function SQFormDialog({
         shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
+        showSecondaryButton={showSecondaryButton}
       />
     </Formik>
   );
@@ -93,7 +95,9 @@ SQFormDialog.propTypes = {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
+  /** show/hide the secondary Cancel button.  Defaults to show(true) */
+  showSecondaryButton: PropTypes.bool
 };
 
 export default SQFormDialog;
