@@ -114,10 +114,25 @@ it('should not call onClose on `escape` keydown because cancel is not available'
     code: 'Escape'
   });
 
+  await waitFor(() => {
+    expect(handleClose).not.toHaveBeenCalled();
+  });
+});
+
+it('should not find the cancel secondary button', async () => {
+  render(
+    <Default
+      isOpen={true}
+      onSave={handleSave}
+      onClose={handleClose}
+      showSecondaryButton={false}
+    />
+  );
+
   expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
 
   await waitFor(() => {
-    expect(handleClose).toHaveBeenCalledTimes(0);
+    expect(handleClose).not.toHaveBeenCalled();
   });
 });
 
