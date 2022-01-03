@@ -17,7 +17,7 @@ import {
   SQFormAutocompleteProps,
 } from './SQFormAutocomplete';
 
-interface SQFormAsyncAutocomplete extends SQFormAutocompleteProps {
+interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
   handleAsyncInputChange: (value: string | number | boolean) => void;
   /** Whether the component is loading */
@@ -134,7 +134,7 @@ function SQFormAsyncAutocomplete({
   onOpen,
   onClose,
   size = 'auto',
-}: SQFormAsyncAutocomplete): React.ReactElement {
+}: SQFormAsyncAutocompleteProps): React.ReactElement {
   const classes = useStyles();
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
