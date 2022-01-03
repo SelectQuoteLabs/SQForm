@@ -44,9 +44,9 @@ In english this validation says "nameOfField's value must be an array of numbers
         return typeof value === 'number' ? Yup.number() : Yup.string();
       })
     )
+    // Ensures this field is filled before submission
+    .required(),
     // Minimum one selection required
     .min(1)
-    // Ensures this field is filled before submission
-    .required('Required'),
 }
 ```

@@ -77,6 +77,8 @@ function SQFormScrollableCard({
   title,
   validationSchema,
   isHeaderDisabled = false,
+  titleVariant = 'h4',
+  isSquareCorners = true,
 }) {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
@@ -146,14 +148,14 @@ function SQFormScrollableCard({
               <Card
                 raised={true}
                 elevation={1}
-                square={true}
+                square={isSquareCorners}
                 className={classes.card}
               >
                 {!isHeaderDisabled && (
                   <CardHeader
                     title={title}
                     className={classes.cardHeader}
-                    titleTypographyProps={{variant: 'h4'}}
+                    titleTypographyProps={{variant: titleVariant}}
                   />
                 )}
 
@@ -247,8 +249,12 @@ SQFormScrollableCard.propTypes = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema: PropTypes.object,
-  //** Boolean used to determine if title/header is enabled or disabled */
+  /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled: PropTypes.bool,
+  /** Title Variant: defaults to 'h4', will be assigned to variant in MUI Card Header's titleTypographyProps */
+  titleVariant: PropTypes.string,
+  /** Card style defaults to square */
+  isSquareCorners: PropTypes.bool,
 };
 
 export default SQFormScrollableCard;

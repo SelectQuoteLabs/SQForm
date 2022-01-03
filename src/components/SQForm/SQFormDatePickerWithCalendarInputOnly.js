@@ -4,24 +4,25 @@ import ClearIcon from '@material-ui/icons/HighlightOff';
 import {useFormikContext} from 'formik';
 import {IconButton, makeStyles} from '@material-ui/core';
 import SQFormDatePicker from './SQFormDatePicker';
+import {useForm} from './useForm';
 
 const useClearButtonStyles = makeStyles({
   root: {
     order: 1,
-    padding: 0
-  }
+    padding: 0,
+  },
 });
 
 const useCalendarButtonStyles = makeStyles({
   root: {
     order: 2,
     '& .MuiIconButton-root': {
-      padding: 0
+      padding: 0,
     },
     '& .MuiIconButton-edgeEnd': {
-      margin: 0
-    }
-  }
+      margin: 0,
+    },
+  },
 });
 
 function SQFormDatePickerWithCalendarInputOnly({
@@ -29,13 +30,20 @@ function SQFormDatePickerWithCalendarInputOnly({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   onBlur,
   onChange,
   setDisabledDate,
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
+  const {
+    fieldState: {isFieldRequired},
+    fieldHelpers: {handleBlur, handleChange},
+  } = useForm({
+    name,
+    onBlur,
+    onChange,
+  });
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
   const {values, setFieldValue} = useFormikContext();
@@ -50,10 +58,10 @@ function SQFormDatePickerWithCalendarInputOnly({
       label={label}
       size={size}
       isDisabled={isDisabled}
-      isRequired={isRequired}
+      isRequired={isFieldRequired}
       placeholder={placeholder}
-      onBlur={onBlur}
-      onChange={onChange}
+      onBlur={handleBlur}
+      onChange={handleChange}
       setDisabledDate={setDisabledDate}
       isCalendarOnly={true}
       muiFieldProps={{
@@ -67,16 +75,16 @@ function SQFormDatePickerWithCalendarInputOnly({
             >
               <ClearIcon color="disabled" fontSize="small" />
             </IconButton>
-          )
+          ),
         },
         InputAdornmentProps: {
           position: 'end',
-          classes: calendarButtonClasses
-        }
+          classes: calendarButtonClasses,
+        },
       }}
       muiTextInputProps={{
         readOnly: true,
-        style: {cursor: isDisabled ? 'default' : 'pointer'}
+        style: {cursor: isDisabled ? 'default' : 'pointer'},
       }}
     />
   );
@@ -85,8 +93,6 @@ function SQFormDatePickerWithCalendarInputOnly({
 SQFormDatePickerWithCalendarInputOnly.propTypes = {
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Descriptive label of the input */
   label: PropTypes.string.isRequired,
   /** Name of the field will be the Object key of the key/value pair form payload */
@@ -105,7 +111,7 @@ SQFormDatePickerWithCalendarInputOnly.propTypes = {
    */
   setDisabledDate: PropTypes.func,
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormDatePickerWithCalendarInputOnly;

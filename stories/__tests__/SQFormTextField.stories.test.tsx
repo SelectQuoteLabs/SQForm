@@ -66,20 +66,6 @@ describe('SQFormTextField Tests', () => {
       expect(textField).not.toBeDisabled();
     });
 
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormTextField size="auto" isRequired />);
-
-      const required = screen.getByText('Required');
-      expect(required).toBeInTheDocument();
-    });
-
-    it('should not render as required when isRequired is false', () => {
-      render(<SQFormTextField size="auto" isRequired={false} />);
-
-      const required = screen.queryByText('Required');
-      expect(required).not.toBeInTheDocument();
-    });
-
     it('should only render the number of characters equal to maxCharacters', () => {
       const maxCharacters = 5;
 
@@ -109,7 +95,14 @@ describe('SQFormTextField Tests', () => {
   });
 
   describe('Text Field With Validation', () => {
-    it('should highlight field if required by no value selected', async () => {
+    it('should initially render "Required" helper text if field is required', () => {
+      render(<SQFormTextFieldWithValidation size="auto" />);
+
+      const required = screen.getByText('Required');
+      expect(required).toHaveClass('Mui-required');
+    });
+
+    it('should highlight field if required but no value selected', () => {
       render(<SQFormTextFieldWithValidation size="auto" />);
 
       userEvent.tab();

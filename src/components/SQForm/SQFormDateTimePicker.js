@@ -8,12 +8,13 @@ import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
   root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)': {
-      '& .MuiIconButton-root': {
-        color: 'var(--color-teal)'
-      }
-    }
-  }
+    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+      {
+        '& .MuiIconButton-root': {
+          color: 'var(--color-teal)',
+        },
+      },
+  },
 }));
 
 function SQFormDateTimePicker({
@@ -21,24 +22,22 @@ function SQFormDateTimePicker({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   onBlur,
   onChange,
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const {
     formikField: {field, helpers},
-    fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldState: {isFieldError, isFieldRequired},
+    fieldHelpers: {handleBlur, HelperTextComponent},
   } = useForm({
     name,
-    isRequired,
     onBlur,
-    onChange
+    onChange,
   });
 
-  const handleChange = date => {
+  const handleChange = (date) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
@@ -68,7 +67,7 @@ function SQFormDateTimePicker({
           onClose={handleClose}
           onOpen={toggleCalendar}
           open={isCalendarOpen}
-          renderInput={inputProps => {
+          renderInput={(inputProps) => {
             return (
               <TextField
                 {...inputProps}
@@ -83,7 +82,7 @@ function SQFormDateTimePicker({
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 onClick={handleClickAway}
-                required={isRequired}
+                required={isFieldRequired}
                 classes={classes}
               />
             );
@@ -98,8 +97,6 @@ function SQFormDateTimePicker({
 SQFormDateTimePicker.propTypes = {
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Descriptive label of the input */
   label: PropTypes.string.isRequired,
   /** Name of the field will be the Object key of the key/value pair form payload */
@@ -113,7 +110,7 @@ SQFormDateTimePicker.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func,
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormDateTimePicker;

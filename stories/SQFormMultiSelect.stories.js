@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 
 import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
@@ -10,16 +11,16 @@ export default {
   argTypes: {
     children: {table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage(),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
 const MOCK_FRIENDS_OPTIONS = [
@@ -38,21 +39,22 @@ const MOCK_FRIENDS_OPTIONS = [
   {label: 'Jonah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Judah', value: random(10 + Math.ceil(Math.random() * 20))},
   {label: 'Jimmy', value: random(10 + Math.ceil(Math.random() * 20))},
-  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))}
+  {label: 'Jessica', value: random(10 + Math.ceil(Math.random() * 20))},
 ];
 
 const defaultArgs = {
   label: 'Friends',
   name: 'friends',
-  children: MOCK_FRIENDS_OPTIONS
+  children: MOCK_FRIENDS_OPTIONS,
 };
 
-export const SQFormMultiSelect = args => {
-  const {SQFormProps, ...rest} = args;
+export const Template = (args) => {
+  const {SQFormProps, validationSchema, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         initialValues={{[defaultArgs.name]: []}}
+        validationSchema={validationSchema}
         {...SQFormProps}
       >
         <SQFormMultiSelectComponent
@@ -65,8 +67,19 @@ export const SQFormMultiSelect = args => {
     </div>
   );
 };
-SQFormMultiSelect.storyName = 'SQFormMultiSelect';
+
+export const SQFormMultiSelect = Template.bind({});
 SQFormMultiSelect.args = defaultArgs;
+
+export const WithValidation = Template.bind({});
+WithValidation.args = {
+  validationSchema: {
+    friends: Yup.array().required().min(1),
+  },
+  SQFormProps: {
+    initialValues: {friends: []},
+  },
+};
 
 function random(length) {
   const characters =

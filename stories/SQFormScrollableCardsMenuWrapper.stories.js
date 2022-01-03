@@ -5,7 +5,7 @@ import {
   SQFormScrollableCardsMenuWrapper,
   SQFormScrollableCard,
   SQFormTextField,
-  SQFormCheckbox
+  SQFormCheckbox,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -13,8 +13,8 @@ export default {
   title: 'Forms/SQFormScrollableCardsMenuWrapper',
   component: SQFormScrollableCardsMenuWrapper,
   parameters: {
-    docs: {page: createDocsPage({showStories: false})}
-  }
+    docs: {page: createDocsPage({showStories: false})},
+  },
 };
 
 export const sqFormScrollableCardsMenuWrapper = () => {
@@ -30,11 +30,11 @@ export const sqFormScrollableCardsMenuWrapper = () => {
 
 function ScrollableDetails() {
   const initialValues = {
-    name: ''
+    name: '',
   };
 
   const validationSchema = {
-    name: yup.string().required('Required')
+    name: yup.string().required(),
   };
 
   const handleSubmit = (values, actions) => {
@@ -53,23 +53,18 @@ function ScrollableDetails() {
       validationSchema={validationSchema}
       title="notApplicableBecauseHeaderDisabled" // bug in SQFormScrollableCard bc it errors if no title prop even though it doesn't render its cardheader
     >
-      <SQFormTextField
-        name="name"
-        label="Name"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
+      <SQFormTextField name="name" label="Name" size={12} />
     </SQFormScrollableCard>
   );
 }
 
 function ScrollablePermissions() {
   const initialValues = {
-    isAdmin: false
+    isAdmin: false,
   };
 
   const validationSchema = {
-    isAdmin: yup.boolean()
+    isAdmin: yup.boolean(),
   };
 
   const handleSubmit = (values, actions) => {

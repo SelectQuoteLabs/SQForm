@@ -6,19 +6,20 @@ import {DatePicker, BaseDatePickerProps} from '@material-ui/pickers';
 import {
   makeStyles,
   ClickAwayListener,
-  InputBaseComponentProps
+  InputBaseComponentProps,
 } from '@material-ui/core';
 import BaseFieldProps from '../../types/BaseFieldProps';
 import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
   root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)': {
-      '& .MuiIconButton-root': {
-        color: 'var(--color-teal)'
-      }
-    }
-  }
+    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+      {
+        '& .MuiIconButton-root': {
+          color: 'var(--color-teal)',
+        },
+      },
+  },
 }));
 
 interface SQFormDatePickerProps extends BaseFieldProps {
@@ -50,24 +51,22 @@ function SQFormDatePicker({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '',
   onBlur,
   onChange,
   setDisabledDate,
   muiFieldProps = {},
   muiTextInputProps = {},
-  isCalendarOnly = false
+  isCalendarOnly = false,
 }: SQFormDatePickerProps): JSX.Element {
   const {
     formikField: {field, helpers},
-    fieldState: {isFieldError},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldState: {isFieldError, isFieldRequired},
+    fieldHelpers: {handleBlur, HelperTextComponent},
   } = useForm({
     name,
-    isRequired,
     onBlur,
-    onChange
+    onChange,
   });
 
   const handleChange = (date: React.ChangeEvent<moment.Moment> | unknown) => {
@@ -101,7 +100,7 @@ function SQFormDatePicker({
           onClose={handleClose}
           onOpen={toggleCalendar}
           open={isCalendarOpen}
-          renderInput={inputProps => {
+          renderInput={(inputProps) => {
             return (
               <TextField
                 {...inputProps}
@@ -115,7 +114,7 @@ function SQFormDatePicker({
                 helperText={!isDisabled && HelperTextComponent}
                 placeholder={placeholder}
                 onBlur={handleBlur}
-                required={isRequired}
+                required={isFieldRequired}
                 onClick={
                   isCalendarOnly && !isDisabled
                     ? toggleCalendar

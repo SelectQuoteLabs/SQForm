@@ -6,7 +6,8 @@ import {composeStories} from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormMultiSelect.stories';
 
-const {SQFormMultiSelect} = composeStories(stories);
+const {SQFormMultiSelect, WithValidation: SQFormMultiSelectWithValidation} =
+  composeStories(stories);
 
 const initialDropdownValue = '- -';
 
@@ -16,7 +17,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {
-        name: /friends/i
+        name: /friends/i,
       })
     );
 
@@ -34,7 +35,7 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const expandButton = await waitFor(() =>
       screen.findByRole('button', {
-        name: /friends/i
+        name: /friends/i,
       })
     );
 
@@ -62,7 +63,7 @@ describe('Tests for SQFormMultiSelect', () => {
       <SQFormMultiSelect
         size="auto"
         SQFormProps={{
-          initialValues: {friends: [1, 2]}
+          initialValues: {friends: [1, 2]},
         }}
       />
     );
@@ -83,7 +84,7 @@ describe('Tests for SQFormMultiSelect', () => {
       <SQFormMultiSelect
         size="auto"
         SQFormProps={{
-          initialValues: {friends: [0]}
+          initialValues: {friends: [0]},
         }}
       />
     );
@@ -147,10 +148,10 @@ describe('Tests for SQFormMultiSelect', () => {
     expect(optionsList).not.toBeInTheDocument();
   });
 
-  it('should display "required" helper text if field is required', async () => {
-    render(<SQFormMultiSelect isRequired={true} size="auto" />);
+  it('should initially render "Required" helper text if field is required', () => {
+    render(<SQFormMultiSelectWithValidation size="auto" />);
 
-    const required = await screen.findByText(/required/i);
+    const required = screen.getByText(/required/i);
     expect(required).toBeVisible();
   });
 
@@ -158,14 +159,12 @@ describe('Tests for SQFormMultiSelect', () => {
     render(<SQFormMultiSelect isRequired={false} size="auto" />);
 
     const required = screen.queryByText(/required/i);
-    await waitFor(() => expect(required).not.toBeInTheDocument());
+    expect(required).not.toBeInTheDocument();
   });
 
   it('should highlight field if required but no value selected', async () => {
     const validationSchema = {
-      friends: Yup.array()
-        .min(1, 'Required')
-        .required('Required')
+      friends: Yup.string().required(),
     };
 
     render(
@@ -173,7 +172,7 @@ describe('Tests for SQFormMultiSelect', () => {
         isRequired={true}
         size="auto"
         SQFormProps={{
-          validationSchema
+          validationSchema,
         }}
       />
     );

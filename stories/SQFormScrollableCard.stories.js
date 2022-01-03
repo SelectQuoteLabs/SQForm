@@ -26,7 +26,7 @@ const defaultArgs = {
     alignItems: 'center',
   },
   onSubmit: () => {},
-  validationSchema: {hello: Yup.string().required('Required')},
+  validationSchema: {hello: Yup.string().required()},
 };
 
 const Template = (args) => {
@@ -38,102 +38,22 @@ const Template = (args) => {
       shouldRequireFieldUpdates={true}
       {...restArgs}
     >
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
     </SQFormScrollableCard>
   );
 
@@ -194,4 +114,18 @@ WithStaticHeight.args = {
   title: 'With Static Height',
   height: 450,
   SubHeaderComponent: <SubHeader />,
+};
+
+export const WithTitleVariant = Template.bind({});
+WithTitleVariant.args = {
+  ...defaultArgs,
+  title: 'h2 Title Variant',
+  titleVariant: 'h1',
+};
+
+export const WithRoundedCorners = Template.bind({});
+WithRoundedCorners.args = {
+  ...defaultArgs,
+  title: 'With Rounded Corners',
+  isSquareCorners: false,
 };

@@ -32,7 +32,6 @@ function SQFormDropdown({
   children,
   displayEmpty = false,
   isDisabled = false,
-  isRequired = false,
   label,
   name,
   onBlur,
@@ -44,11 +43,10 @@ function SQFormDropdown({
 
   const {
     formikField: {field},
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, handleChange, HelperTextComponent},
   } = useForm({
     name,
-    isRequired,
     onBlur,
     onChange,
   });
@@ -99,7 +97,7 @@ function SQFormDropdown({
     <Grid item sm={size}>
       <FormControl
         error={isFieldError}
-        required={isRequired}
+        required={isFieldRequired}
         disabled={isDisabled}
         fullWidth={true}
       >
@@ -152,8 +150,6 @@ SQFormDropdown.propTypes = {
   displayEmpty: PropTypes.bool,
   /** Disabled property to disable the input if true */
   isDisabled: PropTypes.bool,
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired: PropTypes.bool,
   /** Label text */
   label: PropTypes.string.isRequired,
   /** Name identifier of the input field */

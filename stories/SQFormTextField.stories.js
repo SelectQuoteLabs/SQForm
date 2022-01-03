@@ -1,14 +1,13 @@
 import React from 'react';
 import * as Yup from 'yup';
 
-import {SQFormTextarea as SQFormTextareaComponent} from '../src';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
+import {SQFormTextField as SQFormTextFieldComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
 
 export default {
-  title: 'Components/SQFormTextarea',
-  component: SQFormTextareaComponent,
+  title: 'Components/SQFormTextField',
+  component: SQFormTextFieldComponent,
   argTypes: {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
@@ -22,19 +21,22 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Textarea',
-  name: 'textarea',
+  label: 'Text Field',
+  name: 'textField',
 };
 
 const Template = (args) => {
-  const {schema, SQFormProps, size, ...rest} = args;
+  const {schema, SQFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
       validationSchema={schema}
       {...SQFormProps}
     >
-      <SQFormTextareaComponent {...rest} size={getSizeProp(size)} />
+      <SQFormTextFieldComponent
+        {...rest}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
+      />
     </SQFormStoryWrapper>
   );
 };

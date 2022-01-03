@@ -4,10 +4,8 @@ import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormTextarea.stories';
 
-const {
-  Default: SQFormTextarea,
-  WithValidation: SQFormTextareaWithValidation
-} = composeStories(stories);
+const {Default: SQFormTextarea, WithValidation: SQFormTextareaWithValidation} =
+  composeStories(stories);
 
 describe('SQFormTextarea Tests', () => {
   describe('Textarea Only', () => {
@@ -16,7 +14,7 @@ describe('SQFormTextarea Tests', () => {
 
       const label = screen
         .getAllByText(/textarea/i)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent('Textarea');
 
@@ -68,20 +66,6 @@ describe('SQFormTextarea Tests', () => {
       expect(textbox).not.toBeDisabled();
     });
 
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormTextarea size="auto" isRequired />);
-
-      const required = screen.getByText('Required');
-      expect(required).toBeInTheDocument();
-    });
-
-    it('should not render as required when isRequired is false', () => {
-      render(<SQFormTextarea size="auto" isRequired={false} />);
-
-      const required = screen.queryByText('Required');
-      expect(required).not.toBeInTheDocument();
-    });
-
     it('should only render the number of characters equal to maxCharacters', () => {
       const maxCharacters = 5;
 
@@ -89,7 +73,7 @@ describe('SQFormTextarea Tests', () => {
 
       const charCount = screen
         .getAllByText(`Textarea : 0/${maxCharacters}`)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(charCount).toBeInTheDocument();
 
       const textbox = screen.getByRole('textbox', {name: /textarea/i});
@@ -99,7 +83,7 @@ describe('SQFormTextarea Tests', () => {
       expect(textbox).toHaveValue('Hello');
       const charCountAfter = screen
         .getAllByText(`Textarea : ${maxCharacters}/${maxCharacters}`)
-        .find(item => item.parentElement.tagName === 'LABEL');
+        .find((item) => item.parentElement.tagName === 'LABEL');
       expect(charCountAfter).toBeInTheDocument();
     });
 
@@ -115,6 +99,13 @@ describe('SQFormTextarea Tests', () => {
   });
 
   describe('Textarea With Validation', () => {
+    it('should initially render "Required" helper text if field is required', () => {
+      render(<SQFormTextareaWithValidation size="auto" />);
+
+      const required = screen.getByText('Required');
+      expect(required).toHaveClass('Mui-required');
+    });
+
     it('should highlight field if required by no value selected', async () => {
       render(<SQFormTextareaWithValidation size="auto" />);
 

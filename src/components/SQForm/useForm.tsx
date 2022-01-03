@@ -40,12 +40,9 @@ interface UseFormReturn {
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
 
-function _handleError(name: string, isRequired: boolean) {
+function _handleError(name) {
   if (typeof name !== 'string') {
     throw new Error('Name is a required param and must be a String!');
-  }
-  if (typeof isRequired !== 'boolean') {
-    throw new Error('isRequired is a required param and must be a Boolean!');
   }
 }
 
@@ -67,13 +64,8 @@ function _getHasValue(meta: FieldMetaProps<unknown>) {
   return !!fieldValue;
 }
 
-export function useForm({
-  name,
-  isRequired,
-  onBlur,
-  onChange,
-}: UseFormParam): UseFormReturn {
-  _handleError(name, isRequired);
+export function useForm({name, onBlur, onChange}: UseFormParam): UseFormReturn {
+  _handleError(name);
 
   const [field, meta, helpers] = useField(name);
   const errorMessage = getIn(meta, 'error');
@@ -81,6 +73,7 @@ export function useForm({
   const isDirty = !isEqual(meta.initialValue, meta.value);
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
+  const isRequired = errorMessage?.toLowerCase() === 'required';
 
   const getFieldStatus = () => {
     if (isRequired && !hasValue && !isDirty && !isTouched) {

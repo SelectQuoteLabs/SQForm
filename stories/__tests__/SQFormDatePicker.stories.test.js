@@ -96,10 +96,9 @@ describe('SQFormDatePicker Tests', () => {
     //Data setup so the test won't need updating all the time
     const getTestDay = () => {
       const today = new Date();
-      const month = today.getMonth(); //January is 0
-      const currentMonth = month === 11 ? month : month + 1;
+      const month = today.getMonth() + 1; // .getMonth() returns a zero based month (0 = January)
 
-      return `${currentMonth}/01/${today.getFullYear()}`;
+      return `${month}/01/${today.getFullYear()}`;
     };
 
     const testDate = getTestDay();
@@ -119,16 +118,17 @@ describe('SQFormDatePicker Tests', () => {
     expect(textField).toBeDisabled();
   });
 
-  it('should display required text when isRequired is true', () => {
+  it('should initially display required text when it is a required field', () => {
     const SQFormProps = {
       initialValues: {
         date: '',
       },
     };
 
-    renderDatePicker({SQFormProps, isRequired: true});
+    renderDatePicker({SQFormProps});
 
     const required = screen.getByText(/required/i);
     expect(required).toBeVisible();
+    expect(required).toHaveClass('Mui-required');
   });
 });

@@ -59,7 +59,7 @@ const Template = () => {
           }
         },
         validationSchema: {
-          outcome: Yup.string().required('Required'),
+          outcome: Yup.string().required(),
           notes: Yup.string(),
         },
       },
@@ -70,7 +70,7 @@ const Template = () => {
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+            <SQFormDropdown name="outcome" label="Outcome">
               {outcomeDropdownOptions}
             </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" />
@@ -97,7 +97,7 @@ const Template = () => {
           console.log(context);
         },
         validationSchema: {
-          outcome: Yup.string().required('Required'),
+          outcome: Yup.string().required(),
           notes: Yup.string(),
         },
       },
@@ -109,7 +109,7 @@ const Template = () => {
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+            <SQFormDropdown name="outcome" label="Outcome">
               {outcomeDropdownOptions}
             </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" />
@@ -144,7 +144,7 @@ const Template = () => {
           console.log(context);
         },
         validationSchema: {
-          outcome: Yup.string().required('Required'),
+          outcome: Yup.string().required(),
           notes: Yup.string(),
         },
       },
@@ -156,7 +156,7 @@ const Template = () => {
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome" isRequired={true}>
+            <SQFormDropdown name="outcome" label="Outcome">
               {outcomeDropdownOptions}
             </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" />
@@ -205,7 +205,7 @@ const TestTemplate = (args) => {
           console.log(JSON.stringify(values));
         },
         validationSchema: {
-          firstText: Yup.string().required('Required'),
+          firstText: Yup.string().required(),
           secondText: Yup.string(),
         },
       },

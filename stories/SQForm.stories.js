@@ -237,28 +237,23 @@ export const BasicForm = () => {
 
 export const FormWithValidation = () => {
   const validationSchema = {
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
     city: Yup.string(),
-    age: Yup.number()
-      .min(1, 'Age 1-65')
-      .max(65, 'Age 1-65')
-      .required('Required'),
-    state: Yup.string().required('Required'),
-    tenThousandOptions: Yup.string().required('Required'),
-    preferredPet: Yup.string().required('Required'),
-    warrantyOptions: Yup.array()
-      .min(1, 'One option required')
-      .required('Required'),
-    note: Yup.string().required('Required'),
+    age: Yup.number().min(1, 'Age 1-65').max(65, 'Age 1-65').required(),
+    state: Yup.string().required(),
+    tenThousandOptions: Yup.string().required(),
+    preferredPet: Yup.string().required(),
+    warrantyOptions: Yup.array().required().min(1, 'One option required'),
+    note: Yup.string().required(),
     favoriteColors: Yup.array()
       .of(
         Yup.lazy((value) => {
           return typeof value === 'number' ? Yup.number() : Yup.string();
         })
       )
-      .min(1)
-      .required('Required'),
+      .required()
+      .min(1),
   };
 
   return (
@@ -272,52 +267,26 @@ export const FormWithValidation = () => {
           name="firstName"
           label="First name"
           size={6}
-          isRequired={true}
           maxCharacters={10}
         />
-        <SQFormTextField
-          name="lastName"
-          label="Last name"
-          size={6}
-          isRequired={true}
-        />
+        <SQFormTextField name="lastName" label="Last name" size={6} />
         <SQFormTextField name="city" label="City" size={3} />
         <SQFormAutocomplete
           name="tenThousandOptions"
           label="Ten Thousand Options"
           size={6}
-          isRequired={true}
         >
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>
-        <SQFormDropdown
-          name="state"
-          label="State"
-          isRequired={true}
-          displayEmpty={true}
-          size={5}
-        >
+        <SQFormDropdown name="state" label="State" displayEmpty={true} size={5}>
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
-        <SQFormTextField
-          name="age"
-          label="Age"
-          type="number"
-          size={2}
-          isRequired={true}
-        />
-        <SQFormTextarea
-          name="note"
-          label="Note"
-          size={5}
-          isRequired={true}
-          maxCharacters={100}
-        />
+        <SQFormTextField name="age" label="Age" type="number" size={2} />
+        <SQFormTextarea name="note" label="Note" size={5} maxCharacters={100} />
         <SQFormRadioButtonGroup
           name="preferredPet"
           groupLabel="Cat or Dog?"
           shouldDisplayInRow={true}
-          isRequired={true}
         >
           {RADIO_GROUP_OPTIONS}
         </SQFormRadioButtonGroup>
@@ -325,7 +294,6 @@ export const FormWithValidation = () => {
           name="warrantyOptions"
           groupLabel="Warranty Options"
           shouldDisplayInRow={true}
-          isRequired={true}
         >
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
@@ -333,7 +301,6 @@ export const FormWithValidation = () => {
           name="favoriteColors"
           label="Your Favorite Colors"
           size={4}
-          isRequired={true}
         >
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
@@ -489,7 +456,7 @@ export const formWithInclusionlist = () => {
 
 export const basicFormWithMultiSelect = () => {
   const validationSchema = {
-    friends: Yup.string().required('Required'),
+    friends: Yup.string().required(),
   };
 
   return (
@@ -508,7 +475,6 @@ export const basicFormWithMultiSelect = () => {
           name="friends"
           label="Friends"
           size={5}
-          isRequired={true}
           onChange={action('Friends selected')}
           useSelectAll={boolean('Use Select All', true)}
         >
@@ -525,14 +491,14 @@ export const basicFormWithMultiSelect = () => {
 export const basicFormWithMaskedFields = () => {
   const validationSchema = {
     phone: Yup.string()
-      .required('Required')
+      .required()
       .transform((value) => value.replace(/[^\d]/g, ''))
       .min(10, 'Phone number must be 10 digits'),
     zip: Yup.string()
-      .required('Required')
+      .required()
       .transform((value) => value.replace(/[^\d]/g, ''))
       .min(5, 'Zip code must be 5 digits'),
-    currency: Yup.string().required('Required'),
+    currency: Yup.string().required(),
   };
 
   return (
@@ -552,21 +518,18 @@ export const basicFormWithMaskedFields = () => {
           label="Phone"
           size={4}
           mask={MASKS.phone}
-          isRequired={true}
         />
         <SQFormMaskedTextField
           name="zip"
           label="Zip Code"
           size={4}
           mask={MASKS.zip}
-          isRequired={true}
         />
         <SQFormMaskedTextField
           name="currency"
           label="Currency"
           size={4}
           mask={MASKS.currency}
-          isRequired={true}
         />
         <SQFormMaskedTextField
           name="percent"
@@ -719,7 +682,7 @@ export const basicFormWithCustomOnChange = () => {
 
 export const applyAnAction = () => {
   const validationSchema = {
-    actions: Yup.string().required('Required'),
+    actions: Yup.string().required(),
   };
 
   return (
@@ -738,7 +701,6 @@ export const applyAnAction = () => {
           name="actions"
           label="Actions with a default value"
           size={5}
-          isRequired={true}
           isDisabled={boolean('Disable autocomplete', true)}
         >
           {ACTIONS_AUTOCOMPLETE_OPTIONS}
@@ -765,25 +727,22 @@ export const SQFormCheckboxGroupExample = () => {
     selectAll: false,
   };
 
-  const isGroupRequired = boolean('Is group required', false);
-
   const validationSchema = {
     warrantyOptions: Yup.array()
       .min(1, 'Must select at least 1 option')
-      .required('Required'),
+      .required(),
   };
 
   return (
     <Card raised style={{padding: '16px', minWidth: '250px'}}>
       <SQForm
         initialValues={initialValues}
-        validationSchema={isGroupRequired ? validationSchema : {}}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         <SQFormCheckboxGroup
           name="warrantyOptions"
           groupLabel="Warranty Options"
-          isRequired={isGroupRequired}
           shouldDisplayInRow={boolean('Should display in row', false)}
           shouldUseSelectAll={boolean('Should use select all', false)}
         >

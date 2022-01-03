@@ -39,7 +39,6 @@ function SQFormTextField({
   label,
   size = 'auto',
   isDisabled = false,
-  isRequired = false,
   placeholder = '- -',
   onBlur,
   onChange,
@@ -53,7 +52,7 @@ function SQFormTextField({
 }: SQFormTextFieldProps): React.ReactElement {
   const {
     formikField: {field},
-    fieldState: {isFieldError},
+    fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
@@ -61,7 +60,6 @@ function SQFormTextField({
     },
   } = useForm({
     name,
-    isRequired,
     onBlur,
     onChange,
   });
@@ -122,7 +120,7 @@ function SQFormTextField({
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}
-        required={isRequired}
+        required={isFieldRequired}
         value={field.value}
         {...muiFieldProps}
       />

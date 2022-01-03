@@ -58,8 +58,8 @@ The `onSubmit` function has two parameters. Values and Actions. [Formik onSubmit
  const initialValues = { firstName: '', lastName: ''}
 
 const validationSchema = {
-  firstName: Yup.string().required('Required'),
-  lastName: Yup.string().required('Required'),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
 };
 
 function HelloForm() {

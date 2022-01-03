@@ -7,7 +7,7 @@ import {
   SQFormTextField,
   SQFormDialogStep,
   SQFormDialogStepper as SQFormDialogStepperComponent,
-  SQFormDropdown
+  SQFormDropdown,
 } from '../src';
 
 export default {
@@ -17,48 +17,48 @@ export default {
     onClose: {action: 'onClose', table: {disable: true}},
     onSubmit: {action: 'onSubmit', table: {disable: true}},
     setValues: {action: 'setValues', table: {disable: true}},
-    children: {table: {disable: true}}
+    children: {table: {disable: true}},
   },
   parameters: {
     docs: {
       page: createDocsPage({markdown, showStories: false}),
       source: {
-        type: 'code'
-      }
-    }
-  }
+        type: 'code',
+      },
+    },
+  },
 };
 
-const handleSubmit = values => {
+const handleSubmit = (values) => {
   window.alert(JSON.stringify(values, null, 2));
 };
 
 const personalDataInitialValues = {
   firstName: '',
-  lastName: ''
+  lastName: '',
 };
 
 const accountDetailsInitValues = {
   newPatient: '',
-  accountID: ''
+  accountID: '',
 };
 const booleanOptions = [
   {
     label: 'Yes',
-    value: 'yes'
+    value: 'yes',
   },
   {
     label: 'No',
-    value: 'no'
-  }
+    value: 'no',
+  },
 ];
 
 const defaultArgs = {
   onSubmit: handleSubmit,
-  initialValues: {...personalDataInitialValues, ...accountDetailsInitValues}
+  initialValues: {...personalDataInitialValues, ...accountDetailsInitValues},
 };
 
-export const Default = args => {
+export const Default = (args) => {
   return (
     <>
       <h1>
@@ -91,10 +91,10 @@ export const Default = args => {
 
 Default.args = {
   ...defaultArgs,
-  title: 'Default'
+  title: 'Default',
 };
 
-export const WithValidation = args => {
+export const WithValidation = (args) => {
   return (
     <>
       <h1>
@@ -105,32 +105,22 @@ export const WithValidation = args => {
         <SQFormDialogStep
           label="Personal Data"
           validationSchema={{
-            firstName: Yup.string().required('Required'),
-            lastName: Yup.string().required('Required')
+            firstName: Yup.string().required(),
+            lastName: Yup.string().required(),
           }}
         >
-          <SQFormTextField
-            fullWidth
-            name="firstName"
-            label="First Name"
-            isRequired={true}
-          />
-          <SQFormTextField
-            fullWidth
-            name="lastName"
-            label="Last Name"
-            isRequired={true}
-          />
+          <SQFormTextField fullWidth name="firstName" label="First Name" />
+          <SQFormTextField fullWidth name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
           validationSchema={{
             accountID: Yup.mixed().when('newPatient', {
-              is: value => value === 'yes',
+              is: (value) => value === 'yes',
               then: Yup.number()
-                .required('Required for new account')
-                .min(100, 'Required for new account')
-            })
+                .required()
+                .min(100, 'Required for new account'),
+            }),
           }}
         >
           <SQFormDropdown
@@ -153,10 +143,10 @@ export const WithValidation = args => {
 
 WithValidation.args = {
   ...defaultArgs,
-  title: 'With Validation'
+  title: 'With Validation',
 };
 
-export const WithLoadingStep = args => {
+export const WithLoadingStep = (args) => {
   return (
     <>
       <h1>
@@ -193,5 +183,5 @@ export const WithLoadingStep = args => {
 
 WithLoadingStep.args = {
   ...defaultArgs,
-  title: 'With Loading Step'
+  title: 'With Loading Step',
 };

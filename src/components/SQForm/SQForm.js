@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
-import * as Yup from 'yup';
+import {object as YupObject, setLocale} from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
+
+setLocale({
+  mixed: {
+    required: 'Required',
+  },
+});
 
 function SQForm({
   children,
@@ -17,7 +23,7 @@ function SQForm({
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
 
-    return Yup.object().shape(validationSchema);
+    return YupObject().shape(validationSchema);
   }, [validationSchema]);
 
   const initialErrors = useInitialRequiredErrors(
