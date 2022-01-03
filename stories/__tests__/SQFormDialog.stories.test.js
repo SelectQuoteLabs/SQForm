@@ -130,10 +130,6 @@ it('should not find the cancel secondary button', async () => {
   );
 
   expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
-
-  await waitFor(() => {
-    expect(handleClose).not.toHaveBeenCalled();
-  });
 });
 
 describe('Tests for WithValidation', () => {
