@@ -33,7 +33,7 @@ const useTitleStyles = makeStyles({
     borderBottom: ({palette}) => `1px solid ${palette.divider}`
   }
 });
-const useActionsStyles = makeStyles({
+const actionStyles = {
   root: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -43,6 +43,10 @@ const useActionsStyles = makeStyles({
     bottom: 0,
     borderTop: ({palette}) => `1px solid ${palette.divider}`
   }
+};
+const useActionsStyles = makeStyles(actionStyles);
+const usePrimaryActionStyles = makeStyles({
+  root: {...actionStyles.root, justifyContent: 'flex-end'}
 });
 const useDialogContentStyles = makeStyles({
   root: {
@@ -63,11 +67,13 @@ function SQFormDialogInner({
   saveButtonText,
   shouldRequireFieldUpdates = false,
   title,
-  muiGridProps
+  muiGridProps,
+  showSecondaryButton = true
 }) {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
+  const primaryActionsClasses = usePrimaryActionStyles(theme);
   const dialogContentClasses = useDialogContentStyles(theme);
   const {resetForm, dirty: isDirty} = useFormikContext();
 
@@ -98,7 +104,7 @@ function SQFormDialogInner({
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={handleCancel}
+        onClose={showSecondaryButton ? handleCancel : undefined}
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
@@ -113,15 +119,21 @@ function SQFormDialogInner({
               {children}
             </Grid>
           </DialogContent>
-          <DialogActions classes={actionsClasses}>
-            <RoundedButton
-              title={cancelButtonText}
-              onClick={handleCancel}
-              color="secondary"
-              variant="outlined"
-            >
-              {cancelButtonText}
-            </RoundedButton>
+          <DialogActions
+            classes={
+              showSecondaryButton ? actionsClasses : primaryActionsClasses
+            }
+          >
+            {showSecondaryButton && (
+              <RoundedButton
+                title={cancelButtonText}
+                onClick={handleCancel}
+                color="secondary"
+                variant="outlined"
+              >
+                {cancelButtonText}
+              </RoundedButton>
+            )}
             {onSave && (
               <SQFormButton
                 title={saveButtonText}
@@ -173,7 +185,9 @@ SQFormDialogInner.propTypes = {
   /** Title text at the top of the Dialog */
   title: PropTypes.string.isRequired,
   /** Any prop from https://material-ui.com/api/grid */
-  muiGridProps: PropTypes.object
+  muiGridProps: PropTypes.object,
+  /** show or hide the secondary Cancel button.  Defaults to show(true) */
+  showSecondaryButton: PropTypes.bool
 };
 
 export default SQFormDialogInner;
