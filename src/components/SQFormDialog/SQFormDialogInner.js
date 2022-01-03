@@ -104,7 +104,7 @@ function SQFormDialogInner({
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={showSecondaryButton ? handleCancel : null}
+        onClose={showSecondaryButton ? handleCancel : undefined}
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
