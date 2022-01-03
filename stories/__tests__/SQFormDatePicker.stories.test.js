@@ -97,10 +97,10 @@ describe('SQFormDatePicker Tests', () => {
     const getTestDay = () => {
       const today = new Date();
       const month = today.getMonth() + 1; // .getMonth() returns a zero based month (0 = January)
-      //Data setup so the test won't need updating all the time
-      const formatMonth = month < 10 ? `0${month}` : month;
+      // The month should have a leading zero if only one digit
+      const monthString = month >= 10 ? month.toString() : `0${month}`;
 
-      return `${formatMonth}/01/${today.getFullYear()}`;
+      return `${monthString}/01/${today.getFullYear()}`;
     };
 
     const testDate = getTestDay();
