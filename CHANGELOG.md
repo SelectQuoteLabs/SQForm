@@ -1,3 +1,10 @@
+## [6.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.0.0...v6.1.0) (2022-01-03)
+
+
+### Features
+
+* 🎸 Adding the ability to hide the secondary button ([a99465a](https://github.com/SelectQuoteLabs/SQForm/commit/a99465a79e47771ff9a59f90bd66f228edc6702a)), closes [#482](https://github.com/SelectQuoteLabs/SQForm/issues/482)
+
 ## [6.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.8.0...v6.0.0) (2021-12-08)
 
 
