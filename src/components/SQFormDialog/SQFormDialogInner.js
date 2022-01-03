@@ -186,7 +186,7 @@ SQFormDialogInner.propTypes = {
   title: PropTypes.string.isRequired,
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
-  /** show/hide the secondary Cancel button.  Defaults to show(true) */
+  /** show or hide the secondary Cancel button.  Defaults to show(true) */
   showSecondaryButton: PropTypes.bool
 };
 
