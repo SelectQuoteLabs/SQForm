@@ -75,7 +75,7 @@ WithValidation.args = {
         })
       )
       .required()
-      .min(1),
+      .min(1, 'Required'),
   },
   SQFormProps: {
     initialValues: {favoriteColors: []},

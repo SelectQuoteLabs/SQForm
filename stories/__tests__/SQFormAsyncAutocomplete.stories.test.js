@@ -166,12 +166,14 @@ describe('SQFormAsyncAutocomplete Tests', () => {
   });
 
   describe('Autocomplete With Validation', () => {
-    it('should render as required when it is a required field', () => {
+    it('should render as required when it is a required field', async () => {
       render(<SQFormAsyncAutocompleteWithValidation size="auto" />);
 
-      const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-required');
+      await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
+        expect(requiredText).toBeVisible();
+        expect(requiredText).toHaveClass('Mui-required');
+      });
     });
 
     it('should not render as required when it is not a required field', () => {
@@ -194,8 +196,8 @@ describe('SQFormAsyncAutocomplete Tests', () => {
 
       userEvent.tab();
 
-      const requiredText = screen.getByText(/required/i);
       await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
         expect(requiredText).toBeVisible();
         expect(requiredText).toHaveClass('Mui-error');
       });

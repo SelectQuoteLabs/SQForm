@@ -117,15 +117,14 @@ it('should be selectable if it is not disabled', () => {
   expect(optionsList).toBeInTheDocument();
 });
 
-it('should display icon and text if field is required', () => {
+it('should display icon and text if field is required', async () => {
   const validationSchema = {
     state: Yup.string().required(),
   };
 
   render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
 
-  const required = screen.getByText(/required/i);
-  expect(required).toBeVisible();
+  await waitFor(() => expect(screen.getByText(/required/i)).toBeVisible());
 });
 
 it('should not display icon and text if field is not required', () => {

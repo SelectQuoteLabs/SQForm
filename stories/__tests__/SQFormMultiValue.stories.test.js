@@ -1,6 +1,6 @@
 import React from 'react';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormMultiValue.stories';
 
@@ -82,7 +82,7 @@ describe('SQFormMultiValue Tests', () => {
     expect(options).not.toBeInTheDocument();
   });
 
-  it('does not display required text when field is not required', () => {
+  it('does not display "required" text when field is not required', () => {
     const SQFormProps = {
       initialValues: {
         favoriteColors: [],
@@ -93,7 +93,7 @@ describe('SQFormMultiValue Tests', () => {
     expect(screen.queryByText('Required')).not.toBeInTheDocument();
   });
 
-  it('should initially render "Required" helper text if field is required', () => {
+  it('should initially render "required" helper text if field is required', async () => {
     const SQFormProps = {
       initialValues: {
         favoriteColors: [],
@@ -101,7 +101,6 @@ describe('SQFormMultiValue Tests', () => {
     };
     render(<SQFormMultiValueWithValidation SQFormProps={SQFormProps} />);
 
-    const required = screen.getByText('Required');
-    expect(required).toBeVisible();
+    await waitFor(() => expect(screen.getByText('Required')).toBeVisible());
   });
 });

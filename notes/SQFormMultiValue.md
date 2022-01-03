@@ -47,6 +47,8 @@ In english this validation says "nameOfField's value must be an array of numbers
     // Ensures this field is filled before submission
     .required(),
     // Minimum one selection required
-    .min(1)
+    // Text is required to be "Required" for gray messaging to appear
+    // Otherwise error messaging will appear
+    .min(1, 'Required')
 }
 ```

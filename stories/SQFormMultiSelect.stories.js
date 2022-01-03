@@ -74,7 +74,7 @@ SQFormMultiSelect.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   validationSchema: {
-    friends: Yup.array().required().min(1),
+    friends: Yup.array().required().min(1, 'Required'),
   },
   SQFormProps: {
     initialValues: {friends: []},

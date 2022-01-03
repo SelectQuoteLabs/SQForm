@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 import {render, screen, waitFor, within} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
 
@@ -148,11 +147,10 @@ describe('Tests for SQFormMultiSelect', () => {
     expect(optionsList).not.toBeInTheDocument();
   });
 
-  it('should initially render "Required" helper text if field is required', () => {
+  it('should initially render "required" helper text if field is required', async () => {
     render(<SQFormMultiSelectWithValidation size="auto" />);
 
-    const required = screen.getByText(/required/i);
-    expect(required).toBeVisible();
+    await waitFor(() => expect(screen.getByText(/required/i)).toBeVisible());
   });
 
   it('should not display "required" helper text if field is not required', async () => {
@@ -160,35 +158,5 @@ describe('Tests for SQFormMultiSelect', () => {
 
     const required = screen.queryByText(/required/i);
     expect(required).not.toBeInTheDocument();
-  });
-
-  it('should highlight field if required but no value selected', async () => {
-    const validationSchema = {
-      friends: Yup.string().required(),
-    };
-
-    render(
-      <SQFormMultiSelect
-        isRequired={true}
-        size="auto"
-        SQFormProps={{
-          validationSchema,
-        }}
-      />
-    );
-
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {name: /friends/i})
-    );
-
-    userEvent.tab();
-    await waitFor(() => expect(expandButton).toHaveFocus());
-
-    userEvent.tab();
-    await waitFor(() => expect(expandButton).not.toHaveFocus());
-
-    const required = screen.getByText(/required/i);
-    expect(required).toBeVisible();
-    expect(required).toHaveClass('Mui-error');
   });
 });

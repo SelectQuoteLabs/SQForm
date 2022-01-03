@@ -216,35 +216,20 @@ describe('SQFormCheckboxGroup Tests', () => {
       await waitFor(() => expect(submitButton).toBeEnabled());
     });
 
-    it('should highlight required when unchecked', async () => {
+    it('should render "required" text when when its field is required', async () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
-      const checkbox = screen.getByLabelText(SHOPPING_LIST_OPTIONS[3].label);
-
-      userEvent.click(checkbox);
-
-      userEvent.click(checkbox);
-
-      const required = screen.getByText(/Required/i);
-      expect(required).toHaveClass('Mui-required');
-
-      expect(
-        await screen.findByRole('button', {name: /form submission/i})
-      ).toBeDisabled();
+      await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
+        expect(requiredText).toBeInTheDocument();
+        expect(requiredText).toHaveClass('Mui-required');
+      });
     });
 
-    it('should render as required when when its field is required', () => {
-      render(<SQFormCheckboxGroupWithValidation size="auto" />);
-
-      const required = screen.getByText(/Required/i);
-      expect(required).toBeInTheDocument();
-      expect(required).toHaveClass('Mui-required');
-    });
-
-    it('should not render as required when when its field is not required', () => {
+    it('should not render "required" text as required when when its field is not required', () => {
       render(<SQFormCheckboxGroup size="auto" />);
 
-      const required = screen.queryByText(/Required/i);
+      const required = screen.queryByText(/required/i);
       expect(required).not.toBeInTheDocument();
     });
   });

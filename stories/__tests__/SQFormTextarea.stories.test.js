@@ -99,11 +99,10 @@ describe('SQFormTextarea Tests', () => {
   });
 
   describe('Textarea With Validation', () => {
-    it('should initially render "Required" helper text if field is required', () => {
+    it('should initially render "Required" helper text if field is required', async () => {
       render(<SQFormTextareaWithValidation size="auto" />);
 
-      const required = screen.getByText('Required');
-      expect(required).toHaveClass('Mui-required');
+      await waitFor(() => expect(screen.getByText('Required')).toHaveClass('Mui-required'));
     });
 
     it('should highlight field if required by no value selected', async () => {
@@ -117,8 +116,7 @@ describe('SQFormTextarea Tests', () => {
       userEvent.tab();
       expect(textbox).not.toHaveFocus();
 
-      const required = screen.getByText('Required');
-      await waitFor(() => expect(required).toHaveClass('Mui-error'));
+      await waitFor(() => expect(screen.getByText('Required')).toHaveClass('Mui-error'));
     });
   });
 });

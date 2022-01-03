@@ -65,7 +65,7 @@ export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   schema: {
-    [defaultArgs.name]: Yup.string().required(),
+    [defaultArgs.name]: Yup.array().required().min(1, 'Required'),
   },
 };
 WithValidation.parameters = {

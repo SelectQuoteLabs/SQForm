@@ -2,7 +2,7 @@ import React from 'react';
 import {LocalizationProvider} from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import {composeStories} from '@storybook/testing-react';
-import {render, screen, within} from '@testing-library/react';
+import {render, screen, within, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDatePicker.stories';
 
@@ -98,7 +98,10 @@ describe('SQFormDatePicker Tests', () => {
       const today = new Date();
       const month = today.getMonth() + 1; // .getMonth() returns a zero based month (0 = January)
 
-      return `${month}/01/${today.getFullYear()}`;
+      // The month should have a leading zero if only one digit
+      const monthString = month >= 10 ? month.toString() : `0${month}`;
+
+      return `${monthString}/01/${today.getFullYear()}`;
     };
 
     const testDate = getTestDay();
@@ -118,7 +121,7 @@ describe('SQFormDatePicker Tests', () => {
     expect(textField).toBeDisabled();
   });
 
-  it('should initially display required text when it is a required field', () => {
+  it('should initially display required text when it is a required field', async () => {
     const SQFormProps = {
       initialValues: {
         date: '',
@@ -126,9 +129,10 @@ describe('SQFormDatePicker Tests', () => {
     };
 
     renderDatePicker({SQFormProps});
-
-    const required = screen.getByText(/required/i);
-    expect(required).toBeVisible();
-    expect(required).toHaveClass('Mui-required');
+    await waitFor(() => {
+      const requiredText = screen.getByText(/required/i);
+      expect(requiredText).toBeVisible();
+      expect(requiredText).toHaveClass('Mui-required')
+    })
   });
 });

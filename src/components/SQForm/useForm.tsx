@@ -12,7 +12,6 @@ import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
 interface UseFormParam {
   name: string;
-  isRequired: boolean;
   onBlur?: React.FocusEventHandler;
   onChange?: React.ChangeEventHandler;
 }
@@ -40,7 +39,7 @@ interface UseFormReturn {
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
 
-function _handleError(name) {
+function _handleError(name: string) {
   if (typeof name !== 'string') {
     throw new Error('Name is a required param and must be a String!');
   }
