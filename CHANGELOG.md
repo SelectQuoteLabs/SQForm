@@ -1,3 +1,10 @@
+### [6.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.0...v6.1.1) (2022-01-05)
+
+
+### Bug Fixes
+
+* 🐛 add style prop for container of guided workflow ([847167a](https://github.com/SelectQuoteLabs/SQForm/commit/847167a7f792a1f7caba7e4677bdabbe6499036b))
+
 ## [6.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.0.0...v6.1.0) (2022-01-03)
 
 
