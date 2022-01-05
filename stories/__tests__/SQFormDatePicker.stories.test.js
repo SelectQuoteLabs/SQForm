@@ -62,6 +62,7 @@ describe('SQFormDatePicker Tests', () => {
     const textField = screen.getByRole('textbox', {name: /choose date/i});
 
     userEvent.click(textField);
+    await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
 
     await screen.findByRole('dialog');
 
@@ -77,13 +78,10 @@ describe('SQFormDatePicker Tests', () => {
 
     renderDatePicker({SQFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /date/i});
+    const textField = screen.getByRole('textbox', {name: /Choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-
     userEvent.click(textField);
-
-    await screen.findByRole('dialog');
-
+    await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();

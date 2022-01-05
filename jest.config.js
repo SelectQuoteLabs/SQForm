@@ -12,4 +12,5 @@ module.exports = {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
   },
   transformIgnorePatterns: ['/node_modules/(?!@storybook/addon-docs).+\\.js$'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 };
