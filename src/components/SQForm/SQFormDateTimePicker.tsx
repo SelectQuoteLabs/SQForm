@@ -11,8 +11,6 @@ import {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Custom onBlur event callback */
