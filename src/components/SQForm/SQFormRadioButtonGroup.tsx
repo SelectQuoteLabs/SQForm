@@ -3,6 +3,7 @@ import {
   Grid,
   RadioGroup,
   RadioProps,
+  RadioGroupProps,
   FormHelperText,
   FormControl,
   FormLabel,
@@ -24,7 +25,7 @@ interface SQFormRadioButtonGroupProps {
   /** Size of the input given full-width is 12. */
   size?: GridSize;
   /** Function to call on value change */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: RadioGroupProps['onChange'];
   /** Whether this radio selection is required */
   isRequired?: boolean;
   /** Whether to display group in row */
@@ -47,7 +48,15 @@ function SQFormRadioButtonGroup({
     fieldState: {isFieldError, isFieldRequired},
     formikField: {field},
     fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
-  } = useForm({name, onChange});
+  } = useForm<
+    RadioButtonInputItemProps['value'],
+    React.ChangeEvent<HTMLInputElement>
+  >({
+    name,
+    onChange,
+  });
+
+  console.log('field', field);
 
   const childrenToRadioGroupItems = () => {
     return children.map((radioOption) => {

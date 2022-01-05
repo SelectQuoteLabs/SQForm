@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import Select, {SelectProps} from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -16,9 +15,29 @@ import {
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
+import {BaseFieldProps, Option} from 'types';
+
+interface SQFormDropdownProps extends BaseFieldProps {
+  /** Dropdown options to select from */
+  children: Option[];
+  /** Whether to display empty option - - in options */
+  displayEmpty?: boolean;
+  /** Disabled property to disable the input if true */
+  isDisabled?: boolean;
+  /** Custom onBlur event callback */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  /** Custom onChange event callback */
+  onChange?: SelectProps['onChange'];
+  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
+  muiFieldProps?: SelectProps;
+}
 
 const EMPTY_VALUE = '';
-const EMPTY_OPTION = {label: EMPTY_LABEL, value: EMPTY_VALUE};
+const EMPTY_OPTION = {
+  label: EMPTY_LABEL,
+  value: EMPTY_VALUE,
+  isDisabled: false,
+};
 
 const useStyles = makeStyles({
   selectHeight: {
@@ -38,7 +57,7 @@ function SQFormDropdown({
   onChange,
   size = 'auto',
   muiFieldProps = {},
-}) {
+}: SQFormDropdownProps): React.ReactElement {
   const classes = useStyles();
 
   const {
@@ -72,7 +91,7 @@ function SQFormDropdown({
     return [EMPTY_OPTION, ...children];
   }, [children, displayEmpty, name]);
 
-  const renderValue = (value) => {
+  const renderValue = (value: Option['value']) => {
     if (value === undefined || value === null) {
       console.warn(getUndefinedValueWarning('SQFormDropdown', name));
       return EMPTY_LABEL;
@@ -86,7 +105,9 @@ function SQFormDropdown({
       (option) => option.value === value
     )?.label;
     if (!valueToRender) {
-      console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value));
+      console.warn(
+        getOutOfRangeValueWarning('SQFormDropdown', name, value.toString())
+      );
       return undefined;
     }
 
@@ -112,15 +133,17 @@ function SQFormDropdown({
           onBlur={handleBlur}
           onChange={handleChange}
           labelId={labelID}
-          renderValue={renderValue}
+          renderValue={(value: unknown) =>
+            renderValue(value as Option['value'])
+          }
           {...muiFieldProps}
         >
           {options.map((option) => {
             return (
               <MenuItem
-                key={option.value}
+                key={`${name}_${option.value}`}
                 disabled={option.isDisabled}
-                value={option.value}
+                value={`${option.value}`}
               >
                 {option.label}
               </MenuItem>
@@ -132,36 +155,5 @@ function SQFormDropdown({
     </Grid>
   );
 }
-
-SQFormDropdown.propTypes = {
-  /** Dropdown options to select from */
-  children: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.bool,
-      ]),
-      isDisabled: PropTypes.bool,
-    })
-  ),
-  /** Whether to display empty option - - in options */
-  displayEmpty: PropTypes.bool,
-  /** Disabled property to disable the input if true */
-  isDisabled: PropTypes.bool,
-  /** Label text */
-  label: PropTypes.string.isRequired,
-  /** Name identifier of the input field */
-  name: PropTypes.string.isRequired,
-  /** Custom onBlur event callback */
-  onBlur: PropTypes.func,
-  /** Custom onChange event callback */
-  onChange: PropTypes.func,
-  /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
-  muiFieldProps: PropTypes.object,
-};
 
 export default SQFormDropdown;

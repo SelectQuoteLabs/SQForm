@@ -3,6 +3,7 @@ import {FormControlLabel, CheckboxProps} from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
+import {Option} from 'types';
 
 const useStyles = makeStyles((theme) => ({
   checkboxGroupItem: {
@@ -21,7 +22,7 @@ interface SQFormCheckboxGroupItemProps {
   /** Value for the checkbox */
   value: string | boolean | number;
   /** Function to call when input value is changed */
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: CheckboxProps['onChange'];
   /** Whether this group item is part of a group displayed in a row */
   isRowDisplay?: boolean;
   /** Whether the checkbox is disabled */
@@ -42,7 +43,10 @@ function SQFormCheckboxGroupItem({
   const {
     formikField: {field},
     fieldHelpers: {handleChange},
-  } = useForm({name: groupName, onChange});
+  } = useForm<
+    Option['value'][] | Option['value'],
+    React.ChangeEvent<HTMLInputElement>
+  >({name: groupName, onChange});
 
   const classes = useStyles();
 

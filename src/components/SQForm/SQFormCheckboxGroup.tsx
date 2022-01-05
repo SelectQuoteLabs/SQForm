@@ -25,7 +25,7 @@ interface SQFormCheckboxGroupProps {
   /** Whether a selection in this group is required */
   isRequired?: boolean;
   /** Function to call on value change */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: CheckboxProps['onChange'];
   /** Whether to display the group in a row */
   shouldDisplayInRow?: boolean;
   /** Whether to display the select all checkbox */
@@ -48,7 +48,10 @@ function SQFormCheckboxGroup({
   const {
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
-  } = useForm({name, onChange});
+  } = useForm<CheckboxOption['value'][], React.ChangeEvent<HTMLInputElement>>({
+    name,
+    onChange,
+  });
 
   const {setFieldValue} = useFormikContext();
 

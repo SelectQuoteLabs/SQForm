@@ -10,17 +10,22 @@ import isEqual from 'lodash.isequal';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
-interface UseFormParam {
+type ChangeHandler<TChangeEvent> = (
+  event: TChangeEvent,
+  ...args: any[]
+) => void;
+
+interface UseFormParam<TChangeEvent> {
   name: string;
   onBlur?: React.FocusEventHandler;
-  onChange?: React.ChangeEventHandler;
+  onChange?: ChangeHandler<TChangeEvent>;
 }
 
-interface UseFormReturn {
+interface UseFormReturn<TValue, TChangeEvent> {
   formikField: {
-    field: FieldInputProps<unknown>;
-    meta: FieldMetaProps<unknown>;
-    helpers: FieldHelperProps<unknown>;
+    field: FieldInputProps<TValue>;
+    meta: FieldMetaProps<TValue>;
+    helpers: FieldHelperProps<TValue>;
   };
   fieldState: {
     errorMessage: string;
@@ -32,7 +37,7 @@ interface UseFormReturn {
   };
   fieldHelpers: {
     handleBlur: React.FocusEventHandler;
-    handleChange: React.ChangeEventHandler;
+    handleChange: ChangeHandler<TChangeEvent>;
     HelperTextComponent: React.ReactElement | string;
   };
 }
@@ -63,10 +68,14 @@ function _getHasValue(meta: FieldMetaProps<unknown>) {
   return !!fieldValue;
 }
 
-export function useForm({name, onBlur, onChange}: UseFormParam): UseFormReturn {
+export function useForm<TValue, TChangeEvent>({
+  name,
+  onBlur,
+  onChange,
+}: UseFormParam<TChangeEvent>): UseFormReturn<TValue, TChangeEvent> {
   _handleError(name);
 
-  const [field, meta, helpers] = useField(name);
+  const [field, meta, helpers] = useField<TValue>(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
   const isDirty = !isEqual(meta.initialValue, meta.value);
@@ -92,7 +101,7 @@ export function useForm({name, onBlur, onChange}: UseFormParam): UseFormReturn {
   const isFieldError = getFieldStatus() === 'ERROR';
   const isFulfilled = getFieldStatus() === 'USER_FULFILLED';
 
-  const handleChange = React.useCallback(
+  const handleChange: ChangeHandler<TChangeEvent> = React.useCallback(
     (event) => {
       field.onChange(event);
       onChange && onChange(event);
