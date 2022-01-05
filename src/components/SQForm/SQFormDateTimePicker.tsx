@@ -43,7 +43,7 @@ function SQFormDateTimePicker({
   onBlur,
   onChange,
   muiFieldProps = {},
-}: SQFormDateTimePickerProps) {
+}: SQFormDateTimePickerProps): JSX.Element {
   const {
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
