@@ -96,6 +96,42 @@ describe('Tests for Default', () => {
   });
 });
 
+it('should not call onClose on `escape` keydown because cancel is not available', async () => {
+  render(
+    <Default
+      isOpen={true}
+      onSave={handleSave}
+      onClose={handleClose}
+      showSecondaryButton={false}
+    />
+  );
+
+  // fireEvent, not userEvent
+  // to confirm the 'key' and 'code' values-- > https://keycode.info/
+  // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
+  fireEvent.keyDown(screen.getByRole('presentation'), {
+    key: 'Escape',
+    code: 'Escape'
+  });
+
+  await waitFor(() => {
+    expect(handleClose).not.toHaveBeenCalled();
+  });
+});
+
+it('should not find the cancel secondary button', async () => {
+  render(
+    <Default
+      isOpen={true}
+      onSave={handleSave}
+      onClose={handleClose}
+      showSecondaryButton={false}
+    />
+  );
+
+  expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
+});
+
 describe('Tests for WithValidation', () => {
   it('should disable submit/save until validationSchema satisfied', async () => {
     render(

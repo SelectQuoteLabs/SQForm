@@ -30,7 +30,8 @@ const defaultArgs = {
   muiGridProps: {
     spacing: 2,
     alignItems: 'center'
-  }
+  },
+  showSecondaryButton: true
 };
 
 const Template = args => {
