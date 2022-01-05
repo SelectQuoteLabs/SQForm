@@ -6,7 +6,7 @@ import * as stories from '../SQFormAsyncAutocomplete.stories';
 
 const {
   Default: SQFormAsyncAutocomplete,
-  WithValidation: SQFormAsyncAutocompleteWithValidation
+  WithValidation: SQFormAsyncAutocompleteWithValidation,
 } = composeStories(stories);
 
 describe('SQFormAsyncAutocomplete Tests', () => {
@@ -29,7 +29,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       expect(textField).toHaveTextContent('');
@@ -38,14 +38,14 @@ describe('SQFormAsyncAutocomplete Tests', () => {
     it('should render with non-empty initial value', () => {
       const SQFormProps = {
         initialValues: {
-          asyncAutocomplete: 'fifth'
-        }
+          asyncAutocomplete: 'fifth',
+        },
       };
 
       render(<SQFormAsyncAutocomplete size="auto" SQFormProps={SQFormProps} />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('Fifth');
     });
@@ -66,7 +66,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       userEvent.type(textField, 'F');
@@ -80,7 +80,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('');
 
@@ -102,7 +102,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       userEvent.click(optionToSelect);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('Second');
     });
@@ -111,7 +111,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       userEvent.type(textField, 'F');
 
@@ -132,31 +132,17 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       render(<SQFormAsyncAutocomplete size="auto" isDisabled={true} />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
 
       expect(textField).toBeDisabled();
-    });
-
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormAsyncAutocomplete size="auto" isRequired={true} />);
-
-      const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-    });
-
-    it('should not render as required when isRequired is false', () => {
-      render(<SQFormAsyncAutocomplete size="auto" isRequired={false} />);
-
-      const requiredText = screen.queryByText(/required/i);
-      expect(requiredText).not.toBeInTheDocument();
     });
 
     it(`should display 'No options' when option not in the list is typed`, () => {
       render(<SQFormAsyncAutocomplete size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       userEvent.type(textField, '2');
 
@@ -180,11 +166,28 @@ describe('SQFormAsyncAutocomplete Tests', () => {
   });
 
   describe('Autocomplete With Validation', () => {
+    it('should render as required when it is a required field', async () => {
+      render(<SQFormAsyncAutocompleteWithValidation size="auto" />);
+
+      await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
+        expect(requiredText).toBeVisible();
+        expect(requiredText).toHaveClass('Mui-required');
+      });
+    });
+
+    it('should not render as required when it is not a required field', () => {
+      render(<SQFormAsyncAutocomplete size="auto" />);
+
+      const requiredText = screen.queryByText(/required/i);
+      expect(requiredText).not.toBeInTheDocument();
+    });
+
     it('should highlight field if required but no value selected', async () => {
       render(<SQFormAsyncAutocompleteWithValidation size="auto" />);
 
       const textField = screen.getByRole('textbox', {
-        name: /async autocomplete/i
+        name: /async autocomplete/i,
       });
       expect(textField).not.toHaveFocus();
 
@@ -193,8 +196,8 @@ describe('SQFormAsyncAutocomplete Tests', () => {
 
       userEvent.tab();
 
-      const requiredText = screen.getByText(/required/i);
       await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
         expect(requiredText).toBeVisible();
         expect(requiredText).toHaveClass('Mui-error');
       });

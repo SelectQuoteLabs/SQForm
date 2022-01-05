@@ -4,14 +4,14 @@ import {
   FieldInputProps,
   FieldMetaProps,
   getIn,
-  useField
+  useField,
 } from 'formik';
+import isEqual from 'lodash.isequal';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 
 interface UseFormParam {
   name: string;
-  isRequired: boolean;
   onBlur?: React.FocusEventHandler;
   onChange?: React.ChangeEventHandler;
 }
@@ -39,24 +39,13 @@ interface UseFormReturn {
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
 
-function _handleError(name: string, isRequired: boolean) {
+function _handleError(name: string) {
   if (typeof name !== 'string') {
     throw new Error('Name is a required param and must be a String!');
   }
-  if (typeof isRequired !== 'boolean') {
-    throw new Error('isRequired is a required param and must be a Boolean!');
-  }
 }
 
-function _getIsFulfilled(hasValue: boolean, isError: boolean) {
-  if (hasValue && !isError) {
-    return true;
-  }
-
-  return false;
-}
-
-function _getHasValue(meta: unknown) {
+function _getHasValue(meta: FieldMetaProps<unknown>) {
   const fieldValue = getIn(meta, 'value');
 
   if (Array.isArray(fieldValue)) {
@@ -74,25 +63,37 @@ function _getHasValue(meta: unknown) {
   return !!fieldValue;
 }
 
-export function useForm({
-  name,
-  isRequired,
-  onBlur,
-  onChange
-}: UseFormParam): UseFormReturn {
-  _handleError(name, isRequired);
+export function useForm({name, onBlur, onChange}: UseFormParam): UseFormReturn {
+  _handleError(name);
 
   const [field, meta, helpers] = useField(name);
   const errorMessage = getIn(meta, 'error');
   const isTouched = getIn(meta, 'touched');
+  const isDirty = !isEqual(meta.initialValue, meta.value);
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
-  const isFieldError = (isTouched || hasValue) && isError;
-  const isFieldRequired = isRequired && !hasValue;
-  const isFulfilled = _getIsFulfilled(hasValue, isError);
+  const isRequired = errorMessage?.toLowerCase() === 'required';
+
+  const getFieldStatus = () => {
+    if (isRequired && !hasValue && !isDirty && !isTouched) {
+      return 'REQUIRED';
+    }
+    if (isError) {
+      return 'ERROR';
+    }
+    if (hasValue && !isError && isDirty) {
+      return 'USER_FULFILLED';
+    }
+
+    return 'FULFILLED';
+  };
+
+  const isFieldRequired = getFieldStatus() === 'REQUIRED';
+  const isFieldError = getFieldStatus() === 'ERROR';
+  const isFulfilled = getFieldStatus() === 'USER_FULFILLED';
 
   const handleChange = React.useCallback(
-    event => {
+    (event) => {
       field.onChange(event);
       onChange && onChange(event);
     },
@@ -100,7 +101,7 @@ export function useForm({
   );
 
   const handleBlur = React.useCallback(
-    event => {
+    (event) => {
       field.onBlur(event);
       onBlur && onBlur(event);
     },
@@ -142,8 +143,8 @@ export function useForm({
       isError,
       isFieldError,
       isFieldRequired,
-      isFulfilled
+      isFulfilled,
     },
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {handleBlur, handleChange, HelperTextComponent},
   };
 }

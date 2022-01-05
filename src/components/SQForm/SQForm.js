@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
-import * as Yup from 'yup';
+import {object as YupObject, setLocale} from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
+
+setLocale({
+  mixed: {
+    required: 'Required',
+  },
+});
 
 function SQForm({
   children,
@@ -12,15 +18,18 @@ function SQForm({
   initialValues,
   muiGridProps = {},
   onSubmit,
-  validationSchema
+  validationSchema,
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
 
-    return Yup.object().shape(validationSchema);
+    return YupObject().shape(validationSchema);
   }, [validationSchema]);
 
-  const initialErrors = useInitialRequiredErrors(validationSchema);
+  const initialErrors = useInitialRequiredErrors(
+    validationSchema,
+    initialValues
+  );
 
   // HACK: This is a workaround for: https://github.com/mui-org/material-ui-pickers/issues/2112
   // Remove this reset handler when the issue is fixed.
@@ -44,7 +53,7 @@ function SQForm({
       validationSchema={validationYupSchema}
       validateOnMount={true}
     >
-      {_props => {
+      {(_props) => {
         return (
           <Form>
             <Grid
@@ -83,7 +92,7 @@ SQForm.propTypes = {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: PropTypes.object
+  validationSchema: PropTypes.object,
 };
 
 export default SQForm;

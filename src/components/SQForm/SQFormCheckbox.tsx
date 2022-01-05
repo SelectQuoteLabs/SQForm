@@ -26,11 +26,7 @@ function SQFormCheckbox({
   const {
     formikField: {field},
     fieldHelpers: {handleChange},
-  } = useForm({
-    name,
-    isRequired: false,
-    onChange,
-  });
+  } = useForm({name, onChange});
 
   return (
     <Grid item sm={size}>

@@ -6,6 +6,7 @@ import {FormikContextType, useFormikContext} from 'formik';
 export const BUTTON_TYPES = {
   SUBMIT: 'submit',
   RESET: 'reset',
+  BUTTON: 'button',
 } as const;
 
 export type ButtonType = typeof BUTTON_TYPES[keyof typeof BUTTON_TYPES];

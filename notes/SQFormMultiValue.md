@@ -44,9 +44,11 @@ In english this validation says "nameOfField's value must be an array of numbers
         return typeof value === 'number' ? Yup.number() : Yup.string();
       })
     )
-    // Minimum one selection required
-    .min(1)
     // Ensures this field is filled before submission
-    .required('Required'),
+    .required(),
+    // Minimum one selection required
+    // Text is required to be "Required" for gray messaging to appear
+    // Otherwise error messaging will appear
+    .min(1, 'Required')
 }
 ```

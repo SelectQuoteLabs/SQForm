@@ -27,7 +27,6 @@ function SQFormInclusionListItem({
     fieldHelpers: {handleChange},
   } = useForm({
     name,
-    isRequired: false,
     onChange,
   });
 

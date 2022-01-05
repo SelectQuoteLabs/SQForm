@@ -134,12 +134,14 @@ describe('SQFormRadioButtonGroup Tests', () => {
         ).toBeDisabled();
       });
 
-      it('displays required helper text', () => {
+      it('displays required helper text', async () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
-        const requiredText = screen.getByText('Required');
-        expect(requiredText).toBeInTheDocument();
-        expect(requiredText).toHaveClass('Mui-required');
+        await waitFor(() => {
+          const requiredText = screen.getByText('Required');
+          expect(requiredText).toBeInTheDocument();
+          expect(requiredText).toHaveClass('Mui-required');
+        })
       });
     });
 
@@ -147,15 +149,14 @@ describe('SQFormRadioButtonGroup Tests', () => {
       it('has error styles on label and helper text', async () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
-        const label = screen.getByText(/Pandas/i);
-        const requiredText = screen.getByText(/Required/i);
-
         // Tab into radio group
         userEvent.tab();
 
         // Tab out of radio group
         userEvent.tab();
         await waitFor(() => {
+          const label = screen.getByText(/Pandas/i);
+          const requiredText = screen.getByText(/Required/i);
           expect(label).toHaveClass('Mui-error');
           expect(requiredText).toHaveClass('Mui-error');
         });

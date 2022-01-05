@@ -6,7 +6,7 @@ import {
   SQFormDatePicker,
   SQFormTextField,
   SQFormDateTimePicker,
-  SQFormDatePickerWithCalendarInputOnly
+  SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -17,11 +17,11 @@ export default {
     onSave: {action: 'onSave', table: {disable: true}},
     onClose: {action: 'onClose', table: {disable: true}},
     children: {table: {disable: true}},
-    validationSchema: {table: {disable: true}}
+    validationSchema: {table: {disable: true}},
   },
   parameters: {
-    docs: {page: createDocsPage({showStories: false})}
-  }
+    docs: {page: createDocsPage({showStories: false})},
+  },
 };
 
 const defaultArgs = {
@@ -29,11 +29,11 @@ const defaultArgs = {
   initialValues: {hello: ''},
   muiGridProps: {
     spacing: 2,
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 };
 
-const Template = args => {
+const Template = (args) => {
   return (
     <>
       <h1>
@@ -41,11 +41,7 @@ const Template = args => {
       </h1>
 
       <SQFormDialog {...args}>
-        <SQFormTextField
-          name="hello"
-          label="Hello"
-          isRequired={Boolean(args.validationSchema)}
-        />
+        <SQFormTextField name="hello" label="Hello" />
       </SQFormDialog>
     </>
   );
@@ -59,11 +55,11 @@ WithValidation.args = {
   ...defaultArgs,
   title: 'With Validation',
   validationSchema: {
-    hello: Yup.string().required('Required')
-  }
+    hello: Yup.string().required(),
+  },
 };
 
-export const WithAutoFocus = args => {
+export const WithAutoFocus = (args) => {
   return (
     <>
       <h1>
@@ -82,10 +78,10 @@ export const WithAutoFocus = args => {
 };
 WithAutoFocus.args = {
   ...defaultArgs,
-  title: 'With Auto Focus'
+  title: 'With Auto Focus',
 };
 
-export const WithDatePickers = args => {
+export const WithDatePickers = (args) => {
   return (
     <>
       <h1>
@@ -109,6 +105,6 @@ WithDatePickers.args = {
   initialValues: {
     datePicker: '',
     dateTimePicker: '',
-    datePickerCalendarOnly: ''
-  }
+    datePickerCalendarOnly: '',
+  },
 };

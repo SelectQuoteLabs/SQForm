@@ -11,11 +11,11 @@ export default {
   argTypes: {
     onSave: {action: 'onSave', table: {disable: true}},
     children: {table: {disable: true}},
-    validationSchema: {table: {disable: true}}
+    validationSchema: {table: {disable: true}},
   },
   parameters: {
-    docs: {page: createDocsPage({showStories: false})}
-  }
+    docs: {page: createDocsPage({showStories: false})},
+  },
 };
 
 const defaultArgs = {
@@ -23,113 +23,37 @@ const defaultArgs = {
   initialValues: {hello: ''},
   muiGridProps: {
     spacing: 2,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   onSubmit: () => {},
-  validationSchema: {hello: Yup.string().required('Required')}
+  validationSchema: {hello: Yup.string().required()},
 };
 
-const Template = args => {
+const Template = (args) => {
   const {wrapper, validationSchema, ...restArgs} = args;
 
   const basicCard = (
-    <SQFormScrollableCard {...restArgs}>
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
-      <SQFormTextField
-        name="hello"
-        label="Hello"
-        size={12}
-        isRequired={Boolean(validationSchema)}
-      />
+    <SQFormScrollableCard
+      validationSchema={validationSchema}
+      shouldRequireFieldUpdates={true}
+      {...restArgs}
+    >
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
+      <SQFormTextField name="hello" label="Hello" size={12} />
     </SQFormScrollableCard>
   );
 
@@ -140,7 +64,15 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  ...defaultArgs
+  ...defaultArgs,
+};
+
+export const CardContentStyles = Template.bind({});
+CardContentStyles.args = {
+  ...defaultArgs,
+  cardContentStyles: {
+    padding: `0 16px`,
+  },
 };
 
 const SubHeader = () => (
@@ -152,7 +84,7 @@ const SubHeader = () => (
 export const WithSubHeader = Template.bind({});
 WithSubHeader.args = {
   ...defaultArgs,
-  SubHeaderComponent: <SubHeader />
+  SubHeaderComponent: <SubHeader />,
 };
 
 const Wrapper = ({children}) => (
@@ -173,7 +105,7 @@ WithSelfBoundingHeight.args = {
   title: 'With Self-Bounding Height',
   isSelfBounding: true,
   wrapper: <Wrapper />,
-  SubHeaderComponent: <SubHeader />
+  SubHeaderComponent: <SubHeader />,
 };
 
 export const WithStaticHeight = Template.bind({});
@@ -181,5 +113,19 @@ WithStaticHeight.args = {
   ...defaultArgs,
   title: 'With Static Height',
   height: 450,
-  SubHeaderComponent: <SubHeader />
+  SubHeaderComponent: <SubHeader />,
+};
+
+export const WithTitleVariant = Template.bind({});
+WithTitleVariant.args = {
+  ...defaultArgs,
+  title: 'h2 Title Variant',
+  titleVariant: 'h1',
+};
+
+export const WithRoundedCorners = Template.bind({});
+WithRoundedCorners.args = {
+  ...defaultArgs,
+  title: 'With Rounded Corners',
+  isSquareCorners: false,
 };

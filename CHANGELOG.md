@@ -1,3 +1,99 @@
+## [6.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.8.0...v6.0.0) (2021-12-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Removed the isRequired prop
+
+### Bug Fixes
+
+* 🐛 No longer need to pass isRequired to form components ([aa63449](https://github.com/SelectQuoteLabs/SQForm/commit/aa63449f23c864e4ba7d293103088ca00bc62741)), closes [#472](https://github.com/SelectQuoteLabs/SQForm/issues/472)
+
+## [5.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.7.0...v5.8.0) (2021-11-15)
+
+
+### Features
+
+* 🎸 Configure title variant and square corners ([4c0bc25](https://github.com/SelectQuoteLabs/SQForm/commit/4c0bc25fdf645491f02d532422836cd50be12ba1))
+
+## [5.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.3...v5.7.0) (2021-11-02)
+
+
+### Features
+
+* 🎸 cardContentStyles prop for SQFormScrollableCard ([65fb816](https://github.com/SelectQuoteLabs/SQForm/commit/65fb816619276ae55c88f2f5a763a6d759254402))
+
+### [5.6.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.2...v5.6.3) (2021-10-08)
+
+
+### Bug Fixes
+
+* 🐛 Only shows green fulfilled icon if field updated by user ([a9747fb](https://github.com/SelectQuoteLabs/SQForm/commit/a9747fbc9962591c7c8cbc5990cb2ecece6d2b1a)), closes [#459](https://github.com/SelectQuoteLabs/SQForm/issues/459)
+
+### [5.6.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.1...v5.6.2) (2021-10-06)
+
+
+### Bug Fixes
+
+* 🐛 Renders - - when no data is provided to MaskedReadOnly ([a7206a5](https://github.com/SelectQuoteLabs/SQForm/commit/a7206a5fc5ab96bce1eaf8aef93754ccb159de5f)), closes [#452](https://github.com/SelectQuoteLabs/SQForm/issues/452)
+
+### [5.6.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.6.0...v5.6.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* 🐛 Fix dropdown issue with empty children and displayEmpty ([e28b1b6](https://github.com/SelectQuoteLabs/SQForm/commit/e28b1b64183dcca334d15c48f8161ebac42b896d)), closes [#449](https://github.com/SelectQuoteLabs/SQForm/issues/449)
+
+## [5.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.1...v5.6.0) (2021-09-28)
+
+
+### Features
+
+* 🎸 New component: SQFormMaskedReadOnlyField ([629848f](https://github.com/SelectQuoteLabs/SQForm/commit/629848fccb412297a824802844b752b35e19be86)), closes [#444](https://github.com/SelectQuoteLabs/SQForm/issues/444)
+
+### [5.5.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.5.0...v5.5.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* 🐛 fix isSelfBounding issue in SQFormScrollableCard ([5124bf2](https://github.com/SelectQuoteLabs/SQForm/commit/5124bf2f5230f2956c6e0602b4b7977464cb6ca7))
+
+## [5.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.4.0...v5.5.0) (2021-09-07)
+
+
+### Features
+
+* 🎸 SQFormScrollableCardsMenuWrapper ([12aa521](https://github.com/SelectQuoteLabs/SQForm/commit/12aa521ba7d8e934b403c8dfd857d0ba6a36205e)), closes [#347](https://github.com/SelectQuoteLabs/SQForm/issues/347)
+
+## [5.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.3...v5.4.0) (2021-08-26)
+
+
+### Features
+
+* 🎸 add prop for disabling or enabling cardHeader ([a7046b1](https://github.com/SelectQuoteLabs/SQForm/commit/a7046b1b66e1b7a1b70d69ae48bc476ce97a2713))
+* 🎸 add prop to disable SQFormScrollableCard header ([3378b57](https://github.com/SelectQuoteLabs/SQForm/commit/3378b57ba044f9406e94fb739b3873415133bfa5)), closes [#434](https://github.com/SelectQuoteLabs/SQForm/issues/434)
+
+### [5.3.3](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.2...v5.3.3) (2021-08-26)
+
+
+### Bug Fixes
+
+* 🐛 SQFormScrollableCard submit button updates ([4f49162](https://github.com/SelectQuoteLabs/SQForm/commit/4f49162340ab620ca206be13e37b8896770cfee0)), closes [#435](https://github.com/SelectQuoteLabs/SQForm/issues/435)
+
+### [5.3.2](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.1...v5.3.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* 🐛 fixed autocomplete initial width issues and placement ([990783b](https://github.com/SelectQuoteLabs/SQForm/commit/990783b11482ade4f2e7c7f69729f5ee494c2f19)), closes [#429](https://github.com/SelectQuoteLabs/SQForm/issues/429)
+
+### [5.3.1](https://github.com/SelectQuoteLabs/SQForm/compare/v5.3.0...v5.3.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* 🐛 SQFormGuidedWorkflow isDisabled now skips the module ([74fd037](https://github.com/SelectQuoteLabs/SQForm/commit/74fd037f34b6001efcc39cc2acfe5f8ac248dc52)), closes [#405](https://github.com/SelectQuoteLabs/SQForm/issues/405)
+
 ## [5.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.2.4...v5.3.0) (2021-08-06)
 
 

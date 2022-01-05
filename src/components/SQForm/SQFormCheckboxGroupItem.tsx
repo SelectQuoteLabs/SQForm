@@ -4,13 +4,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   checkboxGroupItem: {
-    marginBottom: theme.spacing(1.5)
+    marginBottom: theme.spacing(1.5),
   },
   rowDisplay: {
-    marginRight: theme.spacing(3.75)
-  }
+    marginRight: theme.spacing(3.75),
+  },
 }));
 
 interface SQFormCheckboxGroupItemProps {
@@ -37,16 +37,12 @@ function SQFormCheckboxGroupItem({
   onChange,
   isRowDisplay = false,
   isDisabled = false,
-  inputProps = {}
+  inputProps = {},
 }: SQFormCheckboxGroupItemProps): JSX.Element {
   const {
     formikField: {field},
-    fieldHelpers: {handleChange}
-  } = useForm({
-    name: groupName,
-    isRequired: false,
-    onChange
-  });
+    fieldHelpers: {handleChange},
+  } = useForm({name: groupName, onChange});
 
   const classes = useStyles();
 

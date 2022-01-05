@@ -6,7 +6,7 @@ import * as stories from '../SQFormCheckboxGroup.stories';
 
 const {
   Default: SQFormCheckboxGroup,
-  WithValidation: SQFormCheckboxGroupWithValidation
+  WithValidation: SQFormCheckboxGroupWithValidation,
 } = composeStories(stories);
 
 const SHOPPING_LIST_OPTIONS = [
@@ -14,7 +14,7 @@ const SHOPPING_LIST_OPTIONS = [
   {label: 'Sunshroom', value: 'sunshroom'},
   {label: 'Bokoblin Guts', value: 'bokoblin guts'},
   {label: 'Lynel Hoof', value: 'lynel hoof'},
-  {label: 'Stealthfin Trout', value: 'stealthfin trout'}
+  {label: 'Stealthfin Trout', value: 'stealthfin trout'},
 ];
 
 describe('SQFormCheckboxGroup Tests', () => {
@@ -31,7 +31,7 @@ describe('SQFormCheckboxGroup Tests', () => {
 
     it('should display as checked when initial values are set', () => {
       const initialValues = {
-        shoppingList: [SHOPPING_LIST_OPTIONS[0].value]
+        shoppingList: [SHOPPING_LIST_OPTIONS[0].value],
       };
 
       render(<SQFormCheckboxGroup SQFormProps={{initialValues}} size="auto" />);
@@ -43,7 +43,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       );
 
       const filteredCheckboxes = checkboxes.filter(
-        checkbox => checkbox.checked
+        (checkbox) => checkbox.checked
       );
       expect(filteredCheckboxes).toEqual(
         expect.arrayContaining([targetCheckbox])
@@ -78,13 +78,6 @@ describe('SQFormCheckboxGroup Tests', () => {
       expect(checkboxLabel).not.toBeChecked();
     });
 
-    it('should render as required when isRequired is true', () => {
-      render(<SQFormCheckboxGroup size="auto" isRequired />);
-
-      const required = screen.getByText('Required');
-      expect(required).toBeInTheDocument();
-    });
-
     it('should render an extra checkbox when adding select all capability', () => {
       render(<SQFormCheckboxGroup size="auto" shouldUseSelectAll />);
 
@@ -99,7 +92,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
 
       const filteredCheckboxes = checkboxes.filter(
-        checkbox => checkbox.checked
+        (checkbox) => checkbox.checked
       );
       expect(filteredCheckboxes).toEqual([]);
       expect(filteredCheckboxes).toHaveLength(0);
@@ -108,7 +101,9 @@ describe('SQFormCheckboxGroup Tests', () => {
 
       userEvent.click(selectAllCheckbox);
 
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -119,8 +114,8 @@ describe('SQFormCheckboxGroup Tests', () => {
       const initialValues = {
         shoppingList: [
           SHOPPING_LIST_OPTIONS[1].value,
-          SHOPPING_LIST_OPTIONS[4].value
-        ]
+          SHOPPING_LIST_OPTIONS[4].value,
+        ],
       };
       render(
         <SQFormCheckboxGroup
@@ -133,7 +128,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
       const targetBox1 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[1].label);
       const targetBox2 = screen.getByLabelText(SHOPPING_LIST_OPTIONS[4].label);
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
 
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([targetBox1, targetBox2])
@@ -143,7 +140,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const selectAllCheckbox = screen.getByLabelText('All');
       userEvent.click(selectAllCheckbox);
 
-      const updatedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const updatedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(updatedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -157,9 +156,9 @@ describe('SQFormCheckboxGroup Tests', () => {
           SHOPPING_LIST_OPTIONS[1].value,
           SHOPPING_LIST_OPTIONS[2].value,
           SHOPPING_LIST_OPTIONS[3].value,
-          SHOPPING_LIST_OPTIONS[4].value
+          SHOPPING_LIST_OPTIONS[4].value,
         ],
-        shoppingListSelectAll: true
+        shoppingListSelectAll: true,
       };
       render(
         <SQFormCheckboxGroup
@@ -172,7 +171,9 @@ describe('SQFormCheckboxGroup Tests', () => {
       const checkboxes = screen.getAllByRole('checkbox');
 
       const selectAllCheckbox = screen.getByLabelText('All');
-      const checkedCheckboxes = checkboxes.filter(checkbox => checkbox.checked);
+      const checkedCheckboxes = checkboxes.filter(
+        (checkbox) => checkbox.checked
+      );
       expect(checkedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
       );
@@ -181,7 +182,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       userEvent.click(selectAllCheckbox);
 
       const uncheckedCheckboxes = checkboxes.filter(
-        checkbox => !checkbox.checked
+        (checkbox) => !checkbox.checked
       );
       expect(uncheckedCheckboxes).toEqual(
         expect.arrayContaining([selectAllCheckbox])
@@ -209,27 +210,27 @@ describe('SQFormCheckboxGroup Tests', () => {
       userEvent.click(checkbox);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       await waitFor(() => expect(submitButton).toBeEnabled());
     });
 
-    it('should highlight required when unchecked', async () => {
+    it('should render "required" text when when its field is required', async () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
-      const checkbox = screen.getByLabelText(SHOPPING_LIST_OPTIONS[3].label);
+      await waitFor(() => {
+        const requiredText = screen.getByText(/required/i);
+        expect(requiredText).toBeInTheDocument();
+        expect(requiredText).toHaveClass('Mui-required');
+      });
+    });
 
-      userEvent.click(checkbox);
+    it('should not render "required" text as required when when its field is not required', () => {
+      render(<SQFormCheckboxGroup size="auto" />);
 
-      userEvent.click(checkbox);
-
-      const required = screen.getByText('Required');
-      expect(required).toHaveClass('Mui-required');
-
-      expect(
-        await screen.findByRole('button', {name: /form submission/i})
-      ).toBeDisabled();
+      const required = screen.queryByText(/required/i);
+      expect(required).not.toBeInTheDocument();
     });
   });
 });

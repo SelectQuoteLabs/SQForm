@@ -71,7 +71,7 @@ it('should not let the disabled option be selected', async () => {
   // Disabled option is skipped
   userEvent.type(expandButton, '{tab}{enter}{arrowdown}{arrowdown}{enter}');
   const updatedExpandButton = await screen.findByRole('button', {
-    name: /missouri/i
+    name: /missouri/i,
   });
 
   expect(updatedExpandButton).toBeInTheDocument();
@@ -117,15 +117,22 @@ it('should be selectable if it is not disabled', () => {
   expect(optionsList).toBeInTheDocument();
 });
 
-it('should display icon and text if field is required', () => {
-  render(<SQFormDropdown isRequired size="auto" />);
+it('should display icon and text if field is required', async () => {
+  const validationSchema = {
+    state: Yup.string().required(),
+  };
 
-  const required = screen.getByText(/required/i);
-  expect(required).toBeVisible();
+  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
+
+  await waitFor(() => expect(screen.getByText(/required/i)).toBeVisible());
 });
 
 it('should not display icon and text if field is not required', () => {
-  render(<SQFormDropdown isRequired={false} size="auto" />);
+  const validationSchema = {
+    state: Yup.string(),
+  };
+
+  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
 
   const required = screen.queryByText(/required/i);
   expect(required).not.toBeInTheDocument();
@@ -133,12 +140,10 @@ it('should not display icon and text if field is not required', () => {
 
 it('should highlight field if required but no value selected', async () => {
   const validationSchema = {
-    state: Yup.string().required('Required')
+    state: Yup.string().required(),
   };
 
-  render(
-    <SQFormDropdown isRequired SQFormProps={{validationSchema}} size="auto" />
-  );
+  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 

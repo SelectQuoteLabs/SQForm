@@ -68,7 +68,7 @@ function SQFormDialog<Values>({
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
-  validationSchema
+  validationSchema,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -76,7 +76,10 @@ function SQFormDialog<Values>({
     return Yup.object().shape(validationSchema);
   }, [validationSchema]);
 
-  const initialErrors = useInitialRequiredErrors(validationSchema);
+  const initialErrors = useInitialRequiredErrors(
+    validationSchema,
+    initialValues
+  );
 
   return (
     <Formik

@@ -21,8 +21,8 @@ function renderRow({data, index, style}) {
   return React.cloneElement(data[index], {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: style.top + LISTBOX_PADDING,
+    },
   });
 }
 
@@ -73,16 +73,16 @@ const useStyles = makeStyles({
   listbox: {
     '& ul': {
       padding: 0,
-      margin: 0
-    }
-  }
+      margin: 0,
+    },
+  },
 });
 
 const clearButtonStyles = makeStyles({
   clearButton: {
     top: 'auto',
-    bottom: '8px'
-  }
+    bottom: '8px',
+  },
 });
 
 function SQFormMultiValue({
@@ -90,11 +90,10 @@ function SQFormMultiValue({
   name,
   label,
   size = 'auto',
-  isRequired = false,
   isDisabled = false,
   onInputChange,
   onChange,
-  onBlur
+  onBlur,
 }) {
   const classes = useStyles();
   const clearButtonClasses = clearButtonStyles();
@@ -102,18 +101,15 @@ function SQFormMultiValue({
   const {setFieldValue, setTouched, touched} = useFormikContext();
   const {
     fieldState: {isFieldError},
-    fieldHelpers: {HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired
-  });
+    fieldHelpers: {HelperTextComponent},
+  } = useForm({name});
 
   const [inputValue, setInputValue] = React.useState('');
   const [customOptions, setCustomOptions] = React.useState([]);
-  const displayOptions = React.useMemo(() => [...children, ...customOptions], [
-    children,
-    customOptions
-  ]);
+  const displayOptions = React.useMemo(
+    () => [...children, ...customOptions],
+    [children, customOptions]
+  );
   const previousInitialValue = usePrevious(initialValue);
 
   React.useEffect(() => {
@@ -123,7 +119,7 @@ function SQFormMultiValue({
       return;
     }
 
-    const displayValues = displayOptions.map(option => {
+    const displayValues = displayOptions.map((option) => {
       return option.value;
     });
 
@@ -134,19 +130,19 @@ function SQFormMultiValue({
 
       acc.push({
         label: value,
-        value
+        value,
       });
 
       return acc;
     }, []);
 
-    setCustomOptions(previousCustomOptions => {
+    setCustomOptions((previousCustomOptions) => {
       return [...previousCustomOptions, ...newCustomOptions];
     });
   }, [initialValue, displayOptions, previousInitialValue]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
@@ -165,16 +161,16 @@ function SQFormMultiValue({
       if (reason === 'create-option') {
         const newCustomOption = {
           label: value[value.length - 1],
-          value: value[value.length - 1]
+          value: value[value.length - 1],
         };
-        const isCustomOptionNew = customOptions.every(customOption => {
+        const isCustomOptionNew = customOptions.every((customOption) => {
           return customOption.value !== newCustomOption.value;
         });
 
         if (isCustomOptionNew) {
-          setCustomOptions(prevCustomOptions => [
+          setCustomOptions((prevCustomOptions) => [
             ...prevCustomOptions,
-            newCustomOption
+            newCustomOption,
           ]);
         }
 
@@ -187,7 +183,7 @@ function SQFormMultiValue({
       if (reason === 'remove-option') {
         const currentFieldOptions = [...value];
 
-        const newCustomOptions = customOptions.filter(customOption => {
+        const newCustomOptions = customOptions.filter((customOption) => {
           return customOption.value !== detail.option;
         });
         setCustomOptions(newCustomOptions);
@@ -200,7 +196,7 @@ function SQFormMultiValue({
       const newlyAddedOption = currentFieldOptions.pop();
       let newFieldValue;
       if (currentFieldOptions.includes(newlyAddedOption.value)) {
-        newFieldValue = currentFieldOptions.filter(option => {
+        newFieldValue = currentFieldOptions.filter((option) => {
           return option !== newlyAddedOption.value;
         });
       } else {
@@ -233,7 +229,7 @@ function SQFormMultiValue({
         freeSolo={true}
         renderTags={(value, getTagProps) => {
           return value.map((optionValue, index) => {
-            const tagOption = displayOptions.find(autocompleteOption => {
+            const tagOption = displayOptions.find((autocompleteOption) => {
               return autocompleteOption.value === optionValue;
             });
 
@@ -251,16 +247,16 @@ function SQFormMultiValue({
           });
         }}
         ListboxComponent={ListboxVirtualizedComponent}
-        getOptionLabel={option => option.label || ''}
+        getOptionLabel={(option) => option.label || ''}
         value={fieldValue || []}
         inputValue={inputValue}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
-        getOptionDisabled={option => option.isDisabled}
+        getOptionDisabled={(option) => option.isDisabled}
         disabled={isDisabled}
         disableClearable={isDisabled}
-        renderInput={params => (
+        renderInput={(params) => (
           <TextField
             {...params}
             name={name}
@@ -274,17 +270,17 @@ function SQFormMultiValue({
                 ...params.InputProps.endAdornment,
                 props: {
                   ...params.InputProps.endAdornment.props,
-                  className: `${params.InputProps.endAdornment.props.className} ${clearButtonClasses.clearButton}`
-                }
-              }
+                  className: `${params.InputProps.endAdornment.props.className} ${clearButtonClasses.clearButton}`,
+                },
+              },
             }}
             InputLabelProps={{
               ...params.InputLabelProps,
-              shrink: true
+              shrink: true,
             }}
             inputProps={{
               ...params.inputProps,
-              disabled: isDisabled
+              disabled: isDisabled,
             }}
             FormHelperTextProps={{error: isFieldError}}
             helperText={!isDisabled && HelperTextComponent}
@@ -301,7 +297,7 @@ SQFormMultiValue.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      isDisabled: PropTypes.bool
+      isDisabled: PropTypes.bool,
     })
   ),
   /** Name of the form field */
@@ -310,8 +306,6 @@ SQFormMultiValue.propTypes = {
   label: PropTypes.string.isRequired,
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
-  /** Whether the field is required */
-  isRequired: PropTypes.bool,
   /** Whether the field is disabled */
   isDisabled: PropTypes.bool,
   /** Custom handler for input value change */
@@ -319,7 +313,7 @@ SQFormMultiValue.propTypes = {
   /** Custom handler for autocomplete value change */
   onChange: PropTypes.func,
   /** Custom handler for field blur */
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 export default SQFormMultiValue;

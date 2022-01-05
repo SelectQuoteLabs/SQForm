@@ -39,21 +39,16 @@ interface SQFormCheckboxGroupProps {
 function SQFormCheckboxGroup({
   name,
   groupLabel,
-  isRequired = false,
   onChange,
   shouldDisplayInRow = false,
   shouldUseSelectAll = false,
   size = 'auto',
-  children
+  children,
 }: SQFormCheckboxGroupProps): JSX.Element {
   const {
-    fieldState: {isFieldError},
-    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
-  } = useForm({
-    name,
-    isRequired,
-    onChange
-  });
+    fieldState: {isFieldError, isFieldRequired},
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
+  } = useForm({name, onChange});
 
   const {setFieldValue} = useFormikContext();
 
@@ -80,7 +75,7 @@ function SQFormCheckboxGroup({
   };
 
   const childrenToCheckboxGroupItems = () => {
-    const providedCheckboxItems = children.map(checkboxOption => {
+    const providedCheckboxItems = children.map((checkboxOption) => {
       const {label, value, isDisabled, inputProps} = checkboxOption;
 
       return (
@@ -104,7 +99,7 @@ function SQFormCheckboxGroup({
           onChange={handleSelectAllChange}
           key={`${name}_selectAll`}
         />,
-        ...providedCheckboxItems
+        ...providedCheckboxItems,
       ];
     }
 
@@ -115,7 +110,7 @@ function SQFormCheckboxGroup({
     <Grid item sm={size}>
       <FormControl
         component="fieldset"
-        required={isRequired}
+        required={isFieldRequired}
         error={isFieldError}
         onBlur={handleBlur}
       >
@@ -123,7 +118,7 @@ function SQFormCheckboxGroup({
           component="legend"
           classes={{
             root: 'MuiInputLabel-root',
-            asterisk: 'MuiInputLabel-asterisk'
+            asterisk: 'MuiInputLabel-asterisk',
           }}
         >
           {groupLabel}

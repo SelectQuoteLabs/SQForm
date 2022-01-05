@@ -7,7 +7,7 @@ import {
   ComponentLoadingSpinner,
   Section,
   SectionHeader,
-  SectionBody
+  SectionBody,
 } from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 import AgentScript from './AgentScript';
@@ -19,14 +19,14 @@ import {GuidedWorkflowProps} from './PropTypes';
 const useStyles = makeStyles(() => {
   return {
     root: {
-      padding: '16px !important' /* material-ui override */
+      padding: '16px !important' /* material-ui override */,
     },
     panelFooter: {
       display: 'flex',
       justifyContent: 'space-between',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: '16px 24px'
-    }
+      padding: '16px 24px',
+    },
   };
 });
 
@@ -51,20 +51,15 @@ function SQFormGuidedWorkflow({
   mainSubtitle,
   initialCompletedTasks = 0,
   isStrictMode = false,
-  onError
+  onError,
 }) {
   const classes = useStyles();
 
-  const [
-    taskModulesContext,
-    updateTaskModuleContextByID
-  ] = useGuidedWorkflowContext(taskModules);
+  const [taskModulesContext, updateTaskModuleContextByID] =
+    useGuidedWorkflowContext(taskModules);
 
-  const {
-    taskModulesState,
-    updateActiveTaskModule,
-    enableNextTaskModule
-  } = useManageTaskModules(initialCompletedTasks, taskModulesContext);
+  const {taskModulesState, updateActiveTaskModule, enableNextTaskModule} =
+    useManageTaskModules(initialCompletedTasks, taskModulesContext);
 
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
@@ -77,6 +72,7 @@ function SQFormGuidedWorkflow({
     );
     const isPanelExpanded =
       taskModulesContext[taskModulesState.activeTaskModuleID].name === taskName;
+
     const getIsDisabled = () => {
       if (isStrictMode && taskModulesState.activeTaskModuleID !== taskNumber) {
         return true;
@@ -89,14 +85,16 @@ function SQFormGuidedWorkflow({
       }
       return false;
     };
+
     const handleSubmit = async (values, formikBag) => {
       const context = {
         ...taskModulesContext,
         [taskNumber]: {
           ...taskModulesContext[taskNumber],
-          data: values
-        }
+          data: values,
+        },
       };
+
       try {
         await taskModule.formikProps.onSubmit(values, formikBag, context);
         updateTaskModuleContextByID(taskNumber, values);
@@ -128,13 +126,15 @@ function SQFormGuidedWorkflow({
             <Form>
               <CardContent className={classes.root}>
                 {isSubmitting || taskModule.isLoading ? (
-                  <ComponentLoadingSpinner
-                    message={
-                      isSubmitting
-                        ? `Saving ${taskModule.title} outcome`
-                        : taskModule.isLoadingMessage
-                    }
-                  />
+                  <div data-testid="loadingSpinner">
+                    <ComponentLoadingSpinner
+                      message={
+                        isSubmitting
+                          ? `Saving ${taskModule.title} outcome`
+                          : taskModule.isLoadingMessage
+                      }
+                    />
+                  </div>
                 ) : (
                   <>
                     <AgentScript
@@ -166,7 +166,7 @@ function SQFormGuidedWorkflow({
             </Form>
           )}
         </Formik>
-      )
+      ),
     };
   });
 

@@ -2,9 +2,8 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import {SQFormTextField as SQFormTextFieldComponent} from '../src';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
 
 export default {
   title: 'Components/SQFormTextField',
@@ -27,14 +26,17 @@ const defaultArgs = {
 };
 
 const Template = (args) => {
-  const {schema, SQFormProps, size, ...rest} = args;
+  const {schema, SQFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
       validationSchema={schema}
       {...SQFormProps}
     >
-      <SQFormTextFieldComponent {...rest} size={getSizeProp(size)} />
+      <SQFormTextFieldComponent
+        {...rest}
+        size={args.size !== 'auto' ? Number(args.size) : args.size}
+      />
     </SQFormStoryWrapper>
   );
 };
@@ -45,9 +47,8 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  isRequired: true,
   schema: {
-    [defaultArgs.name]: Yup.string().required('Required'),
+    [defaultArgs.name]: Yup.string().required(),
   },
 };
 WithValidation.parameters = {
