@@ -108,5 +108,7 @@ export const GuidedWorkflowProps = {
   onError: PropTypes.func.isRequired,
   /** Task Module configuration Object(s) */
   taskModules: PropTypes.arrayOf(PropTypes.shape(TaskModuleProps).isRequired)
-    .isRequired
+    .isRequired,
+  /** An object of css-in-js style properties to be passed */
+  containerStyles: PropTypes.object
 };

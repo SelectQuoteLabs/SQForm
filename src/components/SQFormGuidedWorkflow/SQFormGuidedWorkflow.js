@@ -51,7 +51,8 @@ function SQFormGuidedWorkflow({
   mainSubtitle,
   initialCompletedTasks = 0,
   isStrictMode = false,
-  onError
+  onError,
+  containerStyles = {}
 }) {
   const classes = useStyles();
 
@@ -176,7 +177,7 @@ function SQFormGuidedWorkflow({
   });
 
   return (
-    <Section style={{padding: '20px'}}>
+    <Section style={{padding: '20px', ...containerStyles}}>
       <SectionHeader title={mainTitle} informativeHeading={mainSubtitle} />
       <SectionBody>
         <Accordion accordionPanels={transformedTaskModules} />
