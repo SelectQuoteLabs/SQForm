@@ -21,7 +21,7 @@ function SQFormReadOnlyField({
 }: SQFormReadOnlyFieldProps): React.ReactElement {
   const {
     formikField: {field},
-  } = useForm({name, isRequired: false});
+  } = useForm({name});
 
   return (
     <Grid item sm={size}>
