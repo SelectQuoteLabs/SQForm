@@ -1,11 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
+import {AnySchema} from 'yup';
 import {Story, Meta} from '@storybook/react';
 import {SQFormCheckboxGroup as SQFormCheckboxGroupComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {SQFormCheckboxGroupProps} from '../src/components/SQForm/SQFormCheckboxGroup';
-import { AnySchema } from 'yup';
 
 export default {
   title: 'Components/SQFormCheckboxGroup',
@@ -77,8 +77,9 @@ export const WithValidation: Story<CheckboxGroupTestProps> = (args) => {
 WithValidation.args = {
   ...defaultArgs,
   schema: {
-    [defaultArgs.name]: Yup.array().required().min(1, 'Required')}
-  };
+    [defaultArgs.name]: Yup.array().required().min(1, 'Required'),
+  },
+};
 
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
