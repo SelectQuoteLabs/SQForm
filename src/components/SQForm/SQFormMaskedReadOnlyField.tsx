@@ -1,6 +1,6 @@
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-import {maskProp} from 'types';
+import type {maskProp} from 'types';
 import SQFormReadOnlyField, {
   SQFormReadOnlyFieldProps,
 } from './SQFormReadOnlyField';

@@ -1,7 +1,7 @@
 import {useFormikContext} from 'formik';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-import {maskProp} from 'types';
+import type {maskProp} from 'types';
 import SQFormTextField, {SQFormTextFieldProps} from './SQFormTextField';
 
 interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {

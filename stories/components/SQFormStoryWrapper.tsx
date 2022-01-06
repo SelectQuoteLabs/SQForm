@@ -7,8 +7,8 @@ import {
   SnackbarProvider,
   useSnackbar,
 } from 'scplus-shared-components';
-import {FormikValues} from 'formik';
-import {AnySchema} from 'yup';
+import type {FormikValues} from 'formik';
+import type {AnySchema} from 'yup';
 
 export interface SQFormStoryWrapperProps {
   children: React.ReactNode;

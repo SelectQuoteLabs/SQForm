@@ -2,7 +2,7 @@ import React from 'react';
 
 import {useFormButton, BUTTON_TYPES, ButtonType} from './useFormButton';
 import {IconButton} from 'scplus-shared-components';
-import {IconProps} from '@material-ui/core';
+import type {IconProps} from '@material-ui/core';
 
 export interface SQFormIconButtonProps {
   /** The Material UI Icon to render inside the button */

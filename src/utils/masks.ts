@@ -1,4 +1,4 @@
-import {maskArray} from 'react-text-mask';
+import type {maskArray} from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import emailMask from 'text-mask-addons/dist/emailMask';
 

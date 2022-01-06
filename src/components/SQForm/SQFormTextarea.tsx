@@ -3,8 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import {useFormikContext, FormikProps} from 'formik';
 import {useForm} from './useForm';
-import {TextFieldProps} from '@material-ui/core';
-import {BaseFieldProps} from 'types';
+import type {TextFieldProps} from '@material-ui/core';
+import type {BaseFieldProps} from 'types';
 import {toKebabCase} from '../../utils';
 
 interface SQFormTextareaProps extends BaseFieldProps {

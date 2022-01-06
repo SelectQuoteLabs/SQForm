@@ -5,7 +5,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
-import {CheckboxProps, GridSize} from '@material-ui/core';
+import type {CheckboxProps, GridSize} from '@material-ui/core';
 import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
 import SQFormCheckbox from './SQFormCheckbox';
 import {useForm} from './useForm';

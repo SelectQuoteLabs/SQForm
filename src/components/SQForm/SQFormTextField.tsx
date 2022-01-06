@@ -2,7 +2,7 @@ import React from 'react';
 import {TextField, TextFieldProps, InputProps} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import {BaseFieldProps, maskProp} from 'types';
+import type {BaseFieldProps, maskProp} from 'types';
 
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';

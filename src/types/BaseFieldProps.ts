@@ -1,4 +1,4 @@
-import {GridSize} from '@material-ui/core';
+import type {GridSize} from '@material-ui/core';
 
 interface BaseFieldProps {
   name: string;

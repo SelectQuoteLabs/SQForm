@@ -1,6 +1,6 @@
 import React from 'react';
 import {Formik, FormikHelpers} from 'formik';
-import {DialogProps, GridProps} from '@material-ui/core';
+import type {DialogProps, GridProps} from '@material-ui/core';
 import * as Yup from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';

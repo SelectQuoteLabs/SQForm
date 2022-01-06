@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, TextFieldProps} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import {useForm} from './useForm';
-import {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from 'types';
 import {toKebabCase} from '../../utils';
 
 export interface SQFormReadOnlyFieldProps extends BaseFieldProps {
