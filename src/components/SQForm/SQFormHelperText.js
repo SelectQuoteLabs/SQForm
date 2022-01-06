@@ -80,7 +80,7 @@ function SQFormHelperText({
   return (
     <Grid
       container
-      justify="flex-end"
+      justifyContent="flex-end"
       wrap="nowrap"
       alignItems="center"
       className={`${classes.wrapper} ${classes[helperTextType]}`}
