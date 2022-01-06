@@ -220,7 +220,7 @@ export const BasicForm = () => {
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -310,7 +310,7 @@ export const FormWithValidation = () => {
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormButton title="Reset" type="reset">
               RESET
             </SQFormButton>
@@ -354,7 +354,7 @@ export const formWithFieldArray = () => {
           <FriendsFieldArray name="friends" />
         </Grid>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton shouldRequireFieldUpdates={true}>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -444,7 +444,7 @@ export const formWithInclusionlist = () => {
           }}
         </SQFormInclusionList>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -472,7 +472,7 @@ export const basicFormWithMultiSelect = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >
@@ -514,7 +514,7 @@ export const basicFormWithMaskedFields = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >
@@ -568,7 +568,7 @@ export const basicFormWithMaskedFields = () => {
           mask={[/[A-Z]/i, /\d/, /[A-Z]/i, ' ', /\d/, /[A-Z]/i, /\d/]}
         />
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -625,7 +625,7 @@ export const basicFormWithCustomOnBlur = () => {
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -676,7 +676,7 @@ export const basicFormWithCustomOnChange = () => {
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -698,7 +698,7 @@ export const applyAnAction = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >
@@ -754,7 +754,7 @@ export const SQFormCheckboxGroupExample = () => {
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -786,7 +786,7 @@ export const ccaChecklist = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center'
         }}
       >

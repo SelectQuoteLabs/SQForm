@@ -224,7 +224,7 @@ export function SQFormDialogStepper({
                 {...muiGridProps}
                 container
                 spacing={muiGridProps.spacing ?? 3}
-                justify="center"
+                justifyContent="center"
               >
                 {currentChild}
               </Grid>
@@ -249,7 +249,11 @@ export function SQFormDialogStepper({
 
 SQFormDialogStep.propTypes = {
   /** The content to be rendered in the step body. */
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType]),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.elementType,
+    PropTypes.node
+  ]),
   /** Should the loading spinner be shown */
   isLoading: PropTypes.bool,
   /** Optional message to be added to the loading spinner */
