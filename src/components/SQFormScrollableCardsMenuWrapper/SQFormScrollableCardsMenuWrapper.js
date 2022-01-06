@@ -28,6 +28,12 @@ const useStyles = makeStyles(theme => {
     action: {
       alignSelf: 'unset',
       marginTop: 'unset'
+    },
+    title: {
+      display: '-webkit-box',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': '1',
+      overflow: 'hidden'
     }
   };
 });
@@ -77,7 +83,8 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
     <Card raised={true} elevation={1} square={true} className={classes.card}>
       <CardHeader
         classes={{
-          action: classes.action
+          action: classes.action,
+          title: classes.title
         }}
         title={title}
         className={classes.cardHeader}
