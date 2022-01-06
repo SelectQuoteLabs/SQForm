@@ -42,17 +42,6 @@ describe('SQFormIconButton Tests', () => {
       expect(iconButton).toHaveAttribute('type', 'reset');
     });
 
-    it('should render a button given the type button', () => {
-      render(<SQFormIconButton exampleIcons={CheckCircle} type="button" />);
-
-      const iconButton = screen.getByRole('button', {
-        name: /form submission/i
-      });
-
-      expect(iconButton).toBeInTheDocument();
-      expect(iconButton).toHaveAttribute('type', 'button');
-    });
-
     it('should call a function when clicked', () => {
       const onClickSpy = jest.fn();
       render(
