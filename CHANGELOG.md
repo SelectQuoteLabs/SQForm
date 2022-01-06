@@ -1,3 +1,10 @@
+## [6.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.1...v6.2.0) (2022-01-06)
+
+
+### Features
+
+* 🎸 truncate right card title when text is longer than box ([508820f](https://github.com/SelectQuoteLabs/SQForm/commit/508820f3a4ab02ad9a23608d3deb731dfdf846ff))
+
 ### [6.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.0...v6.1.1) (2022-01-05)
 
 
