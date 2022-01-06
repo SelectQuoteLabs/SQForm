@@ -77,7 +77,7 @@
     "react-text-mask": "^5.4.3",
     "react-weekly-schedule": "0.0.0-development",
     "react-window": "^1.8.5",
-    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.3.1",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.7.2",
     "text-mask-addons": "^3.8.0",
     "use-debounce": "^6.0.0"
   },
