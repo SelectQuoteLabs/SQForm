@@ -17,7 +17,7 @@ interface SQFormTextareaProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   /** Custom onChange event callback */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  onChange?: TextFieldProps['onChange'];
   /** Number of rows to display when multiline option is set to true. */
   rows?: number;
   /** Maximum number of rows to display when multiline option is set to true. */
@@ -56,7 +56,7 @@ function SQFormTextarea({
       handleChange: handleChangeHelper,
       HelperTextComponent,
     },
-  } = useForm({
+  } = useForm<string, React.ChangeEvent<HTMLInputElement>>({
     name,
     onBlur,
     onChange,
