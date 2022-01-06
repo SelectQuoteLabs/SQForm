@@ -1,3 +1,10 @@
+### [6.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.0...v6.2.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* 🐛 Update deprecated justify prop for Grid ([761cbed](https://github.com/SelectQuoteLabs/SQForm/commit/761cbed4ab8da58384ed33e31dc392536bcf776c)), closes [#499](https://github.com/SelectQuoteLabs/SQForm/issues/499)
+
 ## [6.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.1...v6.2.0) (2022-01-06)
 
 
