@@ -4,7 +4,6 @@ import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 import {SectionHeader} from 'scplus-shared-components';
 
 import FriendsFieldArray from './components/FriendsFieldArray';
@@ -17,7 +16,6 @@ import {
   SQFormTextarea,
   SQFormTextField,
   SQFormButton,
-  SQFormIconButton,
   SQFormAutocomplete,
   SQFormCheckbox,
   SQFormDropdown,
@@ -486,7 +484,7 @@ export const basicFormWithMultiSelect = () => {
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>
@@ -719,7 +717,7 @@ export const applyAnAction = () => {
           rowsMax={2}
         />
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>
@@ -805,7 +803,7 @@ export const ccaChecklist = () => {
           {dropdownOptions}
         </SQFormDropdown>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>
