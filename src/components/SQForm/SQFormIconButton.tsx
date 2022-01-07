@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {useFormButton, BUTTON_TYPES, ButtonType} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
+import type {ButtonType} from './useFormButton';
 import {IconButton} from 'scplus-shared-components';
 import type {IconProps} from '@material-ui/core';
 

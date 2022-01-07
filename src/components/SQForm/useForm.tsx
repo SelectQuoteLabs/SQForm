@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  FieldHelperProps,
-  FieldInputProps,
-  FieldMetaProps,
-  getIn,
-  useField,
-} from 'formik';
+import {getIn, useField} from 'formik';
+import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 import isEqual from 'lodash.isequal';
 import WarningIcon from '@material-ui/icons/NewReleases';
 import VerifiedIcon from '@material-ui/icons/VerifiedUser';

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import type {AnySchema} from 'yup';
-import {Story, Meta} from '@storybook/react';
+import type {Story, Meta} from '@storybook/react';
 import {SQFormCheckboxGroup as SQFormCheckboxGroupComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';

@@ -1,6 +1,7 @@
 import React from 'react';
 import CheckMarkIcon from '@material-ui/icons/CheckCircle';
-import Grid, {GridProps} from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
+import type {GridProps} from '@material-ui/core';
 import {SQForm, SQFormIconButton} from '../../src';
 import {
   Snackbar,

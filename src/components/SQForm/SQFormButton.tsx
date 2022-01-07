@@ -1,6 +1,7 @@
 import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
-import {useFormButton, BUTTON_TYPES, ButtonType} from './useFormButton';
+import {useFormButton, BUTTON_TYPES} from './useFormButton';
+import type {ButtonType} from './useFormButton';
 
 export interface Props {
   children: React.ReactNode;
@@ -17,14 +18,14 @@ function SQFormButton({
   shouldRequireFieldUpdates = false,
   title,
   type = 'submit',
-  onClick
+  onClick,
 }: Props): JSX.Element {
   const isResetButton = type === BUTTON_TYPES.RESET;
   const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

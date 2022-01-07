@@ -7,9 +7,9 @@ import {
   CardActions,
   Grid,
   makeStyles,
-  GridProps,
-  TypographyVariant
+  TypographyVariant,
 } from '@material-ui/core';
+import type {GridProps} from '@material-ui/core';
 import {Formik, Form, FormikHelpers} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
@@ -76,7 +76,7 @@ interface SQFormScrollableCardProps<Values> {
   /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled?: boolean;
   /** MUI Typography variant to be used for the title */
-  titleVariant?: TypographyVariant
+  titleVariant?: TypographyVariant;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
 }

@@ -11,9 +11,8 @@ import {
   ListItemText,
   Tooltip,
   makeStyles,
-  TooltipProps,
-  SelectProps,
 } from '@material-ui/core';
+import type {TooltipProps, SelectProps} from '@material-ui/core';
 import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';

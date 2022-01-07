@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dialog,
-  DialogProps,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -9,10 +8,11 @@ import {
   Grid,
   Slide,
   makeStyles,
-  GridProps,
 } from '@material-ui/core';
+import type {DialogProps, GridProps} from '@material-ui/core';
 import type {TransitionProps} from '@material-ui/core/transitions';
-import {Theme, useTheme} from '@material-ui/core/styles';
+import {useTheme} from '@material-ui/core/styles';
+import type {Theme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
