@@ -25,20 +25,44 @@ A text field that forces the user input text to follow a defined pattern. The en
 | InputProps | object | no | Props applied to the Input element |
 | inputProps | object | no | Attributes applied to the `input` element |
 | muiFieldProps | object | no | Any valid prop for MUI text input child component https://material-ui.com/api/text-field/#props |
-| strpNonNumeric | boolean | no | The submitted value from the input will have all non-numeric characters removed |
+| stripNonNumeric | boolean | no | The submitted value from the input will have all non-numeric characters removed |
 
 ## Masks
 
-For convenience several common masks are provided. `import MASKS from '
+For convenience several common masks are provided.
 
 - phone: US Phone numbers \*\*Will allow invalid phone numbers see note below
 - zip: US address zip codes
 - currency: a number only mask that allows decimal values.
 - percent: a number mask that adds a `%` as a suffix
 - email: provided from the [text-mask module](https://github.com/text-mask/text-mask/tree/master/addons/#emailmask)
-- date: a mask to allow the date form of 12/31/2020.
+- date: a mask to allow the date form of `MM/DD/YYYY`
 - ssn: a mask to include the dashes in the xxx-xx-xxxx form of social security numbers.
 
-:::note The included phone mask is to get the correct format not to force a valid phone number. Historically it had prevented a `1` in the fourth position. For example: `(555) 155-5555`
+:::note
+
+The included phone mask is to get the correct format not to force a valid phone number. Historically it had prevented a `1` in the fourth position. For example: `(555) 155-5555`
 
 For US phone numbers the fourth digit cannot be a one. Use Yup to validate your phone numbers and do not rely on the mask for validation.
+
+:::
+
+## Example
+
+Using the phone mask for a fax number field:
+
+```js
+import {
+  SQFormMaskedTextField,
+  MASKS
+} from '@selectquotelabs/sqform
+
+/* omitted code for brevity */
+
+   <SQFormMaskedTextField
+     name="faxNumber"
+     label="Fax number"
+     size={12}
+     mask={MASKS.phone}
+   />
+```
