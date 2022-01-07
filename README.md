@@ -39,6 +39,60 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 ## Breaking Changes
 
+### Version `[Typescript Version]`
+In SQForm v`[Typescript Version]` support for `boolean` valued dropdown options was removed. Material-UI and HTML Select components do not support options with `boolean`s as values and causes type conflicts with our own library. Therefore, if you're upgrading this version and you using `boolean` values options you'll need to take care to update those. Below is our recommended changes.
+
+```js
+// ⛔️ Example
+const YES_NO_DROPDOWN_OPTIONS = [
+  {label: 'Yes', value: true},
+  {label: 'No', value: false}
+];
+
+// ✅ Example
+const YES_NO_DROPDOWN_OPTIONS = [
+  {label: 'Yes', value: 1},
+  {label: 'No', value: 0}
+]
+```
+
+Be sure that when you change your dropdown options that you take care to update your submit, onChange, and onBlur handlers such that you're taking into account that the values for the affected forms will no longer be `boolean`s. Using `1` and `0` will still allow for `if(dropdownValue)` to evaluate correctly. However, if you're expecting your values to be passed as booleans outside of any event handlers you'll need to use `Boolean(dropdownValue)`. See an example below of how one might update an SQForm submit handler to comply with this breaking change.
+
+```js
+const updateSurveyAnswer = (surveyAnswer: boolean) => {
+  // Example
+  sendNetworkRequest({
+    url,
+    method: 'GET',
+    body: {
+      questionID: 1,
+      answer: surveryAnswer,
+    }
+  });
+};
+
+// ⛔️ Outdated submit handler
+type FormValues = {
+  surveyAnswer: boolean;
+};
+
+const handleSubmit = (formValues: FormValues) => {
+  updateSurveryAnswer(formValues.surveryAnswer);
+};
+
+// ✅ Updated submit handler
+type FormValues = {
+  // Now is `number` or whatever new type your dropdown options will be
+  surveryAnswer: number;
+}
+
+const handleSubmit = (formValues: FormValues) => {
+  updateSurveryAnswer(Boolean(formValues.surveryAnswer));
+});
+```
+
+Lastly, you'll also need to make sure you update your Yup validation for the affected form fields from `Yup.boolean()` to `Yup.number()` or whatever new value type you're using for your affected dropdown options.
+
 ### Version 6
 
 In SQForm v6, we no longer need to pass the `isRequired` prop to any form components. The components now derive whether or not they are a required field based on the Yup validation schema of the form.
@@ -63,7 +117,7 @@ setLocale({
 During this time, please search the project for validation schemas that use `array()`. If they are `required`.
 Please ensure `.required()` is the FIRST validation method in the chain.
 
-```
+```js
 // ✅ Example
 options: Yup.array()
   .required()
