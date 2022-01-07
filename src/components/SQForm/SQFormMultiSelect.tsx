@@ -192,12 +192,16 @@ function SQFormMultiSelect({
    * this handles scenarios where label and value are not the same,
    * e.g., if value is an "ID"
    */
-  const getRenderValue = (selected: Option['value'][]) => {
-    if (!selected?.length) {
-      return EMPTY_LABEL;
-    }
+  const getRenderValue = (selected: unknown) => {
+    const getValue = (selectedValues: Option['value'][]) => {
+      if (!selectedValues?.length) {
+        return EMPTY_LABEL;
+      }
 
-    return selectedDisplayValue(selected, children, name);
+      return selectedDisplayValue(selectedValues, children, name);
+    };
+
+    return getValue(selected as Option['value'][]);
   };
 
   const renderTooltip = () => {
@@ -236,9 +240,7 @@ function SQFormMultiSelect({
             onChange={handleMultiSelectChange}
             fullWidth={true}
             labelId={labelID}
-            renderValue={(selected: unknown) =>
-              getRenderValue(selected as Option['value'][])
-            }
+            renderValue={getRenderValue}
             MenuProps={MenuProps}
             onOpen={toggleTooltip}
             onClose={toggleTooltip}
@@ -259,10 +261,7 @@ function SQFormMultiSelect({
             )}
             {children?.map((option) => {
               return (
-                <MenuItem
-                  key={`${name}_${option.value}`}
-                  value={`${option.value}`}
-                >
+                <MenuItem key={`${name}_${option.value}`} value={option.value}>
                   <Checkbox checked={field.value?.includes(option.value)} />
                   <ListItemText
                     primary={option.label}

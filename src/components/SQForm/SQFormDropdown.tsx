@@ -91,27 +91,35 @@ function SQFormDropdown({
     return [EMPTY_OPTION, ...children];
   }, [children, displayEmpty, name]);
 
-  const renderValue = (value: Option['value']) => {
-    if (value === undefined || value === null) {
-      console.warn(getUndefinedValueWarning('SQFormDropdown', name));
-      return EMPTY_LABEL;
-    }
+  const renderValue = (value: unknown) => {
+    const getValue = (selectedValue: Option['value']) => {
+      if (selectedValue === undefined || selectedValue === null) {
+        console.warn(getUndefinedValueWarning('SQFormDropdown', name));
+        return EMPTY_LABEL;
+      }
 
-    if (value === EMPTY_VALUE) {
-      return EMPTY_LABEL;
-    }
+      if (selectedValue === EMPTY_VALUE) {
+        return EMPTY_LABEL;
+      }
 
-    const valueToRender = options.find(
-      (option) => option.value === value
-    )?.label;
-    if (!valueToRender) {
-      console.warn(
-        getOutOfRangeValueWarning('SQFormDropdown', name, value.toString())
-      );
-      return undefined;
-    }
+      const valueToRender = options.find(
+        (option) => option.value === selectedValue
+      )?.label;
+      if (!valueToRender) {
+        console.warn(
+          getOutOfRangeValueWarning(
+            'SQFormDropdown',
+            name,
+            selectedValue.toString()
+          )
+        );
+        return undefined;
+      }
 
-    return valueToRender;
+      return valueToRender;
+    };
+
+    return getValue(value as Option['value']);
   };
 
   return (
@@ -133,9 +141,7 @@ function SQFormDropdown({
           onBlur={handleBlur}
           onChange={handleChange}
           labelId={labelID}
-          renderValue={(value: unknown) =>
-            renderValue(value as Option['value'])
-          }
+          renderValue={renderValue}
           {...muiFieldProps}
         >
           {options.map((option) => {
@@ -143,7 +149,7 @@ function SQFormDropdown({
               <MenuItem
                 key={`${name}_${option.value}`}
                 disabled={option.isDisabled}
-                value={`${option.value}`}
+                value={option.value}
               >
                 {option.label}
               </MenuItem>
