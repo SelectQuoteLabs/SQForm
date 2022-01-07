@@ -21,7 +21,7 @@ function SQFormDialog({
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
   validationSchema,
-  showSecondaryButton = true
+  showSecondaryButton = true,
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -97,7 +97,7 @@ SQFormDialog.propTypes = {
    * */
   validationSchema: PropTypes.object,
   /** show/hide the secondary Cancel button.  Defaults to show(true) */
-  showSecondaryButton: PropTypes.bool
+  showSecondaryButton: PropTypes.bool,
 };
 
 export default SQFormDialog;

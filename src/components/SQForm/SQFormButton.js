@@ -9,14 +9,14 @@ function SQFormButton({
   shouldRequireFieldUpdates = false,
   title,
   type = 'submit',
-  onClick
+  onClick,
 }) {
   const isResetButton = type === BUTTON_TYPES.RESET;
   const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   const getClickHandler = (...args) => {
@@ -63,7 +63,7 @@ SQFormButton.propTypes = {
   /** Type of button, defaults to 'submit' */
   type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   /** Standard React event handler */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 export default SQFormButton;

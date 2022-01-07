@@ -5,29 +5,29 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles({
   '@keyframes bumpit': {
     '0%': {
-      transform: 'scale(1)'
+      transform: 'scale(1)',
     },
     '10%': {
-      transform: 'scale(1)'
+      transform: 'scale(1)',
     },
     '60%': {
-      transform: 'scale(0.9) translate(20px, 20px)'
+      transform: 'scale(0.9) translate(20px, 20px)',
     },
     '100%': {
-      transform: 'scale(1)'
-    }
+      transform: 'scale(1)',
+    },
   },
   orange: {
-    animation: 'bumpit 2s linear 0.66s infinite'
+    animation: 'bumpit 2s linear 0.66s infinite',
   },
   sqLoadingIcon: {
-    opacity: '0.65'
+    opacity: '0.65',
   },
   brown: {
-    animation: 'bumpit 2s linear 0s infinite'
+    animation: 'bumpit 2s linear 0s infinite',
   },
   yellow: {
-    animation: 'bumpit 2s linear 1.33s infinite'
+    animation: 'bumpit 2s linear 1.33s infinite',
   },
   root: {
     display: 'flex',
@@ -35,8 +35,8 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     width: '100%',
     animation: '0.45s fade-in',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const LoadingIcon = ({height = '10rem'}) => {
@@ -99,7 +99,7 @@ const LoadingIcon = ({height = '10rem'}) => {
 
 LoadingIcon.propTypes = {
   /** The height of the loading icon */
-  height: PropTypes.string
+  height: PropTypes.string,
 };
 
 export default LoadingIcon;

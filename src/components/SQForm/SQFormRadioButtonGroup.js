@@ -14,16 +14,16 @@ function SQFormRadioButtonGroup({
   shouldDisplayInRow = false,
   size = 'auto',
   groupLabel,
-  children
+  children,
 }) {
   const {
     fieldState: {isFieldError, isFieldRequired},
     formikField: {field},
-    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
   } = useForm({name, onChange});
 
   const childrenToRadioGroupItems = () => {
-    return children.map(radioOption => {
+    return children.map((radioOption) => {
       const {label, value, isDisabled, inputProps} = radioOption;
       return (
         <SQFormRadioButtonGroupItem
@@ -50,7 +50,7 @@ function SQFormRadioButtonGroup({
           component="legend"
           classes={{
             root: 'MuiInputLabel-root',
-            asterisk: 'MuiInputLabel-asterisk'
+            asterisk: 'MuiInputLabel-asterisk',
           }}
         >
           {groupLabel}
@@ -87,9 +87,9 @@ SQFormRadioButtonGroup.propTypes = {
       label: PropTypes.string.isRequired,
       value: PropTypes.any.isRequired,
       isDisabled: PropTypes.bool,
-      inputProps: PropTypes.object
+      inputProps: PropTypes.object,
     }).isRequired
-  ).isRequired
+  ).isRequired,
 };
 
 export default SQFormRadioButtonGroup;

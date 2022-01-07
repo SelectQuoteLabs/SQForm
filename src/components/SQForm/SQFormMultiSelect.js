@@ -11,7 +11,7 @@ import {
   Checkbox,
   ListItemText,
   Tooltip,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
@@ -19,7 +19,7 @@ import {useForm} from './useForm';
 import {
   getOutOfRangeValueWarning,
   getUndefinedChildrenWarning,
-  getUndefinedValueWarning
+  getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 
 /**
@@ -33,17 +33,17 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
+      width: 250,
+    },
   },
   variant: 'menu',
-  getContentAnchorEl: null
+  getContentAnchorEl: null,
 };
 
 const selectedDisplayValue = (values, options, name) => {
   const selectedValues = values
-    .map(value => {
-      return options.find(option => option.value === value)?.label;
+    .map((value) => {
+      return options.find((option) => option.value === value)?.label;
     })
     .join(', ');
 
@@ -66,9 +66,9 @@ const getToolTipTitle = (formikFieldValue, options) => {
 const useStyles = makeStyles({
   selectHeight: {
     '& .MuiSelect-selectMenu': {
-      height: '1.1876em'
-    }
-  }
+      height: '1.1876em',
+    },
+  },
 });
 
 function SQFormMultiSelect({
@@ -82,7 +82,7 @@ function SQFormMultiSelect({
   toolTipPlacement = 'bottom',
   muiFieldProps = {},
   showTooltip = true,
-  tooltipText
+  tooltipText,
 }) {
   const classes = useStyles();
 
@@ -91,7 +91,7 @@ function SQFormMultiSelect({
   const {
     formikField: {field},
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldHelpers: {handleBlur, HelperTextComponent},
   } = useForm({name});
 
   React.useEffect(() => {
@@ -107,8 +107,8 @@ function SQFormMultiSelect({
   const labelID = label.toLowerCase();
   const toolTipTitle = getToolTipTitle(field.value, children);
 
-  const getIsSelectAllChecked = value => value.includes('ALL');
-  const getIsSelectNoneChecked = value => value.includes('NONE');
+  const getIsSelectAllChecked = (value) => value.includes('ALL');
+  const getIsSelectNoneChecked = (value) => value.includes('NONE');
 
   const getValues = (
     children,
@@ -117,7 +117,7 @@ function SQFormMultiSelect({
     value
   ) => {
     if (isSelectAllChecked) {
-      return children?.map(option => option.value);
+      return children?.map((option) => option.value);
     }
 
     if (isSelectNoneChecked) {
@@ -127,7 +127,7 @@ function SQFormMultiSelect({
     return value;
   };
 
-  const handleMultiSelectChange = event => {
+  const handleMultiSelectChange = (event) => {
     const value = event.target.value;
     const isSelectAllChecked = getIsSelectAllChecked(value);
     const isSelectNoneChecked = getIsSelectNoneChecked(value);
@@ -150,7 +150,7 @@ function SQFormMultiSelect({
    * this handles scenarios where label and value are not the same,
    * e.g., if value is an "ID"
    */
-  const getRenderValue = selected => {
+  const getRenderValue = (selected) => {
     if (!selected?.length) {
       return EMPTY_LABEL;
     }
@@ -213,7 +213,7 @@ function SQFormMultiSelect({
                 />
               </MenuItem>
             )}
-            {children?.map(option => {
+            {children?.map((option) => {
               return (
                 <MenuItem key={option.value} value={option.value}>
                   <Checkbox checked={field.value?.includes(option.value)} />
@@ -237,7 +237,7 @@ SQFormMultiSelect.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ),
   /** Disabled property to disable the input if true */
@@ -261,7 +261,7 @@ SQFormMultiSelect.propTypes = {
   /** String to show as the tooltip.
    * Note: Default behavior is to show the selected value(s)
    */
-  tooltipText: PropTypes.string
+  tooltipText: PropTypes.string,
 };
 
 export default SQFormMultiSelect;

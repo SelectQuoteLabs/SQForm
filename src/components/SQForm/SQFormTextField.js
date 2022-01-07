@@ -21,7 +21,7 @@ function SQFormTextField({
   InputProps,
   inputProps = {},
   maxCharacters,
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const {
     formikField: {field},
@@ -29,19 +29,19 @@ function SQFormTextField({
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
-      HelperTextComponent
-    }
+      HelperTextComponent,
+    },
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
 
   const [valueLength, setValueLength] = React.useState(
     field.value?.length || 0
   );
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setValueLength(e.target.value.length);
     handleChangeHelper(e);
   };
@@ -75,11 +75,11 @@ function SQFormTextField({
           ) : null,
           endAdornment: endAdornment ? (
             <InputAdornment position="end">{endAdornment}</InputAdornment>
-          ) : null
+          ) : null,
         }}
         inputProps={{
           maxLength: maxCharacters,
-          ...inputProps
+          ...inputProps,
         }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}
@@ -125,7 +125,7 @@ SQFormTextField.propTypes = {
   /** Defines the maximum number of characters the user can enter into the field; mapped to `input` element `maxlength` attribute */
   maxCharacters: PropTypes.number,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormTextField;

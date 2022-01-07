@@ -8,7 +8,7 @@ import {
   Typography,
   Grid,
   Slide,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
@@ -23,15 +23,15 @@ const Transition = React.forwardRef((props, ref) => {
 const stickyStyles = {
   position: 'sticky',
   background: ({palette}) => palette.background.paper,
-  zIndex: 1
+  zIndex: 1,
 };
 
 const useTitleStyles = makeStyles({
   root: {
     ...stickyStyles,
     top: 0,
-    borderBottom: ({palette}) => `1px solid ${palette.divider}`
-  }
+    borderBottom: ({palette}) => `1px solid ${palette.divider}`,
+  },
 });
 const actionStyles = {
   root: {
@@ -41,18 +41,18 @@ const actionStyles = {
     padding: '16px 24px',
     ...stickyStyles,
     bottom: 0,
-    borderTop: ({palette}) => `1px solid ${palette.divider}`
-  }
+    borderTop: ({palette}) => `1px solid ${palette.divider}`,
+  },
 };
 const useActionsStyles = makeStyles(actionStyles);
 const usePrimaryActionStyles = makeStyles({
-  root: {...actionStyles.root, justifyContent: 'flex-end'}
+  root: {...actionStyles.root, justifyContent: 'flex-end'},
 });
 const useDialogContentStyles = makeStyles({
   root: {
     overflowY: 'visible',
-    padding: '20px'
-  }
+    padding: '20px',
+  },
 });
 
 function SQFormDialogInner({
@@ -68,7 +68,7 @@ function SQFormDialogInner({
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
-  showSecondaryButton = true
+  showSecondaryButton = true,
 }) {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -80,7 +80,7 @@ function SQFormDialogInner({
   const {
     isDialogOpen: isDialogAlertOpen,
     openDialog: openDialogAlert,
-    closeDialog: closeDialogAlert
+    closeDialog: closeDialogAlert,
   } = useDialog();
 
   const handleCancel = () => {
@@ -187,7 +187,7 @@ SQFormDialogInner.propTypes = {
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
   /** show or hide the secondary Cancel button.  Defaults to show(true) */
-  showSecondaryButton: PropTypes.bool
+  showSecondaryButton: PropTypes.bool,
 };
 
 export default SQFormDialogInner;

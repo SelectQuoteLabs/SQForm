@@ -18,9 +18,9 @@ const useStyles = makeStyles({
   listbox: {
     '& ul': {
       padding: 0,
-      margin: 0
-    }
-  }
+      margin: 0,
+    },
+  },
 });
 
 const OuterElementContext = React.createContext({});
@@ -34,8 +34,8 @@ function renderRow({data, index, style}) {
   return React.cloneElement(data[index], {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: style.top + LISTBOX_PADDING,
+    },
   });
 }
 
@@ -95,18 +95,18 @@ function SQFormAsyncAutocomplete({
   open,
   onOpen,
   onClose,
-  size = 'auto'
+  size = 'auto',
 }) {
   const classes = useStyles();
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {HelperTextComponent}
+    fieldHelpers: {HelperTextComponent},
   } = useForm({name});
 
   const initialValue = React.useMemo(() => {
-    const optionInitialValue = children.find(option => {
+    const optionInitialValue = children.find((option) => {
       if (option.value === value) {
         return option;
       }
@@ -132,7 +132,7 @@ function SQFormAsyncAutocomplete({
   }, [value, inputValue, name, prevValue, values]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({[name]: true});
       onBlur && onBlur(event);
     },
@@ -178,9 +178,9 @@ function SQFormAsyncAutocomplete({
         onClose={onClose}
         inputValue={inputValue}
         disabled={isDisabled}
-        getOptionLabel={option => option.label}
-        getOptionDisabled={option => option.isDisabled}
-        renderInput={params => {
+        getOptionLabel={(option) => option.label}
+        getOptionDisabled={(option) => option.isDisabled}
+        renderInput={(params) => {
           return (
             <TextField
               {...params}
@@ -190,11 +190,11 @@ function SQFormAsyncAutocomplete({
               fullWidth={true}
               InputLabelProps={{
                 ...params.InputLabelProps,
-                shrink: true
+                shrink: true,
               }}
               inputProps={{
                 ...params.inputProps,
-                disabled: isDisabled
+                disabled: isDisabled,
               }}
               InputProps={{
                 ...params.InputProps,
@@ -205,7 +205,7 @@ function SQFormAsyncAutocomplete({
                     ) : null}
                     {params.InputProps.endAdornment}
                   </>
-                )
+                ),
               }}
               FormHelperTextProps={{error: isFieldError}}
               name={name}
@@ -215,7 +215,7 @@ function SQFormAsyncAutocomplete({
             />
           );
         }}
-        renderOption={option => (
+        renderOption={(option) => (
           <Typography variant="body2" noWrap>
             {option.label}
           </Typography>
@@ -230,7 +230,7 @@ SQFormAsyncAutocomplete.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ),
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
@@ -256,7 +256,7 @@ SQFormAsyncAutocomplete.propTypes = {
   /** Callback for when the popup requests to be closed */
   onClose: PropTypes.func,
   /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
 };
 
 export default SQFormAsyncAutocomplete;

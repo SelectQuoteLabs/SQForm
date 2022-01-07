@@ -10,11 +10,11 @@ export default function SQFormInclusionList({
   useSelectAll = false,
   selectAllData = null,
   selectAllContainerProps = {},
-  selectAllProps = {}
+  selectAllProps = {},
 }) {
   const {values, setFieldValue} = useFormikContext();
 
-  const handleSelectAllChange = event => {
+  const handleSelectAllChange = (event) => {
     if (event.target.checked) {
       setFieldValue(name, selectAllData);
     } else {
@@ -58,6 +58,6 @@ SQFormInclusionList.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.elementType,
-    PropTypes.arrayOf([PropTypes.element, PropTypes.elementType])
-  ]).isRequired
+    PropTypes.arrayOf([PropTypes.element, PropTypes.elementType]),
+  ]).isRequired,
 };

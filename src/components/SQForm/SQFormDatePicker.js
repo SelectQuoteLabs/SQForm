@@ -8,12 +8,13 @@ import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
   root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)': {
-      '& .MuiIconButton-root': {
-        color: 'var(--color-teal)'
-      }
-    }
-  }
+    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+      {
+        '& .MuiIconButton-root': {
+          color: 'var(--color-teal)',
+        },
+      },
+  },
 }));
 
 function SQFormDatePicker({
@@ -27,19 +28,19 @@ function SQFormDatePicker({
   setDisabledDate,
   muiFieldProps = {},
   muiTextInputProps = {},
-  isCalendarOnly = false
+  isCalendarOnly = false,
 }) {
   const {
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldHelpers: {handleBlur, HelperTextComponent},
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
 
-  const handleChange = date => {
+  const handleChange = (date) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
@@ -70,7 +71,7 @@ function SQFormDatePicker({
           onClose={handleClose}
           onOpen={toggleCalendar}
           open={isCalendarOpen}
-          renderInput={inputProps => {
+          renderInput={(inputProps) => {
             return (
               <TextField
                 {...inputProps}
@@ -126,7 +127,7 @@ SQFormDatePicker.propTypes = {
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps: PropTypes.object,
   /** A Boolean flag used when using calendar only; disabled text filed input */
-  isCalendarOnly: PropTypes.bool
+  isCalendarOnly: PropTypes.bool,
 };
 
 export default SQFormDatePicker;

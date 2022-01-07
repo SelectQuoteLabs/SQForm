@@ -11,13 +11,13 @@ function SQFormIconButton({
   shouldRequireFieldUpdates = false,
   title = 'Form Submission',
   type = BUTTON_TYPES.SUBMIT,
-  onClick
+  onClick,
 }) {
   const {isButtonDisabled, handleClick} = useFormButton({
     isDisabled,
     shouldRequireFieldUpdates,
     onClick,
-    buttonType: type
+    buttonType: type,
   });
 
   function Icon(props) {
@@ -51,7 +51,7 @@ SQFormIconButton.propTypes = {
   /** Type of button, defaults to 'submit' */
   type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   /** Standard React event handler */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 export default SQFormIconButton;
