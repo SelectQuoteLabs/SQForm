@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormikValues} from 'formik';
+import type {FormikValues} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
@@ -35,15 +35,15 @@ function SQFormResetInitialValuesButton({
   const {values, resetForm} = useFormButton<typeof initialValuesObject>({
     isDisabled,
     shouldRequireFieldUpdates: false,
-    buttonType: BUTTON_TYPES.RESET
+    buttonType: BUTTON_TYPES.RESET,
   });
 
   const handlePrimaryButtonClick = (): void => {
     resetForm({
       values: {
         ...values,
-        ...initialValuesObject
-      }
+        ...initialValuesObject,
+      },
     });
 
     closeDialog();

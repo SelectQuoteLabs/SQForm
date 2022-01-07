@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dialog,
-  DialogProps,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -9,10 +8,11 @@ import {
   Grid,
   Slide,
   makeStyles,
-  GridProps
 } from '@material-ui/core';
-import {TransitionProps} from '@material-ui/core/transitions';
-import {Theme, useTheme} from '@material-ui/core/styles';
+import type {DialogProps, GridProps} from '@material-ui/core';
+import type {TransitionProps} from '@material-ui/core/transitions';
+import {useTheme} from '@material-ui/core/styles';
+import type {Theme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
@@ -63,15 +63,15 @@ const Transition = React.forwardRef(function Transition(
 const stickyStyles = {
   position: 'sticky' as React.CSSProperties['position'],
   background: ({palette}: Theme) => palette.background.paper,
-  zIndex: 1
+  zIndex: 1,
 };
 
 const useTitleStyles = makeStyles({
   root: {
     ...stickyStyles,
     top: 0,
-    borderBottom: ({palette}: Theme) => `1px solid ${palette.divider}`
-  }
+    borderBottom: ({palette}: Theme) => `1px solid ${palette.divider}`,
+  },
 });
 const useActionsStyles = makeStyles({
   root: {
@@ -81,14 +81,14 @@ const useActionsStyles = makeStyles({
     padding: '16px 24px',
     ...stickyStyles,
     bottom: 0,
-    borderTop: ({palette}) => `1px solid ${palette.divider}`
-  }
+    borderTop: ({palette}) => `1px solid ${palette.divider}`,
+  },
 });
 const useDialogContentStyles = makeStyles({
   root: {
     overflowY: 'visible',
-    padding: '20px'
-  }
+    padding: '20px',
+  },
 });
 
 function SQFormDialogInner({
@@ -103,7 +103,7 @@ function SQFormDialogInner({
   saveButtonText,
   shouldRequireFieldUpdates = false,
   title,
-  muiGridProps
+  muiGridProps,
 }: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -114,7 +114,7 @@ function SQFormDialogInner({
   const {
     isDialogOpen: isDialogAlertOpen,
     openDialog: openDialogAlert,
-    closeDialog: closeDialogAlert
+    closeDialog: closeDialogAlert,
   } = useDialog();
 
   const handleCancel = (

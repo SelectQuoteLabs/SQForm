@@ -9,10 +9,11 @@ import {
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@material-ui/lab/Autocomplete';
-import {ListChildComponentProps, VariableSizeList} from 'react-window';
+import {VariableSizeList} from 'react-window';
+import type {ListChildComponentProps} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
-import {BaseFieldProps, Option, optionValue} from 'types';
+import type {BaseFieldProps, Option, optionValue} from 'types';
 import {useForm} from './useForm';
 
 export interface SQFormAutocompleteProps extends BaseFieldProps {

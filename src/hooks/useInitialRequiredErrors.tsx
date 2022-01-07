@@ -1,6 +1,6 @@
 import React from 'react';
-import {AnySchema} from 'yup';
-import {FormikErrors, FormikValues} from 'formik';
+import type {AnySchema} from 'yup';
+import type {FormikErrors, FormikValues} from 'formik';
 
 function _getHasValue(fieldValue: unknown) {
   if (Array.isArray(fieldValue)) {

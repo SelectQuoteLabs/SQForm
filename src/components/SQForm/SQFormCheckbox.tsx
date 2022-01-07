@@ -1,8 +1,9 @@
 import React from 'react';
-import {Checkbox, CheckboxProps} from '@material-ui/core';
+import {Checkbox} from '@material-ui/core';
+import type {CheckboxProps} from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from 'types';
 
 import {useForm} from './useForm';
 

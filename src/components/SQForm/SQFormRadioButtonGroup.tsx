@@ -7,8 +7,8 @@ import {
   FormHelperText,
   FormControl,
   FormLabel,
-  GridSize,
 } from '@material-ui/core';
+import type {GridSize} from '@material-ui/core';
 import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
 

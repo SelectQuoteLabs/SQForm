@@ -4,12 +4,13 @@ import Autocomplete, {
   AutocompleteChangeReason,
   AutocompleteRenderInputParams,
 } from '@material-ui/lab/Autocomplete';
-import {ListChildComponentProps, VariableSizeList} from 'react-window';
+import {VariableSizeList} from 'react-window';
+import type {ListChildComponentProps} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import {BaseFieldProps, Option, optionValue} from 'types';
-import {
+import type {BaseFieldProps, Option, optionValue} from 'types';
+import type {
   OuterElementContextInterface,
   OuterElementTypeProps,
 } from './SQFormAutocomplete';

@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Autocomplete, {AutocompleteProps} from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import type {AutocompleteProps} from '@material-ui/lab';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 import {ListChildComponentProps, VariableSizeList} from 'react-window';
@@ -9,7 +10,7 @@ import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import {Option} from 'types';
+import type {Option} from 'types';
 import {
   ListboxVirtualizedComponentProps,
   OuterElementContextInterface,
