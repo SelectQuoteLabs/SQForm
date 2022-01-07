@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import {DateTimePicker, BaseDateTimePickerProps} from '@material-ui/pickers';
 import {ClickAwayListener, makeStyles} from '@material-ui/core';
 import {useForm} from './useForm';
-import type BaseFieldProps from '../../types/BaseFieldProps';
+import type {BaseFieldProps} from 'types';
 import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
 interface SQFormDateTimePickerProps extends BaseFieldProps {

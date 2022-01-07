@@ -9,7 +9,7 @@ import {
   SQFormStoryWrapper,
   SQFormStoryWrapperProps,
 } from './components/SQFormStoryWrapper';
-import type {SQFormTextFieldProps} from '../src/components/SQForm/SQFormTextField';
+import type {SQFormTextFieldProps} from 'components/SQForm/SQFormTextField';
 
 type SQFormTextFieldStoryType = Story<
   Omit<SQFormTextFieldProps, 'size'> & {

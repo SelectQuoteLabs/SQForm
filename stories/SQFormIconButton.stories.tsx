@@ -12,7 +12,7 @@ import {
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
-import type {SQFormIconButtonProps} from '../src/components/SQForm/SQFormIconButton';
+import type {SQFormIconButtonProps} from 'components/SQForm/SQFormIconButton';
 
 const icons = {CheckCircle, Close, AddCircle, History};
 

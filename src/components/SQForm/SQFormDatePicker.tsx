@@ -8,7 +8,7 @@ import {
   ClickAwayListener,
   InputBaseComponentProps,
 } from '@material-ui/core';
-import type BaseFieldProps from '../../types/BaseFieldProps';
+import type {BaseFieldProps} from 'types';
 import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
