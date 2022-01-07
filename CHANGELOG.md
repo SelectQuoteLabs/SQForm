@@ -1,3 +1,10 @@
+### [6.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.1...v6.2.2) (2022-01-07)
+
+
+### Bug Fixes
+
+* 🐛 Phone Mask - allows 1's in fourth position ([0d129c7](https://github.com/SelectQuoteLabs/SQForm/commit/0d129c780a0c46e1d5a680b5d1f4319f91394805)), closes [#392](https://github.com/SelectQuoteLabs/SQForm/issues/392)
+
 ### [6.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.0...v6.2.1) (2022-01-06)
 
 
