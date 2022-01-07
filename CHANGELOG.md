@@ -1,3 +1,14 @@
+## [7.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.3...v7.0.0) (2022-01-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 SQFormIconButton has been removed
+
+### Bug Fixes
+
+* 🐛 Remove the SQFormIconButton component ([4465eee](https://github.com/SelectQuoteLabs/SQForm/commit/4465eeee9c7f8a29d1b7e630de5ef9b81848d25f)), closes [#491](https://github.com/SelectQuoteLabs/SQForm/issues/491)
+
 ### [6.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.2...v6.2.3) (2022-01-07)
 
 
