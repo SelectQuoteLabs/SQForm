@@ -182,7 +182,8 @@ const useAutocompleteStyles = makeStyles({
   popper: {
     borderRadius: '4px',
     boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
-    width: ({lockWidthToField}) => (!lockWidthToField ? 'auto !important' : ''),
+    width: ({lockWidthToField}) =>
+      !lockWidthToField ? 'auto !important' : undefined,
     overflowX: 'hidden !important',
   },
   paper: {
