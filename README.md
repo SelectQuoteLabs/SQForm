@@ -119,6 +119,16 @@ $ nvm use
 $ npm run storybook
 ```
 
+## Running the Docs Page Locally
+1. Install Doc page dependencies
+```sh
+$ cd SQFormDocs && npm i
+```
+2. Run the docs page
+```sh
+$ npm run docs
+```
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://bitbucket.org/SelectQuote/scplus-shared-components/src/master/).
