@@ -1,3 +1,10 @@
+### [7.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.0...v7.0.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Update deprecated props SQFormTextarea ([cff6528](https://github.com/SelectQuoteLabs/SQForm/commit/cff6528453a5e5e748280dfca2d01463e19dc3f7)), closes [#517](https://github.com/SelectQuoteLabs/SQForm/issues/517)
+
 ## [7.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.3...v7.0.0) (2022-01-07)
 
 
