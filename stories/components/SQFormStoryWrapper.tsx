@@ -1,8 +1,7 @@
 import React from 'react';
-import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 import Grid from '@material-ui/core/Grid';
 import type {GridProps} from '@material-ui/core';
-import {SQForm, SQFormIconButton} from '../../src';
+import {SQForm, SQFormButton} from '../../src';
 import {
   Snackbar,
   SnackbarProvider,
@@ -77,8 +76,8 @@ function Form({
       >
         {children}
         {showSubmit && (
-          <Grid item sm={2} style={{alignSelf: 'center'}}>
-            <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <Grid item={true} sm={2} style={{alignSelf: 'center'}}>
+            <SQFormButton>Submit</SQFormButton>
           </Grid>
         )}
       </SQForm>

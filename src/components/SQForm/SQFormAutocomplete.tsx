@@ -250,7 +250,7 @@ const useAutocompleteStyles = makeStyles({
     borderRadius: '4px',
     boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
     width: ({lockWidthToField}: {lockWidthToField: boolean}) =>
-      !lockWidthToField ? 'auto !important' : '',
+      !lockWidthToField ? 'auto !important' : undefined,
     overflowX: 'hidden !important' as 'hidden',
   },
   paper: {

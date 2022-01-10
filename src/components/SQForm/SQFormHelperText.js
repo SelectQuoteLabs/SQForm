@@ -5,41 +5,41 @@ import {Grid, Typography, makeStyles} from '@material-ui/core';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
-  Report as FailIcon
+  Report as FailIcon,
 } from '@material-ui/icons';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     wrapper: {
-      padding: `0 ${theme.spacing(2)}px`
+      padding: `0 ${theme.spacing(2)}px`,
     },
     icon: {
       marginRight: theme.spacing(1),
-      fontSize: '24px'
+      fontSize: '24px',
     },
     valid: {
-      color: 'var(--color-textSuccessGreen)'
+      color: 'var(--color-textSuccessGreen)',
     },
     error: {
-      color: 'var(--color-brightYellow)'
+      color: 'var(--color-brightYellow)',
     },
     fail: {
-      color: 'var(--color-textErrorRed)'
-    }
+      color: 'var(--color-textErrorRed)',
+    },
   };
 });
 
 const helperStateMap = {
   fail: 'fail',
   error: 'error',
-  valid: 'valid'
+  valid: 'valid',
 };
 
 function SQFormHelperText({
   isFailedState = false,
   errorText = 'There is an error in the form',
   failText = 'Cannot proceed',
-  validText = 'All fields completed'
+  validText = 'All fields completed',
 }) {
   const classes = useStyles();
   const {isValid} = useFormikContext();
@@ -72,7 +72,7 @@ function SQFormHelperText({
   const helperTextMap = {
     [valid]: validText,
     [error]: errorText,
-    [fail]: failText
+    [fail]: failText,
   };
 
   const Icon = getHelperTextIcon();
@@ -80,7 +80,7 @@ function SQFormHelperText({
   return (
     <Grid
       container
-      justify="flex-end"
+      justifyContent="flex-end"
       wrap="nowrap"
       alignItems="center"
       className={`${classes.wrapper} ${classes[helperTextType]}`}
@@ -95,7 +95,7 @@ SQFormHelperText.propTypes = {
   isFailedState: PropTypes.bool,
   errorText: PropTypes.string,
   failText: PropTypes.string,
-  validText: PropTypes.string
+  validText: PropTypes.string,
 };
 
 export default SQFormHelperText;

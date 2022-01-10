@@ -92,6 +92,9 @@ const handleSubmit = (formValues: FormValues) => {
 ```
 
 Lastly, you'll also need to make sure you update your Yup validation for the affected form fields from `Yup.boolean()` to `Yup.number()` or whatever new value type you're using for your affected dropdown options.
+### Version 7
+
+In SQForm v7, we have removed the SQFormIconButton in favor of the SQFormButton where the text says either "Submit" or "Save". Please replace all occurrences of SQFormIconButton with SQFormButton in the consuming application.
 
 ### Version 6
 
@@ -171,6 +174,20 @@ $ nvm use
 
 ```sh
 $ npm run storybook
+```
+
+## Running the Docs Page Locally
+
+1. Install Doc page dependencies
+
+```sh
+$ cd SQFormDocs && npm i
+```
+
+2. Run the docs page
+
+```sh
+$ npm run docs
 ```
 
 ## Versioning

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import {Card, CardHeader, makeStyles} from '@material-ui/core';
 import {CardPopoverMenu} from 'scplus-shared-components';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     card: {
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: 'auto 1fr auto',
       gridTemplateAreas: `'header' 'content' 'footer'`,
-      height: '100%'
+      height: '100%',
     },
     cardHeader: {
       gridArea: 'header',
@@ -23,19 +23,25 @@ const useStyles = makeStyles(theme => {
        * counterpart in MIAV, AdminViewCard.
        */
       height: '70px',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     action: {
       alignSelf: 'unset',
-      marginTop: 'unset'
-    }
+      marginTop: 'unset',
+    },
+    title: {
+      display: '-webkit-box',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': '1',
+      overflow: 'hidden',
+    },
   };
 });
 
 function getSelectedComponent(selectedTab, children) {
   if (Array.isArray(children)) {
     const selectedFormComponent = children.find(
-      child => child.props.value === selectedTab.value
+      (child) => child.props.value === selectedTab.value
     );
     return selectedFormComponent;
   }
@@ -47,10 +53,10 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
 
   const menuItems = React.useMemo(
     () =>
-      React.Children.map(children, child => {
+      React.Children.map(children, (child) => {
         return {
           label: child.props.label,
-          value: child.props.value
+          value: child.props.value,
         };
       }),
     [children]
@@ -58,9 +64,9 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
 
   const [selectedTab, setSelectedTab] = React.useState(() => menuItems[0]);
 
-  const handleChange = selectedMenuItemValue => {
+  const handleChange = (selectedMenuItemValue) => {
     const newSelection = menuItems.find(
-      item => item.value === selectedMenuItemValue
+      (item) => item.value === selectedMenuItemValue
     );
 
     if (selectedTab.value !== newSelection.value) {
@@ -77,7 +83,8 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
     <Card raised={true} elevation={1} square={true} className={classes.card}>
       <CardHeader
         classes={{
-          action: classes.action
+          action: classes.action,
+          title: classes.title,
         }}
         title={title}
         className={classes.cardHeader}
@@ -105,8 +112,8 @@ SQFormScrollableCardsMenuWrapper.propTypes = {
    */
   children: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
+    PropTypes.arrayOf(PropTypes.element),
   ]),
   /** The Title for the Header component */
-  title: PropTypes.string
+  title: PropTypes.string,
 };

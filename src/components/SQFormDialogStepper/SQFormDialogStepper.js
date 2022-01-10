@@ -12,7 +12,7 @@ import {
   Step,
   StepButton,
   Stepper,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
@@ -22,7 +22,7 @@ import LoadingSpinner from '../LoadingSpinner';
 export function SQFormDialogStep({
   children,
   isLoading = false,
-  loadingMessage = ''
+  loadingMessage = '',
 }) {
   return isLoading ? (
     <LoadingSpinner message={loadingMessage} />
@@ -44,16 +44,16 @@ const useStyles = makeStyles({
       fontSize: 30,
       '& text': {
         fontSize: 15,
-        fontWeight: 600
-      }
+        fontWeight: 600,
+      },
     },
     '& span': {
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
     },
     '& .MuiStepLabel-label.MuiStepLabel-alternativeLabel': {
-      marginTop: '5px'
-    }
-  }
+      marginTop: '5px',
+    },
+  },
 });
 
 const useActionsStyles = makeStyles({
@@ -61,15 +61,15 @@ const useActionsStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flex: '1 1 100%',
-    padding: '16px 24px'
-  }
+    padding: '16px 24px',
+  },
 });
 
 const useStepperStyles = makeStyles({
   root: {
     padding: '1px',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 export function SQFormDialogStepper({
@@ -113,9 +113,9 @@ export function SQFormDialogStepper({
     setCompleted([...completed, activeStep]);
   };
 
-  const handleStep = step => () => {
+  const handleStep = (step) => () => {
     const nextStep = step;
-    if ([nextStep].some(step => completed.includes(step))) {
+    if ([nextStep].some((step) => completed.includes(step))) {
       setActiveStep(step);
     }
   };
@@ -140,13 +140,13 @@ export function SQFormDialogStepper({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-      const stepValues = currentStepKeys.every(step => {
+      const stepValues = currentStepKeys.every((step) => {
         return !!values[step];
       });
 
       if (
         !stepValues ||
-        currentStepKeys.some(step => Object.keys(errors).includes(step)) ||
+        currentStepKeys.some((step) => Object.keys(errors).includes(step)) ||
         !dirty
       ) {
         return true;
@@ -217,14 +217,14 @@ export function SQFormDialogStepper({
               style={{
                 paddingTop: '40px',
                 paddingBottom: '40px',
-                ...contentStyle
+                ...contentStyle,
               }}
             >
               <Grid
                 {...muiGridProps}
                 container
                 spacing={muiGridProps.spacing ?? 3}
-                justify="center"
+                justifyContent="center"
               >
                 {currentChild}
               </Grid>
@@ -249,11 +249,15 @@ export function SQFormDialogStepper({
 
 SQFormDialogStep.propTypes = {
   /** The content to be rendered in the step body. */
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType]),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.elementType,
+    PropTypes.node,
+  ]),
   /** Should the loading spinner be shown */
   isLoading: PropTypes.bool,
   /** Optional message to be added to the loading spinner */
-  loadingMessage: PropTypes.string
+  loadingMessage: PropTypes.string,
 };
 
 SQFormDialogStepper.propTypes = {
@@ -288,5 +292,5 @@ SQFormDialogStepper.propTypes = {
   /** Any prop from https://material-ui.com/api/dialog/#props */
   dialogProps: PropTypes.object,
   /** Optional styling on the dialog */
-  contentStyle: PropTypes.object
+  contentStyle: PropTypes.object,
 };

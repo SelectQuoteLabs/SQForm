@@ -37,12 +37,12 @@ function SQFormDatePickerWithCalendarInputOnly({
   muiFieldProps = {},
 }) {
   const {
+    formikField: {helpers},
     fieldState: {isFieldRequired},
-    fieldHelpers: {handleBlur, handleChange},
+    fieldHelpers: {handleBlur},
   } = useForm({
     name,
     onBlur,
-    onChange,
   });
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
@@ -50,6 +50,11 @@ function SQFormDatePickerWithCalendarInputOnly({
 
   const clearField = () => {
     setFieldValue(name, '');
+  };
+
+  const handleChange = (date) => {
+    helpers.setValue(date);
+    onChange && onChange(date);
   };
 
   return (

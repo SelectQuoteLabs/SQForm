@@ -16,12 +16,12 @@ const zipMask = (userInput: string): maskArray => {
 export const MASKS = {
   phone: [
     '(',
-    /[02-9]/,
+    /\d/,
     /\d/,
     /\d/,
     ')',
     ' ',
-    /[02-9]/,
+    /\d/,
     /\d/,
     /\d/,
     '-',

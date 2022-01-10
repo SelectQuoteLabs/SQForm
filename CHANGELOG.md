@@ -1,3 +1,70 @@
+### [7.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.1...v7.0.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Fix datepicker component change handlers ([#518](https://github.com/SelectQuoteLabs/SQForm/issues/518)) ([db69797](https://github.com/SelectQuoteLabs/SQForm/commit/db697972d679a1dc6fc110d2bca99d759e4f2b10)), closes [#511](https://github.com/SelectQuoteLabs/SQForm/issues/511)
+
+### [7.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.0...v7.0.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Update deprecated props SQFormTextarea ([cff6528](https://github.com/SelectQuoteLabs/SQForm/commit/cff6528453a5e5e748280dfca2d01463e19dc3f7)), closes [#517](https://github.com/SelectQuoteLabs/SQForm/issues/517)
+
+## [7.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.3...v7.0.0) (2022-01-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 SQFormIconButton has been removed
+
+### Bug Fixes
+
+* 🐛 Remove the SQFormIconButton component ([4465eee](https://github.com/SelectQuoteLabs/SQForm/commit/4465eeee9c7f8a29d1b7e630de5ef9b81848d25f)), closes [#491](https://github.com/SelectQuoteLabs/SQForm/issues/491)
+
+### [6.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.2...v6.2.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* 🐛 SQFormAutocomplete fix JSS warning ([f0163ae](https://github.com/SelectQuoteLabs/SQForm/commit/f0163ae3fc02c80033da911c5f7d251e522aa231)), closes [#510](https://github.com/SelectQuoteLabs/SQForm/issues/510)
+
+### [6.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.1...v6.2.2) (2022-01-07)
+
+
+### Bug Fixes
+
+* 🐛 Phone Mask - allows 1's in fourth position ([0d129c7](https://github.com/SelectQuoteLabs/SQForm/commit/0d129c780a0c46e1d5a680b5d1f4319f91394805)), closes [#392](https://github.com/SelectQuoteLabs/SQForm/issues/392)
+
+### [6.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.0...v6.2.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* 🐛 Update deprecated justify prop for Grid ([761cbed](https://github.com/SelectQuoteLabs/SQForm/commit/761cbed4ab8da58384ed33e31dc392536bcf776c)), closes [#499](https://github.com/SelectQuoteLabs/SQForm/issues/499)
+
+## [6.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.1...v6.2.0) (2022-01-06)
+
+
+### Features
+
+* 🎸 truncate right card title when text is longer than box ([508820f](https://github.com/SelectQuoteLabs/SQForm/commit/508820f3a4ab02ad9a23608d3deb731dfdf846ff))
+
+### [6.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.1.0...v6.1.1) (2022-01-05)
+
+
+### Bug Fixes
+
+* 🐛 add style prop for container of guided workflow ([847167a](https://github.com/SelectQuoteLabs/SQForm/commit/847167a7f792a1f7caba7e4677bdabbe6499036b))
+
+## [6.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.0.0...v6.1.0) (2022-01-03)
+
+
+### Features
+
+* 🎸 Adding the ability to hide the secondary button ([a99465a](https://github.com/SelectQuoteLabs/SQForm/commit/a99465a79e47771ff9a59f90bd66f228edc6702a)), closes [#482](https://github.com/SelectQuoteLabs/SQForm/issues/482)
+
 ## [6.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v5.8.0...v6.0.0) (2021-12-08)
 
 

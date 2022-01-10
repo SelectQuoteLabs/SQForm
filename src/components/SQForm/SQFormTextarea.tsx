@@ -100,8 +100,8 @@ function SQFormTextarea({
         onChange={handleChange}
         onBlur={handleBlur}
         required={isFieldRequired}
-        rows={rows}
-        rowsMax={rowsMax}
+        minRows={rows}
+        maxRows={rowsMax}
         variant="outlined"
         value={values[name]}
         inputProps={{

@@ -36,7 +36,7 @@ interface SQFormDialogInnerProps {
     event: Record<string, unknown>,
     reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => void;
-  /** Whether to show save/submit button */
+  /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton: boolean;
   /** The primary button text (Button located on right side of Dialog) */
   saveButtonText?: string;
@@ -46,6 +46,8 @@ interface SQFormDialogInnerProps {
   title: string;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
+  /** Determine if the secondary action button should be displayed */
+  showSecondaryButton?: boolean;
 }
 
 /*
@@ -73,7 +75,7 @@ const useTitleStyles = makeStyles({
     borderBottom: ({palette}: Theme) => `1px solid ${palette.divider}`,
   },
 });
-const useActionsStyles = makeStyles({
+const actionStyles = {
   root: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -81,8 +83,12 @@ const useActionsStyles = makeStyles({
     padding: '16px 24px',
     ...stickyStyles,
     bottom: 0,
-    borderTop: ({palette}) => `1px solid ${palette.divider}`,
+    borderTop: ({palette}: Theme) => `1px solid ${palette.divider}`,
   },
+};
+const useActionsStyles = makeStyles(actionStyles);
+const usePrimaryActionStyles = makeStyles({
+  root: {...actionStyles.root, justifyContent: 'flex-end'},
 });
 const useDialogContentStyles = makeStyles({
   root: {
@@ -99,15 +105,17 @@ function SQFormDialogInner({
   isOpen,
   maxWidth,
   onClose,
-  shouldDisplaySaveButton,
+  shouldDisplaySaveButton = true,
   saveButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
+  showSecondaryButton = true,
 }: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
+  const primaryActionsClasses = usePrimaryActionStyles(theme);
   const dialogContentClasses = useDialogContentStyles(theme);
   const {resetForm, dirty: isDirty} = useFormikContext();
 
@@ -141,7 +149,7 @@ function SQFormDialogInner({
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={handleCancel}
+        onClose={showSecondaryButton ? handleCancel : undefined}
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
@@ -156,15 +164,21 @@ function SQFormDialogInner({
               {children}
             </Grid>
           </DialogContent>
-          <DialogActions classes={actionsClasses}>
-            <RoundedButton
-              title={cancelButtonText}
-              onClick={handleCancel}
-              color="secondary"
-              variant="outlined"
-            >
-              {cancelButtonText}
-            </RoundedButton>
+          <DialogActions
+            classes={
+              showSecondaryButton ? actionsClasses : primaryActionsClasses
+            }
+          >
+            {showSecondaryButton && (
+              <RoundedButton
+                title={cancelButtonText}
+                onClick={handleCancel}
+                color="secondary"
+                variant="outlined"
+              >
+                {cancelButtonText}
+              </RoundedButton>
+            )}
             {shouldDisplaySaveButton && (
               <SQFormButton
                 title={saveButtonText}
