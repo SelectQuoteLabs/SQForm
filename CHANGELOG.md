@@ -1,3 +1,10 @@
+### [7.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.1...v7.0.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Fix datepicker component change handlers ([#518](https://github.com/SelectQuoteLabs/SQForm/issues/518)) ([db69797](https://github.com/SelectQuoteLabs/SQForm/commit/db697972d679a1dc6fc110d2bca99d759e4f2b10)), closes [#511](https://github.com/SelectQuoteLabs/SQForm/issues/511)
+
 ### [7.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.0...v7.0.1) (2022-01-10)
 
 
