@@ -13,9 +13,14 @@ import {
   Stepper,
   Typography,
 } from '@material-ui/core';
-import type {DialogProps, GridProps} from '@material-ui/core';
+import type {
+  DialogProps,
+  GridProps,
+  DialogContentProps,
+} from '@material-ui/core';
 import * as Yup from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
+import type {FormikHelpers} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
 import type {TransitionProps} from '@material-ui/core/transitions';
@@ -89,7 +94,7 @@ const useStepperStyles = makeStyles({
   },
 });
 
-interface SQFormDialogStepperProps {
+interface SQFormDialogStepperProps<Values> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body.  Will be an array of React elements. */
@@ -109,22 +114,22 @@ interface SQFormDialogStepperProps {
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
   onClose: () => void;
   /** Callback function invoked when user clicks primary submit button */
-  onSubmit: (values: Record<string, unknown>, helpers: unknown) => void;
+  onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void;
   /** Title text at the top of the Dialog */
   title: string;
   /** Form Entity Object */
-  initialValues: Record<string, string>;
+  initialValues: Values;
   /** Callback function that is called when a step is completed to pass back the current state values to the consumer */
-  setValues?: (values: Record<string, unknown>) => void;
+  setValues?: (values: Values) => void;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
   /** Any prop from https://material-ui.com/api/dialog/#props */
   dialogProps?: DialogProps;
   /** Optional styling on the dialog */
-  contentStyle?: Record<string, unknown>;
+  contentStyle?: DialogContentProps['style'];
 }
 
-export function SQFormDialogStepper({
+export function SQFormDialogStepper<Values>({
   cancelButtonText = 'Cancel',
   children,
   disableBackdropClick = false,
@@ -136,13 +141,13 @@ export function SQFormDialogStepper({
   title,
   enableReinitialize = false,
   muiGridProps = {},
-  dialogProps = {open: isOpen},
+  dialogProps,
   setValues,
   fullWidth = true,
   contentStyle,
   initialValues,
   ...props
-}: SQFormDialogStepperProps): JSX.Element {
+}: SQFormDialogStepperProps<Values>): JSX.Element {
   const steps = children;
   const [activeStep, setActiveStep] = React.useState(0);
   const currentChild = steps[activeStep];
@@ -166,15 +171,14 @@ export function SQFormDialogStepper({
   };
 
   const handleStep = (step: number) => () => {
-    const nextStep = step;
-    if ([nextStep].some((step) => completed.includes(step))) {
+    if (completed.includes(step)) {
       setActiveStep(step);
     }
   };
 
   const handleSubmit = async (
-    values: Record<string, unknown>,
-    helpers: unknown
+    values: Values,
+    helpers: FormikHelpers<Values>
   ) => {
     if (isLastStep) {
       await onSubmit(values, helpers);
@@ -237,6 +241,7 @@ export function SQFormDialogStepper({
           maxWidth={maxWidth}
           onClose={onClose}
           fullWidth={fullWidth}
+          open={isOpen}
           {...dialogProps}
         >
           <Form>
@@ -249,7 +254,7 @@ export function SQFormDialogStepper({
                 <Stepper
                   activeStep={activeStep}
                   classes={classes}
-                  alternativeLabel
+                  alternativeLabel={true}
                 >
                   {steps.map((child, index) => (
                     <Step key={`${child.props.label}-${index}`}>
