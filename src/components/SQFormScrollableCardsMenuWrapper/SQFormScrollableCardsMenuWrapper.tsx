@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Card, CardHeader, makeStyles} from '@material-ui/core';
 import {CardPopoverMenu} from 'scplus-shared-components';
 
@@ -38,7 +37,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function getSelectedComponent(selectedTab, children) {
+function getSelectedComponent(
+  selectedTab: {label: string; value: string},
+  children: JSX.Element | JSX.Element[]
+) {
   if (Array.isArray(children)) {
     const selectedFormComponent = children.find(
       (child) => child.props.value === selectedTab.value
@@ -48,7 +50,23 @@ function getSelectedComponent(selectedTab, children) {
   return children;
 }
 
-export default function SQFormScrollableCardsMenuWrapper({title, children}) {
+interface SQFormScrollableCardsMenuWrapperProps {
+  /** At least one instance of SQFormScrollableCard where each has
+   * prop `isHeaderDisabled` === true
+   * AND
+   * each has a unique string `value` prop and `label` prop so we
+   * have a menu label and can match the `value` to what's selected
+   * in the popover menu.
+   */
+  children: JSX.Element | JSX.Element[];
+  /** The Title for the Header component */
+  title?: string;
+}
+
+export default function SQFormScrollableCardsMenuWrapper({
+  title,
+  children,
+}: SQFormScrollableCardsMenuWrapperProps): JSX.Element {
   const classes = useStyles();
 
   const menuItems = React.useMemo(
@@ -64,12 +82,15 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
 
   const [selectedTab, setSelectedTab] = React.useState(() => menuItems[0]);
 
-  const handleChange = (selectedMenuItemValue) => {
+  const handleChange = (selectedMenuItemValue: string) => {
     const newSelection = menuItems.find(
       (item) => item.value === selectedMenuItemValue
     );
 
-    if (selectedTab.value !== newSelection.value) {
+    if (
+      typeof newSelection !== 'undefined' &&
+      selectedTab.value !== newSelection.value
+    ) {
       setSelectedTab(newSelection);
     }
   };
@@ -101,19 +122,3 @@ export default function SQFormScrollableCardsMenuWrapper({title, children}) {
     </Card>
   );
 }
-
-SQFormScrollableCardsMenuWrapper.propTypes = {
-  /** At least one instance of SQFormScrollableCard where each has
-   * prop `isHeaderDisabled` === true
-   * AND
-   * each has a unique string `value` prop and `label` prop so we
-   * have a menu label and can match the `value` to what's selected
-   * in the popover menu.
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
-  /** The Title for the Header component */
-  title: PropTypes.string,
-};
