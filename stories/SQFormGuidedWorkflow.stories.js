@@ -48,10 +48,8 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async (values, _formikBag, context) => {
+        onSubmit: async (values, _formikBag, _context) => {
           await sleep(3000); // Simulate API call to see loading spinner
-          console.log(values);
-          console.log(context);
           if (values.outcome === 'not-interested') {
             setIsModuleDisabled(true);
           } else {
@@ -92,10 +90,7 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async (values, _formikBag, context) => {
-          console.log(values);
-          console.log(context);
-        },
+        onSubmit: async (_values, _formikBag, _context) => {},
         validationSchema: {
           outcome: Yup.string().required(),
           notes: Yup.string()
@@ -139,10 +134,7 @@ const Template = () => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async (values, _formikBag, context) => {
-          console.log(values);
-          console.log(context);
-        },
+        onSubmit: async (_values, _formikBag, _context) => {},
         validationSchema: {
           outcome: Yup.string().required(),
           notes: Yup.string()
@@ -179,7 +171,7 @@ const Template = () => {
             isStrictMode={false}
             taskModules={taskModules}
             onError={error => {
-              console.error(error);
+              window.alert(error);
             }}
           />
         </ExpandingCard>
@@ -202,9 +194,7 @@ const TestTemplate = args => {
           firstText: '',
           secondText: ''
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
-        },
+        onSubmit: async _values => {},
         validationSchema: {
           firstText: Yup.string().required(),
           secondText: Yup.string()
@@ -233,9 +223,7 @@ const TestTemplate = args => {
           outcome: '',
           notes: ''
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
-        }
+        onSubmit: async _values => {}
       },
       scriptedTextProps: {
         text: 'This is some more text',
@@ -261,7 +249,7 @@ const TestTemplate = args => {
             {...rest}
             mainTitle={mainTitle}
             onError={error => {
-              console.error(error);
+              window.alert(error);
             }}
             taskModules={taskModules}
           />
