@@ -11,10 +11,10 @@ function SQFormReadOnlyField({
   size = 'auto',
   InputProps = {},
   inputProps = {},
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const {
-    formikField: {field}
+    formikField: {field},
   } = useForm({name});
 
   return (
@@ -29,7 +29,7 @@ function SQFormReadOnlyField({
         InputProps={{
           ...InputProps,
           readOnly: true,
-          disableUnderline: true
+          disableUnderline: true,
         }}
         inputProps={inputProps}
         style={{marginBottom: 21}}
@@ -51,7 +51,7 @@ SQFormReadOnlyField.propTypes = {
   /** Attributes applied to the `input` element */
   inputProps: PropTypes.object,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormReadOnlyField;

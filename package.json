@@ -16,7 +16,8 @@
     "build-storybook": "build-storybook -c .storybook -o .out",
     "nuke-everything": "rm -rf ./dist && rm -rf ./node_modules && rm -f package-lock.json",
     "commit": "npx git-cz",
-    "format": "npx prettier --write 'src/**/*.js'",
+    "format": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
+    "format.ci": "npx prettier --check './{pages,src}/**/*.{js,ts,tsx}'",
     "docs": "cd SQFormDocs && npm start",
     "build-docs": "cd SQFormDocs && npm ci && npm run build"
   },
@@ -35,7 +36,8 @@
           "chore",
           "refactor",
           "test",
-          "ci"
+          "ci",
+          "style"
         ]
       ]
     }
@@ -47,7 +49,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,md}": [
+    "*.{js,ts,tsx,md}": [
       "prettier --write",
       "eslint --fix",
       "git add"
@@ -133,7 +135,7 @@
     "eslint-plugin-testing-library": "^3.10.2",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.0",

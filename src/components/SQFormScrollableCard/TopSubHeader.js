@@ -1,12 +1,12 @@
 import React from 'react';
 import {Paper, makeStyles} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     container: {
       padding: `${theme.spacing(1.5)}px ${theme.spacing(2)}px`,
-      marginBottom: `${theme.spacing(4)}px`
-    }
+      marginBottom: `${theme.spacing(4)}px`,
+    },
   };
 });
 

@@ -7,7 +7,7 @@ const helperTextType = {
   info: 'info',
   error: 'error',
   success: 'success',
-  warning: 'warning'
+  warning: 'warning',
 };
 
 function Header({
@@ -17,7 +17,7 @@ function Header({
   warningText,
   errorText,
   successText,
-  isFailedState = false
+  isFailedState = false,
 }) {
   const {isValid, touched} = useFormikContext();
   const isFormTouched = Object.keys(touched).length;
@@ -49,7 +49,7 @@ function Header({
     [helperTextType.info]: infoText,
     [helperTextType.error]: errorText,
     [helperTextType.success]: successText,
-    [helperTextType.warning]: warningText
+    [helperTextType.warning]: warningText,
   };
 
   const getInformativeHeadingText = () => {

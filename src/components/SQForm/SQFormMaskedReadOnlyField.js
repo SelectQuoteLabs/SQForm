@@ -7,7 +7,7 @@ function TextFieldMask({inputRef, mask, ...rest}) {
   return (
     <MaskedInput
       {...rest}
-      ref={ref => {
+      ref={(ref) => {
         inputRef(ref ? ref.inputElement : null);
       }}
       mask={mask}
@@ -25,7 +25,7 @@ function SQFormMaskedReadOnlyField({
   size = 'auto',
   InputProps,
   inputProps = {},
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   return (
     <SQFormReadOnlyField
@@ -35,11 +35,11 @@ function SQFormMaskedReadOnlyField({
       InputProps={{
         ...InputProps,
         placeholder,
-        inputComponent: TextFieldMask
+        inputComponent: TextFieldMask,
       }}
       inputProps={{
         ...inputProps,
-        mask
+        mask,
       }}
       muiFieldProps={muiFieldProps}
     />
@@ -51,7 +51,7 @@ SQFormMaskedReadOnlyField.propTypes = {
   mask: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
-    PropTypes.func
+    PropTypes.func,
   ]),
   /** Name of the field will be the Object key of the key/value pair form payload */
   name: PropTypes.string.isRequired,
@@ -66,7 +66,7 @@ SQFormMaskedReadOnlyField.propTypes = {
   /** Attributes applied to the `input` element */
   inputProps: PropTypes.object,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormMaskedReadOnlyField;

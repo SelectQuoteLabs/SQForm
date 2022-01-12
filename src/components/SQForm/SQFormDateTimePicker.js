@@ -8,12 +8,13 @@ import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
   root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)': {
-      '& .MuiIconButton-root': {
-        color: 'var(--color-teal)'
-      }
-    }
-  }
+    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+      {
+        '& .MuiIconButton-root': {
+          color: 'var(--color-teal)',
+        },
+      },
+  },
 }));
 
 function SQFormDateTimePicker({
@@ -24,19 +25,19 @@ function SQFormDateTimePicker({
   placeholder = '',
   onBlur,
   onChange,
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const {
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {handleBlur, HelperTextComponent}
+    fieldHelpers: {handleBlur, HelperTextComponent},
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
 
-  const handleChange = date => {
+  const handleChange = (date) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
@@ -66,7 +67,7 @@ function SQFormDateTimePicker({
           onClose={handleClose}
           onOpen={toggleCalendar}
           open={isCalendarOpen}
-          renderInput={inputProps => {
+          renderInput={(inputProps) => {
             return (
               <TextField
                 {...inputProps}
@@ -109,7 +110,7 @@ SQFormDateTimePicker.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func,
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormDateTimePicker;

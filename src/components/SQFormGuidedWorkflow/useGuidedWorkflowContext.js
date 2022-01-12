@@ -7,8 +7,8 @@ export function useGuidedWorkflowContext(taskModules) {
       [index + 1]: {
         name: taskModule.name,
         data: taskModule.formikProps.initialValues,
-        isDisabled: taskModule.isDisabled || false
-      }
+        isDisabled: taskModule.isDisabled || false,
+      },
     };
   }, {});
 
@@ -23,8 +23,8 @@ export function useGuidedWorkflowContext(taskModules) {
             [taskID]: {
               name: taskModlue.name,
               data: action.id === taskID ? action.data : prevData,
-              isDisabled: taskModlue.isDisabled || false
-            }
+              isDisabled: taskModlue.isDisabled || false,
+            },
           };
         }, {});
       default:

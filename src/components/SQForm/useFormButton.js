@@ -4,14 +4,14 @@ import {useDebouncedCallback} from 'use-debounce';
 
 export const BUTTON_TYPES = {
   SUBMIT: 'submit',
-  RESET: 'reset'
+  RESET: 'reset',
 };
 
 export function useFormButton({
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   onClick,
-  buttonType
+  buttonType,
 }) {
   const {values, initialValues, isValid, dirty, ...rest} = useFormikContext();
 
@@ -44,7 +44,7 @@ export function useFormButton({
     500,
     {
       leading: true,
-      trailing: false
+      trailing: false,
     }
   );
 
@@ -55,6 +55,6 @@ export function useFormButton({
     isValid,
     handleClick,
     dirty,
-    ...rest
+    ...rest,
   };
 }
