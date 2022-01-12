@@ -239,9 +239,9 @@ export function SQFormDialogStepper<Values>({
           TransitionComponent={Transition}
           disableBackdropClick={disableBackdropClick}
           maxWidth={maxWidth}
+          open={isOpen}
           onClose={onClose}
           fullWidth={fullWidth}
-          open={isOpen}
           {...dialogProps}
         >
           <Form>
