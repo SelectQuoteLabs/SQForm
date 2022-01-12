@@ -6,7 +6,7 @@ import type {BaseFieldProps} from 'types';
 
 import {useForm} from './useForm';
 
-interface SQFormInclusionListItemProps extends BaseFieldProps {
+export interface SQFormInclusionListItemProps extends BaseFieldProps {
   /** evaluation of whether the box should be checked */
   isChecked: boolean;
   /** Disabled state of the checkbox */
