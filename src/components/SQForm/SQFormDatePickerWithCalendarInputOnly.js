@@ -39,10 +39,10 @@ function SQFormDatePickerWithCalendarInputOnly({
   const {
     formikField: {helpers},
     fieldState: {isFieldRequired},
-    fieldHelpers: {handleBlur}
+    fieldHelpers: {handleBlur},
   } = useForm({
     name,
-    onBlur
+    onBlur,
   });
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
@@ -52,7 +52,7 @@ function SQFormDatePickerWithCalendarInputOnly({
     setFieldValue(name, '');
   };
 
-  const handleChange = date => {
+  const handleChange = (date) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
