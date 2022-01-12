@@ -2,11 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import {DateTimePicker, BaseDateTimePickerProps} from '@material-ui/pickers';
+import {DateTimePicker} from '@material-ui/pickers';
+import type {BaseDateTimePickerProps} from '@material-ui/pickers';
 import {ClickAwayListener, makeStyles} from '@material-ui/core';
 import {useForm} from './useForm';
-import BaseFieldProps from '../../types/BaseFieldProps';
-import {ParsableDate} from '@material-ui/pickers/constants/prop-types';
+import type {BaseFieldProps} from 'types';
+import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
 interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
@@ -16,9 +17,9 @@ interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: (date: React.ChangeEvent<moment.Moment> | unknown) => void;
+  onChange?: (date: moment.Moment | null) => void;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDateTimePickerProps;
+  muiFieldProps?: BaseDateTimePickerProps<moment.Moment>;
 }
 
 const useStyles = makeStyles(() => ({
@@ -46,10 +47,9 @@ function SQFormDateTimePicker({
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm({
+  } = useForm<moment.Moment | null, unknown>({
     name,
     onBlur,
-    onChange,
   });
 
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
@@ -67,9 +67,7 @@ function SQFormDateTimePicker({
   const value: ParsableDate<moment.Moment> | null =
     (field.value as ParsableDate<moment.Moment>) ?? null;
 
-  const handleChange = (
-    date: React.ChangeEvent<moment.Moment> | unknown
-  ): void => {
+  const handleChange = (date: moment.Moment | null): void => {
     helpers.setValue(date);
     onChange && onChange(date);
   };

@@ -4,7 +4,6 @@ import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import CheckMarkIcon from '@material-ui/icons/CheckCircle';
 import {SectionHeader} from 'scplus-shared-components';
 
 import FriendsFieldArray from './components/FriendsFieldArray';
@@ -17,7 +16,6 @@ import {
   SQFormTextarea,
   SQFormTextField,
   SQFormButton,
-  SQFormIconButton,
   SQFormAutocomplete,
   SQFormCheckbox,
   SQFormDropdown,
@@ -220,7 +218,7 @@ export const BasicForm = () => {
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -305,7 +303,7 @@ export const FormWithValidation = () => {
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormButton title="Reset" type="reset">
               RESET
             </SQFormButton>
@@ -349,7 +347,7 @@ export const formWithFieldArray = () => {
           <FriendsFieldArray name="friends" />
         </Grid>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton shouldRequireFieldUpdates={true}>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -439,7 +437,7 @@ export const formWithInclusionlist = () => {
           }}
         </SQFormInclusionList>
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -467,7 +465,7 @@ export const basicFormWithMultiSelect = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
@@ -481,7 +479,7 @@ export const basicFormWithMultiSelect = () => {
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>
@@ -509,7 +507,7 @@ export const basicFormWithMaskedFields = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
@@ -563,7 +561,7 @@ export const basicFormWithMaskedFields = () => {
           mask={[/[A-Z]/i, /\d/, /[A-Z]/i, ' ', /\d/, /[A-Z]/i, /\d/]}
         />
         <Grid item sm={12}>
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -620,7 +618,7 @@ export const basicFormWithCustomOnBlur = () => {
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -671,7 +669,7 @@ export const basicFormWithCustomOnChange = () => {
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -693,7 +691,7 @@ export const applyAnAction = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
@@ -714,7 +712,7 @@ export const applyAnAction = () => {
           rowsMax={2}
         />
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>
@@ -749,7 +747,7 @@ export const SQFormCheckboxGroupExample = () => {
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
         <Grid item sm={12}>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -781,7 +779,7 @@ export const ccaChecklist = () => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
@@ -800,7 +798,7 @@ export const ccaChecklist = () => {
           {dropdownOptions}
         </SQFormDropdown>
         <Grid item size={2} style={{alignSelf: 'flex-end'}}>
-          <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
     </Card>

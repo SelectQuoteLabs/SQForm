@@ -1,4 +1,4 @@
-import {maskArray} from 'react-text-mask';
+import type {maskArray} from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import emailMask from 'text-mask-addons/dist/emailMask';
 
@@ -16,12 +16,12 @@ const zipMask = (userInput: string): maskArray => {
 export const MASKS = {
   phone: [
     '(',
-    /[02-9]/,
+    /\d/,
     /\d/,
     /\d/,
     ')',
     ' ',
-    /[02-9]/,
+    /\d/,
     /\d/,
     /\d/,
     '-',

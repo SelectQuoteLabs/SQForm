@@ -1,6 +1,7 @@
 import React from 'react';
-import {Formik, FormikHelpers} from 'formik';
-import {DialogProps, GridProps} from '@material-ui/core';
+import {Formik} from 'formik';
+import type {FormikHelpers} from 'formik';
+import type {DialogProps, GridProps} from '@material-ui/core';
 import * as Yup from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
@@ -28,7 +29,9 @@ interface SQFormDialogProps<Values> {
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => void | Promise<unknown>;
-  /** Whether to show save/submit button */
+  /** Determine if the secondary action button should be displayed (default: true) */
+  showSecondaryButton?: boolean;
+  /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton?: boolean;
   /** The primary button text (Button located on right side of Dialog) */
   saveButtonText?: string;
@@ -61,6 +64,7 @@ function SQFormDialog<Values>({
   maxWidth = 'sm',
   onClose,
   onSave,
+  showSecondaryButton = true,
   shouldDisplaySaveButton = true,
   saveButtonText = 'Save',
   title,
@@ -103,6 +107,7 @@ function SQFormDialog<Values>({
         shouldRequireFieldUpdates={shouldRequireFieldUpdates}
         title={title}
         muiGridProps={muiGridProps}
+        showSecondaryButton={showSecondaryButton}
       />
     </Formik>
   );

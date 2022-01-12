@@ -1,10 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import {useFormikContext, FormikProps} from 'formik';
+import {useFormikContext} from 'formik';
+import type {FormikProps} from 'formik';
 import {useForm} from './useForm';
-import {TextFieldProps} from '@material-ui/core';
-import {BaseFieldProps} from 'types';
+import type {TextFieldProps} from '@material-ui/core';
+import type {BaseFieldProps} from 'types';
 import {toKebabCase} from '../../utils';
 
 interface SQFormTextareaProps extends BaseFieldProps {
@@ -99,8 +100,8 @@ function SQFormTextarea({
         onChange={handleChange}
         onBlur={handleBlur}
         required={isFieldRequired}
-        rows={rows}
-        rowsMax={rowsMax}
+        minRows={rows}
+        maxRows={rowsMax}
         variant="outlined"
         value={values[name]}
         inputProps={{

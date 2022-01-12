@@ -1,15 +1,14 @@
 import React from 'react';
 import * as Yup from 'yup';
-import {Story, Meta} from '@storybook/react';
+import type {Story, Meta} from '@storybook/react';
 
 import {SQFormTextField as SQFormTextFieldComponent} from '../src';
-import getSizeProp, {gridOptions} from './utils/getSizeProp';
+import getSizeProp from './utils/getSizeProp';
+import type {gridOptions} from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
-import {
-  SQFormStoryWrapper,
-  SQFormStoryWrapperProps,
-} from './components/SQFormStoryWrapper';
-import {SQFormTextFieldProps} from '../src/components/SQForm/SQFormTextField';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
+import type {SQFormTextFieldProps} from 'components/SQForm/SQFormTextField';
 
 type SQFormTextFieldStoryType = Story<
   Omit<SQFormTextFieldProps, 'size'> & {

@@ -31,6 +31,8 @@ const defaultArgs = {
     spacing: 2,
     alignItems: 'center',
   },
+  shouldDisplaySaveButton: true,
+  showSecondaryButton: true,
 };
 
 const Template = (args) => {

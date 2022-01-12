@@ -9,10 +9,11 @@ import {
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@material-ui/lab/Autocomplete';
-import {ListChildComponentProps, VariableSizeList} from 'react-window';
+import {VariableSizeList} from 'react-window';
+import type {ListChildComponentProps} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
-import {BaseFieldProps, Option, optionValue} from 'types';
+import type {BaseFieldProps, Option, optionValue} from 'types';
 import {useForm} from './useForm';
 
 export interface SQFormAutocompleteProps extends BaseFieldProps {
@@ -249,7 +250,7 @@ const useAutocompleteStyles = makeStyles({
     borderRadius: '4px',
     boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
     width: ({lockWidthToField}: {lockWidthToField: boolean}) =>
-      !lockWidthToField ? 'auto !important' : '',
+      !lockWidthToField ? 'auto !important' : undefined,
     overflowX: 'hidden !important' as 'hidden',
   },
   paper: {

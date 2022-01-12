@@ -95,7 +95,6 @@ describe('SQFormDatePicker Tests', () => {
     const getTestDay = () => {
       const today = new Date();
       const month = today.getMonth() + 1; // .getMonth() returns a zero based month (0 = January)
-
       // The month should have a leading zero if only one digit
       const monthString = month >= 10 ? month.toString() : `0${month}`;
 
@@ -130,7 +129,7 @@ describe('SQFormDatePicker Tests', () => {
     await waitFor(() => {
       const requiredText = screen.getByText(/required/i);
       expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-required')
-    })
+      expect(requiredText).toHaveClass('Mui-required');
+    });
   });
 });

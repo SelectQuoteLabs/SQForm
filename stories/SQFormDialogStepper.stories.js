@@ -56,6 +56,8 @@ const booleanOptions = [
 const defaultArgs = {
   onSubmit: handleSubmit,
   initialValues: {...personalDataInitialValues, ...accountDetailsInitValues},
+  isOpen: false,
+  onClose: () => {},
 };
 
 export const Default = (args) => {

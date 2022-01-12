@@ -1,4 +1,4 @@
-export type optionValue = string | number | boolean;
+export type optionValue = string | number;
 
 interface Option {
   /** Label of the option */

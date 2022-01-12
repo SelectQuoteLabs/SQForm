@@ -1,14 +1,14 @@
 import React from 'react';
-import CheckMarkIcon from '@material-ui/icons/CheckCircle';
-import Grid, {GridProps} from '@material-ui/core/Grid';
-import {SQForm, SQFormIconButton} from '../../src';
+import Grid from '@material-ui/core/Grid';
+import type {GridProps} from '@material-ui/core';
+import {SQForm, SQFormButton} from '../../src';
 import {
   Snackbar,
   SnackbarProvider,
   useSnackbar,
 } from 'scplus-shared-components';
-import {FormikValues} from 'formik';
-import {AnySchema} from 'yup';
+import type {FormikValues} from 'formik';
+import type {AnySchema} from 'yup';
 
 export interface SQFormStoryWrapperProps {
   children: React.ReactNode;
@@ -76,8 +76,8 @@ function Form({
       >
         {children}
         {showSubmit && (
-          <Grid item sm={2} style={{alignSelf: 'center'}}>
-            <SQFormIconButton IconComponent={CheckMarkIcon} />
+          <Grid item={true} sm={2} style={{alignSelf: 'center'}}>
+            <SQFormButton>Submit</SQFormButton>
           </Grid>
         )}
       </SQForm>

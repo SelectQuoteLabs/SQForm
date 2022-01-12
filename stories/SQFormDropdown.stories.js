@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
@@ -42,21 +41,6 @@ const defaultArgs = {
   },
 };
 
-const YES_NO_OPTIONS = [
-  {label: 'Yes', value: true},
-  {label: 'No', value: false},
-];
-
-const booleanValueArgs = {
-  label: 'Opt in?',
-  name: 'isOptIn',
-  children: YES_NO_OPTIONS,
-  schema: {isOptIn: Yup.bool().required()},
-  SQFormProps: {
-    initialValues: {isOptIn: false},
-  },
-};
-
 const Template = (args) => {
   const {SQFormProps, schema, size, ...dropdownProps} = args;
   return (
@@ -75,7 +59,3 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 Default.storyName = 'SQFormDropdown';
-
-export const BooleanValued = Template.bind({});
-BooleanValued.args = booleanValueArgs;
-BooleanValued.storyName = 'BooleanValues';

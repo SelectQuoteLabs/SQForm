@@ -1,4 +1,4 @@
-import {FormikValues} from 'formik';
+import type {FormikValues} from 'formik';
 // Note - Formik fields expect empty strings and not nulls
 
 // When initializing the forms initialValues we can use this function to replace all nulls with empty strings

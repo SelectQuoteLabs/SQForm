@@ -1,7 +1,8 @@
 import React from 'react';
-import {DebouncedState} from 'use-debounce/lib/useDebouncedCallback';
+import type {DebouncedState} from 'use-debounce/lib/useDebouncedCallback';
 import {useDebouncedCallback} from 'use-debounce';
-import {FormikContextType, useFormikContext} from 'formik';
+import {useFormikContext} from 'formik';
+import type {FormikContextType} from 'formik';
 
 export const BUTTON_TYPES = {
   SUBMIT: 'submit',
