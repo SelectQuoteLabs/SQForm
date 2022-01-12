@@ -13,7 +13,7 @@ import {useForm} from './useForm';
 import {
   getOutOfRangeValueWarning,
   getUndefinedChildrenWarning,
-  getUndefinedValueWarning
+  getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
 
@@ -23,9 +23,9 @@ const EMPTY_OPTION = {label: EMPTY_LABEL, value: EMPTY_VALUE};
 const useStyles = makeStyles({
   selectHeight: {
     '& .MuiSelect-selectMenu': {
-      height: '1.1876em'
-    }
-  }
+      height: '1.1876em',
+    },
+  },
 });
 
 function SQFormDropdown({
@@ -37,18 +37,18 @@ function SQFormDropdown({
   onBlur,
   onChange,
   size = 'auto',
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const classes = useStyles();
 
   const {
     formikField: {field},
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {handleBlur, handleChange, HelperTextComponent},
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
   const labelID = label.toLowerCase();
 
@@ -72,7 +72,7 @@ function SQFormDropdown({
     return [EMPTY_OPTION, ...children];
   }, [children, displayEmpty, name]);
 
-  const renderValue = value => {
+  const renderValue = (value) => {
     if (value === undefined || value === null) {
       console.warn(getUndefinedValueWarning('SQFormDropdown', name));
       return EMPTY_LABEL;
@@ -82,7 +82,9 @@ function SQFormDropdown({
       return EMPTY_LABEL;
     }
 
-    const valueToRender = options.find(option => option.value === value)?.label;
+    const valueToRender = options.find(
+      (option) => option.value === value
+    )?.label;
     if (!valueToRender) {
       console.warn(getOutOfRangeValueWarning('SQFormDropdown', name, value));
       return undefined;
@@ -113,7 +115,7 @@ function SQFormDropdown({
           renderValue={renderValue}
           {...muiFieldProps}
         >
-          {options.map(option => {
+          {options.map((option) => {
             return (
               <MenuItem
                 key={option.value}
@@ -139,9 +141,9 @@ SQFormDropdown.propTypes = {
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
-        PropTypes.bool
+        PropTypes.bool,
       ]),
-      isDisabled: PropTypes.bool
+      isDisabled: PropTypes.bool,
     })
   ),
   /** Whether to display empty option - - in options */
@@ -159,7 +161,7 @@ SQFormDropdown.propTypes = {
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormDropdown;

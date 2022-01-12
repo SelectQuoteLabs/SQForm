@@ -17,15 +17,15 @@ function SQFormResetInitialValuesButton({
   const {isDialogOpen, openDialog, closeDialog} = useDialog();
   const {values, resetForm} = useFormButton({
     isDisabled,
-    buttonType: BUTTON_TYPES.RESET
+    buttonType: BUTTON_TYPES.RESET,
   });
 
   const handlePrimaryButtonClick = () => {
     resetForm({
       values: {
         ...values,
-        ...initialValuesObject
-      }
+        ...initialValuesObject,
+      },
     });
 
     closeDialog();
@@ -70,7 +70,7 @@ SQFormResetInitialValuesButton.propTypes = {
   /** initial form values */
   initialValuesObject: PropTypes.object,
   /** Button tooltip */
-  tooltip: PropTypes.string
+  tooltip: PropTypes.string,
 };
 
 export default SQFormResetInitialValuesButton;

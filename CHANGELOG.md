@@ -1,3 +1,10 @@
+### [7.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.2...v7.0.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* 🐛 Update scplus-shared-component version ([#523](https://github.com/SelectQuoteLabs/SQForm/issues/523)) ([64763ee](https://github.com/SelectQuoteLabs/SQForm/commit/64763ee1dcf765ae4d08c5ec0e29f25acab6a4af)), closes [#520](https://github.com/SelectQuoteLabs/SQForm/issues/520)
+
 ### [7.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.1...v7.0.2) (2022-01-10)
 
 

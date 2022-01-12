@@ -12,13 +12,13 @@ function SQFormInclusionListItem({
   label,
   name,
   onChange,
-  size = 'auto'
+  size = 'auto',
 }) {
   const {
-    fieldHelpers: {handleChange}
+    fieldHelpers: {handleChange},
   } = useForm({
     name,
-    onChange
+    onChange,
   });
 
   return (
@@ -51,7 +51,7 @@ SQFormInclusionListItem.propTypes = {
   /** Custom onChange event callback */
   onChange: PropTypes.func.isRequired,
   /** Size of the input given full-width is 12. */
-  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
 };
 
 export default SQFormInclusionListItem;

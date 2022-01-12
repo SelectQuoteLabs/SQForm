@@ -7,7 +7,7 @@ import {
   CardContent,
   CardActions,
   Grid,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
@@ -15,43 +15,43 @@ import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     form: {
       height: '100%',
-      width: '100%'
+      width: '100%',
     },
     card: {
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: 'auto 1fr auto',
       gridTemplateAreas: `'header' 'content' 'footer'`,
-      height: '100%'
+      height: '100%',
     },
     cardHeader: {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
     },
-    cardContent: props => ({
+    cardContent: (props) => ({
       gridArea: 'content',
       overflowY: 'auto',
       padding: `${theme.spacing(2)}px`,
-      ...props.cardContentStyles
+      ...props.cardContentStyles,
     }),
     childrenContainer: {
       width: 'auto',
       margin: ({hasSubHeader}) => {
         return hasSubHeader ? `${theme.spacing(2)}px ${theme.spacing(4)}px` : 0;
-      }
+      },
     },
     cardFooter: {
       gridArea: 'footer',
       display: 'flex',
       justifyContent: 'space-between',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
-    }
+      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+    },
   };
 });
 
@@ -78,7 +78,7 @@ function SQFormScrollableCard({
   validationSchema,
   isHeaderDisabled = false,
   titleVariant = 'h4',
-  isSquareCorners = true
+  isSquareCorners = true,
 }) {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
@@ -101,9 +101,10 @@ function SQFormScrollableCard({
     {leading: true, trailing: false}
   );
 
-  const formattedTitle = React.useMemo(() => title.replace(/\s/g, '-'), [
-    title
-  ]);
+  const formattedTitle = React.useMemo(
+    () => title.replace(/\s/g, '-'),
+    [title]
+  );
 
   const [calculatedHeight, setCalculatedHeight] = React.useState(0);
 
@@ -116,8 +117,8 @@ function SQFormScrollableCard({
     const offsetBasedHeight = `calc(100vh - ${topOffset}px - 24px)`;
 
     const parentHeight = currentElement.parentElement.clientHeight;
-    const parentTopOffset = currentElement.parentElement.getBoundingClientRect()
-      .top;
+    const parentTopOffset =
+      currentElement.parentElement.getBoundingClientRect().top;
     const topDifferential = topOffset - parentTopOffset;
     const maxOffsetBasedHeight = `calc(${parentHeight}px - ${topDifferential}px)`;
 
@@ -141,7 +142,7 @@ function SQFormScrollableCard({
         validationSchema={validationYupSchema}
         validateOnMount={true}
       >
-        {_props => {
+        {(_props) => {
           return (
             <Form className={classes.form}>
               <Card
@@ -253,7 +254,7 @@ SQFormScrollableCard.propTypes = {
   /** Title Variant: defaults to 'h4', will be assigned to variant in MUI Card Header's titleTypographyProps */
   titleVariant: PropTypes.string,
   /** Card style defaults to square */
-  isSquareCorners: PropTypes.bool
+  isSquareCorners: PropTypes.bool,
 };
 
 export default SQFormScrollableCard;
