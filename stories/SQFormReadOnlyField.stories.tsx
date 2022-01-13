@@ -1,12 +1,22 @@
 import React from 'react';
+import {Story, Meta} from '@storybook/react';
 
 import {SQFormReadOnlyField as SQFormReadOnlyFieldComponent} from '../src';
+import type {SQFormReadOnlyFieldProps} from 'components/SQForm/SQFormReadOnlyField';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
-import markdown from '../notes/SQFormReadOnlyField.md';
+import type {gridOptions} from './utils/getSizeProp';
+import * as markdown from '../notes/SQFormReadOnlyField.md';
 
-export default {
+type SQFormReadOnlyFieldStory = Story<
+  Omit<SQFormReadOnlyFieldProps, 'size'> & {
+    size?: gridOptions;
+    initialValue?: string;
+  }
+>
+
+const meta: Meta = {
   title: 'Components/SQFormReadOnlyField',
   component: SQFormReadOnlyFieldComponent,
   argTypes: {
@@ -24,7 +34,7 @@ const defaultArgs = {
   name: 'readOnlyField',
 };
 
-const Template = ({initialValue = '', ...args}) => {
+const Template: SQFormReadOnlyFieldStory = ({initialValue = '', ...args}) => {
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: initialValue}}
@@ -46,3 +56,5 @@ WithInitialValue.args = {
 WithInitialValue.parameters = {
   controls: {exclude: 'initialValue'},
 };
+
+export default meta;
