@@ -6,12 +6,12 @@ import type {SQFormReadOnlyFieldProps} from 'components/SQForm/SQFormReadOnlyFie
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
-import type {gridOptions} from './utils/getSizeProp';
+import type {GridSizeOptions} from './types/storyHelperTypes';
 import * as markdown from '../notes/SQFormReadOnlyField.md';
 
 type SQFormReadOnlyFieldStory = Story<
   Omit<SQFormReadOnlyFieldProps, 'size'> & {
-    size?: gridOptions;
+    size?: GridSizeOptions;
     initialValue?: string;
   }
 >
