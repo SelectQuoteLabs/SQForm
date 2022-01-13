@@ -19,12 +19,12 @@ type DropdownStoryType = Story<
   Omit<SQFormDropdownProps, 'size'> &
   {
    size?: gridOptions,
-   SQFormProps?: FormProps,
+   sqFormProps?: FormProps,
    schema: Record<string, AnySchema>
   }
 >
 
-export default {
+const meta: Meta = {
   title: 'Components/SQFormDropdown',
   component: SQFormDropdownComponent,
   argTypes: {
@@ -32,7 +32,7 @@ export default {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
     name: {table: {disable: true}},
-    SQFormProps: {table: {disable: true}},
+    sqFormProps: {table: {disable: true}},
   },
   parameters: {
     docs: {
@@ -42,7 +42,7 @@ export default {
       },
     },
   },
-} as Meta;
+};
 
 const MOCK_STATE_OPTIONS = [
   {label: 'Arizona', value: 'AZ'},
@@ -54,19 +54,19 @@ const defaultArgs = {
   label: 'State',
   name: 'state',
   children: MOCK_STATE_OPTIONS,
-  SQFormProps: {
+  sqFormProps: {
     initialValues: {state: ''},
   },
 };
 
 const Template: DropdownStoryType = (args) => {
-  const {SQFormProps, schema, size, ...dropdownProps} = args;
+  const {sqFormProps, schema, size, ...dropdownProps} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
-        {...defaultArgs.SQFormProps}
+        {...defaultArgs.sqFormProps}
         validationSchema={schema}
-        {...SQFormProps}
+        {...sqFormProps}
       >
         <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
       </SQFormStoryWrapper>
@@ -77,3 +77,5 @@ const Template: DropdownStoryType = (args) => {
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 Default.storyName = 'SQFormDropdown';
+
+export default meta;

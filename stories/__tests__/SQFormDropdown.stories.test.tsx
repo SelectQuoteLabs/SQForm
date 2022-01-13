@@ -28,7 +28,7 @@ it('should render with empty initial value', () => {
 
 it('should render with non-empty initial value', () => {
   render(
-    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'MO'}}} />
+    <SQFormDropdown size="auto" sqFormProps={{initialValues: {state: 'MO'}}} />
   );
 
   const labelValue = screen.getByRole('button', {name: /state/i});
@@ -124,7 +124,7 @@ it('should display icon and text if field is required', async () => {
     initialValues: { state: ''},
   }
 
-  render(<SQFormDropdown SQFormProps={formProps} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   await waitFor(() => expect(screen.getByText(/required/i)).toBeVisible());
 });
@@ -135,7 +135,7 @@ it('should not display icon and text if field is not required', () => {
     initialValues:  { state: '' }
   }
 
-  render(<SQFormDropdown SQFormProps={formProps} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   const required = screen.queryByText(/required/i);
   expect(required).not.toBeInTheDocument();
@@ -147,7 +147,7 @@ it('should highlight field if required but no value selected', async () => {
     initialValues: {state: ''},
   }
 
-  render(<SQFormDropdown SQFormProps={formProps} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 
@@ -186,7 +186,7 @@ it('should show empty value if initial value not in options', () => {
     .mockImplementation(() => {});
 
   render(
-    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'TX'}}} />
+    <SQFormDropdown size="auto" sqFormProps={{initialValues: {state: 'TX'}}} />
   );
 
   const expandButton = screen.queryByRole('button', {name: /- -/i});
