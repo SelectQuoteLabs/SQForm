@@ -8,8 +8,8 @@ import {toKebabCase} from '../../utils';
 
 export interface SQFormReadOnlyFieldProps extends BaseFieldProps {
   muiFieldProps?: TextFieldProps;
-  InputProps: TextFieldProps['InputProps'];
-  inputProps: TextFieldProps['inputProps'];
+  InputProps?: TextFieldProps['InputProps'];
+  inputProps?: TextFieldProps['inputProps'];
 }
 
 function SQFormReadOnlyField({
