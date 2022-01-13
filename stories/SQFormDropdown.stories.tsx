@@ -1,10 +1,23 @@
 import React from 'react';
 
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {SQFormStoryWrapper, SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
-import markdown from '../notes/SQFormDropdown.md';
+import type {gridOptions} from './utils/getSizeProp';
+import * as markdown from '../notes/SQFormDropdown.md';
+import { Meta, Story } from '@storybook/react';
+import {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
+
+
+type FormProps = {
+  initalValues?: SQFormStoryWrapperProps['initialValues'];
+} & Omit<SQFormStoryWrapperProps, 'initalValues' | 'children'>;
+
+type BaseType = Omit<SQFormDropdownProps, 'size'> & { size?: gridOptions, SQFormProps?: FormProps, schema: any}
+type DropdownStoryType = Story<BaseType>
+
+
 
 export default {
   title: 'Components/SQFormDropdown',
@@ -24,7 +37,7 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
 const MOCK_STATE_OPTIONS = [
   {label: 'Arizona', value: 'AZ'},
@@ -41,7 +54,7 @@ const defaultArgs = {
   },
 };
 
-const Template = (args) => {
+const Template: DropdownStoryType = (args) => {
   const {SQFormProps, schema, size, ...dropdownProps} = args;
   return (
     <div style={{minWidth: 250}}>
