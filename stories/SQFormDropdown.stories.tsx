@@ -1,23 +1,28 @@
 import React from 'react';
+import type {AnySchema} from 'yup'; 
 
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
-import {SQFormStoryWrapper, SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
+import type {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import getSizeProp from './utils/getSizeProp';
 import type {gridOptions} from './utils/getSizeProp';
+import type { Meta, Story } from '@storybook/react';
+import {createDocsPage} from './utils/createDocsPage';
 import * as markdown from '../notes/SQFormDropdown.md';
-import { Meta, Story } from '@storybook/react';
-import {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
-
 
 type FormProps = {
   initalValues?: SQFormStoryWrapperProps['initialValues'];
 } & Omit<SQFormStoryWrapperProps, 'initalValues' | 'children'>;
 
-type BaseType = Omit<SQFormDropdownProps, 'size'> & { size?: gridOptions, SQFormProps?: FormProps, schema: any}
-type DropdownStoryType = Story<BaseType>
-
-
+type DropdownStoryType = Story<
+  Omit<SQFormDropdownProps, 'size'> &
+  {
+   size?: gridOptions,
+   SQFormProps?: FormProps,
+   schema: Record<string, AnySchema>
+  }
+>
 
 export default {
   title: 'Components/SQFormDropdown',
