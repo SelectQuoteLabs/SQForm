@@ -28,7 +28,7 @@ it('should render with empty initial value', () => {
 
 it('should render with non-empty initial value', () => {
   render(
-    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'MO'}}} />
+    <SQFormDropdown size="auto" sqFormProps={{initialValues: {state: 'MO'}}} />
   );
 
   const labelValue = screen.getByRole('button', {name: /state/i});
@@ -53,7 +53,8 @@ it('should update when option is selected', () => {
 it('should display disabled option', () => {
   render(<SQFormDropdown size="auto" />);
 
-  const disabledOptionBefore = screen.queryByRole('option', /kansas/i);
+  const disabledOptionBefore = screen.queryByRole('option', { name: /kansas/i});
+  
   expect(disabledOptionBefore).not.toBeInTheDocument();
 
   const expandButton = screen.getByRole('button', {name: /state/i});
@@ -118,32 +119,35 @@ it('should be selectable if it is not disabled', () => {
 });
 
 it('should display icon and text if field is required', async () => {
-  const validationSchema = {
-    state: Yup.string().required(),
-  };
+  const formProps = {
+    validationSchema: { state: Yup.string().required(), },
+    initialValues: { state: ''},
+  }
 
-  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   await waitFor(() => expect(screen.getByText(/required/i)).toBeVisible());
 });
 
 it('should not display icon and text if field is not required', () => {
-  const validationSchema = {
-    state: Yup.string(),
-  };
+  const formProps = {
+    validationSchema: { state: Yup.string(), },
+    initialValues:  { state: '' }
+  }
 
-  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   const required = screen.queryByText(/required/i);
   expect(required).not.toBeInTheDocument();
 });
 
 it('should highlight field if required but no value selected', async () => {
-  const validationSchema = {
-    state: Yup.string().required(),
-  };
+  const formProps = {
+    validationSchema:  { state: Yup.string().required(), },
+    initialValues: {state: ''},
+  }
 
-  render(<SQFormDropdown SQFormProps={{validationSchema}} size="auto" />);
+  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 
@@ -163,7 +167,7 @@ it('should show empty list if no options are given', () => {
     .spyOn(console, 'warn')
     .mockImplementation(() => {});
 
-  render(<SQFormDropdown size="auto" children={null} />);
+  render(<SQFormDropdown size="auto" children={undefined} />);
 
   const expandButton = screen.getByRole('button', {name: /- -/i});
   userEvent.click(expandButton);
@@ -182,7 +186,7 @@ it('should show empty value if initial value not in options', () => {
     .mockImplementation(() => {});
 
   render(
-    <SQFormDropdown size="auto" SQFormProps={{initialValues: {state: 'TX'}}} />
+    <SQFormDropdown size="auto" sqFormProps={{initialValues: {state: 'TX'}}} />
   );
 
   const expandButton = screen.queryByRole('button', {name: /- -/i});
