@@ -3,7 +3,7 @@ import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DatePicker} from '@material-ui/pickers';
-import type {BaseDatePickerProps} from '@material-ui/pickers';
+import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
 import type {InputBaseComponentProps} from '@material-ui/core';
 import type {BaseFieldProps} from 'types';
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface SQFormDatePickerProps extends BaseFieldProps {
+export interface SQFormDatePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Required property used to highlight input and label if not fulfilled */
@@ -30,7 +30,7 @@ interface SQFormDatePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: (date: React.ChangeEvent<moment.Moment> | unknown) => void;
+  onChange?: (date: moment.Moment | null) => void;
   /** Disable specific date(s) (day: DateIOType) => boolean
    * This is a predicate function called for every day of the month
    * Return true to disable that day or false to enable that day
@@ -40,6 +40,10 @@ interface SQFormDatePickerProps extends BaseFieldProps {
   muiFieldProps?: BaseDatePickerProps<moment.Moment>;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
+  /** Props provided to the Input component. Most commonly used for adornments. */
+  InputProps?: DatePickerProps['InputProps'];
+  /** Props provided to the input adornments. */
+  InputAdornmentProps?: DatePickerProps['InputAdornmentProps'];
   /** A Boolean flag used when using calendar only; disabled text filed input */
   isCalendarOnly?: boolean;
 }
@@ -53,18 +57,19 @@ function SQFormDatePicker({
   onBlur,
   onChange,
   setDisabledDate,
-  muiFieldProps = {},
+  muiFieldProps,
   muiTextInputProps = {},
   isCalendarOnly = false,
+  InputProps,
+  InputAdornmentProps,
 }: SQFormDatePickerProps): JSX.Element {
   const {
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm<moment.Moment | null, unknown>({
+  } = useForm<moment.Moment | null, moment.Moment | null>({
     name,
     onBlur,
-    onChange,
   });
 
   const handleChange = (date: moment.Moment | null) => {
@@ -122,6 +127,8 @@ function SQFormDatePicker({
               />
             );
           }}
+          InputProps={InputProps}
+          InputAdornmentProps={InputAdornmentProps}
           {...muiFieldProps}
         />
       </Grid>
