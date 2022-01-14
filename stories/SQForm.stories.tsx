@@ -401,9 +401,7 @@ export const formWithInclusionlist = (): JSX.Element => {
             }
           }
         >
-          {(
-            arrayHelpers: FieldArrayRenderProps
-          ): JSX.Element | Array<JSX.Element> => {
+          {(arrayHelpers: FieldArrayRenderProps): JSX.Element => {
             const {values} = arrayHelpers.form;
             return (
               <Grid
