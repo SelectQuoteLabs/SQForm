@@ -11,7 +11,7 @@ import type { SQFormStoryWrapperProps } from './components/SQFormStoryWrapper';
 import type { GridSizeOptions } from './types/storyHelperTypes';
 
 type FormProps = {
-    initalValues?: SQFormStoryWrapperProps['initialValues'];
+    initialValues?: SQFormStoryWrapperProps['initialValues'];
  } & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
 
 type SQFormAutocompleteStory = Story<

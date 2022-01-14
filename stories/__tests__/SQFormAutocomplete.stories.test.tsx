@@ -34,13 +34,13 @@ describe('SQFormAutocomplete Tests', () => {
     });
 
     it('should render with non-empty initial value', () => {
-      const SQFormProps = {
+      const sqFormProps = {
         initialValues: {
           autocomplete: 'first',
         },
       };
 
-      render(<SQFormAutocomplete size="auto" SQFormProps={SQFormProps} />);
+      render(<SQFormAutocomplete size="auto" sqFormProps={sqFormProps} />);
 
       const textField = screen.getByRole('textbox', {name: /autocomplete/i});
       expect(textField).toHaveValue('First');
