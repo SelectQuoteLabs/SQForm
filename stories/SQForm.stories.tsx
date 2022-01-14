@@ -9,7 +9,7 @@ import {SectionHeader} from 'scplus-shared-components';
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import {createDocsPage} from './utils/createDocsPage';
-import markdown from '../notes/SQForm.md';
+import * as markdown from '../notes/SQForm.md';
 
 import {
   SQForm,
@@ -30,6 +30,7 @@ import {
   SQFormMultiValue,
   MASKS,
 } from '../src';
+import type {FieldArrayRenderProps, FormikHelpers} from 'formik';
 
 export default {
   title: 'Forms/SQForm',
@@ -156,13 +157,13 @@ const CHECKBOX_GROUP_OPTIONS = [
   {label: 'Interior', value: 4, isDisabled: true},
 ];
 
-const handleSubmit = (values, actions) => {
+const handleSubmit = (values: unknown, actions: FormikHelpers<unknown>) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
   actions.resetForm();
 };
 
-export const BasicForm = () => {
+export const BasicForm = (): JSX.Element => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm
@@ -233,7 +234,7 @@ export const BasicForm = () => {
   );
 };
 
-export const FormWithValidation = () => {
+export const FormWithValidation = (): JSX.Element => {
   const validationSchema = {
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
@@ -246,9 +247,9 @@ export const FormWithValidation = () => {
     note: Yup.string().required(),
     favoriteColors: Yup.array()
       .of(
-        Yup.lazy((value) => {
+        Yup.lazy((value: unknown) => {
           return typeof value === 'number' ? Yup.number() : Yup.string();
-        })
+        }) as never
       )
       .required()
       .min(1),
@@ -317,7 +318,7 @@ export const FormWithValidation = () => {
   );
 };
 
-export const formWithFieldArray = () => {
+export const formWithFieldArray = (): JSX.Element => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm
@@ -369,7 +370,7 @@ const names = [
   'Jill',
 ];
 
-export const formWithInclusionlist = () => {
+export const formWithInclusionlist = (): JSX.Element => {
   return (
     <Card raised style={{padding: 16}}>
       <SectionHeader title="Friends" />
@@ -400,7 +401,7 @@ export const formWithInclusionlist = () => {
             }
           }
         >
-          {(arrayHelpers) => {
+          {(arrayHelpers: FieldArrayRenderProps): JSX.Element => {
             const {values} = arrayHelpers.form;
             return (
               <Grid
@@ -452,7 +453,7 @@ export const formWithInclusionlist = () => {
   );
 };
 
-export const basicFormWithMultiSelect = () => {
+export const basicFormWithMultiSelect = (): JSX.Element => {
   const validationSchema = {
     friends: Yup.string().required(),
   };
@@ -478,7 +479,7 @@ export const basicFormWithMultiSelect = () => {
         >
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
-        <Grid item size={2} style={{alignSelf: 'flex-end'}}>
+        <Grid item style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
@@ -486,7 +487,7 @@ export const basicFormWithMultiSelect = () => {
   );
 };
 
-export const basicFormWithMaskedFields = () => {
+export const basicFormWithMaskedFields = (): JSX.Element => {
   const validationSchema = {
     phone: Yup.string()
       .required()
@@ -576,7 +577,7 @@ export const basicFormWithMaskedFields = () => {
   );
 };
 
-export const basicFormWithCustomOnBlur = () => {
+export const basicFormWithCustomOnBlur = (): JSX.Element => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm
@@ -627,7 +628,7 @@ export const basicFormWithCustomOnBlur = () => {
   );
 };
 
-export const basicFormWithCustomOnChange = () => {
+export const basicFormWithCustomOnChange = (): JSX.Element => {
   return (
     <Card raised style={{padding: 16}}>
       <SQForm
@@ -678,7 +679,7 @@ export const basicFormWithCustomOnChange = () => {
   );
 };
 
-export const applyAnAction = () => {
+export const applyAnAction = (): JSX.Element => {
   const validationSchema = {
     actions: Yup.string().required(),
   };
@@ -711,7 +712,7 @@ export const applyAnAction = () => {
           rows={2}
           rowsMax={2}
         />
-        <Grid item size={2} style={{alignSelf: 'flex-end'}}>
+        <Grid item style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
@@ -719,7 +720,7 @@ export const applyAnAction = () => {
   );
 };
 
-export const SQFormCheckboxGroupExample = () => {
+export const SQFormCheckboxGroupExample = (): JSX.Element => {
   const initialValues = {
     warrantyOptions: ['brakes'],
     selectAll: false,
@@ -756,7 +757,7 @@ export const SQFormCheckboxGroupExample = () => {
   );
 };
 
-export const ccaChecklist = () => {
+export const ccaChecklist = (): JSX.Element => {
   const dropdownOptions = [
     {label: 'Pitched', value: 'pitched'},
     {label: 'Transferred', value: 'transferred'},
@@ -797,7 +798,7 @@ export const ccaChecklist = () => {
         >
           {dropdownOptions}
         </SQFormDropdown>
-        <Grid item size={2} style={{alignSelf: 'flex-end'}}>
+        <Grid item style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
@@ -805,7 +806,7 @@ export const ccaChecklist = () => {
   );
 };
 
-function random(length) {
+function random(length: number) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';

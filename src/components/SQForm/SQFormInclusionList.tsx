@@ -17,17 +17,10 @@ interface SQFormInclusionListProps {
   selectAllContainerProps?: GridProps;
   /** props for the 'select all' SQFormInclusionListItem component */
   selectAllProps?: Partial<
-    Omit<
-      SQFormInclusionListItemProps,
-      'name' | 'label' | 'size' | 'isChecked' | 'onChange'
-    >
+    Omit<SQFormInclusionListItemProps, 'name' | 'isChecked' | 'onChange'>
   >;
   /** Children must be a function that accepts one param of type FieldArrayRenderProps and returns a single, or array of, SQFormInclusionListItems*/
-  children: (
-    props: FieldArrayRenderProps
-  ) =>
-    | React.ComponentType<typeof SQFormInclusionListItem>
-    | Array<React.ComponentType<typeof SQFormInclusionListItem>>;
+  children: (props: FieldArrayRenderProps) => JSX.Element | Array<JSX.Element>;
 }
 
 function SQFormInclusionList({
