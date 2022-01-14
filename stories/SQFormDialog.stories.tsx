@@ -51,7 +51,7 @@ const defaultArgs = {
   isOpen: false,
 };
 
-const Template: SQFormDialogStory = (args) => {
+const Template: SQFormDialogStory = (args): React.ReactElement => {
   return (
     <>
       <h1>
