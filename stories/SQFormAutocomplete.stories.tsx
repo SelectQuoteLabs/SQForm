@@ -1,12 +1,28 @@
 import React from 'react';
 import * as Yup from 'yup';
-
+import type { AnySchema } from 'yup';
+import type {Story, Meta} from '@storybook/react';
 import {SQFormAutocomplete} from '../src';
+import type { SQFormAutocompleteProps } from 'components/SQForm/SQFormAutocomplete';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type { SQFormStoryWrapperProps } from './components/SQFormStoryWrapper';
+import type { GridSizeOptions } from './types/storyHelperTypes';
 
-export default {
+type FormProps = {
+    initalValues?: SQFormStoryWrapperProps['initialValues'];
+ } & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
+
+type SQFormAutocompleteStory = Story<
+  Omit<SQFormAutocompleteProps, 'size'> & {
+    size?: GridSizeOptions;
+    sqFormProps?: FormProps;
+    schema: Record<string, AnySchema>;
+  }
+>
+
+const meta: Meta = {
   title: 'Components/SQFormAutocomplete',
   component: SQFormAutocomplete,
   argTypes: {
@@ -52,14 +68,14 @@ const defaultArgs = {
   ],
 };
 
-const Template = (args) => {
-  const {schema, SQFormProps, size, ...rest} = args;
+const Template: SQFormAutocompleteStory = (args) => {
+  const {schema, sqFormProps, size, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         initialValues={{[defaultArgs.name]: ''}}
         validationSchema={schema}
-        {...SQFormProps}
+        {...sqFormProps}
       >
         <SQFormAutocomplete {...rest} size={getSizeProp(size)} />
       </SQFormStoryWrapper>
@@ -85,12 +101,14 @@ export const WithAutoSizePopper = Template.bind({});
 WithAutoSizePopper.args = {
   ...defaultArgs,
   lockWidthToField: false,
-  size: 6,
+  size: '6',
 };
 
 export const WithNoOptions = Template.bind({});
 WithNoOptions.args = {
   ...defaultArgs,
   children: undefined,
-  size: 12,
+  size: '12',
 };
+
+export default meta;
