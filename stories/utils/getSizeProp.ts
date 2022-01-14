@@ -1,27 +1,7 @@
 import type {GridSize} from '@material-ui/core';
+import type {GridSizeOptions} from '../types/storyHelperTypes';
 
-/** String 'undefined' has to be added due to the way
- * Storybook handles `undefined` in dropdown options.
- * Weird, I know. Otherwise we get console errors.
- */
-export type gridOptions =
-  | 'auto'
-  | 'undefined'
-  | undefined
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12';
-
-const getSizeProp = (size: gridOptions): GridSize => {
+const getSizeProp = (size: GridSizeOptions): GridSize => {
   switch (size) {
     case undefined:
     case 'undefined':

@@ -56,8 +56,6 @@ function SQFormRadioButtonGroup({
     onChange,
   });
 
-  console.log('field', field);
-
   const childrenToRadioGroupItems = () => {
     return children.map((radioOption) => {
       const {label, value, isDisabled, InputProps} = radioOption;

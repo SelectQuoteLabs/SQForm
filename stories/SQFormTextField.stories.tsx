@@ -4,7 +4,7 @@ import type {Story, Meta} from '@storybook/react';
 
 import {SQFormTextField as SQFormTextFieldComponent} from '../src';
 import getSizeProp from './utils/getSizeProp';
-import type {gridOptions} from './utils/getSizeProp';
+import type {GridSizeOptions} from './types/storyHelperTypes';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
@@ -12,7 +12,7 @@ import type {SQFormTextFieldProps} from 'components/SQForm/SQFormTextField';
 
 type SQFormTextFieldStoryType = Story<
   Omit<SQFormTextFieldProps, 'size'> & {
-    size?: gridOptions;
+    size?: GridSizeOptions;
     SQFormProps?: {
       initialValues?: SQFormStoryWrapperProps['initialValues'];
     } & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
