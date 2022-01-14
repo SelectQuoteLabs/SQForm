@@ -1,12 +1,30 @@
 import React from 'react';
 import * as Yup from 'yup';
+import { AnySchema } from 'yup';
+import type {Story, Meta} from '@storybook/react';
 
 import {SQFormTextarea as SQFormTextareaComponent} from '../src';
+import { SQFormTextareaProps } from 'components/SQForm/SQFormTextarea';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
+import { GridSizeOptions } from './types/storyHelperTypes';
 
-export default {
+type FormProps = {
+  initialValues?: SQFormStoryWrapperProps['initialValues'];
+} & Omit<SQFormStoryWrapperProps, 'initialValues'>;
+
+type SQFormTextAreaStory = Story<
+  Omit<SQFormTextareaProps, 'size'> &
+  {
+    size: GridSizeOptions,
+    sqFormProps?: FormProps,
+    schema: Record<string, AnySchema>,
+  }
+>
+
+const meta: Meta = {
   title: 'Components/SQFormTextarea',
   component: SQFormTextareaComponent,
   argTypes: {
@@ -26,13 +44,13 @@ const defaultArgs = {
   name: 'textarea',
 };
 
-const Template = (args) => {
-  const {schema, SQFormProps, size, ...rest} = args;
+const Template: SQFormTextAreaStory = (args) => {
+  const {schema, sqFormProps, size, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
       validationSchema={schema}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <SQFormTextareaComponent {...rest} size={getSizeProp(size)} />
     </SQFormStoryWrapper>
@@ -52,3 +70,5 @@ WithValidation.args = {
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
 };
+
+export default meta;
