@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
+import type {Story, Meta} from '@storybook/react';
+import type { GridItemsAlignment, GridSpacing } from '@material-ui/core';
 
 import {
   SQFormDialog,
@@ -8,9 +10,20 @@ import {
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
+import type { SQFormDialogProps } from 'components/SQFormDialog/SQFormDialog';
 import {createDocsPage} from './utils/createDocsPage';
 
-export default {
+type DefaultArgsValues = { hello: string };
+type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>
+
+type WithDatePickersValues = {
+  datePicker: string,
+  dateTimePicker: string,
+  datePickerCalendarOnly: string,
+}
+type SQFormDialogWithDatePickersStory = Story<SQFormDialogProps<WithDatePickersValues>>;
+
+const meta: Meta = {
   title: 'Forms/SQFormDialog',
   component: SQFormDialog,
   argTypes: {
@@ -24,18 +37,21 @@ export default {
   },
 };
 
+const alignItems: GridItemsAlignment = 'center';
+const spacing: GridSpacing = 2;
 const defaultArgs = {
   title: 'Default',
   initialValues: {hello: ''},
   muiGridProps: {
-    spacing: 2,
-    alignItems: 'center',
+    spacing,
+    alignItems,
   },
   shouldDisplaySaveButton: true,
   showSecondaryButton: true,
+  isOpen: false,
 };
 
-const Template = (args) => {
+const Template: SQFormDialogStory = (args) => {
   return (
     <>
       <h1>
@@ -61,7 +77,7 @@ WithValidation.args = {
   },
 };
 
-export const WithAutoFocus = (args) => {
+export const WithAutoFocus: SQFormDialogStory = (args) => {
   return (
     <>
       <h1>
@@ -83,7 +99,7 @@ WithAutoFocus.args = {
   title: 'With Auto Focus',
 };
 
-export const WithDatePickers = (args) => {
+export const WithDatePickers: SQFormDialogWithDatePickersStory= (args) => {
   return (
     <>
       <h1>
@@ -110,3 +126,5 @@ WithDatePickers.args = {
     datePickerCalendarOnly: '',
   },
 };
+
+export default meta;
