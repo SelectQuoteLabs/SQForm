@@ -30,7 +30,7 @@ import {
   SQFormMultiValue,
   MASKS,
 } from '../src';
-import type {FieldArrayRenderProps, FormikHelpers} from 'formik';
+import type {FieldArrayRenderProps, FormikHelpers, FormikValues} from 'formik';
 
 export default {
   title: 'Forms/SQForm',
@@ -157,7 +157,10 @@ const CHECKBOX_GROUP_OPTIONS = [
   {label: 'Interior', value: 4, isDisabled: true},
 ];
 
-const handleSubmit = (values: unknown, actions: FormikHelpers<unknown>) => {
+const handleSubmit = (
+  values: unknown,
+  actions: FormikHelpers<FormikValues>
+) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
   actions.resetForm();
