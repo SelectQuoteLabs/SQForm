@@ -158,7 +158,7 @@ const CHECKBOX_GROUP_OPTIONS = [
 ];
 
 const handleSubmit = (
-  values: unknown,
+  values: Record<string, unknown>,
   actions: FormikHelpers<FormikValues>
 ) => {
   window.alert(JSON.stringify(values, null, 2));
