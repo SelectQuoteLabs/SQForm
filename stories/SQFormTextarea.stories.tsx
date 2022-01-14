@@ -4,16 +4,16 @@ import { AnySchema } from 'yup';
 import type {Story, Meta} from '@storybook/react';
 
 import {SQFormTextarea as SQFormTextareaComponent} from '../src';
-import { SQFormTextareaProps } from 'components/SQForm/SQFormTextarea';
+import type { SQFormTextareaProps } from 'components/SQForm/SQFormTextarea';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
-import { GridSizeOptions } from './types/storyHelperTypes';
+import type { GridSizeOptions } from './types/storyHelperTypes';
 
 type FormProps = {
   initialValues?: SQFormStoryWrapperProps['initialValues'];
-} & Omit<SQFormStoryWrapperProps, 'initialValues'>;
+} & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
 
 type SQFormTextAreaStory = Story<
   Omit<SQFormTextareaProps, 'size'> &

@@ -14,7 +14,7 @@ describe('SQFormTextarea Tests', () => {
 
       const label = screen
         .getAllByText(/textarea/i)
-        .find((item) => item.parentElement.tagName === 'LABEL');
+        .find((item) => item?.parentElement?.tagName === 'LABEL');
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent('Textarea');
 
@@ -33,7 +33,7 @@ describe('SQFormTextarea Tests', () => {
       render(
         <SQFormTextarea
           size="auto"
-          SQFormProps={{initialValues: {textarea: 'Hello SelectQuote!'}}}
+          sqFormProps={{initialValues: {textarea: 'Hello SelectQuote!'}}}
         />
       );
 
@@ -73,7 +73,7 @@ describe('SQFormTextarea Tests', () => {
 
       const charCount = screen
         .getAllByText(`Textarea : 0/${maxCharacters}`)
-        .find((item) => item.parentElement.tagName === 'LABEL');
+        .find((item) => item?.parentElement?.tagName === 'LABEL');
       expect(charCount).toBeInTheDocument();
 
       const textbox = screen.getByRole('textbox', {name: /textarea/i});
@@ -83,7 +83,7 @@ describe('SQFormTextarea Tests', () => {
       expect(textbox).toHaveValue('Hello');
       const charCountAfter = screen
         .getAllByText(`Textarea : ${maxCharacters}/${maxCharacters}`)
-        .find((item) => item.parentElement.tagName === 'LABEL');
+        .find((item) => item?.parentElement?.tagName === 'LABEL');
       expect(charCountAfter).toBeInTheDocument();
     });
 
