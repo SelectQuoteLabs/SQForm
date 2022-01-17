@@ -18,7 +18,7 @@ import {
   SQFormAutocompleteProps,
 } from './SQFormAutocomplete';
 
-interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
+export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
   handleAsyncInputChange: (value: string | number | boolean) => void;
   /** Whether the component is loading */

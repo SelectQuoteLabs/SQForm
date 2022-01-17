@@ -36,13 +36,13 @@ describe('SQFormAsyncAutocomplete Tests', () => {
     });
 
     it('should render with non-empty initial value', () => {
-      const SQFormProps = {
+      const sqFormProps = {
         initialValues: {
           asyncAutocomplete: 'fifth',
         },
       };
 
-      render(<SQFormAsyncAutocomplete size="auto" SQFormProps={SQFormProps} />);
+      render(<SQFormAsyncAutocomplete size="auto" sqFormProps={sqFormProps} />);
 
       const textField = screen.getByRole('textbox', {
         name: /async autocomplete/i,
