@@ -5,7 +5,7 @@ import {useDebouncedCallback} from 'use-debounce';
 import {object as YupObject, setLocale} from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {GridProps} from '@material-ui/core';
-import type {FormikHelpers, FormikValues} from 'formik';
+import type {FormikHelpers} from 'formik';
 import type {ObjectShape} from 'yup/lib/object';
 
 setLocale({
@@ -14,13 +14,13 @@ setLocale({
   },
 });
 
-interface SQFormProps<Values> {
+interface SQFormProps<Values extends Record<string, unknown>> {
   /** Form Input(s) */
   children: React.ReactNode;
   /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */
   enableReinitialize?: boolean;
   /** Form Entity Object */
-  initialValues: Record<string, Values>;
+  initialValues: Values;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
   /**
@@ -32,8 +32,8 @@ interface SQFormProps<Values> {
    * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
    * */
   onSubmit: (
-    values: Record<string, Values>,
-    formikBag: FormikHelpers<FormikValues>
+    values: Values,
+    formikBag: FormikHelpers<Values>
   ) => void | Promise<unknown>;
   /**
    * Yup validation schema shape
@@ -42,7 +42,7 @@ interface SQFormProps<Values> {
   validationSchema?: ObjectShape;
 }
 
-function SQForm<Values>({
+function SQForm<Values extends Record<string, unknown>>({
   children,
   enableReinitialize = false,
   initialValues,
@@ -70,16 +70,14 @@ function SQForm<Values>({
   };
 
   const handleSubmit = useDebouncedCallback(
-    (
-      values: Record<string, Values>,
-      formikHelpers: FormikHelpers<FormikValues>
-    ) => onSubmit(values, formikHelpers),
+    (values: Values, formikHelpers: FormikHelpers<Values>) =>
+      onSubmit(values, formikHelpers),
     500,
     {leading: true, trailing: false}
   );
 
   return (
-    <Formik
+    <Formik<Values>
       enableReinitialize={enableReinitialize}
       initialErrors={initialErrors}
       initialValues={initialValues}
