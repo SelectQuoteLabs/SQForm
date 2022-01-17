@@ -8,7 +8,7 @@ import type {TextFieldProps} from '@material-ui/core';
 import type {BaseFieldProps} from 'types';
 import {toKebabCase} from '../../utils';
 
-interface SQFormTextareaProps extends BaseFieldProps {
+export interface SQFormTextareaProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Disabled property to disable the input if true */
