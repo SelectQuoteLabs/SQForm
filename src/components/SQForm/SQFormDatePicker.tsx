@@ -37,7 +37,7 @@ export interface SQFormDatePickerProps extends BaseFieldProps {
    */
   setDisabledDate?: (day: unknown) => boolean;
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDatePickerProps<moment.Moment>;
+  muiFieldProps?: BaseDatePickerProps;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
   /** Props provided to the Input component. Most commonly used for adornments. */

@@ -5,10 +5,20 @@ import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDatePicker.stories';
+import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
+import type {FormProps} from '../SQFormDatePicker.stories';
+import type {AnySchema} from 'yup';
 
 const {BasicDatePicker} = composeStories(stories);
 
-const renderDatePicker = (props) => {
+const renderDatePicker = (
+  props?: Partial<
+    Omit<SQFormDatePickerProps, 'label' | 'name'> & {
+      sqFormProps?: FormProps | undefined;
+      schema: Record<string, AnySchema<unknown, unknown, unknown>>;
+    }
+  >
+) => {
   render(
     <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
       <BasicDatePicker {...props} />
@@ -34,7 +44,7 @@ describe('SQFormDatePicker Tests', () => {
       date: '',
     };
 
-    renderDatePicker({SQFormProps: {initialValues}});
+    renderDatePicker({sqFormProps: {initialValues}});
 
     const textField = screen.getByRole('textbox', {name: /date/i});
     expect(textField).toHaveValue('');
@@ -45,7 +55,7 @@ describe('SQFormDatePicker Tests', () => {
       date: '09/15/2022',
     };
 
-    renderDatePicker({SQFormProps: {initialValues}});
+    renderDatePicker({sqFormProps: {initialValues}});
 
     const textField = screen.getByRole('textbox', {name: /date/i});
     expect(textField).toBeInTheDocument();
@@ -57,7 +67,7 @@ describe('SQFormDatePicker Tests', () => {
       date: '',
     };
 
-    renderDatePicker({SQFormProps: {initialValues}});
+    renderDatePicker({sqFormProps: {initialValues}});
 
     const textField = screen.getByRole('textbox', {name: /choose date/i});
 
@@ -76,7 +86,7 @@ describe('SQFormDatePicker Tests', () => {
       date: '',
     };
 
-    renderDatePicker({SQFormProps: {initialValues}});
+    renderDatePicker({sqFormProps: {initialValues}});
 
     const textField = screen.getByRole('textbox', {name: /Choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -106,26 +116,26 @@ describe('SQFormDatePicker Tests', () => {
   });
 
   it('should show as disabled when isDisabled is true', () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         date: '',
       },
     };
 
-    renderDatePicker({SQFormProps, isDisabled: true});
+    renderDatePicker({sqFormProps, isDisabled: true});
 
     const textField = screen.getByRole('textbox', {name: /date/i});
     expect(textField).toBeDisabled();
   });
 
   it('should initially display required text when it is a required field', async () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         date: '',
       },
     };
 
-    renderDatePicker({SQFormProps});
+    renderDatePicker({sqFormProps});
     await waitFor(() => {
       const requiredText = screen.getByText(/required/i);
       expect(requiredText).toBeVisible();
