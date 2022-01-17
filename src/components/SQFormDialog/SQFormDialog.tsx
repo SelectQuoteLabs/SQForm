@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-interface SQFormDialogProps<Values> {
+export interface SQFormDialogProps<Values> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
