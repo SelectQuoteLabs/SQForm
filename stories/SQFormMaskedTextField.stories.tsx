@@ -7,6 +7,12 @@ import {
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
+import type {Story} from '@storybook/react';
+import type {SQFormMaskedTextFieldProps} from 'components/SQForm/SQFormMaskedTextField';
+import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {AnySchema} from 'yup';
+import type {maskProp} from 'types';
 
 export default {
   title: 'Components/SQFormMaskedTextField',
@@ -23,18 +29,27 @@ export default {
   },
 };
 
+type MaskedTextFieldStoryType = Story<
+  Omit<SQFormMaskedTextFieldProps, 'size'> & {
+    size?: GridSizeOptions;
+    sqFormProps?: SQFormStoryWrapperProps;
+    schema: Record<string, AnySchema>;
+    exampleMasks: maskProp;
+  }
+>;
+
 const defaultArgs = {
   label: 'Masked Text Field',
   name: 'maskedTextField',
 };
 
-const Template = (args) => {
-  const {schema, SQFormProps, exampleMasks, size, ...rest} = args;
+const Template: MaskedTextFieldStoryType = (args) => {
+  const {schema, sqFormProps, exampleMasks, size, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: ''}}
       validationSchema={schema}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <SQFormMaskedTextFieldComponent
         {...rest}
