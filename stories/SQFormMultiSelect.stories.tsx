@@ -2,8 +2,24 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {
+  SQFormStoryWrapper,
+  SQFormStoryWrapperProps,
+} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import type {Story} from '@storybook/react';
+import type {SQFormMultiSelectProps} from 'components/SQForm/SQFormMultiSelect';
+import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {AnySchema} from 'yup';
+import getSizeProp from './utils/getSizeProp';
+
+type MultiSelectStoryType = Story<
+  Omit<SQFormMultiSelectProps, 'size' | 'name' | 'label'> & {
+    size?: GridSizeOptions;
+    sqFormProps?: Omit<SQFormStoryWrapperProps, 'children'>;
+    validationSchema: Record<string, AnySchema>;
+  }
+>;
 
 export default {
   title: 'Components/SQFormMultiSelect',
@@ -48,20 +64,20 @@ const defaultArgs = {
   children: MOCK_FRIENDS_OPTIONS,
 };
 
-export const Template = (args) => {
-  const {SQFormProps, validationSchema, ...rest} = args;
+const Template: MultiSelectStoryType = (args) => {
+  const {sqFormProps, validationSchema, size, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         initialValues={{[defaultArgs.name]: []}}
         validationSchema={validationSchema}
-        {...SQFormProps}
+        {...sqFormProps}
       >
         <SQFormMultiSelectComponent
           name={defaultArgs.name}
           label={defaultArgs.label}
           {...rest}
-          size={rest.size !== 'auto' ? Number(rest.size) : rest.size}
+          size={getSizeProp(size)}
         />
       </SQFormStoryWrapper>
     </div>
@@ -73,15 +89,16 @@ SQFormMultiSelect.args = defaultArgs;
 
 export const WithValidation = Template.bind({});
 WithValidation.args = {
+  ...defaultArgs,
   validationSchema: {
     friends: Yup.array().required().min(1, 'Required'),
   },
-  SQFormProps: {
+  sqFormProps: {
     initialValues: {friends: []},
   },
 };
 
-function random(length) {
+function random(length: number) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
