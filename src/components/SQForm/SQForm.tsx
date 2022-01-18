@@ -31,7 +31,7 @@ interface SQFormProps<Values extends Record<string, unknown>> {
    *
    * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
    * */
-  onSubmit: (
+  onSubmit?: (
     values: Values,
     formikBag: FormikHelpers<Values>
   ) => void | Promise<unknown>;
@@ -70,8 +70,13 @@ function SQForm<Values extends Record<string, unknown>>({
   };
 
   const handleSubmit = useDebouncedCallback(
-    (values: Values, formikHelpers: FormikHelpers<Values>) =>
-      onSubmit(values, formikHelpers),
+    (values: Values, formikHelpers: FormikHelpers<Values>) => {
+      if (typeof onSubmit === 'undefined') {
+        return;
+      }
+
+      return onSubmit(values, formikHelpers);
+    },
     500,
     {leading: true, trailing: false}
   );
