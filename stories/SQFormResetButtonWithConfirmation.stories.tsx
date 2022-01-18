@@ -1,6 +1,10 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-
+import type {Story, Meta} from '@storybook/react';
+import type { AnySchema } from 'yup';
+import { SQFormResetButtonWithConfirmationProps } from 'components/SQForm/SQFormResetButtonWithConfirmation';
+import type { SQFormStoryWrapperProps } from './components/SQFormStoryWrapper';
+import type { GridSizeOptions } from './types/storyHelperTypes';
 import {
   SQFormResetButtonWithConfirmation as SQFormResetButtonWithConfirmationComponent,
   SQFormTextField
@@ -8,7 +12,19 @@ import {
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
-export default {
+type FormProps = {
+  initialValues?: SQFormStoryWrapperProps['initialValues'];
+} & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
+
+type SQFormResetButtonWithConfirmStory = Story<
+  Omit<SQFormResetButtonWithConfirmationProps, 'size'> & {
+    size?: GridSizeOptions;
+    sqFormProps?: FormProps;
+    schema: Record<string, AnySchema>;
+  }
+>;
+
+const meta: Meta = {
   title: 'Components/SQFormResetButtonWithConfirmation',
   component: SQFormResetButtonWithConfirmationComponent,
   argTypes: {
@@ -31,13 +47,13 @@ const defaultArgs = {
   )
 };
 
-const Template = args => {
-  const {SQFormProps, ...rest} = args;
+const Template: SQFormResetButtonWithConfirmStory = args => {
+  const {sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{test: ''}}
       showSubmit={false}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
@@ -54,3 +70,6 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 Default.storyName = 'SQFormResetButtonWithConfirmation';
+
+
+export default meta;
