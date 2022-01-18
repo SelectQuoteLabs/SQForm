@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {useFormikContext} from 'formik';
 import {Grid, Typography, makeStyles} from '@material-ui/core';
 import {
@@ -35,12 +34,19 @@ const helperStateMap = {
   valid: 'valid',
 };
 
+interface SQFormHelperTextProps {
+  isFailedState?: boolean;
+  errorText?: string;
+  failText?: string;
+  validText?: string;
+}
+
 function SQFormHelperText({
   isFailedState = false,
   errorText = 'There is an error in the form',
   failText = 'Cannot proceed',
   validText = 'All fields completed',
-}) {
+}: SQFormHelperTextProps): JSX.Element {
   const classes = useStyles();
   const {isValid} = useFormikContext();
   const {fail, error, valid} = helperStateMap;
@@ -48,21 +54,21 @@ function SQFormHelperText({
   const getHelperTextType = () => {
     switch (true) {
       case isFailedState:
-        return fail;
+        return 'fail';
       case isValid:
-        return valid;
+        return 'valid';
       default:
-        return error;
+        return 'error';
     }
   };
 
-  const helperTextType = getHelperTextType();
+  const helperTextType: keyof typeof helperStateMap = getHelperTextType();
 
   const getHelperTextIcon = () => {
     switch (helperTextType) {
-      case fail:
+      case 'fail':
         return FailIcon;
-      case valid:
+      case 'valid':
         return VerifiedIcon;
       default:
         return WarningIcon;
@@ -90,12 +96,5 @@ function SQFormHelperText({
     </Grid>
   );
 }
-
-SQFormHelperText.propTypes = {
-  isFailedState: PropTypes.bool,
-  errorText: PropTypes.string,
-  failText: PropTypes.string,
-  validText: PropTypes.string,
-};
 
 export default SQFormHelperText;
