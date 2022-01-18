@@ -5,7 +5,7 @@ import type {maskProp} from 'types';
 import SQFormTextField from './SQFormTextField';
 import type {SQFormTextFieldProps} from './SQFormTextField';
 
-interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {
+export interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {
   /** Valid mask array; custom or from utils/masks.js */
   mask?: maskProp;
   /** Whether the submitted value from the input should have all non-numeric characters removed */
