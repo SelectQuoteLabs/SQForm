@@ -1,5 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import type {Meta} from '@storybook/react';
+import type {CustomStory} from './types/storyHelperTypes'
+import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton' 
 
 import {
   SQFormResetInitialValuesButton as SQFormResetInitialValuesButtonComponent,
@@ -8,7 +11,7 @@ import {
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
-export default {
+const meta: Meta = {
   title: 'Components/SQFormResetInitialValuesButton',
   component: SQFormResetInitialValuesButtonComponent,
   parameters: {
@@ -31,13 +34,13 @@ const defaultArgs = {
   )
 };
 
-const Template = args => {
-  const {SQFormProps, ...rest} = args;
+const Template: CustomStory<SQFormResetInitialValuesButtonProps> = args => {
+  const {sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={initialValues}
       showSubmit={false}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
@@ -54,3 +57,5 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 Default.storyName = 'SQFormResetInitialValuesButton';
+
+export default meta;
