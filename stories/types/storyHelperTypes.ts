@@ -31,8 +31,8 @@ type FormProps = {
     initialValues?: SQFormStoryWrapperProps['initialValues'];
  } & Omit<SQFormStoryWrapperProps, 'initialValues' | 'children'>;
 
-export type CustomStory<TComponent> = Story<
-  Omit<TComponent, 'size'> & {
+export type CustomStory<TComponentProps> = Story<
+  Omit<TComponentProps, 'size'> & {
     size?: GridSizeOptions;
     sqFormProps?: FormProps;
     schema: Record<string, AnySchema>;
