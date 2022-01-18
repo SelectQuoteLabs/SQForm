@@ -2,8 +2,6 @@ import type { SQFormStoryWrapperProps } from '../components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
 import type { AnySchema } from 'yup';
 
-
-
 /** String 'undefined' has to be added due to the way
  * Storybook handles `undefined` in dropdown options.
  * Weird, I know. Otherwise we get console errors.
@@ -24,8 +22,6 @@ export type GridSizeOptions =
   | '10'
   | '11'
   | '12';
-
-
 
 type FormProps = {
     initialValues?: SQFormStoryWrapperProps['initialValues'];
