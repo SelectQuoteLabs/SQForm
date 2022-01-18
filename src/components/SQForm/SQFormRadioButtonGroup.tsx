@@ -19,7 +19,7 @@ interface RadioButtonInputItemProps {
   InputProps?: RadioProps;
 }
 
-interface SQFormRadioButtonGroupProps {
+export interface SQFormRadioButtonGroupProps {
   /** Name of the Radio Group */
   name: string;
   /** Size of the input given full-width is 12. */

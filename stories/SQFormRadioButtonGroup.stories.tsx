@@ -4,7 +4,22 @@ import * as Yup from 'yup';
 import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {
+  SQFormStoryWrapper,
+  SQFormStoryWrapperProps,
+} from './components/SQFormStoryWrapper';
+import type {Story} from '@storybook/react';
+import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
+import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {AnySchema} from 'yup';
+
+type RadioButtonGroupType = Story<
+  Omit<SQFormRadioButtonGroupProps, 'size'> & {
+    size?: GridSizeOptions;
+    sqFormProps: Partial<SQFormStoryWrapperProps>;
+    schema: Record<string, AnySchema>;
+  }
+>;
 
 export default {
   title: 'Components/SQFormRadioButtonGroup',
@@ -35,17 +50,17 @@ const defaultArgs = {
   groupLabel: 'Pandas',
   name: 'pandas',
   children: PANDA_GROUP_OPTIONS,
-  SQFormProps: {
+  sqFormProps: {
     initialValues: {pandas: ''},
   },
 };
 
-const Template = (args) => {
-  const {SQFormProps, schema, size, ...componentProps} = args;
+const Template: RadioButtonGroupType = (args) => {
+  const {sqFormProps, schema, size, ...componentProps} = args;
   return (
     <SQFormStoryWrapper
-      {...defaultArgs.SQFormProps}
-      {...SQFormProps}
+      {...defaultArgs.sqFormProps}
+      {...sqFormProps}
       validationSchema={schema}
     >
       <SQFormRadioButtonGroupComponent

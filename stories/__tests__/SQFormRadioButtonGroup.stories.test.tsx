@@ -3,10 +3,11 @@ import {composeStories} from '@storybook/testing-react';
 import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormRadioButtonGroup.stories';
+import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
 
 const {
   Default: SQFormRadioButtonGroup,
-  WithValidation: SQFormRadioButtonGroupWithValidation
+  WithValidation: SQFormRadioButtonGroupWithValidation,
 } = composeStories(stories);
 
 describe('SQFormRadioButtonGroup Tests', () => {
@@ -41,7 +42,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
           expect.arrayContaining([
             giantPandaLabel,
             redPandaLabel,
-            kungFuPandaLabel
+            kungFuPandaLabel,
           ])
         );
       });
@@ -89,7 +90,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
     });
 
     describe('onChange handler', () => {
-      let onChangeMock;
+      let onChangeMock: SQFormRadioButtonGroupProps['onChange'];
 
       beforeEach(() => {
         onChangeMock = jest.fn();
@@ -106,10 +107,10 @@ describe('SQFormRadioButtonGroup Tests', () => {
 
     it('Has default value with an initialValue', () => {
       const initialValues = {
-        pandas: 'red panda'
+        pandas: 'red panda',
       };
       render(
-        <SQFormRadioButtonGroup size="auto" SQFormProps={{initialValues}} />
+        <SQFormRadioButtonGroup size="auto" sqFormProps={{initialValues}} />
       );
 
       const radioButtons = screen.getAllByRole('radio');
@@ -141,7 +142,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
           const requiredText = screen.getByText('Required');
           expect(requiredText).toBeInTheDocument();
           expect(requiredText).toHaveClass('Mui-required');
-        })
+        });
       });
     });
 
