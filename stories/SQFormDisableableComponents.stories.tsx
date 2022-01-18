@@ -15,15 +15,15 @@ import {
   SQFormTextField,
   SQFormTextarea,
   SQFormCheckbox,
-  SQForm
+  SQForm,
 } from '../src';
 
 export default {
   title: 'Forms/SQFormDisableableComponents',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
 };
 
-export const disableableComponents = () => {
+export const disableableComponents = (): React.ReactElement => {
   const initialValues = {
     autoComplete: 'test1',
     datePicker: '12/01/1990',
@@ -33,7 +33,7 @@ export const disableableComponents = () => {
     multiSelect: ['test1', 'test2'],
     textField: 'someString',
     textArea: 'someBigString?',
-    checkbox: true
+    checkbox: true,
   };
 
   const validationSchema = {
@@ -45,18 +45,17 @@ export const disableableComponents = () => {
     multiSelect: Yup.array(),
     textField: Yup.string(),
     textArea: Yup.string(),
-    checkbox: Yup.boolean()
+    checkbox: Yup.boolean(),
   };
 
-  const onSubmit = formValues => {
-    const selectedRadioValue = formValues.testGroup;
-    window.alert(`Selected Radio Value: ${selectedRadioValue}`);
+  const onSubmit = (formValues: typeof initialValues) => {
+    window.alert(JSON.stringify(formValues, null, 2));
   };
 
   const options = [
     {label: 'Test1', value: 'test1'},
     {label: 'Test2', value: 'test2', isDisabled: true},
-    {label: 'Test3', value: 'test3'}
+    {label: 'Test3', value: 'test3'},
   ];
 
   return (
