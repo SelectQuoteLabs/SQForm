@@ -9,7 +9,7 @@ import {useForm} from './useForm';
 import type {BaseFieldProps} from 'types';
 import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
-interface SQFormDateTimePickerProps extends BaseFieldProps {
+export interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
