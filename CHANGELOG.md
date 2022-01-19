@@ -1,3 +1,10 @@
+### [7.0.4](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.3...v7.0.4) (2022-01-19)
+
+
+### Bug Fixes
+
+* 🐛 modified selectValues logic for required fields only      ([af8fe9b](https://github.com/SelectQuoteLabs/SQForm/commit/af8fe9b2a32c564ac529067233d487ff50e49881)), closes [#554](https://github.com/SelectQuoteLabs/SQForm/issues/554)
+
 ### [7.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.2...v7.0.3) (2022-01-12)
 
 
