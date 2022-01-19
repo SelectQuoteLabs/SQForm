@@ -7,7 +7,7 @@ import {
   SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent,
 } from '../src';
 import type { maskProp } from 'types';
-import { SQFormMaskedReadOnlyFieldProps } from '../src/components/SQForm/SQFormMaskedReadOnlyField';
+import type { SQFormMaskedReadOnlyFieldProps } from '../src/components/SQForm/SQFormMaskedReadOnlyField';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';

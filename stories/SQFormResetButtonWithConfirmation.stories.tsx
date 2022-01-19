@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import type { Meta} from '@storybook/react';
-import { SQFormResetButtonWithConfirmationProps } from 'components/SQForm/SQFormResetButtonWithConfirmation';
+import type { SQFormResetButtonWithConfirmationProps } from 'components/SQForm/SQFormResetButtonWithConfirmation';
 import type { CustomStory} from './types/storyHelperTypes';
 import {
   SQFormResetButtonWithConfirmation as SQFormResetButtonWithConfirmationComponent,
