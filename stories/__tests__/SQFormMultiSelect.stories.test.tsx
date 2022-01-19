@@ -61,7 +61,7 @@ describe('Tests for SQFormMultiSelect', () => {
     render(
       <SQFormMultiSelect
         size="auto"
-        SQFormProps={{
+        sqFormProps={{
           initialValues: {friends: [1, 2]},
         }}
       />
@@ -77,12 +77,14 @@ describe('Tests for SQFormMultiSelect', () => {
   it('should show console warning if provided initial value not in options', async () => {
     const consoleWarnSpy = jest
       .spyOn(console, 'warn')
-      .mockImplementation(() => {});
+      .mockImplementation(() => {
+        /* do nothing */
+      });
 
     render(
       <SQFormMultiSelect
         size="auto"
-        SQFormProps={{
+        sqFormProps={{
           initialValues: {friends: [0]},
         }}
       />
@@ -100,23 +102,14 @@ describe('Tests for SQFormMultiSelect', () => {
   });
 
   it('should show empty list if no options passed', async () => {
-    const consoleWarnSpy = jest
-      .spyOn(console, 'warn')
-      .mockImplementation(() => {});
-
     render(
-      <SQFormMultiSelect useSelectAll={false} size="auto" children={null} />
+      <SQFormMultiSelect useSelectAll={false} size="auto" children={[]} />
     );
 
     const expandButton = await screen.findByRole('button', {name: /friends/i});
 
     userEvent.click(expandButton);
     expect(screen.queryByRole('option')).not.toBeInTheDocument();
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      expect.stringMatching(/the children you provided.*was undefined/i)
-    );
-
-    consoleWarnSpy.mockRestore();
   });
 
   it('should update when options are selected', async () => {
@@ -154,7 +147,7 @@ describe('Tests for SQFormMultiSelect', () => {
   });
 
   it('should not display "required" helper text if field is not required', async () => {
-    render(<SQFormMultiSelect isRequired={false} size="auto" />);
+    render(<SQFormMultiSelect size="auto" />);
 
     const required = screen.queryByText(/required/i);
     expect(required).not.toBeInTheDocument();

@@ -23,7 +23,7 @@ import {
 } from '../../utils/consoleWarnings';
 import type {BaseFieldProps, Option} from 'types';
 
-interface SQFormMultiSelectProps extends BaseFieldProps {
+export interface SQFormMultiSelectProps extends BaseFieldProps {
   /** Multiselect options to select from */
   children: Option[];
   /** Disabled property to disable the input if true */
