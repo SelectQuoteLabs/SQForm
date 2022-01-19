@@ -24,14 +24,14 @@ interface SQFormProps<Values extends Record<string, unknown>> {
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
   /**
-   * Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag) => void | Promise<any>
+   * Form Submission Handler | @typedef onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void | Promise<any>
    * IMPORTANT: If onSubmit is async, then Formik will automatically set isSubmitting to false on your behalf once it has resolved.
    * This means you do NOT need to call formikBag.setSubmitting(false) manually.
    * However, if your onSubmit function is synchronous, then you need to call setSubmitting(false) on your own.
    *
    * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
    * */
-  onSubmit?: (
+  onSubmit: (
     values: Values,
     formikBag: FormikHelpers<Values>
   ) => void | Promise<unknown>;
@@ -70,13 +70,8 @@ function SQForm<Values extends Record<string, unknown>>({
   };
 
   const handleSubmit = useDebouncedCallback(
-    (values: Values, formikHelpers: FormikHelpers<Values>) => {
-      if (typeof onSubmit === 'undefined') {
-        return;
-      }
-
-      return onSubmit(values, formikHelpers);
-    },
+    (values: Values, formikHelpers: FormikHelpers<Values>) =>
+      onSubmit(values, formikHelpers),
     500,
     {leading: true, trailing: false}
   );
