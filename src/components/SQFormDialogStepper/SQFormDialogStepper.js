@@ -140,7 +140,7 @@ export function SQFormDialogStepper({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-       const stepValues = currentStepKeys.every((step) => {
+      const stepValues = currentStepKeys.every((step) => {
         if (
           values[step].length === 0 &&
           validationSchema.fields[step]?.tests[0]?.OPTIONS?.name === 'required'
