@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-
+import type { Meta} from '@storybook/react';
+import type { SQFormResetButtonWithConfirmationProps } from 'components/SQForm/SQFormResetButtonWithConfirmation';
+import type { CustomStory} from './types/storyHelperTypes';
 import {
   SQFormResetButtonWithConfirmation as SQFormResetButtonWithConfirmationComponent,
   SQFormTextField
@@ -8,7 +10,7 @@ import {
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
-export default {
+const meta: Meta = {
   title: 'Components/SQFormResetButtonWithConfirmation',
   component: SQFormResetButtonWithConfirmationComponent,
   argTypes: {
@@ -31,13 +33,13 @@ const defaultArgs = {
   )
 };
 
-const Template = args => {
-  const {SQFormProps, ...rest} = args;
+const Template: CustomStory<SQFormResetButtonWithConfirmationProps> = args => {
+  const {sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{test: ''}}
       showSubmit={false}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
@@ -54,3 +56,6 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 Default.storyName = 'SQFormResetButtonWithConfirmation';
+
+
+export default meta;

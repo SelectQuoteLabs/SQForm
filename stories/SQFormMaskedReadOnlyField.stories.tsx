@@ -1,13 +1,24 @@
 import React from 'react';
+import type {Meta} from '@storybook/react';
+import type {CustomStory} from './types/storyHelperTypes';
 
 import {
   MASKS,
   SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent,
 } from '../src';
+import type { maskProp } from 'types';
+import type { SQFormMaskedReadOnlyFieldProps } from '../src/components/SQForm/SQFormMaskedReadOnlyField';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 
-export default {
+type SQFormMaskedReadOnlyFieldStory = CustomStory<
+  SQFormMaskedReadOnlyFieldProps & {
+    exampleMasks: maskProp;
+  }
+> 
+
+const meta: Meta ={ 
   title: 'Components/SQFormMaskedReadOnlyField',
   component: SQFormMaskedReadOnlyFieldComponent,
   argTypes: {
@@ -27,14 +38,14 @@ const defaultArgs = {
   name: 'maskedReadOnlyField',
 };
 
-const Template = (args) => {
-  const {schema, SQFormProps, exampleMasks, ...rest} = args;
+const Template: SQFormMaskedReadOnlyFieldStory = (args) => {
+  const {schema, sqFormProps, exampleMasks, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={{[defaultArgs.name]: '8168675309'}}
       validationSchema={schema}
       showSubmit={false}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <SQFormMaskedReadOnlyFieldComponent
         {...rest}
@@ -45,18 +56,6 @@ const Template = (args) => {
   );
 };
 
-const getSizeProp = (size) => {
-  switch (size) {
-    case true:
-    case false:
-    case 'auto':
-      return size;
-    case undefined:
-      return 'auto';
-    default:
-      return Number(size);
-  }
-};
 
 export const Default = Template.bind({});
 Default.storyName = 'SQFormMaskedTextField';
@@ -72,3 +71,6 @@ Default.argTypes = {
     defaultValue: 'phone',
   },
 };
+
+export default meta;
+
