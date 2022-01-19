@@ -141,7 +141,13 @@ export function SQFormDialogStepper({
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
       const stepValues = currentStepKeys.every((step) => {
-        return !!values[step];
+        if (
+          values[step].length === 0 &&
+          validationSchema.fields[step]?.tests[0]?.OPTIONS?.name === 'required'
+        ) {
+          return false;
+        }
+        return true;
       });
 
       if (
