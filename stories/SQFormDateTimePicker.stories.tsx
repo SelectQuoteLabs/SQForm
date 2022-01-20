@@ -4,8 +4,12 @@ import {SQFormDateTimePicker as SQFormDateTimePickerComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
+import type { Meta } from '@storybook/react';
+import type { CustomStory } from './types/storyHelperTypes';
+import type { SQFormDateTimePickerProps } from 'components/SQForm/SQFormDateTimePicker';
+import getSizeProp from './utils/getSizeProp';
 
-export default {
+const meta: Meta = {
   title: 'Components/SQFormDateTimePicker',
   component: SQFormDateTimePickerComponent,
   argTypes: {
@@ -35,18 +39,34 @@ const defaultArgs = {
   name: 'datetime'
 };
 
-export const BasicDateTimePicker = args => {
+const Template: CustomStory<SQFormDateTimePickerProps> = args => {
+  const {schema, sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={MOCK_INITIAL_STATE}
       validationSchema={schema}
+      {...sqFormProps}
     >
       <SQFormDateTimePickerComponent
-        name={defaultArgs.name}
-        label={defaultArgs.label}
-        {...args}
+        {...rest}
+        size={getSizeProp(args.size)}
       />
     </SQFormStoryWrapper>
-  );
-};
+  )
+}
+
+export const BasicDateTimePicker = Template.bind({});
+BasicDateTimePicker.storyName = 'BasicDateTimePicker';
 BasicDateTimePicker.args = defaultArgs;
+
+export const WithValidation = Template.bind({});
+WithValidation.args = {
+  ...defaultArgs,
+  schema,
+}
+WithValidation.parameters = {
+  controls: {exclude: 'schema'}
+}
+
+export default meta;
+
