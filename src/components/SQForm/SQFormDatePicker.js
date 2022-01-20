@@ -41,8 +41,13 @@ function SQFormDatePicker({
   });
 
   const handleChange = (date) => {
-    helpers.setValue(date);
-    onChange && onChange(date);
+    if (date) {
+      helpers.setValue(date);
+      onChange && onChange(date);
+      return;
+    }
+    helpers.setValue('');
+    onChange && onChange('');
   };
 
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
