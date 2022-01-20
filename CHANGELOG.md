@@ -1,3 +1,10 @@
+### [7.0.5](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.4...v7.0.5) (2022-01-20)
+
+
+### Bug Fixes
+
+* 🐛 Added ? operator and modified date clearance logic ([d719dab](https://github.com/SelectQuoteLabs/SQForm/commit/d719dabef48428d0ac7e2c6c90d7fa384624fa3b)), closes [#584](https://github.com/SelectQuoteLabs/SQForm/issues/584)
+
 ### [7.0.4](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.3...v7.0.4) (2022-01-19)
 
 
