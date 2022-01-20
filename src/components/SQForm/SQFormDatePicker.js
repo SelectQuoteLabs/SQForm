@@ -44,10 +44,10 @@ function SQFormDatePicker({
     if (date) {
       helpers.setValue(date);
       onChange && onChange(date);
-      return;
+    } else {
+      helpers.setValue('');
+      onChange && onChange('');
     }
-    helpers.setValue('');
-    onChange && onChange('');
   };
 
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
