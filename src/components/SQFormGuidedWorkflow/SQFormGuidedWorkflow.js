@@ -12,6 +12,7 @@ import {
 import SQFormButton from '../SQForm/SQFormButton';
 import AgentScript from './AgentScript';
 import OutcomeForm from './OutcomeForm';
+import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
 import {GuidedWorkflowProps} from './PropTypes';
@@ -138,6 +139,12 @@ function SQFormGuidedWorkflow({
                   </div>
                 ) : (
                   <>
+                    {taskModule.additionalInformationSectionProps && (
+                      <AdditionalInformationSection
+                        {...taskModule.additionalInformationSectionProps}
+                        isFailedState={taskModule.isFailedState}
+                      />
+                    )}
                     <AgentScript
                       {...taskModule.scriptedTextProps}
                       isFailedState={taskModule.isFailedState}
