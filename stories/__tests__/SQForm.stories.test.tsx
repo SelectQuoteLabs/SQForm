@@ -13,7 +13,7 @@ import {BasicForm} from '../SQForm.stories';
 window.alert = jest.fn();
 
 afterEach(() => {
-  window.alert.mockClear();
+  (window.alert as jest.MockedFunction<typeof window.alert>).mockClear();
 });
 
 const mockData = {
@@ -34,7 +34,9 @@ describe('Tests for BasicForm', () => {
 
     userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
 
-    const {value: lastNameInputValue} = screen.getByLabelText(/last name/i);
+    const {value: lastNameInputValue} = screen.getByLabelText(
+      /last name/i
+    ) as HTMLInputElement;
     userEvent.type(screen.getByLabelText(/hobby/i), mockData.hobby);
     userEvent.type(screen.getByLabelText(/age/i), mockData.age.toString());
 
@@ -94,7 +96,9 @@ describe('Tests for BasicForm', () => {
 
     userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
 
-    const {value: lastNameInputValue} = screen.getByLabelText(/last name/i);
+    const {value: lastNameInputValue} = screen.getByLabelText(
+      /last name/i
+    ) as HTMLInputElement;
 
     userEvent.click(screen.getByRole('button', {name: /form reset/i}));
 
