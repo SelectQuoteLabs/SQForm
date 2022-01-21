@@ -1,3 +1,10 @@
+## [7.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.5...v7.1.0) (2022-01-21)
+
+
+### Features
+
+* 🎸 SQFormGuidedWorkflow additional section ([#587](https://github.com/SelectQuoteLabs/SQForm/issues/587)) ([55ae824](https://github.com/SelectQuoteLabs/SQForm/commit/55ae82434101d0c1949593c24e5ca2eebcc7cc80)), closes [#586](https://github.com/SelectQuoteLabs/SQForm/issues/586)
+
 ### [7.0.5](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.4...v7.0.5) (2022-01-20)
 
 
