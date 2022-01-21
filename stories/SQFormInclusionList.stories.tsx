@@ -5,27 +5,30 @@ import * as Yup from 'yup';
 
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
-  SQFormInclusionListItem
+  SQFormInclusionListItem,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import type {FieldArrayRenderProps} from 'formik';
+import type {CustomStory} from './types/storyHelperTypes';
+import type {SQFormInclusionListProps} from 'components/SQForm/SQFormInclusionList';
 
 export default {
   title: 'Components/SQFormInclusionList',
   component: SQFormInclusionListComponent,
   argTypes: {
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
+      page: createDocsPage(),
+    },
+  },
 };
 
 const MOCK_FORM_FOR_CHECKBOX_GROUP = {
   friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-  selectAll: false
+  selectAll: false,
 };
 const names = [
   'Jim',
@@ -36,7 +39,7 @@ const names = [
   'Joe',
   'Jane',
   'Jack',
-  'Jill'
+  'Jill',
 ];
 
 const defaultArgs = {
@@ -44,13 +47,13 @@ const defaultArgs = {
   selectAllData: names,
   selectAllContainerProps: {
     style: {
-      padding: '0 16px'
-    }
+      padding: '0 16px',
+    },
   },
   selectAllProps: {
-    label: 'ALL THE PEEPS'
+    label: 'ALL THE PEEPS',
   },
-  children: arrayHelpers => {
+  children: (arrayHelpers: FieldArrayRenderProps) => {
     const {values} = arrayHelpers.form;
     return (
       <Grid
@@ -60,17 +63,17 @@ const defaultArgs = {
         style={{
           height: 200,
           overflow: 'auto',
-          padding: '0 16px'
+          padding: '0 16px',
         }}
       >
-        {names.map(name => {
+        {names.map((name) => {
           return (
             <Grid item key={name}>
               <SQFormInclusionListItem
                 name="friends"
                 label={name}
                 isChecked={values?.friends?.includes(name)}
-                onChange={e => {
+                onChange={(e) => {
                   if (e.target.checked) {
                     arrayHelpers.push(name);
                   } else {
@@ -84,16 +87,16 @@ const defaultArgs = {
         })}
       </Grid>
     );
-  }
+  },
 };
 
-const Template = args => {
-  const {schema, SQFormProps, ...rest} = args;
+const Template: CustomStory<SQFormInclusionListProps> = (args) => {
+  const {schema, sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
       initialValues={MOCK_FORM_FOR_CHECKBOX_GROUP}
       validationSchema={schema}
-      {...SQFormProps}
+      {...sqFormProps}
     >
       <Card raised style={{minWidth: 250, padding: 16}}>
         <SQFormInclusionListComponent {...rest} />
@@ -109,9 +112,9 @@ export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   schema: {
-    friends: Yup.array().min(5)
-  }
+    friends: Yup.array().min(5),
+  },
 };
 WithValidation.parameters = {
-  controls: {exclude: 'schema'}
+  controls: {exclude: 'schema'},
 };
