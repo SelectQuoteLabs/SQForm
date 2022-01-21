@@ -65,7 +65,12 @@ describe('SQFormMultiValue Tests', () => {
     // Even though the entire <div> has role='button' only the actual
     // <svg> is clickable for the delete
     const deleteIcon = redButton.querySelector('.MuiChip-deleteIcon');
-    userEvent.click(deleteIcon);
+    expect(deleteIcon).toBeInTheDocument();
+
+    // This is necessary as deleteIcon is possibly null and
+    // `userEvent.click` does not accept null.
+    // Test would fail if `deleteIcon` is null anyway
+    deleteIcon && userEvent.click(deleteIcon);
 
     expect(screen.queryByText('Red')).not.toBeInTheDocument();
   });
@@ -83,23 +88,23 @@ describe('SQFormMultiValue Tests', () => {
   });
 
   it('does not display "required" text when field is not required', () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         favoriteColors: [],
       },
     };
-    render(<SQFormMultiValue SQFormProps={SQFormProps} />);
+    render(<SQFormMultiValue sqFormProps={sqFormProps} />);
 
     expect(screen.queryByText('Required')).not.toBeInTheDocument();
   });
 
   it('should initially render "required" helper text if field is required', async () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         favoriteColors: [],
       },
     };
-    render(<SQFormMultiValueWithValidation SQFormProps={SQFormProps} />);
+    render(<SQFormMultiValueWithValidation sqFormProps={sqFormProps} />);
 
     await waitFor(() => expect(screen.getByText('Required')).toBeVisible());
   });

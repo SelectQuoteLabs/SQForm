@@ -15,7 +15,7 @@ import type {
   OuterElementTypeProps,
 } from './SQFormAutocomplete';
 
-interface SQFormMultiValueProps extends BaseFieldProps {
+export interface SQFormMultiValueProps extends BaseFieldProps {
   /** options to select from */
   children: Option[];
   /** Whether the field is required */

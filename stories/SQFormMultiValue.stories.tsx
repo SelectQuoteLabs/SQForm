@@ -5,6 +5,8 @@ import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
 import markdown from '../notes/SQFormMultiValue.md';
+import type {CustomStory} from './types/storyHelperTypes';
+import type {SQFormMultiValueProps} from 'components/SQForm/SQFormMultiValue';
 
 export default {
   title: 'Components/SQFormMultiValue',
@@ -40,15 +42,15 @@ const defaultArgs = {
   children: MOCK_COLOR_OPTIONS,
 };
 
-const Template = (args) => {
-  const {SQFormProps, validationSchema, size, ...componentProps} = args;
+const Template: CustomStory<SQFormMultiValueProps> = (args) => {
+  const {sqFormProps, schema, size, ...componentProps} = args;
 
   return (
     <div style={{minWidth: 250}}>
       <SQFormStoryWrapper
         initialValues={{[defaultArgs.name]: ['red', 'green', 'Custom Option']}}
-        validationSchema={validationSchema}
-        {...SQFormProps}
+        validationSchema={schema}
+        {...sqFormProps}
       >
         <SQFormMultiValueComponent
           {...componentProps}
@@ -67,17 +69,17 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  validationSchema: {
+  schema: {
     favoriteColors: Yup.array()
       .of(
-        Yup.lazy((value) => {
+        Yup.lazy((value: unknown) => {
           return typeof value === 'number' ? Yup.number() : Yup.string();
-        })
+        }) as never
       )
       .required()
       .min(1, 'Required'),
   },
-  SQFormProps: {
+  sqFormProps: {
     initialValues: {favoriteColors: []},
   },
 };
