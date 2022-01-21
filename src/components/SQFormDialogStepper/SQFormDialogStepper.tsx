@@ -25,20 +25,24 @@ import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
 import type {TransitionProps} from '@material-ui/core/transitions';
 
-interface SQFormDialogStepProps {
+interface SQFormDialogStepProps<Values> {
   /** The content to be rendered in the step body. */
-  children?: JSX.Element;
+  children?: JSX.Element | Array<JSX.Element>;
   /** Should the loading spinner be shown */
   isLoading?: boolean;
   /** Optional message to be added to the loading spinner */
   loadingMessage?: string;
+  /** The label to display in the stepper */
+  label?: string;
+  /** Validation schema for this step */
+  validationSchema?: Record<keyof Values, Yup.AnySchema>;
 }
 
-export function SQFormDialogStep({
+export function SQFormDialogStep<Values extends Record<string, unknown>>({
   children,
   isLoading = false,
   loadingMessage = '',
-}: SQFormDialogStepProps): JSX.Element {
+}: SQFormDialogStepProps<Values>): JSX.Element {
   return isLoading ? (
     <LoadingSpinner message={loadingMessage} />
   ) : (
@@ -94,7 +98,7 @@ const useStepperStyles = makeStyles({
   },
 });
 
-interface SQFormDialogStepperProps<Values> {
+export interface SQFormDialogStepperProps<Values> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body.  Will be an array of React elements. */
