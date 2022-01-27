@@ -1,8 +1,9 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "7.0.3",
+  "version": "7.1.1",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.es.js",
   "private": false,
   "sideEffects": false,
   "scripts": {
@@ -67,6 +68,10 @@
   "license": "MIT",
   "homepage": "https://github.com/SelectQuoteLabs/SQForm#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "@material-ui/pickers": "^4.0.0-alpha.12",
     "@selectquotelabs/sqhooks": "^2.1.0",
     "@tippy.js/react": "^3.1.1",
     "ag-grid-community": "^25.2.1",
@@ -81,13 +86,14 @@
     "react-window": "^1.8.5",
     "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.9.0",
     "text-mask-addons": "^3.8.0",
-    "use-debounce": "^6.0.0"
+    "use-debounce": "^6.0.0",
+    "yup": "^0.28.3"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.46",
-    "@material-ui/pickers": "^4.0.0-alpha.11",
+    "@material-ui/pickers": "^4.0.0-alpha.12",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "yup": "^0.28.3"

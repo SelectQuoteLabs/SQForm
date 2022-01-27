@@ -1,3 +1,31 @@
+### [7.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.0...v7.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* 🐛 Support es modules ([609034c](https://github.com/SelectQuoteLabs/SQForm/commit/609034cc824c4623d35a5795adf6062a3d1ac800))
+
+## [7.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.5...v7.1.0) (2022-01-21)
+
+
+### Features
+
+* 🎸 SQFormGuidedWorkflow additional section ([#587](https://github.com/SelectQuoteLabs/SQForm/issues/587)) ([55ae824](https://github.com/SelectQuoteLabs/SQForm/commit/55ae82434101d0c1949593c24e5ca2eebcc7cc80)), closes [#586](https://github.com/SelectQuoteLabs/SQForm/issues/586)
+
+### [7.0.5](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.4...v7.0.5) (2022-01-20)
+
+
+### Bug Fixes
+
+* 🐛 Added ? operator and modified date clearance logic ([d719dab](https://github.com/SelectQuoteLabs/SQForm/commit/d719dabef48428d0ac7e2c6c90d7fa384624fa3b)), closes [#584](https://github.com/SelectQuoteLabs/SQForm/issues/584)
+
+### [7.0.4](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.3...v7.0.4) (2022-01-19)
+
+
+### Bug Fixes
+
+* 🐛 modified selectValues logic for required fields only      ([af8fe9b](https://github.com/SelectQuoteLabs/SQForm/commit/af8fe9b2a32c564ac529067233d487ff50e49881)), closes [#554](https://github.com/SelectQuoteLabs/SQForm/issues/554)
+
 ### [7.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.2...v7.0.3) (2022-01-12)
 
 
