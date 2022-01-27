@@ -1,3 +1,10 @@
+### [7.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.0...v7.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* 🐛 Support es modules ([609034c](https://github.com/SelectQuoteLabs/SQForm/commit/609034cc824c4623d35a5795adf6062a3d1ac800))
+
 ## [7.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.5...v7.1.0) (2022-01-21)
 
 
