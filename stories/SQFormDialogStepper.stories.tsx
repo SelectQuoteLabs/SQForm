@@ -9,6 +9,7 @@ import {
   SQFormDialogStepper as SQFormDialogStepperComponent,
   SQFormDropdown,
 } from '../src';
+import type {SQFormDialogStepperProps} from 'components/SQFormDialogStepper/SQFormDialogStepper';
 
 export default {
   title: 'Forms/SQFormDialogStepper',
@@ -29,7 +30,7 @@ export default {
   },
 };
 
-const handleSubmit = (values) => {
+const handleSubmit = <TValues extends unknown>(values: TValues) => {
   window.alert(JSON.stringify(values, null, 2));
 };
 
@@ -57,10 +58,14 @@ const defaultArgs = {
   onSubmit: handleSubmit,
   initialValues: {...personalDataInitialValues, ...accountDetailsInitValues},
   isOpen: false,
-  onClose: () => {},
+  onClose: () => {
+    /* do nothing */
+  },
 };
 
-export const Default = (args) => {
+export const Default = (
+  args: SQFormDialogStepperProps<typeof defaultArgs.initialValues>
+): React.ReactElement => {
   return (
     <>
       <h1>
@@ -69,8 +74,8 @@ export const Default = (args) => {
 
       <SQFormDialogStepperComponent {...args}>
         <SQFormDialogStep label="Personal Data">
-          <SQFormTextField fullWidth name="firstName" label="First Name" />
-          <SQFormTextField fullWidth name="lastName" label="Last Name" />
+          <SQFormTextField size={6} name="firstName" label="First Name" />
+          <SQFormTextField size={6} name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep label="Account Info">
           <SQFormDropdown
@@ -80,7 +85,7 @@ export const Default = (args) => {
             children={booleanOptions}
           />
           <SQFormTextField
-            fullWidth
+            size={8}
             name="accountID"
             type="number"
             label="Account ID"
@@ -96,7 +101,9 @@ Default.args = {
   title: 'Default',
 };
 
-export const WithValidation = (args) => {
+export const WithValidation = (
+  args: SQFormDialogStepperProps<typeof defaultArgs.initialValues>
+): React.ReactElement => {
   return (
     <>
       <h1>
@@ -111,14 +118,14 @@ export const WithValidation = (args) => {
             lastName: Yup.string().required(),
           }}
         >
-          <SQFormTextField fullWidth name="firstName" label="First Name" />
-          <SQFormTextField fullWidth name="lastName" label="Last Name" />
+          <SQFormTextField size={6} name="firstName" label="First Name" />
+          <SQFormTextField size={6} name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
           validationSchema={{
             accountID: Yup.mixed().when('newPatient', {
-              is: (value) => value === 'yes',
+              is: (value: string) => value === 'yes',
               then: Yup.number()
                 .required()
                 .min(100, 'Required for new account'),
@@ -132,7 +139,7 @@ export const WithValidation = (args) => {
             children={booleanOptions}
           />
           <SQFormTextField
-            fullWidth
+            size={8}
             name="accountID"
             type="number"
             label="Account ID"
@@ -148,7 +155,9 @@ WithValidation.args = {
   title: 'With Validation',
 };
 
-export const WithLoadingStep = (args) => {
+export const WithLoadingStep = (
+  args: SQFormDialogStepperProps<typeof defaultArgs.initialValues>
+): React.ReactElement => {
   return (
     <>
       <h1>
@@ -157,8 +166,8 @@ export const WithLoadingStep = (args) => {
 
       <SQFormDialogStepperComponent {...args}>
         <SQFormDialogStep label="Personal Data">
-          <SQFormTextField fullWidth name="firstName" label="First Name" />
-          <SQFormTextField fullWidth name="lastName" label="Last Name" />
+          <SQFormTextField size={6} name="firstName" label="First Name" />
+          <SQFormTextField size={6} name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
@@ -172,7 +181,7 @@ export const WithLoadingStep = (args) => {
             children={booleanOptions}
           />
           <SQFormTextField
-            fullWidth
+            size={8}
             name="accountID"
             type="number"
             label="Account ID"
