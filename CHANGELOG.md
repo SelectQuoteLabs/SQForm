@@ -1,3 +1,10 @@
+### [7.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.0...v7.2.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* 🐛 Revert es module support ([0b1ac8a](https://github.com/SelectQuoteLabs/SQForm/commit/0b1ac8a12bb64b6880888355aef792a86aa0e0d8)), closes [#602](https://github.com/SelectQuoteLabs/SQForm/issues/602)
+
 ## [7.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.1...v7.2.0) (2022-01-28)
 
 
