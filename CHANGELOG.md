@@ -1,3 +1,10 @@
+## [7.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.1...v7.2.0) (2022-01-28)
+
+
+### Features
+
+* 🎸 updated Roundbutton color and padding ([e0cfffc](https://github.com/SelectQuoteLabs/SQForm/commit/e0cfffc7848eb59dab15bbaebb933aca54029595))
+
 ### [7.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.0...v7.1.1) (2022-01-27)
 
 
