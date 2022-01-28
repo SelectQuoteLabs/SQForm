@@ -3,7 +3,6 @@
   "version": "7.2.0",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
-  "module": "dist/bundle.es.js",
   "private": false,
   "sideEffects": false,
   "scripts": {

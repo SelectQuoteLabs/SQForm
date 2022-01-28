@@ -15,10 +15,6 @@ export default [
         file: pkg.main,
         format: 'cjs',
       },
-      {
-        file: pkg.module,
-        format: 'es',
-      },
     ],
     plugins: [
       del({targets: 'dist/*'}), // Cleans dist folder before building a new bundle
