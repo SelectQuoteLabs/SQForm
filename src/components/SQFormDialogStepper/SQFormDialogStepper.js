@@ -61,7 +61,7 @@ const useActionsStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flex: '1 1 100%',
-    padding: '16px 24px',
+    padding: '10px 20px',
   },
 });
 
