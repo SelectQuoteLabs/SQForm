@@ -16,7 +16,7 @@ import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-interface SQFormScrollableCardProps<Values> {
+export interface SQFormScrollableCardProps<Values> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
   cardContentStyles?: React.CSSProperties;
   /** Form related Field(s) and components */
