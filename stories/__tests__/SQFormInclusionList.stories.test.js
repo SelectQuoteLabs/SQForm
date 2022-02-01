@@ -31,13 +31,13 @@ describe('SQFormInclusionList Tests', () => {
   });
 
   it('does not have any checked boxes when initial value is empty', () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         friends: [],
       },
     };
 
-    render(<SQFormInclusionList SQFormProps={SQFormProps} />);
+    render(<SQFormInclusionList sqFormProps={sqFormProps} />);
 
     const checkboxes = screen.getAllByRole('checkbox');
 
@@ -98,8 +98,8 @@ describe('SQFormInclusionList Tests', () => {
     expect(noCheckboxesChecked).toHaveLength(0);
   });
 
-  it('displays required when field is required', () => {
-    const SQFormProps = {
+  it('displays required when field is required', async () => {
+    const sqFormProps = {
       initialValues: {
         friends: [],
       },
@@ -108,16 +108,18 @@ describe('SQFormInclusionList Tests', () => {
       },
     };
 
-    render(<SQFormInclusionList SQFormProps={SQFormProps} />);
+    render(<SQFormInclusionList sqFormProps={sqFormProps} />);
 
     const submitButton = screen.getByRole('button', {name: /form submission/i});
-    expect(submitButton).toBeDisabled();
+    await waitFor(() => {
+      expect(submitButton).toBeDisabled();
+    });
 
     //TODO: Add in check for 'required' text when that issue is resolved
   });
 
   it('displays as not required when field is filled out', async () => {
-    const SQFormProps = {
+    const sqFormProps = {
       initialValues: {
         friends: [],
       },
@@ -126,7 +128,7 @@ describe('SQFormInclusionList Tests', () => {
       },
     };
 
-    render(<SQFormInclusionList SQFormProps={SQFormProps} />);
+    render(<SQFormInclusionList sqFormProps={sqFormProps} />);
 
     const jim = screen.getByLabelText('Jim');
     userEvent.click(jim);

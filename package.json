@@ -18,6 +18,7 @@
     "nuke-everything": "rm -rf ./dist && rm -rf ./node_modules && rm -f package-lock.json",
     "commit": "npx git-cz",
     "format": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
+    "format.ci": "npx prettier --check './{pages,src}/**/*.{js,ts,tsx}'",
     "docs": "cd SQFormDocs && npm start",
     "build-docs": "cd SQFormDocs && npm ci && npm run build"
   },

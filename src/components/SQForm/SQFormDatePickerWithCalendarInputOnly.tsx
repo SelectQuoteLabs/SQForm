@@ -6,7 +6,8 @@ import SQFormDatePicker, {SQFormDatePickerProps} from './SQFormDatePicker';
 import {useForm} from './useForm';
 import type {BaseFieldProps} from 'types';
 
-export interface SQFormDatePickerWithCalendarInputOnlyProps extends BaseFieldProps {
+export interface SQFormDatePickerWithCalendarInputOnlyProps
+  extends BaseFieldProps {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
