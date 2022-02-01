@@ -6,7 +6,7 @@ import SQFormInclusionListItem from './SQFormInclusionListItem';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
 import type {Option} from 'types';
 
-interface SQFormInclusionListProps {
+export interface SQFormInclusionListProps {
   /** the `name` must match the name of the desired array in `initialValues` */
   name: string;
   /** boolean flag to trigger usage of Select All functionality */
