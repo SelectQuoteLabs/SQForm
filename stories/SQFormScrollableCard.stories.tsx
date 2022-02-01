@@ -4,6 +4,14 @@ import * as Yup from 'yup';
 import {Paper} from '@material-ui/core';
 import {SQFormScrollableCard, SQFormTextField} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
+import type {GridProps} from '@material-ui/core';
+import type {CustomStory} from './types/storyHelperTypes';
+import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
+
+interface SQFormScrollableCardStoryProps<Values>
+  extends SQFormScrollableCardProps<Values> {
+  wrapper: React.ReactElement;
+}
 
 export default {
   title: 'Forms/SQFormScrollableCard',
@@ -18,24 +26,31 @@ export default {
   },
 };
 
+const alignItems: GridProps['alignItems'] = 'center';
+const spacing: GridProps['spacing'] = 2;
 const defaultArgs = {
   title: 'Default',
   initialValues: {hello: ''},
   muiGridProps: {
-    spacing: 2,
-    alignItems: 'center',
+    spacing,
+    alignItems,
   },
-  onSubmit: () => {},
+  onSubmit: () => {
+    /* do nothing */
+  },
   validationSchema: {hello: Yup.string().required()},
 };
 
-const Template = (args) => {
-  const {wrapper, validationSchema, ...restArgs} = args;
+const Template: CustomStory<
+  SQFormScrollableCardStoryProps<{[key: string]: unknown}>
+> = (args): React.ReactElement => {
+  const {wrapper, validationSchema, initialValues, ...restArgs} = args;
 
   const basicCard = (
-    <SQFormScrollableCard
+    <SQFormScrollableCard<typeof initialValues>
       validationSchema={validationSchema}
       shouldRequireFieldUpdates={true}
+      initialValues={initialValues}
       {...restArgs}
     >
       <SQFormTextField name="hello" label="Hello" size={12} />
@@ -87,7 +102,7 @@ WithSubHeader.args = {
   SubHeaderComponent: <SubHeader />,
 };
 
-const Wrapper = ({children}) => (
+const Wrapper = ({children}: {children?: React.ReactElement}) => (
   <div style={{height: '100%', overflow: 'hidden'}}>
     <Paper
       elevation={2}
