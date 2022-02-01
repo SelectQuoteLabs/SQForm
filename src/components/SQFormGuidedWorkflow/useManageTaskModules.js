@@ -22,19 +22,19 @@ export function useManageTaskModules(
     // Task Module agent is current viewing
     activeTaskModuleID: initialTaskModuleID,
     // Task Module the agent is progressed to (Agent can go to previous task modules, this tracks the total progress)
-    progressTaskModuleID: initialTaskModuleID
+    progressTaskModuleID: initialTaskModuleID,
   };
 
   const manageTaskModulesReducer = (prevState, action) => {
-    const isTaskIDTheFinalTask = prevTaskID => {
+    const isTaskIDTheFinalTask = (prevTaskID) => {
       return prevTaskID === taskModulesLength;
     };
 
-    const isTaskDisabled = taskID => {
+    const isTaskDisabled = (taskID) => {
       return taskModulesContext[taskID].isDisabled;
     };
 
-    const findNextTaskID = prevTaskID => {
+    const findNextTaskID = (prevTaskID) => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
         return;
       }
@@ -48,7 +48,7 @@ export function useManageTaskModules(
       return nextTaskID;
     };
 
-    const incrementTaskModuleID = prevTaskID => {
+    const incrementTaskModuleID = (prevTaskID) => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
         return prevTaskID;
       }
@@ -74,11 +74,11 @@ export function useManageTaskModules(
       return {
         ...prevState,
         activeTaskModuleID: incrementActiveTaskModuleID(),
-        progressTaskModuleID: incrementProgressTaskModuleID()
+        progressTaskModuleID: incrementProgressTaskModuleID(),
       };
     };
 
-    const updateActiveTaskModuleID = id => {
+    const updateActiveTaskModuleID = (id) => {
       const nextID = findNextTaskID(id);
 
       if (isTaskDisabled(nextID)) {
@@ -86,7 +86,7 @@ export function useManageTaskModules(
         return {
           ...prevState,
           activeTaskModuleID: nextTaskID,
-          progressTaskModuleID: nextTaskID
+          progressTaskModuleID: nextTaskID,
         };
       }
       return {...prevState, activeTaskModuleID: nextID};
@@ -114,11 +114,11 @@ export function useManageTaskModules(
     initialState
   );
 
-  const updateActiveTaskModule = taskNumber => {
+  const updateActiveTaskModule = (taskNumber) => {
     if (taskModulesState.activeTaskModuleID !== taskNumber) {
       updateTaskModulesState({
         type: 'UPDATE_ACTIVE_TASK_MODULE',
-        id: taskNumber
+        id: taskNumber,
       });
     }
   };
@@ -130,6 +130,6 @@ export function useManageTaskModules(
   return {
     taskModulesState,
     updateActiveTaskModule,
-    enableNextTaskModule
+    enableNextTaskModule,
   };
 }
