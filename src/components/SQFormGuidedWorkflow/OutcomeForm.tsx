@@ -1,22 +1,24 @@
 import React from 'react';
+import {Grid} from '@material-ui/core';
 import {Section, SectionBody} from 'scplus-shared-components';
-import {AdditionalInformationPropTypes} from './PropTypes';
 import Header from './Header';
+import type {OutcomeProps} from './Types';
 
-function AdditionalInformationSection({
-  actionButton,
+function OutcomeForm({
+  actions,
+  FormElements,
   title,
   infoText,
   warningText,
   errorText,
   successText,
   isFailedState,
-  Elements,
-}) {
+  muiGridProps = {},
+}: OutcomeProps): React.ReactElement {
   return (
     <Section>
       <Header
-        actionButton={actionButton}
+        actions={actions}
         title={title}
         infoText={infoText}
         warningText={warningText}
@@ -24,11 +26,13 @@ function AdditionalInformationSection({
         successText={successText}
         isFailedState={isFailedState}
       />
-      <SectionBody>{Elements}</SectionBody>
+      <SectionBody>
+        <Grid {...muiGridProps} container spacing={muiGridProps.spacing ?? 2}>
+          {FormElements}
+        </Grid>
+      </SectionBody>
     </Section>
   );
 }
 
-AdditionalInformationSection.propTypes = AdditionalInformationPropTypes;
-
-export default AdditionalInformationSection;
+export default OutcomeForm;

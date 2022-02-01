@@ -1,16 +1,25 @@
 import React from 'react';
+import type {
+  Context,
+  ManageTaskModulesActionType,
+  ManageTaskModulesState,
+  UseManageTaskModulesType,
+} from './Types';
 
-const getInitialTaskModuleID = (initialCompletedTasks, firstTaskModuleID) => {
-  if (!!initialCompletedTasks) {
+const getInitialTaskModuleID = (
+  initialCompletedTasks: number,
+  firstTaskModuleID: number
+) => {
+  if (initialCompletedTasks) {
     return initialCompletedTasks + 1;
   }
   return firstTaskModuleID;
 };
 
-export function useManageTaskModules(
-  initialCompletedTasks,
-  taskModulesContext
-) {
+export function useManageTaskModules<TValues>(
+  initialCompletedTasks: number,
+  taskModulesContext: Context<TValues>
+): UseManageTaskModulesType {
   const taskModulesLength = Object.keys(taskModulesContext).length;
   const firstTaskModuleID = Number(Object.keys(taskModulesContext)[0]);
   const initialTaskModuleID = getInitialTaskModuleID(
@@ -25,18 +34,25 @@ export function useManageTaskModules(
     progressTaskModuleID: initialTaskModuleID,
   };
 
-  const manageTaskModulesReducer = (prevState, action) => {
-    const isTaskIDTheFinalTask = (prevTaskID) => {
+  const manageTaskModulesReducer = (
+    prevState: ManageTaskModulesState,
+    action: ManageTaskModulesActionType
+  ): ManageTaskModulesState => {
+    const isTaskIDTheFinalTask = (prevTaskID: number | undefined) => {
       return prevTaskID === taskModulesLength;
     };
 
-    const isTaskDisabled = (taskID) => {
-      return taskModulesContext[taskID].isDisabled;
+    const isTaskDisabled = (taskID: number | undefined) => {
+      if (taskID) {
+        return taskModulesContext[taskID].isDisabled;
+      }
+
+      return true;
     };
 
-    const findNextTaskID = (prevTaskID) => {
+    const findNextTaskID = (prevTaskID: number): number => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
-        return;
+        return -1;
       }
 
       const nextTaskID = prevTaskID + 1;
@@ -48,14 +64,14 @@ export function useManageTaskModules(
       return nextTaskID;
     };
 
-    const incrementTaskModuleID = (prevTaskID) => {
+    const incrementTaskModuleID = (prevTaskID: number) => {
       if (isTaskIDTheFinalTask(prevTaskID)) {
         return prevTaskID;
       }
 
       const nextTaskModuleID = findNextTaskID(prevTaskID);
 
-      if (nextTaskModuleID) {
+      if (nextTaskModuleID !== -1) {
         return nextTaskModuleID;
       }
 
@@ -78,8 +94,13 @@ export function useManageTaskModules(
       };
     };
 
-    const updateActiveTaskModuleID = (id) => {
+    const updateActiveTaskModuleID = (id: number) => {
       const nextID = findNextTaskID(id);
+      if (nextID === -1) {
+        return {
+          ...prevState,
+        };
+      }
 
       if (isTaskDisabled(nextID)) {
         const nextTaskID = findNextTaskID(nextID);
@@ -114,7 +135,7 @@ export function useManageTaskModules(
     initialState
   );
 
-  const updateActiveTaskModule = (taskNumber) => {
+  const updateActiveTaskModule = (taskNumber: number) => {
     if (taskModulesState.activeTaskModuleID !== taskNumber) {
       updateTaskModulesState({
         type: 'UPDATE_ACTIVE_TASK_MODULE',

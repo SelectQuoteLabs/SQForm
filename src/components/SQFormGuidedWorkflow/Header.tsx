@@ -1,7 +1,7 @@
 import React from 'react';
 import {useFormikContext} from 'formik';
 import {SectionHeader} from 'scplus-shared-components';
-import {HeaderPropTypes} from './PropTypes';
+import type {HeaderProps} from './Types';
 
 const helperTextType = {
   info: 'info',
@@ -11,14 +11,14 @@ const helperTextType = {
 };
 
 function Header({
-  actionButton,
+  actions,
   title,
   infoText,
   warningText,
   errorText,
   successText,
   isFailedState = false,
-}) {
+}: HeaderProps): React.ReactElement {
   const {isValid, touched} = useFormikContext();
   const isFormTouched = Object.keys(touched).length;
 
@@ -53,7 +53,7 @@ function Header({
   };
 
   const getInformativeHeadingText = () => {
-    if (!shouldRenderInformativeHeading) {
+    if (!shouldRenderInformativeHeading || !informativeHeadingType) {
       return;
     }
 
@@ -66,11 +66,9 @@ function Header({
       informativeHeading={getInformativeHeadingText()}
       type={informativeHeadingType}
     >
-      {actionButton}
+      {actions}
     </SectionHeader>
   );
 }
-
-Header.propTypes = HeaderPropTypes;
 
 export default Header;

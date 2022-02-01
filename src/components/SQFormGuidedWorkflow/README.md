@@ -14,6 +14,9 @@ This section covers how to properly setup the configuration object array for the
 
 - [The Task Module Props](https://www.loom.com/share/ca6de9ff9cfc4faba4d500e8c244c5d9)
   > After recording this video I made a code change that added another prop to the task modules props, `isFailedState` -[The `isFailedState` Task Module Prop](https://www.loom.com/share/5a636e9ca7884bcf9697b00ba7f09da2)
+  > Changes were made that removed the following props: `isPanelExpanded` and `expandPanel`. See the Breaking Changes section of the project README for more information.
+  > The `actionButton` prop was renamed to `actions`. Functionality remains the same. See the Breaking Changes section of the project README for more information.
+
 
 ### Scripted Text Section
 
