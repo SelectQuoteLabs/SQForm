@@ -12,6 +12,7 @@ import {
   SQFormTextarea,
   SQFormTextField,
 } from '../src';
+import {Grid, Typography} from '@material-ui/core';
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -48,10 +49,8 @@ const Template = () => {
           outcome: '',
           notes: '',
         },
-        onSubmit: async (values, _formikBag, context) => {
+        onSubmit: async (values, _formikBag, _context) => {
           await sleep(3000); // Simulate API call to see loading spinner
-          console.log(values);
-          console.log(context);
           if (values.outcome === 'not-interested') {
             setIsModuleDisabled(true);
           } else {
@@ -62,6 +61,27 @@ const Template = () => {
           outcome: Yup.string().required(),
           notes: Yup.string(),
         },
+      },
+      additionalInformationSectionProps: {
+        Elements: (
+          <>
+            <Grid container={true}>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">Name: Bob Smith</Typography>
+              </Grid>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">Age: 76</Typography>
+              </Grid>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">
+                  Occupation: Dream Engineer
+                </Typography>
+              </Grid>
+            </Grid>
+          </>
+        ),
+        title: 'Customer Information',
+        infoText: 'This is suplmental information for the agent only.',
       },
       scriptedTextProps: {
         text: `Hi, ${scriptedTextMap.customerName}, my name is ${scriptedTextMap.agentName}, and I am calling to discuss ${scriptedTextMap.planName}.\n Are you available right now to talk through some things with me, today?`,
@@ -147,6 +167,44 @@ const Template = () => {
           outcome: Yup.string().required(),
           notes: Yup.string(),
         },
+      },
+      additionalInformationSectionProps: {
+        Elements: (
+          <>
+            <ul>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Cassidy Cole,&nbsp;
+                  <b>State</b>: Alaska,&nbsp;
+                  <b>Primary</b>: Yes,&nbsp;
+                </div>
+              </li>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Ana Amari,&nbsp;
+                  <b>State</b>: Hawaii,&nbsp;
+                  <b>Primary</b>: No,&nbsp;
+                </div>
+              </li>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Hana Song,&nbsp;
+                  <b>State</b>: Wisconsin,&nbsp;
+                  <b>Primary</b>: No,&nbsp;
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
+        title: 'Providers',
+        actionButton: (
+          <TextButton
+            tooltip="View"
+            onClick={() => window.alert('Awesome list here')}
+          >
+            View Full Providers List
+          </TextButton>
+        ),
       },
       scriptedTextProps: {
         text: 'Before proceeding, please verify the list of providers is correct',

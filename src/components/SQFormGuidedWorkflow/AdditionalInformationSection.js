@@ -1,9 +1,9 @@
 import React from 'react';
-import {Section, SectionBody, ScriptedText} from 'scplus-shared-components';
+import {Section, SectionBody} from 'scplus-shared-components';
+import {AdditionalInformationPropTypes} from './PropTypes';
 import Header from './Header';
-import {AgentScriptPropTypes} from './PropTypes';
 
-function AgentScript({
+function AdditionalInformationSection({
   actionButton,
   title,
   infoText,
@@ -11,7 +11,7 @@ function AgentScript({
   errorText,
   successText,
   isFailedState,
-  text,
+  Elements,
 }) {
   return (
     <Section>
@@ -24,13 +24,11 @@ function AgentScript({
         successText={successText}
         isFailedState={isFailedState}
       />
-      <SectionBody>
-        <ScriptedText text={text} />
-      </SectionBody>
+      <SectionBody>{Elements}</SectionBody>
     </Section>
   );
 }
 
-AgentScript.propTypes = AgentScriptPropTypes;
+AdditionalInformationSection.propTypes = AdditionalInformationPropTypes;
 
-export default AgentScript;
+export default AdditionalInformationSection;

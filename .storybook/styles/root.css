@@ -7,6 +7,7 @@
   --color-srtsGreen: #5a7e44;
   --color-teal: #017788;
   --color-lightTeal: #34a1b6;
+  --color-darkTeal: #004b5b;
   --color-frenchBleu: #0066ff;
   --color-oysterBay: #d9f1f4;
   --color-lightBlue: #ecf5f7;
@@ -96,11 +97,11 @@
   /* Button */
   --button-accent: var(--color-frenchBleu);
   --button-accent-hover: var(--color-button-frenchBleu-hover);
-  --button-primary: var(--color-teal);
+  --button-primary: var(--color-darkTeal);
   --button-primary-hover: var(--color-button-cerulean-hover);
   --button-primaryEmpty-hover: var(--color-oysterBay);
 
-  --button-secondary: var(--color-teal);
+  --button-secondary: var(--color-darkTeal);
   --button-secondary-hover: var(--color-button-teal-hover);
 
   --button-font-weight: var(--font-weight-semibold);

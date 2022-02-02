@@ -24,6 +24,14 @@ export const HeaderPropTypes = {
   isFailedState: PropTypes.bool,
 };
 
+export const AdditionalInformationPropTypes = {
+  Elements: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+  ...HeaderPropTypes,
+};
+
 export const AgentScriptPropTypes = {
   /** Scripted Text for the user to read */
   text: PropTypes.string.isRequired,
@@ -83,6 +91,10 @@ export const TaskModuleProps = {
   isSubmitButtonDisabled: PropTypes.bool,
   /** The props used to configure SQForm */
   formikProps: PropTypes.shape(FormikProps).isRequired,
+  /** The props used to configure the Additional Information section */
+  additionalInformationSectionProps: PropTypes.shape(
+    AdditionalInformationPropTypes
+  ),
   /** The props used to configure the Scripted Text section */
   scriptedTextProps: PropTypes.shape(AgentScriptPropTypes).isRequired,
   /** The props used to configure the Outcome form section */

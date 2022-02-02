@@ -1,3 +1,52 @@
+### [7.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.0...v7.2.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* 🐛 Revert es module support ([0b1ac8a](https://github.com/SelectQuoteLabs/SQForm/commit/0b1ac8a12bb64b6880888355aef792a86aa0e0d8)), closes [#602](https://github.com/SelectQuoteLabs/SQForm/issues/602)
+
+## [7.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.1...v7.2.0) (2022-01-28)
+
+
+### Features
+
+* 🎸 updated Roundbutton color and padding ([e0cfffc](https://github.com/SelectQuoteLabs/SQForm/commit/e0cfffc7848eb59dab15bbaebb933aca54029595))
+
+### [7.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.0...v7.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* 🐛 Support es modules ([609034c](https://github.com/SelectQuoteLabs/SQForm/commit/609034cc824c4623d35a5795adf6062a3d1ac800))
+
+## [7.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.5...v7.1.0) (2022-01-21)
+
+
+### Features
+
+* 🎸 SQFormGuidedWorkflow additional section ([#587](https://github.com/SelectQuoteLabs/SQForm/issues/587)) ([55ae824](https://github.com/SelectQuoteLabs/SQForm/commit/55ae82434101d0c1949593c24e5ca2eebcc7cc80)), closes [#586](https://github.com/SelectQuoteLabs/SQForm/issues/586)
+
+### [7.0.5](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.4...v7.0.5) (2022-01-20)
+
+
+### Bug Fixes
+
+* 🐛 Added ? operator and modified date clearance logic ([d719dab](https://github.com/SelectQuoteLabs/SQForm/commit/d719dabef48428d0ac7e2c6c90d7fa384624fa3b)), closes [#584](https://github.com/SelectQuoteLabs/SQForm/issues/584)
+
+### [7.0.4](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.3...v7.0.4) (2022-01-19)
+
+
+### Bug Fixes
+
+* 🐛 modified selectValues logic for required fields only      ([af8fe9b](https://github.com/SelectQuoteLabs/SQForm/commit/af8fe9b2a32c564ac529067233d487ff50e49881)), closes [#554](https://github.com/SelectQuoteLabs/SQForm/issues/554)
+
+### [7.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.2...v7.0.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* 🐛 Update scplus-shared-component version ([#523](https://github.com/SelectQuoteLabs/SQForm/issues/523)) ([64763ee](https://github.com/SelectQuoteLabs/SQForm/commit/64763ee1dcf765ae4d08c5ec0e29f25acab6a4af)), closes [#520](https://github.com/SelectQuoteLabs/SQForm/issues/520)
+
 ### [7.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.1...v7.0.2) (2022-01-10)
 
 

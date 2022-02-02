@@ -122,14 +122,18 @@ it('should not call onClose on `escape` keydown because cancel is not available'
 });
 
 it('should not find the cancel secondary button', async () => {
+  const dialogTitleValue = 'Test';
   render(
     <Default
       isOpen={true}
       onSave={handleSave}
       onClose={handleClose}
       showSecondaryButton={false}
+      title={dialogTitleValue}
     />
   );
+
+  await screen.findByText(dialogTitleValue);
 
   expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
 });

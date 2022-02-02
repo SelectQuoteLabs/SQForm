@@ -13,7 +13,7 @@ export default [
     input: 'src/index.ts',
     output: {
       file: pkg.main,
-      format: 'cjs'
+      format: 'cjs',
     },
     plugins: [
       typescript(),
@@ -23,7 +23,7 @@ export default [
       commonjs({include: /node_modules/}), // Transpiles CommonJS to ES2015, rollup chokes on CommonJS modules
       babel({exclude: /node_modules/, babelHelpers: 'bundled'}), // Transpiles JS code to JS supported by browsers
       css({output: false}), // Rollup doesn't know what to do with CSS
-      terser() // Minifies JS bundle
-    ]
-  }
+      terser(), // Minifies JS bundle
+    ],
+  },
 ];

@@ -10,7 +10,8 @@ interface TextFieldMaskProps extends React.HTMLAttributes<HTMLInputElement> {
   mask?: maskProp;
 }
 
-export interface SQFormMaskedReadOnlyFieldProps extends SQFormReadOnlyFieldProps {
+export interface SQFormMaskedReadOnlyFieldProps
+  extends SQFormReadOnlyFieldProps {
   /** Valid mask array; custom or from utils/masks.js */
   mask?: maskProp;
   /** Placeholder text used inside the input field to provide hints to the user */
