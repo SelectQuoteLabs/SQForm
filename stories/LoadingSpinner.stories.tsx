@@ -7,12 +7,15 @@ export default {
   component: LoadingSpinner,
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
+      page: createDocsPage(),
+    },
+  },
 };
 
-export const Default = args => {
-  return <LoadingSpinner {...args} />;
+export const Default = (
+  args: Record<string, unknown> & {message?: string}
+): JSX.Element => {
+  const {message} = args;
+  return <LoadingSpinner message={message} />;
 };
 Default.storyName = 'LoadingSpinner';
