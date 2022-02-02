@@ -31,6 +31,6 @@
     "./stories"
   ],
   "exclude": [
-    "**/*.test.ts"
+    "**/*.test(.ts|.tsx)"
   ]
 }
