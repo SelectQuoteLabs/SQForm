@@ -3,5 +3,5 @@ import selectQuoteTheme from './selectQuoteTheme';
 
 addons.setConfig({
   theme: selectQuoteTheme,
-  panelPosition: 'right'
+  panelPosition: 'right',
 });
