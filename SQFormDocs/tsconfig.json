@@ -2,10 +2,13 @@
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
     "jsx": "react",
     "lib": ["DOM"],
     "noEmit": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
-  "include": ["src/"]
+  "include": ["./src"]
 }
