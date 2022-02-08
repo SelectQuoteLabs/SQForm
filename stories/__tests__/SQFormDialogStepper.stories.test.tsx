@@ -10,10 +10,12 @@ const {
   WithValidation: SQFormDialogStepperWithValidation,
 } = composeStories(stories);
 
-window.alert = jest.fn();
+const mockAlert = jest.fn();
+
+window.alert = mockAlert;
 
 afterEach(() => {
-  window.alert.mockClear();
+  mockAlert.mockClear();
 });
 
 describe('SQFormDialogStepper Tests', () => {
