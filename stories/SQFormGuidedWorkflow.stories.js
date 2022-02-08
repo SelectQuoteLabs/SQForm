@@ -197,7 +197,7 @@ const Template = () => {
           </>
         ),
         title: 'Providers',
-        actionButton: (
+        actions: (
           <TextButton
             tooltip="View"
             onClick={() => window.alert('Awesome list here')}

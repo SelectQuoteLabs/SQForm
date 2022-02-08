@@ -58,7 +58,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     expect(nextButton).toBeDisabled();
   });
 
-  it('should enable next button when all required fields are filled out in the 1st section', () => {
+  it('should enable next button when all required fields are filled out in the 1st section', async () => {
     render(<SQFormGuidedWorkflow />);
 
     const nextButton = screen.getByRole('button', {name: /form submission/i});
@@ -70,7 +70,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const interested = screen.getByText('Interested');
     userEvent.click(interested);
 
-    expect(nextButton).toBeEnabled();
+    await waitFor(() => {
+      expect(nextButton).toBeEnabled();
+    });
   });
 
   it('should close current expanded card and open the next one when next button is clicked', async () => {
@@ -89,6 +91,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(interested);
 
     const nextButton = screen.getByRole('button', {name: /form submission/i});
+    await waitFor(() => {
+      expect(nextButton).toBeEnabled();
+    });
     userEvent.click(nextButton);
 
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
@@ -114,6 +119,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(interested);
 
     const nextButton = screen.getByRole('button', {name: /form submission/i});
+    await waitFor(() => {
+      expect(nextButton).toBeEnabled();
+    });
     userEvent.click(nextButton);
 
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
@@ -145,6 +153,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const interested = screen.getByText('Interested');
     userEvent.click(interested);
     const nextButton = screen.getByRole('button', {name: /form submission/i});
+    await waitFor(() => {
+      expect(nextButton).toBeEnabled();
+    });
     userEvent.click(nextButton);
     await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
       timeout: 3500,
@@ -195,6 +206,9 @@ describe('Testing new story', () => {
     userEvent.type(textbox, 'Hello');
 
     const nextButton = screen.getByRole('button', {name: /form submission/i});
+    await waitFor(() => {
+      expect(nextButton).toBeEnabled();
+    });
     userEvent.click(nextButton);
 
     await waitFor(

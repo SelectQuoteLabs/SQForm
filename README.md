@@ -40,6 +40,44 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 ## Breaking Changes
 
 ### Version `[Typescript Version]`
+
+#### SQFormGuidedWorkflow changes
+ - Removed TaskModule properties: `isPanelExpanded` and `expandPanel`
+
+
+ - In SQForm v`[Typescript Version]` `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
+
+```jsx
+// ⛔️ Example
+const taskModules = [
+  { ... },
+  { ... },
+  {
+    ...
+    scriptedTextProps: {
+      text: `Stuff about policy cancellation documents`,
+      title: 'Agent Script',
+      actionButton: <TextButton tooltip="View">View Doc</TextButton>, // This prop was renamed
+    },
+  }
+]
+
+// ✅ Example
+const taskModules = [
+  { ... },
+  { ... },
+  {
+    ...
+    scriptedTextProps: {
+      text: `Stuff about policy cancellation documents`,
+      title: 'Agent Script',
+      actions: <TextButton tooltip="View">View Doc</TextButton>, // This prop was renamed
+    },
+  }
+]
+```
+
+#### SQForm no longer allows `boolean`s as dropdown options
 In SQForm v`[Typescript Version]` support for `boolean` valued dropdown options was removed. Material-UI and HTML Select components do not support options with `boolean`s as values and causes type conflicts with our own library. Therefore, if you're upgrading this version and you using `boolean` values options you'll need to take care to update those. Below is our recommended changes.
 
 ```js

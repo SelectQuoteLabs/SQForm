@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Formik, Form} from 'formik';
+import type {FormikHelpers} from 'formik';
 import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
@@ -15,7 +16,7 @@ import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
-import {GuidedWorkflowProps} from './PropTypes';
+import type {SQFormDataProps, SQFormGuidedWorkflowProps} from './Types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -35,18 +36,7 @@ const getTaskModuleFormSchema = (validationSchema = {}) => {
   return Yup.object().shape(validationSchema);
 };
 
-// Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
-// There's a few open PR's on this issue, here's one for reference: https://github.com/formium/formik/pull/2933
-const getFormikInitialRequiredErrors = (validationSchema = {}) => {
-  Object.entries(validationSchema).reduce((acc, [key, value]) => {
-    if (value._exclusive?.required) {
-      return {...acc, [key]: 'Required'};
-    }
-    return acc;
-  }, {});
-};
-
-function SQFormGuidedWorkflow({
+function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   taskModules,
   mainTitle,
   mainSubtitle,
@@ -54,14 +44,33 @@ function SQFormGuidedWorkflow({
   isStrictMode = false,
   onError,
   containerStyles = {},
-}) {
+}: SQFormGuidedWorkflowProps<TValues>): React.ReactElement {
+  // Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
+  // There's a few open PR's on this issue, here's one for reference: https://github.com/formium/formik/pull/2933
+  const getFormikInitialRequiredErrors = (
+    validationSchema?: SQFormDataProps<TValues>['validationSchema']
+  ) => {
+    if (validationSchema) {
+      return Object.entries(validationSchema).reduce((acc, [key, value]) => {
+        if (value.tests[0]?.OPTIONS.name === 'required') {
+          return {...acc, [key]: 'Required'};
+        }
+        return acc;
+      }, {});
+    }
+
+    return {};
+  };
+
   const classes = useStyles();
 
-  const [taskModulesContext, updateTaskModuleContextByID] =
-    useGuidedWorkflowContext(taskModules);
+  const {
+    state: taskModulesContext,
+    updateDataByID: updateTaskModuleContextByID,
+  } = useGuidedWorkflowContext<TValues>(taskModules);
 
   const {taskModulesState, updateActiveTaskModule, enableNextTaskModule} =
-    useManageTaskModules(initialCompletedTasks, taskModulesContext);
+    useManageTaskModules<TValues>(initialCompletedTasks, taskModulesContext);
 
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
@@ -88,7 +97,10 @@ function SQFormGuidedWorkflow({
       return false;
     };
 
-    const handleSubmit = async (values, formikBag) => {
+    const handleSubmit = async (
+      values: TValues,
+      formikBag: FormikHelpers<TValues>
+    ) => {
       const context = {
         ...taskModulesContext,
         [taskNumber]: {
@@ -102,7 +114,7 @@ function SQFormGuidedWorkflow({
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {
-        onError(error);
+        onError && onError(error);
       }
     };
 
@@ -110,9 +122,12 @@ function SQFormGuidedWorkflow({
       ...taskModule,
       isDisabled: getIsDisabled(),
       isInitiallyExpanded: taskModule.isInitiallyExpanded || isPanelExpanded,
-      expandPanel: () => {}, // Faulty logic in the Accordion SSC requires precense of a function for isPanelExpanded to work
+      expandPanel: () => {
+        /* do nothing */
+      }, // Faulty logic in the Accordion SSC requires precense of a function for isPanelExpanded to work
       isPanelExpanded,
       onClick: () => {
+        taskModule?.onClick && taskModule.onClick();
         updateActiveTaskModule(taskNumber);
       },
       body: (
@@ -187,7 +202,5 @@ function SQFormGuidedWorkflow({
     </Section>
   );
 }
-
-SQFormGuidedWorkflow.propTypes = GuidedWorkflowProps;
 
 export default SQFormGuidedWorkflow;

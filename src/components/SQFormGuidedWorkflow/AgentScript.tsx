@@ -1,10 +1,10 @@
 import React from 'react';
 import {Section, SectionBody, ScriptedText} from 'scplus-shared-components';
 import Header from './Header';
-import {AgentScriptPropTypes} from './PropTypes';
+import type {AgentScriptProps} from './Types';
 
 function AgentScript({
-  actionButton,
+  actions,
   title,
   infoText,
   warningText,
@@ -12,11 +12,11 @@ function AgentScript({
   successText,
   isFailedState,
   text,
-}) {
+}: AgentScriptProps): React.ReactElement {
   return (
     <Section>
       <Header
-        actionButton={actionButton}
+        actions={actions}
         title={title}
         infoText={infoText}
         warningText={warningText}
@@ -30,7 +30,5 @@ function AgentScript({
     </Section>
   );
 }
-
-AgentScript.propTypes = AgentScriptPropTypes;
 
 export default AgentScript;
