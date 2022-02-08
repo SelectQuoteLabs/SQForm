@@ -21,7 +21,7 @@ describe('SQFormInclusionList Tests', () => {
   it('displays as checked when initial values are set', () => {
     render(<SQFormInclusionList />);
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
 
     const filteredCheckboxes = checkboxes.filter(
       (checkbox) => checkbox.checked
@@ -39,7 +39,7 @@ describe('SQFormInclusionList Tests', () => {
 
     render(<SQFormInclusionList sqFormProps={sqFormProps} />);
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
 
     const filteredCheckboxes = checkboxes.filter(
       (checkbox) => checkbox.checked
@@ -65,7 +65,7 @@ describe('SQFormInclusionList Tests', () => {
   it('checks all boxes when select all option is checked', () => {
     render(<SQFormInclusionList useSelectAll={true} />);
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
     const filteredCheckboxes = checkboxes.filter(
       (checkbox) => checkbox.checked
     );
@@ -81,7 +81,7 @@ describe('SQFormInclusionList Tests', () => {
   it('unchecks all boxes when select all is unchecked', () => {
     render(<SQFormInclusionList useSelectAll={true} />);
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
     const selectAllOption = screen.getByLabelText('ALL THE PEEPS');
     userEvent.click(selectAllOption);
 
