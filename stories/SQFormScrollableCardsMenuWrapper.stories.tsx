@@ -1,3 +1,4 @@
+import type {FormikHelpers} from 'formik';
 import React from 'react';
 import * as yup from 'yup';
 
@@ -17,18 +18,18 @@ export default {
   },
 };
 
-export const sqFormScrollableCardsMenuWrapper = () => {
+export const sqFormScrollableCardsMenuWrapper = (): React.ReactElement => {
   return (
     <div style={{width: '100%', height: '100%'}}>
       <SQFormScrollableCardsMenuWrapper title="[selected user]">
-        <ScrollableDetails label="Details" value="details" />
-        <ScrollablePermissions label="Permissions" value="permissions" />
+        <ScrollableDetails />
+        <ScrollablePermissions />
       </SQFormScrollableCardsMenuWrapper>
     </div>
   );
 };
 
-function ScrollableDetails() {
+function ScrollableDetails(): React.ReactElement {
   const initialValues = {
     name: '',
   };
@@ -37,10 +38,13 @@ function ScrollableDetails() {
     name: yup.string().required(),
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (
+    values: typeof initialValues,
+    formikHelpers: FormikHelpers<typeof initialValues>
+  ) => {
     window.alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
-    actions.resetForm();
+    formikHelpers.setSubmitting(false);
+    formikHelpers.resetForm();
   };
 
   return (
@@ -51,14 +55,13 @@ function ScrollableDetails() {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
-      title="notApplicableBecauseHeaderDisabled" // bug in SQFormScrollableCard bc it errors if no title prop even though it doesn't render its cardheader
     >
       <SQFormTextField name="name" label="Name" size={12} />
     </SQFormScrollableCard>
   );
 }
 
-function ScrollablePermissions() {
+function ScrollablePermissions(): React.ReactElement {
   const initialValues = {
     isAdmin: false,
   };
@@ -67,10 +70,13 @@ function ScrollablePermissions() {
     isAdmin: yup.boolean(),
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (
+    values: typeof initialValues,
+    formikHelpers: FormikHelpers<typeof initialValues>
+  ) => {
     window.alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
-    actions.resetForm();
+    formikHelpers.setSubmitting(false);
+    formikHelpers.resetForm();
   };
 
   return (
@@ -81,7 +87,6 @@ function ScrollablePermissions() {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
-      title="notApplicableBecauseHeaderDisabled"
     >
       <SQFormCheckbox name="isAdmin" label="Admin" size={12} />
     </SQFormScrollableCard>
