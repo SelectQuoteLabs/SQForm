@@ -458,7 +458,7 @@ export const formWithInclusionlist = (): JSX.Element => {
 
 export const basicFormWithMultiSelect = (): JSX.Element => {
   const validationSchema = {
-    friends: Yup.string().required(),
+    friends: Yup.array().of(Yup.string()).required().min(1, 'Required'),
   };
 
   return (
