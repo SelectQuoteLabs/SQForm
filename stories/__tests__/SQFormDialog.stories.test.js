@@ -170,7 +170,7 @@ describe('Tests for WithAutoFocus', () => {
 });
 
 describe('Tests for Tertiary Button', () => {
-  it('should find the tertiary button', async () => {
+  it('should display the tertiary button', async () => {
     const tertiaryButtonText = 'Tertiary Button';
     render(
       <Default
@@ -186,7 +186,7 @@ describe('Tests for Tertiary Button', () => {
     await screen.findByText(tertiaryButtonText);
   });
 
-  it('should not find the tertiary button', async () => {
+  it('should not display the tertiary button', async () => {
     const dialogTitleValue = 'Test';
     const tertiaryButtonText = 'Tertiary button';
 
