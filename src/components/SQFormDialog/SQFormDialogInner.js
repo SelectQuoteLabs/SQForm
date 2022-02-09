@@ -100,6 +100,48 @@ function SQFormDialogInner({
     closeDialogAlert();
   };
 
+  const renderTertiaryButton = () => {
+    return (
+      <Grid
+        container={true}
+        justify={showSecondaryButton ? 'space-between' : 'flex-end'}
+      >
+        {showSecondaryButton && (
+          <Grid item={true}>
+            <RoundedButton
+              title={cancelButtonText}
+              onClick={handleCancel}
+              color="secondary"
+              variant="outlined"
+            >
+              {cancelButtonText}
+            </RoundedButton>
+          </Grid>
+        )}
+
+        <Grid item={true}>
+          <span style={{marginRight: '10px'}}>
+            <SQFormButton
+              title={tertiaryButtonText}
+              isDisabled={isTertiaryDisabled}
+            >
+              {tertiaryButtonText}
+            </SQFormButton>
+          </span>
+          {onSave && (
+            <SQFormButton
+              title={saveButtonText}
+              isDisabled={isDisabled}
+              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+            >
+              {saveButtonText}
+            </SQFormButton>
+          )}
+        </Grid>
+      </Grid>
+    );
+  };
+
   return (
     <>
       <Dialog
@@ -127,56 +169,18 @@ function SQFormDialogInner({
               showSecondaryButton ? actionsClasses : primaryActionsClasses
             }
           >
-            {showTertiaryButton ? (
-              <Grid
-                container={true}
-                justify={showSecondaryButton ? 'space-between' : 'flex-end'}
-              >
-                {showSecondaryButton && (
-                  <Grid item={true}>
-                    <RoundedButton
-                      title={cancelButtonText}
-                      onClick={handleCancel}
-                      color="secondary"
-                      variant="outlined"
-                    >
-                      {cancelButtonText}
-                    </RoundedButton>
-                  </Grid>
+            {showTertiaryButton
+              ? renderTertiaryButton()
+              : showSecondaryButton && (
+                  <RoundedButton
+                    title={cancelButtonText}
+                    onClick={handleCancel}
+                    color="secondary"
+                    variant="outlined"
+                  >
+                    {cancelButtonText}
+                  </RoundedButton>
                 )}
-
-                <Grid item={true}>
-                  <span style={{marginRight: '10px'}}>
-                    <SQFormButton
-                      title={tertiaryButtonText}
-                      isDisabled={isTertiaryDisabled}
-                    >
-                      {tertiaryButtonText}
-                    </SQFormButton>
-                  </span>
-                  {onSave && (
-                    <SQFormButton
-                      title={saveButtonText}
-                      isDisabled={isDisabled}
-                      shouldRequireFieldUpdates={shouldRequireFieldUpdates}
-                    >
-                      {saveButtonText}
-                    </SQFormButton>
-                  )}
-                </Grid>
-              </Grid>
-            ) : (
-              showSecondaryButton && (
-                <RoundedButton
-                  title={cancelButtonText}
-                  onClick={handleCancel}
-                  color="secondary"
-                  variant="outlined"
-                >
-                  {cancelButtonText}
-                </RoundedButton>
-              )
-            )}
             {!showTertiaryButton && onSave && (
               <SQFormButton
                 title={saveButtonText}

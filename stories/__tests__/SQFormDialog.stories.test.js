@@ -171,6 +171,7 @@ describe('Tests for WithAutoFocus', () => {
 
 describe('Tests for Tertiary Button', () => {
   it('should display the tertiary button', async () => {
+    const dialogTitleValue = 'Test';
     const tertiaryButtonText = 'Tertiary Button';
     render(
       <Default
@@ -179,11 +180,19 @@ describe('Tests for Tertiary Button', () => {
         onClose={handleClose}
         showTertiaryButton={true}
         tertiaryButtonText={tertiaryButtonText}
-        title="Test"
+        title={dialogTitleValue}
       />
     );
 
-    await screen.findByText(tertiaryButtonText);
+    await screen.findByText(dialogTitleValue);
+
+    expect(
+      screen.getByRole('button', {name: tertiaryButtonText})
+    ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText(tertiaryButtonText)).toBeInTheDocument();
+    });
   });
 
   it('should not display the tertiary button', async () => {
