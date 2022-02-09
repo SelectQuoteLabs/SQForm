@@ -6,3 +6,4 @@ docs
 *.md
 .storybook
 .out
+.dts
