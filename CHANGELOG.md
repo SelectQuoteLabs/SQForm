@@ -1,3 +1,10 @@
+## [7.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.1...v7.3.0) (2022-02-10)
+
+
+### Features
+
+* 🎸 Add Third button to SQFormDialog ([#631](https://github.com/SelectQuoteLabs/SQForm/issues/631)) ([f8ae9f4](https://github.com/SelectQuoteLabs/SQForm/commit/f8ae9f480c3074a571c8f478a10e0518a6a5a13e)), closes [#629](https://github.com/SelectQuoteLabs/SQForm/issues/629)
+
 ### [7.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.0...v7.2.1) (2022-01-28)
 
 
