@@ -186,13 +186,12 @@ describe('Tests for Tertiary Button', () => {
 
     await screen.findByText(dialogTitleValue);
 
-    expect(
-      screen.getByRole('button', {name: tertiaryButtonText})
-    ).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getByText(tertiaryButtonText)).toBeInTheDocument();
+    const tertiaryButton = screen.getByRole('button', {
+      name: tertiaryButtonText,
     });
+
+    expect(tertiaryButton).toBeInTheDocument();
+    expect(tertiaryButton).toHaveTextContent(tertiaryButtonText);
   });
 
   it('should not display the tertiary button', async () => {
