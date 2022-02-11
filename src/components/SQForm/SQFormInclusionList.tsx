@@ -4,7 +4,7 @@ import type {GridProps} from '@material-ui/core';
 import {useFormikContext, FieldArray, FieldArrayRenderProps} from 'formik';
 import SQFormInclusionListItem from './SQFormInclusionListItem';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
-import type {Option} from 'types';
+import type {SQFormOption} from 'types';
 
 export interface SQFormInclusionListProps {
   /** the `name` must match the name of the desired array in `initialValues` */
@@ -12,7 +12,7 @@ export interface SQFormInclusionListProps {
   /** boolean flag to trigger usage of Select All functionality */
   useSelectAll?: boolean;
   /** array of items to put in the `name` array on 'select all' click */
-  selectAllData?: Option['value'][];
+  selectAllData?: SQFormOption['value'][];
   /** props for the Grid container wrapping the select all checkbox */
   selectAllContainerProps?: GridProps;
   /** props for the 'select all' SQFormInclusionListItem component */

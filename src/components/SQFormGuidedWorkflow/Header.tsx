@@ -1,7 +1,7 @@
 import React from 'react';
 import {useFormikContext} from 'formik';
 import {SectionHeader} from 'scplus-shared-components';
-import type {HeaderProps} from './Types';
+import type {SQFormGuidedWorkflowHeaderProps} from './Types';
 
 const helperTextType = {
   info: 'info',
@@ -18,7 +18,7 @@ function Header({
   errorText,
   successText,
   isFailedState = false,
-}: HeaderProps): React.ReactElement {
+}: SQFormGuidedWorkflowHeaderProps): React.ReactElement {
   const {isValid, touched} = useFormikContext();
   const isFormTouched = Object.keys(touched).length;
 

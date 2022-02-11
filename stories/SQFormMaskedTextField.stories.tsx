@@ -12,7 +12,7 @@ import type {Story} from '@storybook/react';
 import type {SQFormMaskedTextFieldProps} from 'components/SQForm/SQFormMaskedTextField';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 import type {AnySchema} from 'yup';
-import type {maskProp} from 'types';
+import type {Mask} from 'types';
 
 export default {
   title: 'Components/SQFormMaskedTextField',
@@ -34,7 +34,7 @@ type MaskedTextFieldStoryType = Story<
     size?: GridSizeOptions;
     sqFormProps?: SQFormStoryWrapperProps;
     schema: Record<string, AnySchema>;
-    exampleMasks: maskProp;
+    exampleMasks: Mask;
   }
 >;
 

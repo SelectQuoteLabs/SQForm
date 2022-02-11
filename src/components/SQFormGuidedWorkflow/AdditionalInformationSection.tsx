@@ -1,7 +1,7 @@
 import React from 'react';
 import {Section, SectionBody} from 'scplus-shared-components';
 import Header from './Header';
-import type {AdditionalInformationProps} from './Types';
+import type {SQFormGuidedWorkflowAdditionalInformationProps} from './Types';
 
 function AdditionalInformationSection({
   actions,
@@ -12,7 +12,7 @@ function AdditionalInformationSection({
   successText,
   isFailedState,
   Elements,
-}: AdditionalInformationProps): React.ReactElement {
+}: SQFormGuidedWorkflowAdditionalInformationProps): React.ReactElement {
   return (
     <Section>
       <Header

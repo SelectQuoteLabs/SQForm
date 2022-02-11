@@ -1,4 +1,4 @@
 import type {maskArray} from 'react-text-mask';
-type maskProp = maskArray | ((value: string) => maskArray);
+type Mask = maskArray | ((value: string) => maskArray);
 
-export default maskProp;
+export default Mask;

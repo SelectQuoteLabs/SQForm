@@ -1,7 +1,7 @@
 import React from 'react';
 import {Section, SectionBody, ScriptedText} from 'scplus-shared-components';
 import Header from './Header';
-import type {AgentScriptProps} from './Types';
+import type {SQFormGuidedWorkflowAgentScriptProps} from './Types';
 
 function AgentScript({
   actions,
@@ -12,7 +12,7 @@ function AgentScript({
   successText,
   isFailedState,
   text,
-}: AgentScriptProps): React.ReactElement {
+}: SQFormGuidedWorkflowAgentScriptProps): React.ReactElement {
   return (
     <Section>
       <Header

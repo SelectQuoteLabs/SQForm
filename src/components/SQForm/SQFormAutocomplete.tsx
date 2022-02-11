@@ -13,12 +13,12 @@ import {VariableSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
-import type {BaseFieldProps, Option, optionValue} from 'types';
+import type {BaseFieldProps, SQFormOption} from 'types';
 import {useForm} from './useForm';
 
 export interface SQFormAutocompleteProps extends BaseFieldProps {
   /** Dropdown menu options to select from */
-  children: Option[];
+  children: SQFormOption[];
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Required property used to highlight input and label if not fulfilled */
@@ -30,13 +30,13 @@ export interface SQFormAutocompleteProps extends BaseFieldProps {
   /** Custom onChange event callback */
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    selectedValue: optionValue,
+    selectedValue: SQFormOption['value'],
     reason: AutocompleteChangeReason
   ) => void;
   /** Custom onInputChange event callback (key pressed) */
   onInputChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    value: optionValue
+    value: SQFormOption['value']
   ) => void;
   /** Lock width of the dropdown to the width of the field in the form */
   lockWidthToField?: boolean;
@@ -192,8 +192,8 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
 );
 
 const getInitialValue = (
-  children: Option[],
-  value: optionValue,
+  children: SQFormOption[],
+  value: SQFormOption['value'],
   displayEmpty: boolean
 ) => {
   const optionInitialValue = children?.find((option) => {
@@ -354,7 +354,9 @@ function SQFormAutocomplete({
         disableClearable={isDisabled}
         disabled={isDisabled}
         getOptionLabel={(option) => option.label || ''}
-        getOptionDisabled={(option: Option) => option?.isDisabled || false}
+        getOptionDisabled={(option: SQFormOption) =>
+          option?.isDisabled || false
+        }
         renderInput={(params) => {
           return (
             <TextField

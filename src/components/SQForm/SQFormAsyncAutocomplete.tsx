@@ -10,7 +10,7 @@ import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import type {Option} from 'types';
+import type {SQFormOption} from 'types';
 import {
   ListboxVirtualizedComponentProps,
   OuterElementContextInterface,
@@ -221,7 +221,7 @@ function SQFormAsyncAutocomplete({
         inputValue={inputValue}
         disabled={isDisabled}
         getOptionLabel={(option) => option.label}
-        getOptionDisabled={(option: Option) => option.isDisabled || false}
+        getOptionDisabled={(option: SQFormOption) => option.isDisabled || false}
         renderInput={(params) => {
           return (
             <TextField

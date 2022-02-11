@@ -1,12 +1,12 @@
-export type optionValue = string | number;
+export type SQFormOptionValue = string | number;
 
-interface Option {
+interface SQFormOption {
   /** Label of the option */
   label: string;
   /** Value of the option */
-  value: optionValue;
+  value: SQFormOptionValue;
   /** Whether the option is disabled */
   isDisabled?: boolean;
 }
 
-export default Option;
+export default SQFormOption;

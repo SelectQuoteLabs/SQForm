@@ -1,20 +1,20 @@
 import {useFormikContext} from 'formik';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-import type {maskProp} from 'types';
+import type {Mask} from 'types';
 import SQFormTextField from './SQFormTextField';
 import type {SQFormTextFieldProps} from './SQFormTextField';
 
 export interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {
   /** Valid mask array; custom or from utils/masks.js */
-  mask?: maskProp;
+  mask?: Mask;
   /** Whether the submitted value from the input should have all non-numeric characters removed */
   stripNonNumeric?: boolean;
 }
 
 interface TextFieldMaskProps extends React.HTMLAttributes<HTMLInputElement> {
   inputRef?: (ref: HTMLElement | null) => void;
-  mask?: maskProp;
+  mask?: Mask;
 }
 
 function TextFieldMask({

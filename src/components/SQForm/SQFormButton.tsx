@@ -3,7 +3,7 @@ import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import type {ButtonType} from './useFormButton';
 
-export interface Props {
+export interface SQFormButtonProps {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
@@ -19,7 +19,7 @@ function SQFormButton({
   title,
   type = 'submit',
   onClick,
-}: Props): JSX.Element {
+}: SQFormButtonProps): JSX.Element {
   const isResetButton = type === BUTTON_TYPES.RESET;
   const {isButtonDisabled, handleReset, handleClick} = useFormButton({
     isDisabled,
