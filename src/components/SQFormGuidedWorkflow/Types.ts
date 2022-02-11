@@ -52,7 +52,7 @@ export interface SQFormDataProps<TValues> {
     context: Context<TValues>
   ) => void | Promise<unknown>;
   /** Yup validation schema shape */
-  validationSchema: Record<
+  validationSchema?: Record<
     keyof TValues,
     AnySchema<TValues[keyof TValues] | null | undefined>
   >;
@@ -66,7 +66,7 @@ export interface TaskModuleProps<TValues> {
   /** The props used to configure SQForm */
   formikProps: SQFormDataProps<TValues>;
   /** The props used to configured the Additional Information section */
-  additionalInformationSectionProps: AdditionalInformationProps;
+  additionalInformationSectionProps?: AdditionalInformationProps;
   /** The props used to configure the Scripted Text section */
   scriptedTextProps: AgentScriptProps;
   /** The props used to configure the Outcome form section */
@@ -93,7 +93,9 @@ export interface TaskModuleProps<TValues> {
   isSubmitButtonDisabled?: boolean;
 }
 
-export interface SQFormGuidedWorkflowProps<TValues> {
+export interface SQFormGuidedWorkflowProps<
+  TValues extends {[key: string]: unknown}
+> {
   /** Main Title */
   mainTitle: string;
   /** Main Subtitle Informative Text */
