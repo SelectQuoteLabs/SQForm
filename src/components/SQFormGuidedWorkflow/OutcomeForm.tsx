@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid} from '@material-ui/core';
 import {Section, SectionBody} from 'scplus-shared-components';
 import Header from './Header';
-import type {OutcomeProps} from './Types';
+import type {SQFormGuidedWorkflowOutcomeProps} from './Types';
 
 function OutcomeForm({
   actions,
@@ -14,7 +14,7 @@ function OutcomeForm({
   successText,
   isFailedState,
   muiGridProps = {},
-}: OutcomeProps): React.ReactElement {
+}: SQFormGuidedWorkflowOutcomeProps): React.ReactElement {
   return (
     <Section>
       <Header

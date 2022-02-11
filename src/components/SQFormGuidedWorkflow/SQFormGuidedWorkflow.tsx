@@ -16,7 +16,10 @@ import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
-import type {SQFormDataProps, SQFormGuidedWorkflowProps} from './Types';
+import type {
+  SQFormGuidedWorkflowDataProps,
+  SQFormGuidedWorkflowProps,
+} from './Types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -48,7 +51,7 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   // Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
   // There's a few open PR's on this issue, here's one for reference: https://github.com/formium/formik/pull/2933
   const getFormikInitialRequiredErrors = (
-    validationSchema?: SQFormDataProps<TValues>['validationSchema']
+    validationSchema?: SQFormGuidedWorkflowDataProps<TValues>['validationSchema']
   ) => {
     if (validationSchema) {
       return Object.entries(validationSchema).reduce((acc, [key, value]) => {

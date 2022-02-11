@@ -3,7 +3,7 @@ import type {GridProps} from '@material-ui/core';
 import type {FormikHelpers} from 'formik';
 import type {AnySchema} from 'yup';
 
-export interface HeaderProps {
+export interface SQFormGuidedWorkflowHeaderProps {
   /** Title to display in the section header */
   title: string;
   /** Optional elements to display in the section header */
@@ -26,30 +26,33 @@ export interface HeaderProps {
   isFailedState?: boolean;
 }
 
-export interface AdditionalInformationProps extends HeaderProps {
+export interface SQFormGuidedWorkflowAdditionalInformationProps
+  extends SQFormGuidedWorkflowHeaderProps {
   Elements: React.ReactElement;
 }
 
-export interface AgentScriptProps extends HeaderProps {
+export interface SQFormGuidedWorkflowAgentScriptProps
+  extends SQFormGuidedWorkflowHeaderProps {
   /** Scripted Text for the user to read */
   text: string;
 }
 
-export interface OutcomeProps extends HeaderProps {
+export interface SQFormGuidedWorkflowOutcomeProps
+  extends SQFormGuidedWorkflowHeaderProps {
   /** SQForm Elements to render inside the Form */
   FormElements: React.ReactElement;
   /** Any props from MUI <Grid> component */
   muiGridProps?: GridProps;
 }
 
-export interface SQFormDataProps<TValues> {
+export interface SQFormGuidedWorkflowDataProps<TValues> {
   /** Form Entity Object aka initial values of the form */
   initialValues: TValues;
   /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag, context) => void | Promise<any> */
   onSubmit: (
     values: TValues,
     formikBag: FormikHelpers<TValues>,
-    context: Context<TValues>
+    context: SQFormGuidedWorkflowContext<TValues>
   ) => void | Promise<unknown>;
   /** Yup validation schema shape */
   validationSchema?: Record<
@@ -58,19 +61,19 @@ export interface SQFormDataProps<TValues> {
   >;
 }
 
-export interface TaskModuleProps<TValues> {
+export interface SQFormGuidedWorkflowTaskModuleProps<TValues> {
   /** Unique name used as a key for managing expansion state within Accordion */
   name: string;
   /** Title text */
   title: string;
   /** The props used to configure SQForm */
-  formikProps: SQFormDataProps<TValues>;
+  formikProps: SQFormGuidedWorkflowDataProps<TValues>;
   /** The props used to configured the Additional Information section */
-  additionalInformationSectionProps?: AdditionalInformationProps;
+  additionalInformationSectionProps?: SQFormGuidedWorkflowAdditionalInformationProps;
   /** The props used to configure the Scripted Text section */
-  scriptedTextProps: AgentScriptProps;
+  scriptedTextProps: SQFormGuidedWorkflowAgentScriptProps;
   /** The props used to configure the Outcome form section */
-  outcomeProps: OutcomeProps;
+  outcomeProps: SQFormGuidedWorkflowOutcomeProps;
   /** Subtitle text - Each Subtitle is separated by a pipe "|" */
   subtitles?: Array<string>;
   /** Panel is disabled, the user cannot toggle the panel while disabled */
@@ -101,7 +104,7 @@ export interface SQFormGuidedWorkflowProps<
   /** Main Subtitle Informative Text */
   mainSubtitle: string;
   /** Task Module configuration Object(s) */
-  taskModules: Array<TaskModuleProps<TValues>>;
+  taskModules: Array<SQFormGuidedWorkflowTaskModuleProps<TValues>>;
   /** Number of tasks completed (Default is zero) */
   initialCompletedTasks?: number;
   /**
@@ -118,50 +121,10 @@ export interface SQFormGuidedWorkflowProps<
   containerStyles?: React.CSSProperties;
 }
 
-export type GuidedWorkflowDispatchActionType<TValues> = {
-  type: 'UPDATE';
-  id: number;
-  data: TValues;
-};
-
-export type ManageTaskModulesUpdateActionType = {
-  type: 'UPDATE_ACTIVE_TASK_MODULE';
-  id: number;
-};
-
-export type ManageTaskModulesNextActionType = {
-  type: 'ENABLE_NEXT_TASK_MODULE';
-};
-
-export type ManageTaskModulesResetActionType = {
-  type: 'RESET_TO_INITIAL_STATE';
-};
-
-export type ManageTaskModulesActionType =
-  | ManageTaskModulesUpdateActionType
-  | ManageTaskModulesNextActionType
-  | ManageTaskModulesResetActionType;
-
-export type ManageTaskModulesState = {
-  activeTaskModuleID: number;
-  progressTaskModuleID: number;
-};
-
-export type Context<TValues> = {
+export type SQFormGuidedWorkflowContext<TValues> = {
   [key: number]: {
     name: string;
     data: TValues;
     isDisabled: boolean;
   };
-};
-
-export type UseGuidedWorkflowContextType<TValues> = {
-  state: Context<TValues>;
-  updateDataByID: (id: number, data: TValues) => void;
-};
-
-export type UseManageTaskModulesType = {
-  taskModulesState: ManageTaskModulesState;
-  updateActiveTaskModule: (taskNumber: number) => void;
-  enableNextTaskModule: () => void;
 };

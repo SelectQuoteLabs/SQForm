@@ -15,7 +15,7 @@ import {
 import {Grid, Typography} from '@material-ui/core';
 import type {FormikHelpers} from 'formik';
 import type {
-  Context,
+  SQFormGuidedWorkflowContext,
   SQFormGuidedWorkflowProps,
 } from 'components/SQFormGuidedWorkflow/Types';
 import type {CustomStory} from './types/storyHelperTypes';
@@ -66,7 +66,7 @@ const Template: CustomStory<
         onSubmit: async (
           values: typeof initialValues,
           _formikBag: FormikHelpers<typeof initialValues>,
-          _context: Context<typeof initialValues>
+          _context: SQFormGuidedWorkflowContext<typeof initialValues>
         ) => {
           await sleep(3000); // Simulate API call to see loading spinner
           if (values.outcome === 'not-interested') {
@@ -130,7 +130,7 @@ const Template: CustomStory<
         onSubmit: async (
           values: typeof initialValues,
           _formikBag: FormikHelpers<typeof initialValues>,
-          context: Context<typeof initialValues>
+          context: SQFormGuidedWorkflowContext<typeof initialValues>
         ) => {
           console.log(values);
           console.log(context);
@@ -178,7 +178,7 @@ const Template: CustomStory<
         onSubmit: async (
           values: typeof initialValues,
           _formikBag: FormikHelpers<typeof initialValues>,
-          context: Context<typeof initialValues>
+          context: SQFormGuidedWorkflowContext<typeof initialValues>
         ) => {
           console.log(values);
           console.log(context);

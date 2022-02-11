@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import type {Story, Meta} from '@storybook/react';
 import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
-import type {Props as ButtonProps} from 'components/SQForm/SQFormButton';
+import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -26,7 +26,7 @@ const defaultArgs = {
 // prevents synthetic event warnings
 const handleClick = (event: React.FormEvent) => event.persist();
 
-export const Default: Story<ButtonProps> = (args) => {
+export const Default: Story<SQFormButtonProps> = (args) => {
   return (
     <SQFormStoryWrapper
       initialValues={{}}
@@ -40,7 +40,7 @@ export const Default: Story<ButtonProps> = (args) => {
 };
 Default.args = defaultArgs;
 
-export const WithTestField: Story<ButtonProps> = (args) => {
+export const WithTestField: Story<SQFormButtonProps> = (args) => {
   return (
     <SQFormStoryWrapper
       initialValues={{testField: ''}}

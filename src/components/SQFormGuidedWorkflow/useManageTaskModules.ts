@@ -1,10 +1,34 @@
 import React from 'react';
-import type {
-  Context,
-  ManageTaskModulesActionType,
-  ManageTaskModulesState,
-  UseManageTaskModulesType,
-} from './Types';
+import type {SQFormGuidedWorkflowContext} from './Types';
+
+type ManageTaskModulesUpdateActionType = {
+  type: 'UPDATE_ACTIVE_TASK_MODULE';
+  id: number;
+};
+
+type ManageTaskModulesNextActionType = {
+  type: 'ENABLE_NEXT_TASK_MODULE';
+};
+
+type ManageTaskModulesResetActionType = {
+  type: 'RESET_TO_INITIAL_STATE';
+};
+
+type UseManageTaskModulesType = {
+  taskModulesState: ManageTaskModulesState;
+  updateActiveTaskModule: (taskNumber: number) => void;
+  enableNextTaskModule: () => void;
+};
+
+type ManageTaskModulesActionType =
+  | ManageTaskModulesUpdateActionType
+  | ManageTaskModulesNextActionType
+  | ManageTaskModulesResetActionType;
+
+type ManageTaskModulesState = {
+  activeTaskModuleID: number;
+  progressTaskModuleID: number;
+};
 
 const getInitialTaskModuleID = (
   initialCompletedTasks: number,
@@ -18,7 +42,7 @@ const getInitialTaskModuleID = (
 
 export function useManageTaskModules<TValues>(
   initialCompletedTasks: number,
-  taskModulesContext: Context<TValues>
+  taskModulesContext: SQFormGuidedWorkflowContext<TValues>
 ): UseManageTaskModulesType {
   const taskModulesLength = Object.keys(taskModulesContext).length;
   const firstTaskModuleID = Number(Object.keys(taskModulesContext)[0]);

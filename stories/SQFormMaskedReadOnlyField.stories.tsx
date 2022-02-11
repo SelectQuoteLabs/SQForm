@@ -6,19 +6,19 @@ import {
   MASKS,
   SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent,
 } from '../src';
-import type { maskProp } from 'types';
-import type { SQFormMaskedReadOnlyFieldProps } from '../src/components/SQForm/SQFormMaskedReadOnlyField';
+import type {Mask} from 'types';
+import type {SQFormMaskedReadOnlyFieldProps} from '../src/components/SQForm/SQFormMaskedReadOnlyField';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
 
 type SQFormMaskedReadOnlyFieldStory = CustomStory<
   SQFormMaskedReadOnlyFieldProps & {
-    exampleMasks: maskProp;
+    exampleMasks: Mask;
   }
-> 
+>;
 
-const meta: Meta ={ 
+const meta: Meta = {
   title: 'Components/SQFormMaskedReadOnlyField',
   component: SQFormMaskedReadOnlyFieldComponent,
   argTypes: {
@@ -56,7 +56,6 @@ const Template: SQFormMaskedReadOnlyFieldStory = (args) => {
   );
 };
 
-
 export const Default = Template.bind({});
 Default.storyName = 'SQFormMaskedTextField';
 Default.args = defaultArgs;
@@ -73,4 +72,3 @@ Default.argTypes = {
 };
 
 export default meta;
-
