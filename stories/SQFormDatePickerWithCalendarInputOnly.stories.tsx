@@ -1,11 +1,11 @@
-import { Meta } from '@storybook/react';
-import type { SQFormDatePickerWithCalendarInputOnlyProps } from 'components/SQForm/SQFormDatePickerWithCalendarInputOnly';
-import moment from 'moment';
+import {Meta} from '@storybook/react';
+import type {SQFormDatePickerWithCalendarInputOnlyProps} from 'components/SQForm/SQFormDatePickerWithCalendarInputOnly';
+import type {Moment} from 'moment';
 import React from 'react';
 import * as Yup from 'yup';
 import {SQFormDatePickerWithCalendarInputOnly as SQFormDatePickerWithCalendarInputOnlyComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import type { CustomStory } from './types/storyHelperTypes';
+import type {CustomStory} from './types/storyHelperTypes';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
 
@@ -15,29 +15,29 @@ const meta: Meta = {
   argTypes: {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
-    docs: {page: createDocsPage()}
-  }
+    docs: {page: createDocsPage()},
+  },
 };
 
 const MOCK_INITIAL_STATE = {
-  date: '12/01/1990'
+  date: '12/01/1990',
 };
 
 const basicSchema = {
-  date: Yup.date()
-    .required()
-    .typeError('Invalid date')
+  date: Yup.date().required().typeError('Invalid date'),
 };
 
 const defaultArgs = {
   label: 'Date',
-  name: 'date'
+  name: 'date',
 };
 
-const Template: CustomStory<SQFormDatePickerWithCalendarInputOnlyProps> = args => {
+const Template: CustomStory<SQFormDatePickerWithCalendarInputOnlyProps> = (
+  args
+) => {
   return (
     <SQFormStoryWrapper
       initialValues={MOCK_INITIAL_STATE}
@@ -58,25 +58,25 @@ export const DisableWeekendsDatePicker = Template.bind({});
 DisableWeekendsDatePicker.args = {
   ...defaultArgs,
   setDisabledDate: (date) => {
-    const inputDate = date as moment.Moment;
+    const inputDate = date as Moment;
     if (inputDate.day() === 0 || inputDate.day() === 6) {
       return true;
     }
     return false;
-  }
+  },
 };
 
 export const OnlyEnableFirstDayOfMonthDatePicker = Template.bind({});
 OnlyEnableFirstDayOfMonthDatePicker.args = {
   ...defaultArgs,
-  setDisabledDate: date => {
+  setDisabledDate: (date) => {
     // disable all days EXCEPT first day of the month
-    const inputDate = date as moment.Moment;
+    const inputDate = date as Moment;
     if (inputDate.date() !== 1) {
       return true;
     }
     return false;
-  }
+  },
 };
 
 export default meta;

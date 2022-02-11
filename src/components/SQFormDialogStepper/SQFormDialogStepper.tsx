@@ -19,13 +19,14 @@ import type {
   DialogContentProps,
 } from '@material-ui/core';
 import * as Yup from 'yup';
+import type {AnySchema} from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
 import type {FormikHelpers} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
 import type {TransitionProps} from '@material-ui/core/transitions';
 
-interface SQFormDialogStepProps<Values> {
+export interface SQFormDialogStepProps<Values> {
   /** The content to be rendered in the step body. */
   children?: JSX.Element | Array<JSX.Element>;
   /** Should the loading spinner be shown */
@@ -35,7 +36,7 @@ interface SQFormDialogStepProps<Values> {
   /** The label to display in the stepper */
   label?: string;
   /** Validation schema for this step */
-  validationSchema?: Record<keyof Values, Yup.AnySchema>;
+  validationSchema?: Record<keyof Values, AnySchema>;
 }
 
 export function SQFormDialogStep<Values extends Record<string, unknown>>({

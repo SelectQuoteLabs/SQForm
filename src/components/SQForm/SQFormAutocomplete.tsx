@@ -13,7 +13,7 @@ import {VariableSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
-import type {BaseFieldProps, SQFormOption} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 import {useForm} from './useForm';
 
 export interface SQFormAutocompleteProps extends BaseFieldProps {

@@ -5,7 +5,7 @@ import {useFormikContext} from 'formik';
 import type {FormikProps} from 'formik';
 import {useForm} from './useForm';
 import type {TextFieldProps} from '@material-ui/core';
-import type {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from '../../types';
 import {toKebabCase} from '../../utils';
 
 export interface SQFormTextareaProps extends BaseFieldProps {

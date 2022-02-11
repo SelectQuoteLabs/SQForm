@@ -34,7 +34,7 @@ const helperStateMap = {
   valid: 'valid',
 };
 
-interface SQFormHelperTextProps {
+export interface SQFormHelperTextProps {
   isFailedState?: boolean;
   errorText?: string;
   failText?: string;

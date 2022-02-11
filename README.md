@@ -35,7 +35,21 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 ## Consuming
 
-- `> npm install @selectquotelabs/sqform`
+This is a Typescript library and therefore relies on Typescript types from libraries other than this one. The libraries who's types SQForm relies on are marked as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies) if the library is also required for non-type imports. Otherwise, they're marked as an [optional dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#optionaldependencies).
+
+By default in NPM v7 and above peer dependencies will be installed automatically. You can check your npm version using `npm --version` to determine the version you are using. If your version is not at least v7 you must install the peer dependencies manually.
+
+Optional dependencies are always installed but can be omitted by using `npm install --no-optional` when installing this package.
+
+- Using NPM v7 or greater
+  - `> npm install @selectquotelabs/sqform`
+
+- Using NPM v6 and below
+  - `> npm install @selectquotelabs/sqform`
+  - Install peer dependencies manually
+
+- To omit optional dependencies
+  - `> npm install @selectquotelabs/sqform --no-optional`
 
 ## Breaking Changes
 
@@ -43,7 +57,6 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 #### SQFormGuidedWorkflow changes
  - Removed TaskModule properties: `isPanelExpanded` and `expandPanel`
-
 
  - In SQForm v`[Typescript Version]` `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
 

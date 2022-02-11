@@ -10,7 +10,7 @@ import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import type {SQFormOption} from 'types';
+import type {SQFormOption} from '../../types';
 import {
   ListboxVirtualizedComponentProps,
   OuterElementContextInterface,

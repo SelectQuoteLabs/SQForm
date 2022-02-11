@@ -1,6 +1,7 @@
 import {action} from '@storybook/addon-actions';
 import React from 'react';
 import * as Yup from 'yup';
+import {AnySchema} from 'yup';
 
 import {SQFormAsyncAutocomplete} from '../src';
 import getSizeProp from './utils/getSizeProp';
@@ -19,7 +20,7 @@ type SQFormAsyncAutocompleteStory = Story<
   Omit<SQFormAsyncAutocompleteProps, 'size'> & {
     size?: GridSizeOptions;
     sqFormProps?: FormProps;
-    schema: Record<string, Yup.AnySchema>;
+    schema: Record<string, AnySchema>;
   }
 >;
 

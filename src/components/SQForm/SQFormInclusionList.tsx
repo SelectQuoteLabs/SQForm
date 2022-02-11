@@ -4,7 +4,7 @@ import type {GridProps} from '@material-ui/core';
 import {useFormikContext, FieldArray, FieldArrayRenderProps} from 'formik';
 import SQFormInclusionListItem from './SQFormInclusionListItem';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
-import type {SQFormOption} from 'types';
+import type {SQFormOption} from '../../types';
 
 export interface SQFormInclusionListProps {
   /** the `name` must match the name of the desired array in `initialValues` */

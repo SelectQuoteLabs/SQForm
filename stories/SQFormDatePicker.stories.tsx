@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
+import type {AnySchema} from 'yup';
 import {SQFormDatePicker as SQFormDatePickerComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
@@ -15,7 +16,7 @@ export type FormProps = {
 export type SQFormDatePickerStory = Story<
   Omit<SQFormDatePickerProps, 'label' | 'name'> & {
     sqFormProps?: FormProps;
-    schema: Record<string, Yup.AnySchema>;
+    schema: Record<string, AnySchema>;
   }
 >;
 

@@ -14,7 +14,7 @@ setLocale({
   },
 });
 
-interface SQFormProps<Values extends Record<string, unknown>> {
+export interface SQFormProps<Values extends Record<string, unknown>> {
   /** Form Input(s) */
   children: React.ReactNode;
   /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */

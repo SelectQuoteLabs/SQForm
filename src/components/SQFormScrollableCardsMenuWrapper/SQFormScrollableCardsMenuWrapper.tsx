@@ -50,7 +50,7 @@ function getSelectedComponent(
   return children;
 }
 
-interface SQFormScrollableCardsMenuWrapperProps {
+export interface SQFormScrollableCardsMenuWrapperProps {
   /** At least one instance of SQFormScrollableCard where each has
    * prop `isHeaderDisabled` === true
    * AND

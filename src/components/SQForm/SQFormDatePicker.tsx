@@ -1,12 +1,12 @@
 import React from 'react';
-import moment from 'moment';
+import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DatePicker} from '@material-ui/pickers';
 import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
 import type {InputBaseComponentProps} from '@material-ui/core';
-import type {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from '../../types';
 import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
@@ -30,14 +30,14 @@ export interface SQFormDatePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: (date: moment.Moment | null) => void;
+  onChange?: (date: Moment | null) => void;
   /** Disable specific date(s) (day: DateIOType) => boolean
    * This is a predicate function called for every day of the month
    * Return true to disable that day or false to enable that day
    */
   setDisabledDate?: (day: unknown) => boolean;
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDatePickerProps<moment.Moment>;
+  muiFieldProps?: BaseDatePickerProps<Moment>;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
   /** Props provided to the Input component. Most commonly used for adornments. */
@@ -67,12 +67,12 @@ function SQFormDatePicker({
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm<moment.Moment | null, moment.Moment | null>({
+  } = useForm<Moment | null, Moment | null>({
     name,
     onBlur,
   });
 
-  const handleChange = (date: moment.Moment | null) => {
+  const handleChange = (date: Moment | null) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };
