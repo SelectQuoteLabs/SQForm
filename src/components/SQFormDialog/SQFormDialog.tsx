@@ -3,6 +3,7 @@ import {Formik} from 'formik';
 import type {FormikHelpers} from 'formik';
 import type {DialogProps, GridProps} from '@material-ui/core';
 import * as Yup from 'yup';
+import type {AnySchema} from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
@@ -51,7 +52,7 @@ export interface SQFormDialogProps<Values> {
    * */
   validationSchema: Record<
     keyof Values,
-    Yup.AnySchema<Values[keyof Values] | null | undefined>
+    AnySchema<Values[keyof Values] | null | undefined>
   >;
 }
 

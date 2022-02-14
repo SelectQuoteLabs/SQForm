@@ -1,10 +1,11 @@
 import React from 'react';
 import ClearIcon from '@material-ui/icons/HighlightOff';
 import {useFormikContext} from 'formik';
+import type {Moment} from 'moment';
 import {IconButton, makeStyles} from '@material-ui/core';
 import SQFormDatePicker, {SQFormDatePickerProps} from './SQFormDatePicker';
 import {useForm} from './useForm';
-import type {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from '../../types';
 
 export interface SQFormDatePickerWithCalendarInputOnlyProps
   extends BaseFieldProps {
@@ -65,14 +66,13 @@ function SQFormDatePickerWithCalendarInputOnly({
   });
   const clearButtonClasses = useClearButtonStyles();
   const calendarButtonClasses = useCalendarButtonStyles();
-  const {values, setFieldValue} =
-    useFormikContext<{[name: string]: moment.Moment}>();
+  const {values, setFieldValue} = useFormikContext<{[name: string]: Moment}>();
 
   const clearField = () => {
     setFieldValue(name, '');
   };
 
-  const handleChange = (date: moment.Moment | null) => {
+  const handleChange = (date: Moment | null) => {
     helpers.setValue(date);
     onChange && onChange(date);
   };

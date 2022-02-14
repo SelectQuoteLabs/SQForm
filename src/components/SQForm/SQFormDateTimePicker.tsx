@@ -1,12 +1,12 @@
 import React from 'react';
-import moment from 'moment';
+import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DateTimePicker} from '@material-ui/pickers';
 import type {BaseDateTimePickerProps} from '@material-ui/pickers';
 import {ClickAwayListener, makeStyles} from '@material-ui/core';
 import {useForm} from './useForm';
-import type {BaseFieldProps} from 'types';
+import type {BaseFieldProps} from '../../types';
 import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
 export interface SQFormDateTimePickerProps extends BaseFieldProps {
@@ -17,9 +17,9 @@ export interface SQFormDateTimePickerProps extends BaseFieldProps {
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Custom onChange event callback */
-  onChange?: (date: moment.Moment | null) => void;
+  onChange?: (date: Moment | null) => void;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDateTimePickerProps<moment.Moment>;
+  muiFieldProps?: BaseDateTimePickerProps<Moment>;
 }
 
 const useStyles = makeStyles(() => ({
@@ -47,7 +47,7 @@ function SQFormDateTimePicker({
     formikField: {field, helpers},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm<moment.Moment | null, unknown>({
+  } = useForm<Moment | null, unknown>({
     name,
     onBlur,
   });
@@ -64,10 +64,10 @@ function SQFormDateTimePicker({
   const classes = useStyles();
 
   // An empty string will not reset the DatePicker so we have to pass null
-  const value: ParsableDate<moment.Moment> | null =
-    (field.value as ParsableDate<moment.Moment>) ?? null;
+  const value: ParsableDate<Moment> | null =
+    (field.value as ParsableDate<Moment>) ?? null;
 
-  const handleChange = (date: moment.Moment | null): void => {
+  const handleChange = (date: Moment | null): void => {
     helpers.setValue(date);
     onChange && onChange(date);
   };

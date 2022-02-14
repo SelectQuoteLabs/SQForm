@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {FormControlLabel} from '@material-ui/core';
 import type {RadioProps} from '@material-ui/core';
 
-interface SQFormRadioButtonGroupItemProps {
+export interface SQFormRadioButtonGroupItemProps {
   /** Value of the radio button */
   value: string | boolean | number;
   /** Label for the radio button */

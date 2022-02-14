@@ -4,7 +4,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import type {CheckboxProps} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
-import type {SQFormOption} from 'types';
+import type {SQFormOption} from '../../types';
 
 const useStyles = makeStyles((theme) => ({
   checkboxGroupItem: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface SQFormCheckboxGroupItemProps {
+export interface SQFormCheckboxGroupItemProps {
   /** The name of the group this checkbox is a part of */
   groupName: string;
   /** Label for the checkbox */

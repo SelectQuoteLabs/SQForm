@@ -21,7 +21,7 @@ import {
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
-import type {BaseFieldProps, SQFormOption} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormMultiSelectProps extends BaseFieldProps {
   /** Multiselect options to select from */

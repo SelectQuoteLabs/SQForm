@@ -9,6 +9,7 @@ import {
   makeStyles,
   TypographyVariant,
 } from '@material-ui/core';
+import type {AnySchema} from 'yup';
 import type {GridProps} from '@material-ui/core';
 import {Formik, Form, FormikHelpers} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
@@ -71,7 +72,7 @@ export interface SQFormScrollableCardProps<Values> {
    * */
   validationSchema?: Record<
     keyof Values,
-    Yup.AnySchema<Values[keyof Values] | null | undefined>
+    AnySchema<Values[keyof Values] | null | undefined>
   >;
   /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled?: boolean;

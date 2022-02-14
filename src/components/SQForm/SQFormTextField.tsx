@@ -3,7 +3,8 @@ import {TextField} from '@material-ui/core';
 import type {TextFieldProps, InputProps} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import type {BaseFieldProps, Mask} from 'types';
+import type Mask from '../../types/MaskTypes';
+import type {BaseFieldProps} from '../../types';
 
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';

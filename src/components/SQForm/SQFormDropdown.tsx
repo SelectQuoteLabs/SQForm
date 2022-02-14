@@ -16,7 +16,7 @@ import {
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
-import type {BaseFieldProps, SQFormOption} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormDropdownProps extends BaseFieldProps {
   /** Dropdown options to select from */

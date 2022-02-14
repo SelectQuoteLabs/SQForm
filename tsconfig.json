@@ -17,7 +17,7 @@
     "jsx": "react",
     "declaration": true,
     "declarationDir": ".dts",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
   },
   "include": ["./src", "./jest-setup.ts", "./stories"],
   "exclude": ["**/*.test(.ts|.tsx)"]

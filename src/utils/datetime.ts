@@ -1,4 +1,5 @@
 import moment from 'moment';
+import type {Moment} from 'moment';
 
 export const DATE_TIME_FORMATS = {
   DATABASE_FORMAT: 'YYYY-MM-DD HH:mm:ss.SSS', // Possibly not needed
@@ -30,7 +31,7 @@ export const DATE_TIME_FORMATS = {
  * @returns {string} The date/time as a utc ISO string
  */
 export function getDateWithoutTimezone(
-  dateTime: moment.Moment | string,
+  dateTime: Moment | string,
   fromFormat: string
 ): string {
   if (!dateTime) {
@@ -52,9 +53,9 @@ export function getDateWithoutTimezone(
  * @returns {Moment} A Moment object converted to local browser time
  */
 export function applyBrowserTimezoneToDate(
-  dateTime: moment.Moment | string,
+  dateTime: Moment | string,
   fromFormat: string
-): moment.Moment {
+): Moment {
   if (!dateTime) {
     dateTime = moment();
   }
@@ -75,7 +76,7 @@ export function applyBrowserTimezoneToDate(
  * @returns {string} The date/time as a utc ISO string
  */
 export function clientMomentToSpecialServerFormat(
-  dateTime: moment.Moment | string,
+  dateTime: Moment | string,
   toFormat: string,
   fromFormat: string
 ): string {
@@ -96,9 +97,7 @@ export function clientMomentToSpecialServerFormat(
  * @param {string} date - the string date time to convert.
  * @returns {Moment} - a Moment date time object.
  */
-export function getDateAsMomentIfValid(
-  date: string
-): moment.Moment | undefined {
+export function getDateAsMomentIfValid(date: string): Moment | undefined {
   if (!date) {
     return undefined;
   }
