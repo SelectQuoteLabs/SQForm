@@ -51,14 +51,69 @@ Optional dependencies are always installed but can be omitted by using `npm inst
 - To omit optional dependencies
   - `> npm install @selectquotelabs/sqform --no-optional`
 
-## Breaking Changes
+## Upgrading/Breaking Changes
 
-### Version `[Typescript Version]`
+### Version 8
+
+#### Upgraded `Yup` peer dependency version
+ - Yup was upgraded from `^0.28.3` to `^0.32.9`, see [Yup's breaking changes](https://github.com/jquense/yup/blob/master/CHANGELOG.md)
+   - `array().required()` will no longer consider an empty array missing and required checks will pass.
+
+```jsx
+// ⛔️ Example
+const validationSchema = {
+  friends: Yup.array().required('Required')
+}
+
+// ✅  Example
+const validationSchema = {
+  friends: Yup.array().required('Required').min(1, 'Atleast one required')
+}
+```
+
+#### SQFormDialog changes
+ - `onSave` is now a required prop
+ - New prop `shouldDisplaySaveButton` dictates whether the "Save" button will be shown in the dialog footer. Previously that was handled by the truthiness of `onSave`
+
+ ```jsx
+// ⛔️ Example
+return (
+  // "Save" button is not displayed
+  <SQFormDialog
+    isOpen={true}
+    onClose={closeSQFormDialog}
+    title="Title"
+    initialValues={{}}
+    validationSchema={{}}
+    {/* Missing `onSave`*/}
+  >
+    {...}
+  </SQFormDialog>
+)
+ ```
+
+```jsx
+// ✅  Example
+return (
+  // "Save" button is not displayed
+  <SQFormDialog
+    isOpen={true}
+    onClose={closeSQFormDialog}
+    title="Title"
+    initialValues={{}}
+    validationSchema={{}}
+    onSave={() => {}} /* `onSave` supplied */
+    shouldDisplaySaveButton={false} /* Prevents save button from being displayed */
+  >
+    {...}
+  </SQFormDialog>
+)
+ ```
 
 #### SQFormGuidedWorkflow changes
  - Removed TaskModule properties: `isPanelExpanded` and `expandPanel`
 
- - In SQForm v`[Typescript Version]` `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
+ - In SQForm v8 `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
 
 ```jsx
 // ⛔️ Example
@@ -91,7 +146,7 @@ const taskModules = [
 ```
 
 #### SQForm no longer allows `boolean`s as dropdown options
-In SQForm v`[Typescript Version]` support for `boolean` valued dropdown options was removed. Material-UI and HTML Select components do not support options with `boolean`s as values and causes type conflicts with our own library. Therefore, if you're upgrading this version and you using `boolean` values options you'll need to take care to update those. Below is our recommended changes.
+In SQForm v8 support for `boolean` valued dropdown options was removed. Material-UI and HTML Select components do not support options with `boolean`s as values and causes type conflicts with our own library. Therefore, if you're upgrading this version and you using `boolean` values options you'll need to take care to update those. Below is our recommended changes.
 
 ```js
 // ⛔️ Example
