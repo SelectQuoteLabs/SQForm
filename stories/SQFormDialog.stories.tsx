@@ -127,4 +127,27 @@ WithDatePickers.args = {
   },
 };
 
+export const WithTertiaryButton: SQFormDialogStory = (args) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormTextField name="hello" label="Hello" />
+      </SQFormDialog>
+    </>
+  );
+};
+WithTertiaryButton.args = {
+  ...defaultArgs,
+  initialValues: {
+    hello: ''
+  },
+  title: 'With Tertiary Button',
+  showTertiaryButton: true,
+  tertiaryButtonText: 'Tertiary Button',
+};
+
 export default meta;
