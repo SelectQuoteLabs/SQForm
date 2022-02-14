@@ -32,6 +32,12 @@ export interface SQFormDialogProps<Values> {
   ) => void | Promise<unknown>;
   /** Determine if the secondary action button should be displayed (default: true) */
   showSecondaryButton?: boolean;
+  /** Whether to show the tertiary button. (Default: false) */
+  showTertiaryButton?: boolean;
+  /** The tertiary button text */
+  tertiaryButtonText?: string;
+  /** Whether the tertiary button is disabled (Default: false) */
+  isTertiaryDisabled?: boolean;
   /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton?: boolean;
   /** The primary button text (Button located on right side of Dialog) */
@@ -68,12 +74,15 @@ function SQFormDialog<Values>({
   showSecondaryButton = true,
   shouldDisplaySaveButton = true,
   saveButtonText = 'Save',
+  tertiaryButtonText,
   title,
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
   validationSchema,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -109,6 +118,9 @@ function SQFormDialog<Values>({
         title={title}
         muiGridProps={muiGridProps}
         showSecondaryButton={showSecondaryButton}
+        showTertiaryButton={showTertiaryButton}
+        tertiaryButtonText={tertiaryButtonText}
+        isTertiaryDisabled={isTertiaryDisabled}
       />
     </Formik>
   );

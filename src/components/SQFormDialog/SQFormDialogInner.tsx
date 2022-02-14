@@ -48,6 +48,12 @@ interface SQFormDialogInnerProps {
   muiGridProps?: GridProps;
   /** Determine if the secondary action button should be displayed */
   showSecondaryButton?: boolean;
+  /** Whether to show the tertiary button. (Default: false) */
+  showTertiaryButton?: boolean;
+  /** The tertiary button text */
+  tertiaryButtonText?: string;
+  /** Whether the tertiary button is disabled (Default: false) */
+  isTertiaryDisabled?: boolean;
 }
 
 /*
@@ -107,10 +113,13 @@ function SQFormDialogInner({
   onClose,
   shouldDisplaySaveButton = true,
   saveButtonText,
+  tertiaryButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
   showSecondaryButton = true,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
 }: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -142,6 +151,48 @@ function SQFormDialogInner({
     closeDialogAlert();
   };
 
+  const renderTertiaryButton = () => {
+    return (
+      <Grid
+        container={true}
+        justify={showSecondaryButton ? 'space-between' : 'flex-end'}
+      >
+        {showSecondaryButton && (
+          <Grid item={true}>
+            <RoundedButton
+              title={cancelButtonText}
+              onClick={handleCancel}
+              color="secondary"
+              variant="outlined"
+            >
+              {cancelButtonText}
+            </RoundedButton>
+          </Grid>
+        )}
+
+        <Grid item={true}>
+          <span style={{marginRight: '10px'}}>
+            <SQFormButton
+              title={tertiaryButtonText}
+              isDisabled={isTertiaryDisabled}
+            >
+              {tertiaryButtonText}
+            </SQFormButton>
+          </span>
+          {shouldDisplaySaveButton && (
+            <SQFormButton
+              title={saveButtonText}
+              isDisabled={isDisabled}
+              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+            >
+              {saveButtonText}
+            </SQFormButton>
+          )}
+        </Grid>
+      </Grid>
+    );
+  };
+
   return (
     <>
       <Dialog
@@ -169,17 +220,19 @@ function SQFormDialogInner({
               showSecondaryButton ? actionsClasses : primaryActionsClasses
             }
           >
-            {showSecondaryButton && (
-              <RoundedButton
-                title={cancelButtonText}
-                onClick={handleCancel}
-                color="secondary"
-                variant="outlined"
-              >
-                {cancelButtonText}
-              </RoundedButton>
-            )}
-            {shouldDisplaySaveButton && (
+            {showTertiaryButton
+              ? renderTertiaryButton()
+              : showSecondaryButton && (
+                  <RoundedButton
+                    title={cancelButtonText}
+                    onClick={handleCancel}
+                    color="secondary"
+                    variant="outlined"
+                  >
+                    {cancelButtonText}
+                  </RoundedButton>
+                )}
+            {!showTertiaryButton && shouldDisplaySaveButton && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}

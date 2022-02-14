@@ -169,3 +169,48 @@ describe('Tests for WithAutoFocus', () => {
     expect(textfield).toBe(document.activeElement);
   });
 });
+
+describe('Tests for Tertiary Button', () => {
+  it('should display the tertiary button', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary Button';
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        showTertiaryButton={true}
+        tertiaryButtonText={tertiaryButtonText}
+        title={dialogTitleValue}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    const tertiaryButton = screen.getByRole('button', {
+      name: tertiaryButtonText,
+    });
+
+    expect(tertiaryButton).toBeInTheDocument();
+    expect(tertiaryButton).toHaveTextContent(tertiaryButtonText);
+  });
+
+  it('should not display the tertiary button', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary button';
+
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        title={dialogTitleValue}
+        tertiaryButtonText={tertiaryButtonText}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    expect(screen.queryByText(tertiaryButtonText)).toBeNull();
+  });
+});
