@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import Autocomplete, {
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import type {
   AutocompleteChangeReason,
   AutocompleteRenderInputParams,
 } from '@material-ui/lab/Autocomplete';

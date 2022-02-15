@@ -7,19 +7,20 @@ import {
   CardActions,
   Grid,
   makeStyles,
-  TypographyVariant,
 } from '@material-ui/core';
+import type {TypographyVariant, GridProps} from '@material-ui/core';
 import type {AnySchema} from 'yup';
-import type {GridProps} from '@material-ui/core';
-import {Formik, Form, FormikHelpers} from 'formik';
+import {Formik, Form} from 'formik';
+import type {FormikHelpers} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
+import {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
 
 export interface SQFormScrollableCardProps<Values> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
-  cardContentStyles?: React.CSSProperties;
+  cardContentStyles?: CreateCSSProperties;
   /** Form related Field(s) and components */
   children: React.ReactNode;
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
