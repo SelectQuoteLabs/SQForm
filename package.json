@@ -72,10 +72,6 @@
   "license": "MIT",
   "homepage": "https://github.com/SelectQuoteLabs/SQForm#readme",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.5.1",
-    "@material-ui/lab": "^4.0.0-alpha.46",
-    "@material-ui/pickers": "^4.0.0-alpha.12",
     "@selectquotelabs/sqhooks": "^2.1.0",
     "@tippy.js/react": "^3.1.1",
     "ag-grid-community": "^25.2.1",
@@ -171,7 +167,7 @@
     "storybook-addon-material-ui": "^0.9.0-alpha.24",
     "ts-jest": "^26.5.6",
     "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "typescript": ">=4.2.4 <4.5.0"
   },
   "browserslist": "last 2 Chrome versions",
   "bugs": {

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
 import type {GridProps} from '@material-ui/core';
-import {useFormikContext, FieldArray, FieldArrayRenderProps} from 'formik';
+import {useFormikContext, FieldArray} from 'formik';
+import type {FieldArrayRenderProps} from 'formik';
 import SQFormInclusionListItem from './SQFormInclusionListItem';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
 import type {SQFormOption} from '../../types';

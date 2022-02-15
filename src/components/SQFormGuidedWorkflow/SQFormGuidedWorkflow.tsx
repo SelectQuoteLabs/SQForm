@@ -117,7 +117,7 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {
-        onError && onError(error);
+        onError && onError(error as Error);
       }
     };
 

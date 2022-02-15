@@ -6,9 +6,8 @@ import {
   Tooltip,
   makeStyles,
 } from '@material-ui/core';
-import Autocomplete, {
-  AutocompleteChangeReason,
-} from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import type {AutocompleteChangeReason} from '@material-ui/lab/Autocomplete';
 import {VariableSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
