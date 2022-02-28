@@ -1,3 +1,10 @@
+## [7.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.3.0...v7.4.0) (2022-02-28)
+
+
+### Features
+
+* 🎸 Add "onTertiaryClick" click handler to SQFormDialog ([8718a4f](https://github.com/SelectQuoteLabs/SQForm/commit/8718a4f01e4083a0038782c73450a1da739c9817)), closes [#643](https://github.com/SelectQuoteLabs/SQForm/issues/643)
+
 ## [7.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.1...v7.3.0) (2022-02-10)
 
 
