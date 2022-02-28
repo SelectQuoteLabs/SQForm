@@ -25,6 +25,7 @@ function SQFormDialog({
   showSecondaryButton = true,
   showTertiaryButton = false,
   isTertiaryDisabled = false,
+  onTertiaryClick,
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -63,6 +64,7 @@ function SQFormDialog({
         showTertiaryButton={showTertiaryButton}
         tertiaryButtonText={tertiaryButtonText}
         isTertiaryDisabled={isTertiaryDisabled}
+        onTertiaryClick={onTertiaryClick}
       />
     </Formik>
   );
@@ -110,6 +112,8 @@ SQFormDialog.propTypes = {
   tertiaryButtonText: PropTypes.string,
   /** The current disabled state of the Tertiary Button */
   isTertiaryDisabled: PropTypes.bool,
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick: PropTypes.func,
 };
 
 export default SQFormDialog;

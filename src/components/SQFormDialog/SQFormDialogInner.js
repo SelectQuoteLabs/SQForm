@@ -72,6 +72,7 @@ function SQFormDialogInner({
   showSecondaryButton = true,
   showTertiaryButton = false,
   isTertiaryDisabled = false,
+  onTertiaryClick,
 }) {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -120,10 +121,12 @@ function SQFormDialogInner({
         )}
 
         <Grid item={true}>
-          <span style={{marginRight: '10px'}}>
+          <span style={{paddingRight: '20px'}}>
             <SQFormButton
               title={tertiaryButtonText}
               isDisabled={isTertiaryDisabled}
+              onClick={onTertiaryClick}
+              type="button"
             >
               {tertiaryButtonText}
             </SQFormButton>
@@ -241,6 +244,8 @@ SQFormDialogInner.propTypes = {
   showTertiaryButton: PropTypes.bool,
   /** The current disabled state of the Tertiary Button */
   isTertiaryDisabled: PropTypes.bool,
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick: PropTypes.func,
 };
 
 export default SQFormDialogInner;
