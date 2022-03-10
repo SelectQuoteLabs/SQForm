@@ -60,6 +60,8 @@ export interface SQFormDialogProps<Values> {
     keyof Values,
     AnySchema<Values[keyof Values] | null | undefined>
   >;
+    /** Callback function invoked when the user clicks the tertiary button */
+    onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function SQFormDialog<Values>({
@@ -83,6 +85,7 @@ function SQFormDialog<Values>({
   validationSchema,
   showTertiaryButton = false,
   isTertiaryDisabled = false,
+  onTertiaryClick,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -121,6 +124,7 @@ function SQFormDialog<Values>({
         showTertiaryButton={showTertiaryButton}
         tertiaryButtonText={tertiaryButtonText}
         isTertiaryDisabled={isTertiaryDisabled}
+        onTertiaryClick={onTertiaryClick}
       />
     </Formik>
   );

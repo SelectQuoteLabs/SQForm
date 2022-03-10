@@ -28,6 +28,7 @@ const meta: Meta = {
   component: SQFormDialog,
   argTypes: {
     onSave: {action: 'onSave', table: {disable: true}},
+    onTertiaryClick: {action: 'onTertiaryClick', table: {disable: true}},
     onClose: {action: 'onClose', table: {disable: true}},
     children: {table: {disable: true}},
     validationSchema: {table: {disable: true}},

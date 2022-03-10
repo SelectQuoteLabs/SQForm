@@ -54,6 +54,8 @@ interface SQFormDialogInnerProps {
   tertiaryButtonText?: string;
   /** Whether the tertiary button is disabled (Default: false) */
   isTertiaryDisabled?: boolean;
+    /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /*
@@ -120,6 +122,7 @@ function SQFormDialogInner({
   showSecondaryButton = true,
   showTertiaryButton = false,
   isTertiaryDisabled = false,
+  onTertiaryClick,
 }: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -171,10 +174,12 @@ function SQFormDialogInner({
         )}
 
         <Grid item={true}>
-          <span style={{marginRight: '10px'}}>
+          <span style={{paddingRight: '20px'}}>
             <SQFormButton
               title={tertiaryButtonText}
               isDisabled={isTertiaryDisabled}
+              onClick={onTertiaryClick}
+              type="button"
             >
               {tertiaryButtonText}
             </SQFormButton>
