@@ -54,7 +54,7 @@ interface SQFormDialogInnerProps {
   tertiaryButtonText?: string;
   /** Whether the tertiary button is disabled (Default: false) */
   isTertiaryDisabled?: boolean;
-    /** Callback function invoked when the user clicks the tertiary button */
+  /** Callback function invoked when the user clicks the tertiary button */
   onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 

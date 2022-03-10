@@ -60,8 +60,8 @@ export interface SQFormDialogProps<Values> {
     keyof Values,
     AnySchema<Values[keyof Values] | null | undefined>
   >;
-    /** Callback function invoked when the user clicks the tertiary button */
-    onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function SQFormDialog<Values>({
