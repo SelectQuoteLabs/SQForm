@@ -1,8 +1,6 @@
 import {action} from '@storybook/addon-actions';
 import React from 'react';
 import * as Yup from 'yup';
-import {AnySchema} from 'yup';
-
 import {SQFormAsyncAutocomplete} from '../src';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
@@ -20,7 +18,7 @@ type SQFormAsyncAutocompleteStory = Story<
   Omit<SQFormAsyncAutocompleteProps, 'size'> & {
     size?: GridSizeOptions;
     sqFormProps?: FormProps;
-    schema: Record<string, AnySchema>;
+    schema: SQFormStoryWrapperProps['validationSchema'];
   }
 >;
 
@@ -95,9 +93,9 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     [defaultArgs.name]: Yup.string().required(),
-  },
+  }),
 };
 WithValidation.parameters = {
   controls: {exclude: 'schema'},

@@ -1,4 +1,5 @@
 import React from 'react';
+import type {AnyObjectSchema} from 'yup';
 import Grid from '@material-ui/core/Grid';
 import type {GridProps} from '@material-ui/core';
 import {SQForm, SQFormButton} from '../../src';
@@ -8,12 +9,11 @@ import {
   useSnackbar,
 } from 'scplus-shared-components';
 import type {FormikValues} from 'formik';
-import type {AnySchema} from 'yup';
 
 export interface SQFormStoryWrapperProps {
   children: React.ReactNode;
   initialValues: FormikValues;
-  validationSchema?: Record<string, AnySchema>;
+  validationSchema?: AnyObjectSchema;
   muiGridProps?: GridProps;
   showSubmit?: boolean;
 }

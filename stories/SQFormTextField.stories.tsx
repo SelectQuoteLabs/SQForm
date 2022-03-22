@@ -59,9 +59,9 @@ WithValidation.args = {
   ...defaultArgs,
   isRequired: true,
   SQFormProps: {
-    validationSchema: {
+    validationSchema: Yup.object({
       [defaultArgs.name]: Yup.string().required('Required'),
-    },
+    }),
   },
 };
 WithValidation.parameters = {

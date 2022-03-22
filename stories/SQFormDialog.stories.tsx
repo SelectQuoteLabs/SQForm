@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import type {Story, Meta} from '@storybook/react';
-import type { GridItemsAlignment, GridSpacing } from '@material-ui/core';
+import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
 
 import {
   SQFormDialog,
@@ -10,18 +10,20 @@ import {
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
-import type { SQFormDialogProps } from 'components/SQFormDialog/SQFormDialog';
+import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 import {createDocsPage} from './utils/createDocsPage';
 
-type DefaultArgsValues = { hello: string };
-type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>
+type DefaultArgsValues = {hello: string};
+type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>;
 
 type WithDatePickersValues = {
-  datePicker: string,
-  dateTimePicker: string,
-  datePickerCalendarOnly: string,
-}
-type SQFormDialogWithDatePickersStory = Story<SQFormDialogProps<WithDatePickersValues>>;
+  datePicker: string;
+  dateTimePicker: string;
+  datePickerCalendarOnly: string;
+};
+type SQFormDialogWithDatePickersStory = Story<
+  SQFormDialogProps<WithDatePickersValues>
+>;
 
 const meta: Meta = {
   title: 'Forms/SQFormDialog',
@@ -73,9 +75,9 @@ export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   title: 'With Validation',
-  validationSchema: {
+  validationSchema: Yup.object({
     hello: Yup.string().required(),
-  },
+  }),
 };
 
 export const WithAutoFocus: SQFormDialogStory = (args) => {
@@ -100,7 +102,7 @@ WithAutoFocus.args = {
   title: 'With Auto Focus',
 };
 
-export const WithDatePickers: SQFormDialogWithDatePickersStory= (args) => {
+export const WithDatePickers: SQFormDialogWithDatePickersStory = (args) => {
   return (
     <>
       <h1>
@@ -144,7 +146,7 @@ export const WithTertiaryButton: SQFormDialogStory = (args) => {
 WithTertiaryButton.args = {
   ...defaultArgs,
   initialValues: {
-    hello: ''
+    hello: '',
   },
   title: 'With Tertiary Button',
   showTertiaryButton: true,

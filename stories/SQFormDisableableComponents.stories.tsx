@@ -36,7 +36,7 @@ export const disableableComponents = (): React.ReactElement => {
     checkbox: true,
   };
 
-  const validationSchema = {
+  const validationSchema = Yup.object({
     autoComplete: Yup.string(),
     datePicker: Yup.date(),
     calendarInputOnly: Yup.date(),
@@ -46,7 +46,7 @@ export const disableableComponents = (): React.ReactElement => {
     textField: Yup.string(),
     textArea: Yup.string(),
     checkbox: Yup.boolean(),
-  };
+  });
 
   const onSubmit = (formValues: typeof initialValues) => {
     window.alert(JSON.stringify(formValues, null, 2));

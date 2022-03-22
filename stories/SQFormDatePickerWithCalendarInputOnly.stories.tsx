@@ -26,9 +26,9 @@ const MOCK_INITIAL_STATE = {
   date: '12/01/1990',
 };
 
-const basicSchema = {
+const basicSchema = Yup.object({
   date: Yup.date().required().typeError('Invalid date'),
-};
+});
 
 const defaultArgs = {
   label: 'Date',

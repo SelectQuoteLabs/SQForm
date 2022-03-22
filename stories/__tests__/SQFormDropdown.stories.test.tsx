@@ -53,8 +53,8 @@ it('should update when option is selected', () => {
 it('should display disabled option', () => {
   render(<SQFormDropdown size="auto" />);
 
-  const disabledOptionBefore = screen.queryByRole('option', { name: /kansas/i});
-  
+  const disabledOptionBefore = screen.queryByRole('option', {name: /kansas/i});
+
   expect(disabledOptionBefore).not.toBeInTheDocument();
 
   const expandButton = screen.getByRole('button', {name: /state/i});
@@ -120,9 +120,9 @@ it('should be selectable if it is not disabled', () => {
 
 it('should display icon and text if field is required', async () => {
   const formProps = {
-    validationSchema: { state: Yup.string().required(), },
-    initialValues: { state: ''},
-  }
+    validationSchema: Yup.object({state: Yup.string().required()}),
+    initialValues: {state: ''},
+  };
 
   render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
@@ -131,9 +131,9 @@ it('should display icon and text if field is required', async () => {
 
 it('should not display icon and text if field is not required', () => {
   const formProps = {
-    validationSchema: { state: Yup.string(), },
-    initialValues:  { state: '' }
-  }
+    validationSchema: Yup.object({state: Yup.string()}),
+    initialValues: {state: ''},
+  };
 
   render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
@@ -143,9 +143,9 @@ it('should not display icon and text if field is not required', () => {
 
 it('should highlight field if required but no value selected', async () => {
   const formProps = {
-    validationSchema:  { state: Yup.string().required(), },
+    validationSchema: Yup.object({state: Yup.string().required()}),
     initialValues: {state: ''},
-  }
+  };
 
   render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
 
@@ -163,9 +163,9 @@ it('should highlight field if required but no value selected', async () => {
 });
 
 it('should show empty list if no options are given', () => {
-  const consoleWarnSpy = jest
-    .spyOn(console, 'warn')
-    .mockImplementation(() => {});
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    /* do nothing */
+  });
 
   render(<SQFormDropdown size="auto" children={undefined} />);
 
@@ -181,9 +181,9 @@ it('should show empty list if no options are given', () => {
 });
 
 it('should show empty value if initial value not in options', () => {
-  const consoleWarnSpy = jest
-    .spyOn(console, 'warn')
-    .mockImplementation(() => {});
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    /* do nothing */
+  });
 
   render(
     <SQFormDropdown size="auto" sqFormProps={{initialValues: {state: 'TX'}}} />

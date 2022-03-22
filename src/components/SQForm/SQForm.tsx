@@ -1,12 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import {setLocale} from 'yup';
+import type {AnyObjectSchema} from 'yup';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
-import {object as YupObject, setLocale} from 'yup';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {GridProps} from '@material-ui/core';
-import type {FormikHelpers, FormikConfig} from 'formik';
-import type {ObjectShape} from 'yup/lib/object';
+import type {FormikHelpers, FormikConfig, FormikValues} from 'formik';
 
 setLocale({
   mixed: {
@@ -14,7 +14,7 @@ setLocale({
   },
 });
 
-export interface SQFormProps<Values extends Record<string, unknown>> {
+export interface SQFormProps<Values extends FormikValues> {
   /** Form Input(s) */
   children: React.ReactNode;
   /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */
@@ -36,10 +36,10 @@ export interface SQFormProps<Values extends Record<string, unknown>> {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema?: ObjectShape;
+  validationSchema?: AnyObjectSchema;
 }
 
-function SQForm<Values extends Record<string, unknown>>({
+function SQForm<Values extends FormikValues>({
   children,
   enableReinitialize = false,
   initialValues,
@@ -47,12 +47,6 @@ function SQForm<Values extends Record<string, unknown>>({
   onSubmit,
   validationSchema,
 }: SQFormProps<Values>): JSX.Element {
-  const validationYupSchema = React.useMemo(() => {
-    if (!validationSchema) return;
-
-    return YupObject().shape(validationSchema);
-  }, [validationSchema]);
-
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
     initialValues
@@ -80,7 +74,7 @@ function SQForm<Values extends Record<string, unknown>>({
       initialValues={initialValues}
       onSubmit={handleSubmit}
       onReset={handleReset}
-      validationSchema={validationYupSchema}
+      validationSchema={validationSchema}
       validateOnMount={true}
     >
       {(_props) => {

@@ -11,7 +11,6 @@ import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
 import type {SQFormMaskedTextFieldProps} from 'components/SQForm/SQFormMaskedTextField';
 import type {GridSizeOptions} from './types/storyHelperTypes';
-import type {AnySchema} from 'yup';
 import type {Mask} from 'types';
 
 export default {
@@ -33,7 +32,7 @@ type MaskedTextFieldStoryType = Story<
   Omit<SQFormMaskedTextFieldProps, 'size'> & {
     size?: GridSizeOptions;
     sqFormProps?: SQFormStoryWrapperProps;
-    schema: Record<string, AnySchema>;
+    schema: SQFormStoryWrapperProps['validationSchema'];
     exampleMasks: Mask;
   }
 >;

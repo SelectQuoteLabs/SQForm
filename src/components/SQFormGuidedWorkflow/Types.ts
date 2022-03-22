@@ -1,7 +1,7 @@
 import React from 'react';
 import type {GridProps} from '@material-ui/core';
-import type {FormikHelpers} from 'formik';
-import type {AnySchema} from 'yup';
+import type {FormikHelpers, FormikValues} from 'formik';
+import type {AnyObjectSchema} from 'yup';
 
 export interface SQFormGuidedWorkflowHeaderProps {
   /** Title to display in the section header */
@@ -45,7 +45,7 @@ export interface SQFormGuidedWorkflowOutcomeProps
   muiGridProps?: GridProps;
 }
 
-export interface SQFormGuidedWorkflowDataProps<TValues> {
+export interface SQFormGuidedWorkflowDataProps<TValues extends FormikValues> {
   /** Form Entity Object aka initial values of the form */
   initialValues: TValues;
   /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag, context) => void | Promise<any> */
@@ -55,13 +55,12 @@ export interface SQFormGuidedWorkflowDataProps<TValues> {
     context: SQFormGuidedWorkflowContext<TValues>
   ) => void | Promise<unknown>;
   /** Yup validation schema shape */
-  validationSchema?: Record<
-    keyof TValues,
-    AnySchema<TValues[keyof TValues] | null | undefined>
-  >;
+  validationSchema?: AnyObjectSchema;
 }
 
-export interface SQFormGuidedWorkflowTaskModuleProps<TValues> {
+export interface SQFormGuidedWorkflowTaskModuleProps<
+  TValues extends FormikValues
+> {
   /** Unique name used as a key for managing expansion state within Accordion */
   name: string;
   /** Title text */
@@ -96,9 +95,7 @@ export interface SQFormGuidedWorkflowTaskModuleProps<TValues> {
   isSubmitButtonDisabled?: boolean;
 }
 
-export interface SQFormGuidedWorkflowProps<
-  TValues extends {[key: string]: unknown}
-> {
+export interface SQFormGuidedWorkflowProps<TValues extends FormikValues> {
   /** Main Title */
   mainTitle: string;
   /** Main Subtitle Informative Text */
