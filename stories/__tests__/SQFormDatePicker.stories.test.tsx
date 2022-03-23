@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDatePicker.stories';
 import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
 import type {FormProps} from '../SQFormDatePicker.stories';
-import type {AnySchema} from 'yup';
+import type {AnyObjectSchema} from 'yup';
 
 const {BasicDatePicker} = composeStories(stories);
 
@@ -15,7 +15,7 @@ const renderDatePicker = (
   props?: Partial<
     Omit<SQFormDatePickerProps, 'label' | 'name'> & {
       sqFormProps?: FormProps | undefined;
-      schema: Record<string, AnySchema<unknown, unknown, unknown>>;
+      schema: AnyObjectSchema;
     }
   >
 ) => {

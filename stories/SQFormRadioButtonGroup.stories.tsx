@@ -11,13 +11,12 @@ import {
 import type {Story} from '@storybook/react';
 import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
 import type {GridSizeOptions} from './types/storyHelperTypes';
-import type {AnySchema} from 'yup';
 
 type RadioButtonGroupType = Story<
   Omit<SQFormRadioButtonGroupProps, 'size'> & {
     size?: GridSizeOptions;
     sqFormProps: Partial<SQFormStoryWrapperProps>;
-    schema: Record<string, AnySchema>;
+    schema: SQFormStoryWrapperProps['validationSchema'];
   }
 >;
 
@@ -77,9 +76,9 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     [defaultArgs.name]: Yup.string().required(),
-  },
+  }),
 };
 WithValidation.parameters = {
   controls: {exclude: 'schema'},

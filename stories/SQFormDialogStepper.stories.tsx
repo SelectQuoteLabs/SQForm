@@ -113,24 +113,24 @@ export const WithValidation = (
       <SQFormDialogStepperComponent {...args}>
         <SQFormDialogStep
           label="Personal Data"
-          validationSchema={{
+          validationSchema={Yup.object({
             firstName: Yup.string().required(),
             lastName: Yup.string().required(),
-          }}
+          })}
         >
           <SQFormTextField size={6} name="firstName" label="First Name" />
           <SQFormTextField size={6} name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
-          validationSchema={{
+          validationSchema={Yup.object({
             accountID: Yup.mixed().when('newPatient', {
               is: (value: string) => value === 'yes',
               then: Yup.number()
                 .required()
                 .min(100, 'Required for new account'),
             }),
-          }}
+          })}
         >
           <SQFormDropdown
             name="newPatient"

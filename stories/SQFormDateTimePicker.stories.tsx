@@ -4,9 +4,9 @@ import {SQFormDateTimePicker as SQFormDateTimePickerComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDatePicker.md';
-import type { Meta } from '@storybook/react';
-import type { CustomStory } from './types/storyHelperTypes';
-import type { SQFormDateTimePickerProps } from 'components/SQForm/SQFormDateTimePicker';
+import type {Meta} from '@storybook/react';
+import type {CustomStory} from './types/storyHelperTypes';
+import type {SQFormDateTimePickerProps} from 'components/SQForm/SQFormDateTimePicker';
 import getSizeProp from './utils/getSizeProp';
 
 const meta: Meta = {
@@ -15,31 +15,31 @@ const meta: Meta = {
   argTypes: {
     onBlur: {action: 'blurred', table: {disable: true}},
     onChange: {action: 'changed', table: {disable: true}},
-    name: {table: {disable: true}}
+    name: {table: {disable: true}},
   },
   parameters: {
-    docs: {page: createDocsPage({markdown})}
-  }
+    docs: {page: createDocsPage({markdown})},
+  },
 };
 
 const MOCK_INITIAL_STATE = {
-  datetime: '09/22/2020 02:20 PM'
+  datetime: '09/22/2020 02:20 PM',
 };
 
-const schema = {
+const schema = Yup.object({
   datetime: Yup.date()
     .required()
     .min(new Date('2020-09-22'))
     .max(new Date('2100-10-10'))
-    .typeError('Invalid date')
-};
+    .typeError('Invalid date'),
+});
 
 const defaultArgs = {
   label: 'Date/Time',
-  name: 'datetime'
+  name: 'datetime',
 };
 
-const Template: CustomStory<SQFormDateTimePickerProps> = args => {
+const Template: CustomStory<SQFormDateTimePickerProps> = (args) => {
   const {schema, sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper
@@ -47,13 +47,10 @@ const Template: CustomStory<SQFormDateTimePickerProps> = args => {
       validationSchema={schema}
       {...sqFormProps}
     >
-      <SQFormDateTimePickerComponent
-        {...rest}
-        size={getSizeProp(args.size)}
-      />
+      <SQFormDateTimePickerComponent {...rest} size={getSizeProp(args.size)} />
     </SQFormStoryWrapper>
-  )
-}
+  );
+};
 
 export const BasicDateTimePicker = Template.bind({});
 BasicDateTimePicker.storyName = 'BasicDateTimePicker';
@@ -63,10 +60,9 @@ export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   schema,
-}
+};
 WithValidation.parameters = {
-  controls: {exclude: 'schema'}
-}
+  controls: {exclude: 'schema'},
+};
 
 export default meta;
-

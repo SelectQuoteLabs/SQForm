@@ -238,7 +238,7 @@ export const BasicForm = (): JSX.Element => {
 };
 
 export const FormWithValidation = (): JSX.Element => {
-  const validationSchema = {
+  const validationSchema = Yup.object({
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
     city: Yup.string(),
@@ -256,7 +256,7 @@ export const FormWithValidation = (): JSX.Element => {
       )
       .required()
       .min(1),
-  };
+  });
 
   return (
     <Card raised style={{padding: 16}}>
@@ -457,9 +457,9 @@ export const formWithInclusionlist = (): JSX.Element => {
 };
 
 export const basicFormWithMultiSelect = (): JSX.Element => {
-  const validationSchema = {
+  const validationSchema = Yup.object({
     friends: Yup.array().of(Yup.string()).required().min(1, 'Required'),
-  };
+  });
 
   return (
     <Card raised style={{padding: '16px', minWidth: '768px'}}>
@@ -491,7 +491,7 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
 };
 
 export const basicFormWithMaskedFields = (): JSX.Element => {
-  const validationSchema = {
+  const validationSchema = Yup.object({
     phone: Yup.string()
       .required()
       .transform((value) => value.replace(/[^\d]/g, ''))
@@ -501,7 +501,7 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
       .transform((value) => value.replace(/[^\d]/g, ''))
       .min(5, 'Zip code must be 5 digits'),
     currency: Yup.string().required(),
-  };
+  });
 
   return (
     <Card raised style={{padding: '16px', minWidth: '768px'}}>
@@ -683,9 +683,9 @@ export const basicFormWithCustomOnChange = (): JSX.Element => {
 };
 
 export const applyAnAction = (): JSX.Element => {
-  const validationSchema = {
+  const validationSchema = Yup.object({
     actions: Yup.string().required(),
-  };
+  });
 
   return (
     <Card raised style={{padding: '16px', minWidth: '768px'}}>
@@ -729,11 +729,11 @@ export const SQFormCheckboxGroupExample = (): JSX.Element => {
     selectAll: false,
   };
 
-  const validationSchema = {
+  const validationSchema = Yup.object({
     warrantyOptions: Yup.array()
       .min(1, 'Must select at least 1 option')
       .required(),
-  };
+  });
 
   return (
     <Card raised style={{padding: '16px', minWidth: '250px'}}>
@@ -765,11 +765,11 @@ export const ccaChecklist = (): JSX.Element => {
     {label: 'Pitched', value: 'pitched'},
     {label: 'Transferred', value: 'transferred'},
   ];
-  const validationSchema = {
+  const validationSchema = Yup.object({
     dvh: Yup.string(),
     hra: Yup.string(),
     shield: Yup.string(),
-  };
+  });
 
   return (
     <Card raised style={{padding: '16px', minWidth: '768px'}}>

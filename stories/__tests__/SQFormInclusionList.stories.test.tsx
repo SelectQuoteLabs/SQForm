@@ -103,9 +103,9 @@ describe('SQFormInclusionList Tests', () => {
       initialValues: {
         friends: [],
       },
-      validationSchema: {
+      validationSchema: Yup.object({
         friends: Yup.array().required().min(1),
-      },
+      }),
     };
 
     render(<SQFormInclusionList sqFormProps={sqFormProps} />);
@@ -123,9 +123,9 @@ describe('SQFormInclusionList Tests', () => {
       initialValues: {
         friends: [],
       },
-      validationSchema: {
+      validationSchema: Yup.object({
         friends: Yup.array().required().min(1),
-      },
+      }),
     };
 
     render(<SQFormInclusionList sqFormProps={sqFormProps} />);

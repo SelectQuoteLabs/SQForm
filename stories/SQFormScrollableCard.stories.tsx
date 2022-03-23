@@ -38,7 +38,7 @@ const defaultArgs = {
   onSubmit: () => {
     /* do nothing */
   },
-  validationSchema: {hello: Yup.string().required()},
+  validationSchema: Yup.object({hello: Yup.string().required().min(15)}),
 };
 
 const Template: CustomStory<

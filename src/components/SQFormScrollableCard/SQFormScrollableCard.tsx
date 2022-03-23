@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 import {
   Card,
   CardHeader,
@@ -9,16 +8,16 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import type {TypographyVariant, GridProps} from '@material-ui/core';
-import type {AnySchema} from 'yup';
+import type {AnyObjectSchema} from 'yup';
 import {Formik, Form} from 'formik';
-import type {FormikHelpers} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
 
-export interface SQFormScrollableCardProps<Values> {
+export interface SQFormScrollableCardProps<Values extends FormikValues> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
   cardContentStyles?: CreateCSSProperties;
   /** Form related Field(s) and components */
@@ -71,10 +70,7 @@ export interface SQFormScrollableCardProps<Values> {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema?: Record<
-    keyof Values,
-    AnySchema<Values[keyof Values] | null | undefined>
-  >;
+  validationSchema?: AnyObjectSchema;
   /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled?: boolean;
   /** MUI Typography variant to be used for the title */
@@ -85,7 +81,7 @@ export interface SQFormScrollableCardProps<Values> {
 
 interface useStylesProps {
   hasSubHeader: boolean;
-  cardContentStyles: SQFormScrollableCardProps<unknown>['cardContentStyles'];
+  cardContentStyles: CreateCSSProperties;
 }
 
 const useStyles = makeStyles((theme) => {
@@ -155,12 +151,6 @@ function SQFormScrollableCard<Values>({
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
-  const validationYupSchema = React.useMemo(() => {
-    if (!validationSchema) return;
-
-    return Yup.object().shape(validationSchema);
-  }, [validationSchema]);
-
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
     initialValues
@@ -225,7 +215,7 @@ function SQFormScrollableCard<Values>({
         initialErrors={initialErrors}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={validationYupSchema}
+        validationSchema={validationSchema}
         validateOnMount={true}
       >
         {(_props) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Formik, Form} from 'formik';
-import type {FormikHelpers} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
@@ -35,11 +35,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const getTaskModuleFormSchema = (validationSchema = {}) => {
-  return Yup.object().shape(validationSchema);
-};
-
-function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
+function SQFormGuidedWorkflow<TValues extends FormikValues>({
   taskModules,
   mainTitle,
   mainSubtitle,
@@ -53,8 +49,10 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   const getFormikInitialRequiredErrors = (
     validationSchema?: SQFormGuidedWorkflowDataProps<TValues>['validationSchema']
   ) => {
-    if (validationSchema) {
-      return Object.entries(validationSchema).reduce((acc, [key, value]) => {
+    if (validationSchema?.fields) {
+      const validationFields =
+        validationSchema.fields as Yup.ObjectSchema<TValues>;
+      return Object.entries(validationFields).reduce((acc, [key, value]) => {
         if (value.tests[0]?.OPTIONS.name === 'required') {
           return {...acc, [key]: 'Required'};
         }
@@ -78,9 +76,7 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
     const taskName = taskModule.name;
-    const validationYupSchema = getTaskModuleFormSchema(
-      taskModule.formikProps?.validationSchema
-    );
+    const validationYupSchema = taskModule.formikProps?.validationSchema;
     const initialErrors = getFormikInitialRequiredErrors(
       taskModule.formikProps?.validationSchema
     );
