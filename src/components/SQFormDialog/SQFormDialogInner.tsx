@@ -139,8 +139,12 @@ function SQFormDialogInner({
 
   const handleCancel = (
     event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown'
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => {
+    if (disableBackdropClick && reason === 'backdropClick') {
+      return;
+    }
+
     if (!isDirty) {
       onClose && onClose(event, reason);
     } else {
@@ -158,13 +162,15 @@ function SQFormDialogInner({
     return (
       <Grid
         container={true}
-        justify={showSecondaryButton ? 'space-between' : 'flex-end'}
+        justifyContent={showSecondaryButton ? 'space-between' : 'flex-end'}
       >
         {showSecondaryButton && (
           <Grid item={true}>
             <RoundedButton
               title={cancelButtonText}
-              onClick={handleCancel}
+              onClick={(event: Record<string, unknown>) =>
+                handleCancel(event, 'cancelClick')
+              }
               color="secondary"
               variant="outlined"
             >
@@ -201,11 +207,12 @@ function SQFormDialogInner({
   return (
     <>
       <Dialog
-        disableBackdropClick={disableBackdropClick}
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={showSecondaryButton ? handleCancel : undefined}
+        onClose={
+          showSecondaryButton || disableBackdropClick ? handleCancel : undefined
+        }
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
@@ -230,7 +237,9 @@ function SQFormDialogInner({
               : showSecondaryButton && (
                   <RoundedButton
                     title={cancelButtonText}
-                    onClick={handleCancel}
+                    onClick={(event: Record<string, unknown>) =>
+                      handleCancel(event, 'cancelClick')
+                    }
                     color="secondary"
                     variant="outlined"
                   >

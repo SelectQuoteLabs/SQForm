@@ -1,3 +1,10 @@
+### [7.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.0...v7.4.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* 🐛 Removing deprecated MUI Dialog prop disable Bg click ([b7cbd16](https://github.com/SelectQuoteLabs/SQForm/commit/b7cbd16b469b723ff6fc6bdd4947ccca05c370b1)), closes [#646](https://github.com/SelectQuoteLabs/SQForm/issues/646)
+
 ## [7.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.3.0...v7.4.0) (2022-02-28)
 
 

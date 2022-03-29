@@ -116,7 +116,10 @@ export interface SQFormDialogStepperProps<Values extends FormikValues> {
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
-  onClose: () => void;
+  onClose: (
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => void;
   /** Callback function invoked when user clicks primary submit button */
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void;
   /** Title text at the top of the Dialog */
@@ -228,6 +231,17 @@ export function SQFormDialogStepper<Values extends FormikValues>({
     );
   }
 
+  const handleClose = (
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => {
+    if (disableBackdropClick && reason === 'backdropClick') {
+      return;
+    }
+
+    onClose(event, reason);
+  };
+
   return (
     <Formik
       {...props}
@@ -242,7 +256,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
           disableBackdropClick={disableBackdropClick}
           maxWidth={maxWidth}
           open={isOpen}
-          onClose={onClose}
+          onClose={handleClose}
           fullWidth={fullWidth}
           {...dialogProps}
         >
