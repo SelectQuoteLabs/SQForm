@@ -101,6 +101,7 @@ const useStyles = makeStyles((theme) => {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+      height: 'auto', // overrides a scplus-shared-component theme hard coded height
     },
     cardContent: (props: useStylesProps) => ({
       gridArea: 'content',
