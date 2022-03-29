@@ -229,7 +229,7 @@ function SQFormScrollableCard<Values>({
               >
                 {!isHeaderDisabled && (
                   <CardHeader
-                    title={undefined}
+                    title={title}
                     className={classes.cardHeader}
                     titleTypographyProps={{variant: titleVariant}}
                   />
