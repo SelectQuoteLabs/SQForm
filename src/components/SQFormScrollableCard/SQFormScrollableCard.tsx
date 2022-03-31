@@ -16,6 +16,7 @@ import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
+import {HEADER_HEIGHT} from '../../utils/constants';
 
 export interface SQFormScrollableCardProps<Values extends FormikValues> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
@@ -101,6 +102,7 @@ const useStyles = makeStyles((theme) => {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
     },
     cardContent: (props: useStylesProps) => ({
       gridArea: 'content',
@@ -146,7 +148,6 @@ function SQFormScrollableCard<Values>({
   title,
   validationSchema,
   isHeaderDisabled = false,
-  titleVariant = 'h4',
   isSquareCorners = true,
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
@@ -231,7 +232,7 @@ function SQFormScrollableCard<Values>({
                   <CardHeader
                     title={title}
                     className={classes.cardHeader}
-                    titleTypographyProps={{variant: titleVariant}}
+                    titleTypographyProps={{variant: 'h5'}}
                   />
                 )}
 
