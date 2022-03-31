@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, makeStyles} from '@material-ui/core';
 import {CardPopoverMenu} from 'scplus-shared-components';
+import {HEADER_HEIGHT} from '../../utils/constants';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -15,13 +16,7 @@ const useStyles = makeStyles((theme) => {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-      /**
-       * Have to do this because CardPopoverMenu adds a few extra
-       * pixels from a rogue span, which screws up alignment compared
-       * to normal SQFormScrollableCard headers or its more generic
-       * counterpart in MIAV, AdminViewCard.
-       */
-      height: '70px',
+      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
       alignItems: 'center',
     },
     action: {
@@ -109,7 +104,7 @@ export default function SQFormScrollableCardsMenuWrapper({
         }}
         title={title}
         className={classes.cardHeader}
-        titleTypographyProps={{variant: 'h4'}}
+        titleTypographyProps={{variant: 'h5'}}
         action={
           <CardPopoverMenu
             tabs={menuItems}
