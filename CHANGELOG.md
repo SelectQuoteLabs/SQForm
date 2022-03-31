@@ -1,3 +1,10 @@
+### [7.4.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.1...v7.4.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* 🐛 SQFormScrollableCard height prop accepts string now ([97486ef](https://github.com/SelectQuoteLabs/SQForm/commit/97486ef0d7838e724729d763f5a36b0a99026205)), closes [#475](https://github.com/SelectQuoteLabs/SQForm/issues/475)
+
 ### [7.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.0...v7.4.1) (2022-03-29)
 
 
