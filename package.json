@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "6.2.1",
+  "version": "7.4.1",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "private": false,
@@ -16,7 +16,8 @@
     "build-storybook": "build-storybook -c .storybook -o .out",
     "nuke-everything": "rm -rf ./dist && rm -rf ./node_modules && rm -f package-lock.json",
     "commit": "npx git-cz",
-    "format": "npx prettier --write 'src/**/*.js'",
+    "format": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
+    "format.ci": "npx prettier --check './{pages,src}/**/*.{js,ts,tsx}'",
     "docs": "cd SQFormDocs && npm start",
     "build-docs": "cd SQFormDocs && npm ci && npm run build"
   },
@@ -35,7 +36,8 @@
           "chore",
           "refactor",
           "test",
-          "ci"
+          "ci",
+          "style"
         ]
       ]
     }
@@ -47,7 +49,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,md}": [
+    "*.{js,ts,tsx,md}": [
       "prettier --write",
       "eslint --fix",
       "git add"
@@ -65,6 +67,10 @@
   "license": "MIT",
   "homepage": "https://github.com/SelectQuoteLabs/SQForm#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "@material-ui/pickers": "^4.0.0-alpha.12",
     "@selectquotelabs/sqhooks": "^2.1.0",
     "@tippy.js/react": "^3.1.1",
     "ag-grid-community": "^25.2.1",
@@ -77,15 +83,16 @@
     "react-text-mask": "^5.4.3",
     "react-weekly-schedule": "0.0.0-development",
     "react-window": "^1.8.5",
-    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.7.2",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/7.9.0",
     "text-mask-addons": "^3.8.0",
-    "use-debounce": "^6.0.0"
+    "use-debounce": "^6.0.0",
+    "yup": "^0.28.3"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.46",
-    "@material-ui/pickers": "^4.0.0-alpha.11",
+    "@material-ui/pickers": "^4.0.0-alpha.12",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "yup": "^0.28.3"
@@ -133,7 +140,7 @@
     "eslint-plugin-testing-library": "^3.10.2",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.0",

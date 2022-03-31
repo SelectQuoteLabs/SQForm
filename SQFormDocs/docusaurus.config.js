@@ -16,7 +16,7 @@ module.exports = {
       title: 'SQForm',
       logo: {
         alt: 'SQ Rings Logo',
-        src: 'img/logo.svg',
+        src: 'img/SQ-logo-slogan.png',
       },
       items: [
         {
@@ -41,10 +41,6 @@ module.exports = {
             {
               label: 'SQForm Storybook',
               href: 'https://master--5f4431386ea00a00220d495c.chromatic.com/',
-            },
-            {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
             },
           ],
         },

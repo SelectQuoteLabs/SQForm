@@ -4,17 +4,18 @@ import {
   ExpandingCardList,
   ExpandingCard,
   RoundedButton,
-  TextButton
+  TextButton,
 } from 'scplus-shared-components';
 import {
   SQFormGuidedWorkflow,
   SQFormDropdown,
   SQFormTextarea,
-  SQFormTextField
+  SQFormTextField,
 } from '../src';
+import {Grid, Typography} from '@material-ui/core';
 
-const sleep = milliseconds => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
 export default {
@@ -22,13 +23,13 @@ export default {
   component: SQFormGuidedWorkflow,
   argTypes: {
     onError: {action: 'error', table: {disable: true}},
-    taskModules: {table: {disable: true}}
-  }
+    taskModules: {table: {disable: true}},
+  },
 };
 
 const outcomeDropdownOptions = [
   {label: 'Not Interested', value: 'not-interested'},
-  {label: 'Interested', value: 'interested'}
+  {label: 'Interested', value: 'interested'},
 ];
 
 const Template = () => {
@@ -37,7 +38,7 @@ const Template = () => {
   const scriptedTextMap = {
     customerName: 'Bob Smith',
     agentName: 'Jane Doe',
-    planName: 'Super Cheap Med+'
+    planName: 'Super Cheap Med+',
   };
   const taskModules = [
     {
@@ -46,12 +47,10 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
-        onSubmit: async (values, _formikBag, context) => {
+        onSubmit: async (values, _formikBag, _context) => {
           await sleep(3000); // Simulate API call to see loading spinner
-          console.log(values);
-          console.log(context);
           if (values.outcome === 'not-interested') {
             setIsModuleDisabled(true);
           } else {
@@ -60,12 +59,33 @@ const Template = () => {
         },
         validationSchema: {
           outcome: Yup.string().required(),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
+      },
+      additionalInformationSectionProps: {
+        Elements: (
+          <>
+            <Grid container={true}>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">Name: Bob Smith</Typography>
+              </Grid>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">Age: 76</Typography>
+              </Grid>
+              <Grid item={true} sm={4}>
+                <Typography variant="body2">
+                  Occupation: Dream Engineer
+                </Typography>
+              </Grid>
+            </Grid>
+          </>
+        ),
+        title: 'Customer Information',
+        infoText: 'This is suplmental information for the agent only.',
       },
       scriptedTextProps: {
         text: `Hi, ${scriptedTextMap.customerName}, my name is ${scriptedTextMap.agentName}, and I am calling to discuss ${scriptedTextMap.planName}.\n Are you available right now to talk through some things with me, today?`,
-        title: 'Agent Script'
+        title: 'Agent Script',
       },
       outcomeProps: {
         FormElements: (
@@ -76,8 +96,8 @@ const Template = () => {
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
-        title: 'Confirm Info'
-      }
+        title: 'Confirm Info',
+      },
     },
     {
       name: 'cancellation',
@@ -90,21 +110,18 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
-        onSubmit: async (values, _formikBag, context) => {
-          console.log(values);
-          console.log(context);
-        },
+        onSubmit: async (_values, _formikBag, _context) => {},
         validationSchema: {
           outcome: Yup.string().required(),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
       },
       scriptedTextProps: {
         text: `Stuff about policy cancellation documents`,
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Doc</TextButton>
+        actionButton: <TextButton tooltip="View">View Doc</TextButton>,
       },
       outcomeProps: {
         FormElements: (
@@ -126,8 +143,8 @@ const Template = () => {
           'Interact with the form to see me change colors based on form state',
         warningText: 'Form needs your attention',
         successText: 'Form is ready to submit',
-        errorText: 'Do not pass go, do not collect $200'
-      }
+        errorText: 'Do not pass go, do not collect $200',
+      },
     },
     {
       name: 'providers',
@@ -137,22 +154,55 @@ const Template = () => {
       formikProps: {
         initialValues: {
           outcome: '',
-          notes: ''
+          notes: '',
         },
-        onSubmit: async (values, _formikBag, context) => {
-          console.log(values);
-          console.log(context);
-        },
+        onSubmit: async (_values, _formikBag, _context) => {},
         validationSchema: {
           outcome: Yup.string().required(),
-          notes: Yup.string()
-        }
+          notes: Yup.string(),
+        },
+      },
+      additionalInformationSectionProps: {
+        Elements: (
+          <>
+            <ul>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Cassidy Cole,&nbsp;
+                  <b>State</b>: Alaska,&nbsp;
+                  <b>Primary</b>: Yes,&nbsp;
+                </div>
+              </li>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Ana Amari,&nbsp;
+                  <b>State</b>: Hawaii,&nbsp;
+                  <b>Primary</b>: No,&nbsp;
+                </div>
+              </li>
+              <li>
+                <div>
+                  <b>Name</b>: Dr. Hana Song,&nbsp;
+                  <b>State</b>: Wisconsin,&nbsp;
+                  <b>Primary</b>: No,&nbsp;
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
+        title: 'Providers',
+        actionButton: (
+          <TextButton
+            tooltip="View"
+            onClick={() => window.alert('Awesome list here')}
+          >
+            View Full Providers List
+          </TextButton>
+        ),
       },
       scriptedTextProps: {
-        text:
-          'Before proceeding, please verify the list of providers is correct',
+        text: 'Before proceeding, please verify the list of providers is correct',
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Providers</TextButton>
       },
       outcomeProps: {
         FormElements: (
@@ -163,9 +213,9 @@ const Template = () => {
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
-        title: 'Confirm Info'
-      }
-    }
+        title: 'Confirm Info',
+      },
+    },
   ];
 
   return (
@@ -178,8 +228,8 @@ const Template = () => {
             initialCompletedTasks={0}
             isStrictMode={false}
             taskModules={taskModules}
-            onError={error => {
-              console.error(error);
+            onError={(error) => {
+              window.alert(error);
             }}
           />
         </ExpandingCard>
@@ -190,7 +240,7 @@ const Template = () => {
 
 export const Default = Template.bind({});
 
-const TestTemplate = args => {
+const TestTemplate = (args) => {
   const {mainTitle, ...rest} = args;
 
   const taskModules = [
@@ -200,19 +250,17 @@ const TestTemplate = args => {
       formikProps: {
         initialValues: {
           firstText: '',
-          secondText: ''
+          secondText: '',
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
-        },
+        onSubmit: async (_values) => {},
         validationSchema: {
           firstText: Yup.string().required(),
-          secondText: Yup.string()
-        }
+          secondText: Yup.string(),
+        },
       },
       scriptedTextProps: {
         text: 'This is some text',
-        title: 'Script Title'
+        title: 'Script Title',
       },
       outcomeProps: {
         FormElements: (
@@ -221,8 +269,8 @@ const TestTemplate = args => {
             <SQFormTextField name="secondText" label="Second Text" />
           </>
         ),
-        title: 'Outcome Test'
-      }
+        title: 'Outcome Test',
+      },
     },
     {
       name: 'secondSection',
@@ -231,15 +279,13 @@ const TestTemplate = args => {
         initialValues: {
           testText: '',
           outcome: '',
-          notes: ''
+          notes: '',
         },
-        onSubmit: async values => {
-          console.log(JSON.stringify(values));
-        }
+        onSubmit: async (_values) => {},
       },
       scriptedTextProps: {
         text: 'This is some more text',
-        title: 'Another Script Title'
+        title: 'Another Script Title',
       },
       outcomeProps: {
         FormElements: (
@@ -248,9 +294,9 @@ const TestTemplate = args => {
             <SQFormTextarea name="notes" label="Notes" />
           </>
         ),
-        title: 'Outcome Test'
-      }
-    }
+        title: 'Outcome Test',
+      },
+    },
   ];
 
   return (
@@ -260,8 +306,8 @@ const TestTemplate = args => {
           <SQFormGuidedWorkflow
             {...rest}
             mainTitle={mainTitle}
-            onError={error => {
-              console.error(error);
+            onError={(error) => {
+              window.alert(error);
             }}
             taskModules={taskModules}
           />
@@ -276,5 +322,5 @@ Testing.args = {
   mainTitle: 'CCA Guided Workflow',
   mainSubtitle:
     'Please review these Services with your client, then confirm their responses.',
-  isStrictMode: false
+  isStrictMode: false,
 };

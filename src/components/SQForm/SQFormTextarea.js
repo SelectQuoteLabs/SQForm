@@ -19,7 +19,7 @@ function SQFormTextarea({
   rowsMax = 3,
   maxCharacters,
   inputProps = {},
-  muiFieldProps = {}
+  muiFieldProps = {},
 }) {
   const {values} = useFormikContext();
   const {
@@ -27,19 +27,19 @@ function SQFormTextarea({
     fieldHelpers: {
       handleBlur,
       handleChange: handleChangeHelper,
-      HelperTextComponent
-    }
+      HelperTextComponent,
+    },
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
 
   const [valueLength, setValueLength] = React.useState(
     values[name]?.length || 0
   );
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValueLength(event.target.value.length);
     handleChangeHelper(event);
   };
@@ -72,13 +72,13 @@ function SQFormTextarea({
         onChange={handleChange}
         onBlur={handleBlur}
         required={isFieldRequired}
-        rows={rows}
-        rowsMax={rowsMax}
+        minRows={rows}
+        maxRows={rowsMax}
         variant="outlined"
         value={values[name]}
         inputProps={{
           maxLength: maxCharacters,
-          ...inputProps
+          ...inputProps,
         }}
         {...muiFieldProps}
       />
@@ -110,7 +110,7 @@ SQFormTextarea.propTypes = {
   /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
   maxCharacters: PropTypes.number,
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
-  muiFieldProps: PropTypes.object
+  muiFieldProps: PropTypes.object,
 };
 
 export default SQFormTextarea;

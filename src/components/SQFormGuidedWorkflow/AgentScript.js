@@ -11,7 +11,7 @@ function AgentScript({
   errorText,
   successText,
   isFailedState,
-  text
+  text,
 }) {
   return (
     <Section>

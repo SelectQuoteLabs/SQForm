@@ -9,7 +9,7 @@ function TextFieldMask({inputRef, mask, ...rest}) {
   return (
     <MaskedInput
       {...rest}
-      ref={ref => {
+      ref={(ref) => {
         inputRef(ref ? ref.inputElement : null);
       }}
       mask={mask}
@@ -34,19 +34,19 @@ function SQFormMaskedTextField({
   InputProps,
   inputProps = {},
   muiFieldProps = {},
-  stripNonNumeric = false
+  stripNonNumeric = false,
 }) {
   const {
     fieldState: {isFieldRequired},
-    fieldHelpers: {handleBlur, handleChange}
+    fieldHelpers: {handleBlur, handleChange},
   } = useForm({
     name,
     onBlur,
-    onChange
+    onChange,
   });
   const {setFieldValue} = useFormikContext();
 
-  const handleChangeStripNonNumeric = event => {
+  const handleChangeStripNonNumeric = (event) => {
     onChange && onChange(event);
     setFieldValue(name, event.target.value.replace(/[^\d]/g, ''));
   };
@@ -66,11 +66,11 @@ function SQFormMaskedTextField({
       type={type}
       InputProps={{
         ...InputProps,
-        inputComponent: TextFieldMask
+        inputComponent: TextFieldMask,
       }}
       inputProps={{
         ...inputProps,
-        mask
+        mask,
       }}
       muiFieldProps={muiFieldProps}
     />
@@ -82,7 +82,7 @@ SQFormMaskedTextField.propTypes = {
   mask: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
-    PropTypes.func
+    PropTypes.func,
   ]),
   /** Name of the field will be the Object key of the key/value pair form payload */
   name: PropTypes.string.isRequired,
@@ -111,7 +111,7 @@ SQFormMaskedTextField.propTypes = {
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps: PropTypes.object,
   /** The submitted value from the input will have all non-numeric charactes removed */
-  stripNonNumeric: PropTypes.bool
+  stripNonNumeric: PropTypes.bool,
 };
 
 export default SQFormMaskedTextField;

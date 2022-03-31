@@ -23,10 +23,9 @@ export {default as SQFormCheckboxGroup} from './components/SQForm/SQFormCheckbox
 export {default as SQFormCheckboxGroupItem} from './components/SQForm/SQFormCheckboxGroupItem';
 export {
   SQFormDialogStepper,
-  SQFormDialogStep
+  SQFormDialogStep,
 } from './components/SQFormDialogStepper';
 export {default as SQFormDropdown} from './components/SQForm/SQFormDropdown';
-export {default as SQFormIconButton} from './components/SQForm/SQFormIconButton';
 export {default as SQFormReadOnlyField} from './components/SQForm/SQFormReadOnlyField';
 export {default as SQFormResetButtonWithConfirmation} from './components/SQForm/SQFormResetButtonWithConfirmation';
 export {default as SQFormResetInitialValuesButton} from './components/SQForm/SQFormResetInitialValuesButton';

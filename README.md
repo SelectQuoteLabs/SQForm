@@ -39,6 +39,10 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 ## Breaking Changes
 
+### Version 7
+
+In SQForm v7, we have removed the SQFormIconButton in favor of the SQFormButton where the text says either "Submit" or "Save". Please replace all occurrences of SQFormIconButton with SQFormButton in the consuming application.
+
 ### Version 6
 
 In SQForm v6, we no longer need to pass the `isRequired` prop to any form components. The components now derive whether or not they are a required field based on the Yup validation schema of the form.
@@ -117,6 +121,20 @@ $ nvm use
 
 ```sh
 $ npm run storybook
+```
+
+## Running the Docs Page Locally
+
+1. Install Doc page dependencies
+
+```sh
+$ cd SQFormDocs && npm i
+```
+
+2. Run the docs page
+
+```sh
+$ npm run docs
 ```
 
 ## Versioning

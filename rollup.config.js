@@ -10,10 +10,12 @@ import pkg from './package.json';
 export default [
   {
     input: 'src/index.js',
-    output: {
-      file: pkg.main,
-      format: 'cjs'
-    },
+    output: [
+      {
+        file: pkg.main,
+        format: 'cjs',
+      },
+    ],
     plugins: [
       del({targets: 'dist/*'}), // Cleans dist folder before building a new bundle
       peerDepsExternal(), // Keeps peer dependencies out of the bundle
@@ -21,7 +23,7 @@ export default [
       commonjs({include: /node_modules/}), // Transpiles CommonJS to ES2015, rollup chokes on CommonJS modules
       babel({exclude: /node_modules/, babelHelpers: 'bundled'}), // Transpiles JS code to JS supported by browsers
       css({output: false}), // Rollup doesn't know what to do with CSS
-      terser() // Minifies JS bundle
-    ]
-  }
+      terser(), // Minifies JS bundle
+    ],
+  },
 ];

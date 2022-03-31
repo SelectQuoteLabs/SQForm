@@ -17,16 +17,16 @@ function SQFormCheckboxGroup({
   shouldDisplayInRow = false,
   shouldUseSelectAll = false,
   size = 'auto',
-  children
+  children,
 }) {
   const {
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {handleChange, handleBlur, HelperTextComponent}
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
   } = useForm({name, onChange});
 
   const {setFieldValue} = useFormikContext();
 
-  const handleSelectAllChange = event => {
+  const handleSelectAllChange = (event) => {
     if (!event.target.checked) {
       setFieldValue(name, []);
       return;
@@ -44,7 +44,7 @@ function SQFormCheckboxGroup({
   };
 
   const childrenToCheckboxGroupItems = () => {
-    const providedCheckboxItems = children.map(checkboxOption => {
+    const providedCheckboxItems = children.map((checkboxOption) => {
       const {label, value, isDisabled, inputProps} = checkboxOption;
 
       return (
@@ -68,7 +68,7 @@ function SQFormCheckboxGroup({
           onChange={handleSelectAllChange}
           key={`${name}_selectAll`}
         />,
-        ...providedCheckboxItems
+        ...providedCheckboxItems,
       ];
     }
 
@@ -87,7 +87,7 @@ function SQFormCheckboxGroup({
           component="legend"
           classes={{
             root: 'MuiInputLabel-root',
-            asterisk: 'MuiInputLabel-asterisk'
+            asterisk: 'MuiInputLabel-asterisk',
           }}
         >
           {groupLabel}
@@ -120,9 +120,9 @@ SQFormCheckboxGroup.propTypes = {
       label: PropTypes.string.isRequired,
       value: PropTypes.any.isRequired,
       isDisabled: PropTypes.bool,
-      inputProps: PropTypes.object
+      inputProps: PropTypes.object,
     }).isRequired
-  ).isRequired
+  ).isRequired,
 };
 
 export default SQFormCheckboxGroup;

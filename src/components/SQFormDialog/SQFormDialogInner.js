@@ -8,7 +8,7 @@ import {
   Typography,
   Grid,
   Slide,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
@@ -23,36 +23,36 @@ const Transition = React.forwardRef((props, ref) => {
 const stickyStyles = {
   position: 'sticky',
   background: ({palette}) => palette.background.paper,
-  zIndex: 1
+  zIndex: 1,
 };
 
 const useTitleStyles = makeStyles({
   root: {
     ...stickyStyles,
     top: 0,
-    borderBottom: ({palette}) => `1px solid ${palette.divider}`
-  }
+    borderBottom: ({palette}) => `1px solid ${palette.divider}`,
+  },
 });
 const actionStyles = {
   root: {
     display: 'flex',
     justifyContent: 'space-between',
     flex: '1 1 100%',
-    padding: '16px 24px',
+    padding: '10px 20px',
     ...stickyStyles,
     bottom: 0,
-    borderTop: ({palette}) => `1px solid ${palette.divider}`
-  }
+    borderTop: ({palette}) => `1px solid ${palette.divider}`,
+  },
 };
 const useActionsStyles = makeStyles(actionStyles);
 const usePrimaryActionStyles = makeStyles({
-  root: {...actionStyles.root, justifyContent: 'flex-end'}
+  root: {...actionStyles.root, justifyContent: 'flex-end'},
 });
 const useDialogContentStyles = makeStyles({
   root: {
     overflowY: 'visible',
-    padding: '20px'
-  }
+    padding: '20px',
+  },
 });
 
 function SQFormDialogInner({
@@ -65,10 +65,14 @@ function SQFormDialogInner({
   onClose,
   onSave,
   saveButtonText,
+  tertiaryButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
-  showSecondaryButton = true
+  showSecondaryButton = true,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
+  onTertiaryClick,
 }) {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -80,12 +84,19 @@ function SQFormDialogInner({
   const {
     isDialogOpen: isDialogAlertOpen,
     openDialog: openDialogAlert,
-    closeDialog: closeDialogAlert
+    closeDialog: closeDialogAlert,
   } = useDialog();
 
-  const handleCancel = () => {
+  const handleCancel = (
+    event, // Record<string, unknown>,
+    reason // 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => {
+    if (disableBackdropClick && reason === 'backdropClick') {
+      return;
+    }
+
     if (!isDirty) {
-      onClose();
+      onClose(event, reason);
     } else {
       openDialogAlert();
     }
@@ -97,14 +108,59 @@ function SQFormDialogInner({
     closeDialogAlert();
   };
 
+  const renderTertiaryButton = () => {
+    return (
+      <Grid
+        container={true}
+        justifyContent={showSecondaryButton ? 'space-between' : 'flex-end'}
+      >
+        {showSecondaryButton && (
+          <Grid item={true}>
+            <RoundedButton
+              title={cancelButtonText}
+              onClick={(event) => handleCancel(event, 'cancelClick')}
+              color="secondary"
+              variant="outlined"
+            >
+              {cancelButtonText}
+            </RoundedButton>
+          </Grid>
+        )}
+
+        <Grid item={true}>
+          <span style={{paddingRight: '20px'}}>
+            <SQFormButton
+              title={tertiaryButtonText}
+              isDisabled={isTertiaryDisabled}
+              onClick={onTertiaryClick}
+              type="button"
+            >
+              {tertiaryButtonText}
+            </SQFormButton>
+          </span>
+          {onSave && (
+            <SQFormButton
+              title={saveButtonText}
+              isDisabled={isDisabled}
+              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+            >
+              {saveButtonText}
+            </SQFormButton>
+          )}
+        </Grid>
+      </Grid>
+    );
+  };
+
   return (
     <>
       <Dialog
-        disableBackdropClick={disableBackdropClick}
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={showSecondaryButton ? handleCancel : undefined}
+        onClose={
+          showSecondaryButton || disableBackdropClick ? handleCancel : undefined
+        }
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
@@ -124,17 +180,19 @@ function SQFormDialogInner({
               showSecondaryButton ? actionsClasses : primaryActionsClasses
             }
           >
-            {showSecondaryButton && (
-              <RoundedButton
-                title={cancelButtonText}
-                onClick={handleCancel}
-                color="secondary"
-                variant="outlined"
-              >
-                {cancelButtonText}
-              </RoundedButton>
-            )}
-            {onSave && (
+            {showTertiaryButton
+              ? renderTertiaryButton()
+              : showSecondaryButton && (
+                  <RoundedButton
+                    title={cancelButtonText}
+                    onClick={(event) => handleCancel(event, 'cancelClick')}
+                    color="secondary"
+                    variant="outlined"
+                  >
+                    {cancelButtonText}
+                  </RoundedButton>
+                )}
+            {!showTertiaryButton && onSave && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}
@@ -187,7 +245,15 @@ SQFormDialogInner.propTypes = {
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps: PropTypes.object,
   /** show or hide the secondary Cancel button.  Defaults to show(true) */
-  showSecondaryButton: PropTypes.bool
+  showSecondaryButton: PropTypes.bool,
+  /** The tertiary button text (Button located on right side of Dialog NEXT to save button) */
+  tertiaryButtonText: PropTypes.string,
+  /** show or hide the tertiary button.  Defaults to hide(false) */
+  showTertiaryButton: PropTypes.bool,
+  /** The current disabled state of the Tertiary Button */
+  isTertiaryDisabled: PropTypes.bool,
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick: PropTypes.func,
 };
 
 export default SQFormDialogInner;

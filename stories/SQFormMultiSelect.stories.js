@@ -48,7 +48,7 @@ const defaultArgs = {
   children: MOCK_FRIENDS_OPTIONS
 };
 
-export const Template = args => {
+const Template = args => {
   const {SQFormProps, validationSchema, ...rest} = args;
   return (
     <div style={{minWidth: 250}}>
@@ -73,6 +73,7 @@ SQFormMultiSelect.args = defaultArgs;
 
 export const WithValidation = Template.bind({});
 WithValidation.args = {
+  children: MOCK_FRIENDS_OPTIONS,
   validationSchema: {
     friends: Yup.array()
       .required()

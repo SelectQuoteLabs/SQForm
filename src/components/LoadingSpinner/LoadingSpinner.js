@@ -12,14 +12,14 @@ const gridStyles = makeStyles({
     flexDirection: 'column',
     width: '100%',
     animation: '0.45s fade-in',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const typographyStyles = makeStyles({
   root: {
-    paddingTop: '10px'
-  }
+    paddingTop: '10px',
+  },
 });
 
 function LoadingSpinner({message}) {
@@ -40,7 +40,7 @@ function LoadingSpinner({message}) {
 
 LoadingSpinner.propTypes = {
   /** The loading message */
-  message: PropTypes.string
+  message: PropTypes.string,
 };
 
 export default LoadingSpinner;

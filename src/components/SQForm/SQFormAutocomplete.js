@@ -5,7 +5,7 @@ import {
   Grid,
   Typography,
   Tooltip,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {VariableSizeList} from 'react-window';
@@ -39,8 +39,8 @@ function renderRow({data, index, style}) {
   const clone = React.cloneElement(elToClone, {
     style: {
       ...style,
-      top: style.top + LISTBOX_PADDING
-    }
+      top: style.top + LISTBOX_PADDING,
+    },
   });
 
   return (
@@ -71,9 +71,9 @@ const useListStyles = makeStyles({
         lockWidthToField
           ? `${baseWidth}px !important`
           : calculateWidth(baseWidth, left),
-      overflowX: 'hidden !important'
-    }
-  }
+      overflowX: 'hidden !important',
+    },
+  },
 });
 
 // Adapter for react-window
@@ -85,7 +85,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
     const classes = useListStyles({
       baseWidth: basewidth,
       left,
-      lockWidthToField
+      lockWidthToField,
     });
     const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
@@ -129,7 +129,7 @@ const ListboxVirtualizedComponent = React.forwardRef(
 );
 
 const getInitialValue = (children, value, displayEmpty) => {
-  const optionInitialValue = children?.find(option => {
+  const optionInitialValue = children?.find((option) => {
     if (option.value === value) {
       return option;
     }
@@ -144,18 +144,13 @@ const getInitialValue = (children, value, displayEmpty) => {
   return optionInitialValue;
 };
 
-const calculateBaseWidth = ref => {
+const calculateBaseWidth = (ref) => {
   if (!ref) {
     return;
   }
 
-  const {
-    marginLeft,
-    paddingLeft,
-    width,
-    paddingRight,
-    marginRight
-  } = window.getComputedStyle(ref);
+  const {marginLeft, paddingLeft, width, paddingRight, marginRight} =
+    window.getComputedStyle(ref);
 
   const baseWidth =
     parseFloat(width) -
@@ -171,8 +166,8 @@ const calculateBaseWidth = ref => {
 
 const useStyles = makeStyles({
   grid: {
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 });
 
 const useAutocompleteStyles = makeStyles({
@@ -181,18 +176,19 @@ const useAutocompleteStyles = makeStyles({
 
     '& ul': {
       padding: 0,
-      margin: 0
-    }
+      margin: 0,
+    },
   },
   popper: {
     borderRadius: '4px',
     boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
-    width: ({lockWidthToField}) => (!lockWidthToField ? 'auto !important' : ''),
-    overflowX: 'hidden !important'
+    width: ({lockWidthToField}) =>
+      !lockWidthToField ? 'auto !important' : undefined,
+    overflowX: 'hidden !important',
   },
   paper: {
-    margin: 0
-  }
+    margin: 0,
+  },
 });
 
 function SQFormAutocomplete({
@@ -205,7 +201,7 @@ function SQFormAutocomplete({
   onChange,
   onInputChange,
   size = 'auto',
-  lockWidthToField = true
+  lockWidthToField = true,
 }) {
   const classes = useStyles();
   const autocompleteClasses = useAutocompleteStyles({lockWidthToField});
@@ -217,7 +213,7 @@ function SQFormAutocomplete({
   const [{value}] = useField(name);
   const {
     fieldState: {isFieldError, isFieldRequired},
-    fieldHelpers: {HelperTextComponent}
+    fieldHelpers: {HelperTextComponent},
   } = useForm({name});
 
   const initialValue = getInitialValue(children, value, displayEmpty);
@@ -237,7 +233,7 @@ function SQFormAutocomplete({
   }, [value, inputValue, name, prevValue, values, displayEmpty]);
 
   const handleAutocompleteBlur = React.useCallback(
-    event => {
+    (event) => {
       setTouched({...touched, ...{[name]: true}});
       onBlur && onBlur(event);
     },
@@ -287,9 +283,9 @@ function SQFormAutocomplete({
         value={initialValue || null}
         disableClearable={isDisabled}
         disabled={isDisabled}
-        getOptionLabel={option => option.label || ''}
-        getOptionDisabled={option => option.isDisabled}
-        renderInput={params => {
+        getOptionLabel={(option) => option.label || ''}
+        getOptionDisabled={(option) => option.isDisabled}
+        renderInput={(params) => {
           return (
             <TextField
               {...params}
@@ -299,11 +295,11 @@ function SQFormAutocomplete({
               fullWidth={true}
               InputLabelProps={{
                 ...params.InputLabelProps,
-                shrink: true
+                shrink: true,
               }}
               inputProps={{
                 ...params.inputProps,
-                disabled: isDisabled
+                disabled: isDisabled,
               }}
               FormHelperTextProps={{error: isFieldError}}
               name={name}
@@ -313,7 +309,7 @@ function SQFormAutocomplete({
             />
           );
         }}
-        renderOption={option => (
+        renderOption={(option) => (
           <Typography variant="body2" noWrap>
             {option.label}
           </Typography>
@@ -329,7 +325,7 @@ SQFormAutocomplete.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      isDisabled: PropTypes.bool
+      isDisabled: PropTypes.bool,
     })
   ),
   /** Disabled property to disable the input if true */
@@ -349,7 +345,7 @@ SQFormAutocomplete.propTypes = {
   /** Size of the input given full-width is 12. */
   size: PropTypes.oneOf(['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
   /** Lock width of the dropdown to the width of the field in the form */
-  lockWidthToField: PropTypes.bool
+  lockWidthToField: PropTypes.bool,
 };
 
 export default SQFormAutocomplete;

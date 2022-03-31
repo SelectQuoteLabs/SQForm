@@ -60,7 +60,7 @@ export function useForm({name, onBlur, onChange}) {
   const isFulfilled = getFieldStatus() === 'USER_FULFILLED';
 
   const handleChange = React.useCallback(
-    event => {
+    (event) => {
       field.onChange(event);
       onChange && onChange(event);
     },
@@ -68,7 +68,7 @@ export function useForm({name, onBlur, onChange}) {
   );
 
   const handleBlur = React.useCallback(
-    event => {
+    (event) => {
       field.onBlur(event);
       onBlur && onBlur(event);
     },
@@ -110,8 +110,8 @@ export function useForm({name, onBlur, onChange}) {
       isError,
       isFieldError,
       isFieldRequired,
-      isFulfilled
+      isFulfilled,
     },
-    fieldHelpers: {handleBlur, handleChange, HelperTextComponent}
+    fieldHelpers: {handleBlur, handleChange, HelperTextComponent},
   };
 }

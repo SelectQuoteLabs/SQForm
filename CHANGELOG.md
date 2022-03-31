@@ -1,3 +1,112 @@
+### [7.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.0...v7.4.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* 🐛 Removing depricated MUI Dialog prop disable Bg click ([b7cbd16](https://github.com/SelectQuoteLabs/SQForm/commit/b7cbd16b469b723ff6fc6bdd4947ccca05c370b1)), closes [#646](https://github.com/SelectQuoteLabs/SQForm/issues/646)
+
+## [7.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.3.0...v7.4.0) (2022-02-28)
+
+
+### Features
+
+* 🎸 Add "onTertiaryClick" click handler to SQFormDialog ([8718a4f](https://github.com/SelectQuoteLabs/SQForm/commit/8718a4f01e4083a0038782c73450a1da739c9817)), closes [#643](https://github.com/SelectQuoteLabs/SQForm/issues/643)
+
+## [7.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.1...v7.3.0) (2022-02-10)
+
+
+### Features
+
+* 🎸 Add Third button to SQFormDialog ([#631](https://github.com/SelectQuoteLabs/SQForm/issues/631)) ([f8ae9f4](https://github.com/SelectQuoteLabs/SQForm/commit/f8ae9f480c3074a571c8f478a10e0518a6a5a13e)), closes [#629](https://github.com/SelectQuoteLabs/SQForm/issues/629)
+
+### [7.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.0...v7.2.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* 🐛 Revert es module support ([0b1ac8a](https://github.com/SelectQuoteLabs/SQForm/commit/0b1ac8a12bb64b6880888355aef792a86aa0e0d8)), closes [#602](https://github.com/SelectQuoteLabs/SQForm/issues/602)
+
+## [7.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.1...v7.2.0) (2022-01-28)
+
+
+### Features
+
+* 🎸 updated Roundbutton color and padding ([e0cfffc](https://github.com/SelectQuoteLabs/SQForm/commit/e0cfffc7848eb59dab15bbaebb933aca54029595))
+
+### [7.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.1.0...v7.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* 🐛 Support es modules ([609034c](https://github.com/SelectQuoteLabs/SQForm/commit/609034cc824c4623d35a5795adf6062a3d1ac800))
+
+## [7.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.5...v7.1.0) (2022-01-21)
+
+
+### Features
+
+* 🎸 SQFormGuidedWorkflow additional section ([#587](https://github.com/SelectQuoteLabs/SQForm/issues/587)) ([55ae824](https://github.com/SelectQuoteLabs/SQForm/commit/55ae82434101d0c1949593c24e5ca2eebcc7cc80)), closes [#586](https://github.com/SelectQuoteLabs/SQForm/issues/586)
+
+### [7.0.5](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.4...v7.0.5) (2022-01-20)
+
+
+### Bug Fixes
+
+* 🐛 Added ? operator and modified date clearance logic ([d719dab](https://github.com/SelectQuoteLabs/SQForm/commit/d719dabef48428d0ac7e2c6c90d7fa384624fa3b)), closes [#584](https://github.com/SelectQuoteLabs/SQForm/issues/584)
+
+### [7.0.4](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.3...v7.0.4) (2022-01-19)
+
+
+### Bug Fixes
+
+* 🐛 modified selectValues logic for required fields only      ([af8fe9b](https://github.com/SelectQuoteLabs/SQForm/commit/af8fe9b2a32c564ac529067233d487ff50e49881)), closes [#554](https://github.com/SelectQuoteLabs/SQForm/issues/554)
+
+### [7.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.2...v7.0.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* 🐛 Update scplus-shared-component version ([#523](https://github.com/SelectQuoteLabs/SQForm/issues/523)) ([64763ee](https://github.com/SelectQuoteLabs/SQForm/commit/64763ee1dcf765ae4d08c5ec0e29f25acab6a4af)), closes [#520](https://github.com/SelectQuoteLabs/SQForm/issues/520)
+
+### [7.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.1...v7.0.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Fix datepicker component change handlers ([#518](https://github.com/SelectQuoteLabs/SQForm/issues/518)) ([db69797](https://github.com/SelectQuoteLabs/SQForm/commit/db697972d679a1dc6fc110d2bca99d759e4f2b10)), closes [#511](https://github.com/SelectQuoteLabs/SQForm/issues/511)
+
+### [7.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.0.0...v7.0.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* 🐛 Update deprecated props SQFormTextarea ([cff6528](https://github.com/SelectQuoteLabs/SQForm/commit/cff6528453a5e5e748280dfca2d01463e19dc3f7)), closes [#517](https://github.com/SelectQuoteLabs/SQForm/issues/517)
+
+## [7.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.3...v7.0.0) (2022-01-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 SQFormIconButton has been removed
+
+### Bug Fixes
+
+* 🐛 Remove the SQFormIconButton component ([4465eee](https://github.com/SelectQuoteLabs/SQForm/commit/4465eeee9c7f8a29d1b7e630de5ef9b81848d25f)), closes [#491](https://github.com/SelectQuoteLabs/SQForm/issues/491)
+
+### [6.2.3](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.2...v6.2.3) (2022-01-07)
+
+
+### Bug Fixes
+
+* 🐛 SQFormAutocomplete fix JSS warning ([f0163ae](https://github.com/SelectQuoteLabs/SQForm/commit/f0163ae3fc02c80033da911c5f7d251e522aa231)), closes [#510](https://github.com/SelectQuoteLabs/SQForm/issues/510)
+
+### [6.2.2](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.1...v6.2.2) (2022-01-07)
+
+
+### Bug Fixes
+
+* 🐛 Phone Mask - allows 1's in fourth position ([0d129c7](https://github.com/SelectQuoteLabs/SQForm/commit/0d129c780a0c46e1d5a680b5d1f4319f91394805)), closes [#392](https://github.com/SelectQuoteLabs/SQForm/issues/392)
+
 ### [6.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v6.2.0...v6.2.1) (2022-01-06)
 
 

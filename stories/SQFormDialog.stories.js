@@ -6,7 +6,7 @@ import {
   SQFormDatePicker,
   SQFormTextField,
   SQFormDateTimePicker,
-  SQFormDatePickerWithCalendarInputOnly
+  SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 
@@ -15,13 +15,14 @@ export default {
   component: SQFormDialog,
   argTypes: {
     onSave: {action: 'onSave', table: {disable: true}},
+    onTertiaryClick: {action: 'onTertiaryClick', table: {disable: true}},
     onClose: {action: 'onClose', table: {disable: true}},
     children: {table: {disable: true}},
-    validationSchema: {table: {disable: true}}
+    validationSchema: {table: {disable: true}},
   },
   parameters: {
-    docs: {page: createDocsPage({showStories: false})}
-  }
+    docs: {page: createDocsPage({showStories: false})},
+  },
 };
 
 const defaultArgs = {
@@ -29,12 +30,12 @@ const defaultArgs = {
   initialValues: {hello: ''},
   muiGridProps: {
     spacing: 2,
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  showSecondaryButton: true
+  showSecondaryButton: true,
 };
 
-const Template = args => {
+const Template = (args) => {
   return (
     <>
       <h1>
@@ -56,11 +57,11 @@ WithValidation.args = {
   ...defaultArgs,
   title: 'With Validation',
   validationSchema: {
-    hello: Yup.string().required()
-  }
+    hello: Yup.string().required(),
+  },
 };
 
-export const WithAutoFocus = args => {
+export const WithAutoFocus = (args) => {
   return (
     <>
       <h1>
@@ -79,10 +80,10 @@ export const WithAutoFocus = args => {
 };
 WithAutoFocus.args = {
   ...defaultArgs,
-  title: 'With Auto Focus'
+  title: 'With Auto Focus',
 };
 
-export const WithDatePickers = args => {
+export const WithDatePickers = (args) => {
   return (
     <>
       <h1>
@@ -106,6 +107,35 @@ WithDatePickers.args = {
   initialValues: {
     datePicker: '',
     dateTimePicker: '',
-    datePickerCalendarOnly: ''
-  }
+    datePickerCalendarOnly: '',
+  },
+};
+
+export const WithTertiaryButton = (args) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormTextField name="hello" label="Hello" />
+        <SQFormTextField name="hi" label="Hi" />
+        <SQFormTextField name="howdy" label="Howdy " />
+        <SQFormTextField name="helloAgain" label="Hello Again" />
+      </SQFormDialog>
+    </>
+  );
+};
+WithTertiaryButton.args = {
+  ...defaultArgs,
+  initialValues: {
+    hello: '',
+    hi: '',
+    howdy: '',
+    helloAgain: '',
+  },
+  title: 'With Tertiary Button',
+  showTertiaryButton: true,
+  tertiaryButtonText: 'Tertiary Button',
 };

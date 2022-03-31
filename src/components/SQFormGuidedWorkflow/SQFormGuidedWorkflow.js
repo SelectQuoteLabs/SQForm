@@ -7,11 +7,12 @@ import {
   ComponentLoadingSpinner,
   Section,
   SectionHeader,
-  SectionBody
+  SectionBody,
 } from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 import AgentScript from './AgentScript';
 import OutcomeForm from './OutcomeForm';
+import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
 import {GuidedWorkflowProps} from './PropTypes';
@@ -19,14 +20,14 @@ import {GuidedWorkflowProps} from './PropTypes';
 const useStyles = makeStyles(() => {
   return {
     root: {
-      padding: '16px !important' /* material-ui override */
+      padding: '16px !important' /* material-ui override */,
     },
     panelFooter: {
       display: 'flex',
       justifyContent: 'space-between',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: '16px 24px'
-    }
+      padding: '16px 24px',
+    },
   };
 });
 
@@ -52,20 +53,15 @@ function SQFormGuidedWorkflow({
   initialCompletedTasks = 0,
   isStrictMode = false,
   onError,
-  containerStyles = {}
+  containerStyles = {},
 }) {
   const classes = useStyles();
 
-  const [
-    taskModulesContext,
-    updateTaskModuleContextByID
-  ] = useGuidedWorkflowContext(taskModules);
+  const [taskModulesContext, updateTaskModuleContextByID] =
+    useGuidedWorkflowContext(taskModules);
 
-  const {
-    taskModulesState,
-    updateActiveTaskModule,
-    enableNextTaskModule
-  } = useManageTaskModules(initialCompletedTasks, taskModulesContext);
+  const {taskModulesState, updateActiveTaskModule, enableNextTaskModule} =
+    useManageTaskModules(initialCompletedTasks, taskModulesContext);
 
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
@@ -97,8 +93,8 @@ function SQFormGuidedWorkflow({
         ...taskModulesContext,
         [taskNumber]: {
           ...taskModulesContext[taskNumber],
-          data: values
-        }
+          data: values,
+        },
       };
 
       try {
@@ -143,6 +139,12 @@ function SQFormGuidedWorkflow({
                   </div>
                 ) : (
                   <>
+                    {taskModule.additionalInformationSectionProps && (
+                      <AdditionalInformationSection
+                        {...taskModule.additionalInformationSectionProps}
+                        isFailedState={taskModule.isFailedState}
+                      />
+                    )}
                     <AgentScript
                       {...taskModule.scriptedTextProps}
                       isFailedState={taskModule.isFailedState}
@@ -172,7 +174,7 @@ function SQFormGuidedWorkflow({
             </Form>
           )}
         </Formik>
-      )
+      ),
     };
   });
 

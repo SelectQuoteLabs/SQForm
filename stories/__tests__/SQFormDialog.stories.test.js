@@ -18,7 +18,7 @@ afterEach(() => {
 });
 
 const mockData = {
-  hello: 'howdy'
+  hello: 'howdy',
 };
 
 describe('Tests for Default', () => {
@@ -87,7 +87,7 @@ describe('Tests for Default', () => {
     // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
     fireEvent.keyDown(screen.getByRole('presentation'), {
       key: 'Escape',
-      code: 'Escape'
+      code: 'Escape',
     });
 
     await waitFor(() => {
@@ -111,7 +111,7 @@ it('should not call onClose on `escape` keydown because cancel is not available'
   // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
   fireEvent.keyDown(screen.getByRole('presentation'), {
     key: 'Escape',
-    code: 'Escape'
+    code: 'Escape',
   });
 
   await waitFor(() => {
@@ -120,14 +120,18 @@ it('should not call onClose on `escape` keydown because cancel is not available'
 });
 
 it('should not find the cancel secondary button', async () => {
+  const dialogTitleValue = 'Test';
   render(
     <Default
       isOpen={true}
       onSave={handleSave}
       onClose={handleClose}
       showSecondaryButton={false}
+      title={dialogTitleValue}
     />
   );
+
+  await screen.findByText(dialogTitleValue);
 
   expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
 });
@@ -162,5 +166,50 @@ describe('Tests for WithAutoFocus', () => {
 
     const textfield = screen.getByLabelText(/hello/i);
     expect(textfield).toBe(document.activeElement);
+  });
+});
+
+describe('Tests for Tertiary Button', () => {
+  it('should display the tertiary button', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary Button';
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        showTertiaryButton={true}
+        tertiaryButtonText={tertiaryButtonText}
+        title={dialogTitleValue}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    const tertiaryButton = screen.getByRole('button', {
+      name: tertiaryButtonText,
+    });
+
+    expect(tertiaryButton).toBeInTheDocument();
+    expect(tertiaryButton).toHaveTextContent(tertiaryButtonText);
+  });
+
+  it('should not display the tertiary button', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary button';
+
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        title={dialogTitleValue}
+        tertiaryButtonText={tertiaryButtonText}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    expect(screen.queryByText(tertiaryButtonText)).toBeNull();
   });
 });

@@ -16,7 +16,7 @@ const features = [
         fields, orchestrates validation, and handles submission, so we don't
         have to.
       </>
-    )
+    ),
   },
   {
     title: <>Yup</>,
@@ -26,19 +26,19 @@ const features = [
         Yup is a JavaScript schema builder for validation. Define a schema, then
         validate the shape of an existing value.
       </>
-    )
+    ),
   },
   {
     title: <>Material UI</>,
-    imageUrl: 'img/undraw_react.svg',
+    imageUrl: 'img/material_ui.svg',
     description: (
       <>
         Material UI is a React UI library that provides a Grid system,
         Typography system, and form components to provide a consisten and
         beautiful UI for SQForm.
       </>
-    )
-  }
+    ),
+  },
 ];
 
 function Feature({ imageUrl, title, description }) {

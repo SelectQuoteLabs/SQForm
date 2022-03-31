@@ -15,13 +15,17 @@ function SQFormDialog({
   onClose,
   onSave,
   saveButtonText = 'Save',
+  tertiaryButtonText,
   title,
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
   validationSchema,
-  showSecondaryButton = true
+  showSecondaryButton = true,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
+  onTertiaryClick,
 }) {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -57,6 +61,10 @@ function SQFormDialog({
         title={title}
         muiGridProps={muiGridProps}
         showSecondaryButton={showSecondaryButton}
+        showTertiaryButton={showTertiaryButton}
+        tertiaryButtonText={tertiaryButtonText}
+        isTertiaryDisabled={isTertiaryDisabled}
+        onTertiaryClick={onTertiaryClick}
       />
     </Formik>
   );
@@ -97,7 +105,15 @@ SQFormDialog.propTypes = {
    * */
   validationSchema: PropTypes.object,
   /** show/hide the secondary Cancel button.  Defaults to show(true) */
-  showSecondaryButton: PropTypes.bool
+  showSecondaryButton: PropTypes.bool,
+  /** show/hide the tertiary button.  Defaults to hide(false) */
+  showTertiaryButton: PropTypes.bool,
+  /** The tertiary button text (Button located on right side of Dialog NEXT to primary button) */
+  tertiaryButtonText: PropTypes.string,
+  /** The current disabled state of the Tertiary Button */
+  isTertiaryDisabled: PropTypes.bool,
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick: PropTypes.func,
 };
 
 export default SQFormDialog;

@@ -13,7 +13,7 @@ function OutcomeForm({
   errorText,
   successText,
   isFailedState,
-  muiGridProps = {}
+  muiGridProps = {},
 }) {
   return (
     <Section>

@@ -13,6 +13,7 @@ module.exports = {
       'reset_button_with_confirmation',
       'text_area',
       'text_field',
+      'masked_text_field',
     ],
     Hooks: ['use_form', 'use_form_button'],
     'Component Support': ['common_issues'],
