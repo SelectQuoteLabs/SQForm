@@ -230,6 +230,17 @@ export function SQFormDialogStepper<Values>({
     );
   }
 
+  const handleClose = (
+    event, // Record<string, unknown>,
+    reason // 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => {
+    if (disableBackdropClick && reason === 'backDropClick') {
+      return;
+    }
+
+    onClose(event, reason);
+  };
+
   return (
     <Formik
       {...props}
@@ -244,7 +255,7 @@ export function SQFormDialogStepper<Values>({
           disableBackdropClick={disableBackdropClick}
           maxWidth={maxWidth}
           open={isOpen}
-          onClose={onClose}
+          onClose={handleClose}
           fullWidth={fullWidth}
           {...dialogProps}
         >

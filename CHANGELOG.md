@@ -1,3 +1,31 @@
+### [7.4.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.1...v7.4.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* 🐛 SQFormScrollableCard height prop accepts string now ([97486ef](https://github.com/SelectQuoteLabs/SQForm/commit/97486ef0d7838e724729d763f5a36b0a99026205)), closes [#475](https://github.com/SelectQuoteLabs/SQForm/issues/475)
+
+### [7.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.0...v7.4.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* 🐛 Removing depricated MUI Dialog prop disable Bg click ([b7cbd16](https://github.com/SelectQuoteLabs/SQForm/commit/b7cbd16b469b723ff6fc6bdd4947ccca05c370b1)), closes [#646](https://github.com/SelectQuoteLabs/SQForm/issues/646)
+
+## [7.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.3.0...v7.4.0) (2022-02-28)
+
+
+### Features
+
+* 🎸 Add "onTertiaryClick" click handler to SQFormDialog ([8718a4f](https://github.com/SelectQuoteLabs/SQForm/commit/8718a4f01e4083a0038782c73450a1da739c9817)), closes [#643](https://github.com/SelectQuoteLabs/SQForm/issues/643)
+
+## [7.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.1...v7.3.0) (2022-02-10)
+
+
+### Features
+
+* 🎸 Add Third button to SQFormDialog ([#631](https://github.com/SelectQuoteLabs/SQForm/issues/631)) ([f8ae9f4](https://github.com/SelectQuoteLabs/SQForm/commit/f8ae9f480c3074a571c8f478a10e0518a6a5a13e)), closes [#629](https://github.com/SelectQuoteLabs/SQForm/issues/629)
+
 ### [7.2.1](https://github.com/SelectQuoteLabs/SQForm/compare/v7.2.0...v7.2.1) (2022-01-28)
 
 

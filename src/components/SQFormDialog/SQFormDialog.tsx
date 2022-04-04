@@ -64,15 +64,19 @@ function SQFormDialog<Values>({
   maxWidth = 'sm',
   onClose,
   onSave,
-  showSecondaryButton = true,
   shouldDisplaySaveButton = true,
   saveButtonText = 'Save',
+  tertiaryButtonText,
   title,
   enableReinitialize = false,
   initialValues,
   muiGridProps = {},
   shouldRequireFieldUpdates = false,
   validationSchema,
+  showSecondaryButton = true,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
+  onTertiaryClick,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const validationYupSchema = React.useMemo(() => {
     if (!validationSchema) return;
@@ -108,6 +112,10 @@ function SQFormDialog<Values>({
         title={title}
         muiGridProps={muiGridProps}
         showSecondaryButton={showSecondaryButton}
+        showTertiaryButton={showTertiaryButton}
+        tertiaryButtonText={tertiaryButtonText}
+        isTertiaryDisabled={isTertiaryDisabled}
+        onTertiaryClick={onTertiaryClick}
       />
     </Formik>
   );

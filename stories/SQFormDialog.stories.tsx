@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import type {Story, Meta} from '@storybook/react';
-import type { GridItemsAlignment, GridSpacing } from '@material-ui/core';
+import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
 
 import {
   SQFormDialog,
@@ -10,24 +10,27 @@ import {
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
-import type { SQFormDialogProps } from 'components/SQFormDialog/SQFormDialog';
+import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 import {createDocsPage} from './utils/createDocsPage';
 
-type DefaultArgsValues = { hello: string };
-type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>
+type DefaultArgsValues = {hello: string};
+type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>;
 
 type WithDatePickersValues = {
-  datePicker: string,
-  dateTimePicker: string,
-  datePickerCalendarOnly: string,
-}
-type SQFormDialogWithDatePickersStory = Story<SQFormDialogProps<WithDatePickersValues>>;
+  datePicker: string;
+  dateTimePicker: string;
+  datePickerCalendarOnly: string;
+};
+type SQFormDialogWithDatePickersStory = Story<
+  SQFormDialogProps<WithDatePickersValues>
+>;
 
 const meta: Meta = {
   title: 'Forms/SQFormDialog',
   component: SQFormDialog,
   argTypes: {
     onSave: {action: 'onSave', table: {disable: true}},
+    onTertiaryClick: {action: 'onTertiaryClick', table: {disable: true}},
     onClose: {action: 'onClose', table: {disable: true}},
     children: {table: {disable: true}},
     validationSchema: {table: {disable: true}},
@@ -99,7 +102,7 @@ WithAutoFocus.args = {
   title: 'With Auto Focus',
 };
 
-export const WithDatePickers: SQFormDialogWithDatePickersStory= (args) => {
+export const WithDatePickers: SQFormDialogWithDatePickersStory = (args) => {
   return (
     <>
       <h1>
@@ -125,6 +128,35 @@ WithDatePickers.args = {
     dateTimePicker: '',
     datePickerCalendarOnly: '',
   },
+};
+
+export const WithTertiaryButton = (args) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormTextField name="hello" label="Hello" />
+        <SQFormTextField name="hi" label="Hi" />
+        <SQFormTextField name="howdy" label="Howdy " />
+        <SQFormTextField name="helloAgain" label="Hello Again" />
+      </SQFormDialog>
+    </>
+  );
+};
+WithTertiaryButton.args = {
+  ...defaultArgs,
+  initialValues: {
+    hello: '',
+    hi: '',
+    howdy: '',
+    helloAgain: '',
+  },
+  title: 'With Tertiary Button',
+  showTertiaryButton: true,
+  tertiaryButtonText: 'Tertiary Button',
 };
 
 export default meta;

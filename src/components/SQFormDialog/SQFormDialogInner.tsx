@@ -105,12 +105,16 @@ function SQFormDialogInner({
   isOpen,
   maxWidth,
   onClose,
-  shouldDisplaySaveButton = true,
+  onSave,
   saveButtonText,
+  tertiaryButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
   showSecondaryButton = true,
+  showTertiaryButton = false,
+  isTertiaryDisabled = false,
+  onTertiaryClick,
 }: SQFormDialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -129,6 +133,10 @@ function SQFormDialogInner({
     event: Record<string, unknown>,
     reason: 'backdropClick' | 'escapeKeyDown'
   ) => {
+    if (disableBackdropClick && reason === 'backdropClick') {
+      return;
+    }
+
     if (!isDirty) {
       onClose && onClose(event, reason);
     } else {
@@ -142,14 +150,59 @@ function SQFormDialogInner({
     closeDialogAlert();
   };
 
+  const renderTertiaryButton = () => {
+    return (
+      <Grid
+        container={true}
+        justifyContent={showSecondaryButton ? 'space-between' : 'flex-end'}
+      >
+        {showSecondaryButton && (
+          <Grid item={true}>
+            <RoundedButton
+              title={cancelButtonText}
+              onClick={(event) => handleCancel(event, 'cancelClick')}
+              color="secondary"
+              variant="outlined"
+            >
+              {cancelButtonText}
+            </RoundedButton>
+          </Grid>
+        )}
+
+        <Grid item={true}>
+          <span style={{paddingRight: '20px'}}>
+            <SQFormButton
+              title={tertiaryButtonText}
+              isDisabled={isTertiaryDisabled}
+              onClick={onTertiaryClick}
+              type="button"
+            >
+              {tertiaryButtonText}
+            </SQFormButton>
+          </span>
+          {onSave && (
+            <SQFormButton
+              title={saveButtonText}
+              isDisabled={isDisabled}
+              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+            >
+              {saveButtonText}
+            </SQFormButton>
+          )}
+        </Grid>
+      </Grid>
+    );
+  };
+
   return (
     <>
       <Dialog
-        disableBackdropClick={disableBackdropClick}
         maxWidth={maxWidth}
         open={isOpen}
         TransitionComponent={Transition}
-        onClose={showSecondaryButton ? handleCancel : undefined}
+        onClose={
+          showSecondaryButton || disableBackdropClick ? handleCancel : undefined
+        }
       >
         <Form>
           <DialogTitle disableTypography={true} classes={titleClasses}>
@@ -169,17 +222,19 @@ function SQFormDialogInner({
               showSecondaryButton ? actionsClasses : primaryActionsClasses
             }
           >
-            {showSecondaryButton && (
-              <RoundedButton
-                title={cancelButtonText}
-                onClick={handleCancel}
-                color="secondary"
-                variant="outlined"
-              >
-                {cancelButtonText}
-              </RoundedButton>
-            )}
-            {shouldDisplaySaveButton && (
+            {showTertiaryButton
+              ? renderTertiaryButton()
+              : showSecondaryButton && (
+                  <RoundedButton
+                    title={cancelButtonText}
+                    onClick={(event) => handleCancel(event, 'cancelClick')}
+                    color="secondary"
+                    variant="outlined"
+                  >
+                    {cancelButtonText}
+                  </RoundedButton>
+                )}
+            {!showTertiaryButton && onSave && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}
