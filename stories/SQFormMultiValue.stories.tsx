@@ -69,7 +69,7 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     favoriteColors: Yup.array()
       .of(
         Yup.lazy((value: unknown) => {
@@ -78,7 +78,7 @@ WithValidation.args = {
       )
       .required()
       .min(1, 'Required'),
-  },
+  }),
   sqFormProps: {
     initialValues: {favoriteColors: []},
   },

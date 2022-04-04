@@ -2,13 +2,11 @@ import React from 'react';
 import {
   Grid,
   RadioGroup,
-  RadioProps,
-  RadioGroupProps,
   FormHelperText,
   FormControl,
   FormLabel,
 } from '@material-ui/core';
-import type {GridSize} from '@material-ui/core';
+import type {GridSize, RadioProps, RadioGroupProps} from '@material-ui/core';
 import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
 

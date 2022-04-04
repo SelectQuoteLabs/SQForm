@@ -2,14 +2,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    "types": [
-      "jest"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["jest"],
     "allowJs": true, // TODO: Change to false once fully migrated to TS
     "skipLibCheck": false,
     "esModuleInterop": true,
@@ -22,15 +16,9 @@
     "isolatedModules": true,
     "jsx": "react",
     "declaration": true,
+    "declarationDir": ".dts",
     "emitDeclarationOnly": true,
-    "outDir": "dist"
   },
-  "include": [
-    "./src",
-    "./jest-setup.ts",
-    "./stories",
-  ],
-  "exclude": [
-    "**/*.test(.ts|.tsx)"
-  ]
+  "include": ["./src", "./jest-setup.ts", "./stories"],
+  "exclude": ["**/*.test(.ts|.tsx)"]
 }

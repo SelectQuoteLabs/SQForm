@@ -1,15 +1,24 @@
 import React from 'react';
 import type {
-  TaskModuleProps,
-  Context,
-  GuidedWorkflowDispatchActionType,
-  UseGuidedWorkflowContextType,
+  SQFormGuidedWorkflowTaskModuleProps,
+  SQFormGuidedWorkflowContext,
 } from './Types';
 
+type GuidedWorkflowDispatchActionType<TValues> = {
+  type: 'UPDATE';
+  id: number;
+  data: TValues;
+};
+
+type UseGuidedWorkflowContextType<TValues> = {
+  state: SQFormGuidedWorkflowContext<TValues>;
+  updateDataByID: (id: number, data: TValues) => void;
+};
+
 export function useGuidedWorkflowContext<TValues>(
-  taskModules: Array<TaskModuleProps<TValues>>
+  taskModules: Array<SQFormGuidedWorkflowTaskModuleProps<TValues>>
 ): UseGuidedWorkflowContextType<TValues> {
-  const initialData = taskModules.reduce<Context<TValues>>(
+  const initialData = taskModules.reduce<SQFormGuidedWorkflowContext<TValues>>(
     (acc, taskModule, index) => {
       return {
         ...acc,
@@ -24,12 +33,12 @@ export function useGuidedWorkflowContext<TValues>(
   );
 
   const reducer = (
-    prevState: Context<TValues>,
+    prevState: SQFormGuidedWorkflowContext<TValues>,
     action: GuidedWorkflowDispatchActionType<TValues>
   ) => {
     switch (action.type) {
       case 'UPDATE':
-        return taskModules.reduce<Context<TValues>>(
+        return taskModules.reduce<SQFormGuidedWorkflowContext<TValues>>(
           (acc, taskModlue, index) => {
             const taskID = index + 1;
             const prevData = prevState[taskID].data;

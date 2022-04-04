@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Formik, Form} from 'formik';
-import type {FormikHelpers} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
@@ -16,7 +16,10 @@ import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
-import type {SQFormDataProps, SQFormGuidedWorkflowProps} from './Types';
+import type {
+  SQFormGuidedWorkflowDataProps,
+  SQFormGuidedWorkflowProps,
+} from './Types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -32,11 +35,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const getTaskModuleFormSchema = (validationSchema = {}) => {
-  return Yup.object().shape(validationSchema);
-};
-
-function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
+function SQFormGuidedWorkflow<TValues extends FormikValues>({
   taskModules,
   mainTitle,
   mainSubtitle,
@@ -48,10 +47,12 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   // Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
   // There's a few open PR's on this issue, here's one for reference: https://github.com/formium/formik/pull/2933
   const getFormikInitialRequiredErrors = (
-    validationSchema?: SQFormDataProps<TValues>['validationSchema']
+    validationSchema?: SQFormGuidedWorkflowDataProps<TValues>['validationSchema']
   ) => {
-    if (validationSchema) {
-      return Object.entries(validationSchema).reduce((acc, [key, value]) => {
+    if (validationSchema?.fields) {
+      const validationFields =
+        validationSchema.fields as Yup.ObjectSchema<TValues>;
+      return Object.entries(validationFields).reduce((acc, [key, value]) => {
         if (value.tests[0]?.OPTIONS.name === 'required') {
           return {...acc, [key]: 'Required'};
         }
@@ -75,9 +76,7 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
   const transformedTaskModules = taskModules.map((taskModule, index) => {
     const taskNumber = index + 1;
     const taskName = taskModule.name;
-    const validationYupSchema = getTaskModuleFormSchema(
-      taskModule.formikProps?.validationSchema
-    );
+    const validationYupSchema = taskModule.formikProps?.validationSchema;
     const initialErrors = getFormikInitialRequiredErrors(
       taskModule.formikProps?.validationSchema
     );
@@ -114,7 +113,7 @@ function SQFormGuidedWorkflow<TValues extends {[key: string]: unknown}>({
         updateTaskModuleContextByID(taskNumber, values);
         enableNextTaskModule();
       } catch (error) {
-        onError && onError(error);
+        onError && onError(error as Error);
       }
     };
 

@@ -1,6 +1,6 @@
 import type {FormikHelpers} from 'formik';
 import React from 'react';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 
 import {
   SQFormScrollableCardsMenuWrapper,
@@ -34,9 +34,9 @@ function ScrollableDetails(): React.ReactElement {
     name: '',
   };
 
-  const validationSchema = {
-    name: yup.string().required(),
-  };
+  const validationSchema = Yup.object({
+    name: Yup.string().required().min(12),
+  });
 
   const handleSubmit = (
     values: typeof initialValues,
@@ -66,9 +66,9 @@ function ScrollablePermissions(): React.ReactElement {
     isAdmin: false,
   };
 
-  const validationSchema = {
-    isAdmin: yup.boolean(),
-  };
+  const validationSchema = Yup.object({
+    isAdmin: Yup.boolean(),
+  });
 
   const handleSubmit = (
     values: typeof initialValues,

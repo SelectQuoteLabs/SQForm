@@ -18,14 +18,14 @@ import type {
   GridProps,
   DialogContentProps,
 } from '@material-ui/core';
-import * as Yup from 'yup';
+import type {AnyObjectSchema} from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
-import type {FormikHelpers} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
 import type {TransitionProps} from '@material-ui/core/transitions';
 
-interface SQFormDialogStepProps<Values> {
+export interface SQFormDialogStepProps {
   /** The content to be rendered in the step body. */
   children?: JSX.Element | Array<JSX.Element>;
   /** Should the loading spinner be shown */
@@ -35,14 +35,14 @@ interface SQFormDialogStepProps<Values> {
   /** The label to display in the stepper */
   label?: string;
   /** Validation schema for this step */
-  validationSchema?: Record<keyof Values, Yup.AnySchema>;
+  validationSchema?: AnyObjectSchema;
 }
 
-export function SQFormDialogStep<Values extends Record<string, unknown>>({
+export function SQFormDialogStep({
   children,
   isLoading = false,
   loadingMessage = '',
-}: SQFormDialogStepProps<Values>): JSX.Element {
+}: SQFormDialogStepProps): JSX.Element {
   return isLoading ? (
     <LoadingSpinner message={loadingMessage} />
   ) : (
@@ -98,7 +98,7 @@ const useStepperStyles = makeStyles({
   },
 });
 
-export interface SQFormDialogStepperProps<Values> {
+export interface SQFormDialogStepperProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body.  Will be an array of React elements. */
@@ -116,7 +116,10 @@ export interface SQFormDialogStepperProps<Values> {
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
-  onClose: () => void;
+  onClose: (
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+  ) => void;
   /** Callback function invoked when user clicks primary submit button */
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void;
   /** Title text at the top of the Dialog */
@@ -133,7 +136,7 @@ export interface SQFormDialogStepperProps<Values> {
   contentStyle?: DialogContentProps['style'];
 }
 
-export function SQFormDialogStepper<Values>({
+export function SQFormDialogStepper<Values extends FormikValues>({
   cancelButtonText = 'Cancel',
   children,
   disableBackdropClick = false,
@@ -157,9 +160,7 @@ export function SQFormDialogStepper<Values>({
   const currentChild = steps[activeStep];
   const [completed, setCompleted] = React.useState<number[]>([]);
 
-  const validationSchema = currentChild.props.validationSchema
-    ? Yup.object().shape(currentChild.props.validationSchema)
-    : null;
+  const validationSchema = currentChild.props.validationSchema || null;
 
   const classes = useStyles({steps});
   const actionsClasses = useActionsStyles();
@@ -231,10 +232,10 @@ export function SQFormDialogStepper<Values>({
   }
 
   const handleClose = (
-    event, // Record<string, unknown>,
-    reason // 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+    event: Record<string, unknown>,
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => {
-    if (disableBackdropClick && reason === 'backDropClick') {
+    if (disableBackdropClick && reason === 'backdropClick') {
       return;
     }
 

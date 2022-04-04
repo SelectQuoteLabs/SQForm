@@ -5,12 +5,13 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import type {AutocompleteProps} from '@material-ui/lab';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
-import {ListChildComponentProps, VariableSizeList} from 'react-window';
+import {VariableSizeList} from 'react-window';
+import type {ListChildComponentProps} from 'react-window';
 import {Typography} from '@material-ui/core';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import type {Option} from 'types';
+import type {SQFormOption} from '../../types';
 import {
   ListboxVirtualizedComponentProps,
   OuterElementContextInterface,
@@ -221,7 +222,7 @@ function SQFormAsyncAutocomplete({
         inputValue={inputValue}
         disabled={isDisabled}
         getOptionLabel={(option) => option.label}
-        getOptionDisabled={(option: Option) => option.isDisabled || false}
+        getOptionDisabled={(option: SQFormOption) => option.isDisabled || false}
         renderInput={(params) => {
           return (
             <TextField

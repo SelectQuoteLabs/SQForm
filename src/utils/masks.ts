@@ -1,8 +1,8 @@
-import type {maskArray} from 'react-text-mask';
+import type {Mask as MaskArray} from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import emailMask from 'text-mask-addons/dist/emailMask';
 
-const zipMask = (userInput: string): maskArray => {
+const zipMask = (userInput: string): MaskArray => {
   const numbers = userInput.match(/\d/g);
   const numberLength = numbers ? numbers.join('').length : 0;
 

@@ -10,14 +10,13 @@ import {createDocsPage} from './utils/createDocsPage';
 import type {Story} from '@storybook/react';
 import type {SQFormMultiSelectProps} from 'components/SQForm/SQFormMultiSelect';
 import type {GridSizeOptions} from './types/storyHelperTypes';
-import type {AnySchema} from 'yup';
 import getSizeProp from './utils/getSizeProp';
 
 type MultiSelectStoryType = Story<
   Omit<SQFormMultiSelectProps, 'size' | 'name' | 'label'> & {
     size?: GridSizeOptions;
     sqFormProps?: Omit<SQFormStoryWrapperProps, 'children'>;
-    validationSchema: Record<string, AnySchema>;
+    validationSchema: SQFormStoryWrapperProps['validationSchema'];
   }
 >;
 
@@ -90,9 +89,9 @@ SQFormMultiSelect.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  validationSchema: {
+  validationSchema: Yup.object({
     friends: Yup.array().required().min(1, 'Required'),
-  },
+  }),
   sqFormProps: {
     initialValues: {friends: []},
   },

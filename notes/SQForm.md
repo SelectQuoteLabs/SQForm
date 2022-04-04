@@ -48,11 +48,11 @@ The `helperText` prop defaults to an empty space it is always present in the DOM
 
 **SQFormAutocomplete**
 
-As shown in the component prop-types, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
+As shown in the component props, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
 
 **SQFormDropdown**
 
-As shown in the component prop-types, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
+As shown in the component props, the `children` of this component must be an `Array` of objects. Each object must have the shape of `{label: String, value: String | Number}`.
 
 If you want an empty option in the dropdown list options, set the `displayEmpty` prop to `true`.
 

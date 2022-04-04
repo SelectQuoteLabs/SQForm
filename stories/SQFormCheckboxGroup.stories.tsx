@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Yup from 'yup';
-import type {AnySchema} from 'yup';
 import type {Story, Meta} from '@storybook/react';
 import {SQFormCheckboxGroup as SQFormCheckboxGroupComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {SQFormCheckboxGroupProps} from 'components/SQForm/SQFormCheckboxGroup';
 
 export default {
@@ -43,7 +43,7 @@ const defaultArgs = {
 
 interface CheckboxGroupTestProps extends SQFormCheckboxGroupProps {
   initialValues: Record<string, string[] | boolean>;
-  schema: Record<string, AnySchema>;
+  schema: SQFormStoryWrapperProps['validationSchema'];
 }
 
 export const Default: Story<CheckboxGroupTestProps> = (args) => {
@@ -76,9 +76,9 @@ export const WithValidation: Story<CheckboxGroupTestProps> = (args) => {
 
 WithValidation.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     [defaultArgs.name]: Yup.array().required().min(1, 'Required'),
-  },
+  }),
 };
 
 WithValidation.parameters = {

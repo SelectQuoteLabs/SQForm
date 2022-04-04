@@ -13,8 +13,14 @@ import {
   SQFormTextField,
 } from '../src';
 import {Grid, Typography} from '@material-ui/core';
+import type {FormikHelpers} from 'formik';
+import type {
+  SQFormGuidedWorkflowContext,
+  SQFormGuidedWorkflowProps,
+} from 'components/SQFormGuidedWorkflow/Types';
+import type {CustomStory} from './types/storyHelperTypes';
 
-const sleep = (milliseconds) => {
+const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
@@ -32,7 +38,14 @@ const outcomeDropdownOptions = [
   {label: 'Interested', value: 'interested'},
 ];
 
-const Template = () => {
+type DefaultInitialValuesType = {
+  outcome: string;
+  notes: string;
+};
+
+const Template: CustomStory<
+  SQFormGuidedWorkflowProps<DefaultInitialValuesType>
+> = (): React.ReactElement => {
   const [isIneligible, setIneligible] = React.useState(false);
   const [isModuleDisabled, setIsModuleDisabled] = React.useState(false);
   const scriptedTextMap = {
@@ -40,16 +53,21 @@ const Template = () => {
     agentName: 'Jane Doe',
     planName: 'Super Cheap Med+',
   };
+  const initialValues = {
+    outcome: '',
+    notes: '',
+  };
   const taskModules = [
     {
       name: 'intro',
       title: 'Introduction',
       formikProps: {
-        initialValues: {
-          outcome: '',
-          notes: '',
-        },
-        onSubmit: async (values, _formikBag, _context) => {
+        initialValues,
+        onSubmit: async (
+          values: typeof initialValues,
+          _formikBag: FormikHelpers<typeof initialValues>,
+          _context: SQFormGuidedWorkflowContext<typeof initialValues>
+        ) => {
           await sleep(3000); // Simulate API call to see loading spinner
           if (values.outcome === 'not-interested') {
             setIsModuleDisabled(true);
@@ -57,10 +75,10 @@ const Template = () => {
             setIsModuleDisabled(false);
           }
         },
-        validationSchema: {
+        validationSchema: Yup.object({
           outcome: Yup.string().required(),
           notes: Yup.string(),
-        },
+        }),
       },
       additionalInformationSectionProps: {
         Elements: (
@@ -108,18 +126,19 @@ const Template = () => {
       isFailedState: isIneligible,
       isDisabled: isModuleDisabled,
       formikProps: {
-        initialValues: {
-          outcome: '',
-          notes: '',
-        },
-        onSubmit: async (values, _formikBag, context) => {
+        initialValues,
+        onSubmit: async (
+          values: typeof initialValues,
+          _formikBag: FormikHelpers<typeof initialValues>,
+          context: SQFormGuidedWorkflowContext<typeof initialValues>
+        ) => {
           console.log(values);
           console.log(context);
         },
-        validationSchema: {
+        validationSchema: Yup.object({
           outcome: Yup.string().required(),
           notes: Yup.string(),
-        },
+        }),
       },
       scriptedTextProps: {
         text: `Stuff about policy cancellation documents`,
@@ -155,18 +174,19 @@ const Template = () => {
       subtitles: ['Please verify the providers'],
       isDisabled: false,
       formikProps: {
-        initialValues: {
-          outcome: '',
-          notes: '',
-        },
-        onSubmit: async (values, _formikBag, context) => {
+        initialValues,
+        onSubmit: async (
+          values: typeof initialValues,
+          _formikBag: FormikHelpers<typeof initialValues>,
+          context: SQFormGuidedWorkflowContext<typeof initialValues>
+        ) => {
           console.log(values);
           console.log(context);
         },
-        validationSchema: {
+        validationSchema: Yup.object({
           outcome: Yup.string().required(),
           notes: Yup.string(),
-        },
+        }),
       },
       additionalInformationSectionProps: {
         Elements: (
@@ -247,86 +267,106 @@ const Template = () => {
 
 export const Default = Template.bind({});
 
-const TestTemplate = (args) => {
-  const {mainTitle, ...rest} = args;
-
-  const taskModules = [
-    {
-      name: 'firstSection',
-      title: 'First Section',
-      formikProps: {
-        initialValues: {
-          firstText: '',
-          secondText: '',
-        },
-        onSubmit: async (values) => {
-          console.log(JSON.stringify(values));
-        },
-        validationSchema: {
-          firstText: Yup.string().required(),
-          secondText: Yup.string(),
-        },
-      },
-      scriptedTextProps: {
-        text: 'This is some text',
-        title: 'Script Title',
-      },
-      outcomeProps: {
-        FormElements: (
-          <>
-            <SQFormTextField name="firstText" label="First Text" />
-            <SQFormTextField name="secondText" label="Second Text" />
-          </>
-        ),
-        title: 'Outcome Test',
-      },
-    },
-    {
-      name: 'secondSection',
-      title: 'Second Section',
-      formikProps: {
-        initialValues: {
-          testText: '',
-          outcome: '',
-          notes: '',
-        },
-        onSubmit: async (values) => {
-          console.log(JSON.stringify(values));
-        },
-      },
-      scriptedTextProps: {
-        text: 'This is some more text',
-        title: 'Another Script Title',
-      },
-      outcomeProps: {
-        FormElements: (
-          <>
-            <SQFormTextField name="testText" label="Test Text" />
-            <SQFormTextarea name="notes" label="Notes" />
-          </>
-        ),
-        title: 'Outcome Test',
-      },
-    },
-  ];
-
-  return (
-    <div style={{width: '90%', height: '95vh'}}>
-      <ExpandingCardList>
-        <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
-          <SQFormGuidedWorkflow
-            {...rest}
-            mainTitle={mainTitle}
-            onError={(error) => {
-              console.error(error);
-            }}
-            taskModules={taskModules}
-          />
-        </ExpandingCard>
-      </ExpandingCardList>
-    </div>
-  );
+const firstSectionInitialValues: FirstSectionInitialValuesType = {
+  firstText: '',
+  secondText: '',
 };
+
+type FirstSectionInitialValuesType = {
+  firstText?: string;
+  secondText?: string;
+};
+
+const secondSectionInitialValues: SecondSectionInitialValues = {
+  testText: '',
+  outcome: '',
+  notes: '',
+};
+
+type SecondSectionInitialValues = {
+  testText?: string;
+  outcome?: string;
+  notes?: string;
+};
+
+type InitialValuesType =
+  | typeof firstSectionInitialValues
+  | typeof secondSectionInitialValues;
+
+const TestTemplate: CustomStory<SQFormGuidedWorkflowProps<InitialValuesType>> =
+  (args): React.ReactElement => {
+    const {mainTitle, ...rest} = args;
+
+    const taskModules = [
+      {
+        name: 'firstSection',
+        title: 'First Section',
+        formikProps: {
+          initialValues: firstSectionInitialValues,
+          onSubmit: async (values: InitialValuesType) => {
+            console.log(JSON.stringify(values));
+          },
+          validationSchema: Yup.object({
+            firstText: Yup.string().required(),
+            secondText: Yup.string(),
+          }),
+        },
+        scriptedTextProps: {
+          text: 'This is some text',
+          title: 'Script Title',
+        },
+        outcomeProps: {
+          FormElements: (
+            <>
+              <SQFormTextField name="firstText" label="First Text" />
+              <SQFormTextField name="secondText" label="Second Text" />
+            </>
+          ),
+          title: 'Outcome Test',
+        },
+      },
+      {
+        name: 'secondSection',
+        title: 'Second Section',
+        formikProps: {
+          initialValues: secondSectionInitialValues,
+          onSubmit: async (values: InitialValuesType) => {
+            console.log(JSON.stringify(values));
+          },
+        },
+        scriptedTextProps: {
+          text: 'This is some more text',
+          title: 'Another Script Title',
+        },
+        outcomeProps: {
+          FormElements: (
+            <>
+              <SQFormTextField name="testText" label="Test Text" />
+              <SQFormTextarea name="notes" label="Notes" />
+            </>
+          ),
+          title: 'Outcome Test',
+        },
+      },
+    ];
+
+    return (
+      <div style={{width: '90%', height: '95vh'}}>
+        <ExpandingCardList>
+          <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
+            <SQFormGuidedWorkflow<InitialValuesType>
+              {...rest}
+              mainTitle={mainTitle}
+              onError={(error) => {
+                console.error(error);
+              }}
+              taskModules={taskModules}
+            />
+          </ExpandingCard>
+        </ExpandingCardList>
+      </div>
+    );
+  };
 
 export const Testing = TestTemplate.bind({});
 Testing.args = {

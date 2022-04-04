@@ -38,7 +38,7 @@ const defaultArgs = {
   onSubmit: () => {
     /* do nothing */
   },
-  validationSchema: {hello: Yup.string().required()},
+  validationSchema: Yup.object({hello: Yup.string().required().min(15)}),
 };
 
 const Template: CustomStory<
@@ -129,13 +129,6 @@ WithStaticHeight.args = {
   title: 'With Static Height',
   height: 450,
   SubHeaderComponent: <SubHeader />,
-};
-
-export const WithTitleVariant = Template.bind({});
-WithTitleVariant.args = {
-  ...defaultArgs,
-  title: 'h2 Title Variant',
-  titleVariant: 'h1',
 };
 
 export const WithRoundedCorners = Template.bind({});

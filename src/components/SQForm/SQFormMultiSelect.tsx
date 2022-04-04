@@ -21,17 +21,17 @@ import {
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
-import type {BaseFieldProps, Option} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormMultiSelectProps extends BaseFieldProps {
   /** Multiselect options to select from */
-  children: Option[];
+  children: SQFormOption[];
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Custom onChange event callback */
   onChange?: (
     event: React.ChangeEvent<{name?: string; value: unknown}>,
-    value: Option['value'][]
+    value: SQFormOption['value'][]
   ) => void;
   /** This property will allow the end user to check a "Select All" box */
   useSelectAll?: boolean;
@@ -66,7 +66,7 @@ const MenuProps = {
 } as SelectProps['MenuProps'];
 
 const selectedDisplayValue = (
-  values: Option['value'][],
+  values: SQFormOption['value'][],
   options: SQFormMultiSelectProps['children'],
   name?: SQFormMultiSelectProps['name']
 ) => {
@@ -89,7 +89,7 @@ const selectedDisplayValue = (
 };
 
 const getToolTipTitle = (
-  formikFieldValue: Option['value'][],
+  formikFieldValue: SQFormOption['value'][],
   options: SQFormMultiSelectProps['children']
 ) => {
   if (!formikFieldValue?.length) {
@@ -128,7 +128,7 @@ function SQFormMultiSelect({
     formikField: {field},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm<Option['value'][], unknown>({name});
+  } = useForm<SQFormOption['value'][], unknown>({name});
 
   React.useEffect(() => {
     if (!children) {
@@ -143,16 +143,16 @@ function SQFormMultiSelect({
   const labelID = label.toLowerCase();
   const toolTipTitle = getToolTipTitle(field.value, children);
 
-  const getIsSelectAllChecked = (value: Option['value'][]) =>
+  const getIsSelectAllChecked = (value: SQFormOption['value'][]) =>
     value.includes('ALL');
-  const getIsSelectNoneChecked = (value: Option['value'][]) =>
+  const getIsSelectNoneChecked = (value: SQFormOption['value'][]) =>
     value.includes('NONE');
 
   const getValues = (
     children: SQFormMultiSelectProps['children'],
     isSelectAllChecked: boolean,
     isSelectNoneChecked: boolean,
-    value: Option['value'][]
+    value: SQFormOption['value'][]
   ) => {
     if (isSelectAllChecked) {
       return children?.map((option) => option.value);
@@ -169,7 +169,7 @@ function SQFormMultiSelect({
     event: React.ChangeEvent<{name?: string; value: unknown}>,
     _child: ReactNode
   ) => {
-    const value = event.target.value as unknown as Option['value'][];
+    const value = event.target.value as unknown as SQFormOption['value'][];
     const isSelectAllChecked = getIsSelectAllChecked(value);
     const isSelectNoneChecked = getIsSelectNoneChecked(value);
     const values = getValues(
@@ -192,7 +192,7 @@ function SQFormMultiSelect({
    * e.g., if value is an "ID"
    */
   const getRenderValue = (selected: unknown) => {
-    const getValue = (selectedValues: Option['value'][]) => {
+    const getValue = (selectedValues: SQFormOption['value'][]) => {
       if (!selectedValues?.length) {
         return EMPTY_LABEL;
       }
@@ -200,7 +200,7 @@ function SQFormMultiSelect({
       return selectedDisplayValue(selectedValues, children, name);
     };
 
-    return getValue(selected as Option['value'][]);
+    return getValue(selected as SQFormOption['value'][]);
   };
 
   const renderTooltip = () => {
@@ -234,7 +234,7 @@ function SQFormMultiSelect({
             multiple
             displayEmpty
             input={<Input disabled={isDisabled} name={name} />}
-            value={(field.value as Option['value'][]) || []}
+            value={(field.value as SQFormOption['value'][]) || []}
             onBlur={handleBlur}
             onChange={handleMultiSelectChange}
             fullWidth={true}

@@ -15,7 +15,7 @@ export type FormProps = {
 export type SQFormDatePickerStory = Story<
   Omit<SQFormDatePickerProps, 'label' | 'name'> & {
     sqFormProps?: FormProps;
-    schema: Record<string, Yup.AnySchema>;
+    schema: SQFormStoryWrapperProps['validationSchema'];
   }
 >;
 
@@ -63,24 +63,24 @@ const Template: SQFormDatePickerStory = (args) => {
 export const BasicDatePicker = Template.bind({});
 BasicDatePicker.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     date: Yup.date()
       .required()
       .min(new Date('2020-09-22'))
       .max(new Date('2100-10-10'))
       .typeError('Invalid date'),
-  },
+  }),
 };
 
 export const DatePickerBefore2024 = Template.bind({});
 DatePickerBefore2024.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     date: Yup.date()
       .required()
       .max(new Date('2024-01-01'), 'Date must be before 2024')
       .typeError('Invalid date'),
-  },
+  }),
 };
 
 export default meta;

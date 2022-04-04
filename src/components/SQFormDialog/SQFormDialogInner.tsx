@@ -48,6 +48,14 @@ interface SQFormDialogInnerProps {
   muiGridProps?: GridProps;
   /** Determine if the secondary action button should be displayed */
   showSecondaryButton?: boolean;
+  /** Whether to show the tertiary button. (Default: false) */
+  showTertiaryButton?: boolean;
+  /** The tertiary button text */
+  tertiaryButtonText?: string;
+  /** Whether the tertiary button is disabled (Default: false) */
+  isTertiaryDisabled?: boolean;
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /*
@@ -105,12 +113,12 @@ function SQFormDialogInner({
   isOpen,
   maxWidth,
   onClose,
-  onSave,
   saveButtonText,
   tertiaryButtonText,
   shouldRequireFieldUpdates = false,
   title,
   muiGridProps,
+  shouldDisplaySaveButton = true,
   showSecondaryButton = true,
   showTertiaryButton = false,
   isTertiaryDisabled = false,
@@ -131,7 +139,7 @@ function SQFormDialogInner({
 
   const handleCancel = (
     event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown'
+    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => {
     if (disableBackdropClick && reason === 'backdropClick') {
       return;
@@ -160,7 +168,9 @@ function SQFormDialogInner({
           <Grid item={true}>
             <RoundedButton
               title={cancelButtonText}
-              onClick={(event) => handleCancel(event, 'cancelClick')}
+              onClick={(event: Record<string, unknown>) =>
+                handleCancel(event, 'cancelClick')
+              }
               color="secondary"
               variant="outlined"
             >
@@ -180,7 +190,7 @@ function SQFormDialogInner({
               {tertiaryButtonText}
             </SQFormButton>
           </span>
-          {onSave && (
+          {shouldDisplaySaveButton && (
             <SQFormButton
               title={saveButtonText}
               isDisabled={isDisabled}
@@ -227,14 +237,16 @@ function SQFormDialogInner({
               : showSecondaryButton && (
                   <RoundedButton
                     title={cancelButtonText}
-                    onClick={(event) => handleCancel(event, 'cancelClick')}
+                    onClick={(event: Record<string, unknown>) =>
+                      handleCancel(event, 'cancelClick')
+                    }
                     color="secondary"
                     variant="outlined"
                   >
                     {cancelButtonText}
                   </RoundedButton>
                 )}
-            {!showTertiaryButton && onSave && (
+            {!showTertiaryButton && shouldDisplaySaveButton && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}

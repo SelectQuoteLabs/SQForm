@@ -16,11 +16,11 @@ import {
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
-import type {BaseFieldProps, Option} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormDropdownProps extends BaseFieldProps {
   /** Dropdown options to select from */
-  children: Option[];
+  children: SQFormOption[];
   /** Whether to display empty option - - in options */
   displayEmpty?: boolean;
   /** Disabled property to disable the input if true */
@@ -93,7 +93,7 @@ function SQFormDropdown({
   }, [children, displayEmpty, name]);
 
   const renderValue = (value: unknown) => {
-    const getValue = (selectedValue: Option['value']) => {
+    const getValue = (selectedValue: SQFormOption['value']) => {
       if (selectedValue === undefined || selectedValue === null) {
         console.warn(getUndefinedValueWarning('SQFormDropdown', name));
         return EMPTY_LABEL;
@@ -120,7 +120,7 @@ function SQFormDropdown({
       return valueToRender;
     };
 
-    return getValue(value as Option['value']);
+    return getValue(value as SQFormOption['value']);
   };
 
   return (

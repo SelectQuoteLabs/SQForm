@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import Autocomplete, {
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import type {
   AutocompleteChangeReason,
   AutocompleteRenderInputParams,
 } from '@material-ui/lab/Autocomplete';
@@ -9,7 +10,7 @@ import type {ListChildComponentProps} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import type {BaseFieldProps, Option, optionValue} from 'types';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 import type {
   OuterElementContextInterface,
   OuterElementTypeProps,
@@ -17,7 +18,7 @@ import type {
 
 export interface SQFormMultiValueProps extends BaseFieldProps {
   /** options to select from */
-  children: Option[];
+  children: SQFormOption[];
   /** Whether the field is required */
   isRequired?: boolean;
   /** Whether the field is disabled */
@@ -25,13 +26,13 @@ export interface SQFormMultiValueProps extends BaseFieldProps {
   /** Custom handler for input value change */
   onInputChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    value: optionValue
+    value: SQFormOption['value']
   ) => void;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    value: (string | Option)[],
+    value: (string | SQFormOption)[],
     reason: AutocompleteChangeReason,
-    detail?: string | Option
+    detail?: string | SQFormOption
   ) => void;
   /** Custom onBlur event callback */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -138,7 +139,7 @@ function SQFormMultiValue({
   });
 
   const [inputValue, setInputValue] = React.useState('');
-  const [customOptions, setCustomOptions] = React.useState<Option[]>([]);
+  const [customOptions, setCustomOptions] = React.useState<SQFormOption[]>([]);
   const displayOptions = React.useMemo(
     () => [...children, ...customOptions],
     [children, customOptions]
@@ -157,8 +158,8 @@ function SQFormMultiValue({
       return option.value;
     });
 
-    const newCustomOptions: Option[] = initialValue.reduce(
-      (acc: Option[], value: optionValue): Option[] => {
+    const newCustomOptions: SQFormOption[] = initialValue.reduce(
+      (acc: SQFormOption[], value: SQFormOption['value']): SQFormOption[] => {
         if (displayValues.includes(value)) {
           return acc;
         }
@@ -199,7 +200,7 @@ function SQFormMultiValue({
         /* Creating an option we always know that the last value
          * in the `value` array is a string
          */
-        const newCustomOption: Option = {
+        const newCustomOption: SQFormOption = {
           label: value[value.length - 1],
           value: value[value.length - 1],
         };

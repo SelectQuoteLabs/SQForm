@@ -111,9 +111,9 @@ Default.args = defaultArgs;
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  schema: {
+  schema: Yup.object({
     friends: Yup.array().min(5),
-  },
+  }),
 };
 WithValidation.parameters = {
   controls: {exclude: 'schema'},

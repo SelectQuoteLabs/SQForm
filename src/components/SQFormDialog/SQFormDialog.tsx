@@ -1,12 +1,12 @@
 import React from 'react';
 import {Formik} from 'formik';
-import type {FormikHelpers} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import type {DialogProps, GridProps} from '@material-ui/core';
-import * as Yup from 'yup';
+import type {AnyObjectSchema} from 'yup';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
-export interface SQFormDialogProps<Values> {
+export interface SQFormDialogProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
@@ -31,6 +31,12 @@ export interface SQFormDialogProps<Values> {
   ) => void | Promise<unknown>;
   /** Determine if the secondary action button should be displayed (default: true) */
   showSecondaryButton?: boolean;
+  /** Whether to show the tertiary button. (Default: false) */
+  showTertiaryButton?: boolean;
+  /** The tertiary button text */
+  tertiaryButtonText?: string;
+  /** Whether the tertiary button is disabled (Default: false) */
+  isTertiaryDisabled?: boolean;
   /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton?: boolean;
   /** The primary button text (Button located on right side of Dialog) */
@@ -49,13 +55,12 @@ export interface SQFormDialogProps<Values> {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: Record<
-    keyof Values,
-    Yup.AnySchema<Values[keyof Values] | null | undefined>
-  >;
+  validationSchema: AnyObjectSchema;
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function SQFormDialog<Values>({
+function SQFormDialog<Values extends FormikValues>({
   cancelButtonText = 'Cancel',
   children,
   disableBackdropClick = false,
@@ -78,12 +83,6 @@ function SQFormDialog<Values>({
   isTertiaryDisabled = false,
   onTertiaryClick,
 }: SQFormDialogProps<Values>): React.ReactElement {
-  const validationYupSchema = React.useMemo(() => {
-    if (!validationSchema) return;
-
-    return Yup.object().shape(validationSchema);
-  }, [validationSchema]);
-
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
     initialValues
@@ -95,7 +94,7 @@ function SQFormDialog<Values>({
       initialErrors={initialErrors}
       initialValues={initialValues}
       onSubmit={onSave}
-      validationSchema={validationYupSchema}
+      validationSchema={validationSchema}
       validateOnMount={true}
     >
       <SQFormDialogInner

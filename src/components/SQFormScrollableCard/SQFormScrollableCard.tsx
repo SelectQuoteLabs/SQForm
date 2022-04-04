@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 import {
   Card,
   CardHeader,
@@ -7,18 +6,21 @@ import {
   CardActions,
   Grid,
   makeStyles,
-  TypographyVariant,
 } from '@material-ui/core';
-import type {GridProps} from '@material-ui/core';
-import {Formik, Form, FormikHelpers} from 'formik';
+import type {TypographyVariant, GridProps} from '@material-ui/core';
+import type {AnyObjectSchema} from 'yup';
+import {Formik, Form} from 'formik';
+import type {FormikHelpers, FormikValues} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
+import {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
+import {HEADER_HEIGHT} from '../../utils/constants';
 
-export interface SQFormScrollableCardProps<Values> {
+export interface SQFormScrollableCardProps<Values extends FormikValues> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
-  cardContentStyles?: React.CSSProperties;
+  cardContentStyles?: CreateCSSProperties;
   /** Form related Field(s) and components */
   children: React.ReactNode;
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
@@ -69,10 +71,7 @@ export interface SQFormScrollableCardProps<Values> {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema?: Record<
-    keyof Values,
-    Yup.AnySchema<Values[keyof Values] | null | undefined>
-  >;
+  validationSchema?: AnyObjectSchema;
   /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled?: boolean;
   /** MUI Typography variant to be used for the title */
@@ -83,7 +82,7 @@ export interface SQFormScrollableCardProps<Values> {
 
 interface useStylesProps {
   hasSubHeader: boolean;
-  cardContentStyles: SQFormScrollableCardProps<unknown>['cardContentStyles'];
+  cardContentStyles: CreateCSSProperties;
 }
 
 const useStyles = makeStyles((theme) => {
@@ -103,6 +102,7 @@ const useStyles = makeStyles((theme) => {
       gridArea: 'header',
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
+      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
     },
     cardContent: (props: useStylesProps) => ({
       gridArea: 'content',
@@ -148,16 +148,9 @@ function SQFormScrollableCard<Values>({
   title,
   validationSchema,
   isHeaderDisabled = false,
-  titleVariant = 'h4',
   isSquareCorners = true,
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
-
-  const validationYupSchema = React.useMemo(() => {
-    if (!validationSchema) return;
-
-    return Yup.object().shape(validationSchema);
-  }, [validationSchema]);
 
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -223,7 +216,7 @@ function SQFormScrollableCard<Values>({
         initialErrors={initialErrors}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={validationYupSchema}
+        validationSchema={validationSchema}
         validateOnMount={true}
       >
         {(_props) => {
@@ -237,9 +230,9 @@ function SQFormScrollableCard<Values>({
               >
                 {!isHeaderDisabled && (
                   <CardHeader
-                    title={undefined}
+                    title={title}
                     className={classes.cardHeader}
-                    titleTypographyProps={{variant: titleVariant}}
+                    titleTypographyProps={{variant: 'h5'}}
                   />
                 )}
 

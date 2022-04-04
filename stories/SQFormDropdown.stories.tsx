@@ -1,13 +1,11 @@
 import React from 'react';
-import type {AnySchema} from 'yup'; 
-
 import {SQFormDropdown as SQFormDropdownComponent} from '../src';
 import type {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import getSizeProp from './utils/getSizeProp';
 import type {GridSizeOptions} from './types/storyHelperTypes';
-import type { Meta, Story } from '@storybook/react';
+import type {Meta, Story} from '@storybook/react';
 import {createDocsPage} from './utils/createDocsPage';
 import * as markdown from '../notes/SQFormDropdown.md';
 
@@ -16,13 +14,12 @@ type FormProps = {
 } & Omit<SQFormStoryWrapperProps, 'initalValues' | 'children'>;
 
 type DropdownStoryType = Story<
-  Omit<SQFormDropdownProps, 'size'> &
-  {
-   size?: GridSizeOptions,
-   sqFormProps?: FormProps,
-   schema: Record<string, AnySchema>
+  Omit<SQFormDropdownProps, 'size'> & {
+    size?: GridSizeOptions;
+    sqFormProps?: FormProps;
+    schema: SQFormStoryWrapperProps['validationSchema'];
   }
->
+>;
 
 const meta: Meta = {
   title: 'Components/SQFormDropdown',

@@ -75,9 +75,9 @@ export const WithValidation = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
   title: 'With Validation',
-  validationSchema: {
+  validationSchema: Yup.object({
     hello: Yup.string().required(),
-  },
+  }),
 };
 
 export const WithAutoFocus: SQFormDialogStory = (args) => {
@@ -130,7 +130,7 @@ WithDatePickers.args = {
   },
 };
 
-export const WithTertiaryButton = (args) => {
+export const WithTertiaryButton: SQFormDialogStory = (args) => {
   return (
     <>
       <h1>
@@ -139,9 +139,6 @@ export const WithTertiaryButton = (args) => {
 
       <SQFormDialog {...args}>
         <SQFormTextField name="hello" label="Hello" />
-        <SQFormTextField name="hi" label="Hi" />
-        <SQFormTextField name="howdy" label="Howdy " />
-        <SQFormTextField name="helloAgain" label="Hello Again" />
       </SQFormDialog>
     </>
   );
@@ -150,9 +147,6 @@ WithTertiaryButton.args = {
   ...defaultArgs,
   initialValues: {
     hello: '',
-    hi: '',
-    howdy: '',
-    helloAgain: '',
   },
   title: 'With Tertiary Button',
   showTertiaryButton: true,
