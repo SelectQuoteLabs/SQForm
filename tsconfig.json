@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ES6",
+    "lib": ["DOM", "DOM.Iterable", "ES6"],
     "types": ["jest"],
-    "allowJs": true, // TODO: Change to false once fully migrated to TS
+    "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,7 +17,7 @@
     "jsx": "react",
     "declaration": true,
     "declarationDir": ".dts",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": true
   },
   "include": ["./src", "./jest-setup.ts", "./stories"],
   "exclude": ["**/*.test(.ts|.tsx)"]
