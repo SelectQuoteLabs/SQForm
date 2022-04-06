@@ -24,8 +24,6 @@ export interface SQFormRadioButtonGroupProps {
   size?: GridSize;
   /** Function to call on value change */
   onChange?: RadioGroupProps['onChange'];
-  /** Whether this radio selection is required */
-  isRequired?: boolean;
   /** Whether to display group in row */
   shouldDisplayInRow?: boolean;
   /** Label to display above the group */

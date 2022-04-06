@@ -19,8 +19,6 @@ import type {
 export interface SQFormMultiValueProps extends BaseFieldProps {
   /** options to select from */
   children: SQFormOption[];
-  /** Whether the field is required */
-  isRequired?: boolean;
   /** Whether the field is disabled */
   isDisabled?: boolean;
   /** Custom handler for input value change */

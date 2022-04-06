@@ -57,7 +57,6 @@ Default.args = defaultArgs;
 export const WithValidation: SQFormTextFieldStoryType = Template.bind({});
 WithValidation.args = {
   ...defaultArgs,
-  isRequired: true,
   SQFormProps: {
     validationSchema: Yup.object({
       [defaultArgs.name]: Yup.string().required('Required'),

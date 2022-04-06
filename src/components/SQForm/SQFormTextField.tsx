@@ -14,8 +14,6 @@ export interface SQFormTextFieldProps extends BaseFieldProps {
   placeholder?: string;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired?: boolean;
   /** Custom onBlur event callback */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   /** Custom onChange event callback */

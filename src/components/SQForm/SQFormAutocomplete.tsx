@@ -20,8 +20,6 @@ export interface SQFormAutocompleteProps extends BaseFieldProps {
   children: SQFormOption[];
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
-  /** Required property used to highlight input and label if not fulfilled */
-  isRequired?: boolean;
   /** Whether to display empty option */
   displayEmpty?: boolean;
   /** Custom onBlur event callback */

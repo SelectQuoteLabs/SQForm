@@ -22,8 +22,6 @@ export interface SQFormCheckboxGroupProps {
   name: string;
   /** Label to display above the group */
   groupLabel: string;
-  /** Whether a selection in this group is required */
-  isRequired?: boolean;
   /** Function to call on value change */
   onChange?: CheckboxProps['onChange'];
   /** Whether to display the group in a row */

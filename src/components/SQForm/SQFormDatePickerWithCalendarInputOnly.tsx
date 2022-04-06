@@ -58,7 +58,6 @@ function SQFormDatePickerWithCalendarInputOnly({
 }: SQFormDatePickerWithCalendarInputOnlyProps): React.ReactElement {
   const {
     formikField: {helpers},
-    fieldState: {isFieldRequired},
     fieldHelpers: {handleBlur},
   } = useForm({
     name,
@@ -83,7 +82,6 @@ function SQFormDatePickerWithCalendarInputOnly({
       label={label}
       size={size}
       isDisabled={isDisabled}
-      isRequired={isFieldRequired}
       placeholder={placeholder}
       onBlur={handleBlur}
       onChange={handleChange}
