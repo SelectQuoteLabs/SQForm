@@ -34,7 +34,7 @@ export interface SQFormGuidedWorkflowAdditionalInformationProps
 export interface SQFormGuidedWorkflowAgentScriptProps
   extends SQFormGuidedWorkflowHeaderProps {
   /** Scripted Text for the user to read */
-  text: string;
+  text: React.ReactNode;
 }
 
 export interface SQFormGuidedWorkflowOutcomeProps

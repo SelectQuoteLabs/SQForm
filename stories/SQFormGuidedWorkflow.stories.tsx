@@ -48,11 +48,6 @@ const Template: CustomStory<
 > = (): React.ReactElement => {
   const [isIneligible, setIneligible] = React.useState(false);
   const [isModuleDisabled, setIsModuleDisabled] = React.useState(false);
-  const scriptedTextMap = {
-    customerName: 'Bob Smith',
-    agentName: 'Jane Doe',
-    planName: 'Super Cheap Med+',
-  };
   const initialValues = {
     outcome: '',
     notes: '',
@@ -102,7 +97,29 @@ const Template: CustomStory<
         infoText: 'This is suplmental information for the agent only.',
       },
       scriptedTextProps: {
-        text: `Hi, ${scriptedTextMap.customerName}, my name is ${scriptedTextMap.agentName}, and I am calling to discuss ${scriptedTextMap.planName}.\n Are you available right now to talk through some things with me, today?`,
+        text: (
+          <>
+            <Grid container>
+              <Grid item xs={12}>
+                Review the following ancillary benefits with the client
+              </Grid>
+              <Grid item xs={6}>
+                <ul style={{marginBottom: 0}}>
+                  <li>Dental (Reimbursement / Co-Pay)</li>
+                  <li>Transportation</li>
+                  <li>Home Health Care</li>
+                </ul>
+              </Grid>
+              <Grid item xs={6}>
+                <ul style={{marginBottom: 0}}>
+                  <li>Meals</li>
+                  <li>Fitness Membership</li>
+                  <li>Part B Giveback</li>
+                </ul>
+              </Grid>
+            </Grid>
+          </>
+        ),
         title: 'Agent Script',
       },
       outcomeProps: {
@@ -293,80 +310,81 @@ type InitialValuesType =
   | typeof firstSectionInitialValues
   | typeof secondSectionInitialValues;
 
-const TestTemplate: CustomStory<SQFormGuidedWorkflowProps<InitialValuesType>> =
-  (args): React.ReactElement => {
-    const {mainTitle, ...rest} = args;
+const TestTemplate: CustomStory<
+  SQFormGuidedWorkflowProps<InitialValuesType>
+> = (args): React.ReactElement => {
+  const {mainTitle, ...rest} = args;
 
-    const taskModules = [
-      {
-        name: 'firstSection',
-        title: 'First Section',
-        formikProps: {
-          initialValues: firstSectionInitialValues,
-          onSubmit: async (values: InitialValuesType) => {
-            console.log(JSON.stringify(values));
-          },
-          validationSchema: Yup.object({
-            firstText: Yup.string().required(),
-            secondText: Yup.string(),
-          }),
+  const taskModules = [
+    {
+      name: 'firstSection',
+      title: 'First Section',
+      formikProps: {
+        initialValues: firstSectionInitialValues,
+        onSubmit: async (values: InitialValuesType) => {
+          console.log(JSON.stringify(values));
         },
-        scriptedTextProps: {
-          text: 'This is some text',
-          title: 'Script Title',
-        },
-        outcomeProps: {
-          FormElements: (
-            <>
-              <SQFormTextField name="firstText" label="First Text" />
-              <SQFormTextField name="secondText" label="Second Text" />
-            </>
-          ),
-          title: 'Outcome Test',
+        validationSchema: Yup.object({
+          firstText: Yup.string().required(),
+          secondText: Yup.string(),
+        }),
+      },
+      scriptedTextProps: {
+        text: 'This is some text',
+        title: 'Script Title',
+      },
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormTextField name="firstText" label="First Text" />
+            <SQFormTextField name="secondText" label="Second Text" />
+          </>
+        ),
+        title: 'Outcome Test',
+      },
+    },
+    {
+      name: 'secondSection',
+      title: 'Second Section',
+      formikProps: {
+        initialValues: secondSectionInitialValues,
+        onSubmit: async (values: InitialValuesType) => {
+          console.log(JSON.stringify(values));
         },
       },
-      {
-        name: 'secondSection',
-        title: 'Second Section',
-        formikProps: {
-          initialValues: secondSectionInitialValues,
-          onSubmit: async (values: InitialValuesType) => {
-            console.log(JSON.stringify(values));
-          },
-        },
-        scriptedTextProps: {
-          text: 'This is some more text',
-          title: 'Another Script Title',
-        },
-        outcomeProps: {
-          FormElements: (
-            <>
-              <SQFormTextField name="testText" label="Test Text" />
-              <SQFormTextarea name="notes" label="Notes" />
-            </>
-          ),
-          title: 'Outcome Test',
-        },
+      scriptedTextProps: {
+        text: 'This is some more text',
+        title: 'Another Script Title',
       },
-    ];
+      outcomeProps: {
+        FormElements: (
+          <>
+            <SQFormTextField name="testText" label="Test Text" />
+            <SQFormTextarea name="notes" label="Notes" />
+          </>
+        ),
+        title: 'Outcome Test',
+      },
+    },
+  ];
 
-    return (
-      <div style={{width: '90%', height: '95vh'}}>
-        <ExpandingCardList>
-          <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
-            <SQFormGuidedWorkflow<InitialValuesType>
-              {...rest}
-              mainTitle={mainTitle}
-              onError={(error) => {
-                console.error(error);
-              }}
-              taskModules={taskModules}
-            />
-          </ExpandingCard>
-        </ExpandingCardList>
-      </div>
-    );
-  };
+  return (
+    <div style={{width: '90%', height: '95vh'}}>
+      <ExpandingCardList>
+        <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
+          <SQFormGuidedWorkflow<InitialValuesType>
+            {...rest}
+            mainTitle={mainTitle}
+            onError={(error) => {
+              console.error(error);
+            }}
+            taskModules={taskModules}
+          />
+        </ExpandingCard>
+      </ExpandingCardList>
+    </div>
+  );
+};
 
 export const Testing = TestTemplate.bind({});
 Testing.args = {

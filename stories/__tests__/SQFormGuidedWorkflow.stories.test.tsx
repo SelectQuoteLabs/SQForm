@@ -78,7 +78,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
   it('should close current expanded card and open the next one when next button is clicked', async () => {
     render(<SQFormGuidedWorkflow />);
 
-    const introText = screen.queryByText(/hi, bob smith, my name is/i);
+    const introText = screen.queryByText(
+      /Review the following ancillary benefits with the client/i
+    );
     expect(introText).toBeVisible();
 
     const policyText = screen.queryByText(/stuff about policy cancellation/i);
@@ -109,7 +111,9 @@ describe('SQFormGuidedWorkflow Tests', () => {
     jest.setTimeout(10000);
     render(<SQFormGuidedWorkflow />);
 
-    const introText = screen.getByText(/hi, bob smith, my name is/i);
+    const introText = screen.getByText(
+      /Review the following ancillary benefits with the client/i
+    );
     expect(introText).toBeVisible();
 
     const outcome = screen.getByRole('button', {name: /outcome/i});
@@ -137,11 +141,19 @@ describe('SQFormGuidedWorkflow Tests', () => {
 
     await waitFor(
       () =>
-        expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible(),
+        expect(
+          screen.getByText(
+            /Review the following ancillary benefits with the client/i
+          )
+        ).toBeVisible(),
       {timeout: 2000}
     );
 
-    expect(screen.getByText(/hi, bob smith, my name is/i)).toBeVisible();
+    expect(
+      screen.getByText(
+        /Review the following ancillary benefits with the client/i
+      )
+    ).toBeVisible();
   });
 
   it('should display an error when in a failed state', async () => {
