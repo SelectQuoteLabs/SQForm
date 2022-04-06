@@ -86,66 +86,14 @@ export type {
 } from './components/SQFormGuidedWorkflow/Types';
 
 // Other Types
-// export type {BaseFieldProps, SQFormOption, SQFormOptionValue, Mask} from './types';
 export type {default as BaseFieldProps} from './types/BaseFieldProps';
 export type {default as SQFormOption, SQFormOptionValue} from './types/Option';
 export type {default as Mask} from './types/MaskTypes';
 
-/*
-// 3rd part types SQForm relies on
+// 3rd party types SQForm relies on
 export type {
   FormikValues,
   FormikHelpers,
   FormikConfig,
-  FieldArrayRenderProps
+  FieldArrayRenderProps,
 } from 'formik';
-
-export type {
-  DialogProps,
-  GridProps,
-  GridSize,
-  CheckboxProps,
-  InputBaseComponentProps,
-  RadioProps,
-  RadioGroupProps,
-  DialogContentProps,
-  TextFieldProps,
-  InputProps,
-  TooltipProps,
-  SelectProps as SelectProps$1,
-  TypographyVariant
-} from '@material-ui/core';
-
-export type {
-  AutocompleteProps
-} from '@material-ui/lab';
-
-export type { AutocompleteChangeReason } from '@material-ui/lab/Autocomplete';
-
-
-export type {
-  AnySchema,
-} from 'yup';
-
-export type {
-  ObjectShape
-} from 'yup/lib/object'
-
-export type {
-  Moment
-} from 'moment';
-
-export type {
-  BaseDatePickerProps,
-  DatePickerProps,
-  BaseDateTimePickerProps
-} from '@material-ui/pickers';
-
-export type {
-  SelectProps
-} from '@material-ui/core/Select';
-
-export type {
-  maskArray
-} from 'react-text-mask';
-*/
