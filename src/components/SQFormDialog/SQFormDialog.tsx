@@ -55,7 +55,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
-  validationSchema: AnyObjectSchema;
+  validationSchema?: AnyObjectSchema;
   /** Callback function invoked when the user clicks the tertiary button */
   onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
