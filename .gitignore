@@ -107,3 +107,6 @@ dist
 # Editors
 .idea
 .vscode
+
+# TS Declaration files
+.dts

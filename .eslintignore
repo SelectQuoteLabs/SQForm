@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 dist
 docs
 *.css
@@ -6,3 +6,4 @@ docs
 *.md
 .storybook
 .out
+.dts
