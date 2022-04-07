@@ -1,3 +1,54 @@
+## [8.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.2...v8.0.0) (2022-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Removes the titleVariant prop from SQFormScrollableCard. Fixes the
+height of SQFormScrollableCard and SQFormScrollableCardsMenuWrapper to
+50px.
+
+✅ Closes: 653
+* 🧨 Plain javascript objects are no longer accepted for validation schema
+* 🧨 SQFormGuidedWorkflow prop 'actionButton' renamed to 'actions'. Removed
+props 'isPanelExpanded' and 'expandPanel'
+* 🧨 Components options are no longer allowed to have boolean values
+* 🧨 SQFormDialog's onSave prop is now required. New prop
+`shouldDisplaySaveButton` will handle whether the "Save" button is
+displayed or not. Previously this was done by the truthiness of
+`onSave`.
+* 🧨 Yup.array().isRequired() is now passed with an empty array.
+
+### Features
+
+* 🎸 Support for TypeScript ([c7d2135](https://github.com/SelectQuoteLabs/SQForm/commit/c7d2135402a13148f9b08d4cfcb82e24eb75ae3e)), closes [#244](https://github.com/SelectQuoteLabs/SQForm/issues/244)
+
+
+### Bug Fixes
+
+* 🐛 Fixed components using boolean valued options ([53327cf](https://github.com/SelectQuoteLabs/SQForm/commit/53327cff9619ccfb6b0404d69ddf754d3425c88f)), closes [#504](https://github.com/SelectQuoteLabs/SQForm/issues/504)
+* 🐛 Resolves a heading height issue ([be56780](https://github.com/SelectQuoteLabs/SQForm/commit/be56780cdc91d50da474c49f54a740d0cb795536))
+* 🐛 resolves some type errors after merging in some changes ([9af4838](https://github.com/SelectQuoteLabs/SQForm/commit/9af48389ca8d275be56e8afad1149118964e2303))
+* 🐛 SQFormScrollableCard title prop passing correction ([3feef6e](https://github.com/SelectQuoteLabs/SQForm/commit/3feef6e5e1ea46e59bd2f2edb0347fa885fc90b6))
+
+
+### Reverts
+
+* Revert "refactor: 💡 Convert SQFormCheckboxGroup to typescript Ref #244" ([f8a1755](https://github.com/SelectQuoteLabs/SQForm/commit/f8a17551224e4ffc28afee9ae419fca7364b2d3d)), closes [#244](https://github.com/SelectQuoteLabs/SQForm/issues/244)
+* Revert "chore: 🤖 PR comments - comment typo, GridSize, narrow value" ([36f7d98](https://github.com/SelectQuoteLabs/SQForm/commit/36f7d987d10a349202bac362f26b477c232aac1b))
+* Revert "Convert SQFormInclusionListItem to TS Ref #244" ([62c5b56](https://github.com/SelectQuoteLabs/SQForm/commit/62c5b5658f03b7f1d6626598ed363a4cb0367622)), closes [#244](https://github.com/SelectQuoteLabs/SQForm/issues/244)
+
+
+### Miscellaneous Chores
+
+* 🤖 Upgrade Yup to v0.32.x ([f26d1c0](https://github.com/SelectQuoteLabs/SQForm/commit/f26d1c057fa5523513af2dce76dcf24cd4a5c3c1)), closes [/github.com/jquense/yup/blob/master/CHANGELOG.md#breaking-changes-1](https://github.com/SelectQuoteLabs//github.com/jquense/yup/blob/master/CHANGELOG.md/issues/breaking-changes-1) [#398](https://github.com/SelectQuoteLabs/SQForm/issues/398)
+
+
+### Code Refactoring
+
+* 💡 Migrate SQFormDialog to TS ([c0d1aec](https://github.com/SelectQuoteLabs/SQForm/commit/c0d1aecd6635e5964030827194244d8688f73b0e)), closes [#395](https://github.com/SelectQuoteLabs/SQForm/issues/395)
+* 💡 Migrate SQFormGuidedWorkflow to TS ([e44bc14](https://github.com/SelectQuoteLabs/SQForm/commit/e44bc147b707b30a03b468db555e37d4df978e3b)), closes [#567](https://github.com/SelectQuoteLabs/SQForm/issues/567)
+* 💡 SQForm components now only accept Yup schemas ([b87aaf6](https://github.com/SelectQuoteLabs/SQForm/commit/b87aaf6368eb9cd22f258c3554c5fde50650f5a3)), closes [#316](https://github.com/SelectQuoteLabs/SQForm/issues/316)
+
 ### [7.4.2](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.1...v7.4.2) (2022-03-31)
 
 
