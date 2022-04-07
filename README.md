@@ -42,9 +42,11 @@ By default in NPM v7 and above peer dependencies will be installed automatically
 Optional dependencies are always installed but can be omitted by using `npm install --no-optional` when installing this package.
 
 - Using NPM v7 or greater
+
   - `> npm install @selectquotelabs/sqform`
 
 - Using NPM v6 and below
+
   - `> npm install @selectquotelabs/sqform`
   - Install peer dependencies manually
 
@@ -55,61 +57,68 @@ Optional dependencies are always installed but can be omitted by using `npm inst
 
 ### Version 8
 
+#### SQFormScrollableCard no longer accepts titleVariant as a prop
+
+- No changes are required if the consumer application is a JS application
+- Consumer applications that use TypeScript will require this prop to be removed if present to resolve the type error.
+
 #### SQForm components no longer accept POJO validation schemas
- - SQForm components now *only* accept validation schema objects that are of type `Yup.AnyObjectSchema`. You can create these types of schema using `Yup.object()`. Supplying any other type of object will have unexpected results and validation will fail to work.
- - This is an intentional design to facilitate using Yup to create models to be shared between servers and clients.
+
+- SQForm components now _only_ accept validation schema objects that are of type `Yup.AnyObjectSchema`. You can create these types of schema using `Yup.object()`. Supplying any other type of object will have unexpected results and validation will fail to work.
+- This is an intentional design to facilitate using Yup to create models to be shared between servers and clients.
 
 ```jsx
 // ⛔️ Example
 const validationSchema = {
-  friends: Yup.array().required('Required')
+  friends: Yup.array().required('Required'),
 };
 
 // ✅  Example
 // Addition of `Yup.object` wrapping our validation object
-const validationSchema = Yup.object({ 
-  friends: Yup.array().required('Required').min(1, 'Atleast one required')
+const validationSchema = Yup.object({
+  friends: Yup.array().required('Required').min(1, 'Atleast one required'),
 });
-
 ```
+
 <em>Note: `Yup.object().shape({})` may fail to provide the correct type and cause issues in Typescript projects. `.shape()` is advised to be used only to extend or modify already existing schemas. `const newSchema = existingSchema.shape({ newKey: ... })`</em>
 
-
 #### Upgraded `Yup` peer dependency version
- - Yup was upgraded from `^0.28.3` to `^0.32.9`, see [Yup's breaking changes](https://github.com/jquense/yup/blob/master/CHANGELOG.md)
-   - `array().required()` will no longer consider an empty array missing and required checks will pass.
+
+- Yup was upgraded from `^0.28.3` to `^0.32.9`, see [Yup's breaking changes](https://github.com/jquense/yup/blob/master/CHANGELOG.md)
+  - `array().required()` will no longer consider an empty array missing and required checks will pass.
 
 ```jsx
 // ⛔️ Example
 const validationSchema = Yup.object({
-  friends: Yup.array().required('Required')
+  friends: Yup.array().required('Required'),
 });
 
 // ✅  Example
 const validationSchema = Yup.object({
-  friends: Yup.array().required('Required').min(1, 'Atleast one required')
+  friends: Yup.array().required('Required').min(1, 'Atleast one required'),
 });
 ```
 
 #### SQFormDialog changes
- - `onSave` is now a required prop
- - New prop `shouldDisplaySaveButton` dictates whether the "Save" button will be shown in the dialog footer. Previously that was handled by the truthiness of `onSave`
 
- ```jsx
+- `onSave` is now a required prop
+- New prop `shouldDisplaySaveButton` dictates whether the "Save" button will be shown in the dialog footer. Previously that was handled by the truthiness of `onSave`
+
+```jsx
 // ⛔️ Example
 return (
-  // "Save" button is not displayed
-  <SQFormDialog
-    isOpen={true}
-    onClose={closeSQFormDialog}
-    title="Title"
-    initialValues={{}}
-    {/* Missing `onSave`*/}
-  >
-    {...}
-  </SQFormDialog>
+ // "Save" button is not displayed
+ <SQFormDialog
+   isOpen={true}
+   onClose={closeSQFormDialog}
+   title="Title"
+   initialValues={{}}
+   {/* Missing `onSave`*/}
+ >
+   {...}
+ </SQFormDialog>
 )
- ```
+```
 
 ```jsx
 // ✅  Example
@@ -126,12 +135,13 @@ return (
     {...}
   </SQFormDialog>
 )
- ```
+```
 
 #### SQFormGuidedWorkflow changes
- - Removed TaskModule properties: `isPanelExpanded` and `expandPanel`
 
- - In SQForm v8 `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
+- Removed TaskModule properties: `isPanelExpanded` and `expandPanel`
+
+- In SQForm v8 `actionButton` was renamed to `actions` as part of the taskModule definitions. Functionality remains the same.
 
 ```jsx
 // ⛔️ Example
@@ -164,20 +174,21 @@ const taskModules = [
 ```
 
 #### SQForm no longer allows `boolean`s as dropdown options
+
 - In SQForm v8 support for `boolean` valued dropdown options was removed. Material-UI and HTML Select components do not support options with `boolean`s as values and causes type conflicts with our own library. Therefore, if you're upgrading this version and you using `boolean` values options you'll need to take care to update those. Below is our recommended changes.
 
 ```js
 // ⛔️ Example
 const YES_NO_DROPDOWN_OPTIONS = [
   {label: 'Yes', value: true},
-  {label: 'No', value: false}
+  {label: 'No', value: false},
 ];
 
 // ✅ Example
 const YES_NO_DROPDOWN_OPTIONS = [
   {label: 'Yes', value: 1},
-  {label: 'No', value: 0}
-]
+  {label: 'No', value: 0},
+];
 ```
 
 - Be sure that when you change your dropdown options that you take care to update your submit, onChange, and onBlur handlers such that you're taking into account that the values for the affected forms will no longer be `boolean`s. Using `1` and `0` will still allow for `if(dropdownValue)` to evaluate correctly. However, if you're expecting your values to be passed as booleans outside of any event handlers you'll need to use `Boolean(dropdownValue)`. See an example below of how one might update an SQForm submit handler to comply with this breaking change.
