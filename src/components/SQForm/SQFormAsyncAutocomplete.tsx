@@ -1,5 +1,5 @@
 import type {SQFormOption} from '../../types';
-import {
+import type {
   ListboxVirtualizedComponentProps,
   OuterElementContextInterface,
   OuterElementTypeProps,
