@@ -1,4 +1,4 @@
-import React from 'react';
+import {BasicForm} from '../SQForm.stories';
 import {
   render,
   screen,
@@ -7,8 +7,7 @@ import {
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import {BasicForm} from '../SQForm.stories';
+import React from 'react';
 
 window.alert = jest.fn();
 

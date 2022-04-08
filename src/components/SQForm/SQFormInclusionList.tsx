@@ -1,11 +1,11 @@
-import React from 'react';
+import type {SQFormOption} from '../../types';
+import SQFormInclusionListItem from './SQFormInclusionListItem';
+import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
 import {Grid} from '@material-ui/core';
 import type {GridProps} from '@material-ui/core';
 import {useFormikContext, FieldArray} from 'formik';
 import type {FieldArrayRenderProps} from 'formik';
-import SQFormInclusionListItem from './SQFormInclusionListItem';
-import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
-import type {SQFormOption} from '../../types';
+import React from 'react';
 
 export interface SQFormInclusionListProps {
   /** the `name` must match the name of the desired array in `initialValues` */

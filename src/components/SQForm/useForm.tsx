@@ -1,9 +1,9 @@
-import React from 'react';
+import WarningIcon from '@material-ui/icons/NewReleases';
+import VerifiedIcon from '@material-ui/icons/VerifiedUser';
 import {getIn, useField} from 'formik';
 import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 import isEqual from 'lodash.isequal';
-import WarningIcon from '@material-ui/icons/NewReleases';
-import VerifiedIcon from '@material-ui/icons/VerifiedUser';
+import React from 'react';
 
 type ChangeHandler<TChangeEvent> = (
   event: TChangeEvent,

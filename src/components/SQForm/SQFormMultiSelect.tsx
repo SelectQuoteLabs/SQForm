@@ -1,4 +1,11 @@
-import React, {ReactNode} from 'react';
+import type {BaseFieldProps, SQFormOption} from '../../types';
+import {
+  getOutOfRangeValueWarning,
+  getUndefinedChildrenWarning,
+  getUndefinedValueWarning,
+} from '../../utils/consoleWarnings';
+import {EMPTY_LABEL} from '../../utils/constants';
+import {useForm} from './useForm';
 import {
   FormControl,
   Select,
@@ -14,14 +21,7 @@ import {
 } from '@material-ui/core';
 import type {TooltipProps, SelectProps} from '@material-ui/core';
 import {useFormikContext} from 'formik';
-import {EMPTY_LABEL} from '../../utils/constants';
-import {useForm} from './useForm';
-import {
-  getOutOfRangeValueWarning,
-  getUndefinedChildrenWarning,
-  getUndefinedValueWarning,
-} from '../../utils/consoleWarnings';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+import React, {ReactNode} from 'react';
 
 export interface SQFormMultiSelectProps extends BaseFieldProps {
   /** Multiselect options to select from */

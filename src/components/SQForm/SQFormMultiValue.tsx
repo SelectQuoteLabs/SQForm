@@ -1,20 +1,20 @@
-import React from 'react';
+import type {BaseFieldProps, SQFormOption} from '../../types';
+import type {
+  OuterElementContextInterface,
+  OuterElementTypeProps,
+} from './SQFormAutocomplete';
+import {useForm} from './useForm';
 import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import type {
   AutocompleteChangeReason,
   AutocompleteRenderInputParams,
 } from '@material-ui/lab/Autocomplete';
+import {usePrevious} from '@selectquotelabs/sqhooks';
+import {useField, useFormikContext} from 'formik';
+import React from 'react';
 import {VariableSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
-import {useField, useFormikContext} from 'formik';
-import {usePrevious} from '@selectquotelabs/sqhooks';
-import {useForm} from './useForm';
-import type {BaseFieldProps, SQFormOption} from '../../types';
-import type {
-  OuterElementContextInterface,
-  OuterElementTypeProps,
-} from './SQFormAutocomplete';
 
 export interface SQFormMultiValueProps extends BaseFieldProps {
   /** options to select from */

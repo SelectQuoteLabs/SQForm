@@ -1,16 +1,3 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import type {AutocompleteProps} from '@material-ui/lab';
-import Grid from '@material-ui/core/Grid';
-import {makeStyles} from '@material-ui/core/styles';
-import {VariableSizeList} from 'react-window';
-import type {ListChildComponentProps} from 'react-window';
-import {Typography} from '@material-ui/core';
-import {getIn, useField, useFormikContext} from 'formik';
-import {usePrevious} from '@selectquotelabs/sqhooks';
-import {useForm} from './useForm';
 import type {SQFormOption} from '../../types';
 import {
   ListboxVirtualizedComponentProps,
@@ -18,6 +5,19 @@ import {
   OuterElementTypeProps,
   SQFormAutocompleteProps,
 } from './SQFormAutocomplete';
+import {useForm} from './useForm';
+import {Typography} from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import {makeStyles} from '@material-ui/core/styles';
+import type {AutocompleteProps} from '@material-ui/lab';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import {usePrevious} from '@selectquotelabs/sqhooks';
+import {getIn, useField, useFormikContext} from 'formik';
+import React from 'react';
+import {VariableSizeList} from 'react-window';
+import type {ListChildComponentProps} from 'react-window';
 
 export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */

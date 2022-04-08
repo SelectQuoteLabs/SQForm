@@ -1,12 +1,12 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import {useFormikContext} from 'formik';
-import type {FormikProps} from 'formik';
-import {useForm} from './useForm';
-import type {TextFieldProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
 import {toKebabCase} from '../../utils';
+import {useForm} from './useForm';
+import type {TextFieldProps} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import {useFormikContext} from 'formik';
+import type {FormikProps} from 'formik';
+import React from 'react';
 
 export interface SQFormTextareaProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */

@@ -1,22 +1,21 @@
-import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import type {SelectProps} from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Grid from '@material-ui/core/Grid';
-import {makeStyles} from '@material-ui/core/styles';
-
-import {useForm} from './useForm';
+import type {BaseFieldProps, SQFormOption} from '../../types';
 import {
   getOutOfRangeValueWarning,
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+import {useForm} from './useForm';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Grid from '@material-ui/core/Grid';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import type {SelectProps} from '@material-ui/core/Select';
+import {makeStyles} from '@material-ui/core/styles';
+import React from 'react';
 
 export interface SQFormDropdownProps extends BaseFieldProps {
   /** Dropdown options to select from */

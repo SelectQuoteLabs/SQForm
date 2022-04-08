@@ -1,10 +1,10 @@
-import React from 'react';
+import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
+import SQFormDialogInner from './SQFormDialogInner';
+import type {DialogProps, GridProps} from '@material-ui/core';
 import {Formik} from 'formik';
 import type {FormikHelpers, FormikValues} from 'formik';
-import type {DialogProps, GridProps} from '@material-ui/core';
+import React from 'react';
 import type {AnyObjectSchema} from 'yup';
-import SQFormDialogInner from './SQFormDialogInner';
-import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 
 export interface SQFormDialogProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */

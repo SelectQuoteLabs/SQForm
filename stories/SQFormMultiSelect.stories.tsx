@@ -1,16 +1,15 @@
-import React from 'react';
-import * as Yup from 'yup';
-
 import {SQFormMultiSelect as SQFormMultiSelectComponent} from '../src';
 import {
   SQFormStoryWrapper,
   SQFormStoryWrapperProps,
 } from './components/SQFormStoryWrapper';
+import type {GridSizeOptions} from './types/storyHelperTypes';
 import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 import type {Story} from '@storybook/react';
 import type {SQFormMultiSelectProps} from 'components/SQForm/SQFormMultiSelect';
-import type {GridSizeOptions} from './types/storyHelperTypes';
-import getSizeProp from './utils/getSizeProp';
+import React from 'react';
+import * as Yup from 'yup';
 
 type MultiSelectStoryType = Story<
   Omit<SQFormMultiSelectProps, 'size' | 'name' | 'label'> & {

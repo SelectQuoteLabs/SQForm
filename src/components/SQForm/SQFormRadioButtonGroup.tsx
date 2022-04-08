@@ -1,4 +1,5 @@
-import React from 'react';
+import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
+import {useForm} from './useForm';
 import {
   Grid,
   RadioGroup,
@@ -7,8 +8,7 @@ import {
   FormLabel,
 } from '@material-ui/core';
 import type {GridSize, RadioProps, RadioGroupProps} from '@material-ui/core';
-import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
-import {useForm} from './useForm';
+import React from 'react';
 
 interface RadioButtonInputItemProps {
   value: string | boolean | number;

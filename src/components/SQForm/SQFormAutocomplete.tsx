@@ -1,4 +1,5 @@
-import React from 'react';
+import type {BaseFieldProps, SQFormOption} from '../../types';
+import {useForm} from './useForm';
 import {
   TextField,
   Grid,
@@ -8,12 +9,11 @@ import {
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import type {AutocompleteChangeReason} from '@material-ui/lab/Autocomplete';
+import {usePrevious} from '@selectquotelabs/sqhooks';
+import {getIn, useField, useFormikContext} from 'formik';
+import React from 'react';
 import {VariableSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
-import {getIn, useField, useFormikContext} from 'formik';
-import {usePrevious} from '@selectquotelabs/sqhooks';
-import type {BaseFieldProps, SQFormOption} from '../../types';
-import {useForm} from './useForm';
 
 export interface SQFormAutocompleteProps extends BaseFieldProps {
   /** Dropdown menu options to select from */

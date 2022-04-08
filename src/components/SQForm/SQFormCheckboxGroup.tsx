@@ -1,14 +1,14 @@
-import React from 'react';
-import {useFormikContext} from 'formik';
+import SQFormCheckbox from './SQFormCheckbox';
+import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
+import {useForm} from './useForm';
+import type {CheckboxProps, GridSize} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormGroup from '@material-ui/core/FormGroup';
-import type {CheckboxProps, GridSize} from '@material-ui/core';
-import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
-import SQFormCheckbox from './SQFormCheckbox';
-import {useForm} from './useForm';
+import {useFormikContext} from 'formik';
+import React from 'react';
 
 interface CheckboxOption {
   label: string;

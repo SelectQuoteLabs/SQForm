@@ -1,16 +1,4 @@
-import React from 'react';
-import * as Yup from 'yup';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
-import {SectionHeader} from 'scplus-shared-components';
-
-import FriendsFieldArray from './components/FriendsFieldArray';
-import FormValidationMessage from './components/FormValidationMessage';
-import {createDocsPage} from './utils/createDocsPage';
 import * as markdown from '../notes/SQForm.md';
-
 import {
   SQForm,
   SQFormTextarea,
@@ -30,7 +18,17 @@ import {
   SQFormMultiValue,
   MASKS,
 } from '../src';
+import FormValidationMessage from './components/FormValidationMessage';
+import FriendsFieldArray from './components/FriendsFieldArray';
+import {createDocsPage} from './utils/createDocsPage';
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import {action} from '@storybook/addon-actions';
+import {withKnobs, boolean} from '@storybook/addon-knobs';
 import type {FieldArrayRenderProps, FormikHelpers} from 'formik';
+import React from 'react';
+import {SectionHeader} from 'scplus-shared-components';
+import * as Yup from 'yup';
 
 export default {
   title: 'Forms/SQForm',

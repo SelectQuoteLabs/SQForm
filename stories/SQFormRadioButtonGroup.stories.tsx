@@ -1,16 +1,15 @@
-import React from 'react';
-import * as Yup from 'yup';
-
 import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
 import {
   SQFormStoryWrapper,
   SQFormStoryWrapperProps,
 } from './components/SQFormStoryWrapper';
+import type {GridSizeOptions} from './types/storyHelperTypes';
+import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
 import type {Story} from '@storybook/react';
 import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
-import type {GridSizeOptions} from './types/storyHelperTypes';
+import React from 'react';
+import * as Yup from 'yup';
 
 type RadioButtonGroupType = Story<
   Omit<SQFormRadioButtonGroupProps, 'size'> & {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as stories from '../SQFormGuidedWorkflow.stories';
 import {composeStories} from '@storybook/testing-react';
 import {
   render,
@@ -7,7 +7,7 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from '../SQFormGuidedWorkflow.stories';
+import React from 'react';
 
 const {Default: SQFormGuidedWorkflow, Testing} = composeStories(stories);
 

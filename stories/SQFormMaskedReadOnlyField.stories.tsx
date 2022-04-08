@@ -1,16 +1,15 @@
-import React from 'react';
-import type {Meta} from '@storybook/react';
-import type {CustomStory} from './types/storyHelperTypes';
-
 import {
   MASKS,
   SQFormMaskedReadOnlyField as SQFormMaskedReadOnlyFieldComponent,
 } from '../src';
-import type {Mask} from 'types';
 import type {SQFormMaskedReadOnlyFieldProps} from '../src/components/SQForm/SQFormMaskedReadOnlyField';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {CustomStory} from './types/storyHelperTypes';
 import {createDocsPage} from './utils/createDocsPage';
 import getSizeProp from './utils/getSizeProp';
+import type {Meta} from '@storybook/react';
+import React from 'react';
+import type {Mask} from 'types';
 
 type SQFormMaskedReadOnlyFieldStory = CustomStory<
   SQFormMaskedReadOnlyFieldProps & {

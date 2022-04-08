@@ -1,4 +1,4 @@
-import React from 'react';
+import LoadingSpinner from '../LoadingSpinner';
 import {
   Dialog,
   DialogActions,
@@ -18,12 +18,12 @@ import type {
   GridProps,
   DialogContentProps,
 } from '@material-ui/core';
-import type {AnyObjectSchema} from 'yup';
+import type {TransitionProps} from '@material-ui/core/transitions';
 import {Form, Formik, useFormikContext} from 'formik';
 import type {FormikHelpers, FormikValues} from 'formik';
+import React from 'react';
 import {RoundedButton} from 'scplus-shared-components';
-import LoadingSpinner from '../LoadingSpinner';
-import type {TransitionProps} from '@material-ui/core/transitions';
+import type {AnyObjectSchema} from 'yup';
 
 export interface SQFormDialogStepProps {
   /** The content to be rendered in the step body. */

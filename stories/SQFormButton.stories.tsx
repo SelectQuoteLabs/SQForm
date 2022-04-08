@@ -1,10 +1,10 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import type {Story, Meta} from '@storybook/react';
 import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
-import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import Grid from '@material-ui/core/Grid';
+import type {Story, Meta} from '@storybook/react';
+import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
+import React from 'react';
 
 export default {
   title: 'Components/SQFormButton',

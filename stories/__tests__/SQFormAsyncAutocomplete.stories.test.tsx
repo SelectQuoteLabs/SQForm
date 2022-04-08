@@ -1,8 +1,8 @@
-import React from 'react';
+import * as stories from '../SQFormAsyncAutocomplete.stories';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, waitFor, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from '../SQFormAsyncAutocomplete.stories';
+import React from 'react';
 
 const {
   Default: SQFormAsyncAutocomplete,

@@ -1,4 +1,4 @@
-import React from 'react';
+import SQFormButton from '../SQForm/SQFormButton';
 import {
   Dialog,
   DialogActions,
@@ -10,13 +10,13 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import type {DialogProps, GridProps} from '@material-ui/core';
-import type {TransitionProps} from '@material-ui/core/transitions';
 import {useTheme} from '@material-ui/core/styles';
 import type {Theme} from '@material-ui/core/styles';
-import {Form, useFormikContext} from 'formik';
+import type {TransitionProps} from '@material-ui/core/transitions';
 import {useDialog} from '@selectquotelabs/sqhooks';
+import {Form, useFormikContext} from 'formik';
+import React from 'react';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
-import SQFormButton from '../SQForm/SQFormButton';
 
 interface SQFormDialogInnerProps {
   /** The secondary button text (Button located on left side of Dialog) */

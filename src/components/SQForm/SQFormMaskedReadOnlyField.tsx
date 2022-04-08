@@ -1,8 +1,8 @@
-import React from 'react';
-import MaskedInput from 'react-text-mask';
 import type {Mask} from '../../types';
 import SQFormReadOnlyField from './SQFormReadOnlyField';
 import type {SQFormReadOnlyFieldProps} from './SQFormReadOnlyField';
+import React from 'react';
+import MaskedInput from 'react-text-mask';
 
 interface TextFieldMaskProps extends React.HTMLAttributes<HTMLInputElement> {
   inputRef?: (ref: HTMLElement | null) => void;

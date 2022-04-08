@@ -1,11 +1,11 @@
-import React from 'react';
+import type {BaseFieldProps} from '../../types';
+import SQFormDatePicker, {SQFormDatePickerProps} from './SQFormDatePicker';
+import {useForm} from './useForm';
+import {IconButton, makeStyles} from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/HighlightOff';
 import {useFormikContext} from 'formik';
 import type {Moment} from 'moment';
-import {IconButton, makeStyles} from '@material-ui/core';
-import SQFormDatePicker, {SQFormDatePickerProps} from './SQFormDatePicker';
-import {useForm} from './useForm';
-import type {BaseFieldProps} from '../../types';
+import React from 'react';
 
 export interface SQFormDatePickerWithCalendarInputOnlyProps
   extends BaseFieldProps {

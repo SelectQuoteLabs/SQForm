@@ -1,9 +1,8 @@
-import React from 'react';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
-import {composeStories} from '@storybook/testing-react';
-
-import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDialog.stories';
+import {composeStories} from '@storybook/testing-react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
 
 const {Default, WithValidation, WithAutoFocus} = composeStories(stories);
 

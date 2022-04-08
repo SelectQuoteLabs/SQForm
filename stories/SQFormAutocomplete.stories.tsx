@@ -1,13 +1,13 @@
-import React from 'react';
-import * as Yup from 'yup';
-import type {Story, Meta} from '@storybook/react';
 import {SQFormAutocomplete} from '../src';
-import type {SQFormAutocompleteProps} from 'components/SQForm/SQFormAutocomplete';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {GridSizeOptions} from './types/storyHelperTypes';
+import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from './utils/getSizeProp';
+import type {Story, Meta} from '@storybook/react';
+import type {SQFormAutocompleteProps} from 'components/SQForm/SQFormAutocomplete';
+import React from 'react';
+import * as Yup from 'yup';
 
 type FormProps = {
   initialValues?: SQFormStoryWrapperProps['initialValues'];

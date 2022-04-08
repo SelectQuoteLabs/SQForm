@@ -1,8 +1,8 @@
-import React from 'react';
+import * as stories from '../SQFormTextField.stories';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from '../SQFormTextField.stories';
+import React from 'react';
 
 const {
   Default: SQFormTextField,
@@ -98,7 +98,9 @@ describe('SQFormTextField Tests', () => {
     it('should initially render "Required" helper text if field is required', async () => {
       render(<SQFormTextFieldWithValidation size="auto" />);
 
-      await waitFor(() => expect(screen.getByText(/required/i)).toHaveClass('Mui-required'));
+      await waitFor(() =>
+        expect(screen.getByText(/required/i)).toHaveClass('Mui-required')
+      );
     });
 
     it('should highlight field if required but no value selected', async () => {
@@ -112,7 +114,9 @@ describe('SQFormTextField Tests', () => {
       userEvent.tab();
       expect(textField).not.toHaveFocus();
 
-      await waitFor(() => expect(screen.getByText('Required')).toHaveClass('Mui-error'));
+      await waitFor(() =>
+        expect(screen.getByText('Required')).toHaveClass('Mui-error')
+      );
     });
   });
 });

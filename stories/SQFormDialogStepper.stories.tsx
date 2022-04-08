@@ -1,15 +1,14 @@
-import React from 'react';
-import * as Yup from 'yup';
-import {createDocsPage} from './utils/createDocsPage';
 import markdown from '../notes/SQFormDialogStepper.md';
-
 import {
   SQFormTextField,
   SQFormDialogStep,
   SQFormDialogStepper as SQFormDialogStepperComponent,
   SQFormDropdown,
 } from '../src';
+import {createDocsPage} from './utils/createDocsPage';
 import type {SQFormDialogStepperProps} from 'components/SQFormDialogStepper/SQFormDialogStepper';
+import React from 'react';
+import * as Yup from 'yup';
 
 export default {
   title: 'Forms/SQFormDialogStepper',

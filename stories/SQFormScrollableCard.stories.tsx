@@ -1,12 +1,11 @@
+import {SQFormScrollableCard, SQFormTextField} from '../src';
+import type {CustomStory} from './types/storyHelperTypes';
+import {createDocsPage} from './utils/createDocsPage';
+import {Paper} from '@material-ui/core';
+import type {GridProps} from '@material-ui/core';
+import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
 import React from 'react';
 import * as Yup from 'yup';
-
-import {Paper} from '@material-ui/core';
-import {SQFormScrollableCard, SQFormTextField} from '../src';
-import {createDocsPage} from './utils/createDocsPage';
-import type {GridProps} from '@material-ui/core';
-import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
 
 interface SQFormScrollableCardStoryProps<Values>
   extends SQFormScrollableCardProps<Values> {

@@ -1,12 +1,12 @@
-import React from 'react';
+import * as stories from '../SQFormReadOnlyField.stories';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from '../SQFormReadOnlyField.stories';
+import React from 'react';
 
 const {
   Default: SQFormReadOnlyField,
-  WithInitialValue: SQFormReadOnlyFieldWithInitialValue
+  WithInitialValue: SQFormReadOnlyFieldWithInitialValue,
 } = composeStories(stories);
 
 describe('SQFormReadOnlyField Tests', () => {

@@ -1,8 +1,17 @@
-import React from 'react';
-import * as Yup from 'yup';
+import SQFormButton from '../SQForm/SQFormButton';
+import AdditionalInformationSection from './AdditionalInformationSection';
+import AgentScript from './AgentScript';
+import OutcomeForm from './OutcomeForm';
+import type {
+  SQFormGuidedWorkflowDataProps,
+  SQFormGuidedWorkflowProps,
+} from './Types';
+import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
+import {useManageTaskModules} from './useManageTaskModules';
+import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import type {FormikHelpers, FormikValues} from 'formik';
-import {CardActions, CardContent, makeStyles} from '@material-ui/core';
+import React from 'react';
 import {
   Accordion,
   ComponentLoadingSpinner,
@@ -10,16 +19,7 @@ import {
   SectionHeader,
   SectionBody,
 } from 'scplus-shared-components';
-import SQFormButton from '../SQForm/SQFormButton';
-import AgentScript from './AgentScript';
-import OutcomeForm from './OutcomeForm';
-import AdditionalInformationSection from './AdditionalInformationSection';
-import {useManageTaskModules} from './useManageTaskModules';
-import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
-import type {
-  SQFormGuidedWorkflowDataProps,
-  SQFormGuidedWorkflowProps,
-} from './Types';
+import * as Yup from 'yup';
 
 const useStyles = makeStyles(() => {
   return {

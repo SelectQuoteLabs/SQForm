@@ -1,24 +1,23 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import type {Meta} from '@storybook/react';
-import type {CustomStory} from './types/storyHelperTypes'
-import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton' 
-
 import {
   SQFormResetInitialValuesButton as SQFormResetInitialValuesButtonComponent,
-  SQFormTextField
+  SQFormTextField,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {CustomStory} from './types/storyHelperTypes';
 import {createDocsPage} from './utils/createDocsPage';
+import Grid from '@material-ui/core/Grid';
+import type {Meta} from '@storybook/react';
+import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton';
+import React from 'react';
 
 const meta: Meta = {
   title: 'Components/SQFormResetInitialValuesButton',
   component: SQFormResetInitialValuesButtonComponent,
   parameters: {
     docs: {
-      page: createDocsPage()
-    }
-  }
+      page: createDocsPage(),
+    },
+  },
 };
 
 const initialValues = {test: '👁 👄 👁 👍'};
@@ -31,10 +30,10 @@ const defaultArgs = {
       src="https://media.giphy.com/media/oGO1MPNUVbbk4/giphy.gif"
       alt="good job"
     />
-  )
+  ),
 };
 
-const Template: CustomStory<SQFormResetInitialValuesButtonProps> = args => {
+const Template: CustomStory<SQFormResetInitialValuesButtonProps> = (args) => {
   const {sqFormProps, ...rest} = args;
   return (
     <SQFormStoryWrapper

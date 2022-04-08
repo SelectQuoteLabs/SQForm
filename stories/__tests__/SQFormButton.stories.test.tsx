@@ -1,13 +1,11 @@
-import React from 'react';
+import * as stories from '../SQFormButton.stories';
+import {composeStories} from '@storybook/testing-react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {composeStories} from '@storybook/testing-react';
-import * as stories from '../SQFormButton.stories';
+import React from 'react';
 
-const {
-  Default: SQFormButton,
-  WithTestField: SQFormButtonWithField
-} = composeStories(stories);
+const {Default: SQFormButton, WithTestField: SQFormButtonWithField} =
+  composeStories(stories);
 
 describe('SQFormButton Tests', () => {
   describe('Button Only', () => {
@@ -15,7 +13,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(submitButton).toBeInTheDocument();
@@ -34,7 +32,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /reset form/i
+        name: /reset form/i,
       });
 
       expect(resetButton).toBeInTheDocument();
@@ -45,7 +43,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /reset form/i
+        name: /reset form/i,
       });
 
       expect(resetButton).toBeInTheDocument();
@@ -57,7 +55,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton shouldRequireFieldUpdates={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(submitButton).toBeDisabled();
@@ -68,7 +66,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton onClick={onClickSpy} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       userEvent.click(submitButton);
@@ -80,7 +78,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton isDisabled={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(submitButton).toBeDisabled();
@@ -91,7 +89,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       fireEvent.click(submitButton);
@@ -109,7 +107,7 @@ describe('SQFormButton Tests', () => {
       expect(testField).toBeInTheDocument();
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
 
       expect(submitButton).toBeInTheDocument();
@@ -120,7 +118,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField shouldRequireFieldUpdates={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /form submission/i,
       });
       expect(submitButton).toBeDisabled();
 
@@ -135,7 +133,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /reset form/i
+        name: /reset form/i,
       });
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();
@@ -150,7 +148,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField type="reset" />);
 
       const resetButton = screen.getByRole('button', {
-        name: /reset form/i
+        name: /reset form/i,
       });
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();

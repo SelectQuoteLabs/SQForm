@@ -1,17 +1,16 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import * as Yup from 'yup';
-
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
   SQFormInclusionListItem,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
-import type {FieldArrayRenderProps} from 'formik';
 import type {CustomStory} from './types/storyHelperTypes';
+import {createDocsPage} from './utils/createDocsPage';
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 import type {SQFormInclusionListProps} from 'components/SQForm/SQFormInclusionList';
+import type {FieldArrayRenderProps} from 'formik';
+import React from 'react';
+import * as Yup from 'yup';
 
 export default {
   title: 'Components/SQFormInclusionList',
