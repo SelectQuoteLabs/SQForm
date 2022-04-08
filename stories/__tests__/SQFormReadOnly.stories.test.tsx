@@ -15,21 +15,21 @@ describe('SQFormReadOnly Tests', () => {
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent('First Name');
 
-      const textField = screen.getByRole('textbox', {name: /firstName/i});
+      const textField = screen.getByRole('textbox', {name: /first name/i});
       expect(textField).toBeInTheDocument();
     });
 
     it('should render with default "- -" initial values', () => {
       render(<SQFormReadOnly />);
 
-      const textField = screen.getByRole('textbox', {name: /preferredName/i});
+      const textField = screen.getByRole('textbox', {name: /preferred name/i});
       expect(textField).toHaveValue('- -');
     });
 
     it('should NOT update when text is entered', () => {
       render(<SQFormReadOnly size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /preferredName/i});
+      const textField = screen.getByRole('textbox', {name: /preferred name/i});
       expect(textField).toHaveValue('- -');
       userEvent.type(textField, 'test');
       expect(textField).toHaveValue('- -');
@@ -40,7 +40,7 @@ describe('SQFormReadOnly Tests', () => {
     it('should render with the custom initialValue provided', () => {
       render(<SQFormReadOnly />);
 
-      const textField = screen.getByRole('textbox', {name: /firstName/i});
+      const textField = screen.getByRole('textbox', {name: /first name/i});
       expect(textField).toHaveValue('Jane');
     });
   });
