@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import SQFormReadOnlyField from './SQFormReadOnlyField';
-import {noop} from 'utils';
+import {noop} from '../../utils';
 import type {CSSProperties} from 'react';
 import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
