@@ -2,15 +2,16 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {Formik, Form} from 'formik';
 import SQFormReadOnlyField from './SQFormReadOnlyField';
+import SQFormMaskedReadOnlyField from './SQFormMaskedReadOnlyField';
 import {noop} from '../../utils';
 import type {CSSProperties} from 'react';
 import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
-import type {SQFormReadOnlyFieldProps} from './SQFormReadOnlyField';
+import type {SQFormMaskedReadOnlyFieldProps} from './SQFormMaskedReadOnlyField';
 
 export interface SQFormReadOnlyProps<Values extends FormikValues> {
   /** Form Input(s) */
-  readOnlyFields: SQFormReadOnlyFieldProps[];
+  readOnlyFields: SQFormMaskedReadOnlyFieldProps[];
   /** Form Entity Object */
   initialValues: Values;
   /** Any prop from https://material-ui.com/api/grid */
@@ -38,13 +39,16 @@ function SQFormReadOnly<Values extends FormikValues>({
               spacing={muiGridProps.spacing ?? 2}
             >
               {readOnlyFields.map((readOnlyField, index) => {
-                return (
-                  <SQFormReadOnlyField
-                    key={index}
-                    muiFieldProps={noBottomMarginStyle}
-                    {...readOnlyField}
-                  />
-                );
+                const props = {
+                  key: index,
+                  muiFieldProps: noBottomMarginStyle,
+                  ...readOnlyField,
+                };
+
+                if (readOnlyField?.mask) {
+                  return <SQFormMaskedReadOnlyField {...props} />;
+                }
+                return <SQFormReadOnlyField {...props} />;
               })}
             </Grid>
           </Form>
