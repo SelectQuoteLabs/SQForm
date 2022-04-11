@@ -35,8 +35,6 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 ## Consuming
 
-This is a Typescript library and therefore relies on Typescript types from libraries other than this one. The libraries who's types SQForm relies on are marked as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies) if the library is also required for non-type imports. Otherwise, they're marked as an [optional dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#optionaldependencies).
-
 By default in NPM v7 and above peer dependencies will be installed automatically. You can check your npm version using `npm --version` to determine the version you are using. If your version is not at least v7 you must install the peer dependencies manually.
 
 Optional dependencies are always installed but can be omitted by using `npm install --no-optional` when installing this package.
@@ -50,8 +48,10 @@ Optional dependencies are always installed but can be omitted by using `npm inst
   - `> npm install @selectquotelabs/sqform`
   - Install peer dependencies manually
 
-- To omit optional dependencies
-  - `> npm install @selectquotelabs/sqform --no-optional`
+- Using TypeScript
+  - `> npm install -D @types/react @types/react-dom @types/react-text-mask @types/yup`
+
+> Note: Ensure the types package major version number matches the package of your project. ex: React 16 should use v16 of @types/react
 
 ## Upgrading/Breaking Changes
 
