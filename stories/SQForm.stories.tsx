@@ -6,7 +6,6 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import {SectionHeader} from 'scplus-shared-components';
 
-import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import {createDocsPage} from './utils/createDocsPage';
 import * as markdown from '../notes/SQForm.md';
@@ -347,9 +346,6 @@ export const formWithFieldArray = (): JSX.Element => {
         </SQFormDropdown>
         <SQFormCheckbox name="cool" label="Cool" />
         <SQFormCheckbox name="lame" label="Lame" isDisabled={true} />
-        <Grid item sm={12}>
-          <FriendsFieldArray name="friends" />
-        </Grid>
         <Grid item sm={12}>
           <Grid container justifyContent="flex-end">
             <SQFormButton shouldRequireFieldUpdates={true}>Submit</SQFormButton>
