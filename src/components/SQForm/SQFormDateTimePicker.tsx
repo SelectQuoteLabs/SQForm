@@ -1,11 +1,11 @@
 import React from 'react';
-import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DateTimePicker} from '@material-ui/pickers';
-import type {BaseDateTimePickerProps} from '@material-ui/pickers';
 import {ClickAwayListener, makeStyles} from '@material-ui/core';
 import {useForm} from './useForm';
+import type {Moment} from 'moment';
+import type {BaseDateTimePickerProps} from '@material-ui/pickers';
 import type {BaseFieldProps} from '../../types';
 import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 

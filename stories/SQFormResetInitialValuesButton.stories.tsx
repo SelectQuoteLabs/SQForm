@@ -1,8 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import type {Meta} from '@storybook/react';
-import type {CustomStory} from './types/storyHelperTypes'
-import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton' 
 
 import {
   SQFormResetInitialValuesButton as SQFormResetInitialValuesButtonComponent,
@@ -10,6 +7,9 @@ import {
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
+import type {Meta} from '@storybook/react';
+import type {CustomStory} from './types/storyHelperTypes';
+import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton';
 
 const meta: Meta = {
   title: 'Components/SQFormResetInitialValuesButton',

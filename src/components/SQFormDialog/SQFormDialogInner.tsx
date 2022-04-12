@@ -9,14 +9,14 @@ import {
   Slide,
   makeStyles,
 } from '@material-ui/core';
-import type {DialogProps, GridProps} from '@material-ui/core';
-import type {TransitionProps} from '@material-ui/core/transitions';
 import {useTheme} from '@material-ui/core/styles';
-import type {Theme} from '@material-ui/core/styles';
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
+import type {DialogProps, GridProps} from '@material-ui/core';
+import type {TransitionProps} from '@material-ui/core/transitions';
+import type {Theme} from '@material-ui/core/styles';
 
 interface SQFormDialogInnerProps {
   /** The secondary button text (Button located on left side of Dialog) */

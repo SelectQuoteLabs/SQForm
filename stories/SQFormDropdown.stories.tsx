@@ -1,13 +1,13 @@
 import React from 'react';
-import {SQFormDropdown as SQFormDropdownComponent} from '../src';
-import type {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
-import getSizeProp from './utils/getSizeProp';
-import type {GridSizeOptions} from './types/storyHelperTypes';
-import type {Meta, Story} from '@storybook/react';
-import {createDocsPage} from './utils/createDocsPage';
 import * as markdown from '../notes/SQFormDropdown.md';
+import getSizeProp from './utils/getSizeProp';
+import {SQFormDropdown as SQFormDropdownComponent} from '../src';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
+import type {Meta, Story} from '@storybook/react';
+import type {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
+import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 
 type FormProps = {
   initalValues?: SQFormStoryWrapperProps['initialValues'];

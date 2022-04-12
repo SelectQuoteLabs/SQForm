@@ -1,5 +1,5 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
 
 import {Paper} from '@material-ui/core';
 import {SQFormScrollableCard, SQFormTextField} from '../src';

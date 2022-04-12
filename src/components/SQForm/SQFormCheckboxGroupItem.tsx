@@ -1,9 +1,9 @@
 import React from 'react';
-import {FormControlLabel} from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
-import type {CheckboxProps} from '@material-ui/core';
+import {FormControlLabel} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from './useForm';
+import type {CheckboxProps} from '@material-ui/core';
 import type {SQFormOption} from '../../types';
 
 const useStyles = makeStyles((theme) => ({

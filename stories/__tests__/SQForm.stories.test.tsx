@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import {
   render,
   screen,
@@ -6,7 +7,6 @@ import {
   waitForElementToBeRemoved,
   within,
 } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import {BasicForm} from '../SQForm.stories';
 

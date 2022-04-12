@@ -1,8 +1,8 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
 
-import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
 import getSizeProp from './utils/getSizeProp';
+import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {
   SQFormStoryWrapper,

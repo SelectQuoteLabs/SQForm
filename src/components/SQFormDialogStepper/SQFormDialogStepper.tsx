@@ -13,17 +13,17 @@ import {
   Stepper,
   Typography,
 } from '@material-ui/core';
+import {Form, Formik, useFormikContext} from 'formik';
+import {RoundedButton} from 'scplus-shared-components';
+import LoadingSpinner from '../LoadingSpinner';
+import type {TransitionProps} from '@material-ui/core/transitions';
 import type {
   DialogProps,
   GridProps,
   DialogContentProps,
 } from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
-import {Form, Formik, useFormikContext} from 'formik';
 import type {FormikHelpers, FormikValues} from 'formik';
-import {RoundedButton} from 'scplus-shared-components';
-import LoadingSpinner from '../LoadingSpinner';
-import type {TransitionProps} from '@material-ui/core/transitions';
 
 export interface SQFormDialogStepProps {
   /** The content to be rendered in the step body. */

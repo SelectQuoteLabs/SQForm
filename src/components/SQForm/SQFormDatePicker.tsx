@@ -1,13 +1,13 @@
 import React from 'react';
-import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DatePicker} from '@material-ui/pickers';
-import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
+import {useForm} from './useForm';
+import type {Moment} from 'moment';
+import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
 import type {InputBaseComponentProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
-import {useForm} from './useForm';
 
 const useStyles = makeStyles(() => ({
   root: {

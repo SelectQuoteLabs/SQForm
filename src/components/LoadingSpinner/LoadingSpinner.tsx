@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import LoadingIcon from '../LoadingIcon';
 import {Grid, Typography} from '@material-ui/core';
+import LoadingIcon from '../LoadingIcon';
 
 interface LoadingSpinnerProps {
   message?: string;

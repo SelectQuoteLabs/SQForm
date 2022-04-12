@@ -1,15 +1,15 @@
-import React from 'react';
 import * as Yup from 'yup';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import {withKnobs, boolean} from '@storybook/addon-knobs';
+import {action} from '@storybook/addon-actions';
 import {SectionHeader} from 'scplus-shared-components';
 
+import * as markdown from '../notes/SQForm.md';
 import FriendsFieldArray from './components/FriendsFieldArray';
 import FormValidationMessage from './components/FormValidationMessage';
 import {createDocsPage} from './utils/createDocsPage';
-import * as markdown from '../notes/SQForm.md';
 
 import {
   SQForm,

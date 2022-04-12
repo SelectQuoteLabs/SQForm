@@ -1,7 +1,6 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
 import {Formik, Form} from 'formik';
-import type {FormikHelpers, FormikValues} from 'formik';
 import {CardActions, CardContent, makeStyles} from '@material-ui/core';
 import {
   Accordion,
@@ -16,6 +15,7 @@ import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
+import type {FormikHelpers, FormikValues} from 'formik';
 import type {
   SQFormGuidedWorkflowDataProps,
   SQFormGuidedWorkflowProps,

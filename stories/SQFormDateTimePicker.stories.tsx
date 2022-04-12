@@ -1,5 +1,6 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
+import getSizeProp from './utils/getSizeProp';
 import {SQFormDateTimePicker as SQFormDateTimePickerComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
@@ -7,7 +8,6 @@ import markdown from '../notes/SQFormDatePicker.md';
 import type {Meta} from '@storybook/react';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {SQFormDateTimePickerProps} from 'components/SQForm/SQFormDateTimePicker';
-import getSizeProp from './utils/getSizeProp';
 
 const meta: Meta = {
   title: 'Components/SQFormDateTimePicker',

@@ -1,11 +1,10 @@
 import React from 'react';
-import {Checkbox} from '@material-ui/core';
-import type {CheckboxProps} from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import type {BaseFieldProps} from '../../types';
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {Checkbox} from '@material-ui/core';
 import {useForm} from './useForm';
+import type {CheckboxProps} from '@material-ui/core';
+import type {BaseFieldProps} from '../../types';
 
 export interface SQFormCheckboxProps extends BaseFieldProps {
   /** Disabled state of the checkbox */

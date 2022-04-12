@@ -1,6 +1,6 @@
-import type {FormikHelpers} from 'formik';
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
+
 
 import {
   SQFormScrollableCardsMenuWrapper,
@@ -9,6 +9,7 @@ import {
   SQFormCheckbox,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
+import type {FormikHelpers} from 'formik';
 
 export default {
   title: 'Forms/SQFormScrollableCardsMenuWrapper',
