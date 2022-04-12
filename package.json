@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "SQ Form",
   "main": "dist/bundle.cjs.js",
   "types": "dist/index.d.ts",
@@ -97,9 +97,6 @@
     "react-dom": "^16.12.0",
     "yup": "^0.32.9"
   },
-  "optionalDependencies": {
-    "@types/react-text-mask": "^5.4.11"
-  },
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
@@ -136,6 +133,7 @@
     "@types/lodash.isequal": "^4.5.5",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
+    "@types/react-text-mask": "^5.4.11",
     "@types/react-window": "^1.8.5",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@types/yup": "^0.29.11",
