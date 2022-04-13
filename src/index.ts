@@ -26,6 +26,7 @@ export {
   SQFormDialogStep,
 } from './components/SQFormDialogStepper';
 export {default as SQFormDropdown} from './components/SQForm/SQFormDropdown';
+export {default as SQFormReadOnly} from './components/SQForm/SQFormReadOnly';
 export {default as SQFormReadOnlyField} from './components/SQForm/SQFormReadOnlyField';
 export {default as SQFormResetButtonWithConfirmation} from './components/SQForm/SQFormResetButtonWithConfirmation';
 export {default as SQFormResetInitialValuesButton} from './components/SQForm/SQFormResetInitialValuesButton';
@@ -62,6 +63,10 @@ export type {
   SQFormDialogStepProps,
 } from './components/SQFormDialogStepper/SQFormDialogStepper';
 export type {SQFormDropdownProps} from './components/SQForm/SQFormDropdown';
+export type {
+  SQFormReadOnlyProps,
+  SQFormMaskedReadOnlyFieldWithKey,
+} from './components/SQForm/SQFormReadOnly';
 export type {SQFormReadOnlyFieldProps} from './components/SQForm/SQFormReadOnlyField';
 export type {SQFormResetButtonWithConfirmationProps} from './components/SQForm/SQFormResetButtonWithConfirmation';
 export type {SQFormResetInitialValuesButtonProps} from './components/SQForm/SQFormResetInitialValuesButton';

@@ -34,4 +34,8 @@ export const toKebabCase = (inputString: string): string | undefined =>
     ?.map((x) => x.toLowerCase())
     ?.join('-');
 
+export const noop = (): void => {
+  /* do nothing */
+};
+
 export {MASKS} from './masks';
