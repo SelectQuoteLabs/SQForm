@@ -1,3 +1,10 @@
+## [8.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.0.1...v8.1.0) (2022-04-13)
+
+
+### Features
+
+* 🎸 Read only form component ([238f463](https://github.com/SelectQuoteLabs/SQForm/commit/238f463c07886fc37022cb9eb054524df8b22870)), closes [#561](https://github.com/SelectQuoteLabs/SQForm/issues/561)
+
 ### [8.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v8.0.0...v8.0.1) (2022-04-11)
 
 
