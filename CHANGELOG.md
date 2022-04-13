@@ -1,3 +1,17 @@
+## [8.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.0.1...v8.1.0) (2022-04-13)
+
+
+### Features
+
+* 🎸 Read only form component ([238f463](https://github.com/SelectQuoteLabs/SQForm/commit/238f463c07886fc37022cb9eb054524df8b22870)), closes [#561](https://github.com/SelectQuoteLabs/SQForm/issues/561)
+
+### [8.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v8.0.0...v8.0.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* 🐛 Tests pass - changed react-text-mask types to a devDep ([7854047](https://github.com/SelectQuoteLabs/SQForm/commit/78540470041e51831e700e969b4deb78b4e61660)), closes [#666](https://github.com/SelectQuoteLabs/SQForm/issues/666)
+
 ## [8.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v7.4.2...v8.0.0) (2022-04-07)
 
 
