@@ -2,7 +2,10 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 import Card from '@material-ui/core/Card';
 import {SQFormReadOnly as SQFormReadOnlyComponent, MASKS} from '../src';
-import type {SQFormReadOnlyProps, SQFormMaskedReadOnlyFieldProps} from '../src';
+import type {
+  SQFormReadOnlyProps,
+  SQFormMaskedReadOnlyFieldWithKey,
+} from '../src';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 
 const MOCK_INITIAL_VALUES = {
@@ -20,7 +23,7 @@ const MOCK_INITIAL_VALUES = {
   county: 'Johnson',
 };
 
-const readOnlyFields: SQFormMaskedReadOnlyFieldProps[] = [
+const readOnlyFields: SQFormMaskedReadOnlyFieldWithKey[] = [
   {
     label: 'First Name',
     name: 'firstName',

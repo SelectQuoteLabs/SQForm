@@ -9,9 +9,14 @@ import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
 import type {SQFormMaskedReadOnlyFieldProps} from './SQFormMaskedReadOnlyField';
 
+export interface SQFormMaskedReadOnlyFieldWithKey
+  extends SQFormMaskedReadOnlyFieldProps {
+  key?: React.Key;
+}
+
 export interface SQFormReadOnlyProps<Values extends FormikValues> {
   /** Form Input(s) */
-  readOnlyFields: SQFormMaskedReadOnlyFieldProps[];
+  readOnlyFields: SQFormMaskedReadOnlyFieldWithKey[];
   /** Form Entity Object */
   initialValues: Values;
   /** Any prop from https://material-ui.com/api/grid */
@@ -40,7 +45,7 @@ function SQFormReadOnly<Values extends FormikValues>({
             >
               {readOnlyFields.map((readOnlyField, index) => {
                 const props = {
-                  key: index,
+                  key: readOnlyField?.key ?? index,
                   muiFieldProps: noBottomMarginStyle,
                   ...readOnlyField,
                 };
