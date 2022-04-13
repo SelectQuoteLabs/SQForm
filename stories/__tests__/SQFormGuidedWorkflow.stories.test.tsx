@@ -49,11 +49,11 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const outcomeArea = screen.getByRole('heading', {name: /confirm info/i});
     expect(outcomeArea).toBeVisible();
 
-    const resetButton = screen.getByRole('button', {name: /reset form/i});
+    const resetButton = screen.getByRole('button', {name: /reset/i});
     expect(resetButton).toBeVisible();
     expect(resetButton).toBeDisabled();
 
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     expect(nextButton).toBeVisible();
     expect(nextButton).toBeDisabled();
   });
@@ -61,7 +61,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
   it('should enable next button when all required fields are filled out in the 1st section', async () => {
     render(<SQFormGuidedWorkflow />);
 
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     expect(nextButton).toBeDisabled();
 
     const outcome = screen.getByRole('button', {name: /outcome/i});
@@ -92,7 +92,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const interested = screen.getByText('Interested');
     userEvent.click(interested);
 
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     await waitFor(() => {
       expect(nextButton).toBeEnabled();
     });
@@ -122,7 +122,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     const interested = screen.getByText('Interested');
     userEvent.click(interested);
 
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     await waitFor(() => {
       expect(nextButton).toBeEnabled();
     });
@@ -164,7 +164,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     userEvent.click(outcome);
     const interested = screen.getByText('Interested');
     userEvent.click(interested);
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     await waitFor(() => {
       expect(nextButton).toBeEnabled();
     });
@@ -217,7 +217,7 @@ describe('Testing new story', () => {
     const textbox = screen.getByRole('textbox', {name: /first text/i});
     userEvent.type(textbox, 'Hello');
 
-    const nextButton = screen.getByRole('button', {name: /form submission/i});
+    const nextButton = screen.getByRole('button', {name: /next/i});
     await waitFor(() => {
       expect(nextButton).toBeEnabled();
     });

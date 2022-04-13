@@ -14,11 +14,9 @@ describe('Tests for SQFormMultiSelect', () => {
   it('should render a form with a multiselect input', async () => {
     render(<SQFormMultiSelect size="auto" />);
 
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {
-        name: /friends/i,
-      })
-    );
+    const expandButton = await screen.findByRole('button', {
+      name: /friends/i,
+    });
 
     userEvent.click(expandButton);
 
@@ -32,11 +30,9 @@ describe('Tests for SQFormMultiSelect', () => {
   it('should render dropdown options', async () => {
     render(<SQFormMultiSelect size="auto" />);
 
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {
-        name: /friends/i,
-      })
-    );
+    const expandButton = await screen.findByRole('button', {
+      name: /friends/i,
+    });
 
     userEvent.click(expandButton);
 
@@ -48,9 +44,7 @@ describe('Tests for SQFormMultiSelect', () => {
   it('should render the multiselect with default initial value "- -"', async () => {
     render(<SQFormMultiSelect size="auto" />);
 
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {name: /friends/i})
-    );
+    const expandButton = await screen.findByRole('button', {name: /friends/i});
 
     expect(expandButton).toHaveTextContent(initialDropdownValue);
   });
@@ -67,9 +61,7 @@ describe('Tests for SQFormMultiSelect', () => {
       />
     );
 
-    const expandButton = await waitFor(() =>
-      screen.findByRole('button', {name: /friends/i})
-    );
+    const expandButton = await screen.findByRole('button', {name: /friends/i});
 
     expect(expandButton).toHaveTextContent(initialValueLabels);
   });

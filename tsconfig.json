@@ -2,9 +2,9 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "ES6",
-    "lib": ["DOM", "DOM.Iterable", "ES6"],
+    "lib": ["DOM", "DOM.Iterable", "es2021"],
     "types": ["jest"],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,9 +16,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "declaration": true,
-    "declarationDir": ".dts",
-    "emitDeclarationOnly": true
-  },
-  "include": ["./src", "./jest-setup.ts", "./stories"],
-  "exclude": ["**/*.test(.ts|.tsx)"]
+    "emitDeclarationOnly": true,
+    "outDir": "dist"
+  }
 }

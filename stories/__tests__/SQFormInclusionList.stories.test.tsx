@@ -110,7 +110,7 @@ describe('SQFormInclusionList Tests', () => {
 
     render(<SQFormInclusionList sqFormProps={sqFormProps} />);
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+    const submitButton = screen.getByRole('button', {name: /submit/i});
     await waitFor(() => {
       expect(submitButton).toBeDisabled();
     });
@@ -135,7 +135,7 @@ describe('SQFormInclusionList Tests', () => {
 
     //TODO: Add in check for 'required' text when that issue is resolved
 
-    const submitButton = screen.getByRole('button', {name: /form submission/i});
+    const submitButton = screen.getByRole('button', {name: /submit/i});
     await waitFor(() => {
       expect(submitButton).toBeEnabled();
     });

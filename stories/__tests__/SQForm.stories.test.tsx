@@ -63,7 +63,7 @@ describe('Tests for BasicForm', () => {
       within(warrantyOptions).getByRole('checkbox', {name: /brakes/i})
     );
 
-    userEvent.click(screen.getByRole('button', {name: /form submission/i}));
+    userEvent.click(screen.getByRole('button', {name: /submit/i}));
 
     await waitFor(() =>
       expect(window.alert).toHaveBeenCalledWith(
@@ -96,42 +96,16 @@ describe('Tests for BasicForm', () => {
 
     userEvent.type(screen.getByLabelText(/first name/i), mockData.firstName);
 
-    const {value: lastNameInputValue} = screen.getByLabelText(
-      /last name/i
-    ) as HTMLInputElement;
-
-    userEvent.click(screen.getByRole('button', {name: /form reset/i}));
+    userEvent.click(screen.getByRole('button', {name: /reset/i}));
 
     await screen.findByText('Reset Form');
     userEvent.click(screen.getByRole('button', {name: /reset/i}));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Reset Form'));
-    userEvent.click(screen.getByRole('button', {name: /form submission/i}));
-
-    await waitFor(() =>
-      expect(window.alert).toHaveBeenCalledWith(
-        JSON.stringify(
-          {
-            firstName: '',
-            lastName: lastNameInputValue,
-            city: '',
-            age: '',
-            state: '',
-            tenThousandOptions: '',
-            note: '',
-            preferredPet: '',
-            warrantyOptions: [],
-            warrantyOptionsSelectAll: false,
-            favoriteColors: [2, 4],
-            hobby: '',
-            cool: false,
-            lame: false,
-          },
-          null,
-          2
-        )
-      )
-    );
+    const {value: firstNameInputValue} = screen.getByLabelText(
+      /first name/i
+    ) as HTMLInputElement;
+    expect(firstNameInputValue).toBe('');
   });
 });
 
