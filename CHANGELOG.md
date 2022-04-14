@@ -1,3 +1,10 @@
+### [8.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.0...v8.1.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* 🐛 Adds enableReinitialize prop to SQFormReadOnly component ([07103cd](https://github.com/SelectQuoteLabs/SQForm/commit/07103cd7a99af4f9d8ae537173094c0073ff4857)), closes [#670](https://github.com/SelectQuoteLabs/SQForm/issues/670)
+
 ## [8.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.0.1...v8.1.0) (2022-04-13)
 
 
