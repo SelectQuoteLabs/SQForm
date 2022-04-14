@@ -19,6 +19,8 @@ export interface SQFormReadOnlyProps<Values extends FormikValues> {
   readOnlyFields: SQFormMaskedReadOnlyFieldWithKey[];
   /** Form Entity Object */
   initialValues: Values;
+  /** Should SQFormReadOnly reset the form when new initialValues change */
+  enableReinitialize?: boolean;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
 }
@@ -31,10 +33,15 @@ const noBottomMarginStyle = {style: noBottomMargin};
 function SQFormReadOnly<Values extends FormikValues>({
   readOnlyFields,
   initialValues,
+  enableReinitialize = false,
   muiGridProps = {},
 }: SQFormReadOnlyProps<Values>): JSX.Element {
   return (
-    <Formik<Values> initialValues={initialValues} onSubmit={noop}>
+    <Formik<Values>
+      initialValues={initialValues}
+      onSubmit={noop}
+      enableReinitialize={enableReinitialize}
+    >
       {(_props) => {
         return (
           <Form>
