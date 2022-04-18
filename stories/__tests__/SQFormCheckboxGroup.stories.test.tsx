@@ -198,7 +198,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       render(<SQFormCheckboxGroupWithValidation size="auto" />);
 
       expect(
-        await screen.findByRole('button', {name: /form submission/i})
+        await screen.findByRole('button', {name: /submit/i})
       ).toBeDisabled();
     });
 
@@ -210,7 +210,7 @@ describe('SQFormCheckboxGroup Tests', () => {
       userEvent.click(checkbox);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i,
+        name: /submit/i,
       });
 
       await waitFor(() => expect(submitButton).toBeEnabled());
