@@ -1,3 +1,10 @@
+### [8.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.1...v8.1.2) (2022-04-18)
+
+
+### Bug Fixes
+
+* 🐛 Fix hole in BaseDatePickerProps ([3c1ab77](https://github.com/SelectQuoteLabs/SQForm/commit/3c1ab77c15850099483d68a73b1ad9dd3414db30)), closes [#672](https://github.com/SelectQuoteLabs/SQForm/issues/672)
+
 ### [8.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.0...v8.1.1) (2022-04-14)
 
 
