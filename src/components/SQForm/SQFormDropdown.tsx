@@ -1,14 +1,14 @@
 import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import type {SelectProps} from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Grid from '@material-ui/core/Grid';
-import {makeStyles} from '@material-ui/core/styles';
-
+import {
+  FormControl,
+  FormHelperText,
+  Grid,
+  Input,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Select,
+} from '@material-ui/core';
 import {useForm} from './useForm';
 import {
   getOutOfRangeValueWarning,
@@ -16,6 +16,7 @@ import {
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
+import type {SelectProps} from '@material-ui/core/Select';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormDropdownProps extends BaseFieldProps {

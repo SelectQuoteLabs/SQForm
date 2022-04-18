@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import {Grid} from '@material-ui/core';
 import {Formik, Form} from 'formik';
 import SQFormReadOnlyField from './SQFormReadOnlyField';
 import SQFormMaskedReadOnlyField from './SQFormMaskedReadOnlyField';

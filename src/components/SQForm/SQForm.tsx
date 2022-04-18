@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import {Grid} from '@material-ui/core';
 import {setLocale} from 'yup';
 import type {AnyObjectSchema} from 'yup';
 import {Formik, Form} from 'formik';

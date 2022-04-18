@@ -12,7 +12,6 @@ import {
   Tooltip,
   makeStyles,
 } from '@material-ui/core';
-import type {TooltipProps, SelectProps} from '@material-ui/core';
 import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
@@ -21,6 +20,7 @@ import {
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
+import type {TooltipProps, SelectProps} from '@material-ui/core';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export interface SQFormMultiSelectProps extends BaseFieldProps {

@@ -2,8 +2,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
+import {Card, Grid} from '@material-ui/core';
 import {SectionHeader} from 'scplus-shared-components';
 
 import FormValidationMessage from './components/FormValidationMessage';
