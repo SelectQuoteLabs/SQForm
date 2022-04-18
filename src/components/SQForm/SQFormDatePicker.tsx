@@ -3,9 +3,14 @@ import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DatePicker} from '@material-ui/pickers';
-import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
+import type {
+  BasePickerProps,
+  BaseDatePickerProps,
+  DatePickerProps,
+} from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
 import type {InputBaseComponentProps} from '@material-ui/core';
+import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 import type {BaseFieldProps} from '../../types';
 import {useForm} from './useForm';
 
@@ -19,6 +24,10 @@ const useStyles = makeStyles(() => ({
       },
   },
 }));
+
+interface SQFormPickerProps<TDate>
+  extends BaseDatePickerProps<TDate>,
+    BasePickerProps<ParsableDate<TDate>, TDate | null> {}
 
 export interface SQFormDatePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
@@ -35,7 +44,7 @@ export interface SQFormDatePickerProps extends BaseFieldProps {
    */
   setDisabledDate?: (day: unknown) => boolean;
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDatePickerProps<Moment>;
+  muiFieldProps?: SQFormPickerProps<Moment>;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
   /** Props provided to the Input component. Most commonly used for adornments. */
