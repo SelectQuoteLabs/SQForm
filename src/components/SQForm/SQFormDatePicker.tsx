@@ -10,9 +10,9 @@ import type {
 } from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
 import type {InputBaseComponentProps} from '@material-ui/core';
+import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 import type {BaseFieldProps} from '../../types';
 import {useForm} from './useForm';
-import {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
 const useStyles = makeStyles(() => ({
   root: {
