@@ -3,11 +3,16 @@ import type {Moment} from 'moment';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import {DatePicker} from '@material-ui/pickers';
-import type {BaseDatePickerProps, DatePickerProps} from '@material-ui/pickers';
+import type {
+  BasePickerProps,
+  BaseDatePickerProps,
+  DatePickerProps,
+} from '@material-ui/pickers';
 import {makeStyles, ClickAwayListener} from '@material-ui/core';
 import type {InputBaseComponentProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
 import {useForm} from './useForm';
+import {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,9 +25,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface SQFormPickerProps<TDate> extends BaseDatePickerProps<TDate> {
-  onAccept?: (date: TDate | null) => void;
-}
+interface SQFormPickerProps<TDate>
+  extends BaseDatePickerProps<TDate>,
+    BasePickerProps<ParsableDate<TDate>, TDate | null> {}
 
 export interface SQFormDatePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
