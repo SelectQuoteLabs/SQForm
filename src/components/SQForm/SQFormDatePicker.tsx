@@ -28,9 +28,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface SQFormPickerProps<TDate>
+interface MuiFieldProps<TDate>
   extends BaseDatePickerProps<TDate>,
-    BasePickerProps<ParsableDate<TDate>, TDate | null> {}
+    Omit<
+      BasePickerProps<ParsableDate<TDate>, TDate | null>,
+      'value' | 'onChange'
+    > {}
 
 export interface SQFormDatePickerProps extends BaseFieldProps {
   /** Disabled property to disable the input if true */
@@ -47,7 +50,7 @@ export interface SQFormDatePickerProps extends BaseFieldProps {
    */
   setDisabledDate?: (day: unknown) => boolean;
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: SQFormPickerProps<Moment>;
+  muiFieldProps?: MuiFieldProps<Moment>;
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
   /** Props provided to the Input component. Most commonly used for adornments. */
