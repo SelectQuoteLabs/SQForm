@@ -1,3 +1,10 @@
+### [8.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.2...v8.1.3) (2022-04-18)
+
+
+### Bug Fixes
+
+* 🐛 Fix SQFormDatePicker muiFieldProps type ([8ba6ec0](https://github.com/SelectQuoteLabs/SQForm/commit/8ba6ec0d50c3aa7f0abfd8a9524964b5c8931d96)), closes [#674](https://github.com/SelectQuoteLabs/SQForm/issues/674)
+
 ### [8.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.1...v8.1.2) (2022-04-18)
 
 
