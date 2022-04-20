@@ -131,7 +131,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
         render(<SQFormRadioButtonGroupWithValidation size="auto" />);
 
         expect(
-          await screen.findByRole('button', {name: /form submission/i})
+          await screen.findByRole('button', {name: /submit/i})
         ).toBeDisabled();
       });
 
@@ -171,7 +171,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
         userEvent.click(firstRadioButton);
 
         expect(
-          await screen.findByRole('button', {name: /form submission/i})
+          await screen.findByRole('button', {name: /submit/i})
         ).toBeEnabled();
       });
     });

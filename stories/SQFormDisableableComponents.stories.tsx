@@ -1,8 +1,7 @@
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import * as Yup from 'yup';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
+import {Card, Grid} from '@material-ui/core';
 import {
   SQFormButton,
   SQFormAutocomplete,

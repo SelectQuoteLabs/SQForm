@@ -1,15 +1,15 @@
 import React from 'react';
 import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import {Autocomplete} from '@material-ui/lab';
+import {usePrevious} from '@selectquotelabs/sqhooks';
+import {VariableSizeList} from 'react-window';
+import {useField, useFormikContext} from 'formik';
+import {useForm} from './useForm';
+import type {ListChildComponentProps} from 'react-window';
 import type {
   AutocompleteChangeReason,
   AutocompleteRenderInputParams,
 } from '@material-ui/lab/Autocomplete';
-import {VariableSizeList} from 'react-window';
-import type {ListChildComponentProps} from 'react-window';
-import {useField, useFormikContext} from 'formik';
-import {usePrevious} from '@selectquotelabs/sqhooks';
-import {useForm} from './useForm';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 import type {
   OuterElementContextInterface,

@@ -1,9 +1,11 @@
 import React from 'react';
 import {getIn, useField} from 'formik';
-import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 import isEqual from 'lodash.isequal';
-import WarningIcon from '@material-ui/icons/NewReleases';
-import VerifiedIcon from '@material-ui/icons/VerifiedUser';
+import {
+  NewReleases as WarningIcon,
+  VerifiedUser as VerifiedIcon,
+} from '@material-ui/icons';
+import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 
 type ChangeHandler<TChangeEvent> = (
   event: TChangeEvent,

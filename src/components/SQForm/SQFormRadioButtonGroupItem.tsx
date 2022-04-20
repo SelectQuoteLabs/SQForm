@@ -1,7 +1,5 @@
 import React from 'react';
-import Radio from '@material-ui/core/Radio';
-import {makeStyles} from '@material-ui/core/styles';
-import {FormControlLabel} from '@material-ui/core';
+import {FormControlLabel, makeStyles, Radio} from '@material-ui/core';
 import type {RadioProps} from '@material-ui/core';
 
 export interface SQFormRadioButtonGroupItemProps {

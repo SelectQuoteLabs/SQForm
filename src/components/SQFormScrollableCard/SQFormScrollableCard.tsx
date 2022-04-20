@@ -7,16 +7,16 @@ import {
   Grid,
   makeStyles,
 } from '@material-ui/core';
-import type {TypographyVariant, GridProps} from '@material-ui/core';
-import type {AnyObjectSchema} from 'yup';
 import {Formik, Form} from 'formik';
-import type {FormikHelpers, FormikValues} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
 import {HEADER_HEIGHT} from '../../utils/constants';
+import type {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
+import type {TypographyVariant, GridProps} from '@material-ui/core';
+import type {FormikHelpers, FormikValues} from 'formik';
+import type {AnyObjectSchema} from 'yup';
 
 export interface SQFormScrollableCardProps<Values extends FormikValues> {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */

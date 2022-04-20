@@ -1,13 +1,10 @@
 import React from 'react';
-import {TextField} from '@material-ui/core';
-import type {TextFieldProps, InputProps} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import type Mask from '../../types/MaskTypes';
-import type {BaseFieldProps} from '../../types';
-
+import {Grid, InputAdornment, TextField} from '@material-ui/core';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
+import type {TextFieldProps, InputProps} from '@material-ui/core';
+import type Mask from '../../types/MaskTypes';
+import type {BaseFieldProps} from '../../types';
 
 export interface SQFormTextFieldProps extends BaseFieldProps {
   /** Placeholder text used inside the input field to provide hints to the user */

@@ -4,10 +4,8 @@ import userEvent from '@testing-library/user-event';
 import {composeStories} from '@storybook/testing-react';
 import * as stories from '../SQFormButton.stories';
 
-const {
-  Default: SQFormButton,
-  WithTestField: SQFormButtonWithField
-} = composeStories(stories);
+const {Default: SQFormButton, WithTestField: SQFormButtonWithField} =
+  composeStories(stories);
 
 describe('SQFormButton Tests', () => {
   describe('Button Only', () => {
@@ -15,7 +13,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       expect(submitButton).toBeInTheDocument();
@@ -33,9 +31,7 @@ describe('SQFormButton Tests', () => {
     it('should render a reset button given the type reset', () => {
       render(<SQFormButton type="reset" />);
 
-      const resetButton = screen.getByRole('button', {
-        name: /reset form/i
-      });
+      const resetButton = screen.getByTitle(/reset form/i);
 
       expect(resetButton).toBeInTheDocument();
       expect(resetButton).toHaveAttribute('type', 'reset');
@@ -44,9 +40,7 @@ describe('SQFormButton Tests', () => {
     it('should be disabled when button is type reset', () => {
       render(<SQFormButton type="reset" />);
 
-      const resetButton = screen.getByRole('button', {
-        name: /reset form/i
-      });
+      const resetButton = screen.getByTitle(/reset form/i);
 
       expect(resetButton).toBeInTheDocument();
       expect(resetButton).toHaveAttribute('type', 'reset');
@@ -57,7 +51,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton shouldRequireFieldUpdates={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       expect(submitButton).toBeDisabled();
@@ -68,7 +62,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton onClick={onClickSpy} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       userEvent.click(submitButton);
@@ -80,7 +74,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton isDisabled={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       expect(submitButton).toBeDisabled();
@@ -91,7 +85,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButton isDisabled={true} onClick={onClickSpy} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       fireEvent.click(submitButton);
@@ -109,7 +103,7 @@ describe('SQFormButton Tests', () => {
       expect(testField).toBeInTheDocument();
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
 
       expect(submitButton).toBeInTheDocument();
@@ -120,7 +114,7 @@ describe('SQFormButton Tests', () => {
       render(<SQFormButtonWithField shouldRequireFieldUpdates={true} />);
 
       const submitButton = screen.getByRole('button', {
-        name: /form submission/i
+        name: /submit/i,
       });
       expect(submitButton).toBeDisabled();
 
@@ -134,9 +128,7 @@ describe('SQFormButton Tests', () => {
     it('should enable when data entered into field and type is reset', () => {
       render(<SQFormButtonWithField type="reset" />);
 
-      const resetButton = screen.getByRole('button', {
-        name: /reset form/i
-      });
+      const resetButton = screen.getByTitle(/reset form/i);
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();
 
@@ -149,9 +141,7 @@ describe('SQFormButton Tests', () => {
     it('should reset field when clicked', () => {
       render(<SQFormButtonWithField type="reset" />);
 
-      const resetButton = screen.getByRole('button', {
-        name: /reset form/i
-      });
+      const resetButton = screen.getByTitle(/reset form/i);
       expect(resetButton).toHaveAttribute('type', 'reset');
       expect(resetButton).toBeDisabled();
 

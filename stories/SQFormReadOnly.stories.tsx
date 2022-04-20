@@ -1,6 +1,6 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-import Card from '@material-ui/core/Card';
+import {Card} from '@material-ui/core';
 import {SQFormReadOnly as SQFormReadOnlyComponent, MASKS} from '../src';
 import type {
   SQFormReadOnlyProps,

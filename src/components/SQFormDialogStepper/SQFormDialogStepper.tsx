@@ -18,11 +18,11 @@ import type {
   GridProps,
   DialogContentProps,
 } from '@material-ui/core';
-import type {AnyObjectSchema} from 'yup';
 import {Form, Formik, useFormikContext} from 'formik';
-import type {FormikHelpers, FormikValues} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
+import type {AnyObjectSchema} from 'yup';
+import type {FormikHelpers, FormikValues} from 'formik';
 import type {TransitionProps} from '@material-ui/core/transitions';
 
 export interface SQFormDialogStepProps {
