@@ -1,3 +1,10 @@
+## [8.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.3...v8.2.0) (2022-04-20)
+
+
+### Features
+
+* 🎸 Migrate from Rollup to Vite & improve deps config ([4ea670c](https://github.com/SelectQuoteLabs/SQForm/commit/4ea670c4180d0045deb4038bcb5004007419b46c)), closes [#604](https://github.com/SelectQuoteLabs/SQForm/issues/604)
+
 ### [8.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.2...v8.1.3) (2022-04-18)
 
 
