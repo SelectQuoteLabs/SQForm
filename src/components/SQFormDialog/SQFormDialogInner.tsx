@@ -17,6 +17,7 @@ import SQFormButton from '../SQForm/SQFormButton';
 import type {DialogProps, GridProps} from '@material-ui/core';
 import type {Theme} from '@material-ui/core/styles';
 import type {TransitionProps} from '@material-ui/core/transitions';
+import type {FormikContextType} from 'formik';
 
 interface SQFormDialogInnerProps {
   /** The secondary button text (Button located on left side of Dialog) */
@@ -55,7 +56,7 @@ interface SQFormDialogInnerProps {
   /** Whether the tertiary button is disabled (Default: false) */
   isTertiaryDisabled?: boolean;
   /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onTertiaryClick?: (formikContext: FormikContextType<unknown>) => void;
 }
 
 /*
@@ -129,7 +130,7 @@ function SQFormDialogInner({
   const actionsClasses = useActionsStyles(theme);
   const primaryActionsClasses = usePrimaryActionStyles(theme);
   const dialogContentClasses = useDialogContentStyles(theme);
-  const {resetForm, dirty: isDirty} = useFormikContext();
+  const formikContext = useFormikContext();
 
   const {
     isDialogOpen: isDialogAlertOpen,
@@ -145,7 +146,7 @@ function SQFormDialogInner({
       return;
     }
 
-    if (!isDirty) {
+    if (!formikContext.dirty) {
       onClose && onClose(event, reason);
     } else {
       openDialogAlert();
@@ -153,7 +154,7 @@ function SQFormDialogInner({
   };
 
   const confirmCancel = () => {
-    resetForm();
+    formikContext.resetForm();
     onClose && onClose({}, 'escapeKeyDown');
     closeDialogAlert();
   };
@@ -183,8 +184,8 @@ function SQFormDialogInner({
           <span style={{paddingRight: '20px'}}>
             <SQFormButton
               title={tertiaryButtonText}
-              isDisabled={isTertiaryDisabled}
-              onClick={onTertiaryClick}
+              isDisabled={isTertiaryDisabled || !formikContext.isValid}
+              onClick={() => onTertiaryClick?.(formikContext)}
               type="button"
             >
               {tertiaryButtonText}

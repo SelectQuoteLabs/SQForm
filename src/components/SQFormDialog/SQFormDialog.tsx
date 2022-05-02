@@ -2,7 +2,7 @@ import React from 'react';
 import {Formik} from 'formik';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import type {FormikHelpers, FormikValues} from 'formik';
+import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps} from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
 
@@ -57,7 +57,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * */
   validationSchema?: AnyObjectSchema;
   /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onTertiaryClick?: (formikContext: FormikContextType<unknown>) => void;
 }
 
 function SQFormDialog<Values extends FormikValues>({
