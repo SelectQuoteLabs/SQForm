@@ -97,7 +97,7 @@ function SQFormDialog<Values extends FormikValues>({
       validationSchema={validationSchema}
       validateOnMount={true}
     >
-      <SQFormDialogInner
+      <SQFormDialogInner<Values>
         cancelButtonText={cancelButtonText}
         children={children}
         disableBackdropClick={disableBackdropClick}
