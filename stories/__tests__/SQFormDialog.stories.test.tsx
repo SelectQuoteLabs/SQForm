@@ -141,6 +141,21 @@ it('should not find the cancel secondary button', async () => {
 describe('Tests for WithValidation', () => {
   it('should disable submit/save until validationSchema satisfied', async () => {
     render(
+      <WithValidation isOpen={true} onSave={handleSave} onClose={handleClose} />
+    );
+
+    expect(await screen.findByRole('button', {name: /save/i})).toBeDisabled();
+
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
+
+    expect(await screen.findByRole('button', {name: /save/i})).toBeEnabled();
+  });
+});
+
+describe('Tests for WithValidation', () => {
+  it('should disable tertiary button until validationSchema satisfied', async () => {
+    render(
       <WithValidation
         isOpen={true}
         onSave={handleSave}
@@ -160,21 +175,6 @@ describe('Tests for WithValidation', () => {
     expect(
       await screen.findByRole('button', {name: /Tertiary/i})
     ).toBeEnabled();
-  });
-});
-
-describe('Tests for WithValidation', () => {
-  it('should disable tertiary button until validationSchema satisfied', async () => {
-    render(
-      <WithValidation isOpen={true} onSave={handleSave} onClose={handleClose} />
-    );
-
-    expect(await screen.findByRole('button', {name: /save/i})).toBeDisabled();
-
-    const textField = screen.getByLabelText(/hello/i);
-    userEvent.type(textField, mockData.hello);
-
-    expect(await screen.findByRole('button', {name: /save/i})).toBeEnabled();
   });
 });
 

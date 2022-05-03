@@ -157,7 +157,7 @@ WithTertiaryButton.args = {
   },
   title: 'With Tertiary Button',
   showTertiaryButton: true,
-  tertiaryButtonText: 'Tertiary Button',
+  tertiaryButtonText: 'Tertiary',
   onTertiaryClick: handleTertiaryClick,
 };
 
