@@ -17,9 +17,9 @@ import SQFormButton from '../SQForm/SQFormButton';
 import type {DialogProps, GridProps} from '@material-ui/core';
 import type {Theme} from '@material-ui/core/styles';
 import type {TransitionProps} from '@material-ui/core/transitions';
-import type {FormikContextType} from 'formik';
+import type {FormikContextType, FormikValues} from 'formik';
 
-interface SQFormDialogInnerProps {
+interface SQFormDialogInnerProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
@@ -56,7 +56,7 @@ interface SQFormDialogInnerProps {
   /** Whether the tertiary button is disabled (Default: false) */
   isTertiaryDisabled?: boolean;
   /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: (formikContext: FormikContextType<unknown>) => void;
+  onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
 }
 
 /*
@@ -106,7 +106,7 @@ const useDialogContentStyles = makeStyles({
   },
 });
 
-function SQFormDialogInner({
+function SQFormDialogInner<Values extends FormikValues>({
   cancelButtonText,
   children,
   disableBackdropClick,
@@ -124,13 +124,13 @@ function SQFormDialogInner({
   showTertiaryButton = false,
   isTertiaryDisabled = false,
   onTertiaryClick,
-}: SQFormDialogInnerProps): React.ReactElement {
+}: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
   const actionsClasses = useActionsStyles(theme);
   const primaryActionsClasses = usePrimaryActionStyles(theme);
   const dialogContentClasses = useDialogContentStyles(theme);
-  const formikContext = useFormikContext();
+  const formikContext = useFormikContext<Values>();
 
   const {
     isDialogOpen: isDialogAlertOpen,

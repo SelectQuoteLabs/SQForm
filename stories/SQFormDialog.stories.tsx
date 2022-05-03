@@ -145,7 +145,9 @@ export const WithTertiaryButton: SQFormDialogStory = (args) => {
   );
 };
 
-const handleTertiaryClick = (formikContext: FormikContextType<unknown>) => {
+const handleTertiaryClick = (
+  formikContext: FormikContextType<DefaultArgsValues>
+) => {
   formikContext.resetForm();
   console.log('formikContext', formikContext);
 };

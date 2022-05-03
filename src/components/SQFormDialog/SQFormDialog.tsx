@@ -57,7 +57,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * */
   validationSchema?: AnyObjectSchema;
   /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: (formikContext: FormikContextType<unknown>) => void;
+  onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
 }
 
 function SQFormDialog<Values extends FormikValues>({
