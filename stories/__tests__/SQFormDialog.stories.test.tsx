@@ -238,4 +238,31 @@ describe('Tests for Tertiary Button', () => {
 
     expect(screen.queryByText(tertiaryButtonText)).toBeNull();
   });
+
+  it('should display the tertiary button and it should be disabled', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary Button';
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        tertiaryStatus="IS_DISABLED"
+        tertiaryButtonText={tertiaryButtonText}
+        title={dialogTitleValue}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    const tertiaryButton = screen.getByRole('button', {
+      name: tertiaryButtonText,
+    });
+
+    expect(tertiaryButton).toBeInTheDocument();
+    expect(tertiaryButton).toHaveTextContent(tertiaryButtonText);
+    expect(
+      await screen.findByRole('button', {name: /Tertiary Button/i})
+    ).toBeDisabled();
+  });
 });
