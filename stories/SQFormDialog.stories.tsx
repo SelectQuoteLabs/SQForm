@@ -158,7 +158,7 @@ WithTertiaryButton.args = {
     hello: '',
   },
   title: 'With Tertiary Button',
-  showTertiaryButton: true,
+  tertiaryStatus: 'IS_ENABLED',
   tertiaryButtonText: 'Tertiary',
   onTertiaryClick: handleTertiaryClick,
 };

@@ -18,6 +18,7 @@ import type {DialogProps, GridProps} from '@material-ui/core';
 import type {Theme} from '@material-ui/core/styles';
 import type {TransitionProps} from '@material-ui/core/transitions';
 import type {FormikContextType, FormikValues} from 'formik';
+import type {SQFormDialogTertiaryValue} from './types';
 
 interface SQFormDialogInnerProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */
@@ -45,16 +46,18 @@ interface SQFormDialogInnerProps<Values extends FormikValues> {
   shouldRequireFieldUpdates?: boolean;
   /** Title text at the top of the Dialog */
   title: string;
+  /**
+   * determine the status of the tertiary button
+   * can be one of'HIDE_BUTTON'|'NO_VALIDATION'|'IS_DISABLED'|'IS_ENABLED'|'FORM_VALIDATION_ONLY'|'IS_DISABLED_AND_FORM_VALIDATION',
+   * this will determine if the button is rendered, as well as if the button is disabled and if it uses form validation.
+   */
+  tertiaryStatus: SQFormDialogTertiaryValue;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
   /** Determine if the secondary action button should be displayed */
   showSecondaryButton?: boolean;
-  /** Whether to show the tertiary button. (Default: false) */
-  showTertiaryButton?: boolean;
   /** The tertiary button text */
   tertiaryButtonText?: string;
-  /** Whether the tertiary button is disabled (Default: false) */
-  isTertiaryDisabled?: boolean;
   /** Callback function invoked when the user clicks the tertiary button */
   onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
 }
@@ -121,8 +124,7 @@ function SQFormDialogInner<Values extends FormikValues>({
   muiGridProps,
   shouldDisplaySaveButton = true,
   showSecondaryButton = true,
-  showTertiaryButton = false,
-  isTertiaryDisabled = false,
+  tertiaryStatus = 'HIDE_BUTTON',
   onTertiaryClick,
 }: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
@@ -131,6 +133,19 @@ function SQFormDialogInner<Values extends FormikValues>({
   const primaryActionsClasses = usePrimaryActionStyles(theme);
   const dialogContentClasses = useDialogContentStyles(theme);
   const formikContext = useFormikContext<Values>();
+
+  function getIsDisabled() {
+    switch (tertiaryStatus) {
+      case 'IS_DISABLED':
+        return true;
+      case 'FORM_VALIDATION_ONLY':
+        return !formikContext.isValid;
+      case 'IS_DISABLED_AND_FORM_VALIDATION':
+        return isDisabled || !formikContext.isValid;
+      default:
+        return false;
+    }
+  }
 
   const {
     isDialogOpen: isDialogAlertOpen,
@@ -184,7 +199,7 @@ function SQFormDialogInner<Values extends FormikValues>({
           <span style={{paddingRight: '20px'}}>
             <SQFormButton
               title={tertiaryButtonText}
-              isDisabled={isTertiaryDisabled || !formikContext.isValid}
+              isDisabled={getIsDisabled()}
               onClick={() => onTertiaryClick?.(formikContext)}
               type="button"
             >
@@ -233,7 +248,7 @@ function SQFormDialogInner<Values extends FormikValues>({
               showSecondaryButton ? actionsClasses : primaryActionsClasses
             }
           >
-            {showTertiaryButton
+            {tertiaryStatus !== 'HIDE_BUTTON'
               ? renderTertiaryButton()
               : showSecondaryButton && (
                   <RoundedButton
@@ -247,7 +262,7 @@ function SQFormDialogInner<Values extends FormikValues>({
                     {cancelButtonText}
                   </RoundedButton>
                 )}
-            {!showTertiaryButton && shouldDisplaySaveButton && (
+            {tertiaryStatus === 'HIDE_BUTTON' && shouldDisplaySaveButton && (
               <SQFormButton
                 title={saveButtonText}
                 isDisabled={isDisabled}
