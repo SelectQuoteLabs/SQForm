@@ -238,27 +238,4 @@ describe('Tests for Tertiary Button', () => {
 
     expect(screen.queryByText(tertiaryButtonText)).toBeNull();
   });
-
-  it('should disable the tertiary button if the tertiaryStatus is IS_DISABLED_AND_FORM_VALIDATION and the isDisabled value is true', async () => {
-    const isLoading = true;
-    render(
-      <WithValidation
-        isOpen={true}
-        onSave={handleSave}
-        onClose={handleClose}
-        isDisabled={isLoading}
-        tertiaryStatus="IS_DISABLED_AND_FORM_VALIDATION"
-        tertiaryButtonText={'Tertiary'}
-      />
-    );
-
-    expect(
-      await screen.findByRole('button', {name: /Tertiary/i})
-    ).toBeDisabled();
-
-    const textField = screen.getByLabelText(/hello/i);
-    userEvent.type(textField, mockData.hello);
-
-    expect(await screen.findByRole('button', {name: /Save/i})).toBeDisabled();
-  });
 });
