@@ -153,6 +153,31 @@ describe('Tests for WithValidation', () => {
   });
 });
 
+describe('Tests for WithValidation', () => {
+  it('should disable tertiary button until validationSchema satisfied', async () => {
+    render(
+      <WithValidation
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        tertiaryStatus="FORM_VALIDATION_ONLY"
+        tertiaryButtonText={'Tertiary'}
+      />
+    );
+
+    expect(
+      await screen.findByRole('button', {name: /Tertiary/i})
+    ).toBeDisabled();
+
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
+
+    expect(
+      await screen.findByRole('button', {name: /Tertiary/i})
+    ).toBeEnabled();
+  });
+});
+
 describe('Tests for WithAutoFocus', () => {
   it('should render a dialog and automatically focus the form input', async () => {
     render(
@@ -179,7 +204,7 @@ describe('Tests for Tertiary Button', () => {
         isOpen={true}
         onSave={handleSave}
         onClose={handleClose}
-        showTertiaryButton={true}
+        tertiaryStatus="IS_ENABLED"
         tertiaryButtonText={tertiaryButtonText}
         title={dialogTitleValue}
       />
@@ -212,5 +237,32 @@ describe('Tests for Tertiary Button', () => {
     await screen.findByText(dialogTitleValue);
 
     expect(screen.queryByText(tertiaryButtonText)).toBeNull();
+  });
+
+  it('should display the tertiary button and it should be disabled', async () => {
+    const dialogTitleValue = 'Test';
+    const tertiaryButtonText = 'Tertiary Button';
+    render(
+      <Default
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        tertiaryStatus="IS_DISABLED"
+        tertiaryButtonText={tertiaryButtonText}
+        title={dialogTitleValue}
+      />
+    );
+
+    await screen.findByText(dialogTitleValue);
+
+    const tertiaryButton = screen.getByRole('button', {
+      name: tertiaryButtonText,
+    });
+
+    expect(tertiaryButton).toBeInTheDocument();
+    expect(tertiaryButton).toHaveTextContent(tertiaryButtonText);
+    expect(
+      await screen.findByRole('button', {name: /Tertiary Button/i})
+    ).toBeDisabled();
   });
 });

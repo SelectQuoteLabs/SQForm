@@ -2,6 +2,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import type {Story, Meta} from '@storybook/react';
 import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
+import type {FormikContextType} from 'formik';
 
 import {
   SQFormDialog,
@@ -143,14 +144,23 @@ export const WithTertiaryButton: SQFormDialogStory = (args) => {
     </>
   );
 };
+
+const handleTertiaryClick = (
+  formikContext: FormikContextType<DefaultArgsValues>
+) => {
+  formikContext.resetForm();
+  console.log('formikContext', formikContext);
+};
+
 WithTertiaryButton.args = {
   ...defaultArgs,
   initialValues: {
     hello: '',
   },
   title: 'With Tertiary Button',
-  showTertiaryButton: true,
-  tertiaryButtonText: 'Tertiary Button',
+  tertiaryStatus: 'IS_ENABLED',
+  tertiaryButtonText: 'Tertiary',
+  onTertiaryClick: handleTertiaryClick,
 };
 
 export default meta;

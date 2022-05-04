@@ -2,9 +2,10 @@ import React from 'react';
 import {Formik} from 'formik';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import type {FormikHelpers, FormikValues} from 'formik';
+import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps} from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
+import type {SQFormDialogTertiaryValue} from './types';
 
 export interface SQFormDialogProps<Values extends FormikValues> {
   /** The secondary button text (Button located on left side of Dialog) */
@@ -31,12 +32,14 @@ export interface SQFormDialogProps<Values extends FormikValues> {
   ) => void | Promise<unknown>;
   /** Determine if the secondary action button should be displayed (default: true) */
   showSecondaryButton?: boolean;
-  /** Whether to show the tertiary button. (Default: false) */
-  showTertiaryButton?: boolean;
+  /**
+   * determine the status of the tertiary button
+   * can be one of'HIDE_BUTTON'|'NO_VALIDATION'|'IS_DISABLED'|'IS_ENABLED'|'FORM_VALIDATION_ONLY'|'IS_DISABLED_AND_FORM_VALIDATION',
+   * this will determine if the button is rendered, as well as if the button is disabled and if it uses form validation.
+   */
+  tertiaryStatus: SQFormDialogTertiaryValue;
   /** The tertiary button text */
   tertiaryButtonText?: string;
-  /** Whether the tertiary button is disabled (Default: false) */
-  isTertiaryDisabled?: boolean;
   /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton?: boolean;
   /** The primary button text (Button located on right side of Dialog) */
@@ -57,7 +60,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * */
   validationSchema?: AnyObjectSchema;
   /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
 }
 
 function SQFormDialog<Values extends FormikValues>({
@@ -79,9 +82,8 @@ function SQFormDialog<Values extends FormikValues>({
   shouldRequireFieldUpdates = false,
   validationSchema,
   showSecondaryButton = true,
-  showTertiaryButton = false,
-  isTertiaryDisabled = false,
   onTertiaryClick,
+  tertiaryStatus = 'HIDE_BUTTON',
 }: SQFormDialogProps<Values>): React.ReactElement {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -97,7 +99,7 @@ function SQFormDialog<Values extends FormikValues>({
       validationSchema={validationSchema}
       validateOnMount={true}
     >
-      <SQFormDialogInner
+      <SQFormDialogInner<Values>
         cancelButtonText={cancelButtonText}
         children={children}
         disableBackdropClick={disableBackdropClick}
@@ -111,9 +113,8 @@ function SQFormDialog<Values extends FormikValues>({
         title={title}
         muiGridProps={muiGridProps}
         showSecondaryButton={showSecondaryButton}
-        showTertiaryButton={showTertiaryButton}
+        tertiaryStatus={tertiaryStatus}
         tertiaryButtonText={tertiaryButtonText}
-        isTertiaryDisabled={isTertiaryDisabled}
         onTertiaryClick={onTertiaryClick}
       />
     </Formik>
