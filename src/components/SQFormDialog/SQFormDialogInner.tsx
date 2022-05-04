@@ -140,8 +140,6 @@ function SQFormDialogInner<Values extends FormikValues>({
         return true;
       case 'FORM_VALIDATION_ONLY':
         return !formikContext.isValid;
-      case 'IS_DISABLED_AND_FORM_VALIDATION':
-        return isDisabled || !formikContext.isValid;
       default:
         return false;
     }
