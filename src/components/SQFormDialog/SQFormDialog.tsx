@@ -37,7 +37,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * can be one of'HIDE_BUTTON'|'NO_VALIDATION'|'IS_DISABLED'|'IS_ENABLED'|'FORM_VALIDATION_ONLY'|'IS_DISABLED_AND_FORM_VALIDATION',
    * this will determine if the button is rendered, as well as if the button is disabled and if it uses form validation.
    */
-  tertiaryStatus: SQFormDialogTertiaryValue;
+  tertiaryStatus?: SQFormDialogTertiaryValue;
   /** The tertiary button text */
   tertiaryButtonText?: string;
   /** Whether to show save/submit button (default: true) */
