@@ -1,3 +1,10 @@
+### [9.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.0...v9.0.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* 🐛 tertiarystatus is now optional on SQFormDialog ([ab8cfbb](https://github.com/SelectQuoteLabs/SQForm/commit/ab8cfbb3f2e3530379c776f35c1a495a0a6899c0)), closes [#680](https://github.com/SelectQuoteLabs/SQForm/issues/680)
+
 ## [9.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.2.0...v9.0.0) (2022-05-04)
 
 
