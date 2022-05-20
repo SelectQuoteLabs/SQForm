@@ -78,7 +78,9 @@ export function useForm<TValue, TChangeEvent>({
   const isDirty = !isEqual(meta.initialValue, meta.value);
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
-  const isRequired = errorMessage?.toLowerCase() === 'required';
+  const isRequired = Array.isArray(errorMessage)
+    ? errorMessage.toString().toLowerCase() === 'required'
+    : errorMessage?.toLowerCase() === 'required';
 
   const getFieldStatus = () => {
     if (isRequired && !hasValue && !isDirty && !isTouched) {
