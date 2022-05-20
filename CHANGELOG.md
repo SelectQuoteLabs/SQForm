@@ -1,3 +1,42 @@
+## [9.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.1...v9.1.0) (2022-05-20)
+
+
+### Features
+
+* 🎸 SQFormDialog tertiaryButton variant ([79e7fda](https://github.com/SelectQuoteLabs/SQForm/commit/79e7fda5a5b2a84796a36c20df32ca3308ab3aff)), closes [#682](https://github.com/SelectQuoteLabs/SQForm/issues/682)
+
+### [9.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.0...v9.0.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* 🐛 tertiarystatus is now optional on SQFormDialog ([ab8cfbb](https://github.com/SelectQuoteLabs/SQForm/commit/ab8cfbb3f2e3530379c776f35c1a495a0a6899c0)), closes [#680](https://github.com/SelectQuoteLabs/SQForm/issues/680)
+
+## [9.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.2.0...v9.0.0) (2022-05-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 remove the isTertiaryDisabled and showTertiaryButton props and replace
+with a new prop called tertiaryStatus
+* 🧨 Removed the isTertiaryDisabled and showTertiaryButton props and replaced
+them with a new property called tertiaryStatus.
+* 🧨 Removed the isTertiaryDisabled and showTertiaryButton props and replaced
+them with a new prop of tertiaryStatus
+* 🧨 remove isTertiaryDisabled and showTertiaryButton props and replace them
+with a new prop called tertiaryStatus that will determine if we render
+the tertiary button as well as how we handle disabling/enabling it.
+
+### Features
+
+* 🎸 add type to SQFormDialogInner consumption inside Dialog ([5f5ab13](https://github.com/SelectQuoteLabs/SQForm/commit/5f5ab1373929d0cb6f556c91f0354cfb9c165fd7))
+* 🎸 fix type for onTertiaryClick event ([ca95a7c](https://github.com/SelectQuoteLabs/SQForm/commit/ca95a7cda37fc4455c4dfb0f133ba5ad2647e71b))
+* 🎸 remove 2 props and add 1 new one ([28f7195](https://github.com/SelectQuoteLabs/SQForm/commit/28f71952f6e84b9f219e8cca538317a6197da602)), closes [#677](https://github.com/SelectQuoteLabs/SQForm/issues/677)
+* 🎸 remove 2 props and add 1 new prop ([8399124](https://github.com/SelectQuoteLabs/SQForm/commit/839912443b30fe478d7fe14247faf444998c7b8f)), closes [#677](https://github.com/SelectQuoteLabs/SQForm/issues/677)
+* 🎸 remove 2 props and add new prop in their place ([0ce233e](https://github.com/SelectQuoteLabs/SQForm/commit/0ce233e726e852842d932469fc2b45c5c0f7e582)), closes [#677](https://github.com/SelectQuoteLabs/SQForm/issues/677)
+* 🎸 remove isTertiaryDisabled prop and showTertiaryButton ([9bc03ad](https://github.com/SelectQuoteLabs/SQForm/commit/9bc03adeb4012c8e9e5071742bb70c6a52f727f0))
+* 🎸 update onTertiaryClick prop to return context ([cf6494e](https://github.com/SelectQuoteLabs/SQForm/commit/cf6494e17b39e243b074b6a97115a09f941c8a72)), closes [#677](https://github.com/SelectQuoteLabs/SQForm/issues/677)
+
 ## [8.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v8.1.3...v8.2.0) (2022-04-20)
 
 
