@@ -79,7 +79,7 @@ export function useForm<TValue, TChangeEvent>({
   const hasValue = _getHasValue(meta);
   const isError = !!errorMessage;
   const isRequired = Array.isArray(errorMessage)
-    ? errorMessage.toString().toLowerCase() === 'required'
+    ? errorMessage.join('').toLowerCase() === 'required'
     : errorMessage?.toLowerCase() === 'required';
 
   const getFieldStatus = () => {
