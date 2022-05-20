@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
-import type {DialogProps, GridProps} from '@material-ui/core';
+import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
 import type {SQFormDialogTertiaryValue} from './types';
 
@@ -40,6 +40,10 @@ export interface SQFormDialogProps<Values extends FormikValues> {
   tertiaryStatus?: SQFormDialogTertiaryValue;
   /** The tertiary button text */
   tertiaryButtonText?: string;
+  /** Callback function invoked when the user clicks the tertiary button */
+  onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
+  /** Variant to be used for the tertiary button. Defaults to 'outlined' */
+  tertiaryButtonVariant?: ButtonProps['variant'];
   /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton?: boolean;
   /** The primary button text (Button located on right side of Dialog) */
@@ -59,8 +63,6 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-  /** Callback function invoked when the user clicks the tertiary button */
-  onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
 }
 
 function SQFormDialog<Values extends FormikValues>({
@@ -84,6 +86,7 @@ function SQFormDialog<Values extends FormikValues>({
   showSecondaryButton = true,
   onTertiaryClick,
   tertiaryStatus = 'HIDE_BUTTON',
+  tertiaryButtonVariant = 'outlined',
 }: SQFormDialogProps<Values>): React.ReactElement {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -116,6 +119,7 @@ function SQFormDialog<Values extends FormikValues>({
         tertiaryStatus={tertiaryStatus}
         tertiaryButtonText={tertiaryButtonText}
         onTertiaryClick={onTertiaryClick}
+        tertiaryButtonVariant={tertiaryButtonVariant}
       />
     </Formik>
   );

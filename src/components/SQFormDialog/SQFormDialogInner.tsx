@@ -14,7 +14,7 @@ import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
-import type {DialogProps, GridProps} from '@material-ui/core';
+import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
 import type {Theme} from '@material-ui/core/styles';
 import type {TransitionProps} from '@material-ui/core/transitions';
 import type {FormikContextType, FormikValues} from 'formik';
@@ -60,6 +60,8 @@ interface SQFormDialogInnerProps<Values extends FormikValues> {
   tertiaryButtonText?: string;
   /** Callback function invoked when the user clicks the tertiary button */
   onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
+  /** Variant to be used for the tertiary button. Defaults to 'outlined' */
+  tertiaryButtonVariant?: ButtonProps['variant'];
 }
 
 /*
@@ -126,6 +128,7 @@ function SQFormDialogInner<Values extends FormikValues>({
   showSecondaryButton = true,
   tertiaryStatus = 'HIDE_BUTTON',
   onTertiaryClick,
+  tertiaryButtonVariant,
 }: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -195,14 +198,15 @@ function SQFormDialogInner<Values extends FormikValues>({
 
         <Grid item={true}>
           <span style={{paddingRight: '20px'}}>
-            <SQFormButton
+            <RoundedButton
               title={tertiaryButtonText}
               isDisabled={getIsDisabled()}
               onClick={() => onTertiaryClick?.(formikContext)}
               type="button"
+              variant={tertiaryButtonVariant}
             >
               {tertiaryButtonText}
-            </SQFormButton>
+            </RoundedButton>
           </span>
           {shouldDisplaySaveButton && (
             <SQFormButton
