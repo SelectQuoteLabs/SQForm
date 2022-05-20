@@ -1,3 +1,10 @@
+## [9.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.1...v9.1.0) (2022-05-20)
+
+
+### Features
+
+* 🎸 SQFormDialog tertiaryButton variant ([79e7fda](https://github.com/SelectQuoteLabs/SQForm/commit/79e7fda5a5b2a84796a36c20df32ca3308ab3aff)), closes [#682](https://github.com/SelectQuoteLabs/SQForm/issues/682)
+
 ### [9.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.0...v9.0.1) (2022-05-19)
 
 
