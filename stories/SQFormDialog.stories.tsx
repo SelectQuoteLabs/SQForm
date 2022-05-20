@@ -145,6 +145,20 @@ export const WithTertiaryButton: SQFormDialogStory = (args) => {
   );
 };
 
+export const WithTertiaryButtonDefinedVariant: SQFormDialogStory = (args) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormTextField name="hello" label="Hello" />
+      </SQFormDialog>
+    </>
+  );
+};
+
 const handleTertiaryClick = (
   formikContext: FormikContextType<DefaultArgsValues>
 ) => {
@@ -161,6 +175,12 @@ WithTertiaryButton.args = {
   tertiaryStatus: 'IS_ENABLED',
   tertiaryButtonText: 'Tertiary',
   onTertiaryClick: handleTertiaryClick,
+};
+
+WithTertiaryButtonDefinedVariant.args = {
+  ...defaultArgs,
+  ...WithTertiaryButton.args,
+  tertiaryButtonVariant: 'contained',
 };
 
 export default meta;
