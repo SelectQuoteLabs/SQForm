@@ -141,7 +141,7 @@ describe('SQFormInclusionList Tests', () => {
     });
   });
 
-  it("It should display the error message 'friends field must have at least 5 items' when less than 5 items are selected in the fieldArray", async () => {
+  it("should display the error message 'friends field must have at least 5 items' when less than 5 items are selected in the fieldArray", async () => {
     render(<WithValidation />);
 
     const submitButton = screen.getByRole('button', {name: /submit/i});
@@ -202,25 +202,10 @@ describe('SQFormInclusionList Tests', () => {
     });
   });
 
-  it("It should display the error message 'friends field must have at least 5 items' when our form initially starts in a invalid state and it should continue to display the same error message after unchecking one of the already checked checkboxes", async () => {
+  it("should display the error message 'friends field must have at least 5 items' when our form is initially loaded with less than 5 items checked", async () => {
     render(<WithValidation />);
 
     const submitButton = screen.getByRole('button', {name: /submit/i});
-
-    await waitFor(() => {
-      const errorText = screen.getByText(
-        /friends field must have at least 5 items/i
-      );
-      expect(errorText).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      expect(submitButton).toBeDisabled();
-    });
-
-    //uncheck checkbox
-    const joe = screen.getByLabelText('Joe');
-    userEvent.click(joe);
 
     await waitFor(() => {
       const errorText = screen.getByText(
