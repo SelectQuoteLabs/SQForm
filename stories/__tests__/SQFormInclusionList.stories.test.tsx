@@ -218,10 +218,8 @@ describe('SQFormInclusionList Tests', () => {
       expect(submitButton).toBeDisabled();
     });
 
-    // get one of the checked checkbox elements
+    //uncheck checkbox
     const joe = screen.getByLabelText('Joe');
-
-    //click checkbox to make validation pass by adding a 5th item to the array
     userEvent.click(joe);
 
     await waitFor(() => {
@@ -229,6 +227,10 @@ describe('SQFormInclusionList Tests', () => {
         /friends field must have at least 5 items/i
       );
       expect(errorText).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(submitButton).toBeDisabled();
     });
   });
 });
