@@ -14,29 +14,19 @@ import {
 } from './SQFormAutocomplete';
 import type {ListChildComponentProps} from 'react-window';
 import type {AutocompleteProps} from '@material-ui/lab';
-import type {SQFormOption} from '../../types';
+import type {SQFormOption, SQFormOptionValue} from '../../types';
 
 export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
-  handleAsyncInputChange: (value: string | number | boolean) => void;
+  handleAsyncInputChange: (value: SQFormOptionValue) => void;
   /** Whether the component is loading */
   loading: boolean;
   /** Whether the popup is open */
   open: boolean;
   /** Callback for when the popup requests to be opened */
-  onOpen: AutocompleteProps<
-    string | number | boolean,
-    false,
-    false,
-    false
-  >['onOpen'];
+  onOpen: AutocompleteProps<SQFormOptionValue, false, false, false>['onOpen'];
   /** Callback for when the popup requests to be closed */
-  onClose: AutocompleteProps<
-    string | number | boolean,
-    false,
-    false,
-    false
-  >['onClose'];
+  onClose: AutocompleteProps<SQFormOptionValue, false, false, false>['onClose'];
 }
 
 // MUI uses px, a numeric value is needed for calculations
