@@ -1,3 +1,10 @@
+### [9.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.1...v9.1.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* 🐛 SQFormAsyncAutocomplete onChange doesn't accept boolean ([f47553d](https://github.com/SelectQuoteLabs/SQForm/commit/f47553ddc8c395890ef13630396aecede54a4417)), closes [#685](https://github.com/SelectQuoteLabs/SQForm/issues/685)
+
 ### [9.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.0...v9.1.1) (2022-05-24)
 
 
