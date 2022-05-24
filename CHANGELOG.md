@@ -1,3 +1,12 @@
+### [9.1.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.0...v9.1.1) (2022-05-24)
+
+
+### Bug Fixes
+
+* 🐛 field array valication bug ([fdc8a37](https://github.com/SelectQuoteLabs/SQForm/commit/fdc8a371b0b05e3e6cffbd877fa603d285b0c397))
+* 🐛 fix bug in formiks field array validation ([3620f01](https://github.com/SelectQuoteLabs/SQForm/commit/3620f019604f28357fd82306b999eb64ac078ad5))
+* 🐛 fix bug with fieldArray validations ([5de59df](https://github.com/SelectQuoteLabs/SQForm/commit/5de59dfcf7e5ffe644a1bdf338574fd4179202de))
+
 ## [9.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.0.1...v9.1.0) (2022-05-20)
 
 
