@@ -65,6 +65,16 @@ function _getHasValue(meta: FieldMetaProps<unknown>) {
   return !!fieldValue;
 }
 
+function _transformErrorMessageToString<TValue>(meta: FieldMetaProps<TValue>) {
+  const error = getIn(meta, 'error');
+
+  if (Array.isArray(error)) {
+    return error.join('').toLowerCase() || undefined;
+  }
+
+  return error;
+}
+
 export function useForm<TValue, TChangeEvent>({
   name,
   onBlur,
@@ -73,7 +83,7 @@ export function useForm<TValue, TChangeEvent>({
   _handleError(name);
 
   const [field, meta, helpers] = useField<TValue>(name);
-  const errorMessage = getIn(meta, 'error');
+  const errorMessage = _transformErrorMessageToString<TValue>(meta);
   const isTouched = getIn(meta, 'touched');
   const isDirty = !isEqual(meta.initialValue, meta.value);
   const hasValue = _getHasValue(meta);

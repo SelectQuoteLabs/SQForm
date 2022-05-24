@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
   SQFormInclusionListItem,
+  SQFormHelperText,
 } from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
@@ -90,6 +91,7 @@ const defaultArgs = {
 
 const Template: CustomStory<SQFormInclusionListProps> = (args) => {
   const {schema, sqFormProps, ...rest} = args;
+
   return (
     <SQFormStoryWrapper
       initialValues={MOCK_FORM_FOR_CHECKBOX_GROUP}
@@ -103,10 +105,28 @@ const Template: CustomStory<SQFormInclusionListProps> = (args) => {
   );
 };
 
+const ValidationTemplate: CustomStory<SQFormInclusionListProps> = (args) => {
+  const {schema, sqFormProps, ...rest} = args;
+  return (
+    <SQFormStoryWrapper
+      initialValues={MOCK_FORM_FOR_CHECKBOX_GROUP}
+      validationSchema={schema}
+      {...sqFormProps}
+    >
+      <Card raised style={{minWidth: 250, padding: 16}}>
+        <SQFormInclusionListComponent {...rest} />
+        <SQFormHelperText
+          errorText={'friends field must have at least 5 items'}
+        />
+      </Card>
+    </SQFormStoryWrapper>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 
-export const WithValidation = Template.bind({});
+export const WithValidation = ValidationTemplate.bind({});
 WithValidation.args = {
   ...defaultArgs,
   schema: Yup.object({
