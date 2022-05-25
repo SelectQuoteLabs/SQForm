@@ -1,3 +1,10 @@
+### [9.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.2...v9.1.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* 🐛 Marked SQFormAsyncAutocomplete props as optional ([b6854a0](https://github.com/SelectQuoteLabs/SQForm/commit/b6854a0100d2ab2a40a097df2cc6e819cf18749f)), closes [#688](https://github.com/SelectQuoteLabs/SQForm/issues/688)
+
 ### [9.1.2](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.1...v9.1.2) (2022-05-24)
 
 
