@@ -20,13 +20,18 @@ export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
   handleAsyncInputChange: (value: SQFormOptionValue) => void;
   /** Whether the component is loading */
-  loading: boolean;
+  loading?: boolean;
   /** Whether the popup is open */
-  open: boolean;
+  open?: boolean;
   /** Callback for when the popup requests to be opened */
-  onOpen: AutocompleteProps<SQFormOptionValue, false, false, false>['onOpen'];
+  onOpen?: AutocompleteProps<SQFormOptionValue, false, false, false>['onOpen'];
   /** Callback for when the popup requests to be closed */
-  onClose: AutocompleteProps<SQFormOptionValue, false, false, false>['onClose'];
+  onClose?: AutocompleteProps<
+    SQFormOptionValue,
+    false,
+    false,
+    false
+  >['onClose'];
 }
 
 // MUI uses px, a numeric value is needed for calculations
