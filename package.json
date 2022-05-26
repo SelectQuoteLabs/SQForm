@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "9.1.3",
+  "version": "9.2.0",
   "description": "SQ Form",
   "files": [
     "dist"

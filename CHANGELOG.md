@@ -1,3 +1,10 @@
+## [9.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.3...v9.2.0) (2022-05-26)
+
+
+### Features
+
+* 🎸 Add date-fns support for Date Picker ([670444b](https://github.com/SelectQuoteLabs/SQForm/commit/670444bd7dbfc0c25e28c851511b09ee5b15c35e)), closes [#251](https://github.com/SelectQuoteLabs/SQForm/issues/251)
+
 ### [9.1.3](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.2...v9.1.3) (2022-05-25)
 
 
