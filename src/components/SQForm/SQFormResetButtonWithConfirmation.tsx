@@ -3,7 +3,7 @@ import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
-export interface SQFormResetButtonWithConfirmationProps {
+export type SQFormResetButtonWithConfirmationProps = {
   /** The contents of the form button; usually text */
   children: React.ReactNode;
   /** Title of the confirmation dialog */
@@ -18,7 +18,7 @@ export interface SQFormResetButtonWithConfirmationProps {
   onReset?: () => void;
   /** style variant, "contained" or "outlined"*/
   variant?: 'contained' | 'outlined';
-}
+};
 
 function SQFormResetButtonWithConfirmation({
   children,

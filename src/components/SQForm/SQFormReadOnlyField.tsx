@@ -5,11 +5,11 @@ import {toKebabCase} from '../../utils';
 import type {TextFieldProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormReadOnlyFieldProps extends BaseFieldProps {
+export type SQFormReadOnlyFieldProps = BaseFieldProps & {
   muiFieldProps?: TextFieldProps;
   InputProps?: TextFieldProps['InputProps'];
   inputProps?: TextFieldProps['inputProps'];
-}
+};
 
 function SQFormReadOnlyField({
   label,

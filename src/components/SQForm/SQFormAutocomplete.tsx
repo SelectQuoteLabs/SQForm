@@ -15,7 +15,7 @@ import type {AutocompleteChangeReason} from '@material-ui/lab';
 import type {ListChildComponentProps} from 'react-window';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
-export interface SQFormAutocompleteProps extends BaseFieldProps {
+export type SQFormAutocompleteProps = BaseFieldProps & {
   /** Dropdown menu options to select from */
   children: SQFormOption[];
   /** Disabled property to disable the input if true */
@@ -37,35 +37,36 @@ export interface SQFormAutocompleteProps extends BaseFieldProps {
   ) => void;
   /** Lock width of the dropdown to the width of the field in the form */
   lockWidthToField?: boolean;
-}
+};
 
-export interface OuterElementTypeProps {
+export type OuterElementTypeProps = {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-}
+};
 
-export interface ListboxVirtualizedComponentProps {
+export type ListboxVirtualizedComponentProps = {
   children?: React.ReactNode;
   basewidth: number;
   left: number;
   lockWidthToField: boolean;
   className?: string;
   style?: React.CSSProperties;
-}
+};
 
-export interface OuterElementContextInterface {
+export type OuterElementContextType = {
   className?: string;
   style?: React.CSSProperties;
-}
+};
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
 
 const EMPTY_OPTION = {label: '- -', value: ''};
 
-const OuterElementContext =
-  React.createContext<OuterElementContextInterface | null>({});
+const OuterElementContext = React.createContext<OuterElementContextType | null>(
+  {}
+);
 
 const OuterElementType = React.forwardRef<HTMLDivElement>(
   (props: OuterElementTypeProps, ref) => {

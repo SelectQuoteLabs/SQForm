@@ -25,7 +25,7 @@ import type {AnyObjectSchema} from 'yup';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {TransitionProps} from '@material-ui/core/transitions';
 
-export interface SQFormDialogStepProps {
+export type SQFormDialogStepProps = {
   /** The content to be rendered in the step body. */
   children?: JSX.Element | Array<JSX.Element>;
   /** Should the loading spinner be shown */
@@ -36,7 +36,7 @@ export interface SQFormDialogStepProps {
   label?: string;
   /** Validation schema for this step */
   validationSchema?: AnyObjectSchema;
-}
+};
 
 export function SQFormDialogStep({
   children,
@@ -98,7 +98,7 @@ const useStepperStyles = makeStyles({
   },
 });
 
-export interface SQFormDialogStepperProps<Values extends FormikValues> {
+export type SQFormDialogStepperProps<Values extends FormikValues> = {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body.  Will be an array of React elements. */
@@ -134,7 +134,7 @@ export interface SQFormDialogStepperProps<Values extends FormikValues> {
   dialogProps?: DialogProps;
   /** Optional styling on the dialog */
   contentStyle?: DialogContentProps['style'];
-}
+};
 
 export function SQFormDialogStepper<Values extends FormikValues>({
   cancelButtonText = 'Cancel',

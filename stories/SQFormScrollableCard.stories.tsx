@@ -8,10 +8,10 @@ import type {GridProps} from '@material-ui/core';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
 
-interface SQFormScrollableCardStoryProps<Values>
-  extends SQFormScrollableCardProps<Values> {
-  wrapper: React.ReactElement;
-}
+type SQFormScrollableCardStoryProps<Values> =
+  SQFormScrollableCardProps<Values> & {
+    wrapper: React.ReactElement;
+  };
 
 export default {
   title: 'Forms/SQFormScrollableCard',

@@ -20,7 +20,7 @@ import type {TransitionProps} from '@material-ui/core/transitions';
 import type {FormikContextType, FormikValues} from 'formik';
 import type {SQFormDialogTertiaryValue} from './types';
 
-interface SQFormDialogInnerProps<Values extends FormikValues> {
+type SQFormDialogInnerProps<Values extends FormikValues> = {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
@@ -62,7 +62,7 @@ interface SQFormDialogInnerProps<Values extends FormikValues> {
   onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
   /** Variant to be used for the tertiary button. Defaults to 'outlined' */
   tertiaryButtonVariant?: ButtonProps['variant'];
-}
+};
 
 /*
 const Transition = React.forwardRef<HTMLDivElement>((props, ref) => {

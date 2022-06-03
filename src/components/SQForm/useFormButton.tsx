@@ -12,12 +12,12 @@ export const BUTTON_TYPES = {
 
 export type ButtonType = typeof BUTTON_TYPES[keyof typeof BUTTON_TYPES];
 
-interface UseFormButtonProps {
+type UseFormButtonProps = {
   isDisabled: boolean;
   shouldRequireFieldUpdates: boolean;
   buttonType: ButtonType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+};
 
 type UseFormButtonReturnType<Values> = {
   isButtonDisabled: boolean;

@@ -10,14 +10,14 @@ import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
 import type {GridSize, RadioProps, RadioGroupProps} from '@material-ui/core';
 
-interface RadioButtonInputItemProps {
+type RadioButtonInputItemProps = {
   value: string | boolean | number;
   label: string;
   isDisabled?: boolean;
   InputProps?: RadioProps;
-}
+};
 
-export interface SQFormRadioButtonGroupProps {
+export type SQFormRadioButtonGroupProps = {
   /** Name of the Radio Group */
   name: string;
   /** Size of the input given full-width is 12. */
@@ -30,7 +30,7 @@ export interface SQFormRadioButtonGroupProps {
   groupLabel: string;
   /** Children must be an array of objects with radio button label and value information */
   children: RadioButtonInputItemProps[];
-}
+};
 
 function SQFormRadioButtonGroup({
   name,

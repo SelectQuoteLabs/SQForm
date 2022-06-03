@@ -19,7 +19,7 @@ import {EMPTY_LABEL} from '../../utils/constants';
 import type {SelectProps} from '@material-ui/core/Select';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
-export interface SQFormDropdownProps extends BaseFieldProps {
+export type SQFormDropdownProps = BaseFieldProps & {
   /** Dropdown options to select from */
   children: SQFormOption[];
   /** Whether to display empty option - - in options */
@@ -32,7 +32,7 @@ export interface SQFormDropdownProps extends BaseFieldProps {
   onChange?: SelectProps['onChange'];
   /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
   muiFieldProps?: SelectProps;
-}
+};
 
 const EMPTY_VALUE = '';
 const EMPTY_OPTION = {

@@ -12,14 +12,14 @@ import SQFormCheckbox from './SQFormCheckbox';
 import {useForm} from './useForm';
 import type {CheckboxProps, GridSize} from '@material-ui/core';
 
-interface CheckboxOption {
+type CheckboxOption = {
   label: string;
   value: string | boolean | number;
   isDisabled?: boolean;
   inputProps?: CheckboxProps;
-}
+};
 
-export interface SQFormCheckboxGroupProps {
+export type SQFormCheckboxGroupProps = {
   /** Name of the checkbox group */
   name: string;
   /** Label to display above the group */
@@ -34,7 +34,7 @@ export interface SQFormCheckboxGroupProps {
   size?: GridSize;
   /** Children must be an array of object with checkbox label and value information */
   children: CheckboxOption[];
-}
+};
 
 function SQFormCheckboxGroup({
   name,

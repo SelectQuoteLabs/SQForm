@@ -18,7 +18,7 @@ import type {TypographyVariant, GridProps} from '@material-ui/core';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 
-export interface SQFormScrollableCardProps<Values extends FormikValues> {
+export type SQFormScrollableCardProps<Values extends FormikValues> = {
   /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
   cardContentStyles?: CreateCSSProperties;
   /** Form related Field(s) and components */
@@ -78,12 +78,12 @@ export interface SQFormScrollableCardProps<Values extends FormikValues> {
   titleVariant?: TypographyVariant;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
-}
+};
 
-interface useStylesProps {
+type useStylesProps = {
   hasSubHeader: boolean;
   cardContentStyles: CreateCSSProperties;
-}
+};
 
 const useStyles = makeStyles((theme) => {
   return {

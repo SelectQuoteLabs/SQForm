@@ -6,7 +6,7 @@ import type {TextFieldProps, InputProps} from '@material-ui/core';
 import type Mask from '../../types/MaskTypes';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormTextFieldProps extends BaseFieldProps {
+export type SQFormTextFieldProps = BaseFieldProps & {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Disabled property to disable the input if true */
@@ -29,7 +29,7 @@ export interface SQFormTextFieldProps extends BaseFieldProps {
   maxCharacters?: number;
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps?: TextFieldProps;
-}
+};
 
 function SQFormTextField({
   name,

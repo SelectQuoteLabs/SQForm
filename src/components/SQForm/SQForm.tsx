@@ -14,7 +14,7 @@ setLocale({
   },
 });
 
-export interface SQFormProps<Values extends FormikValues> {
+export type SQFormProps<Values extends FormikValues> = {
   /** Form Input(s) */
   children: React.ReactNode;
   /** Bool to pass through to Formik. https://formik.org/docs/api/formik#enablereinitialize-boolean */
@@ -37,7 +37,7 @@ export interface SQFormProps<Values extends FormikValues> {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-}
+};
 
 function SQForm<Values extends FormikValues>({
   children,

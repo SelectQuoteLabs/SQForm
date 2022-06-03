@@ -28,14 +28,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface MuiFieldProps<TDate>
-  extends BaseDatePickerProps<TDate>,
-    Omit<
-      BasePickerProps<ParsableDate<TDate>, TDate | null>,
-      'value' | 'onChange'
-    > {}
+type MuiFieldProps<TDate> = BaseDatePickerProps<TDate> &
+  Omit<
+    BasePickerProps<ParsableDate<TDate>, TDate | null>,
+    'value' | 'onChange'
+  >;
 
-export interface SQFormDatePickerProps extends BaseFieldProps {
+export type SQFormDatePickerProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
@@ -59,7 +58,7 @@ export interface SQFormDatePickerProps extends BaseFieldProps {
   InputAdornmentProps?: DatePickerProps['InputAdornmentProps'];
   /** A Boolean flag used when using calendar only; disabled text filed input */
   isCalendarOnly?: boolean;
-}
+};
 
 function SQFormDatePicker({
   name,

@@ -12,13 +12,13 @@ type ChangeHandler<TChangeEvent> = (
   ...args: any[]
 ) => void;
 
-interface UseFormParam<TChangeEvent> {
+type UseFormParam<TChangeEvent> = {
   name: string;
   onBlur?: React.FocusEventHandler;
   onChange?: ChangeHandler<TChangeEvent>;
-}
+};
 
-interface UseFormReturn<TValue, TChangeEvent> {
+type UseFormReturn<TValue, TChangeEvent> = {
   formikField: {
     field: FieldInputProps<TValue>;
     meta: FieldMetaProps<TValue>;
@@ -37,7 +37,7 @@ interface UseFormReturn<TValue, TChangeEvent> {
     handleChange: ChangeHandler<TChangeEvent>;
     HelperTextComponent: React.ReactElement | string;
   };
-}
+};
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
 

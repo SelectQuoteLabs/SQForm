@@ -12,7 +12,7 @@ import type {BaseDateTimePickerProps} from '@material-ui/pickers';
 import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormDateTimePickerProps extends BaseFieldProps {
+export type SQFormDateTimePickerProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
@@ -23,7 +23,7 @@ export interface SQFormDateTimePickerProps extends BaseFieldProps {
   onChange?: (date: Moment | null) => void;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps?: BaseDateTimePickerProps<Moment>;
-}
+};
 
 const useStyles = makeStyles(() => ({
   root: {

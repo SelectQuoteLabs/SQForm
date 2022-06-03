@@ -41,10 +41,10 @@ const defaultArgs = {
   initialValues: {shoppingList: []},
 };
 
-interface CheckboxGroupTestProps extends SQFormCheckboxGroupProps {
+type CheckboxGroupTestProps = SQFormCheckboxGroupProps & {
   initialValues: Record<string, string[] | boolean>;
   schema: SQFormStoryWrapperProps['validationSchema'];
-}
+};
 
 export const Default: Story<CheckboxGroupTestProps> = (args) => {
   return (

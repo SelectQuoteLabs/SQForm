@@ -23,7 +23,7 @@ import {
 import type {TooltipProps, SelectProps} from '@material-ui/core';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
-export interface SQFormMultiSelectProps extends BaseFieldProps {
+export type SQFormMultiSelectProps = BaseFieldProps & {
   /** Multiselect options to select from */
   children: SQFormOption[];
   /** Disabled property to disable the input if true */
@@ -45,7 +45,7 @@ export interface SQFormMultiSelectProps extends BaseFieldProps {
    * Note: Default behavior is to show the selected value(s)
    */
   tooltipText?: TooltipProps['title'];
-}
+};
 
 /**
  * Material UI has a jank issue with the multi select form,

@@ -9,12 +9,12 @@ import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
 import type {SQFormMaskedReadOnlyFieldProps} from './SQFormMaskedReadOnlyField';
 
-export interface SQFormMaskedReadOnlyFieldWithKey
-  extends SQFormMaskedReadOnlyFieldProps {
-  key?: React.Key;
-}
+export type SQFormMaskedReadOnlyFieldWithKey =
+  SQFormMaskedReadOnlyFieldProps & {
+    key?: React.Key;
+  };
 
-export interface SQFormReadOnlyProps<Values extends FormikValues> {
+export type SQFormReadOnlyProps<Values extends FormikValues> = {
   /** Form Input(s) */
   readOnlyFields: SQFormMaskedReadOnlyFieldWithKey[];
   /** Form Entity Object */
@@ -23,7 +23,7 @@ export interface SQFormReadOnlyProps<Values extends FormikValues> {
   enableReinitialize?: boolean;
   /** Any prop from https://material-ui.com/api/grid */
   muiGridProps?: GridProps;
-}
+};
 
 const noBottomMargin: CSSProperties = {
   marginBottom: 0,

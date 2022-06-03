@@ -4,19 +4,18 @@ import type {Mask} from '../../types';
 import SQFormReadOnlyField from './SQFormReadOnlyField';
 import type {SQFormReadOnlyFieldProps} from './SQFormReadOnlyField';
 
-interface TextFieldMaskProps extends React.HTMLAttributes<HTMLInputElement> {
+type TextFieldMaskProps = React.HTMLAttributes<HTMLInputElement> & {
   inputRef?: (ref: HTMLElement | null) => void;
   /** Valid mask array; custom or from utils/masks.js */
   mask?: Mask;
-}
+};
 
-export interface SQFormMaskedReadOnlyFieldProps
-  extends SQFormReadOnlyFieldProps {
+export type SQFormMaskedReadOnlyFieldProps = SQFormReadOnlyFieldProps & {
   /** Valid mask array; custom or from utils/masks.js */
   mask?: Mask;
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
-}
+};
 
 function TextFieldMask({
   inputRef,

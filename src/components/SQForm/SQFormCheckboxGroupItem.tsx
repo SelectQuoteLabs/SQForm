@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export interface SQFormCheckboxGroupItemProps {
+export type SQFormCheckboxGroupItemProps = {
   /** The name of the group this checkbox is a part of */
   groupName: string;
   /** Label for the checkbox */
@@ -29,7 +29,7 @@ export interface SQFormCheckboxGroupItemProps {
   isDisabled?: boolean;
   /** Props for the checkbox input */
   inputProps?: CheckboxProps;
-}
+};
 
 function SQFormCheckboxGroupItem({
   groupName,

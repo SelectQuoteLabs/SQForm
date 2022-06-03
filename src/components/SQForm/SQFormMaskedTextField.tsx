@@ -5,17 +5,17 @@ import type {Mask} from '../../types';
 import SQFormTextField from './SQFormTextField';
 import type {SQFormTextFieldProps} from './SQFormTextField';
 
-export interface SQFormMaskedTextFieldProps extends SQFormTextFieldProps {
+export type SQFormMaskedTextFieldProps = SQFormTextFieldProps & {
   /** Valid mask array; custom or from utils/masks.js */
   mask?: Mask;
   /** Whether the submitted value from the input should have all non-numeric characters removed */
   stripNonNumeric?: boolean;
-}
+};
 
-interface TextFieldMaskProps extends React.HTMLAttributes<HTMLInputElement> {
+type TextFieldMaskProps = React.HTMLAttributes<HTMLInputElement> & {
   inputRef?: (ref: HTMLElement | null) => void;
   mask?: Mask;
-}
+};
 
 function TextFieldMask({
   inputRef,

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Title, Description, ArgsTable, Stories} from '@storybook/addon-docs';
 
-interface createDocsPageParams {
+type createDocsPageParams = {
   markdown?: string;
   showStories?: boolean;
-}
+};
 
 export const createDocsPage = ({
   markdown,

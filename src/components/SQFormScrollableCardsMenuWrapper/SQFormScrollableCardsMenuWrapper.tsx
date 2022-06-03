@@ -45,7 +45,7 @@ function getSelectedComponent(
   return children;
 }
 
-export interface SQFormScrollableCardsMenuWrapperProps {
+export type SQFormScrollableCardsMenuWrapperProps = {
   /** At least one instance of SQFormScrollableCard where each has
    * prop `isHeaderDisabled` === true
    * AND
@@ -56,7 +56,7 @@ export interface SQFormScrollableCardsMenuWrapperProps {
   children: JSX.Element | JSX.Element[];
   /** The Title for the Header component */
   title?: string;
-}
+};
 
 export default function SQFormScrollableCardsMenuWrapper({
   title,

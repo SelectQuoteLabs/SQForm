@@ -7,7 +7,7 @@ import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
 import type {SQFormDialogTertiaryValue} from './types';
 
-export interface SQFormDialogProps<Values extends FormikValues> {
+export type SQFormDialogProps<Values extends FormikValues> = {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
@@ -63,7 +63,7 @@ export interface SQFormDialogProps<Values extends FormikValues> {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-}
+};
 
 function SQFormDialog<Values extends FormikValues>({
   cancelButtonText = 'Cancel',

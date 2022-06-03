@@ -3,14 +3,14 @@ import {Checkbox, FormControlLabel, Grid} from '@material-ui/core';
 import {useForm} from './useForm';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormInclusionListItemProps extends BaseFieldProps {
+export type SQFormInclusionListItemProps = BaseFieldProps & {
   /** evaluation of whether the box should be checked */
   isChecked: boolean;
   /** Disabled state of the checkbox */
   isDisabled?: boolean;
   /** Custom onChange event callback */
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 function SQFormInclusionListItem({
   isChecked = false,

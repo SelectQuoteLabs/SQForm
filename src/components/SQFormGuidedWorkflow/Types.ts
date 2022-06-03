@@ -3,7 +3,7 @@ import type {GridProps} from '@material-ui/core';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 
-export interface SQFormGuidedWorkflowHeaderProps {
+export type SQFormGuidedWorkflowHeaderProps = {
   /** Title to display in the section header */
   title: string;
   /** Optional elements to display in the section header */
@@ -24,28 +24,28 @@ export interface SQFormGuidedWorkflowHeaderProps {
    * Determines if the form is in a failed state where the user cannot continue
    */
   isFailedState?: boolean;
-}
+};
 
-export interface SQFormGuidedWorkflowAdditionalInformationProps
-  extends SQFormGuidedWorkflowHeaderProps {
-  Elements: React.ReactElement;
-}
+export type SQFormGuidedWorkflowAdditionalInformationProps =
+  SQFormGuidedWorkflowHeaderProps & {
+    Elements: React.ReactElement;
+  };
 
-export interface SQFormGuidedWorkflowAgentScriptProps
-  extends SQFormGuidedWorkflowHeaderProps {
-  /** Scripted Text for the user to read */
-  text: React.ReactNode;
-}
+export type SQFormGuidedWorkflowAgentScriptProps =
+  SQFormGuidedWorkflowHeaderProps & {
+    /** Scripted Text for the user to read */
+    text: React.ReactNode;
+  };
 
-export interface SQFormGuidedWorkflowOutcomeProps
-  extends SQFormGuidedWorkflowHeaderProps {
-  /** SQForm Elements to render inside the Form */
-  FormElements: React.ReactElement;
-  /** Any props from MUI <Grid> component */
-  muiGridProps?: GridProps;
-}
+export type SQFormGuidedWorkflowOutcomeProps =
+  SQFormGuidedWorkflowHeaderProps & {
+    /** SQForm Elements to render inside the Form */
+    FormElements: React.ReactElement;
+    /** Any props from MUI <Grid> component */
+    muiGridProps?: GridProps;
+  };
 
-export interface SQFormGuidedWorkflowDataProps<TValues extends FormikValues> {
+export type SQFormGuidedWorkflowDataProps<TValues extends FormikValues> = {
   /** Form Entity Object aka initial values of the form */
   initialValues: TValues;
   /** Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag, context) => void | Promise<any> */
@@ -56,46 +56,45 @@ export interface SQFormGuidedWorkflowDataProps<TValues extends FormikValues> {
   ) => void | Promise<unknown>;
   /** Yup validation schema shape */
   validationSchema?: AnyObjectSchema;
-}
+};
 
-export interface SQFormGuidedWorkflowTaskModuleProps<
-  TValues extends FormikValues
-> {
-  /** Unique name used as a key for managing expansion state within Accordion */
-  name: string;
-  /** Title text */
-  title: string;
-  /** The props used to configure SQForm */
-  formikProps: SQFormGuidedWorkflowDataProps<TValues>;
-  /** The props used to configured the Additional Information section */
-  additionalInformationSectionProps?: SQFormGuidedWorkflowAdditionalInformationProps;
-  /** The props used to configure the Scripted Text section */
-  scriptedTextProps: SQFormGuidedWorkflowAgentScriptProps;
-  /** The props used to configure the Outcome form section */
-  outcomeProps: SQFormGuidedWorkflowOutcomeProps;
-  /** Subtitle text - Each Subtitle is separated by a pipe "|" */
-  subtitles?: Array<string>;
-  /** Panel is disabled, the user cannot toggle the panel while disabled */
-  isDisabled?: boolean;
-  /** Whether the panel is initially expanded */
-  isInitiallyExpanded?: boolean;
-  /** Whether the module is loading */
-  isLoading?: boolean;
-  /** Custom loading message to display when module is loading */
-  isLoadingMessage?: string;
-  /** Optional click handler if you want to perform a side effect on click */
-  onClick?: () => void;
-  /** Reset button text */
-  resetButtonText?: string;
-  /** Submit button text */
-  submitButtonText?: string;
-  /** Flag for if the form is in a failed state where the user cannot continue */
-  isFailedState?: boolean;
-  /** Whether the submit button is disabled */
-  isSubmitButtonDisabled?: boolean;
-}
+export type SQFormGuidedWorkflowTaskModuleProps<TValues extends FormikValues> =
+  {
+    /** Unique name used as a key for managing expansion state within Accordion */
+    name: string;
+    /** Title text */
+    title: string;
+    /** The props used to configure SQForm */
+    formikProps: SQFormGuidedWorkflowDataProps<TValues>;
+    /** The props used to configured the Additional Information section */
+    additionalInformationSectionProps?: SQFormGuidedWorkflowAdditionalInformationProps;
+    /** The props used to configure the Scripted Text section */
+    scriptedTextProps: SQFormGuidedWorkflowAgentScriptProps;
+    /** The props used to configure the Outcome form section */
+    outcomeProps: SQFormGuidedWorkflowOutcomeProps;
+    /** Subtitle text - Each Subtitle is separated by a pipe "|" */
+    subtitles?: Array<string>;
+    /** Panel is disabled, the user cannot toggle the panel while disabled */
+    isDisabled?: boolean;
+    /** Whether the panel is initially expanded */
+    isInitiallyExpanded?: boolean;
+    /** Whether the module is loading */
+    isLoading?: boolean;
+    /** Custom loading message to display when module is loading */
+    isLoadingMessage?: string;
+    /** Optional click handler if you want to perform a side effect on click */
+    onClick?: () => void;
+    /** Reset button text */
+    resetButtonText?: string;
+    /** Submit button text */
+    submitButtonText?: string;
+    /** Flag for if the form is in a failed state where the user cannot continue */
+    isFailedState?: boolean;
+    /** Whether the submit button is disabled */
+    isSubmitButtonDisabled?: boolean;
+  };
 
-export interface SQFormGuidedWorkflowProps<TValues extends FormikValues> {
+export type SQFormGuidedWorkflowProps<TValues extends FormikValues> = {
   /** Main Title */
   mainTitle: string;
   /** Main Subtitle Informative Text */
@@ -116,7 +115,7 @@ export interface SQFormGuidedWorkflowProps<TValues extends FormikValues> {
   onError?: (error: Error) => void;
   /** An object of css-in-js style properties to be passed */
   containerStyles?: React.CSSProperties;
-}
+};
 
 export type SQFormGuidedWorkflowContext<TValues> = {
   [key: number]: {
