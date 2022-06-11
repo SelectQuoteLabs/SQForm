@@ -7,8 +7,7 @@ import {useForm} from './useForm';
 import type {Moment} from 'moment';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormDatePickerWithCalendarInputOnlyProps
-  extends BaseFieldProps {
+export type SQFormDatePickerWithCalendarInputOnlyProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
@@ -24,7 +23,7 @@ export interface SQFormDatePickerWithCalendarInputOnlyProps
   setDisabledDate?: SQFormDatePickerProps['setDisabledDate'];
   /** Any valid prop for material ui datepicker child component - https://material-ui.com/components/pickers/  */
   muiFieldProps?: SQFormDatePickerProps['muiFieldProps'];
-}
+};
 
 const useClearButtonStyles = makeStyles({
   root: {

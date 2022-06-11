@@ -1,9 +1,9 @@
 import React from 'react';
 import {Paper, makeStyles} from '@material-ui/core';
 
-interface TopSubHeaderProps {
+type TopSubHeaderProps = {
   children: React.ReactNode;
-}
+};
 
 const useStyles = makeStyles((theme) => {
   return {

@@ -3,14 +3,14 @@ import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import type {ButtonType} from './useFormButton';
 
-export interface SQFormButtonProps {
+export type SQFormButtonProps = {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
   title?: string;
   type?: ButtonType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+};
 
 function SQFormButton({
   children,

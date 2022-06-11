@@ -8,7 +8,7 @@ import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
 import {
   ListboxVirtualizedComponentProps,
-  OuterElementContextInterface,
+  OuterElementContextType,
   OuterElementTypeProps,
   SQFormAutocompleteProps,
 } from './SQFormAutocomplete';
@@ -16,7 +16,7 @@ import type {ListChildComponentProps} from 'react-window';
 import type {AutocompleteProps} from '@material-ui/lab';
 import type {SQFormOption, SQFormOptionValue} from '../../types';
 
-export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
+export type SQFormAsyncAutocompleteProps = SQFormAutocompleteProps & {
   /** updates consumer's local state value for the input, which is passed to a useQuery hook */
   handleAsyncInputChange: (value: SQFormOptionValue) => void;
   /** Whether the component is loading */
@@ -32,7 +32,7 @@ export interface SQFormAsyncAutocompleteProps extends SQFormAutocompleteProps {
     false,
     false
   >['onClose'];
-}
+};
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
@@ -46,8 +46,9 @@ const useStyles = makeStyles({
   },
 });
 
-const OuterElementContext =
-  React.createContext<OuterElementContextInterface | null>({});
+const OuterElementContext = React.createContext<OuterElementContextType | null>(
+  {}
+);
 
 const OuterElementType = React.forwardRef<HTMLDivElement>(
   (props: OuterElementTypeProps, ref) => {

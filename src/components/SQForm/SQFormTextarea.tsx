@@ -7,7 +7,7 @@ import type {FormikProps} from 'formik';
 import type {TextFieldProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormTextareaProps extends BaseFieldProps {
+export type SQFormTextareaProps = BaseFieldProps & {
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Disabled property to disable the input if true */
@@ -26,11 +26,11 @@ export interface SQFormTextareaProps extends BaseFieldProps {
   maxCharacters?: number;
   /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
   muiFieldProps?: TextFieldProps;
-}
+};
 
-interface FormValues {
+type FormValues = {
   [field: string]: string;
-}
+};
 
 function SQFormTextarea({
   name,

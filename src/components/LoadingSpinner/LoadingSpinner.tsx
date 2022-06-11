@@ -3,9 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import LoadingIcon from '../LoadingIcon';
 import {Grid, Typography} from '@material-ui/core';
 
-interface LoadingSpinnerProps {
+type LoadingSpinnerProps = {
   message?: string;
-}
+};
 
 const gridStyles = makeStyles({
   root: {

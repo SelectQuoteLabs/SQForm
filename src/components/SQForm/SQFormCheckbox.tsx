@@ -4,14 +4,14 @@ import {useForm} from './useForm';
 import type {CheckboxProps} from '@material-ui/core';
 import type {BaseFieldProps} from '../../types';
 
-export interface SQFormCheckboxProps extends BaseFieldProps {
+export type SQFormCheckboxProps = BaseFieldProps & {
   /** Disabled state of the checkbox */
   isDisabled?: boolean;
   /** Custom onChange event callback */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** Any valid prop for material ui checkbox child component - https://material-ui.com/api/checkbox/#props */
   muiFieldProps?: CheckboxProps;
-}
+};
 
 function SQFormCheckbox({
   isDisabled = false,

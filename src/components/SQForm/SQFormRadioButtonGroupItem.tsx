@@ -2,7 +2,7 @@ import React from 'react';
 import {FormControlLabel, makeStyles, Radio} from '@material-ui/core';
 import type {RadioProps} from '@material-ui/core';
 
-export interface SQFormRadioButtonGroupItemProps {
+export type SQFormRadioButtonGroupItemProps = {
   /** Value of the radio button */
   value: string | boolean | number;
   /** Label for the radio button */
@@ -13,7 +13,7 @@ export interface SQFormRadioButtonGroupItemProps {
   isRowDisplay?: boolean;
   /** Props for the radio input */
   InputProps?: RadioProps;
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   radioButton: {

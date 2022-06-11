@@ -10,13 +10,13 @@ import {
 import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
 
-export interface SQFormStoryWrapperProps {
+export type SQFormStoryWrapperProps = {
   children: React.ReactNode;
   initialValues: FormikValues;
   validationSchema?: AnyObjectSchema;
   muiGridProps?: GridProps;
   showSubmit?: boolean;
-}
+};
 
 export function SQFormStoryWrapper({
   children,

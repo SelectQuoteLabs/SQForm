@@ -7,7 +7,7 @@ import type {GridProps} from '@material-ui/core';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
 import type {SQFormOption} from '../../types';
 
-export interface SQFormInclusionListProps {
+export type SQFormInclusionListProps = {
   /** the `name` must match the name of the desired array in `initialValues` */
   name: string;
   /** boolean flag to trigger usage of Select All functionality */
@@ -22,7 +22,7 @@ export interface SQFormInclusionListProps {
   >;
   /** Children must be a function that accepts one param of type FieldArrayRenderProps and returns a single, or array of, SQFormInclusionListItems*/
   children: (props: FieldArrayRenderProps) => JSX.Element | Array<JSX.Element>;
-}
+};
 
 function SQFormInclusionList({
   name,

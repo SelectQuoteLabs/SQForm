@@ -22,18 +22,19 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface MuiFieldProps<TDate>
-  extends BaseDatePickerProps<TDate>,
-    Omit<
-      BasePickerProps<ParsableDate<TDate>, TDate | null>,
-      'value' | 'onChange'
-    > {}
+type MuiFieldProps<TDate> = BaseDatePickerProps<TDate> &
+  Omit<
+    BasePickerProps<ParsableDate<TDate>, TDate | null>,
+    'value' | 'onChange'
+  >;
 
-export interface SQFormDatePickerDateFNSProps
-  extends Omit<SQFormDatePickerProps, 'onChange' | 'muiFieldProps'> {
+export type SQFormDatePickerDateFNSProps = Omit<
+  SQFormDatePickerProps,
+  'onChange' | 'muiFieldProps'
+> & {
   onChange?: (date: Date | null) => void;
   muiFieldProps?: MuiFieldProps<Date>;
-}
+};
 
 function SQFormDatePickerWithDateFNS({
   name,

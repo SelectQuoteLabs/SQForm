@@ -4,7 +4,7 @@ import {useDialog} from '@selectquotelabs/sqhooks';
 import {DialogAlert, TextButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 
-export interface SQFormResetInitialValuesButtonProps {
+export type SQFormResetInitialValuesButtonProps = {
   /** Content for the button; usually text */
   children: React.ReactNode;
   /** Title for the confirmation dialog */
@@ -19,7 +19,7 @@ export interface SQFormResetInitialValuesButtonProps {
   initialValuesObject?: FormikValues;
   /** Button tooltip */
   tooltip?: string;
-}
+};
 
 function SQFormResetInitialValuesButton({
   children,

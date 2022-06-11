@@ -1,9 +1,9 @@
 import type {GridSize} from '@material-ui/core';
 
-interface BaseFieldProps {
+type BaseFieldProps = {
   name: string;
   label: string;
   size?: GridSize;
-}
+};
 
 export default BaseFieldProps;

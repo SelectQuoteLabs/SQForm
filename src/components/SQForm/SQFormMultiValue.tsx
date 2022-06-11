@@ -12,11 +12,11 @@ import type {
 } from '@material-ui/lab/Autocomplete';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 import type {
-  OuterElementContextInterface,
+  OuterElementContextType,
   OuterElementTypeProps,
 } from './SQFormAutocomplete';
 
-export interface SQFormMultiValueProps extends BaseFieldProps {
+export type SQFormMultiValueProps = BaseFieldProps & {
   /** options to select from */
   children: SQFormOption[];
   /** Whether the field is disabled */
@@ -34,13 +34,14 @@ export interface SQFormMultiValueProps extends BaseFieldProps {
   ) => void;
   /** Custom onBlur event callback */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-}
+};
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
 
-const OuterElementContext =
-  React.createContext<OuterElementContextInterface | null>({});
+const OuterElementContext = React.createContext<OuterElementContextType | null>(
+  {}
+);
 
 const OuterElementType = React.forwardRef<HTMLDivElement>(
   (props: OuterElementTypeProps, ref) => {
