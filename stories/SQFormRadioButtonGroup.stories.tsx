@@ -1,7 +1,11 @@
 import React from 'react';
 import * as Yup from 'yup';
 
-import {SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent} from '../src';
+import {
+  SQFormRadioButtonGroup as SQFormRadioButtonGroupComponent,
+  SQFormRadioButtonGroupItem,
+  SQFormTextField,
+} from '../src';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {
@@ -81,5 +85,39 @@ WithValidation.args = {
   }),
 };
 WithValidation.parameters = {
+  controls: {exclude: 'schema'},
+};
+
+const withElementChildren: RadioButtonGroupType = (args) => {
+  const {sqFormProps, schema, size, ...componentProps} = args;
+  return (
+    <SQFormStoryWrapper
+      {...defaultArgs.sqFormProps}
+      {...sqFormProps}
+      validationSchema={schema}
+    >
+      <SQFormRadioButtonGroupComponent
+        {...componentProps}
+        size={getSizeProp(size)}
+      >
+        <SQFormRadioButtonGroupItem label="Giant Panda" value="giant panda" />
+        <SQFormRadioButtonGroupItem label="Red Panda" value="red panda" />
+        <SQFormTextField label="thing" name="whatever" />
+        <SQFormRadioButtonGroupItem
+          label="Kung Fu Panda"
+          value="kung fu panda"
+        />
+      </SQFormRadioButtonGroupComponent>
+    </SQFormStoryWrapper>
+  );
+};
+export const WithElementChildren = withElementChildren.bind({});
+WithElementChildren.args = {
+  ...defaultArgs,
+  schema: Yup.object({
+    [defaultArgs.name]: Yup.string(),
+  }),
+};
+WithElementChildren.parameters = {
   controls: {exclude: 'schema'},
 };

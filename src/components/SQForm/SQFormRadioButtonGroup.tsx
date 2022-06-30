@@ -10,12 +10,13 @@ import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
 import type {GridSize, RadioProps, RadioGroupProps} from '@material-ui/core';
 
-type RadioButtonInputItemProps = {
+type RadioButtonConfigListItem = {
   value: string | boolean | number;
   label: string;
   isDisabled?: boolean;
   InputProps?: RadioProps;
 };
+type RadioButtonGroupChild = React.ReactElement | RadioButtonConfigListItem;
 
 export type SQFormRadioButtonGroupProps = {
   /** Name of the Radio Group */
@@ -28,8 +29,8 @@ export type SQFormRadioButtonGroupProps = {
   shouldDisplayInRow?: boolean;
   /** Label to display above the group */
   groupLabel: string;
-  /** Children must be an array of objects with radio button label and value information */
-  children: RadioButtonInputItemProps[];
+  /** Children must be 1) an array of objects with radio button label and value information OR 2) an array of SQFormRadioButtonGroupItem components, each with `label` and `value` props  */
+  children: Array<RadioButtonGroupChild>;
 };
 
 function SQFormRadioButtonGroup({
@@ -43,18 +44,20 @@ function SQFormRadioButtonGroup({
   const {
     fieldState: {isFieldError, isFieldRequired},
     formikField: {field},
-    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
-  } = useForm<
-    RadioButtonInputItemProps['value'],
-    React.ChangeEvent<HTMLInputElement>
-  >({
+    fieldHelpers: {handleChange, HelperTextComponent},
+  } = useForm<string | boolean | number, React.ChangeEvent<HTMLInputElement>>({
     name,
     onChange,
   });
 
   const childrenToRadioGroupItems = () => {
+    if (children.every((item) => React.isValidElement(item))) {
+      return children;
+    }
+
     return children.map((radioOption) => {
-      const {label, value, isDisabled, InputProps} = radioOption;
+      const {label, value, isDisabled, InputProps} =
+        radioOption as RadioButtonConfigListItem;
       return (
         <SQFormRadioButtonGroupItem
           label={label}
@@ -74,7 +77,6 @@ function SQFormRadioButtonGroup({
         component="fieldset"
         required={isFieldRequired}
         error={isFieldError}
-        onBlur={handleBlur}
       >
         <FormLabel
           component="legend"
