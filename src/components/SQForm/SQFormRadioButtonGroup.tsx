@@ -44,7 +44,7 @@ function SQFormRadioButtonGroup({
   const {
     fieldState: {isFieldError, isFieldRequired},
     formikField: {field},
-    fieldHelpers: {handleChange, HelperTextComponent},
+    fieldHelpers: {handleChange, handleBlur, HelperTextComponent},
   } = useForm<string | boolean | number, React.ChangeEvent<HTMLInputElement>>({
     name,
     onChange,
@@ -77,6 +77,7 @@ function SQFormRadioButtonGroup({
         component="fieldset"
         required={isFieldRequired}
         error={isFieldError}
+        onBlur={handleBlur}
       >
         <FormLabel
           component="legend"
