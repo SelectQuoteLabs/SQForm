@@ -1,3 +1,10 @@
+## [9.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.2.0...v9.3.0) (2022-07-01)
+
+
+### Features
+
+* 🎸 SQFormRadioButtonGroup accepts React Element child arr ([248bec3](https://github.com/SelectQuoteLabs/SQForm/commit/248bec3dde28f8eda2ffd87e7ca734afd685ade2)), closes [#693](https://github.com/SelectQuoteLabs/SQForm/issues/693)
+
 ## [9.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.1.3...v9.2.0) (2022-05-26)
 
 
