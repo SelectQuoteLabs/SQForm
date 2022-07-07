@@ -36,6 +36,7 @@ const helperStateMap = {
 
 export type SQFormHelperTextProps = {
   isFailedState?: boolean;
+  isValidState?: boolean;
   errorText?: string;
   failText?: string;
   validText?: string;
@@ -43,6 +44,7 @@ export type SQFormHelperTextProps = {
 
 function SQFormHelperText({
   isFailedState = false,
+  isValidState,
   errorText = 'There is an error in the form',
   failText = 'Cannot proceed',
   validText = 'All fields completed',
@@ -55,7 +57,7 @@ function SQFormHelperText({
     switch (true) {
       case isFailedState:
         return 'fail';
-      case isValid:
+      case isValidState ?? isValid:
         return 'valid';
       default:
         return 'error';

@@ -178,6 +178,23 @@ describe('Tests for WithValidation', () => {
   });
 });
 
+describe('Tests for WithValidation', () => {
+  it('should find the correct helper text', async () => {
+    render(
+      <WithValidation
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        helperText="helper text"
+      />
+    );
+    await waitFor(() => {
+      const helperText = screen.getByText(/helper text/i);
+      expect(helperText).toBeInTheDocument();
+    });
+  });
+});
+
 describe('Tests for WithAutoFocus', () => {
   it('should render a dialog and automatically focus the form input', async () => {
     render(
