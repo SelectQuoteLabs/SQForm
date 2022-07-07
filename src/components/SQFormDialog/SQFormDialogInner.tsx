@@ -14,6 +14,7 @@ import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
+import SQFormHelperText from '../SQForm/SQFormHelperText';
 import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
 import type {Theme} from '@material-ui/core/styles';
 import type {TransitionProps} from '@material-ui/core/transitions';
@@ -62,6 +63,10 @@ type SQFormDialogInnerProps<Values extends FormikValues> = {
   onTertiaryClick?: (formikContext: FormikContextType<Values>) => void;
   /** Variant to be used for the tertiary button. Defaults to 'outlined' */
   tertiaryButtonVariant?: ButtonProps['variant'];
+  /** text to pass to SQFormHelperText component */
+  helperText?: string;
+  /** helper text type to pass to SQFormHelperText component */
+  helperTextType?: 'fail' | 'error' | 'valid';
 };
 
 /*
@@ -129,6 +134,8 @@ function SQFormDialogInner<Values extends FormikValues>({
   tertiaryStatus = 'HIDE_BUTTON',
   onTertiaryClick,
   tertiaryButtonVariant,
+  helperText,
+  helperTextType = 'error',
 }: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -196,6 +203,7 @@ function SQFormDialogInner<Values extends FormikValues>({
           </Grid>
         )}
 
+        {helperText && renderHelperText()}
         <Grid item={true}>
           <span style={{paddingRight: '20px'}}>
             <RoundedButton
@@ -220,6 +228,29 @@ function SQFormDialogInner<Values extends FormikValues>({
         </Grid>
       </Grid>
     );
+  };
+
+  const renderHelperText = () => {
+    switch (helperTextType) {
+      case 'fail':
+        return (
+          <Grid item={true}>
+            <SQFormHelperText isFailedState={true} failText={helperText} />
+          </Grid>
+        );
+      case 'valid':
+        return (
+          <Grid item={true}>
+            <SQFormHelperText isValidState={true} validText={helperText} />
+          </Grid>
+        );
+      default:
+        return (
+          <Grid item={true}>
+            <SQFormHelperText errorText={helperText} />
+          </Grid>
+        );
+    }
   };
 
   return (
@@ -265,13 +296,16 @@ function SQFormDialogInner<Values extends FormikValues>({
                   </RoundedButton>
                 )}
             {tertiaryStatus === 'HIDE_BUTTON' && shouldDisplaySaveButton && (
-              <SQFormButton
-                title={saveButtonText}
-                isDisabled={isDisabled}
-                shouldRequireFieldUpdates={shouldRequireFieldUpdates}
-              >
-                {saveButtonText}
-              </SQFormButton>
+              <>
+                {helperText && renderHelperText()}
+                <SQFormButton
+                  title={saveButtonText}
+                  isDisabled={isDisabled}
+                  shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+                >
+                  {saveButtonText}
+                </SQFormButton>
+              </>
             )}
           </DialogActions>
         </Form>

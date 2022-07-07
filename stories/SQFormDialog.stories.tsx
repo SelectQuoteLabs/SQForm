@@ -79,6 +79,7 @@ WithValidation.args = {
   validationSchema: Yup.object({
     hello: Yup.string().required(),
   }),
+  helperText: 'helper text',
 };
 
 export const WithAutoFocus: SQFormDialogStory = (args) => {

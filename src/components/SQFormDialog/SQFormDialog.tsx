@@ -63,6 +63,10 @@ export type SQFormDialogProps<Values extends FormikValues> = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
+  /** text to eventually get passed SQFormHelperText component */
+  helperText?: string;
+  /** helper text type to eventually get passed to SQFormHelperText component */
+  helperTextType?: 'fail' | 'error' | 'valid';
 };
 
 function SQFormDialog<Values extends FormikValues>({
@@ -87,6 +91,8 @@ function SQFormDialog<Values extends FormikValues>({
   onTertiaryClick,
   tertiaryStatus = 'HIDE_BUTTON',
   tertiaryButtonVariant = 'outlined',
+  helperText,
+  helperTextType = 'error',
 }: SQFormDialogProps<Values>): React.ReactElement {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -120,6 +126,8 @@ function SQFormDialog<Values extends FormikValues>({
         tertiaryButtonText={tertiaryButtonText}
         onTertiaryClick={onTertiaryClick}
         tertiaryButtonVariant={tertiaryButtonVariant}
+        helperText={helperText}
+        helperTextType={helperTextType}
       />
     </Formik>
   );
