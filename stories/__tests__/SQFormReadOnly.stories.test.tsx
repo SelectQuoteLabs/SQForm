@@ -1,7 +1,7 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormReadOnly.stories';
 
 const {Default: SQFormReadOnly} = composeStories(stories);

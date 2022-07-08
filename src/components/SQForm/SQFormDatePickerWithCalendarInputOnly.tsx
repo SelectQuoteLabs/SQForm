@@ -2,10 +2,11 @@ import React from 'react';
 import {IconButton, makeStyles} from '@material-ui/core';
 import {HighlightOff as ClearIcon} from '@material-ui/icons';
 import {useFormikContext} from 'formik';
-import SQFormDatePicker, {SQFormDatePickerProps} from './SQFormDatePicker';
+import SQFormDatePicker from './SQFormDatePicker';
 import {useForm} from './useForm';
 import type {Moment} from 'moment';
 import type {BaseFieldProps} from '../../types';
+import type {SQFormDatePickerProps} from './SQFormDatePicker';
 
 export type SQFormDatePickerWithCalendarInputOnlyProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */

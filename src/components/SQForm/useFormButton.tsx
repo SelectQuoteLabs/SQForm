@@ -1,7 +1,7 @@
 import React from 'react';
-import type {DebouncedState} from 'use-debounce/lib/useDebouncedCallback';
 import {useDebouncedCallback} from 'use-debounce';
 import {useFormikContext} from 'formik';
+import type {DebouncedState} from 'use-debounce/lib/useDebouncedCallback';
 import type {FormikContextType} from 'formik';
 
 export const BUTTON_TYPES = {

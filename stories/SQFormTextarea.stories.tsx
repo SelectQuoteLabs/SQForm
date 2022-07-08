@@ -1,12 +1,11 @@
-import React from 'react';
 import * as Yup from 'yup';
-import type {Story, Meta} from '@storybook/react';
-
-import {SQFormTextarea as SQFormTextareaComponent} from '../src';
-import type {SQFormTextareaProps} from 'components/SQForm/SQFormTextarea';
+import React from 'react';
 import getSizeProp from './utils/getSizeProp';
+import {SQFormTextarea as SQFormTextareaComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {Story, Meta} from '@storybook/react';
+import type {SQFormTextareaProps} from 'components/SQForm/SQFormTextarea';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 

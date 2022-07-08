@@ -1,6 +1,6 @@
+import * as Yup from 'yup';
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import * as Yup from 'yup';
 import {Card, Grid} from '@material-ui/core';
 import {
   SQFormButton,

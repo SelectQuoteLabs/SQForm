@@ -1,8 +1,8 @@
-import React from 'react';
 import * as Yup from 'yup';
-import {createDocsPage} from './utils/createDocsPage';
-import markdown from '../notes/SQFormDialogStepper.md';
+import React from 'react';
 
+import markdown from '../notes/SQFormDialogStepper.md';
+import {createDocsPage} from './utils/createDocsPage';
 import {
   SQFormTextField,
   SQFormDialogStep,

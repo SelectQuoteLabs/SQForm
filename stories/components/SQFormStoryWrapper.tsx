@@ -1,5 +1,4 @@
 import React from 'react';
-import type {AnyObjectSchema} from 'yup';
 import {Grid} from '@material-ui/core';
 import {SQForm, SQFormButton} from '../../src';
 import {
@@ -7,6 +6,7 @@ import {
   SnackbarProvider,
   useSnackbar,
 } from 'scplus-shared-components';
+import type {AnyObjectSchema} from 'yup';
 import type {GridProps} from '@material-ui/core';
 import type {FormikValues} from 'formik';
 

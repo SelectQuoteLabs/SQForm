@@ -1,8 +1,8 @@
-import {action} from '@storybook/addon-actions';
-import React from 'react';
 import * as Yup from 'yup';
-import {SQFormAsyncAutocomplete} from '../src';
+import React from 'react';
+import {action} from '@storybook/addon-actions';
 import getSizeProp from './utils/getSizeProp';
+import {SQFormAsyncAutocomplete} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';

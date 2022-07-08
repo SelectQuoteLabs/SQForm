@@ -6,14 +6,14 @@ import {VariableSizeList} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import {
+import type {ListChildComponentProps} from 'react-window';
+import type {AutocompleteProps} from '@material-ui/lab';
+import type {
   ListboxVirtualizedComponentProps,
   OuterElementContextType,
   OuterElementTypeProps,
   SQFormAutocompleteProps,
 } from './SQFormAutocomplete';
-import type {ListChildComponentProps} from 'react-window';
-import type {AutocompleteProps} from '@material-ui/lab';
 import type {SQFormOption, SQFormOptionValue} from '../../types';
 
 export type SQFormAsyncAutocompleteProps = SQFormAutocompleteProps & {

@@ -1,7 +1,7 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormRadioButtonGroup.stories';
 import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
 
