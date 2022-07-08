@@ -1,3 +1,10 @@
+### [9.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.0...v9.4.1) (2022-07-08)
+
+
+### Bug Fixes
+
+* 🐛 Fixed issue with how SQFormHelperText chose type ([86d62a4](https://github.com/SelectQuoteLabs/SQForm/commit/86d62a41cf70ea3e4ad25056ced5f7e1836d991c))
+
 ## [9.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.3.0...v9.4.0) (2022-07-07)
 
 
