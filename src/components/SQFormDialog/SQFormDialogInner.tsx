@@ -247,7 +247,7 @@ function SQFormDialogInner<Values extends FormikValues>({
       default:
         return (
           <Grid item={true}>
-            <SQFormHelperText errorText={helperText} />
+            <SQFormHelperText isValidState={false} errorText={helperText} />
           </Grid>
         );
     }
