@@ -1,3 +1,10 @@
+## [9.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.3.0...v9.4.0) (2022-07-07)
+
+
+### Features
+
+* 🎸 Add footer text option to Dialog ([86c17ac](https://github.com/SelectQuoteLabs/SQForm/commit/86c17ac66f2a9e4f6ac6fee3c30bd66141926086)), closes [#695](https://github.com/SelectQuoteLabs/SQForm/issues/695)
+
 ## [9.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.2.0...v9.3.0) (2022-07-01)
 
 
