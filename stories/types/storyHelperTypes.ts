@@ -1,5 +1,5 @@
-import type {SQFormStoryWrapperProps} from '../components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
+import type {SQFormStoryWrapperProps} from '../components/SQFormStoryWrapper';
 
 /** String 'undefined' has to be added due to the way
  * Storybook handles `undefined` in dropdown options.

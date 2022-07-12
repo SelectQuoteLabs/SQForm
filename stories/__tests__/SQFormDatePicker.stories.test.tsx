@@ -1,9 +1,9 @@
 import React from 'react';
-import {LocalizationProvider} from '@material-ui/pickers';
+import userEvent from '@testing-library/user-event';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import {LocalizationProvider} from '@material-ui/pickers';
 import * as stories from '../SQFormDatePicker.stories';
 import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
 import type {FormProps} from '../SQFormDatePicker.stories';

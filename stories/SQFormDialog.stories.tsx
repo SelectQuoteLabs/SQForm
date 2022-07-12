@@ -1,9 +1,5 @@
-import React from 'react';
 import * as Yup from 'yup';
-import type {Story, Meta} from '@storybook/react';
-import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
-import type {FormikContextType} from 'formik';
-
+import React from 'react';
 import {
   SQFormDialog,
   SQFormDatePicker,
@@ -11,8 +7,11 @@ import {
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
-import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 import {createDocsPage} from './utils/createDocsPage';
+import type {Story, Meta} from '@storybook/react';
+import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
+import type {FormikContextType} from 'formik';
+import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 
 type DefaultArgsValues = {hello: string};
 type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>;

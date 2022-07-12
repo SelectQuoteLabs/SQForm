@@ -1,6 +1,6 @@
+import * as Yup from 'yup';
 import React from 'react';
 import {Card, Grid} from '@material-ui/core';
-import * as Yup from 'yup';
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
   SQFormInclusionListItem,

@@ -1,8 +1,8 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
+import userEvent from '@testing-library/user-event';
 import {render, screen, waitFor, within} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
-import userEvent from '@testing-library/user-event';
 import * as stories from '../SQFormDropdown.stories';
 
 const {Default: SQFormDropdown} = composeStories(stories);

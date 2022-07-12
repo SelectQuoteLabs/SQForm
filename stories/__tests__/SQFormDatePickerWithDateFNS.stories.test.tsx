@@ -1,10 +1,10 @@
 import React from 'react';
-import {LocalizationProvider} from '@material-ui/pickers';
+import userEvent from '@testing-library/user-event';
 import dateFnsAdapter from '@material-ui/pickers/adapter/date-fns';
 import enLocale from 'date-fns/locale/en-US';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import {LocalizationProvider} from '@material-ui/pickers';
 import * as stories from '../SQFormDatePickerWithDateFNS.stories';
 import type {SQFormDatePickerDateFNSProps} from 'components/SQForm/SQFormDatePickerWithDateFNS';
 import type {FormProps} from '../SQFormDatePicker.stories';

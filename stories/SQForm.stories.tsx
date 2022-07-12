@@ -1,13 +1,13 @@
-import React from 'react';
 import * as Yup from 'yup';
+import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import {Card, Grid} from '@material-ui/core';
 import {SectionHeader} from 'scplus-shared-components';
 
+import * as markdown from '../notes/SQForm.md';
 import FormValidationMessage from './components/FormValidationMessage';
 import {createDocsPage} from './utils/createDocsPage';
-import * as markdown from '../notes/SQForm.md';
 
 import {
   SQForm,

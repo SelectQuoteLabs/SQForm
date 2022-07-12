@@ -1,6 +1,6 @@
 import React from 'react';
-import {getIn, useField} from 'formik';
 import isEqual from 'lodash.isequal';
+import {getIn, useField} from 'formik';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
