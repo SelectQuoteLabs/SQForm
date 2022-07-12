@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => {
       color: 'var(--color-textSuccessGreen)',
     },
     error: {
-      color: 'var(--color-brightYellow)',
+      color: 'var(--color-textWarningYellow)',
     },
     fail: {
       color: 'var(--color-textErrorRed)',
