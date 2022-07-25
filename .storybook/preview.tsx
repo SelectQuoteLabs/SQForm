@@ -21,6 +21,7 @@ const CenterComponentsInStorybook = ({children}) => {
 const withTheme = (storyFn) => {
   return (
     <StyledEngineProvider injectFirst>
+      {/* ^^ https://material-ui.com/guides/interoperability/#plain-css */}
       <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
         <ThemeProvider theme={muiTheme}>{storyFn()}</ThemeProvider>
       </LocalizationProvider>
