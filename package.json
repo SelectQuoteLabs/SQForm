@@ -90,10 +90,16 @@
     "text-mask-addons": "^3.8.0"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@material-ui/core": ">= 4 < 5",
     "@material-ui/icons": ">= 4 < 5",
     "@material-ui/lab": "^4.0.0-alpha.46",
     "@material-ui/pickers": "^4.0.0-alpha.12",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.92",
+    "@mui/material": "^5.9.2",
+    "@mui/styles": "^5.9.2",
     "@selectquotelabs/sqhooks": ">= 2",
     "moment": "^2.29.1",
     "react": ">= 17.0.0 < 18",

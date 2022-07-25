@@ -1,10 +1,8 @@
 import React from 'react';
-import {MuiThemeProvider, StylesProvider} from '@material-ui/core/styles';
+import {ThemeProvider, StyledEngineProvider} from '@mui/material/styles';
 import {LocalizationProvider} from '@material-ui/pickers';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import {muiTheme} from 'scplus-shared-components';
-import type {ThemeProviderProps} from '@material-ui/core';
-
 import './styles/index.css';
 
 // For Storybook usage ONLY
@@ -20,20 +18,18 @@ const CenterComponentsInStorybook = ({children}) => {
 };
 
 // Provides Material UI Theme to all stories
-const withTheme = (storyFn: () => ThemeProviderProps['children']) => {
+const withTheme = (storyFn) => {
   return (
-    <StylesProvider injectFirst>
+    <StyledEngineProvider injectFirst>
       <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
-        <MuiThemeProvider theme={muiTheme}>{storyFn()}</MuiThemeProvider>
+        <ThemeProvider theme={muiTheme}>{storyFn()}</ThemeProvider>
       </LocalizationProvider>
-    </StylesProvider>
+    </StyledEngineProvider>
   );
 };
 
 // Visually centers the component for every story
-const withCenteredComponents = (
-  storyFn: () => ThemeProviderProps['children']
-) => {
+const withCenteredComponents = (storyFn) => {
   return <CenterComponentsInStorybook>{storyFn()}</CenterComponentsInStorybook>;
 };
 
