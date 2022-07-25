@@ -19,28 +19,28 @@ const bumpit = keyframes`
 
 const styles = {
   '& g': {
-    opacity: '0.65'
+    opacity: '0.65',
   },
 
   '& circle:nth-child(1)': {
-    animation: `${bumpit} 2s linear 0.66s infinite`
+    animation: `${bumpit} 2s linear 0.66s infinite`,
   },
 
   '& circle:nth-child(2)': {
-    animation: `${bumpit} 2s linear 1.33s infinite`
+    animation: `${bumpit} 2s linear 1.33s infinite`,
   },
 
   '& circle:nth-child(3)': {
-    animation: `${bumpit} 2s linear 0s infinite`
+    animation: `${bumpit} 2s linear 0s infinite`,
   },
 
   '& circle:nth-child(4)': {
-    animation: `${bumpit} 2s linear 1.33s infinite`
+    animation: `${bumpit} 2s linear 1.33s infinite`,
   },
 
   '& circle:nth-child(5)': {
-    animation: `${bumpit} 2s linear 0.66s infinite`
-  }
+    animation: `${bumpit} 2s linear 0.66s infinite`,
+  },
 };
 
 type LoadingIconProps = {
@@ -52,11 +52,7 @@ const LoadingIcon = ({height = '10rem'}: LoadingIconProps): JSX.Element => {
   return (
     <Box sx={styles}>
       <svg height={height} viewBox="0 0 446 439">
-        <g
-          stroke="none"
-          strokeWidth="1"
-          fill="none"
-        >
+        <g stroke="none" strokeWidth="1" fill="none">
           <circle
             stroke="#EC9252"
             strokeWidth="35"
