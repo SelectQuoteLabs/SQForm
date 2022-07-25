@@ -1,7 +1,7 @@
 import React from 'react';
 import {ThemeProvider, StyledEngineProvider} from '@mui/material/styles';
-import {LocalizationProvider} from '@material-ui/pickers';
-import MomentAdapter from '@material-ui/pickers/adapter/moment';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import {muiTheme} from 'scplus-shared-components';
 import './styles/index.css';
 
@@ -22,7 +22,7 @@ const withTheme = (storyFn) => {
   return (
     <StyledEngineProvider injectFirst>
       {/* ^^ https://material-ui.com/guides/interoperability/#plain-css */}
-      <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
+      <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={'en'}>
         <ThemeProvider theme={muiTheme}>{storyFn()}</ThemeProvider>
       </LocalizationProvider>
     </StyledEngineProvider>
