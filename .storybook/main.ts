@@ -1,5 +1,8 @@
 module.exports = {
   stories: ['../stories/*.stories.{js,mdx,tsx}'],
+  features: {
+    emotionAlias: false,
+  },
   addons: [
     '@storybook/preset-create-react-app',
     {
