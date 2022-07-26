@@ -1,8 +1,8 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
 import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
 
