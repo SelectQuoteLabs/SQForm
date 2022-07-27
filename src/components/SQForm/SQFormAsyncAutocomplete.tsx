@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import {makeStyles} from '@material-ui/core/styles';
 import {VariableSizeList} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
@@ -41,22 +40,6 @@ export type SQFormAsyncAutocompleteProps = SQFormAutocompleteProps & {
 
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
-
-const useStyles = makeStyles({
-  root: {
-    '& label': {
-      whiteSpace: 'normal',
-      overflow: 'initial',
-      lineHeight: 1,
-    },
-  },
-  listbox: {
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-});
 
 const OuterElementContext = React.createContext<OuterElementContextType | null>(
   {}
@@ -113,6 +96,11 @@ const ListboxVirtualizedComponent: React.ForwardRefExoticComponent<
           itemData={items}
           height={height}
           width="100%"
+          style={{
+            overflowY: 'hidden',
+            margin: 0,
+            padding: 0,
+          }}
           key={ITEM_COUNT}
           outerElementType={OuterElementType}
           innerElementType="ul"
@@ -142,7 +130,6 @@ function SQFormAsyncAutocomplete({
   onClose,
   size = 'auto',
 }: SQFormAsyncAutocompleteProps): React.ReactElement {
-  const classes = useStyles();
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
   const {
@@ -209,9 +196,14 @@ function SQFormAsyncAutocomplete({
     <Grid item sm={size}>
       <Autocomplete
         id={name}
-        style={{width: '100%'}}
+        sx={{
+          '& label': {
+            overflow: 'initial',
+            lineHeight: 1,
+            whiteSpace: 'normal',
+          },
+        }}
         disableListWrap={true}
-        classes={classes}
         ListboxComponent={
           ListboxVirtualizedComponent as React.ComponentType<
             React.HTMLAttributes<HTMLElement>
@@ -266,9 +258,11 @@ function SQFormAsyncAutocomplete({
         }}
         renderOption={(props, option) => {
           return (
-            <Typography {...props} variant="body2" noWrap>
-              {option.label}
-            </Typography>
+            <li {...props}>
+              <Typography variant="body2" noWrap>
+                {option.label}
+              </Typography>
+            </li>
           );
         }}
       />
