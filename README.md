@@ -55,6 +55,12 @@ Optional dependencies are always installed but can be omitted by using `npm inst
 
 ## Upgrading/Breaking Changes
 
+### Version [MUIv5]
+
+- SQFormTextarea
+  - Renamed `rows` to `minRows`
+  - Renamed `rowsMax` to `maxRows`
+
 ### Version 8
 
 #### SQFormScrollableCard no longer accepts titleVariant as a prop
