@@ -193,7 +193,7 @@ function SQFormAsyncAutocomplete({
   );
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <Autocomplete
         id={name}
         sx={{
@@ -259,7 +259,7 @@ function SQFormAsyncAutocomplete({
         renderOption={(props, option) => {
           return (
             <li {...props}>
-              <Typography variant="body2" noWrap>
+              <Typography variant="body2" noWrap={true}>
                 {option.label}
               </Typography>
             </li>
