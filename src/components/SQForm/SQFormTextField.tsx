@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid, InputAdornment, TextField} from '@material-ui/core';
+import {Grid, InputAdornment, TextField} from '@mui/material';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
-import type {TextFieldProps, InputProps} from '@material-ui/core';
+import type {TextFieldProps, InputProps} from '@mui/material';
 import type Mask from '../../types/MaskTypes';
 import type {BaseFieldProps} from '../../types';
 
@@ -88,9 +88,10 @@ function SQFormTextField({
   );
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <TextField
         id={toKebabCase(name)}
+        variant="standard"
         color="primary"
         disabled={isDisabled}
         error={isFieldError}
