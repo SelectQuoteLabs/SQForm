@@ -5,10 +5,9 @@ import {
   Grid,
   Input,
   InputLabel,
-  makeStyles,
   MenuItem,
   Select,
-} from '@material-ui/core';
+} from '@mui/material';
 import {useForm} from './useForm';
 import {
   getOutOfRangeValueWarning,
@@ -16,7 +15,7 @@ import {
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
 import {EMPTY_LABEL} from '../../utils/constants';
-import type {SelectProps} from '@material-ui/core/Select';
+import type {SelectProps} from '@mui/material';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
 export type SQFormDropdownProps = BaseFieldProps & {
@@ -41,13 +40,13 @@ const EMPTY_OPTION = {
   isDisabled: false,
 };
 
-const useStyles = makeStyles({
+const classes = {
   selectHeight: {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
   },
-});
+};
 
 function SQFormDropdown({
   children,
@@ -60,8 +59,6 @@ function SQFormDropdown({
   size = 'auto',
   muiFieldProps = {},
 }: SQFormDropdownProps): React.ReactElement {
-  const classes = useStyles();
-
   const {
     formikField: {field},
     fieldState: {isFieldError, isFieldRequired},
@@ -130,13 +127,14 @@ function SQFormDropdown({
         error={isFieldError}
         required={isFieldRequired}
         disabled={isDisabled}
+        variant="standard"
         fullWidth={true}
       >
         <InputLabel shrink={true} id={labelID}>
           {label}
         </InputLabel>
         <Select
-          className={classes.selectHeight}
+          sx={classes.selectHeight}
           displayEmpty={true}
           input={<Input name={name} />}
           value={field.value}
