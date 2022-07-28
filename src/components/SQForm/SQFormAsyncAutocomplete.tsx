@@ -220,6 +220,7 @@ function SQFormAsyncAutocomplete({
         disabled={isDisabled}
         getOptionLabel={(option) => option.label}
         getOptionDisabled={(option: SQFormOption) => option.isDisabled || false}
+        defaultValue={initialValue}
         renderInput={(params) => {
           return (
             <TextField

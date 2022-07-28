@@ -101,7 +101,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       const optionToSelect = screen.getByText('Second');
       userEvent.click(optionToSelect);
 
-      const textField = screen.getByRole('textbox', {
+      const textField = screen.getByRole('combobox', {
         name: /async autocomplete/i,
       });
       expect(textField).toHaveValue('Second');
