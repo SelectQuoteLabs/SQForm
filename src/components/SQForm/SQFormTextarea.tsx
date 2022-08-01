@@ -12,6 +12,8 @@ export type SQFormTextareaProps = BaseFieldProps & {
   placeholder?: string;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
+  /** Whether or not to show the helper text */
+  displayHelperText?: boolean;
   /** Custom onBlur event callback */
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   /** Custom onChange event callback */
@@ -36,6 +38,7 @@ function SQFormTextarea({
   name,
   label,
   isDisabled = false,
+  displayHelperText = true,
   placeholder = '',
   size = 'auto',
   onBlur,
@@ -92,7 +95,7 @@ function SQFormTextarea({
         name={name}
         label={labelText}
         multiline={true}
-        helperText={!isDisabled && HelperTextComponent}
+        helperText={!isDisabled && displayHelperText && HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}

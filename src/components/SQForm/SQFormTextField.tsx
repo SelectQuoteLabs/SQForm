@@ -11,6 +11,8 @@ export type SQFormTextFieldProps = BaseFieldProps & {
   placeholder?: string;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
+  /** Whether or not to show the helper text */
+  displayHelperText?: boolean;
   /** Custom onBlur event callback */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   /** Custom onChange event callback */
@@ -36,6 +38,7 @@ function SQFormTextField({
   label,
   size = 'auto',
   isDisabled = false,
+  displayHelperText = true,
   placeholder = '- -',
   onBlur,
   onChange,
@@ -113,7 +116,7 @@ function SQFormTextField({
         name={name}
         type={type}
         label={labelText}
-        helperText={!isDisabled && HelperTextComponent}
+        helperText={!isDisabled && displayHelperText && HelperTextComponent}
         placeholder={placeholder}
         onChange={handleChange}
         onBlur={handleBlur}

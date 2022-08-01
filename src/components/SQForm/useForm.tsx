@@ -39,7 +39,12 @@ type UseFormReturn<TValue, TChangeEvent> = {
   };
 };
 
-const SPACE_STYLE = {marginRight: '0.3333rem'};
+const HELPER_TEXT_STYLE = {
+  marginRight: '2px',
+  fontSize: '10px',
+  fontWeight: 400,
+  letterSpacing: '0.4px',
+};
 
 function _handleError(name: string) {
   if (typeof name !== 'string') {
@@ -128,23 +133,39 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldError) {
       return (
         <>
-          <WarningIcon color="error" style={SPACE_STYLE} />
-          {errorMessage}
+          <WarningIcon
+            style={{
+              color: 'var(--color-textWarningYellow)',
+              ...HELPER_TEXT_STYLE,
+            }}
+          />
+          <span
+            style={{
+              color: 'var(--color-textWarningYellow)',
+              ...HELPER_TEXT_STYLE,
+            }}
+          >
+            {errorMessage}
+          </span>
         </>
       );
     }
     if (isFieldRequired) {
       return (
         <>
-          <WarningIcon color="disabled" style={SPACE_STYLE} />
-          Required
+          <WarningIcon
+            style={{color: 'var(--color-stone)', ...HELPER_TEXT_STYLE}}
+          />
+          <span style={{color: 'var(--color-granite)', ...HELPER_TEXT_STYLE}}>
+            Required
+          </span>
         </>
       );
     }
     if (isFulfilled) {
       return (
         <VerifiedIcon
-          style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}}
+          style={{color: 'var(--color-palmLeaf)', ...HELPER_TEXT_STYLE}}
         />
       );
     }

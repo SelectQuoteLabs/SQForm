@@ -118,6 +118,7 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
 function SQFormAsyncAutocomplete({
   children,
   isDisabled = false,
+  displayHelperText = true,
   label,
   name,
   onBlur,
@@ -246,7 +247,9 @@ function SQFormAsyncAutocomplete({
               FormHelperTextProps={{error: isFieldError}}
               name={name}
               label={label}
-              helperText={!isDisabled && HelperTextComponent}
+              helperText={
+                !isDisabled && displayHelperText && HelperTextComponent
+              }
               required={isFieldRequired}
             />
           );
