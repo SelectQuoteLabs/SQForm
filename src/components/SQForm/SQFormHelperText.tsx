@@ -1,32 +1,11 @@
 import React from 'react';
 import {useFormikContext} from 'formik';
-import {Grid, Typography, makeStyles} from '@material-ui/core';
+import {Grid, Typography} from '@mui/material';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
   Report as FailIcon,
-} from '@material-ui/icons';
-
-const useStyles = makeStyles((theme) => {
-  return {
-    wrapper: {
-      padding: `0 ${theme.spacing(2)}px`,
-    },
-    icon: {
-      marginRight: theme.spacing(1),
-      fontSize: '24px',
-    },
-    valid: {
-      color: 'var(--color-textSuccessGreen)',
-    },
-    error: {
-      color: 'var(--color-textWarningYellow)',
-    },
-    fail: {
-      color: 'var(--color-textErrorRed)',
-    },
-  };
-});
+} from '@mui/icons-material';
 
 const helperStateMap = {
   fail: 'fail',
@@ -49,7 +28,6 @@ function SQFormHelperText({
   failText = 'Cannot proceed',
   validText = 'All fields completed',
 }: SQFormHelperTextProps): JSX.Element {
-  const classes = useStyles();
   const {isValid} = useFormikContext();
   const {fail, error, valid} = helperStateMap;
 
@@ -84,16 +62,38 @@ function SQFormHelperText({
   };
 
   const Icon = getHelperTextIcon();
+  const getColor = (helperTextType: keyof typeof helperStateMap) => {
+    switch (helperTextType) {
+      case 'fail':
+        return 'var(--color-textErrorRed)';
+      case 'valid':
+        return 'var(--color-textSuccessGreen)';
+      default:
+        return 'var(--color-textWarningYellow)';
+    }
+  };
 
   return (
     <Grid
-      container
+      container={true}
       justifyContent="flex-end"
       wrap="nowrap"
-      alignItems="center"
-      className={`${classes.wrapper} ${classes[helperTextType]}`}
+      sx={(theme) => {
+        return {
+          alignItems: 'center',
+          p: `0 ${theme.spacing(2)}px`,
+          color: getColor(helperTextType),
+        };
+      }}
     >
-      <Icon className={classes.icon} />
+      <Icon
+        sx={(theme) => {
+          return {
+            marginRight: theme.spacing(1),
+            fontSize: '24px',
+          };
+        }}
+      />
       <Typography variant="h6">{helperTextMap[helperTextType]}</Typography>
     </Grid>
   );
