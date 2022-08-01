@@ -89,7 +89,7 @@ function SQFormHelperText({
       <Icon
         sx={(theme) => {
           return {
-            marginRight: theme.spacing(1),
+            mr: theme.spacing(1),
             fontSize: '24px',
           };
         }}
