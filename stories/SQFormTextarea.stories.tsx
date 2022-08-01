@@ -1,13 +1,13 @@
 import * as Yup from 'yup';
 import React from 'react';
-import getSizeProp from './utils/getSizeProp';
+import getSizeProp from '../old_stories/utils/getSizeProp';
 import {SQFormTextarea as SQFormTextareaComponent} from '../src';
-import {createDocsPage} from './utils/createDocsPage';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormTextareaProps} from 'components/SQForm/SQFormTextarea';
-import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
-import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {SQFormStoryWrapperProps} from '../old_stories/components/SQFormStoryWrapper';
+import type {GridSizeOptions} from '../old_stories/types/storyHelperTypes';
 
 type FormProps = {
   initialValues?: SQFormStoryWrapperProps['initialValues'];

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Grid, TextField} from '@material-ui/core';
+import {Grid, TextField} from '@mui/material';
 import {useFormikContext} from 'formik';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
 import type {FormikProps} from 'formik';
-import type {TextFieldProps} from '@material-ui/core';
+import type {TextFieldProps} from '@mui/material';
 import type {BaseFieldProps} from '../../types';
 
 export type SQFormTextareaProps = BaseFieldProps & {
@@ -17,9 +17,9 @@ export type SQFormTextareaProps = BaseFieldProps & {
   /** Custom onChange event callback */
   onChange?: TextFieldProps['onChange'];
   /** Number of rows to display when multiline option is set to true. */
-  rows?: number;
+  minRows?: number;
   /** Maximum number of rows to display when multiline option is set to true. */
-  rowsMax?: number;
+  maxRows?: number;
   /** Attributes applied to the `textarea` element */
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   /** Defines the maximum number of characters the user can enter into the field; mapped to `textarea` element `maxlength` attribute */
@@ -40,8 +40,8 @@ function SQFormTextarea({
   size = 'auto',
   onBlur,
   onChange,
-  rows = 3,
-  rowsMax = 3,
+  minRows = 3,
+  maxRows = 3,
   maxCharacters,
   inputProps = {},
   muiFieldProps = {},
@@ -87,7 +87,10 @@ function SQFormTextarea({
         disabled={isDisabled}
         error={isFieldError}
         fullWidth={true}
-        InputLabelProps={{shrink: true}}
+        InputLabelProps={{
+          shrink: true,
+          sx: {transform: 'translate(14px, -9px) scale(0.75)'},
+        }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}
         label={labelText}
@@ -97,8 +100,8 @@ function SQFormTextarea({
         onChange={handleChange}
         onBlur={handleBlur}
         required={isFieldRequired}
-        minRows={rows}
-        maxRows={rowsMax}
+        minRows={minRows}
+        maxRows={maxRows}
         variant="outlined"
         value={values[name]}
         inputProps={{
