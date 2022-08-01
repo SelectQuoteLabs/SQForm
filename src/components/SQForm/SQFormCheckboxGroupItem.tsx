@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, FormControlLabel, useTheme} from '@mui/material';
+import {Checkbox, FormControlLabel} from '@mui/material';
 import {useForm} from './useForm';
 import type {CheckboxProps} from '@mui/material';
 import type {SQFormOption} from '../../types';
@@ -46,17 +46,12 @@ function SQFormCheckboxGroupItem({
     return !!field.value;
   }, [value, field]);
 
-  const theme = useTheme();
   return (
     <FormControlLabel
-      sx={[
-        {
-          mb: theme.spacing(1.5),
-        },
-        isRowDisplay && {
-          mr: theme.spacing(3.75),
-        },
-      ]}
+      sx={(theme) => ({
+        mb: theme.spacing(1.5),
+        mr: isRowDisplay ? theme.spacing(3.75) : undefined,
+      })}
       label={label}
       control={
         <Checkbox
