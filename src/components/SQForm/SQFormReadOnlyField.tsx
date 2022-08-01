@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid, TextField} from '@material-ui/core';
+import {Grid, TextField} from '@mui/material';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
-import type {TextFieldProps} from '@material-ui/core';
+import type {TextFieldProps} from '@mui/material';
 import type {BaseFieldProps} from '../../types';
 
 export type SQFormReadOnlyFieldProps = BaseFieldProps & {
@@ -27,6 +27,7 @@ function SQFormReadOnlyField({
     <Grid item sm={size}>
       <TextField
         id={toKebabCase(name)}
+        variant="standard"
         label={label}
         name={name}
         value={field.value || '- -'}
