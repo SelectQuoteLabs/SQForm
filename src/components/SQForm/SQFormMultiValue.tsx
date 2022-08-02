@@ -1,16 +1,15 @@
 import React from 'react';
-import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import {Autocomplete} from '@material-ui/lab';
+import {Autocomplete, Grid, TextField, Chip} from '@mui/material';
+import {makeStyles} from '@material-ui/core';
+// import {Autocomplete} from '@material-ui/lab';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {VariableSizeList} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {useForm} from './useForm';
 import type {ListChildComponentProps} from 'react-window';
-import type {
-  AutocompleteChangeReason,
-  AutocompleteRenderInputParams,
-} from '@material-ui/lab/Autocomplete';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+import type {AutocompleteChangeReason} from '@mui/base';
+import type {AutocompleteRenderInputParams} from '@mui/material';
+import type {BaseFieldProps, SQFormOption, SQFormOptionValue} from '../../types';
 import type {
   OuterElementContextType,
   OuterElementTypeProps,
@@ -195,7 +194,7 @@ function SQFormMultiValue({
         return;
       }
 
-      if (reason === 'create-option') {
+      if (reason === 'createOption') {
         /* Creating an option we always know that the last value
          * in the `value` array is a string
          */
@@ -220,7 +219,7 @@ function SQFormMultiValue({
         return;
       }
 
-      if (reason === 'remove-option') {
+      if (reason === 'removeOption') {
         const currentFieldOptions: string[] = [...value];
 
         const newCustomOptions = customOptions.filter((customOption) => {
@@ -231,6 +230,18 @@ function SQFormMultiValue({
         onChange && onChange(event, currentFieldOptions, reason);
         return;
       }
+
+      const currentFieldOptions = [...value];
+      const newlyAddedOption: string = currentFieldOptions.pop();
+      if(currentFieldOptions.includes(newlyAddedOption)) {
+        setFieldValue(name, currentFieldOptions);
+      } else {
+        setFieldValue(name, [...currentFieldOptions, newlyAddedOption])
+      }
+
+      onChange && onChange(event, value, reason);
+
+      /*
 
       const currentFieldOptions = [...value];
       const newlyAddedOption = currentFieldOptions.pop();
@@ -244,7 +255,7 @@ function SQFormMultiValue({
       }
 
       setFieldValue(name, newFieldValue);
-      onChange && onChange(event, value, reason);
+      */
     },
     [onChange, customOptions, name, setFieldValue]
   );
@@ -281,6 +292,7 @@ function SQFormMultiValue({
         <TextField
           {...params}
           name={name}
+          variant="standard"
           color="primary"
           disabled={isDisabled}
           fullWidth={true}
@@ -307,16 +319,19 @@ function SQFormMultiValue({
   };
 
   return (
-    <Grid item sm={size}>
-      <Autocomplete
+    <Grid item={true} sm={size}>
+      <Autocomplete<SQFormOptionValue, boolean, boolean, boolean>
         classes={classes}
         multiple={true}
         id={name}
-        options={children}
+        options={children.map((child) => child.value)}
         freeSolo={true}
         renderTags={(value, getTagProps) => {
+          console.log('value', value);
           return value.map((optionValue, index) => {
             const tagOption = displayOptions.find((autocompleteOption) => {
+              console.log('autocompleteOption', autocompleteOption)
+              console.log('optionValue', optionValue);
               return autocompleteOption.value === optionValue;
             });
 
@@ -338,13 +353,13 @@ function SQFormMultiValue({
             React.HTMLAttributes<HTMLElement>
           >
         }
-        getOptionLabel={(option) => option.label || ''}
+        getOptionLabel={(option) => displayOptions.find((displayOption) => displayOption.value === option)?.label || '- -'}
         value={fieldValue || []}
         inputValue={inputValue}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
-        getOptionDisabled={(option) => option.isDisabled}
+        getOptionDisabled={(option) => Boolean(displayOptions.find((displayOption) => displayOption.value === option)?.isDisabled)}
         disabled={isDisabled}
         disableClearable={isDisabled}
         renderInput={getInputElement}

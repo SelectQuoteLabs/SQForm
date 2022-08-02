@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 import React from 'react';
-import getSizeProp from './utils/getSizeProp';
+import getSizeProp from '../old_stories/utils/getSizeProp';
 import markdown from '../notes/SQFormMultiValue.md';
 import {SQFormMultiValue as SQFormMultiValueComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
-import type {CustomStory} from './types/storyHelperTypes';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 import type {SQFormMultiValueProps} from 'components/SQForm/SQFormMultiValue';
 
 export default {
@@ -30,10 +30,12 @@ const MOCK_COLOR_OPTIONS = [
   {label: 'Red', value: 'red'},
   {label: 'Orange', value: 'orange'},
   {label: 'Yellow', value: 'yellow'},
+  {label: 'Black', value: 'black', isDisabled: true},
   {label: 'Green', value: 'green'},
   {label: 'Blue', value: 'blue'},
   {label: 'Indigo', value: 'indigo'},
   {label: 'Violet', value: 'violet'},
+  {label: 'Amber', value: 'amber', isDisabled: true},
 ];
 
 const defaultArgs = {
