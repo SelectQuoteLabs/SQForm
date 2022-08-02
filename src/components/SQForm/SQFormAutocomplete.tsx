@@ -154,7 +154,6 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
             sx={{
               '& ul': {
                 width: getItemWidth(),
-                overflowX: 'hidden !important' as 'hidden',
               },
             }}
           >
@@ -305,7 +304,6 @@ function SQFormAutocomplete({
       sx={{
         position: 'relative',
         '& .MuiAutocomplete-listbox': {
-          overflow: 'hidden !important' as 'hidden',
           '& ul': {
             padding: 0,
             margin: 0,
@@ -317,8 +315,7 @@ function SQFormAutocomplete({
         '& .MuiAutocomplete-popper': {
           borderRadius: '4px',
           boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
-          overflowX: 'hidden !important' as 'hidden',
-          marginTop: !lockWidthToField ? '20px !important' : undefined,
+          width: !lockWidthToField ? 'auto !important' : undefined,
         },
       }}
     >
@@ -334,6 +331,21 @@ function SQFormAutocomplete({
         }
         // Note: basewidth is not camel cased because React doesn't like it here
         ListboxProps={listboxProps}
+        componentsProps={{
+          popper: {
+            popperOptions: {
+              placement: 'bottom-start',
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: !lockWidthToField ? [0, 20] : [0, 0],
+                  },
+                },
+              ],
+            },
+          },
+        }}
         options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
