@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 import React from 'react';
-import getSizeProp from './utils/getSizeProp';
+import getSizeProp from '../old_stories/utils/getSizeProp';
 import markdown from '../notes/SQFormMultiValue.md';
 import {SQFormMultiValue as SQFormMultiValueComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
-import type {CustomStory} from './types/storyHelperTypes';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 import type {SQFormMultiValueProps} from 'components/SQForm/SQFormMultiValue';
 
 export default {

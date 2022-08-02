@@ -1,15 +1,14 @@
 import React from 'react';
-import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import {Autocomplete} from '@material-ui/lab';
+import {Autocomplete, Grid, TextField, Chip} from '@mui/material';
+import {makeStyles} from '@material-ui/core';
+// import {Autocomplete} from '@material-ui/lab';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {VariableSizeList} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {useForm} from './useForm';
 import type {ListChildComponentProps} from 'react-window';
-import type {
-  AutocompleteChangeReason,
-  AutocompleteRenderInputParams,
-} from '@material-ui/lab/Autocomplete';
+import type {AutocompleteChangeReason} from '@mui/base';
+import type {AutocompleteRenderInputParams} from '@mui/material';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 import type {
   OuterElementContextType,
@@ -281,6 +280,7 @@ function SQFormMultiValue({
         <TextField
           {...params}
           name={name}
+          variant="standard"
           color="primary"
           disabled={isDisabled}
           fullWidth={true}
@@ -307,7 +307,7 @@ function SQFormMultiValue({
   };
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <Autocomplete
         classes={classes}
         multiple={true}
@@ -324,6 +324,8 @@ function SQFormMultiValue({
               return null;
             }
 
+            console.log(`onDelete function: ${getTagProps({index}).onDelete}`);
+
             return (
               <Chip
                 variant="outlined"
@@ -338,13 +340,15 @@ function SQFormMultiValue({
             React.HTMLAttributes<HTMLElement>
           >
         }
-        getOptionLabel={(option) => option.label || ''}
+        getOptionLabel={(option) =>
+          typeof option !== 'string' ? option?.label || '' : option
+        }
         value={fieldValue || []}
         inputValue={inputValue}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
-        getOptionDisabled={(option) => option.isDisabled}
+        getOptionDisabled={(option) => option?.isDisabled ?? false}
         disabled={isDisabled}
         disableClearable={isDisabled}
         renderInput={getInputElement}
