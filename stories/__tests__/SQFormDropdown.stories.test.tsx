@@ -159,7 +159,7 @@ it('should highlight field if required but no value selected', async () => {
 
   const required = screen.getByText(/required/i);
   expect(required).toBeVisible();
-  expect(required).toHaveClass('Mui-error');
+  expect(required.closest('p')).toHaveClass('Mui-error');
 });
 
 it('should show empty list if no options are given', () => {

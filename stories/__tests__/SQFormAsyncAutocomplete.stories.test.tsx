@@ -172,7 +172,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       await waitFor(() => {
         const requiredText = screen.getByText(/required/i);
         expect(requiredText).toBeVisible();
-        expect(requiredText).toHaveClass('Mui-required');
+        expect(requiredText.closest('p')).toHaveClass('Mui-required');
       });
     });
 
@@ -199,7 +199,7 @@ describe('SQFormAsyncAutocomplete Tests', () => {
       await waitFor(() => {
         const requiredText = screen.getByText(/required/i);
         expect(requiredText).toBeVisible();
-        expect(requiredText).toHaveClass('Mui-error');
+        expect(requiredText.closest('p')).toHaveClass('Mui-error');
       });
     });
   });

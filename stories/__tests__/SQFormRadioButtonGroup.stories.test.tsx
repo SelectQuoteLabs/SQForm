@@ -141,7 +141,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
         await waitFor(() => {
           const requiredText = screen.getByText('Required');
           expect(requiredText).toBeInTheDocument();
-          expect(requiredText).toHaveClass('Mui-required');
+          expect(requiredText.closest('p')).toHaveClass('Mui-required');
         });
       });
     });
@@ -159,7 +159,7 @@ describe('SQFormRadioButtonGroup Tests', () => {
           const label = screen.getByText(/Pandas/i);
           const requiredText = screen.getByText(/Required/i);
           expect(label).toHaveClass('Mui-error');
-          expect(requiredText).toHaveClass('Mui-error');
+          expect(requiredText.closest('p')).toHaveClass('Mui-error');
         });
       });
     });

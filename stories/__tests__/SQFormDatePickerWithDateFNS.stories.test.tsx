@@ -140,7 +140,7 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     await waitFor(() => {
       const requiredText = screen.getByText(/required/i);
       expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-required');
+      expect(requiredText.closest('p')).toHaveClass('Mui-required');
     });
   });
 });
