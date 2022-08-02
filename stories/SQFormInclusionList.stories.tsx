@@ -1,15 +1,15 @@
 import * as Yup from 'yup';
 import React from 'react';
-import {Card, Grid} from '@material-ui/core';
+import {Card, Grid} from '@mui/material';
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
   SQFormInclusionListItem,
   SQFormHelperText,
 } from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 import type {FieldArrayRenderProps} from 'formik';
-import type {CustomStory} from './types/storyHelperTypes';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 import type {SQFormInclusionListProps} from 'components/SQForm/SQFormInclusionList';
 
 export default {
@@ -56,7 +56,7 @@ const defaultArgs = {
     const {values} = arrayHelpers.form;
     return (
       <Grid
-        container
+        container={true}
         direction="column"
         wrap="nowrap"
         style={{
@@ -67,7 +67,7 @@ const defaultArgs = {
       >
         {names.map((name) => {
           return (
-            <Grid item key={name}>
+            <Grid item={true} key={name}>
               <SQFormInclusionListItem
                 name="friends"
                 label={name}
@@ -98,7 +98,7 @@ const Template: CustomStory<SQFormInclusionListProps> = (args) => {
       validationSchema={schema}
       {...sqFormProps}
     >
-      <Card raised style={{minWidth: 250, padding: 16}}>
+      <Card raised={true} style={{minWidth: 250, padding: 16}}>
         <SQFormInclusionListComponent {...rest} />
       </Card>
     </SQFormStoryWrapper>
@@ -113,7 +113,7 @@ const ValidationTemplate: CustomStory<SQFormInclusionListProps> = (args) => {
       validationSchema={schema}
       {...sqFormProps}
     >
-      <Card raised style={{minWidth: 250, padding: 16}}>
+      <Card raised={true} style={{minWidth: 250, padding: 16}}>
         <SQFormInclusionListComponent {...rest} />
         <SQFormHelperText
           errorText={'friends field must have at least 5 items'}

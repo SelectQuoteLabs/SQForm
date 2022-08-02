@@ -1,9 +1,9 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {useFormikContext, FieldArray} from 'formik';
 import SQFormInclusionListItem from './SQFormInclusionListItem';
 import type {FieldArrayRenderProps} from 'formik';
-import type {GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {SQFormInclusionListItemProps} from './SQFormInclusionListItem';
 import type {SQFormOption} from '../../types';
 
@@ -51,7 +51,7 @@ function SQFormInclusionList({
 
   return (
     <>
-      <Grid container {...selectAllContainerProps}>
+      <Grid container={true} {...selectAllContainerProps}>
         <SQFormInclusionListItem
           label="Select All"
           {...selectAllProps}
