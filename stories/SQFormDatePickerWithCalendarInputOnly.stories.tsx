@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 import React from 'react';
 import {Meta} from '@storybook/react';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
+import getSizeProp from '../old_stories/utils/getSizeProp';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 import {SQFormDatePickerWithCalendarInputOnly as SQFormDatePickerWithCalendarInputOnlyComponent} from '../src';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
 import type {Moment} from 'moment';
-import type {CustomStory} from './types/storyHelperTypes';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 import type {SQFormDatePickerWithCalendarInputOnlyProps} from 'components/SQForm/SQFormDatePickerWithCalendarInputOnly';
 
 const meta: Meta = {
