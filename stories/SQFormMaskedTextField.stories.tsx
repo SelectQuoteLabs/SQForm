@@ -4,13 +4,13 @@ import {
   MASKS,
   SQFormMaskedTextField as SQFormMaskedTextFieldComponent,
 } from '../src';
-import getSizeProp from './utils/getSizeProp';
-import {createDocsPage} from './utils/createDocsPage';
-import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
-import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
+import getSizeProp from '../old_stories/utils/getSizeProp';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from '../old_stories/components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
 import type {SQFormMaskedTextFieldProps} from 'components/SQForm/SQFormMaskedTextField';
-import type {GridSizeOptions} from './types/storyHelperTypes';
+import type {GridSizeOptions} from '../old_stories/types/storyHelperTypes';
 import type {Mask} from 'types';
 
 export default {
