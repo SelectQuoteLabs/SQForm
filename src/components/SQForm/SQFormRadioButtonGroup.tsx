@@ -5,10 +5,10 @@ import {
   FormHelperText,
   FormControl,
   FormLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import SQFormRadioButtonGroupItem from './SQFormRadioButtonGroupItem';
 import {useForm} from './useForm';
-import type {GridSize, RadioProps, RadioGroupProps} from '@material-ui/core';
+import type {GridSize, RadioProps, RadioGroupProps} from '@mui/material';
 
 type RadioButtonConfigListItem = {
   value: string | boolean | number;
@@ -72,9 +72,10 @@ function SQFormRadioButtonGroup({
   };
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <FormControl
         component="fieldset"
+        variant="standard"
         required={isFieldRequired}
         error={isFieldError}
         onBlur={handleBlur}
