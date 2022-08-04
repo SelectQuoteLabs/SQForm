@@ -1,38 +1,16 @@
 import React from 'react';
-import {
-  ClickAwayListener,
-  Grid,
-  makeStyles,
-  TextField,
-} from '@material-ui/core';
-import {DatePicker} from '@material-ui/pickers';
+import {ClickAwayListener, Grid, TextField} from '@mui/material';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {useForm} from './useForm';
 import type {Moment} from 'moment';
-import type {InputBaseComponentProps} from '@material-ui/core';
-import type {
-  BasePickerProps,
-  BaseDatePickerProps,
-  DatePickerProps,
-} from '@material-ui/pickers';
-import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
+import type {InputBaseComponentProps} from '@mui/material';
+import type {DatePickerProps} from '@mui/x-date-pickers/DatePicker';
+import type {BasePickerProps} from '@mui/x-date-pickers/internals';
+import type {BaseDatePickerProps} from '@mui/x-date-pickers/DatePicker/shared';
 import type {BaseFieldProps} from '../../types';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
-      {
-        '& .MuiIconButton-root': {
-          color: 'var(--color-teal)',
-        },
-      },
-  },
-}));
-
-type MuiFieldProps<TDate> = BaseDatePickerProps<TDate> &
-  Omit<
-    BasePickerProps<ParsableDate<TDate>, TDate | null>,
-    'value' | 'onChange'
-  >;
+type MuiFieldProps<TDate> = BaseDatePickerProps<TDate, TDate> &
+  Omit<BasePickerProps<TDate, TDate | null>, 'value' | 'onChange'>;
 
 export type SQFormDatePickerProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
@@ -53,9 +31,9 @@ export type SQFormDatePickerProps = BaseFieldProps & {
   /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
   muiTextInputProps?: InputBaseComponentProps;
   /** Props provided to the Input component. Most commonly used for adornments. */
-  InputProps?: DatePickerProps['InputProps'];
+  InputProps?: DatePickerProps<Moment, Moment>['InputProps'];
   /** Props provided to the input adornments. */
-  InputAdornmentProps?: DatePickerProps['InputAdornmentProps'];
+  InputAdornmentProps?: DatePickerProps<Moment, Moment>['InputAdornmentProps'];
   /** A Boolean flag used when using calendar only; disabled text filed input */
   isCalendarOnly?: boolean;
 };
@@ -98,14 +76,12 @@ function SQFormDatePicker({
     }
   };
 
-  const classes = useStyles();
-
   // An empty string will not reset the DatePicker so we have to pass null
   const value = field.value || null;
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Grid item sm={size}>
+      <Grid item={true} sm={size}>
         <DatePicker
           label={label}
           disabled={isDisabled}
@@ -121,6 +97,7 @@ function SQFormDatePicker({
                 {...inputProps}
                 name={name}
                 color="primary"
+                variant="standard"
                 error={isFieldError}
                 fullWidth={true}
                 inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
@@ -135,7 +112,14 @@ function SQFormDatePicker({
                     ? toggleCalendar
                     : handleClickAway
                 }
-                classes={classes}
+                sx={{
+                  '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+                    {
+                      '& .MuiIconButton-root': {
+                        color: 'var(--color-teal)',
+                      },
+                    },
+                }}
               />
             );
           }}
