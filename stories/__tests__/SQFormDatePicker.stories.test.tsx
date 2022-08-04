@@ -1,9 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import {LocalizationProvider} from '@material-ui/pickers';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import * as stories from '../SQFormDatePicker.stories';
 import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
 import type {FormProps} from '../SQFormDatePicker.stories';
@@ -20,7 +20,7 @@ const renderDatePicker = (
   >
 ) => {
   render(
-    <LocalizationProvider dateAdapter={MomentAdapter} locale={'en'}>
+    <LocalizationProvider dateAdapter={AdapterMoment} locale={'en'}>
       <BasicDatePicker {...props} />
     </LocalizationProvider>
   );
@@ -88,7 +88,7 @@ describe('SQFormDatePicker Tests', () => {
 
     renderDatePicker({sqFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /Choose date/i});
+    const textField = screen.getByRole('textbox', {name: /choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     userEvent.click(textField);
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
@@ -96,8 +96,8 @@ describe('SQFormDatePicker Tests', () => {
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
-    const dateOptions = within(calendarDialog).getAllByRole('cell');
-    const selectedDate = dateOptions[0];
+    const dateOptions = within(calendarDialog).getAllByRole('button');
+    const selectedDate = dateOptions[4];
 
     userEvent.click(selectedDate);
 
