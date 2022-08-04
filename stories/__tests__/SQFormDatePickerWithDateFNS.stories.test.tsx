@@ -1,10 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import dateFnsAdapter from '@material-ui/pickers/adapter/date-fns';
 import enLocale from 'date-fns/locale/en-US';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import {LocalizationProvider} from '@material-ui/pickers';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import * as stories from '../SQFormDatePickerWithDateFNS.stories';
 import type {SQFormDatePickerDateFNSProps} from 'components/SQForm/SQFormDatePickerWithDateFNS';
 import type {FormProps} from '../SQFormDatePicker.stories';
@@ -21,7 +21,7 @@ const renderDatePicker = (
   >
 ) => {
   render(
-    <LocalizationProvider dateAdapter={dateFnsAdapter} locale={enLocale}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={enLocale}>
       <BasicDatePicker {...props} />
     </LocalizationProvider>
   );
@@ -97,8 +97,8 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
-    const dateOptions = within(calendarDialog).getAllByRole('cell');
-    const selectedDate = dateOptions[0];
+    const dateOptions = within(calendarDialog).getAllByRole('button');
+    const selectedDate = dateOptions[4];
 
     userEvent.click(selectedDate);
 
