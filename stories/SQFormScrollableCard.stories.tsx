@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import React from 'react';
 
 import {Paper} from '@material-ui/core';
+import {Public} from '@material-ui/icons';
 import {SQFormScrollableCard, SQFormTextField} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import type {GridProps} from '@material-ui/core';
@@ -136,4 +137,11 @@ WithRoundedCorners.args = {
   ...defaultArgs,
   title: 'With Rounded Corners',
   isSquareCorners: false,
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  ...defaultArgs,
+  title: 'With Icon',
+  icon: <Public fontSize="large" />,
 };
