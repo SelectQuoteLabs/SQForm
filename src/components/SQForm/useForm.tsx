@@ -4,7 +4,7 @@ import {getIn, useField} from 'formik';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 
 type ChangeHandler<TChangeEvent> = (
