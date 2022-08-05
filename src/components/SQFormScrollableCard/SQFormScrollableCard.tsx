@@ -78,6 +78,8 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   titleVariant?: TypographyVariant;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
+  /** An Icon to be shown to the left of the title */
+  icon?: React.ReactNode;
 };
 
 type useStylesProps = {
@@ -149,6 +151,7 @@ function SQFormScrollableCard<Values>({
   validationSchema,
   isHeaderDisabled = false,
   isSquareCorners = true,
+  icon,
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
@@ -233,6 +236,7 @@ function SQFormScrollableCard<Values>({
                     title={title}
                     className={classes.cardHeader}
                     titleTypographyProps={{variant: 'h5'}}
+                    avatar={icon}
                   />
                 )}
 
