@@ -3,6 +3,7 @@ import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import {Card, Grid} from '@material-ui/core';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 import {SectionHeader} from 'scplus-shared-components';
 
 import * as markdown from '../notes/SQForm.md';
@@ -798,6 +799,147 @@ export const ccaChecklist = (): JSX.Element => {
         </SQFormDropdown>
         <Grid item style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const paymentForm = (): JSX.Element => {
+  const validationSchema = Yup.object({
+    billingAddress1: Yup.string().required(),
+    billingAddress2: Yup.string(),
+    city: Yup.string().required(),
+    state: Yup.string().required(),
+    zip: Yup.string().required(),
+    cardholderName: Yup.string().required(),
+    cardNumber: Yup.string().required(),
+    expiry: Yup.string().required(),
+    cvv: Yup.string().required(),
+  });
+
+  const initialValues = {
+    billingAddress1: '',
+    billingAddress2: '',
+    city: '',
+    state: '',
+    zip: '',
+    cardholderName: '',
+    cardNumber: '',
+    expiry: '',
+    cvv: '',
+  };
+
+  return (
+    <Card raised style={{padding: 16, width: '768px'}}>
+      <SQForm
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        <SQFormTextarea
+          label="Billing Address 1 *"
+          name="billingAddress1"
+          rows={2}
+          size={12}
+          displayHelperText={false}
+        />
+        <SQFormTextarea
+          label="Billing Address 2"
+          name="billingAddress2"
+          rows={2}
+          size={12}
+          displayHelperText={false}
+        />
+        <Grid item container sm={12}>
+          <SQFormTextField
+            label="City *"
+            name="city"
+            size={5}
+            muiFieldProps={{
+              variant: 'outlined',
+              style: {paddingRight: '20px'},
+            }}
+            displayHelperText={false}
+          />
+          <SQFormAutocomplete
+            label="State *"
+            name="state"
+            size={3}
+            muiTextFieldProps={{
+              variant: 'outlined',
+              style: {paddingRight: '20px'},
+            }}
+            displayHelperText={false}
+          >
+            {MOCK_STATE_OPTIONS}
+          </SQFormAutocomplete>
+          <SQFormTextField
+            label="ZIP *"
+            name="zip"
+            size={4}
+            muiFieldProps={{
+              variant: 'outlined',
+            }}
+            displayHelperText={false}
+          />
+        </Grid>
+        <SQFormTextField
+          label="Cardholder Name *"
+          name="cardholderName"
+          size={12}
+          muiFieldProps={{
+            variant: 'outlined',
+          }}
+          displayHelperText={false}
+        />
+        <Grid item container sm={12}>
+          <SQFormMaskedTextField
+            label="Card Number *"
+            name="cardNumber"
+            mask={MASKS.creditCardNumber}
+            size={6}
+            placeholder="XXXX - XXXX - XXXX - XXXX"
+            muiFieldProps={{
+              variant: 'outlined',
+              style: {paddingRight: '20px'},
+            }}
+            startAdornment={<CreditCardIcon color="disabled" />}
+            displayHelperText={false}
+          />
+          <SQFormMaskedTextField
+            label="Exp. *"
+            name="expiry"
+            mask={MASKS.creditCardExpiry}
+            size={3}
+            placeholder="MM / YY"
+            muiFieldProps={{
+              variant: 'outlined',
+              style: {paddingRight: '20px'},
+            }}
+            displayHelperText={false}
+          />
+          <SQFormMaskedTextField
+            label="CVV *"
+            name="cvv"
+            mask={MASKS.creditCardCVV}
+            size={3}
+            placeholder="# # #"
+            muiFieldProps={{
+              variant: 'outlined',
+            }}
+            displayHelperText={false}
+          />
+        </Grid>
+        <Grid item sm={12}>
+          <Grid container justifyContent="space-between">
+            <SQFormButton title="Reset" type="reset">
+              RESET
+            </SQFormButton>
+            <FormValidationMessage />
+
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
         </Grid>
       </SQForm>
     </Card>
