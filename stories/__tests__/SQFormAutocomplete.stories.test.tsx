@@ -28,7 +28,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should render with empty initial value', () => {
       render(<SQFormAutocomplete size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
 
       expect(textField).toHaveTextContent('');
     });
@@ -42,7 +42,7 @@ describe('SQFormAutocomplete Tests', () => {
 
       render(<SQFormAutocomplete size="auto" sqFormProps={sqFormProps} />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).toHaveValue('First');
     });
 
@@ -61,7 +61,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should render a list of options when the user starts typing', () => {
       render(<SQFormAutocomplete size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
 
       userEvent.type(textField, 'F');
 
@@ -73,7 +73,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should update when an option is selected after typing', () => {
       render(<SQFormAutocomplete size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).toHaveValue('');
 
       userEvent.type(textField, 'F');
@@ -93,14 +93,14 @@ describe('SQFormAutocomplete Tests', () => {
       const optionToSelect = screen.getByText('Second');
       userEvent.click(optionToSelect);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).toHaveValue('Second');
     });
 
     it('should clear out value when clear button is clicked', () => {
       render(<SQFormAutocomplete size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       userEvent.type(textField, 'F');
 
       const optionToSelect = screen.getByText('Fifth');
@@ -118,7 +118,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should render as disabled when isDisabled is true', () => {
       render(<SQFormAutocomplete size="auto" isDisabled={true} />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
 
       expect(textField).toBeDisabled();
     });
@@ -126,7 +126,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should display empty value when displayEmpty is true', () => {
       render(<SQFormAutocomplete size="auto" displayEmpty={true} />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).toHaveValue('- -');
 
       const openButton = screen.getByRole('button', {name: /open/i});
@@ -140,7 +140,7 @@ describe('SQFormAutocomplete Tests', () => {
     it(`should display 'No options' when option not in the list is typed`, () => {
       render(<SQFormAutocomplete size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       userEvent.type(textField, '2');
 
       const optionToSelect = screen.getByText('No options');
@@ -169,7 +169,7 @@ describe('SQFormAutocomplete Tests', () => {
     it('should highlight field if required but no value selected', async () => {
       render(<SQFormAutocompleteWithValidation size="auto" />);
 
-      const textField = screen.getByRole('textbox', {name: /autocomplete/i});
+      const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).not.toHaveFocus();
 
       userEvent.tab();
