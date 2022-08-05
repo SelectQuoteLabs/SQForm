@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  ClickAwayListener,
-  Grid,
-  makeStyles,
-  TextField,
-} from '@material-ui/core';
-import {DateTimePicker} from '@material-ui/pickers';
+import {ClickAwayListener, Grid, TextField} from '@mui/material';
+import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
+import {MarkOptional} from 'ts-essentials';
 import {useForm} from './useForm';
 import type {Moment} from 'moment';
-import type {BaseDateTimePickerProps} from '@material-ui/pickers';
-import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
+import type {BaseDateTimePickerProps} from '@mui/x-date-pickers/DateTimePicker/shared';
 import type {BaseFieldProps} from '../../types';
 
 export type SQFormDateTimePickerProps = BaseFieldProps & {
@@ -22,19 +17,11 @@ export type SQFormDateTimePickerProps = BaseFieldProps & {
   /** Custom onChange event callback */
   onChange?: (date: Moment | null) => void;
   /** Any valid prop for material ui datetimepicker child component - https://material-ui.com/components/pickers/  */
-  muiFieldProps?: BaseDateTimePickerProps<Moment>;
+  muiFieldProps?: MarkOptional<
+    BaseDateTimePickerProps<Moment, Moment>,
+    'onChange' | 'value' | 'renderInput'
+  >;
 };
-
-const useStyles = makeStyles(() => ({
-  root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
-      {
-        '& .MuiIconButton-root': {
-          color: 'var(--color-teal)',
-        },
-      },
-  },
-}));
 
 function SQFormDateTimePicker({
   name,
@@ -64,11 +51,8 @@ function SQFormDateTimePicker({
     }
   };
 
-  const classes = useStyles();
-
   // An empty string will not reset the DatePicker so we have to pass null
-  const value: ParsableDate<Moment> | null =
-    (field.value as ParsableDate<Moment>) ?? null;
+  const value: Moment | null = (field.value as Moment) ?? null;
 
   const handleChange = (date: Moment | null): void => {
     helpers.setValue(date);
@@ -77,8 +61,9 @@ function SQFormDateTimePicker({
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Grid item sm={size}>
+      <Grid item={true} sm={size}>
         <DateTimePicker
+          {...muiFieldProps}
           label={label}
           disabled={isDisabled}
           value={value}
@@ -92,6 +77,7 @@ function SQFormDateTimePicker({
                 {...inputProps}
                 name={name}
                 color="primary"
+                variant="standard"
                 disabled={isDisabled}
                 error={isFieldError}
                 fullWidth={true}
@@ -102,11 +88,17 @@ function SQFormDateTimePicker({
                 onBlur={handleBlur}
                 onClick={handleClickAway}
                 required={isFieldRequired}
-                classes={classes}
+                sx={{
+                  '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+                    {
+                      '& .MuiIconButton-root': {
+                        color: 'var(--color-teal)',
+                      },
+                    },
+                }}
               />
             );
           }}
-          {...muiFieldProps}
         />
       </Grid>
     </ClickAwayListener>
