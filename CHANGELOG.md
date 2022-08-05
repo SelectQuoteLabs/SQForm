@@ -1,3 +1,10 @@
+## [9.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.1...v9.5.0) (2022-08-05)
+
+
+### Features
+
+* 🎸 Adds icon prop to scrollable card ([38adea6](https://github.com/SelectQuoteLabs/SQForm/commit/38adea62ec3e40b2e812c9b5089e6194fc752de5))
+
 ### [9.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.0...v9.4.1) (2022-07-08)
 
 
