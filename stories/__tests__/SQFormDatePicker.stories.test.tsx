@@ -1,12 +1,11 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import dateFnsAdapter from '@material-ui/pickers/adapter/date-fns';
-import enLocale from 'date-fns/locale/en-US';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import {LocalizationProvider} from '@material-ui/pickers';
-import * as stories from '../SQFormDatePickerWithDateFNS.stories';
-import type {SQFormDatePickerDateFNSProps} from 'components/SQForm/SQFormDatePickerWithDateFNS';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
+import * as stories from '../SQFormDatePicker.stories';
+import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
 import type {FormProps} from '../SQFormDatePicker.stories';
 import type {AnyObjectSchema} from 'yup';
 
@@ -14,20 +13,20 @@ const {BasicDatePicker} = composeStories(stories);
 
 const renderDatePicker = (
   props?: Partial<
-    Omit<SQFormDatePickerDateFNSProps, 'label' | 'name'> & {
+    Omit<SQFormDatePickerProps, 'label' | 'name'> & {
       sqFormProps?: FormProps | undefined;
       schema: AnyObjectSchema;
     }
   >
 ) => {
   render(
-    <LocalizationProvider dateAdapter={dateFnsAdapter} locale={enLocale}>
+    <LocalizationProvider dateAdapter={AdapterMoment} locale={'en'}>
       <BasicDatePicker {...props} />
     </LocalizationProvider>
   );
 };
 
-describe('SQFormDatePickerWithDateFNS Tests', () => {
+describe('SQFormDatePicker Tests', () => {
   it('should render a label and input', () => {
     renderDatePicker();
 
@@ -97,8 +96,8 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
-    const dateOptions = within(calendarDialog).getAllByRole('cell');
-    const selectedDate = dateOptions[0];
+    const dateOptions = within(calendarDialog).getAllByRole('button');
+    const selectedDate = dateOptions[4];
 
     userEvent.click(selectedDate);
 
