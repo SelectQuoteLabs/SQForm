@@ -305,8 +305,8 @@ function SQFormAutocomplete({
         position: 'relative',
         '& .MuiAutocomplete-listbox': {
           '& ul': {
-            padding: 0,
-            margin: 0,
+            p: 0,
+            m: 0,
           },
         },
         '& .MuiAutocomplete-paper': {
@@ -316,6 +316,8 @@ function SQFormAutocomplete({
           borderRadius: '4px',
           boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
           width: !lockWidthToField ? 'auto !important' : undefined,
+          // This makes sure the autocomplete options list width is never less than the input field width
+          minWidth: `${Number(baseWidth ?? 0) + LISTBOX_PADDING}px !important`,
         },
       }}
     >
