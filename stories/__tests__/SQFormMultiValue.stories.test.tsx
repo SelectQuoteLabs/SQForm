@@ -16,7 +16,9 @@ describe('SQFormMultiValue Tests', () => {
     const colorsLabel = screen.getByLabelText(/favorite colors/i);
     expect(colorsLabel).toBeVisible();
 
-    const colorSelect = screen.getByRole('textbox', {name: /favorite colors/i});
+    const colorSelect = screen.getByRole('combobox', {
+      name: /favorite colors/i,
+    });
     expect(colorSelect).toBeVisible();
 
     const red = screen.getByText('Red');
@@ -28,7 +30,7 @@ describe('SQFormMultiValue Tests', () => {
 
     expect(screen.queryByText('Orange')).not.toBeInTheDocument();
 
-    const colorsSelect = screen.getByRole('textbox', {
+    const colorsSelect = screen.getByRole('combobox', {
       name: /favorite colors/i,
     });
     userEvent.click(colorsSelect);
@@ -46,7 +48,7 @@ describe('SQFormMultiValue Tests', () => {
 
     expect(screen.queryByText('Test')).not.toBeInTheDocument();
 
-    const colorsSelect = screen.getByRole('textbox', {
+    const colorsSelect = screen.getByRole('combobox', {
       name: /favorite colors/i,
     });
     userEvent.type(colorsSelect, 'Test{enter}'); //type then press enter
@@ -78,7 +80,7 @@ describe('SQFormMultiValue Tests', () => {
   it('does not allow changes when disabled', () => {
     render(<SQFormMultiValue isDisabled={true} />);
 
-    const colorsSelect = screen.getByRole('textbox', {
+    const colorsSelect = screen.getByRole('combobox', {
       name: /favorite colors/i,
     });
     userEvent.click(colorsSelect);

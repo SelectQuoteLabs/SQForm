@@ -1,16 +1,17 @@
 import React from 'react';
-import {Grid, Chip, TextField, makeStyles} from '@material-ui/core';
-import {Autocomplete} from '@material-ui/lab';
+import {Autocomplete, Grid, TextField, Chip} from '@mui/material';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {VariableSizeList} from 'react-window';
 import {useField, useFormikContext} from 'formik';
 import {useForm} from './useForm';
 import type {ListChildComponentProps} from 'react-window';
+import type {AutocompleteChangeReason} from '@mui/base';
+import type {AutocompleteRenderInputParams} from '@mui/material';
 import type {
-  AutocompleteChangeReason,
-  AutocompleteRenderInputParams,
-} from '@material-ui/lab/Autocomplete';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+  BaseFieldProps,
+  SQFormOption,
+  SQFormOptionValue,
+} from '../../types';
 import type {
   OuterElementContextType,
   OuterElementTypeProps,
@@ -85,6 +86,10 @@ const ListboxVirtualizedComponent = React.forwardRef(
             itemData={items}
             height={height}
             width="100%"
+            style={{
+              margin: 0,
+              padding: 0,
+            }}
             key={ITEM_COUNT}
             outerElementType={OuterElementType}
             innerElementType="ul"
@@ -100,22 +105,6 @@ const ListboxVirtualizedComponent = React.forwardRef(
   } as React.ForwardRefRenderFunction<HTMLDivElement>
 );
 
-const useStyles = makeStyles({
-  listbox: {
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-});
-
-const clearButtonStyles = makeStyles({
-  endAdornment: {
-    top: 'auto',
-    bottom: '8px',
-  },
-});
-
 function SQFormMultiValue({
   children,
   name,
@@ -126,8 +115,6 @@ function SQFormMultiValue({
   onChange,
   onBlur,
 }: SQFormMultiValueProps): React.ReactElement {
-  const classes = useStyles();
-  const clearButtonClasses = clearButtonStyles();
   const [{value: fieldValue}, {initialValue}] = useField(name);
   const {setFieldValue, setTouched, touched} = useFormikContext();
   const {
@@ -187,7 +174,7 @@ function SQFormMultiValue({
   );
 
   const handleAutocompleteChange = React.useCallback(
-    (event, value, reason, detail) => {
+    (event, value, reason: AutocompleteChangeReason, detail) => {
       if (reason === 'clear') {
         setFieldValue(name, []);
         setInputValue('');
@@ -195,7 +182,7 @@ function SQFormMultiValue({
         return;
       }
 
-      if (reason === 'create-option') {
+      if (reason === 'createOption') {
         /* Creating an option we always know that the last value
          * in the `value` array is a string
          */
@@ -220,7 +207,7 @@ function SQFormMultiValue({
         return;
       }
 
-      if (reason === 'remove-option') {
+      if (reason === 'removeOption') {
         const currentFieldOptions: string[] = [...value];
 
         const newCustomOptions = customOptions.filter((customOption) => {
@@ -233,17 +220,13 @@ function SQFormMultiValue({
       }
 
       const currentFieldOptions = [...value];
-      const newlyAddedOption = currentFieldOptions.pop();
-      let newFieldValue;
-      if (currentFieldOptions.includes(newlyAddedOption.value)) {
-        newFieldValue = currentFieldOptions.filter((option) => {
-          return option !== newlyAddedOption.value;
-        });
+      const newlyAddedOption: string = currentFieldOptions.pop();
+      if (currentFieldOptions.includes(newlyAddedOption)) {
+        setFieldValue(name, currentFieldOptions);
       } else {
-        newFieldValue = [...currentFieldOptions, newlyAddedOption.value];
+        setFieldValue(name, [...currentFieldOptions, newlyAddedOption]);
       }
-
-      setFieldValue(name, newFieldValue);
+      setInputValue('');
       onChange && onChange(event, value, reason);
     },
     [onChange, customOptions, name, setFieldValue]
@@ -261,6 +244,7 @@ function SQFormMultiValue({
 
   const getInputElement = (params: AutocompleteRenderInputParams) => {
     const endAdornment = params.InputProps.endAdornment;
+    let newEndAdornment;
 
     // if `endAdornment` exists, it's not primitive, has the props key exists and its value isn't undefined
     if (
@@ -269,50 +253,51 @@ function SQFormMultiValue({
       'props' in endAdornment &&
       endAdornment.props
     ) {
-      const newEndAdornment = {
+      newEndAdornment = {
         ...endAdornment,
         props: {
           ...endAdornment.props,
-          className: `${endAdornment.props.className} ${clearButtonClasses.endAdornment}`,
+          style: {top: 'auto', bottom: '8px'},
         },
       };
-
-      return (
-        <TextField
-          {...params}
-          name={name}
-          color="primary"
-          disabled={isDisabled}
-          fullWidth={true}
-          label={label}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: newEndAdornment,
-          }}
-          InputLabelProps={{
-            ...params.InputLabelProps,
-            shrink: true,
-          }}
-          inputProps={{
-            ...params.inputProps,
-            disabled: isDisabled,
-          }}
-          FormHelperTextProps={{error: isFieldError}}
-          helperText={!isDisabled && HelperTextComponent}
-        />
-      );
     }
 
-    return null;
+    return (
+      <TextField
+        {...params}
+        name={name}
+        variant="standard"
+        color="primary"
+        disabled={isDisabled}
+        fullWidth={true}
+        label={label}
+        InputProps={{
+          ...params.InputProps,
+          endAdornment: newEndAdornment,
+        }}
+        InputLabelProps={{
+          ...params.InputLabelProps,
+          shrink: true,
+        }}
+        inputProps={{
+          ...params.inputProps,
+          disabled: isDisabled,
+        }}
+        FormHelperTextProps={{error: isFieldError}}
+        helperText={!isDisabled && HelperTextComponent}
+      />
+    );
   };
 
   return (
-    <Grid item sm={size}>
-      <Autocomplete
-        classes={classes}
+    <Grid item={true} sm={size}>
+      <Autocomplete<SQFormOptionValue, boolean, boolean, boolean>
+        sx={{
+          minWidth: '75px',
+        }}
         multiple={true}
         id={name}
-        options={children}
+        options={children.map((child) => child.value)}
         freeSolo={true}
         renderTags={(value, getTagProps) => {
           return value.map((optionValue, index) => {
@@ -338,13 +323,22 @@ function SQFormMultiValue({
             React.HTMLAttributes<HTMLElement>
           >
         }
-        getOptionLabel={(option) => option.label || ''}
+        getOptionLabel={(option) =>
+          displayOptions.find((displayOption) => displayOption.value === option)
+            ?.label || '- -'
+        }
         value={fieldValue || []}
         inputValue={inputValue}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
         onInputChange={handleInputChange}
-        getOptionDisabled={(option) => option.isDisabled}
+        getOptionDisabled={(option) =>
+          Boolean(
+            displayOptions.find(
+              (displayOption) => displayOption.value === option
+            )?.isDisabled
+          )
+        }
         disabled={isDisabled}
         disableClearable={isDisabled}
         renderInput={getInputElement}
