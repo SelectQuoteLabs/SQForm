@@ -10,8 +10,7 @@ import {
   Checkbox,
   ListItemText,
   Tooltip,
-  makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
 import {useFormikContext} from 'formik';
 import {EMPTY_LABEL} from '../../utils/constants';
 import {useForm} from './useForm';
@@ -20,8 +19,12 @@ import {
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
 } from '../../utils/consoleWarnings';
-import type {TooltipProps, SelectProps} from '@material-ui/core';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+import type {TooltipProps, SelectProps, SelectChangeEvent} from '@mui/material';
+import type {
+  BaseFieldProps,
+  SQFormOption,
+  SQFormOptionValue,
+} from '../../types';
 
 export type SQFormMultiSelectProps = BaseFieldProps & {
   /** Multiselect options to select from */
@@ -29,16 +32,13 @@ export type SQFormMultiSelectProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Custom onChange event callback */
-  onChange?: (
-    event: React.ChangeEvent<{name?: string; value: unknown}>,
-    value: SQFormOption['value'][]
-  ) => void;
+  onChange?: SelectProps<SQFormOptionValue[] | ''>['onChange'];
   /** This property will allow the end user to check a "Select All" box */
   useSelectAll?: boolean;
   /** Use MUI's Tooltip Position Values */
   toolTipPlacement?: TooltipProps['placement'];
   /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
-  muiFieldProps?: SelectProps;
+  muiFieldProps?: SelectProps<SQFormOptionValue[] | ''>;
   /** Whether or not to show the tooltip */
   showTooltip?: boolean;
   /** String to show as the tooltip.
@@ -63,13 +63,17 @@ const MenuProps = {
   },
   variant: 'menu',
   getContentAnchorEl: null,
-} as SelectProps['MenuProps'];
+} as SelectProps<SQFormOptionValue[] | ''>['MenuProps'];
 
 const selectedDisplayValue = (
-  values: SQFormOption['value'][],
+  values: SQFormOptionValue[] | '',
   options: SQFormMultiSelectProps['children'],
   name?: SQFormMultiSelectProps['name']
 ) => {
+  if (!Array.isArray(values)) {
+    return '';
+  }
+
   const selectedValues = values
     .map((value) => {
       return options.find((option) => option.value === value)?.label;
@@ -89,7 +93,7 @@ const selectedDisplayValue = (
 };
 
 const getToolTipTitle = (
-  formikFieldValue: SQFormOption['value'][],
+  formikFieldValue: SQFormOptionValue[] | '',
   options: SQFormMultiSelectProps['children']
 ) => {
   if (!formikFieldValue?.length) {
@@ -99,13 +103,13 @@ const getToolTipTitle = (
   return selectedDisplayValue(formikFieldValue, options);
 };
 
-const useStyles = makeStyles({
+const classes = {
   selectHeight: {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
   },
-});
+};
 
 function SQFormMultiSelect({
   children,
@@ -120,15 +124,13 @@ function SQFormMultiSelect({
   showTooltip = true,
   tooltipText,
 }: SQFormMultiSelectProps): React.ReactElement {
-  const classes = useStyles();
-
   const {setFieldValue} = useFormikContext();
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
     formikField: {field},
     fieldState: {isFieldError, isFieldRequired},
     fieldHelpers: {handleBlur, HelperTextComponent},
-  } = useForm<SQFormOption['value'][], unknown>({name});
+  } = useForm<SQFormOptionValue[] | '', unknown>({name});
 
   React.useEffect(() => {
     if (!children) {
@@ -143,16 +145,16 @@ function SQFormMultiSelect({
   const labelID = label.toLowerCase();
   const toolTipTitle = getToolTipTitle(field.value, children);
 
-  const getIsSelectAllChecked = (value: SQFormOption['value'][]) =>
+  const getIsSelectAllChecked = (value: SQFormOptionValue[]) =>
     value.includes('ALL');
-  const getIsSelectNoneChecked = (value: SQFormOption['value'][]) =>
+  const getIsSelectNoneChecked = (value: SQFormOptionValue[]) =>
     value.includes('NONE');
 
   const getValues = (
     children: SQFormMultiSelectProps['children'],
     isSelectAllChecked: boolean,
     isSelectNoneChecked: boolean,
-    value: SQFormOption['value'][]
+    value: SQFormOptionValue[]
   ) => {
     if (isSelectAllChecked) {
       return children?.map((option) => option.value);
@@ -166,10 +168,10 @@ function SQFormMultiSelect({
   };
 
   const handleMultiSelectChange = (
-    event: React.ChangeEvent<{name?: string; value: unknown}>,
+    event: SelectChangeEvent<SQFormOptionValue[] | ''>,
     _child: ReactNode
   ) => {
-    const value = event.target.value as unknown as SQFormOption['value'][];
+    const value = event.target.value as SQFormOptionValue[];
     const isSelectAllChecked = getIsSelectAllChecked(value);
     const isSelectNoneChecked = getIsSelectNoneChecked(value);
     const values = getValues(
@@ -192,7 +194,7 @@ function SQFormMultiSelect({
    * e.g., if value is an "ID"
    */
   const getRenderValue = (selected: unknown) => {
-    const getValue = (selectedValues: SQFormOption['value'][]) => {
+    const getValue = (selectedValues: SQFormOptionValue[]) => {
       if (!selectedValues?.length) {
         return EMPTY_LABEL;
       }
@@ -200,7 +202,7 @@ function SQFormMultiSelect({
       return selectedDisplayValue(selectedValues, children, name);
     };
 
-    return getValue(selected as SQFormOption['value'][]);
+    return getValue(selected as SQFormOptionValue[]);
   };
 
   const renderTooltip = () => {
@@ -212,7 +214,7 @@ function SQFormMultiSelect({
   };
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <FormControl
         error={isFieldError}
         disabled={isDisabled}
@@ -229,12 +231,12 @@ function SQFormMultiSelect({
           leaveDelay={100}
           title={renderTooltip()}
         >
-          <Select
-            className={classes.selectHeight}
-            multiple
-            displayEmpty
+          <Select<SQFormOptionValue[] | ''>
+            sx={classes.selectHeight}
+            multiple={true}
+            displayEmpty={true}
             input={<Input disabled={isDisabled} name={name} />}
-            value={(field.value as SQFormOption['value'][]) || []}
+            value={field.value}
             onBlur={handleBlur}
             onChange={handleMultiSelectChange}
             fullWidth={true}
@@ -261,7 +263,13 @@ function SQFormMultiSelect({
             {children?.map((option) => {
               return (
                 <MenuItem key={`${name}_${option.value}`} value={option.value}>
-                  <Checkbox checked={field.value?.includes(option.value)} />
+                  <Checkbox
+                    checked={
+                      Array.isArray(field.value)
+                        ? field.value?.includes(option.value)
+                        : false
+                    }
+                  />
                   <ListItemText
                     primary={option.label}
                     primaryTypographyProps={{variant: 'body2'}}
