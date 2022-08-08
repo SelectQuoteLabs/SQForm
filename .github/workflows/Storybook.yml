@@ -14,8 +14,11 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
-      - run: |
-          npm ci && npm run build-storybook
+      - run: cd ./SQFormDocs
+      - run: npm ci
+      - run: cd ..
+      - run: npm ci
+      - run: npm run build-storybook
       - uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
