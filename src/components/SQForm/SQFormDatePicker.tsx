@@ -8,6 +8,7 @@ import type {DatePickerProps} from '@mui/x-date-pickers/DatePicker';
 import type {BasePickerProps} from '@mui/x-date-pickers/internals';
 import type {BaseDatePickerProps} from '@mui/x-date-pickers/DatePicker/shared';
 import type {BaseFieldProps} from '../../types';
+import type {SxProps, Theme} from '@mui/material/styles';
 
 type MuiFieldProps<TDate> = BaseDatePickerProps<TDate, TDate> &
   Omit<BasePickerProps<TDate, TDate | null>, 'value' | 'onChange'>;
@@ -33,7 +34,12 @@ export type SQFormDatePickerProps = BaseFieldProps & {
   /** Props provided to the Input component. Most commonly used for adornments. */
   InputProps?: DatePickerProps<Moment, Moment>['InputProps'];
   /** Props provided to the input adornments. */
-  InputAdornmentProps?: DatePickerProps<Moment, Moment>['InputAdornmentProps'];
+  InputAdornmentProps?: DatePickerProps<
+    Moment,
+    Moment
+  >['InputAdornmentProps'] & {
+    sx?: SxProps<Theme>;
+  };
   /** A Boolean flag used when using calendar only; disabled text filed input */
   isCalendarOnly?: boolean;
 };
