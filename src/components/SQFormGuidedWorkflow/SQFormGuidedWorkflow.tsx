@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import React from 'react';
 import {Formik, Form} from 'formik';
-import {CardActions, CardContent, makeStyles} from '@material-ui/core';
+import {CardActions, CardContent} from '@mui/material';
 import {
   Accordion,
   ComponentLoadingSpinner,
@@ -21,19 +21,19 @@ import type {
   SQFormGuidedWorkflowProps,
 } from './Types';
 
-const useStyles = makeStyles(() => {
-  return {
-    root: {
-      padding: '16px !important' /* material-ui override */,
+const classes = {
+  sectionBody: {
+    '& .MuiCollapse-wrapper .MuiBox-root': {
+      padding: '0px',
     },
-    panelFooter: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: '16px 24px',
-    },
-  };
-});
+  },
+  panelFooter: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+    padding: '16px 24px',
+  },
+};
 
 function SQFormGuidedWorkflow<TValues extends FormikValues>({
   taskModules,
@@ -62,8 +62,6 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
 
     return {};
   };
-
-  const classes = useStyles();
 
   const {
     state: taskModulesContext,
@@ -140,7 +138,7 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
         >
           {({isSubmitting}) => (
             <Form>
-              <CardContent className={classes.root}>
+              <CardContent>
                 {isSubmitting || taskModule.isLoading ? (
                   <div data-testid="loadingSpinner">
                     <ComponentLoadingSpinner
@@ -170,7 +168,7 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
                   </>
                 )}
               </CardContent>
-              <CardActions className={classes.panelFooter}>
+              <CardActions sx={classes.panelFooter}>
                 <SQFormButton type="reset" title="Reset Form">
                   {taskModule?.resetButtonText ?? 'Reset'}
                 </SQFormButton>
@@ -193,9 +191,9 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
   });
 
   return (
-    <Section style={{padding: '20px', ...containerStyles}}>
+    <Section sx={{padding: '20px', ...containerStyles}}>
       <SectionHeader title={mainTitle} informativeHeading={mainSubtitle} />
-      <SectionBody>
+      <SectionBody sx={classes.sectionBody}>
         <Accordion accordionPanels={transformedTaskModules} />
       </SectionBody>
     </Section>
