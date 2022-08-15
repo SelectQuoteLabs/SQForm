@@ -1,8 +1,8 @@
 import React from 'react';
 import {ClickAwayListener, Grid, TextField} from '@mui/material';
 import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
-import {MarkOptional} from 'ts-essentials';
 import {useForm} from './useForm';
+import type {MarkOptional} from 'ts-essentials';
 import type {Moment} from 'moment';
 import type {BaseDateTimePickerProps} from '@mui/x-date-pickers/DateTimePicker/shared';
 import type {BaseFieldProps} from '../../types';
@@ -63,7 +63,6 @@ function SQFormDateTimePicker({
     <ClickAwayListener onClickAway={handleClickAway}>
       <Grid item={true} sm={size}>
         <DateTimePicker
-          {...muiFieldProps}
           label={label}
           disabled={isDisabled}
           value={value}
@@ -99,6 +98,7 @@ function SQFormDateTimePicker({
               />
             );
           }}
+          {...muiFieldProps}
         />
       </Grid>
     </ClickAwayListener>
