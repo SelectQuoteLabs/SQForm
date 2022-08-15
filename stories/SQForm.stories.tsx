@@ -305,7 +305,7 @@ export const FormWithValidation = (): JSX.Element => {
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
         <Grid item={true} sm={12}>
-          <Grid container={true} justifyContent="space-between">
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
             <SQFormButton title="Reset" type="reset">
               RESET
             </SQFormButton>
@@ -464,8 +464,10 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormMultiSelect
@@ -506,8 +508,10 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormMaskedTextField
@@ -690,8 +694,10 @@ export const applyAnAction = (): JSX.Element => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormAutocomplete
@@ -778,8 +784,10 @@ export const ccaChecklist = (): JSX.Element => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormDropdown name="dvh" label="DVH" displayEmpty={true} size={2}>
