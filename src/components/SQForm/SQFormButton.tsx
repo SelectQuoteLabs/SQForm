@@ -3,7 +3,7 @@ import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import type {ButtonType} from './useFormButton';
 
-export type SQFormButtonProps<Values> = {
+export type SQFormButtonProps<Values = void> = {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
@@ -13,7 +13,7 @@ export type SQFormButtonProps<Values> = {
   initialValues?: Values;
 };
 
-function SQFormButton<Values>({
+function SQFormButton<Values = void>({
   children,
   isDisabled = false,
   shouldRequireFieldUpdates = false,
