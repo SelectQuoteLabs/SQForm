@@ -78,7 +78,6 @@ export default function SQFormScrollableCardsMenuWrapper({
       }}
     >
       <CardHeader
-        classes={{}}
         title={title}
         sx={(theme) => ({
           gridArea: 'header',
