@@ -6,18 +6,19 @@
   --color-recruitViolet: #432534;
   --color-srtsGreen: #5a7e44;
   --color-teal: #017788;
-  --color-lightTeal: #34a1b6;
   --color-darkTeal: #004b5b;
+  --color-lightTeal: #34a1b6;
   --color-frenchBleu: #0066ff;
   --color-oysterBay: #d9f1f4;
   --color-lightBlue: #ecf5f7;
   --color-orange: #f17c21;
   --color-granite: #5b5858;
 
-  --color-textSuccessGreen: #3C7107;
-  --color-textWarningYellow: #C67000;
-  --color-textErrorRed: #AD0010;
-  --color-textInfoBlue: #006CCB;
+  --color-textSuccessGreen: #3c7107;
+  --color-textWarningYellow: #c67000;
+  --color-textErrorRed: #ad0010;
+  --color-textInfoBlue: #006ccb;
+  --color-textDisabled: #9e9e9e;
 
   --color-brightYellow: #ff9f1c;
   --color-sienna: #c46c2a;
@@ -33,6 +34,7 @@
   --color-white: #ffffff;
 
   --color-stone: #8a8889;
+  --color-rock: #767676;
   --color-slate: #b3b4b3;
   --color-concrete: #b8b2a9;
   --color-gainsboro: #e0e0e0;
