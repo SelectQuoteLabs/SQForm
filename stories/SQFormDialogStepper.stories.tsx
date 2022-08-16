@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import React from 'react';
 
 import markdown from '../notes/SQFormDialogStepper.md';
-import {createDocsPage} from './utils/createDocsPage';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 import {
   SQFormTextField,
   SQFormDialogStep,
