@@ -3,34 +3,38 @@ import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import type {ButtonType} from './useFormButton';
 
-export type SQFormButtonProps = {
+export type SQFormButtonProps<Values> = {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
   title?: string;
   type?: ButtonType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  initialValues?: Values;
 };
 
-function SQFormButton({
+function SQFormButton<Values>({
   children,
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title,
   type = 'submit',
   onClick,
-}: SQFormButtonProps): JSX.Element {
+  initialValues,
+}: SQFormButtonProps<Values>): JSX.Element {
   const isResetButton = type === BUTTON_TYPES.RESET;
-  const {isButtonDisabled, handleReset, handleClick} = useFormButton({
-    isDisabled,
-    shouldRequireFieldUpdates,
-    onClick,
-    buttonType: type,
-  });
+  const {isButtonDisabled, setValues, handleReset, handleClick} = useFormButton(
+    {
+      isDisabled,
+      shouldRequireFieldUpdates,
+      onClick,
+      buttonType: type,
+    }
+  );
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (isResetButton) {
-      return handleReset;
+      return initialValues ? () => setValues(initialValues) : handleReset;
     } else if (typeof onClick !== 'undefined') {
       return handleClick(event);
     }
