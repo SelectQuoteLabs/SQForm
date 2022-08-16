@@ -6,7 +6,7 @@ import {
   SQFormTextField,
   SQFormCheckbox,
 } from '../src';
-import {createDocsPage} from './utils/createDocsPage';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 import type {FormikHelpers} from 'formik';
 
 export default {
