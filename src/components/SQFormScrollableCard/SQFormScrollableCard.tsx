@@ -195,6 +195,9 @@ function SQFormScrollableCard<Values>({
                     overflowY: 'auto',
                     p: `${theme.spacing(2)}`,
                     ...cardContentStyles,
+                    '& .MuiGrid-root.MuiGrid-item': {
+                      p: theme.spacing(1),
+                    },
                   })}
                 >
                   {SubHeaderComponent}
@@ -219,6 +222,10 @@ function SQFormScrollableCard<Values>({
                     justifyContent: 'space-between',
                     borderTop: '1px solid rgba(0, 0, 0, 0.12)',
                     padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
+                    '& .MuiGrid-root.MuiGrid-container': {
+                      p: `0 ${theme.spacing(2)}`,
+                      ml: theme.spacing(1),
+                    },
                   })}
                 >
                   <SQFormButton type="reset" title="Reset Form">
