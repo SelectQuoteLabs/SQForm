@@ -2,12 +2,12 @@ import * as Yup from 'yup';
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
-import {Card, Grid} from '@material-ui/core';
+import {Grid, Card} from '@mui/material';
 import {SectionHeader} from 'scplus-shared-components';
 
 import * as markdown from '../notes/SQForm.md';
-import FormValidationMessage from './components/FormValidationMessage';
-import {createDocsPage} from './utils/createDocsPage';
+import FormValidationMessage from '../old_stories/components/FormValidationMessage';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
 
 import {
   SQForm,
@@ -166,7 +166,7 @@ const handleSubmit = <TValues extends unknown>(
 
 export const BasicForm = (): JSX.Element => {
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={MOCK_FORM_WITH_BOOLEANS_ENTITY}
         onSubmit={handleSubmit}
@@ -219,8 +219,8 @@ export const BasicForm = (): JSX.Element => {
         >
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
-        <Grid item sm={12}>
-          <Grid container justifyContent="space-between">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -257,7 +257,7 @@ export const FormWithValidation = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={MOCK_FORM_ENTITY}
         onSubmit={handleSubmit}
@@ -304,8 +304,8 @@ export const FormWithValidation = (): JSX.Element => {
         >
           {MOCK_MULTI_VALUE_OPTIONS}
         </SQFormMultiValue>
-        <Grid item sm={12}>
-          <Grid container justifyContent="space-between">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
             <SQFormButton title="Reset" type="reset">
               RESET
             </SQFormButton>
@@ -321,7 +321,7 @@ export const FormWithValidation = (): JSX.Element => {
 
 export const formWithFieldArray = (): JSX.Element => {
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={MOCK_FORM_FOR_FIELD_ARRAY}
         onSubmit={handleSubmit}
@@ -345,8 +345,8 @@ export const formWithFieldArray = (): JSX.Element => {
         </SQFormDropdown>
         <SQFormCheckbox name="cool" label="Cool" />
         <SQFormCheckbox name="lame" label="Lame" isDisabled={true} />
-        <Grid item sm={12}>
-          <Grid container justifyContent="flex-end">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'flex-end'}}>
             <SQFormButton shouldRequireFieldUpdates={true}>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -370,13 +370,13 @@ const names = [
 
 export const formWithInclusionlist = (): JSX.Element => {
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SectionHeader title="Friends" />
       <SQForm
         // the property you want to store the array of checked items determines the `name` prop below
         initialValues={MOCK_FORM_FOR_CHECKBOX_GROUP}
         onSubmit={handleSubmit}
-        muiGridProps={{spacing: 4}}
+        muiGridProps={{spacing: 4, margin: '-16px'}}
       >
         {/* the group's `name` string should always match the item's `name` string */}
         <SQFormInclusionList
@@ -403,7 +403,7 @@ export const formWithInclusionlist = (): JSX.Element => {
             const {values} = arrayHelpers.form;
             return (
               <Grid
-                container
+                container={true}
                 direction="column"
                 wrap="nowrap"
                 style={{
@@ -414,7 +414,7 @@ export const formWithInclusionlist = (): JSX.Element => {
               >
                 {names.map((name) => {
                   return (
-                    <Grid item key={name}>
+                    <Grid item={true} key={name}>
                       <SQFormInclusionListItem
                         name="friends"
                         label={name}
@@ -435,8 +435,8 @@ export const formWithInclusionlist = (): JSX.Element => {
             );
           }}
         </SQFormInclusionList>
-        <Grid item sm={12}>
-          <Grid container justifyContent="space-between">
+        <Grid sx={{p: '16px'}} item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -457,15 +457,17 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+    <Card raised={true} style={{padding: '16px', minWidth: '768px'}}>
       <SQForm
         initialValues={MOCK_FORM_FOR_MULTISELECT}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormMultiSelect
@@ -477,7 +479,7 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
         >
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
-        <Grid item style={{alignSelf: 'flex-end'}}>
+        <Grid item={true} style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
@@ -499,15 +501,17 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+    <Card raised={true} style={{padding: '16px', minWidth: '768px'}}>
       <SQForm
         initialValues={MOCK_FORM_MASKED_FIELDS}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormMaskedTextField
@@ -559,8 +563,8 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
           placeholder="A1B 2C3"
           mask={[/[A-Z]/i, /\d/, /[A-Z]/i, ' ', /\d/, /[A-Z]/i, /\d/]}
         />
-        <Grid item sm={12}>
-          <Grid container justifyContent="space-between">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
             <SQFormResetButtonWithConfirmation
               variant="outlined"
               confirmationContent="You are about to reset this form. Any unsaved info for this customer will be removed"
@@ -577,7 +581,7 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
 
 export const basicFormWithCustomOnBlur = (): JSX.Element => {
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={MOCK_FORM_ENTITY}
         onSubmit={handleSubmit}
@@ -616,8 +620,8 @@ export const basicFormWithCustomOnBlur = (): JSX.Element => {
         >
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
-        <Grid item sm={12}>
-          <Grid container justifyContent="flex-end">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'flex-end'}}>
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -628,7 +632,7 @@ export const basicFormWithCustomOnBlur = (): JSX.Element => {
 
 export const basicFormWithCustomOnChange = (): JSX.Element => {
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={MOCK_FORM_ENTITY}
         onSubmit={handleSubmit}
@@ -667,8 +671,8 @@ export const basicFormWithCustomOnChange = (): JSX.Element => {
         >
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
-        <Grid item sm={12}>
-          <Grid container justifyContent="flex-end">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'flex-end'}}>
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -683,15 +687,17 @@ export const applyAnAction = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+    <Card raised={true} style={{padding: '16px', minWidth: '768px'}}>
       <SQForm
         initialValues={MOCK_ACTIONS_FORM_ENTITY}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormAutocomplete
@@ -707,10 +713,10 @@ export const applyAnAction = (): JSX.Element => {
           label="Note"
           size={5}
           placeholder="Type to add note..."
-          rows={2}
-          rowsMax={2}
+          minRows={2}
+          maxRows={2}
         />
-        <Grid item style={{alignSelf: 'flex-end'}}>
+        <Grid item={true} style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>
@@ -731,7 +737,7 @@ export const SQFormCheckboxGroupExample = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: '16px', minWidth: '250px'}}>
+    <Card raised={true} style={{padding: '16px', minWidth: '250px'}}>
       <SQForm
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -745,8 +751,8 @@ export const SQFormCheckboxGroupExample = (): JSX.Element => {
         >
           {CHECKBOX_GROUP_OPTIONS}
         </SQFormCheckboxGroup>
-        <Grid item sm={12}>
-          <Grid container justifyContent="flex-end">
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'flex-end'}}>
             <SQFormButton>Submit</SQFormButton>
           </Grid>
         </Grid>
@@ -767,7 +773,7 @@ export const ccaChecklist = (): JSX.Element => {
   });
 
   return (
-    <Card raised style={{padding: '16px', minWidth: '768px'}}>
+    <Card raised={true} style={{padding: '16px', minWidth: '768px'}}>
       <SQForm
         initialValues={{
           dvh: '',
@@ -778,8 +784,10 @@ export const ccaChecklist = (): JSX.Element => {
         validationSchema={validationSchema}
         muiGridProps={{
           spacing: 2,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          sx: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         }}
       >
         <SQFormDropdown name="dvh" label="DVH" displayEmpty={true} size={2}>
@@ -796,7 +804,7 @@ export const ccaChecklist = (): JSX.Element => {
         >
           {dropdownOptions}
         </SQFormDropdown>
-        <Grid item style={{alignSelf: 'flex-end'}}>
+        <Grid item={true} style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>

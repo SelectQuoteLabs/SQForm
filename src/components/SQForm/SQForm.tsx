@@ -1,11 +1,11 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {setLocale} from 'yup';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {AnyObjectSchema} from 'yup';
-import type {GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikConfig, FormikValues} from 'formik';
 
 setLocale({
@@ -82,7 +82,7 @@ function SQForm<Values extends FormikValues>({
           <Form>
             <Grid
               {...muiGridProps}
-              container
+              container={true}
               spacing={muiGridProps.spacing ?? 2}
             >
               {children}
