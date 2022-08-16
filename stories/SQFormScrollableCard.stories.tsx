@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 import React from 'react';
 
-import {Paper} from '@material-ui/core';
+import {Paper} from '@mui/material';
 import {SQFormScrollableCard, SQFormTextField} from '../src';
-import {createDocsPage} from './utils/createDocsPage';
-import type {GridProps} from '@material-ui/core';
-import type {CustomStory} from './types/storyHelperTypes';
+import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import type {GridProps} from '@mui/material';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
 
 type SQFormScrollableCardStoryProps<Values> =
@@ -26,14 +26,15 @@ export default {
   },
 };
 
-const alignItems: GridProps['alignItems'] = 'center';
 const spacing: GridProps['spacing'] = 2;
 const defaultArgs = {
   title: 'Default',
   initialValues: {hello: ''},
   muiGridProps: {
     spacing,
-    alignItems,
+    sx: {
+      alignItems: 'center',
+    },
   },
   onSubmit: () => {
     /* do nothing */
