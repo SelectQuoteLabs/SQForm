@@ -12,7 +12,7 @@ import type {AnyObjectSchema} from 'yup';
 
 export type SQFormScrollableCardProps<Values extends FormikValues> = {
   /** An object of css-in-js style properties to be passed and spread onto the `CardContent` component */
-  cardContentStyles?: Record<string, unknown>;
+  cardContentStyles?: React.CSSProperties;
   /** Form related Field(s) and components */
   children: React.ReactNode;
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
