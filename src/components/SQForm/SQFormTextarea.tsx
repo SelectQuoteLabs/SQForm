@@ -32,6 +32,13 @@ type FormValues = {
   [field: string]: string;
 };
 
+const classes = {
+  requiredLabelNotchedOutline: {
+    // Asterisk is still in dom taking up space for required fields, this fixing spacing
+    '& > div fieldset legend span': {padding: '0px'},
+  },
+};
+
 function SQFormTextarea({
   name,
   label,
@@ -82,6 +89,7 @@ function SQFormTextarea({
   return (
     <Grid item sm={size}>
       <TextField
+        sx={isFieldRequired ? classes.requiredLabelNotchedOutline : undefined}
         id={toKebabCase(name)}
         color="primary"
         disabled={isDisabled}
@@ -89,7 +97,6 @@ function SQFormTextarea({
         fullWidth={true}
         InputLabelProps={{
           shrink: true,
-          sx: {transform: 'translate(14px, -9px) scale(0.75)'},
         }}
         FormHelperTextProps={{error: isFieldError}}
         name={name}

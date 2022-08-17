@@ -282,7 +282,12 @@ export const FormWithValidation = (): JSX.Element => {
           {MOCK_STATE_OPTIONS}
         </SQFormDropdown>
         <SQFormTextField name="age" label="Age" type="number" size={2} />
-        <SQFormTextarea name="note" label="Note" size={5} maxCharacters={100} />
+        <SQFormTextarea
+          name="note"
+          label="Notes (Extended Edition)"
+          size={5}
+          maxCharacters={100}
+        />
         <SQFormRadioButtonGroup
           name="preferredPet"
           groupLabel="Cat or Dog?"
