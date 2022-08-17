@@ -34,6 +34,9 @@ function SQFormButton<Values = void>({
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (isResetButton) {
+      /* There is a Formik bug where simply calling handleReset does not cause the form to re-validate.
+          To fix this, we allow the user to optionally pass in the form's initial values and manually reset the form.
+          Github Issue: https://github.com/jaredpalmer/formik/issues/3512 */
       return initialValues ? () => setValues(initialValues) : handleReset;
     } else if (typeof onClick !== 'undefined') {
       return handleClick(event);
