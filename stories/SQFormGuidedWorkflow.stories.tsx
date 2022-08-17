@@ -6,7 +6,7 @@ import {
   RoundedButton,
   TextButton,
 } from 'scplus-shared-components';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid, Typography, Box} from '@mui/material';
 import {
   SQFormGuidedWorkflow,
   SQFormDropdown,
@@ -18,7 +18,7 @@ import type {
   SQFormGuidedWorkflowContext,
   SQFormGuidedWorkflowProps,
 } from 'components/SQFormGuidedWorkflow/Types';
-import type {CustomStory} from './types/storyHelperTypes';
+import type {CustomStory} from '../old_stories/types/storyHelperTypes';
 
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -104,18 +104,18 @@ const Template: CustomStory<
                 Review the following ancillary benefits with the client
               </Grid>
               <Grid item xs={6}>
-                <ul style={{marginBottom: 0}}>
+                <Box component="ul" sx={{marginBottom: 0}}>
                   <li>Dental (Reimbursement / Co-Pay)</li>
                   <li>Transportation</li>
                   <li>Home Health Care</li>
-                </ul>
+                </Box>
               </Grid>
               <Grid item xs={6}>
-                <ul style={{marginBottom: 0}}>
+                <Box component="ul" sx={{marginBottom: 0}}>
                   <li>Meals</li>
                   <li>Fitness Membership</li>
                   <li>Part B Giveback</li>
-                </ul>
+                </Box>
               </Grid>
             </Grid>
           </>
@@ -125,10 +125,10 @@ const Template: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome">
+            <SQFormDropdown name="outcome" label="Outcome" size={4} >
               {outcomeDropdownOptions}
             </SQFormDropdown>
-            <SQFormTextarea name="notes" label="Notes" />
+            <SQFormTextarea name="notes" label="Notes" size={4} />
           </>
         ),
         title: 'Confirm Info',
@@ -165,16 +165,18 @@ const Template: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome">
+            <SQFormDropdown name="outcome" label="Outcome" size={4}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
-            <SQFormTextarea name="notes" label="Notes" />
-            <RoundedButton
-              title="Ineligible"
-              onClick={() => setIneligible(true)}
-            >
-              Ineligible? Click here
-            </RoundedButton>
+            <SQFormTextarea name="notes" label="Notes" size={4}/>
+            <Grid item={true} sm={4}>
+              <RoundedButton
+                title="Ineligible"
+                onClick={() => setIneligible(true)}
+              >
+                Ineligible? Click here
+              </RoundedButton>
+            </Grid>    
           </>
         ),
         title: 'Confirm Info',
@@ -251,10 +253,10 @@ const Template: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome">
+            <SQFormDropdown name="outcome" label="Outcome" size={4}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
-            <SQFormTextarea name="notes" label="Notes" />
+            <SQFormTextarea name="notes" label="Notes" size={4} />
           </>
         ),
         title: 'Confirm Info',
@@ -263,7 +265,7 @@ const Template: CustomStory<
   ];
 
   return (
-    <div style={{width: '90%', height: '95vh'}}>
+    <Box sx={{width: '90%', height: '95vh'}}>
       <ExpandingCardList>
         <ExpandingCard title="Guided Workflow" name="guidedWorkflow">
           <SQFormGuidedWorkflow
@@ -278,7 +280,7 @@ const Template: CustomStory<
           />
         </ExpandingCard>
       </ExpandingCardList>
-    </div>
+    </Box>
   );
 };
 
@@ -336,8 +338,8 @@ const TestTemplate: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormTextField name="firstText" label="First Text" />
-            <SQFormTextField name="secondText" label="Second Text" />
+            <SQFormTextField name="firstText" label="First Text" size={4} />
+            <SQFormTextField name="secondText" label="Second Text" size={4} />
           </>
         ),
         title: 'Outcome Test',
@@ -359,8 +361,8 @@ const TestTemplate: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormTextField name="testText" label="Test Text" />
-            <SQFormTextarea name="notes" label="Notes" />
+            <SQFormTextField name="testText" label="Test Text" size={4} />
+            <SQFormTextarea name="notes" label="Notes" size={4} />
           </>
         ),
         title: 'Outcome Test',
@@ -369,7 +371,7 @@ const TestTemplate: CustomStory<
   ];
 
   return (
-    <div style={{width: '90%', height: '95vh'}}>
+    <Box sx={{width: '90%', height: '95vh'}}>
       <ExpandingCardList>
         <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
           <SQFormGuidedWorkflow<InitialValuesType>
@@ -382,7 +384,7 @@ const TestTemplate: CustomStory<
           />
         </ExpandingCard>
       </ExpandingCardList>
-    </div>
+    </Box>
   );
 };
 

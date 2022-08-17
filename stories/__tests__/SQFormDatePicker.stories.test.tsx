@@ -69,9 +69,9 @@ describe('SQFormDatePicker Tests', () => {
 
     renderDatePicker({sqFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /choose date/i});
+    const datePickerButton = screen.getByRole('button', {name: /choose date/i});
 
-    userEvent.click(textField);
+    userEvent.click(datePickerButton);
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
 
     await screen.findByRole('dialog');
@@ -88,16 +88,17 @@ describe('SQFormDatePicker Tests', () => {
 
     renderDatePicker({sqFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /Choose date/i});
+    const textField = screen.getByRole('textbox', {name: /Date/i});
+    const datePickerButton = screen.getByRole('button', {name: /Choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    userEvent.click(textField);
+    userEvent.click(datePickerButton);
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
     const dateOptions = within(calendarDialog).getAllByRole('button');
-    const selectedDate = dateOptions[4];
+    const selectedDate = dateOptions[3];
 
     userEvent.click(selectedDate);
 
@@ -112,7 +113,7 @@ describe('SQFormDatePicker Tests', () => {
     };
 
     const testDate = getTestDay();
-    expect(textField).toHaveValue(testDate);
+    await waitFor(() => expect(textField).toHaveValue(testDate));
   });
 
   it('should show as disabled when isDisabled is true', () => {
