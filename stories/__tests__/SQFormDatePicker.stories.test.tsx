@@ -19,7 +19,7 @@ const renderDatePicker = (
     }
   >
 ) => {
-  render(
+  return render(
     <LocalizationProvider dateAdapter={AdapterMoment} locale={'en'}>
       <BasicDatePicker {...props} />
     </LocalizationProvider>
@@ -135,11 +135,11 @@ describe('SQFormDatePicker Tests', () => {
       },
     };
 
-    renderDatePicker({sqFormProps});
+    const {container} = renderDatePicker({sqFormProps});
     await waitFor(() => {
-      const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-required');
+      const helperText = container.querySelector('.MuiFormHelperText-root');
+      expect(helperText).toBeVisible();
+      expect(helperText).toHaveClass('Mui-required');
     });
   });
 });

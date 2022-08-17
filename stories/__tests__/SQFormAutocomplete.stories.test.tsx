@@ -150,12 +150,14 @@ describe('SQFormAutocomplete Tests', () => {
 
   describe('Autocomplete With Validation', () => {
     it('should render as required when it is a required field', async () => {
-      render(<SQFormAutocompleteWithValidation size="auto" />);
+      const {container} = render(
+        <SQFormAutocompleteWithValidation size="auto" />
+      );
 
       await waitFor(() => {
-        const requiredText = screen.getByText(/required/i);
-        expect(requiredText).toBeVisible();
-        expect(requiredText).toHaveClass('Mui-required');
+        const helperText = container.querySelector('.MuiFormHelperText-root');
+        expect(helperText).toBeVisible();
+        expect(helperText).toHaveClass('Mui-required');
       });
     });
 
@@ -167,7 +169,9 @@ describe('SQFormAutocomplete Tests', () => {
     });
 
     it('should highlight field if required but no value selected', async () => {
-      render(<SQFormAutocompleteWithValidation size="auto" />);
+      const {container} = render(
+        <SQFormAutocompleteWithValidation size="auto" />
+      );
 
       const textField = screen.getByRole('combobox', {name: /autocomplete/i});
       expect(textField).not.toHaveFocus();
@@ -178,9 +182,9 @@ describe('SQFormAutocomplete Tests', () => {
       userEvent.tab();
 
       await waitFor(() => {
-        const requiredText = screen.getByText(/required/i);
-        expect(requiredText).toBeVisible();
-        expect(requiredText).toHaveClass('Mui-error');
+        const helperText = container.querySelector('.MuiFormHelperText-root');
+        expect(helperText).toBeVisible();
+        expect(helperText).toHaveClass('Mui-error');
       });
     });
   });
