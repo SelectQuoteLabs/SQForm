@@ -1,4 +1,4 @@
-import type {GridSize} from '@material-ui/core';
+import type {GridSize} from '@mui/material';
 import type {GridSizeOptions} from '../types/storyHelperTypes';
 
 const getSizeProp = (size: GridSizeOptions): GridSize => {

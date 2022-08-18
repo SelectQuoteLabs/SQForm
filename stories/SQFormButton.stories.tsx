@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
-import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
 
@@ -48,11 +48,11 @@ export const WithTestField: Story<SQFormButtonProps> = (args) => {
       validationSchema={undefined}
       muiGridProps={{}}
     >
-      <Grid container alignItems="center" spacing={2}>
-        <Grid item>
+      <Grid container={true} sx={{alignItems: 'center'}} spacing={2}>
+        <Grid item={true}>
           <SQFormTextField name="testField" label="Test Field" />
         </Grid>
-        <Grid item>
+        <Grid item={true}>
           <SQFormButtonComponent onClick={handleClick} {...args} />
         </Grid>
       </Grid>

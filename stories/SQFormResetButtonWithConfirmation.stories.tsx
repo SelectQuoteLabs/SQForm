@@ -4,11 +4,11 @@ import {
   SQFormResetButtonWithConfirmation as SQFormResetButtonWithConfirmationComponent,
   SQFormTextField,
 } from '../src';
-import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
 import type {Meta} from '@storybook/react';
 import type {SQFormResetButtonWithConfirmationProps} from 'components/SQForm/SQFormResetButtonWithConfirmation';
-import type {CustomStory} from '../old_stories/types/storyHelperTypes';
+import type {CustomStory} from './types/storyHelperTypes';
 
 const meta: Meta = {
   title: 'Components/SQFormResetButtonWithConfirmation',

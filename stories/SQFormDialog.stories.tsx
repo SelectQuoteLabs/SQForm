@@ -7,9 +7,9 @@ import {
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
 } from '../src';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
-import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
+import type {GridSpacing} from '@mui/material';
 import type {FormikContextType} from 'formik';
 import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 
@@ -40,7 +40,7 @@ const meta: Meta = {
   },
 };
 
-const alignItems: GridItemsAlignment = 'center';
+const alignItems = 'center';
 const spacing: GridSpacing = 2;
 const defaultArgs = {
   title: 'Default',
@@ -48,7 +48,9 @@ const defaultArgs = {
   onSave: console.log,
   muiGridProps: {
     spacing,
-    alignItems,
+    sx: {
+      alignItems,
+    },
   },
   shouldDisplaySaveButton: true,
   showSecondaryButton: true,

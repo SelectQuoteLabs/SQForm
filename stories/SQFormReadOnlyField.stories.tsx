@@ -1,13 +1,13 @@
 import React from 'react';
 
 import * as markdown from '../notes/SQFormReadOnlyField.md';
-import getSizeProp from '../old_stories/utils/getSizeProp';
+import getSizeProp from './utils/getSizeProp';
 import {SQFormReadOnlyField as SQFormReadOnlyFieldComponent} from '../src';
-import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormReadOnlyFieldProps} from 'components/SQForm/SQFormReadOnlyField';
-import type {GridSizeOptions} from '../old_stories/types/storyHelperTypes';
+import type {GridSizeOptions} from './types/storyHelperTypes';
 
 type SQFormReadOnlyFieldStory = Story<
   Omit<SQFormReadOnlyFieldProps, 'size'> & {

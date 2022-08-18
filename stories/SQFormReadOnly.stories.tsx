@@ -6,7 +6,7 @@ import type {
   SQFormReadOnlyProps,
   SQFormMaskedReadOnlyFieldWithKey,
 } from '../src';
-import type {GridSizeOptions} from '../old_stories/types/storyHelperTypes';
+import type {GridSizeOptions} from './types/storyHelperTypes';
 
 const MOCK_INITIAL_VALUES = {
   firstName: 'Jane',
