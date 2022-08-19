@@ -3,41 +3,43 @@ import {RoundedButton} from 'scplus-shared-components';
 import {useFormButton, BUTTON_TYPES} from './useFormButton';
 import type {ButtonType} from './useFormButton';
 
-export type SQFormButtonProps<Values = unknown> = {
+export type SQFormButtonProps = {
   children: React.ReactNode;
   isDisabled?: boolean;
   shouldRequireFieldUpdates?: boolean;
   title?: string;
   type?: ButtonType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  initialValues?: Values;
 };
 
-function SQFormButton<Values = unknown>({
+function SQFormButton({
   children,
   isDisabled = false,
   shouldRequireFieldUpdates = false,
   title,
   type = 'submit',
   onClick,
-  initialValues,
-}: SQFormButtonProps<Values>): JSX.Element {
+}: SQFormButtonProps): JSX.Element {
   const isResetButton = type === BUTTON_TYPES.RESET;
-  const {isButtonDisabled, setValues, handleReset, handleClick} = useFormButton(
-    {
+  const {isButtonDisabled, setValues, handleClick, initialValues} =
+    useFormButton({
       isDisabled,
       shouldRequireFieldUpdates,
       onClick,
       buttonType: type,
-    }
-  );
+    });
 
   const getClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isResetButton) {
-      /* There is a Formik bug where simply calling handleReset does not cause the form to re-validate.
-          To fix this, we allow the user to optionally pass in the form's initial values and manually reset the form.
+    /* There is a Formik bug where simply calling handleReset does not cause the form to re-validate.
+          To fix this, we manually reset the form by setting the values back to the initialValues.
           Github Issue: https://github.com/jaredpalmer/formik/issues/3512 */
-      return initialValues ? () => setValues(initialValues) : handleReset;
+    const formReset = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      setValues(initialValues);
+    };
+
+    if (isResetButton) {
+      return formReset(event);
     } else if (typeof onClick !== 'undefined') {
       return handleClick(event);
     }

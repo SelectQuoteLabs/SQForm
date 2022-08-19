@@ -252,11 +252,7 @@ function SQFormScrollableCard<Values>({
                   </Grid>
                 </CardContent>
                 <CardActions className={classes.cardFooter}>
-                  <SQFormButton<Values>
-                    initialValues={initialValues}
-                    type="reset"
-                    title="Reset Form"
-                  >
+                  <SQFormButton type="reset" title="Reset Form">
                     {resetButtonText}
                   </SQFormButton>
                   {shouldRenderHelperText && (
