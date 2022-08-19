@@ -186,7 +186,7 @@
     "react-scripts": "^4.0.3",
     "react-weekly-schedule": "0.0.0-development",
     "rimraf": "^3.0.2",
-    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/10.0.0",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/10.1.0",
     "semantic-release": "^17.4.2",
     "storybook-addon-material-ui": "^0.9.0-alpha.24",
     "ts-essentials": "^9.2.0",
