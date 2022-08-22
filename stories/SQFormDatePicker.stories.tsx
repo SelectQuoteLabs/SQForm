@@ -2,11 +2,11 @@ import * as Yup from 'yup';
 import React from 'react';
 import * as markdown from '../notes/SQFormDatePicker.md';
 import {SQFormDatePicker as SQFormDatePickerComponent} from '../src';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
-import {SQFormStoryWrapper} from '../old_stories/components/SQFormStoryWrapper';
+import {createDocsPage} from './utils/createDocsPage';
+import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
-import type {SQFormStoryWrapperProps} from '../old_stories/components/SQFormStoryWrapper';
+import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 
 export type FormProps = {
   initialValues?: SQFormStoryWrapperProps['initialValues'];

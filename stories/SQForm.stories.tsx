@@ -6,8 +6,8 @@ import {Grid, Card} from '@mui/material';
 import {SectionHeader} from 'scplus-shared-components';
 
 import * as markdown from '../notes/SQForm.md';
-import FormValidationMessage from '../old_stories/components/FormValidationMessage';
-import {createDocsPage} from '../old_stories/utils/createDocsPage';
+import FormValidationMessage from './components/FormValidationMessage';
+import {createDocsPage} from './utils/createDocsPage';
 
 import {
   SQForm,

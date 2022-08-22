@@ -18,7 +18,7 @@ import type {
   SQFormGuidedWorkflowContext,
   SQFormGuidedWorkflowProps,
 } from 'components/SQFormGuidedWorkflow/Types';
-import type {CustomStory} from '../old_stories/types/storyHelperTypes';
+import type {CustomStory} from './types/storyHelperTypes';
 
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -125,7 +125,7 @@ const Template: CustomStory<
       outcomeProps: {
         FormElements: (
           <>
-            <SQFormDropdown name="outcome" label="Outcome" size={4} >
+            <SQFormDropdown name="outcome" label="Outcome" size={4}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
             <SQFormTextarea name="notes" label="Notes" size={4} />
@@ -168,7 +168,7 @@ const Template: CustomStory<
             <SQFormDropdown name="outcome" label="Outcome" size={4}>
               {outcomeDropdownOptions}
             </SQFormDropdown>
-            <SQFormTextarea name="notes" label="Notes" size={4}/>
+            <SQFormTextarea name="notes" label="Notes" size={4} />
             <Grid item={true} sm={4}>
               <RoundedButton
                 title="Ineligible"
@@ -176,7 +176,7 @@ const Template: CustomStory<
               >
                 Ineligible? Click here
               </RoundedButton>
-            </Grid>    
+            </Grid>
           </>
         ),
         title: 'Confirm Info',

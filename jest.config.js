@@ -16,6 +16,5 @@ module.exports = {
     '/node_modules/',
     '/dist/',
     '/.dts/',
-    '/old_stories/',
   ],
 };
