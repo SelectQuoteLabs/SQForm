@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardHeader} from '@mui/material';
 import {CardPopoverMenu} from 'scplus-shared-components';
 import {HEADER_HEIGHT} from '../../utils/constants';
+import type {ArrayOrSingle} from 'ts-essentials';
 
 function getSelectedComponent(
   selectedTab: {label: string; value: string},
@@ -17,14 +18,14 @@ function getSelectedComponent(
 }
 
 export type SQFormScrollableCardsMenuWrapperProps = {
-  /** At least one instance of SQFormScrollableCard where each has
-   * prop `isHeaderDisabled` === true
-   * AND
-   * each has a unique string `value` prop and `label` prop so we
-   * have a menu label and can match the `value` to what's selected
-   * in the popover menu.
+  /**
+   * Children should render an SQFormScrollableCard. Each card
+   * should have their header disabled for layout compliance.
+   * Additionally, each direct child should have `value` and `label`
+   * as props to ensure the tab selection is rendered properly.
+   * See SQFormScrollableCardsMenuWrapper stories for an example.
    */
-  children: JSX.Element | JSX.Element[];
+  children: ArrayOrSingle<React.ReactElement<{value: string; label: string}>>;
   /** The Title for the Header component */
   title?: string;
 };
@@ -37,8 +38,8 @@ export default function SQFormScrollableCardsMenuWrapper({
     () =>
       React.Children.map(children, (child) => {
         return {
-          label: child.props.label,
-          value: child.props.value,
+          label: child.props.label || '',
+          value: child.props.value || '',
         };
       }),
     [children]
