@@ -115,11 +115,16 @@ export const WithValidation = (
           label="Personal Data"
           validationSchema={Yup.object({
             firstName: Yup.string().required(),
-            lastName: Yup.string().required(),
+            middleName: Yup.string(),
+            lastName: Yup.string()
+              .required()
+              .min(3, 'Min 3 chars')
+              .max(25, 'Max 25 chars'),
           })}
         >
-          <SQFormTextField size={6} name="firstName" label="First Name" />
-          <SQFormTextField size={6} name="lastName" label="Last Name" />
+          <SQFormTextField size={4} name="firstName" label="First Name" />
+          <SQFormTextField size={4} name="middleName" label="Middle Name" />
+          <SQFormTextField size={4} name="lastName" label="Last Name" />
         </SQFormDialogStep>
         <SQFormDialogStep
           label="Account Info"
