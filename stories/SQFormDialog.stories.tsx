@@ -148,6 +148,20 @@ export const WithTertiaryButton: SQFormDialogStory = (args) => {
   );
 };
 
+export const WithTertiaryButtonAndValidation: SQFormDialogStory = (args) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormTextField name="hello" label="Hello" />
+      </SQFormDialog>
+    </>
+  );
+};
+
 export const WithTertiaryButtonDefinedVariant: SQFormDialogStory = (args) => {
   return (
     <>
@@ -184,6 +198,21 @@ WithTertiaryButtonDefinedVariant.args = {
   ...defaultArgs,
   ...WithTertiaryButton.args,
   tertiaryButtonVariant: 'contained',
+};
+
+WithTertiaryButtonAndValidation.args = {
+  ...defaultArgs,
+  initialValues: {
+    hello: '',
+  },
+  validationSchema: Yup.object({
+    hello: Yup.string().required(),
+  }),
+  title: 'With Tertiary Button',
+  tertiaryStatus: 'IS_ENABLED',
+  tertiaryButtonText: 'Tertiary',
+  onTertiaryClick: handleTertiaryClick,
+  helperText: 'Helper Text',
 };
 
 export default meta;

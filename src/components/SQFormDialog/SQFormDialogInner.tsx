@@ -184,10 +184,7 @@ function SQFormDialogInner<Values extends FormikValues>({
 
   const renderTertiaryButton = () => {
     return (
-      <Grid
-        container={true}
-        justifyContent={showSecondaryButton ? 'space-between' : 'flex-end'}
-      >
+      <>
         {showSecondaryButton && (
           <Grid item={true}>
             <RoundedButton
@@ -202,21 +199,20 @@ function SQFormDialogInner<Values extends FormikValues>({
             </RoundedButton>
           </Grid>
         )}
-
         {helperText && renderHelperText()}
         <Grid item={true}>
-          <span style={{paddingRight: '20px'}}>
-            <RoundedButton
-              title={tertiaryButtonText}
-              isDisabled={getIsDisabled()}
-              onClick={() => onTertiaryClick?.(formikContext)}
-              type="button"
-              variant={tertiaryButtonVariant}
-            >
-              {tertiaryButtonText}
-            </RoundedButton>
-          </span>
-          {shouldDisplaySaveButton && (
+          <RoundedButton
+            title={tertiaryButtonText}
+            isDisabled={getIsDisabled()}
+            onClick={() => onTertiaryClick?.(formikContext)}
+            type="button"
+            variant={tertiaryButtonVariant}
+          >
+            {tertiaryButtonText}
+          </RoundedButton>
+        </Grid>
+        {shouldDisplaySaveButton && (
+          <Grid item={true}>
             <SQFormButton
               title={saveButtonText}
               isDisabled={isDisabled}
@@ -224,9 +220,9 @@ function SQFormDialogInner<Values extends FormikValues>({
             >
               {saveButtonText}
             </SQFormButton>
-          )}
-        </Grid>
-      </Grid>
+          </Grid>
+        )}
+      </>
     );
   };
 
@@ -287,32 +283,44 @@ function SQFormDialogInner<Values extends FormikValues>({
           <DialogActions
             sx={showSecondaryButton ? classes.action : classes.primaryAction}
           >
-            {tertiaryStatus !== 'HIDE_BUTTON'
-              ? renderTertiaryButton()
-              : showSecondaryButton && (
-                  <RoundedButton
-                    title={cancelButtonText}
-                    onClick={(event: Record<string, unknown>) =>
-                      handleCancel(event, 'cancelClick')
-                    }
-                    color="secondary"
-                    variant="outlined"
-                  >
-                    {cancelButtonText}
-                  </RoundedButton>
-                )}
-            {tertiaryStatus === 'HIDE_BUTTON' && shouldDisplaySaveButton && (
-              <>
-                {helperText && renderHelperText()}
-                <SQFormButton
-                  title={saveButtonText}
-                  isDisabled={isDisabled}
-                  shouldRequireFieldUpdates={shouldRequireFieldUpdates}
-                >
-                  {saveButtonText}
-                </SQFormButton>
-              </>
-            )}
+            <Grid
+              container={true}
+              spacing={2}
+              justifyContent={
+                showSecondaryButton ? 'space-between' : 'flex-end'
+              }
+            >
+              {tertiaryStatus !== 'HIDE_BUTTON'
+                ? renderTertiaryButton()
+                : showSecondaryButton && (
+                    <Grid item={true}>
+                      <RoundedButton
+                        title={cancelButtonText}
+                        onClick={(event: Record<string, unknown>) =>
+                          handleCancel(event, 'cancelClick')
+                        }
+                        color="secondary"
+                        variant="outlined"
+                      >
+                        {cancelButtonText}
+                      </RoundedButton>
+                    </Grid>
+                  )}
+              {tertiaryStatus === 'HIDE_BUTTON' && shouldDisplaySaveButton && (
+                <>
+                  {helperText && renderHelperText()}
+                  <Grid item={true}>
+                    <SQFormButton
+                      title={saveButtonText}
+                      isDisabled={isDisabled}
+                      shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+                    >
+                      {saveButtonText}
+                    </SQFormButton>
+                  </Grid>
+                </>
+              )}
+            </Grid>
           </DialogActions>
         </Form>
       </Dialog>
