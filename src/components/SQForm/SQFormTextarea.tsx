@@ -13,7 +13,7 @@ export type SQFormTextareaProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Custom onBlur event callback */
-  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
+  onBlur?: TextFieldProps['onBlur'];
   /** Custom onChange event callback */
   onChange?: TextFieldProps['onChange'];
   /** Number of rows to display when multiline option is set to true. */

@@ -12,9 +12,9 @@ export type SQFormTextFieldProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Custom onBlur event callback */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: TextFieldProps['onBlur'];
   /** Custom onChange event callback */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: TextFieldProps['onChange'];
   /** Adornment that appears at the start of the input */
   startAdornment?: React.ReactElement;
   /** Adornment that appears at the end of the input */
