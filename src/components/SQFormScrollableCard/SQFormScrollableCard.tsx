@@ -68,6 +68,10 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   isHeaderDisabled?: boolean;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
+  /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
+  value?: string;
+  /** The label to display for this card if used by SQFormScrollableCardsMenuWrapper */
+  label?: string;
 };
 
 function SQFormScrollableCard<Values>({

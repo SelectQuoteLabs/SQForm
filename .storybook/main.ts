@@ -14,7 +14,7 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-actions',
     '@storybook/addon-knobs',
-    'storybook-addon-material-ui',
+    'storybook-addon-material-ui5',
   ],
   webpackFinal: (config) => {
     config.module.rules = [

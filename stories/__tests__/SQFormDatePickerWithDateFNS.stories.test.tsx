@@ -98,9 +98,15 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
-    const dateOptions = within(calendarDialog).getAllByRole('button');
-    const selectedDate = dateOptions[3];
+    const dateOptions = within(calendarDialog).getAllByRole('gridcell');
 
+    // Filter out gridcells that aren't buttons, indicating not a date
+    const filteredDateOptions = dateOptions.filter((date) => {
+      return date.attributes.getNamedItem('type')?.value === 'button';
+    });
+
+    // First date will be the first of the month
+    const selectedDate = filteredDateOptions[0];
     userEvent.click(selectedDate);
 
     //Data setup so the test won't need updating all the time
