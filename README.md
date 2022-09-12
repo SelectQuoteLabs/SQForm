@@ -58,8 +58,13 @@ Optional dependencies are always installed but can be omitted by using `npm inst
 ### Version [MUIv5]
 
 - SQFormTextarea
+
   - Renamed `rows` to `minRows`
   - Renamed `rowsMax` to `maxRows`
+
+- SQFormDialogStepper
+  - SQFormDialogStepper now validates on mount
+  - Previously the Next/Submit button was disabled if not all fields had a value, regardless of validation schema. We've updated this component it not care about each individual field's value and instead only take into account the validation schema, the dirty status, and `isDisabled` prop
 
 ### Version 8
 

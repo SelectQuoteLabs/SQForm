@@ -190,8 +190,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
   };
 
   function SubmitButton() {
-    const {errors, values, dirty} = useFormikContext<Record<string, unknown>>();
-
+    const {errors, dirty} = useFormikContext<Record<string, unknown>>();
     const isButtonDisabled = React.useMemo(() => {
       if (isNextDisabled) {
         return true;
@@ -200,12 +199,8 @@ export function SQFormDialogStepper<Values extends FormikValues>({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-      const stepValues = currentStepKeys.every((step) => {
-        return !!values[step];
-      });
 
       if (
-        !stepValues ||
         currentStepKeys.some((step) => Object.keys(errors).includes(step)) ||
         !dirty
       ) {
@@ -213,7 +208,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
       }
 
       return false;
-    }, [errors, values, dirty]);
+    }, [errors, dirty]);
 
     const primaryButtonText = isLastStep ? 'Submit' : 'Next';
     return (
@@ -245,6 +240,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
       onSubmit={handleSubmit}
       initialValues={initialValues}
       enableReinitialize={enableReinitialize}
+      validateOnMount={true}
     >
       {() => (
         <Dialog
