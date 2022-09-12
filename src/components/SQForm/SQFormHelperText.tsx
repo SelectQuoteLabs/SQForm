@@ -81,7 +81,7 @@ function SQFormHelperText({
       sx={(theme) => {
         return {
           alignItems: 'center',
-          p: `0 ${theme.spacing(2)}px`,
+          p: `0 ${theme.spacing(2)}`,
           color: getColor(helperTextType),
         };
       }}
