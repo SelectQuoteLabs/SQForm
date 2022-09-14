@@ -153,7 +153,7 @@ function SQFormAsyncAutocomplete({
   const prevValue = usePrevious(value);
 
   React.useEffect(() => {
-    setInputValue(initialValue?.label || '');
+    setInputValue(initialValue?.label || inputValue);
   }, [initialValue]);
 
   React.useEffect(() => {
