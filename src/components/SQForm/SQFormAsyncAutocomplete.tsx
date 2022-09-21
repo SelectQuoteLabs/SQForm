@@ -44,6 +44,57 @@ const useStyles = makeStyles({
       margin: 0,
     },
   },
+  inputRoot: {
+    fontWeight: 600,
+    fontSize: '14px',
+    color: '#332F2F',
+  },
+  root: {
+    '& .MuiInput-underline:after': {
+      borderBottomWidth: '1px',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):not(.MuiInput-multiline):before':
+      {
+        borderBottom: 'none',
+      },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):not(.MuiInput-multiline):not(.Mui-error):before':
+      {
+        borderBottom: '1px solid var(--color-teal)',
+      },
+    '& .Mui-error': {
+      color: '#C67000',
+    },
+    '& .Mui-error:after': {
+      borderBottomColor: '#C67000',
+    },
+    '& .MuiSvgIcon-root': {
+      color: '#3C7107',
+      width: '12px',
+      height: '14px',
+    },
+    '& .MuiSvgIcon-colorError': {
+      color: '#C67000',
+      width: '13px',
+      height: '13px',
+    },
+    '& .MuiSvgIcon-colorDisabled': {
+      color: '#8A8889',
+      width: '13px',
+      height: '13px',
+    },
+    '& .Mui-required': {
+      color: '#5B5858',
+    },
+    '& .Mui-disabled': {
+      color: '#B3B3B3',
+    },
+    '& .MuiFormHelperText-root': {
+      alignItems: 'flex-end',
+      fontSize: '10px',
+      fontWeight: 400,
+      height: '13px',
+    },
+  },
 });
 
 const OuterElementContext = React.createContext<OuterElementContextType | null>(
