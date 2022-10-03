@@ -67,6 +67,8 @@ type SQFormDialogInnerProps<Values extends FormikValues> = {
   helperText?: string;
   /** helper text type to pass to SQFormHelperText component */
   helperTextType?: 'fail' | 'error' | 'valid';
+  /** option to throw an Are You Sure alert when hitting cancel while in the middle of filling out a the form.  true by default. */
+  throwAlertOnCancel?: boolean;
 };
 
 /*
@@ -136,6 +138,7 @@ function SQFormDialogInner<Values extends FormikValues>({
   tertiaryButtonVariant,
   helperText,
   helperTextType = 'error',
+  throwAlertOnCancel = true,
 }: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
   const titleClasses = useTitleStyles(theme);
@@ -169,7 +172,7 @@ function SQFormDialogInner<Values extends FormikValues>({
       return;
     }
 
-    if (!formikContext.dirty) {
+    if (!formikContext.dirty || !throwAlertOnCancel) {
       onClose && onClose(event, reason);
     } else {
       openDialogAlert();

@@ -6,6 +6,7 @@ import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
 import type {AnyObjectSchema} from 'yup';
 import type {SQFormDialogTertiaryValue} from './types';
+import {ThreeSixtyTwoTone} from '@material-ui/icons';
 
 export type SQFormDialogProps<Values extends FormikValues> = {
   /** The secondary button text (Button located on left side of Dialog) */
@@ -67,6 +68,8 @@ export type SQFormDialogProps<Values extends FormikValues> = {
   helperText?: string;
   /** helper text type to eventually get passed to SQFormHelperText component */
   helperTextType?: 'fail' | 'error' | 'valid';
+  /** option to throw an Are You Sure alert when hitting cancel while in the middle of filling out a the form.  true by default. */
+  throwAlertOnCancel?: boolean;
 };
 
 function SQFormDialog<Values extends FormikValues>({
@@ -93,6 +96,7 @@ function SQFormDialog<Values extends FormikValues>({
   tertiaryButtonVariant = 'outlined',
   helperText,
   helperTextType = 'error',
+  throwAlertOnCancel = true,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -128,6 +132,7 @@ function SQFormDialog<Values extends FormikValues>({
         tertiaryButtonVariant={tertiaryButtonVariant}
         helperText={helperText}
         helperTextType={helperTextType}
+        throwAlertOnCancel={throwAlertOnCancel}
       />
     </Formik>
   );
