@@ -283,3 +283,48 @@ describe('Tests for Tertiary Button', () => {
     ).toBeDisabled();
   });
 });
+
+describe('Tests for throwAlertOnCancel', () => {
+  it('should skip alerts if throwAlertOnCancel is set to false and form is currently dirty', async () => {
+    // render component with throwAlertOnCancel set to false
+    render(
+      <WithValidation
+        isOpen={true}
+        onSave={handleSave}
+        onClose={handleClose}
+        throwAlertOnCancel={false}
+      />
+    );
+
+    // dirty form by filling out text field
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
+
+    // select cancel and see if onClose handler is called
+    const cancelButton = screen.getByRole('button', {name: /cancel/i});
+    userEvent.click(cancelButton);
+
+    await waitFor(() => {
+      expect(handleClose).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('should skip alerts if throwAlertOnCancel is set to true and form is currently dirty', async () => {
+    // render component with throwAlertOnCancel set to true (by default)
+    render(
+      <WithValidation isOpen={true} onSave={handleSave} onClose={handleClose} />
+    );
+
+    // dirty form by filling out text field
+    const textField = screen.getByLabelText(/hello/i);
+    userEvent.type(textField, mockData.hello);
+
+    // select cancel and see if onClose handler is called
+    const cancelButton = screen.getByRole('button', {name: /cancel/i});
+    userEvent.click(cancelButton);
+
+    await waitFor(() => {
+      expect(handleClose).toHaveBeenCalledTimes(0);
+    });
+  });
+});
