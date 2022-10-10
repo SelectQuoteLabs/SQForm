@@ -37,9 +37,9 @@ export type SQFormProps<Values extends FormikValues> = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-  // Set if validation should happen on blur or not.  By default is set to true.
+  // Set if validation should happen on blur or not.  By default is set to true in Formik API.
   validateOnBlur?: boolean;
-  // Set if validation should happen on change.  By defautl is set to true.
+  // Set if validation should happen on change.  By default is set to true in Formik API.
   validateOnChange?: boolean;
 };
 
