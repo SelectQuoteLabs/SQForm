@@ -1,3 +1,10 @@
+## [9.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.5.0...v9.6.0) (2022-10-05)
+
+
+### Features
+
+* 🎸 throwAlertOnCancel control prop for SQFormDialog ([#807](https://github.com/SelectQuoteLabs/SQForm/issues/807)) ([3d2b1f2](https://github.com/SelectQuoteLabs/SQForm/commit/3d2b1f209a328bb92c08b951ef40ad806b89d6e7)), closes [#806](https://github.com/SelectQuoteLabs/SQForm/issues/806)
+
 ## [9.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.1...v9.5.0) (2022-08-05)
 
 
