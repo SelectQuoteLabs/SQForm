@@ -37,10 +37,6 @@ export type SQFormProps<Values extends FormikValues> = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-  // Set if validation should happen on blur or not.  By default is set to true in Formik API.
-  validateOnBlur?: boolean;
-  // Set if validation should happen on change.  By default is set to true in Formik API.
-  validateOnChange?: boolean;
 };
 
 function SQForm<Values extends FormikValues>({
@@ -50,8 +46,6 @@ function SQForm<Values extends FormikValues>({
   muiGridProps = {},
   onSubmit,
   validationSchema,
-  validateOnBlur,
-  validateOnChange,
 }: SQFormProps<Values>): JSX.Element {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -82,8 +76,6 @@ function SQForm<Values extends FormikValues>({
       onReset={handleReset}
       validationSchema={validationSchema}
       validateOnMount={true}
-      validateOnBlur={validateOnBlur}
-      validateOnChange={validateOnChange}
     >
       {(_props) => {
         return (
