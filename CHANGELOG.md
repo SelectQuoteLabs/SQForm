@@ -1,3 +1,10 @@
+## [9.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.6.0...v9.7.0) (2022-10-24)
+
+
+### Features
+
+* 🎸 validateOnBlur and validateOnChange SQForm options ([e645099](https://github.com/SelectQuoteLabs/SQForm/commit/e645099148d1812d7787eb4b574f29632381f682)), closes [#808](https://github.com/SelectQuoteLabs/SQForm/issues/808)
+
 ## [9.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.5.0...v9.6.0) (2022-10-05)
 
 
