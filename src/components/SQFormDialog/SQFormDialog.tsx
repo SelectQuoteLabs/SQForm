@@ -69,9 +69,9 @@ export type SQFormDialogProps<Values extends FormikValues> = {
   helperTextType?: 'fail' | 'error' | 'valid';
   /** option to throw an Are You Sure alert when hitting cancel while in the middle of filling out a the form.  true by default. */
   throwAlertOnCancel?: boolean;
-  // Set if validation should happen on blur or not.  By default is set to true.
+  // Set if validation should happen on blur or not.  By default is set to true in Formik API.
   validateOnBlur?: boolean;
-  // Set if validation should happen on change.  By defautl is set to true.
+  // Set if validation should happen on change.  By default is set to true in Formik API.
   validateOnChange?: boolean;
 };
 
