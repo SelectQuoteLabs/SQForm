@@ -23,13 +23,15 @@ function SQFormReadOnlyField({
     formikField: {field},
   } = useForm({name});
 
+  const getFieldValue = field.value || field.value === 0 ? field.value : '- -';
+
   return (
     <Grid item sm={size}>
       <TextField
         id={toKebabCase(name)}
         label={label}
         name={name}
-        value={field.value || '- -'}
+        value={getFieldValue}
         fullWidth={true}
         InputLabelProps={{shrink: true}}
         InputProps={{
