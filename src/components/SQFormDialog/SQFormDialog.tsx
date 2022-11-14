@@ -67,6 +67,12 @@ export type SQFormDialogProps<Values extends FormikValues> = {
   helperText?: string;
   /** helper text type to eventually get passed to SQFormHelperText component */
   helperTextType?: 'fail' | 'error' | 'valid';
+  /** option to throw an Are You Sure alert when hitting cancel while in the middle of filling out a the form.  true by default. */
+  throwAlertOnCancel?: boolean;
+  // Set if validation should happen on blur or not.  By default is set to true in Formik API.
+  validateOnBlur?: boolean;
+  // Set if validation should happen on change.  By default is set to true in Formik API.
+  validateOnChange?: boolean;
 };
 
 function SQFormDialog<Values extends FormikValues>({
@@ -93,6 +99,9 @@ function SQFormDialog<Values extends FormikValues>({
   tertiaryButtonVariant = 'outlined',
   helperText,
   helperTextType = 'error',
+  throwAlertOnCancel = true,
+  validateOnBlur,
+  validateOnChange,
 }: SQFormDialogProps<Values>): React.ReactElement {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -107,6 +116,8 @@ function SQFormDialog<Values extends FormikValues>({
       onSubmit={onSave}
       validationSchema={validationSchema}
       validateOnMount={true}
+      validateOnBlur={validateOnBlur}
+      validateOnChange={validateOnChange}
     >
       <SQFormDialogInner<Values>
         cancelButtonText={cancelButtonText}
@@ -128,6 +139,7 @@ function SQFormDialog<Values extends FormikValues>({
         tertiaryButtonVariant={tertiaryButtonVariant}
         helperText={helperText}
         helperTextType={helperTextType}
+        throwAlertOnCancel={throwAlertOnCancel}
       />
     </Formik>
   );
