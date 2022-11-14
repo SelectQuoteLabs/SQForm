@@ -1,14 +1,15 @@
 import * as Yup from 'yup';
 import React from 'react';
-
 import {Paper} from '@mui/material';
+import {Public} from '@mui/icons-material';
 import {SQFormScrollableCard, SQFormTextField} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import type {GridProps} from '@mui/material';
+import type {FormikValues} from 'formik';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {SQFormScrollableCardProps} from 'components/SQFormScrollableCard/SQFormScrollableCard';
 
-type SQFormScrollableCardStoryProps<Values> =
+type SQFormScrollableCardStoryProps<Values extends FormikValues> =
   SQFormScrollableCardProps<Values> & {
     wrapper: React.ReactElement;
   };
@@ -137,4 +138,11 @@ WithRoundedCorners.args = {
   ...defaultArgs,
   title: 'With Rounded Corners',
   isSquareCorners: false,
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  ...defaultArgs,
+  title: 'With Icon',
+  icon: <Public fontSize="large" />,
 };

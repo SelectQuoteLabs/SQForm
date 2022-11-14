@@ -27,6 +27,7 @@ import {
   SQFormMaskedTextField,
   SQFormMultiValue,
   MASKS,
+  SQFormDatePicker,
 } from '../src';
 import type {FieldArrayRenderProps, FormikHelpers} from 'formik';
 
@@ -311,6 +312,40 @@ export const FormWithValidation = (): JSX.Element => {
         </SQFormMultiValue>
         <Grid item={true} sm={12}>
           <Grid container={true} sx={{justifyContent: 'space-between'}}>
+            <SQFormButton title="Reset" type="reset">
+              RESET
+            </SQFormButton>
+            <FormValidationMessage />
+
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const FormWithOnBlurValidation = (): JSX.Element => {
+  const validationSchema = Yup.object({
+    datePicker: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+  });
+
+  return (
+    <Card raised style={{padding: 16}}>
+      <SQForm
+        initialValues={{datePicker: new Date()}}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        validateOnBlur={true}
+        validateOnChange={false}
+      >
+        <SQFormDatePicker name="datePicker" label="DatePicker" />
+        <Grid item sm={12}>
+          <Grid container justifyContent="space-between">
             <SQFormButton title="Reset" type="reset">
               RESET
             </SQFormButton>

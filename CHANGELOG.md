@@ -1,3 +1,24 @@
+## [9.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.6.0...v9.7.0) (2022-10-24)
+
+
+### Features
+
+* 🎸 validateOnBlur and validateOnChange SQForm options ([e645099](https://github.com/SelectQuoteLabs/SQForm/commit/e645099148d1812d7787eb4b574f29632381f682)), closes [#808](https://github.com/SelectQuoteLabs/SQForm/issues/808)
+
+## [9.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.5.0...v9.6.0) (2022-10-05)
+
+
+### Features
+
+* 🎸 throwAlertOnCancel control prop for SQFormDialog ([#807](https://github.com/SelectQuoteLabs/SQForm/issues/807)) ([3d2b1f2](https://github.com/SelectQuoteLabs/SQForm/commit/3d2b1f209a328bb92c08b951ef40ad806b89d6e7)), closes [#806](https://github.com/SelectQuoteLabs/SQForm/issues/806)
+
+## [9.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.1...v9.5.0) (2022-08-05)
+
+
+### Features
+
+* 🎸 Adds icon prop to scrollable card ([38adea6](https://github.com/SelectQuoteLabs/SQForm/commit/38adea62ec3e40b2e812c9b5089e6194fc752de5))
+
 ### [9.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.4.0...v9.4.1) (2022-07-08)
 
 
