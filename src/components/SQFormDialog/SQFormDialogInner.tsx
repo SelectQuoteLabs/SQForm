@@ -97,10 +97,11 @@ const actionStyles = (theme: Theme) => ({
   display: 'flex',
   justifyContent: 'space-between',
   flex: '1 1 100%',
-  padding: '10px 20px',
   ...stickyStyles(theme),
   bottom: 0,
-  borderTop: `1px solid ${theme.palette.divider}`,
+  borderTop: `1px solid B3B3B3`,
+  padding: '8px 16px',
+  height: '47px',
 });
 
 const useClasses = (theme: Theme) => ({
@@ -108,7 +109,9 @@ const useClasses = (theme: Theme) => ({
   title: {
     ...stickyStyles(theme),
     top: 0,
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid B3B3B3`,
+    padding: '12px 16px',
+    height: '48px',
   },
   action: actionStyles(theme),
   primaryAction: {
@@ -117,7 +120,7 @@ const useClasses = (theme: Theme) => ({
   },
   dialogContent: {
     overflowY: 'visible',
-    padding: '20px',
+    padding: '16px 16px 32px 16px',
   },
 });
 
@@ -268,7 +271,7 @@ function SQFormDialogInner<Values extends FormikValues>({
       >
         <Form>
           <DialogTitle sx={classes.title}>
-            <Typography variant="h4">{title}</Typography>
+            <Typography variant="h5">{title}</Typography>
           </DialogTitle>
           <DialogContent
             // DialongContent paddingTop is overwritten by some title styling. Applying directly
