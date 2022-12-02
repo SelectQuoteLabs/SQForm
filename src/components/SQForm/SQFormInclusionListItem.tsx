@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, FormControlLabel, Grid} from '@material-ui/core';
+import {Checkbox, FormControlLabel, Grid} from '@mui/material';
 import {useForm} from './useForm';
 import type {BaseFieldProps} from '../../types';
 
@@ -28,12 +28,11 @@ function SQFormInclusionListItem({
   });
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <FormControlLabel
         control={
           <Checkbox
             checked={isChecked}
-            color="primary"
             disabled={isDisabled}
             name={name}
             onChange={handleChange}

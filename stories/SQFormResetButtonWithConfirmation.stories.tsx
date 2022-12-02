@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {
   SQFormResetButtonWithConfirmation as SQFormResetButtonWithConfirmationComponent,
   SQFormTextField,
@@ -43,11 +43,11 @@ const Template: CustomStory<SQFormResetButtonWithConfirmationProps> = (
       showSubmit={false}
       {...sqFormProps}
     >
-      <Grid container alignItems="center" spacing={2}>
-        <Grid item>
+      <Grid container={true} sx={{alignItems: 'center'}} spacing={2}>
+        <Grid item={true}>
           <SQFormTextField name="test" label="Test Field" />
         </Grid>
-        <Grid item>
+        <Grid item={true}>
           <SQFormResetButtonWithConfirmationComponent {...rest} />
         </Grid>
       </Grid>

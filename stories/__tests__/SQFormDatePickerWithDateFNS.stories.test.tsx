@@ -1,10 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import dateFnsAdapter from '@material-ui/pickers/adapter/date-fns';
 import enLocale from 'date-fns/locale/en-US';
 import {composeStories} from '@storybook/testing-react';
 import {render, screen, within, waitFor} from '@testing-library/react';
-import {LocalizationProvider} from '@material-ui/pickers';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import * as stories from '../SQFormDatePickerWithDateFNS.stories';
 import type {SQFormDatePickerDateFNSProps} from 'components/SQForm/SQFormDatePickerWithDateFNS';
 import type {FormProps} from '../SQFormDatePicker.stories';
@@ -20,8 +20,8 @@ const renderDatePicker = (
     }
   >
 ) => {
-  render(
-    <LocalizationProvider dateAdapter={dateFnsAdapter} locale={enLocale}>
+  return render(
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={enLocale}>
       <BasicDatePicker {...props} />
     </LocalizationProvider>
   );
@@ -70,9 +70,9 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
 
     renderDatePicker({sqFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /choose date/i});
+    const datePickerButton = screen.getByRole('button', {name: /Choose date/i});
 
-    userEvent.click(textField);
+    userEvent.click(datePickerButton);
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
 
     await screen.findByRole('dialog');
@@ -89,17 +89,24 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
 
     renderDatePicker({sqFormProps: {initialValues}});
 
-    const textField = screen.getByRole('textbox', {name: /Choose date/i});
+    const textField = screen.getByRole('textbox', {name: /Date/i});
+    const datePickerButton = screen.getByRole('button', {name: /Choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    userEvent.click(textField);
+    userEvent.click(datePickerButton);
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
 
-    const dateOptions = within(calendarDialog).getAllByRole('cell');
-    const selectedDate = dateOptions[0];
+    const dateOptions = within(calendarDialog).getAllByRole('gridcell');
 
+    // Filter out gridcells that aren't buttons, indicating not a date
+    const filteredDateOptions = dateOptions.filter((date) => {
+      return date.attributes.getNamedItem('type')?.value === 'button';
+    });
+
+    // First date will be the first of the month
+    const selectedDate = filteredDateOptions[0];
     userEvent.click(selectedDate);
 
     //Data setup so the test won't need updating all the time
@@ -113,7 +120,7 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     };
 
     const testDate = getTestDay();
-    expect(textField).toHaveValue(testDate);
+    await waitFor(() => expect(textField).toHaveValue(testDate));
   });
 
   it('should show as disabled when isDisabled is true', () => {
@@ -136,11 +143,11 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
       },
     };
 
-    renderDatePicker({sqFormProps});
+    const {container} = renderDatePicker({sqFormProps});
     await waitFor(() => {
-      const requiredText = screen.getByText(/required/i);
-      expect(requiredText).toBeVisible();
-      expect(requiredText).toHaveClass('Mui-required');
+      const helperText = container.querySelector('.MuiFormHelperText-root');
+      expect(helperText).toBeVisible();
+      expect(helperText).toHaveClass('Mui-required');
     });
   });
 });

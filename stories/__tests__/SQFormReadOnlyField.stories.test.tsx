@@ -6,7 +6,7 @@ import * as stories from '../SQFormReadOnlyField.stories';
 
 const {
   Default: SQFormReadOnlyField,
-  WithInitialValue: SQFormReadOnlyFieldWithInitialValue
+  WithInitialValue: SQFormReadOnlyFieldWithInitialValue,
 } = composeStories(stories);
 
 describe('SQFormReadOnlyField Tests', () => {

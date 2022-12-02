@@ -6,24 +6,19 @@ import {
   DialogTitle,
   Divider,
   Grid,
-  makeStyles,
   Slide,
   Step,
   StepButton,
   Stepper,
   Typography,
-} from '@material-ui/core';
-import type {
-  DialogProps,
-  GridProps,
-  DialogContentProps,
-} from '@material-ui/core';
+} from '@mui/material';
 import {Form, Formik, useFormikContext} from 'formik';
 import {RoundedButton} from 'scplus-shared-components';
 import LoadingSpinner from '../LoadingSpinner';
+import type {DialogProps, GridProps, DialogContentProps} from '@mui/material';
 import type {AnyObjectSchema} from 'yup';
 import type {FormikHelpers, FormikValues} from 'formik';
-import type {TransitionProps} from '@material-ui/core/transitions';
+import type {TransitionProps} from '@mui/material/transitions';
 
 export type SQFormDialogStepProps = {
   /** The content to be rendered in the step body. */
@@ -51,26 +46,22 @@ export function SQFormDialogStep({
 }
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {children?: React.ReactElement<unknown, string>},
+  props: TransitionProps & {children: React.ReactElement<unknown, string>},
   ref: React.Ref<unknown>
 ) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const useStyles = makeStyles({
+const useClasses = ({steps}: {steps: Array<JSX.Element>}) => ({
   root: {
-    padding: 20,
+    padding: '20px',
     width: '100%',
-    maxWidth: ({
-      steps,
-    }: {
-      steps: Array<React.ReactChild | React.ReactFragment | React.ReactPortal>;
-    }) => `${300 * steps.length}px`,
+    maxWidth: `${300 * steps.length}px`,
     '& svg': {
       fontSize: 30,
       '& text': {
-        fontSize: 15,
-        fontWeight: 600,
+        fontSize: '15px',
+        fontWeight: '600',
       },
     },
     '& span': {
@@ -80,22 +71,29 @@ const useStyles = makeStyles({
       marginTop: '5px',
     },
   },
-});
-
-const useActionsStyles = makeStyles({
-  root: {
+  action: {
     display: 'flex',
     justifyContent: 'space-between',
     flex: '1 1 100%',
     padding: '16px 24px',
   },
-});
-
-const useStepperStyles = makeStyles({
-  root: {
+  stepper: {
     padding: '1px',
     justifyContent: 'center',
   },
+  stepButton: (isActiveStep: boolean) => ({
+    '& circle': {
+      color: isActiveStep ? 'var(--color-spanishOrange)' : 'disabled',
+    },
+  }),
+  stepText: (isActiveStep: boolean) => ({
+    '& .MuiTypography-root': {
+      fontSize: '12px',
+    },
+    '& .MuiStepLabel-label.MuiStepLabel-alternativeLabel': {
+      color: isActiveStep ? 'var(--color-spanishOrange)' : 'disabled',
+    },
+  }),
 });
 
 export type SQFormDialogStepperProps<Values extends FormikValues> = {
@@ -162,9 +160,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
 
   const validationSchema = currentChild.props.validationSchema || null;
 
-  const classes = useStyles({steps});
-  const actionsClasses = useActionsStyles();
-  const stepperClasses = useStepperStyles();
+  const classes = useClasses({steps});
 
   const isLastStep = React.useMemo(() => {
     return activeStep === steps.length - 1;
@@ -194,8 +190,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
   };
 
   function SubmitButton() {
-    const {errors, values, dirty} = useFormikContext<Record<string, unknown>>();
-
+    const {errors, dirty} = useFormikContext<Record<string, unknown>>();
     const isButtonDisabled = React.useMemo(() => {
       if (isNextDisabled) {
         return true;
@@ -204,12 +199,8 @@ export function SQFormDialogStepper<Values extends FormikValues>({
         return false;
       }
       const currentStepKeys = Object.keys(validationSchema.fields);
-      const stepValues = currentStepKeys.every((step) => {
-        return !!values[step];
-      });
 
       if (
-        !stepValues ||
         currentStepKeys.some((step) => Object.keys(errors).includes(step)) ||
         !dirty
       ) {
@@ -217,7 +208,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
       }
 
       return false;
-    }, [errors, values, dirty]);
+    }, [errors, dirty]);
 
     const primaryButtonText = isLastStep ? 'Submit' : 'Next';
     return (
@@ -249,11 +240,11 @@ export function SQFormDialogStepper<Values extends FormikValues>({
       onSubmit={handleSubmit}
       initialValues={initialValues}
       enableReinitialize={enableReinitialize}
+      validateOnMount={true}
     >
       {() => (
         <Dialog
           TransitionComponent={Transition}
-          disableBackdropClick={disableBackdropClick}
           maxWidth={maxWidth}
           open={isOpen}
           onClose={handleClose}
@@ -261,24 +252,27 @@ export function SQFormDialogStepper<Values extends FormikValues>({
           {...dialogProps}
         >
           <Form>
-            <DialogTitle disableTypography={true}>
+            <DialogTitle>
               <Typography variant="h4">{title}</Typography>
             </DialogTitle>
             <Divider />
             {steps.length > 1 && (
-              <Grid container classes={stepperClasses}>
+              <Grid container={true} sx={classes.stepper}>
                 <Stepper
                   activeStep={activeStep}
-                  classes={classes}
+                  sx={classes.root}
                   alternativeLabel={true}
                 >
                   {steps.map((child, index) => (
-                    <Step key={`${child.props.label}-${index}`}>
-                      <StepButton onClick={handleStep(index)}>
-                        <Typography
-                          variant="overline"
-                          color={index === activeStep ? 'error' : 'initial'} // sets the color to orange if current step
-                        >
+                    <Step
+                      key={`${child.props.label}-${index}`}
+                      sx={classes.stepButton(index === activeStep)}
+                    >
+                      <StepButton
+                        onClick={handleStep(index)}
+                        sx={classes.stepText(index === activeStep)}
+                      >
+                        <Typography variant="overline">
                           {child?.props.label}
                         </Typography>
                       </StepButton>
@@ -288,7 +282,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
               </Grid>
             )}
             <DialogContent
-              dividers
+              dividers={true}
               style={{
                 paddingTop: '40px',
                 paddingBottom: '40px',
@@ -296,15 +290,15 @@ export function SQFormDialogStepper<Values extends FormikValues>({
               }}
             >
               <Grid
-                {...muiGridProps}
-                container
+                container={true}
                 spacing={muiGridProps.spacing ?? 3}
                 justifyContent="center"
+                {...muiGridProps}
               >
                 {currentChild}
               </Grid>
             </DialogContent>
-            <DialogActions classes={actionsClasses}>
+            <DialogActions sx={classes.action}>
               <RoundedButton
                 title={cancelButtonText}
                 onClick={onClose}

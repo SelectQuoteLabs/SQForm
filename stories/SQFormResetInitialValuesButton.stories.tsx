@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import type {Meta} from '@storybook/react';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton';
@@ -42,11 +42,11 @@ const Template: CustomStory<SQFormResetInitialValuesButtonProps> = (args) => {
       showSubmit={false}
       {...sqFormProps}
     >
-      <Grid container alignItems="center" spacing={2}>
-        <Grid item>
+      <Grid container={true} sx={{alignItems: 'center'}} spacing={2}>
+        <Grid item={true}>
           <SQFormTextField name="test" label="Test Field" />
         </Grid>
-        <Grid item>
+        <Grid item={true}>
           <SQFormResetInitialValuesButtonComponent {...rest} />
         </Grid>
       </Grid>
