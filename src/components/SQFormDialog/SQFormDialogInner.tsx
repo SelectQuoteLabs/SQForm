@@ -99,7 +99,7 @@ const actionStyles = (theme: Theme) => ({
   flex: '1 1 100%',
   ...stickyStyles(theme),
   bottom: 0,
-  borderTop: `1px solid B3B3B3`,
+  borderTop: `1px solid #B3B3B3`,
   padding: '8px 16px',
   height: '47px',
 });
@@ -109,7 +109,7 @@ const useClasses = (theme: Theme) => ({
   title: {
     ...stickyStyles(theme),
     top: 0,
-    borderBottom: `1px solid B3B3B3`,
+    borderBottom: `1px solid #B3B3B3`,
     padding: '12px 16px',
     height: '48px',
   },
