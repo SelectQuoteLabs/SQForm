@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {SQForm, SQFormButton} from '../../src';
 import {
   Snackbar,
@@ -7,7 +7,7 @@ import {
   useSnackbar,
 } from 'scplus-shared-components';
 import type {AnyObjectSchema} from 'yup';
-import type {GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {FormikValues} from 'formik';
 
 export type SQFormStoryWrapperProps = {

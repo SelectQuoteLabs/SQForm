@@ -1,10 +1,12 @@
 import React from 'react';
 import isEqual from 'lodash.isequal';
 import {getIn, useField} from 'formik';
+import {Typography} from '@mui/material';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
+import type {Theme} from '@mui/material';
 import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 
 type ChangeHandler<TChangeEvent> = (
@@ -40,6 +42,11 @@ type UseFormReturn<TValue, TChangeEvent> = {
 };
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
+const ICON_STYLES = {
+  ...SPACE_STYLE,
+  width: '12px',
+  height: '11px',
+};
 
 function _handleError(name: string) {
   if (typeof name !== 'string') {
@@ -128,24 +135,26 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldError) {
       return (
         <>
-          <WarningIcon color="error" style={SPACE_STYLE} />
-          {errorMessage}
+          <WarningIcon color="error" sx={ICON_STYLES} />
+          <Typography sx={(theme: Theme) => theme.typography.helper}>
+            {errorMessage}
+          </Typography>
         </>
       );
     }
     if (isFieldRequired) {
       return (
         <>
-          <WarningIcon color="disabled" style={SPACE_STYLE} />
-          Required
+          <WarningIcon color="disabled" sx={ICON_STYLES} />
+          <Typography sx={(theme: Theme) => theme.typography.helper}>
+            Required
+          </Typography>
         </>
       );
     }
     if (isFulfilled) {
       return (
-        <VerifiedIcon
-          style={{color: 'var(--color-palmLeaf)', ...SPACE_STYLE}}
-        />
+        <VerifiedIcon sx={{color: 'var(--color-palmLeaf)', ...ICON_STYLES}} />
       );
     }
     return ' '; // return something so UI space always exists

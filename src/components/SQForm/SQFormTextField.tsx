@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid, InputAdornment, TextField} from '@material-ui/core';
+import {Grid, InputAdornment, TextField} from '@mui/material';
 import {useForm} from './useForm';
 import {toKebabCase} from '../../utils';
-import type {TextFieldProps, InputProps} from '@material-ui/core';
+import type {TextFieldProps, InputProps} from '@mui/material';
 import type Mask from '../../types/MaskTypes';
 import type {BaseFieldProps} from '../../types';
 
@@ -12,9 +12,9 @@ export type SQFormTextFieldProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Custom onBlur event callback */
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: TextFieldProps['onBlur'];
   /** Custom onChange event callback */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: TextFieldProps['onChange'];
   /** Adornment that appears at the start of the input */
   startAdornment?: React.ReactElement;
   /** Adornment that appears at the end of the input */
@@ -88,9 +88,10 @@ function SQFormTextField({
   );
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <TextField
         id={toKebabCase(name)}
+        variant="standard"
         color="primary"
         disabled={isDisabled}
         error={isFieldError}

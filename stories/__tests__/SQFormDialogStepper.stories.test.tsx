@@ -145,7 +145,7 @@ describe('SQFormDialogStepper Tests', () => {
       const lastName = screen.getByLabelText(/last name/i);
       userEvent.type(lastName, 'Last');
 
-      expect(nextButton).toBeEnabled();
+      await waitFor(() => expect(nextButton).toBeEnabled());
     });
   });
 });

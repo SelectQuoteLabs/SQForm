@@ -1,5 +1,5 @@
 import React from 'react';
-import type {GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 

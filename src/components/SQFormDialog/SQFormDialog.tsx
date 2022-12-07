@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
-import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
+import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
 import type {AnyObjectSchema} from 'yup';
 import type {SQFormDialogTertiaryValue} from './types';
 

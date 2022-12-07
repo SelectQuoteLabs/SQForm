@@ -1,3 +1,27 @@
+## [10.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.7.0...v10.0.0) (2022-12-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 SQFormDialogStepper respects validation schema
+* 🧨 Renamed rows and maxRows props on SQFormTextarea
+
+### Features
+
+* 🎸 Migrate InclusionList to MUI5 ([7c8b982](https://github.com/SelectQuoteLabs/SQForm/commit/7c8b982cd7eb16010d44e4885ebd080b7da6f409)), closes [#729](https://github.com/SelectQuoteLabs/SQForm/issues/729)
+* 🎸 Migrate SQFormAutoComplete to MUI5 ([0657e4b](https://github.com/SelectQuoteLabs/SQForm/commit/0657e4b40a3c3d23a15e712221d6be9e30b96069)), closes [#723](https://github.com/SelectQuoteLabs/SQForm/issues/723)
+
+
+### Bug Fixes
+
+* 🐛 SQFormDialogStepper validation works properly ([#791](https://github.com/SelectQuoteLabs/SQForm/issues/791)) ([bf6b18e](https://github.com/SelectQuoteLabs/SQForm/commit/bf6b18e844ee1cf5cb02cd4d49dd61ebf4042099)), closes [#790](https://github.com/SelectQuoteLabs/SQForm/issues/790)
+* 🐛 SQFormScrollable cards accepts value and label props ([#793](https://github.com/SelectQuoteLabs/SQForm/issues/793)) ([1a669b3](https://github.com/SelectQuoteLabs/SQForm/commit/1a669b3e991ac0b9543ae5775f5ee1d93cc2f033)), closes [#792](https://github.com/SelectQuoteLabs/SQForm/issues/792)
+
+
+### Code Refactoring
+
+* 💡 SQFormTextarea to MUIv5 ([30d2301](https://github.com/SelectQuoteLabs/SQForm/commit/30d2301c6c9130765c6fc76e7ab31a262d472942)), closes [#710](https://github.com/SelectQuoteLabs/SQForm/issues/710)
+
 ## [9.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.6.0...v9.7.0) (2022-10-24)
 
 

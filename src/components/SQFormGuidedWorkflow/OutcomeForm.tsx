@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {Section, SectionBody} from 'scplus-shared-components';
 import Header from './Header';
 import type {SQFormGuidedWorkflowOutcomeProps} from './Types';
@@ -27,7 +27,11 @@ function OutcomeForm({
         isFailedState={isFailedState}
       />
       <SectionBody>
-        <Grid {...muiGridProps} container spacing={muiGridProps.spacing ?? 2}>
+        <Grid
+          {...muiGridProps}
+          container={true}
+          spacing={muiGridProps.spacing ?? 2}
+        >
           {FormElements}
         </Grid>
       </SectionBody>
