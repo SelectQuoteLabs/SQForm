@@ -87,7 +87,7 @@ describe('Tests for Default', () => {
     // fireEvent, not userEvent
     // to confirm the 'key' and 'code' values-- > https://keycode.info/
     // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
-    fireEvent.keyDown(screen.getByRole('presentation'), {
+    fireEvent.keyDown(screen.getAllByRole('presentation')[0], {
       key: 'Escape',
       code: 'Escape',
     });
@@ -111,7 +111,7 @@ it('should not call onClose on `escape` keydown because cancel is not available'
   // fireEvent, not userEvent
   // to confirm the 'key' and 'code' values-- > https://keycode.info/
   // https://testing-library.com/docs/dom-testing-library/api-events/ --> find 'keyboard events'
-  fireEvent.keyDown(screen.getByRole('presentation'), {
+  fireEvent.keyDown(screen.getAllByRole('presentation')[0], {
     key: 'Escape',
     code: 'Escape',
   });

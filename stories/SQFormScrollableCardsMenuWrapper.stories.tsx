@@ -21,14 +21,20 @@ export const sqFormScrollableCardsMenuWrapper = (): React.ReactElement => {
   return (
     <div style={{width: '100%', height: '100%'}}>
       <SQFormScrollableCardsMenuWrapper title="[selected user]">
-        <ScrollableDetails />
-        <ScrollablePermissions />
+        <ScrollableDetails value="details" label="Details" />
+        <ScrollablePermissions value="permissions" label="Permissions" />
       </SQFormScrollableCardsMenuWrapper>
     </div>
   );
 };
 
-function ScrollableDetails(): React.ReactElement {
+function ScrollableDetails({
+  value,
+  label,
+}: {
+  value: string;
+  label: string;
+}): React.ReactElement {
   const initialValues = {
     name: '',
   };
@@ -54,13 +60,21 @@ function ScrollableDetails(): React.ReactElement {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
+      value={value}
+      label={label}
     >
       <SQFormTextField name="name" label="Name" size={12} />
     </SQFormScrollableCard>
   );
 }
 
-function ScrollablePermissions(): React.ReactElement {
+function ScrollablePermissions({
+  value,
+  label,
+}: {
+  value: string;
+  label: string;
+}): React.ReactElement {
   const initialValues = {
     isAdmin: false,
   };
@@ -86,6 +100,8 @@ function ScrollablePermissions(): React.ReactElement {
       onSubmit={handleSubmit}
       shouldRequireFieldUpdates={true}
       validationSchema={validationSchema}
+      value={value}
+      label={label}
     >
       <SQFormCheckbox name="isAdmin" label="Admin" size={12} />
     </SQFormScrollableCard>

@@ -30,10 +30,12 @@ const MOCK_COLOR_OPTIONS = [
   {label: 'Red', value: 'red'},
   {label: 'Orange', value: 'orange'},
   {label: 'Yellow', value: 'yellow'},
+  {label: 'Black', value: 'black', isDisabled: true},
   {label: 'Green', value: 'green'},
   {label: 'Blue', value: 'blue'},
   {label: 'Indigo', value: 'indigo'},
   {label: 'Violet', value: 'violet'},
+  {label: 'Amber', value: 'amber', isDisabled: true},
 ];
 
 const defaultArgs = {

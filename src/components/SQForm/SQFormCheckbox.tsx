@@ -1,7 +1,7 @@
 import React from 'react';
-import {Checkbox, FormControlLabel, Grid} from '@material-ui/core';
+import {Checkbox, FormControlLabel, Grid} from '@mui/material';
 import {useForm} from './useForm';
-import type {CheckboxProps} from '@material-ui/core';
+import type {CheckboxProps} from '@mui/material';
 import type {BaseFieldProps} from '../../types';
 
 export type SQFormCheckboxProps = BaseFieldProps & {
@@ -27,12 +27,11 @@ function SQFormCheckbox({
   } = useForm({name, onChange});
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <FormControlLabel
         control={
           <Checkbox
             checked={!!field.value}
-            color="primary"
             disabled={isDisabled}
             name={name}
             onChange={handleChange}

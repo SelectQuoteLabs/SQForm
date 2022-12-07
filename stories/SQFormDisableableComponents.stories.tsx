@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import React from 'react';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
-import {Card, Grid} from '@material-ui/core';
+import {Card, Grid} from '@mui/material';
 import {
   SQFormButton,
   SQFormAutocomplete,
@@ -58,7 +58,7 @@ export const disableableComponents = (): React.ReactElement => {
   ];
 
   return (
-    <Card raised style={{padding: 16}}>
+    <Card raised={true} style={{padding: 16}}>
       <SQForm
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -125,7 +125,7 @@ export const disableableComponents = (): React.ReactElement => {
           isDisabled={boolean('Checkbox Disabled', true)}
           size={4}
         />
-        <Grid item sm={12}>
+        <Grid item={true} sm={12}>
           <SQFormButton>Submit</SQFormButton>
         </Grid>
       </SQForm>

@@ -1,32 +1,13 @@
 import React from 'react';
-import {
-  ClickAwayListener,
-  Grid,
-  makeStyles,
-  TextField,
-} from '@material-ui/core';
-import {DatePicker} from '@material-ui/pickers';
+import {ClickAwayListener, Grid, TextField} from '@mui/material';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {useForm} from './useForm';
-import type {BasePickerProps, BaseDatePickerProps} from '@material-ui/pickers';
-import type {ParsableDate} from '@material-ui/pickers/constants/prop-types';
+import type {BasePickerProps} from '@mui/x-date-pickers/internals';
+import type {BaseDatePickerProps} from '@mui/x-date-pickers/DatePicker/shared';
 import type {SQFormDatePickerProps} from 'index';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
-      {
-        '& .MuiIconButton-root': {
-          color: 'var(--color-teal)',
-        },
-      },
-  },
-}));
-
-type MuiFieldProps<TDate> = BaseDatePickerProps<TDate> &
-  Omit<
-    BasePickerProps<ParsableDate<TDate>, TDate | null>,
-    'value' | 'onChange'
-  >;
+type MuiFieldProps<TDate> = BaseDatePickerProps<TDate, TDate> &
+  Omit<BasePickerProps<TDate, TDate | null>, 'value' | 'onChange'>;
 
 export type SQFormDatePickerDateFNSProps = Omit<
   SQFormDatePickerProps,
@@ -74,14 +55,12 @@ function SQFormDatePickerWithDateFNS({
     }
   };
 
-  const classes = useStyles();
-
   // An empty string will not reset the DatePicker so we have to pass null
   const value = field.value || null;
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Grid item sm={size}>
+      <Grid item={true} sm={size}>
         <DatePicker
           label={label}
           disabled={isDisabled}
@@ -97,6 +76,7 @@ function SQFormDatePickerWithDateFNS({
                 {...inputProps}
                 name={name}
                 color="primary"
+                variant="standard"
                 error={isFieldError}
                 fullWidth={true}
                 inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
@@ -111,7 +91,14 @@ function SQFormDatePickerWithDateFNS({
                     ? toggleCalendar
                     : handleClickAway
                 }
-                classes={classes}
+                sx={{
+                  '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
+                    {
+                      '& .MuiIconButton-root': {
+                        color: 'var(--color-teal)',
+                      },
+                    },
+                }}
               />
             );
           }}

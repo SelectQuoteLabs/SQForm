@@ -1,11 +1,17 @@
 /* ag-grid theme override css */
 .ag-header-cell {
   font-size: 12px;
-  background-color: var(--color-stone);
+  background-color: var(--color-rock);
   color: var(--color-white);
   width: auto;
   font-family: 'Open Sans';
   font-weight: 400;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.ag-header-cell::after {
+  border-right: 1px solid #a4a6a8 !important;
 }
 
 .ag-theme-balham .ag-row-hover {
@@ -73,12 +79,14 @@
 }
 
 .ag-header {
-  background-color: var(--color-stone) !important;
+  background-color: var(--color-rock) !important;
 }
 
 .columnList__hyperlink {
-  color: var(--color-teal);
+  color: var(--color-darkTeal);
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .columnList__number {
@@ -100,4 +108,8 @@
 
 .dataTable__number {
   text-align: right;
+}
+
+.ag-theme-balham .ag-paging-panel {
+  height: 34px;
 }
