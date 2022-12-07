@@ -72,9 +72,11 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   value?: string;
   /** The label to display for this card if used by SQFormScrollableCardsMenuWrapper */
   label?: string;
+  /** An Icon to be shown to the left of the title */
+  icon?: React.ReactNode;
 };
 
-function SQFormScrollableCard<Values>({
+function SQFormScrollableCard<Values extends FormikValues>({
   cardContentStyles = {},
   children,
   enableReinitialize = false,
@@ -97,6 +99,7 @@ function SQFormScrollableCard<Values>({
   validationSchema,
   isHeaderDisabled = false,
   isSquareCorners = true,
+  icon,
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
@@ -190,6 +193,7 @@ function SQFormScrollableCard<Values>({
                       height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
                     })}
                     titleTypographyProps={{variant: 'h5'}}
+                    avatar={icon}
                   />
                 )}
 
