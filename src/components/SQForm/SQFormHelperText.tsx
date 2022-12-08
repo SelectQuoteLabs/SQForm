@@ -90,11 +90,13 @@ function SQFormHelperText({
         sx={(theme) => {
           return {
             mr: theme.spacing(1),
-            fontSize: '24px',
+            fontSize: '22px',
           };
         }}
       />
-      <Typography variant="h6">{helperTextMap[helperTextType]}</Typography>
+      <Typography variant="subtitle2">
+        {helperTextMap[helperTextType]}
+      </Typography>
     </Grid>
   );
 }
