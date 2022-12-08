@@ -278,7 +278,7 @@ function SQFormDialogInner<Values extends FormikValues>({
             // See: https://github.com/mui/material-ui/issues/27851#issuecomment-998996294
             // Known problem in MUI v5, as of @mui/material@5.9.2
             style={{
-              paddingTop: '20px',
+              paddingTop: '24px',
             }}
             sx={classes.dialogContent}
           >
