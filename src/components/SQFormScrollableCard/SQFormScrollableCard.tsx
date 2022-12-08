@@ -5,7 +5,6 @@ import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import {HEADER_HEIGHT} from '../../utils/constants';
 import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
@@ -189,8 +188,8 @@ function SQFormScrollableCard<Values extends FormikValues>({
                     sx={(theme) => ({
                       gridArea: 'header',
                       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-                      padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
-                      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
+                      padding: `${theme.spacing(1.5)} ${theme.spacing(3)}`,
+                      height: '49px', // overrides a scplus-shared-component theme hard coded height
                     })}
                     titleTypographyProps={{variant: 'h5'}}
                     avatar={icon}
@@ -201,7 +200,9 @@ function SQFormScrollableCard<Values extends FormikValues>({
                   sx={(theme) => ({
                     gridArea: 'content',
                     overflowY: 'auto',
-                    p: `${theme.spacing(2)}`,
+                    p: `${theme.spacing(3)} ${theme.spacing(2)} ${theme.spacing(
+                      4
+                    )} ${theme.spacing(2)}`,
                     ...cardContentStyles,
                     '& .MuiGrid-root.MuiGrid-item': {
                       p: theme.spacing(1),
@@ -225,6 +226,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
                 </CardContent>
                 <CardActions
                   sx={(theme) => ({
+                    height: '47px',
                     gridArea: 'footer',
                     display: 'flex',
                     justifyContent: 'space-between',
