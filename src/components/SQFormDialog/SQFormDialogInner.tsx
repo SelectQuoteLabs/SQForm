@@ -111,7 +111,7 @@ const useClasses = (theme: Theme) => ({
     top: 0,
     borderBottom: `1px solid #B3B3B3`,
     padding: '12px 16px',
-    height: '48px',
+    height: '49px',
   },
   action: actionStyles(theme),
   primaryAction: {
