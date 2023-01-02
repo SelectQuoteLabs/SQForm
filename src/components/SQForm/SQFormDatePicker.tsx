@@ -16,6 +16,8 @@ type MuiFieldProps<TDate> = BaseDatePickerProps<TDate, TDate> &
 export type SQFormDatePickerProps = BaseFieldProps & {
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
+  /** Whether or not to show the helper text */
+  displayHelperText?: boolean;
   /** Placeholder text used inside the input field to provide hints to the user */
   placeholder?: string;
   /** Custom onBlur event callback */
@@ -49,6 +51,7 @@ function SQFormDatePicker({
   label,
   size = 'auto',
   isDisabled = false,
+  displayHelperText = true,
   placeholder = '',
   onBlur,
   onChange,
@@ -109,7 +112,9 @@ function SQFormDatePicker({
                 inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
                 InputLabelProps={{shrink: true}}
                 FormHelperTextProps={{error: isFieldError}}
-                helperText={!isDisabled && HelperTextComponent}
+                helperText={
+                  !isDisabled && displayHelperText && HelperTextComponent
+                }
                 placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isFieldRequired}
