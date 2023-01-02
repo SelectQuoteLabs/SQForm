@@ -62,6 +62,6 @@ export const MASKS = {
     /\d/,
     /\d/,
   ],
-  creditCardExpiry: [/[0-1]/, /[1-9]/, '/', /[0-2]/, /[1-9]/],
+  creditCardExpiry: [/[0-1]/, /[1-9]/, '/', /[0-9]/, /[0-9]/],
   creditCardCVV: [/\d/, /\d/, /\d/],
 };
