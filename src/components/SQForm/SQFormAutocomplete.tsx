@@ -1,18 +1,18 @@
 import React from 'react';
 import {
+  Autocomplete,
+  Box,
   TextField,
   Grid,
   Typography,
   Tooltip,
-  makeStyles,
-} from '@material-ui/core';
-import {Autocomplete} from '@material-ui/lab';
+} from '@mui/material';
 import {VariableSizeList} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
-import type {AutocompleteChangeReason} from '@material-ui/lab';
-import type {TextFieldProps} from '@material-ui/core';
+import type {AutocompleteChangeReason} from '@mui/base';
+import type {TextFieldProps} from '@mui/material';
 import type {ListChildComponentProps} from 'react-window';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
@@ -102,6 +102,7 @@ function renderRow({data, index, style}: ListChildComponentProps) {
     <Tooltip
       title={value || ''}
       key={`${value}-${index}-with-tooltip`}
+      disableInteractive={true}
       placement="bottom-start"
     >
       {clone}
@@ -119,26 +120,6 @@ const calculateWidth = (baseWidth: number, left: number) => {
   return 'initial !important';
 };
 
-const useListStyles = makeStyles({
-  list: {
-    '& > ul': {
-      width: ({
-        baseWidth,
-        left,
-        lockWidthToField,
-      }: {
-        baseWidth: number;
-        left: number;
-        lockWidthToField: boolean;
-      }) =>
-        lockWidthToField
-          ? `${baseWidth}px !important`
-          : calculateWidth(baseWidth, left),
-      overflowX: 'hidden !important',
-    },
-  },
-});
-
 // Adapter for react-window
 const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
   function ListboxVirtualizedComponent(
@@ -150,11 +131,6 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
     }: ListboxVirtualizedComponentProps,
     ref
   ): React.ReactElement {
-    const classes = useListStyles({
-      baseWidth: basewidth,
-      left,
-      lockWidthToField,
-    });
     const {children, ...listboxProps} = restProps;
     const LIST_MAX_VIEWABLE_ITEMS = 8;
     const LIST_OVERSCAN_COUNT = 5;
@@ -170,24 +146,41 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
     }, [ITEM_COUNT, items]);
 
     const getItemSize = React.useCallback(() => ITEM_SIZE, []);
+    const getItemWidth = () => {
+      return lockWidthToField
+        ? `${basewidth}px !important`
+        : calculateWidth(basewidth, left);
+    };
 
     return (
       <div ref={ref}>
         <OuterElementContext.Provider value={listboxProps}>
-          <VariableSizeList
-            className={classes.list}
-            itemData={items}
-            height={height}
-            key={ITEM_COUNT}
-            outerElementType={OuterElementType}
-            innerElementType="ul"
-            itemSize={getItemSize}
-            overscanCount={LIST_OVERSCAN_COUNT}
-            itemCount={ITEM_COUNT}
-            width=""
+          <Box
+            sx={{
+              '& ul': {
+                width: getItemWidth(),
+              },
+            }}
           >
-            {renderRow}
-          </VariableSizeList>
+            <VariableSizeList
+              style={{
+                overflow: 'hidden',
+                margin: 0,
+                padding: 0,
+              }}
+              itemData={items}
+              height={height}
+              key={ITEM_COUNT}
+              outerElementType={OuterElementType}
+              innerElementType="ul"
+              itemSize={getItemSize}
+              overscanCount={LIST_OVERSCAN_COUNT}
+              itemCount={ITEM_COUNT}
+              width=""
+            >
+              {renderRow}
+            </VariableSizeList>
+          </Box>
         </OuterElementContext.Provider>
       </div>
     );
@@ -234,33 +227,6 @@ const calculateBaseWidth = (ref: HTMLDivElement | null) => {
   return baseWidth;
 };
 
-const useStyles = makeStyles({
-  grid: {
-    position: 'relative',
-  },
-});
-
-const useAutocompleteStyles = makeStyles({
-  listbox: {
-    overflowX: 'hidden !important' as 'hidden',
-
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-  popper: {
-    borderRadius: '4px',
-    boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
-    width: ({lockWidthToField}: {lockWidthToField: boolean}) =>
-      !lockWidthToField ? 'auto !important' : undefined,
-    overflowX: 'hidden !important' as 'hidden',
-  },
-  paper: {
-    margin: 0,
-  },
-});
-
 function SQFormAutocomplete({
   children,
   isDisabled = false,
@@ -275,9 +241,6 @@ function SQFormAutocomplete({
   lockWidthToField = true,
   muiTextFieldProps = {},
 }: SQFormAutocompleteProps): React.ReactElement {
-  const classes = useStyles();
-  const autocompleteClasses = useAutocompleteStyles({lockWidthToField});
-
   const gridContainerRef = React.useRef<HTMLDivElement>(null);
   const baseWidth = calculateBaseWidth(gridContainerRef.current);
   const left = gridContainerRef.current?.getBoundingClientRect().left;
@@ -335,21 +298,63 @@ function SQFormAutocomplete({
   const options = children ? [...children] : [];
   displayEmpty && options.unshift(EMPTY_OPTION);
 
+  const listboxProps = {
+    basewidth: baseWidth,
+    left,
+    lockWidthToField,
+  } as React.HTMLAttributes<HTMLElement>;
   return (
-    <Grid item xs={size} ref={gridContainerRef} className={classes.grid}>
+    <Grid
+      item={true}
+      xs={size}
+      ref={gridContainerRef}
+      sx={{
+        position: 'relative',
+        '& .MuiAutocomplete-listbox': {
+          '& ul': {
+            p: 0,
+            m: 0,
+          },
+        },
+        '& .MuiAutocomplete-paper': {
+          m: 0,
+        },
+        '& .MuiAutocomplete-popper': {
+          borderRadius: '4px',
+          boxShadow: '0px 3px 4px 0px rgb(100 100 100)',
+          width: !lockWidthToField ? 'auto !important' : undefined,
+          // This makes sure the autocomplete options list width is never less than the input field width
+          minWidth: `${Number(baseWidth ?? 0) + LISTBOX_PADDING}px !important`,
+        },
+      }}
+    >
       <Autocomplete
         id={name}
         style={{width: '100%'}}
-        disableListWrap
+        disableListWrap={true}
         disablePortal={!lockWidthToField}
-        classes={autocompleteClasses}
         ListboxComponent={
           ListboxVirtualizedComponent as React.ComponentType<
             React.HTMLAttributes<HTMLElement>
           >
         }
         // Note: basewidth is not camel cased because React doesn't like it here
-        ListboxProps={{basewidth: baseWidth, left, lockWidthToField}}
+        ListboxProps={listboxProps}
+        componentsProps={{
+          popper: {
+            popperOptions: {
+              placement: 'bottom-start',
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: !lockWidthToField ? [0, 20] : [0, 0],
+                  },
+                },
+              ],
+            },
+          },
+        }}
         options={options}
         onBlur={handleAutocompleteBlur}
         onChange={handleAutocompleteChange}
@@ -367,6 +372,7 @@ function SQFormAutocomplete({
             <TextField
               {...params}
               color="primary"
+              variant="standard"
               disabled={isDisabled}
               error={isFieldError}
               fullWidth={true}
@@ -389,10 +395,12 @@ function SQFormAutocomplete({
             />
           );
         }}
-        renderOption={(option) => (
-          <Typography variant="body2" noWrap>
-            {option.label}
-          </Typography>
+        renderOption={(props, option) => (
+          <li {...props}>
+            <Typography variant="body2" noWrap={true}>
+              {option.label}
+            </Typography>
+          </li>
         )}
       />
     </Grid>

@@ -1,26 +1,17 @@
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Grid,
-  makeStyles,
-} from '@material-ui/core';
+import {Card, CardHeader, CardContent, CardActions, Grid} from '@mui/material';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import {HEADER_HEIGHT} from '../../utils/constants';
-import type {CreateCSSProperties} from '@material-ui/core/styles/withStyles';
-import type {TypographyVariant, GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 
 export type SQFormScrollableCardProps<Values extends FormikValues> = {
-  /** An object of css-in-js style properties to be passed and spread onto `classes.cardContent` */
-  cardContentStyles?: CreateCSSProperties;
+  /** An object of css-in-js style properties to be passed and spread onto the `CardContent` component */
+  cardContentStyles?: React.CSSProperties;
   /** Form related Field(s) and components */
   children: React.ReactNode;
   /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
@@ -74,61 +65,17 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   validationSchema?: AnyObjectSchema;
   /** Boolean used to determine if title/header is enabled or disabled */
   isHeaderDisabled?: boolean;
-  /** MUI Typography variant to be used for the title */
-  titleVariant?: TypographyVariant;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
+  /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
+  value?: string;
+  /** The label to display for this card if used by SQFormScrollableCardsMenuWrapper */
+  label?: string;
   /** An Icon to be shown to the left of the title */
   icon?: React.ReactNode;
 };
 
-type useStylesProps = {
-  hasSubHeader: boolean;
-  cardContentStyles: CreateCSSProperties;
-};
-
-const useStyles = makeStyles((theme) => {
-  return {
-    form: {
-      height: '100%',
-      width: '100%',
-    },
-    card: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: 'auto 1fr auto',
-      gridTemplateAreas: `'header' 'content' 'footer'`,
-      height: '100%',
-    },
-    cardHeader: {
-      gridArea: 'header',
-      borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
-    },
-    cardContent: (props: useStylesProps) => ({
-      gridArea: 'content',
-      overflowY: 'auto',
-      padding: `${theme.spacing(2)}px`,
-      ...props.cardContentStyles,
-    }),
-    childrenContainer: {
-      width: 'auto',
-      margin: ({hasSubHeader}: useStylesProps) => {
-        return hasSubHeader ? `${theme.spacing(2)}px ${theme.spacing(4)}px` : 0;
-      },
-    },
-    cardFooter: {
-      gridArea: 'footer',
-      display: 'flex',
-      justifyContent: 'space-between',
-      borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-    },
-  };
-});
-
-function SQFormScrollableCard<Values>({
+function SQFormScrollableCard<Values extends FormikValues>({
   cardContentStyles = {},
   children,
   enableReinitialize = false,
@@ -159,8 +106,6 @@ function SQFormScrollableCard<Values>({
     validationSchema,
     initialValues
   );
-
-  const classes = useStyles({hasSubHeader, cardContentStyles});
 
   const handleSubmit = useDebouncedCallback(
     (formValues: Values, formikBag: FormikHelpers<Values>) =>
@@ -224,34 +169,75 @@ function SQFormScrollableCard<Values>({
       >
         {(_props) => {
           return (
-            <Form className={classes.form}>
+            <Form style={{height: '100%', width: '100%'}}>
               <Card
                 raised={true}
                 elevation={1}
                 square={isSquareCorners}
-                className={classes.card}
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr',
+                  gridTemplateRows: 'auto 1fr auto',
+                  gridTemplateAreas: `'header' 'content' 'footer'`,
+                  height: '100%',
+                }}
               >
                 {!isHeaderDisabled && (
                   <CardHeader
                     title={title}
-                    className={classes.cardHeader}
+                    sx={(theme) => ({
+                      gridArea: 'header',
+                      borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+                      padding: `${theme.spacing(1.5)} ${theme.spacing(3)}`,
+                      height: '49px', // overrides a scplus-shared-component theme hard coded height
+                    })}
                     titleTypographyProps={{variant: 'h5'}}
                     avatar={icon}
                   />
                 )}
 
-                <CardContent className={classes.cardContent}>
+                <CardContent
+                  sx={(theme) => ({
+                    gridArea: 'content',
+                    overflowY: 'auto',
+                    p: `${theme.spacing(3)} ${theme.spacing(2)} ${theme.spacing(
+                      4
+                    )} ${theme.spacing(2)}`,
+                    ...cardContentStyles,
+                    '& .MuiGrid-root.MuiGrid-item': {
+                      p: theme.spacing(1),
+                    },
+                  })}
+                >
                   {SubHeaderComponent}
                   <Grid
                     {...muiGridProps}
-                    container
+                    container={true}
                     spacing={muiGridProps.spacing ?? 2}
-                    className={classes.childrenContainer}
+                    sx={(theme) => ({
+                      width: 'auto',
+                      m: hasSubHeader
+                        ? `${theme.spacing(2)} ${theme.spacing(4)}`
+                        : 0,
+                    })}
                   >
                     {children}
                   </Grid>
                 </CardContent>
-                <CardActions className={classes.cardFooter}>
+                <CardActions
+                  sx={(theme) => ({
+                    height: '47px',
+                    gridArea: 'footer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+                    padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
+                    '& .MuiGrid-root.MuiGrid-container': {
+                      p: `0 ${theme.spacing(2)}`,
+                      ml: theme.spacing(1),
+                    },
+                  })}
+                >
                   <SQFormButton type="reset" title="Reset Form">
                     {resetButtonText}
                   </SQFormButton>

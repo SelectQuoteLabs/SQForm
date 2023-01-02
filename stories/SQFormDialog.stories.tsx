@@ -9,7 +9,7 @@ import {
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
-import type {GridItemsAlignment, GridSpacing} from '@material-ui/core';
+import type {GridSpacing} from '@mui/material';
 import type {FormikContextType} from 'formik';
 import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 
@@ -17,9 +17,9 @@ type DefaultArgsValues = {hello: string};
 type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>;
 
 type WithDatePickersValues = {
-  datePicker: string;
-  dateTimePicker: string;
-  datePickerCalendarOnly: string;
+  datePicker: Date;
+  dateTimePicker: Date;
+  datePickerCalendarOnly: Date;
 };
 type SQFormDialogWithDatePickersStory = Story<
   SQFormDialogProps<WithDatePickersValues>
@@ -40,14 +40,17 @@ const meta: Meta = {
   },
 };
 
-const alignItems: GridItemsAlignment = 'center';
+const alignItems = 'center';
 const spacing: GridSpacing = 2;
 const defaultArgs = {
   title: 'Default',
   initialValues: {hello: ''},
+  onSave: console.log,
   muiGridProps: {
     spacing,
-    alignItems,
+    sx: {
+      alignItems,
+    },
   },
   shouldDisplaySaveButton: true,
   showSecondaryButton: true,
@@ -125,10 +128,77 @@ WithDatePickers.args = {
   ...defaultArgs,
   title: 'With Date Pickers',
   initialValues: {
-    datePicker: '',
-    dateTimePicker: '',
-    datePickerCalendarOnly: '',
+    datePicker: new Date(),
+    dateTimePicker: new Date(),
+    datePickerCalendarOnly: new Date(),
   },
+  validationSchema: Yup.object({
+    datePicker: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+    dateTimePicker: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+    datePickerCalendarOnly: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+  }),
+};
+
+export const WithOnBlurValidation: SQFormDialogWithDatePickersStory = (
+  args
+) => {
+  return (
+    <>
+      <h1>
+        Toggle the Dialog's <code>isOpen</code> state in the Controls tab
+      </h1>
+
+      <SQFormDialog {...args}>
+        <SQFormDatePicker name="datePicker" label="DatePicker" />
+        <SQFormDateTimePicker name="dateTimePicker" label="DateTimePicker" />
+        <SQFormDatePickerWithCalendarInputOnly
+          name="datePickerCalendarOnly"
+          label="DatePickerWithCalendarInputOnly"
+        />
+      </SQFormDialog>
+    </>
+  );
+};
+
+WithOnBlurValidation.args = {
+  ...defaultArgs,
+  title: 'With Date Pickers',
+  initialValues: {
+    datePicker: new Date(),
+    dateTimePicker: new Date(),
+    datePickerCalendarOnly: new Date(),
+  },
+  validationSchema: Yup.object({
+    datePicker: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+    dateTimePicker: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+    datePickerCalendarOnly: Yup.date()
+      .required()
+      .min(new Date('2020-09-22'), 'Date must be after 09/22/20')
+      .max(new Date('2100-10-10'), 'Date must be after 10/10/2100')
+      .typeError('Invalid date'),
+  }),
+  validateOnBlur: true,
+  validateOnChange: false,
 };
 
 export const WithTertiaryButton: SQFormDialogStory = (args) => {

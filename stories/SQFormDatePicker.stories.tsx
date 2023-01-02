@@ -81,9 +81,6 @@ DatePickerBefore2024.args = {
       .max(new Date('2024-01-01'), 'Date must be before 2024')
       .typeError('Invalid date'),
   }),
-  muiFieldProps: {
-    allowSameDateSelection: true,
-  },
 };
 
 export default meta;

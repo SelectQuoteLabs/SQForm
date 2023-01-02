@@ -6,11 +6,11 @@ import {
   FormGroup,
   FormHelperText,
   Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 import SQFormCheckboxGroupItem from './SQFormCheckboxGroupItem';
 import SQFormCheckbox from './SQFormCheckbox';
 import {useForm} from './useForm';
-import type {CheckboxProps, GridSize} from '@material-ui/core';
+import type {CheckboxProps, GridSize} from '@mui/material';
 
 type CheckboxOption = {
   label: string;
@@ -110,9 +110,10 @@ function SQFormCheckboxGroup({
   };
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <FormControl
         component="fieldset"
+        variant="standard"
         required={isFieldRequired}
         error={isFieldError}
         onBlur={handleBlur}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from '@material-ui/core';
+import {Card} from '@mui/material';
 import {SQFormReadOnly as SQFormReadOnlyComponent, MASKS} from '../src';
 import type {Story, Meta} from '@storybook/react';
 import type {
@@ -108,7 +108,7 @@ const defaultArgs = {
 
 const Template: SQFormReadOnlyStory = (args): JSX.Element => {
   return (
-    <Card raised style={{padding: 20, width: 1200}}>
+    <Card raised={true} style={{padding: 20, width: 1200}}>
       <SQFormReadOnlyComponent {...args} />
     </Card>
   );

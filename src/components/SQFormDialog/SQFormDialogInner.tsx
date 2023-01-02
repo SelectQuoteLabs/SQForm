@@ -7,17 +7,16 @@ import {
   Typography,
   Grid,
   Slide,
-  makeStyles,
-} from '@material-ui/core';
-import {useTheme} from '@material-ui/core/styles';
+  useTheme,
+} from '@mui/material';
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
 import SQFormButton from '../SQForm/SQFormButton';
 import SQFormHelperText from '../SQForm/SQFormHelperText';
-import type {DialogProps, GridProps, ButtonProps} from '@material-ui/core';
-import type {Theme} from '@material-ui/core/styles';
-import type {TransitionProps} from '@material-ui/core/transitions';
+import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
+import type {Theme} from '@mui/material/styles';
+import type {TransitionProps} from '@mui/material/transitions';
 import type {FormikContextType, FormikValues} from 'formik';
 import type {SQFormDialogTertiaryValue} from './types';
 
@@ -67,6 +66,8 @@ type SQFormDialogInnerProps<Values extends FormikValues> = {
   helperText?: string;
   /** helper text type to pass to SQFormHelperText component */
   helperTextType?: 'fail' | 'error' | 'valid';
+  /** option to throw an Are You Sure alert when hitting cancel while in the middle of filling out a the form.  true by default. */
+  throwAlertOnCancel?: boolean;
 };
 
 /*
@@ -75,42 +76,46 @@ const Transition = React.forwardRef<HTMLDivElement>((props, ref) => {
 });
 */
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {children?: React.ReactElement<unknown, string>},
+  props: TransitionProps & {children: React.ReactElement<unknown, string>},
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="down" ref={ref} {...props} />;
+  const {children, ...rest} = props;
+  return (
+    <Slide direction="down" ref={ref} {...rest}>
+      {children}
+    </Slide>
+  );
 });
 
-const stickyStyles = {
+const stickyStyles = (theme: Theme) => ({
   position: 'sticky' as React.CSSProperties['position'],
-  background: ({palette}: Theme) => palette.background.paper,
-  zIndex: 1,
-};
+  background: theme.palette.background.paper,
+  Index: 1,
+});
 
-const useTitleStyles = makeStyles({
-  root: {
-    ...stickyStyles,
+const actionStyles = (theme: Theme) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  flex: '1 1 100%',
+  padding: '10px 20px',
+  ...stickyStyles(theme),
+  bottom: 0,
+  borderTop: `1px solid ${theme.palette.divider}`,
+});
+
+const useClasses = (theme: Theme) => ({
+  sticky: stickyStyles(theme),
+  title: {
+    ...stickyStyles(theme),
     top: 0,
-    borderBottom: ({palette}: Theme) => `1px solid ${palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
-});
-const actionStyles = {
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flex: '1 1 100%',
-    padding: '10px 20px',
-    ...stickyStyles,
-    bottom: 0,
-    borderTop: ({palette}: Theme) => `1px solid ${palette.divider}`,
+  action: actionStyles(theme),
+  primaryAction: {
+    ...actionStyles(theme),
+    justifyContent: 'flex-end',
   },
-};
-const useActionsStyles = makeStyles(actionStyles);
-const usePrimaryActionStyles = makeStyles({
-  root: {...actionStyles.root, justifyContent: 'flex-end'},
-});
-const useDialogContentStyles = makeStyles({
-  root: {
+  dialogContent: {
     overflowY: 'visible',
     padding: '20px',
   },
@@ -136,12 +141,10 @@ function SQFormDialogInner<Values extends FormikValues>({
   tertiaryButtonVariant,
   helperText,
   helperTextType = 'error',
+  throwAlertOnCancel = true,
 }: SQFormDialogInnerProps<Values>): React.ReactElement {
   const theme = useTheme();
-  const titleClasses = useTitleStyles(theme);
-  const actionsClasses = useActionsStyles(theme);
-  const primaryActionsClasses = usePrimaryActionStyles(theme);
-  const dialogContentClasses = useDialogContentStyles(theme);
+  const classes = useClasses(theme);
   const formikContext = useFormikContext<Values>();
 
   function getIsDisabled() {
@@ -169,7 +172,7 @@ function SQFormDialogInner<Values extends FormikValues>({
       return;
     }
 
-    if (!formikContext.dirty) {
+    if (!formikContext.dirty || !throwAlertOnCancel) {
       onClose && onClose(event, reason);
     } else {
       openDialogAlert();
@@ -264,10 +267,18 @@ function SQFormDialogInner<Values extends FormikValues>({
         }
       >
         <Form>
-          <DialogTitle disableTypography={true} classes={titleClasses}>
+          <DialogTitle sx={classes.title}>
             <Typography variant="h4">{title}</Typography>
           </DialogTitle>
-          <DialogContent classes={dialogContentClasses}>
+          <DialogContent
+            // DialongContent paddingTop is overwritten by some title styling. Applying directly
+            // See: https://github.com/mui/material-ui/issues/27851#issuecomment-998996294
+            // Known problem in MUI v5, as of @mui/material@5.9.2
+            style={{
+              paddingTop: '20px',
+            }}
+            sx={classes.dialogContent}
+          >
             <Grid
               {...muiGridProps}
               container
@@ -277,9 +288,7 @@ function SQFormDialogInner<Values extends FormikValues>({
             </Grid>
           </DialogContent>
           <DialogActions
-            classes={
-              showSecondaryButton ? actionsClasses : primaryActionsClasses
-            }
+            sx={showSecondaryButton ? classes.action : classes.primaryAction}
           >
             {tertiaryStatus !== 'HIDE_BUTTON'
               ? renderTertiaryButton()

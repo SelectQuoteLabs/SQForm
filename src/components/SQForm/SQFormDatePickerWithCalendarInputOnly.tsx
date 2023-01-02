@@ -1,6 +1,6 @@
 import React from 'react';
-import {IconButton, makeStyles} from '@material-ui/core';
-import {HighlightOff as ClearIcon} from '@material-ui/icons';
+import {IconButton} from '@mui/material';
+import {HighlightOff as ClearIcon} from '@mui/icons-material';
 import {useFormikContext} from 'formik';
 import SQFormDatePicker from './SQFormDatePicker';
 import {useForm} from './useForm';
@@ -26,25 +26,6 @@ export type SQFormDatePickerWithCalendarInputOnlyProps = BaseFieldProps & {
   muiFieldProps?: SQFormDatePickerProps['muiFieldProps'];
 };
 
-const useClearButtonStyles = makeStyles({
-  root: {
-    order: 1,
-    padding: 0,
-  },
-});
-
-const useCalendarButtonStyles = makeStyles({
-  root: {
-    order: 2,
-    '& .MuiIconButton-root': {
-      padding: 0,
-    },
-    '& .MuiIconButton-edgeEnd': {
-      margin: 0,
-    },
-  },
-});
-
 function SQFormDatePickerWithCalendarInputOnly({
   name,
   label,
@@ -63,8 +44,6 @@ function SQFormDatePickerWithCalendarInputOnly({
     name,
     onBlur,
   });
-  const clearButtonClasses = useClearButtonStyles();
-  const calendarButtonClasses = useCalendarButtonStyles();
   const {values, setFieldValue} = useFormikContext<{[name: string]: Moment}>();
 
   const clearField = () => {
@@ -95,7 +74,11 @@ function SQFormDatePickerWithCalendarInputOnly({
       InputProps={{
         startAdornment: (
           <IconButton
-            classes={clearButtonClasses}
+            sx={{
+              order: 1,
+              p: 0,
+            }}
+            size="large"
             onClick={clearField}
             disabled={isDisabled || !values[name]}
           >
@@ -105,7 +88,15 @@ function SQFormDatePickerWithCalendarInputOnly({
       }}
       InputAdornmentProps={{
         position: 'end',
-        classes: calendarButtonClasses,
+        sx: {
+          order: 2,
+          '& .MuiIconButton-root': {
+            p: 0,
+          },
+          '& .MuiIconButton-edgeEnd': {
+            m: 0,
+          },
+        },
       }}
     />
   );

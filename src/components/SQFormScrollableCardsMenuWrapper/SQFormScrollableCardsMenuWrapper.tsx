@@ -1,36 +1,8 @@
 import React from 'react';
-import {Card, CardHeader, makeStyles} from '@material-ui/core';
+import {Card, CardHeader} from '@mui/material';
 import {CardPopoverMenu} from 'scplus-shared-components';
 import {HEADER_HEIGHT} from '../../utils/constants';
-
-const useStyles = makeStyles((theme) => {
-  return {
-    card: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gridTemplateRows: 'auto 1fr auto',
-      gridTemplateAreas: `'header' 'content' 'footer'`,
-      height: '100%',
-    },
-    cardHeader: {
-      gridArea: 'header',
-      borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-      padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-      height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
-      alignItems: 'center',
-    },
-    action: {
-      alignSelf: 'unset',
-      marginTop: 'unset',
-    },
-    title: {
-      display: '-webkit-box',
-      '-webkit-box-orient': 'vertical',
-      '-webkit-line-clamp': '1',
-      overflow: 'hidden',
-    },
-  };
-});
+import type {ArrayOrSingle} from 'ts-essentials';
 
 function getSelectedComponent(
   selectedTab: {label: string; value: string},
@@ -46,14 +18,14 @@ function getSelectedComponent(
 }
 
 export type SQFormScrollableCardsMenuWrapperProps = {
-  /** At least one instance of SQFormScrollableCard where each has
-   * prop `isHeaderDisabled` === true
-   * AND
-   * each has a unique string `value` prop and `label` prop so we
-   * have a menu label and can match the `value` to what's selected
-   * in the popover menu.
+  /**
+   * Children should render an SQFormScrollableCard. Each card
+   * should have their header disabled for layout compliance.
+   * Additionally, each direct child should have `value` and `label`
+   * as props to ensure the tab selection is rendered properly.
+   * See SQFormScrollableCardsMenuWrapper stories for an example.
    */
-  children: JSX.Element | JSX.Element[];
+  children: ArrayOrSingle<React.ReactElement<{value: string; label: string}>>;
   /** The Title for the Header component */
   title?: string;
 };
@@ -62,14 +34,12 @@ export default function SQFormScrollableCardsMenuWrapper({
   title,
   children,
 }: SQFormScrollableCardsMenuWrapperProps): JSX.Element {
-  const classes = useStyles();
-
   const menuItems = React.useMemo(
     () =>
       React.Children.map(children, (child) => {
         return {
-          label: child.props.label,
-          value: child.props.value,
+          label: child.props.label || '',
+          value: child.props.value || '',
         };
       }),
     [children]
@@ -96,14 +66,37 @@ export default function SQFormScrollableCardsMenuWrapper({
   }, [selectedTab, children]);
 
   return (
-    <Card raised={true} elevation={1} square={true} className={classes.card}>
+    <Card
+      raised={true}
+      elevation={1}
+      square={true}
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'auto 1fr auto',
+        gridTemplateAreas: `'header' 'content' 'footer'`,
+        height: '100%',
+      }}
+    >
       <CardHeader
-        classes={{
-          action: classes.action,
-          title: classes.title,
-        }}
         title={title}
-        className={classes.cardHeader}
+        sx={(theme) => ({
+          gridArea: 'header',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+          padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
+          height: HEADER_HEIGHT, // overrides a scplus-shared-component theme hard coded height
+          alignItems: 'center',
+          '& .MuiCardHeader-action': {
+            alignSelf: 'unset',
+            marginTop: 'unset',
+          },
+          '& .MuiCardHeader-title': {
+            display: '-webkit-box',
+            '-webkit-box-orient': 'vertical',
+            '-webkit-line-clamp': '1',
+            overflow: 'hidden',
+          },
+        })}
         titleTypographyProps={{variant: 'h5'}}
         action={
           <CardPopoverMenu

@@ -1,13 +1,17 @@
 import React from 'react';
-import {CircularProgress, Grid, TextField, Typography} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import {Autocomplete} from '@material-ui/lab';
+import {
+  Autocomplete,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
 import {VariableSizeList} from 'react-window';
 import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
 import type {ListChildComponentProps} from 'react-window';
-import type {AutocompleteProps} from '@material-ui/lab';
+import type {AutocompleteProps} from '@mui/material';
 import type {
   ListboxVirtualizedComponentProps,
   OuterElementContextType,
@@ -37,15 +41,6 @@ export type SQFormAsyncAutocompleteProps = SQFormAutocompleteProps & {
 // MUI uses px, a numeric value is needed for calculations
 const LISTBOX_PADDING = 8; // px
 
-const useStyles = makeStyles({
-  listbox: {
-    '& ul': {
-      padding: 0,
-      margin: 0,
-    },
-  },
-});
-
 const OuterElementContext = React.createContext<OuterElementContextType | null>(
   {}
 );
@@ -67,53 +62,58 @@ function renderRow({data, index, style}: ListChildComponentProps) {
 }
 
 // Adapter for react-window
-const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
-  function ListboxVirtualizedComponent(
-    {
-      basewidth,
-      left,
-      lockWidthToField,
-      ...restProps
-    }: ListboxVirtualizedComponentProps,
-    ref
-  ): React.ReactElement {
-    const {children, ...listboxProps} = restProps;
-    const LIST_MAX_VIEWABLE_ITEMS = 8;
-    const LIST_OVERSCAN_COUNT = 5;
-    const items = React.Children.toArray(children);
-    const ITEM_COUNT = items.length;
-    const ITEM_SIZE = 36;
+const ListboxVirtualizedComponent: React.ForwardRefExoticComponent<
+  React.RefAttributes<HTMLDivElement>
+> = React.forwardRef<HTMLDivElement>(function ListboxVirtualizedComponent(
+  {
+    basewidth,
+    left,
+    lockWidthToField,
+    ...restProps
+  }: ListboxVirtualizedComponentProps,
+  ref
+): React.ReactElement {
+  const {children, ...listboxProps} = restProps;
+  const LIST_MAX_VIEWABLE_ITEMS = 8;
+  const LIST_OVERSCAN_COUNT = 5;
+  const items = React.Children.toArray(children);
+  const ITEM_COUNT = items.length;
+  const ITEM_SIZE = 36;
 
-    const height = React.useMemo(() => {
-      if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {
-        return LIST_MAX_VIEWABLE_ITEMS * ITEM_SIZE;
-      }
-      return items.length * ITEM_SIZE + 2 * LISTBOX_PADDING;
-    }, [ITEM_COUNT, items]);
+  const height = React.useMemo(() => {
+    if (ITEM_COUNT > LIST_MAX_VIEWABLE_ITEMS) {
+      return LIST_MAX_VIEWABLE_ITEMS * ITEM_SIZE;
+    }
+    return items.length * ITEM_SIZE + 2 * LISTBOX_PADDING;
+  }, [ITEM_COUNT, items]);
 
-    const getItemSize = React.useCallback(() => ITEM_SIZE, []);
+  const getItemSize = React.useCallback(() => ITEM_SIZE, []);
 
-    return (
-      <div ref={ref}>
-        <OuterElementContext.Provider value={listboxProps}>
-          <VariableSizeList
-            itemData={items}
-            height={height}
-            width="100%"
-            key={ITEM_COUNT}
-            outerElementType={OuterElementType}
-            innerElementType="ul"
-            itemSize={getItemSize}
-            overscanCount={LIST_OVERSCAN_COUNT}
-            itemCount={ITEM_COUNT}
-          >
-            {renderRow}
-          </VariableSizeList>
-        </OuterElementContext.Provider>
-      </div>
-    );
-  } as React.ForwardRefRenderFunction<HTMLDivElement>
-);
+  return (
+    <div ref={ref}>
+      <OuterElementContext.Provider value={listboxProps}>
+        <VariableSizeList
+          itemData={items}
+          height={height}
+          width="100%"
+          style={{
+            overflowY: 'hidden',
+            margin: 0,
+            padding: 0,
+          }}
+          key={ITEM_COUNT}
+          outerElementType={OuterElementType}
+          innerElementType="ul"
+          itemSize={getItemSize}
+          overscanCount={LIST_OVERSCAN_COUNT}
+          itemCount={ITEM_COUNT}
+        >
+          {renderRow}
+        </VariableSizeList>
+      </OuterElementContext.Provider>
+    </div>
+  );
+} as React.ForwardRefRenderFunction<HTMLDivElement>);
 
 function SQFormAsyncAutocomplete({
   children,
@@ -131,7 +131,6 @@ function SQFormAsyncAutocomplete({
   onClose,
   size = 'auto',
 }: SQFormAsyncAutocompleteProps): React.ReactElement {
-  const classes = useStyles();
   const {setFieldValue, setTouched, values} = useFormikContext();
   const [{value}] = useField(name);
   const {
@@ -195,12 +194,17 @@ function SQFormAsyncAutocomplete({
   );
 
   return (
-    <Grid item sm={size}>
+    <Grid item={true} sm={size}>
       <Autocomplete
         id={name}
-        style={{width: '100%'}}
-        disableListWrap
-        classes={classes}
+        sx={{
+          '& label': {
+            overflow: 'initial',
+            lineHeight: 1,
+            whiteSpace: 'normal',
+          },
+        }}
+        disableListWrap={true}
         ListboxComponent={
           ListboxVirtualizedComponent as React.ComponentType<
             React.HTMLAttributes<HTMLElement>
@@ -217,10 +221,12 @@ function SQFormAsyncAutocomplete({
         disabled={isDisabled}
         getOptionLabel={(option) => option.label}
         getOptionDisabled={(option: SQFormOption) => option.isDisabled || false}
+        defaultValue={initialValue}
         renderInput={(params) => {
           return (
             <TextField
               {...params}
+              variant="standard"
               color="primary"
               disabled={isDisabled}
               error={isFieldError}
@@ -254,11 +260,15 @@ function SQFormAsyncAutocomplete({
             />
           );
         }}
-        renderOption={(option) => (
-          <Typography variant="body2" noWrap>
-            {option.label}
-          </Typography>
-        )}
+        renderOption={(props, option) => {
+          return (
+            <li {...props}>
+              <Typography variant="body2" noWrap={true}>
+                {option.label}
+              </Typography>
+            </li>
+          );
+        }}
       />
     </Grid>
   );

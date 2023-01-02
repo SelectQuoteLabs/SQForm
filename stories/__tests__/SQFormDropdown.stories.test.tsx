@@ -147,7 +147,9 @@ it('should highlight field if required but no value selected', async () => {
     initialValues: {state: ''},
   };
 
-  render(<SQFormDropdown sqFormProps={formProps} size="auto" />);
+  const {container} = render(
+    <SQFormDropdown sqFormProps={formProps} size="auto" />
+  );
 
   const expandButton = screen.getByRole('button', {name: /state/i});
 
@@ -157,9 +159,9 @@ it('should highlight field if required but no value selected', async () => {
   userEvent.tab();
   await waitFor(() => expect(expandButton).not.toHaveFocus());
 
-  const required = screen.getByText(/required/i);
-  expect(required).toBeVisible();
-  expect(required.closest('p')).toHaveClass('Mui-error');
+  const helperText = container.querySelector('.MuiFormHelperText-root');
+  expect(helperText).toBeVisible();
+  expect(helperText).toHaveClass('Mui-error');
 });
 
 it('should show empty list if no options are given', () => {

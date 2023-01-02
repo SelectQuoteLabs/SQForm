@@ -1,6 +1,6 @@
 import React from 'react';
-import {FormControlLabel, makeStyles, Radio} from '@material-ui/core';
-import type {RadioProps} from '@material-ui/core';
+import {FormControlLabel, Radio} from '@mui/material';
+import type {RadioProps} from '@mui/material';
 
 export type SQFormRadioButtonGroupItemProps = {
   /** Value of the radio button */
@@ -15,15 +15,6 @@ export type SQFormRadioButtonGroupItemProps = {
   InputProps?: RadioProps;
 };
 
-const useStyles = makeStyles((theme) => ({
-  radioButton: {
-    marginBottom: theme.spacing(1.5),
-  },
-  rowDisplay: {
-    marginRight: theme.spacing(3.75),
-  },
-}));
-
 function SQFormRadioButtonGroupItem({
   value,
   label,
@@ -31,17 +22,17 @@ function SQFormRadioButtonGroupItem({
   isRowDisplay = false,
   InputProps = {},
 }: SQFormRadioButtonGroupItemProps): JSX.Element {
-  const classes = useStyles();
-
   return (
     <FormControlLabel
-      className={`
-        ${classes.radioButton}
-        ${isRowDisplay ? classes.rowDisplay : ''}
-      `}
+      sx={(theme) => ({
+        mb: theme.spacing(1.5),
+        mr: isRowDisplay ? theme.spacing(3.75) : undefined,
+      })}
       value={value}
       label={label}
-      control={<Radio disabled={isDisabled} {...InputProps} />}
+      control={
+        <Radio color="secondary" disabled={isDisabled} {...InputProps} />
+      }
     />
   );
 }

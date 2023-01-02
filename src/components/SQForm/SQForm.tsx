@@ -1,11 +1,11 @@
 import React from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid} from '@mui/material';
 import {setLocale} from 'yup';
 import {Formik, Form} from 'formik';
 import {useDebouncedCallback} from 'use-debounce';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {AnyObjectSchema} from 'yup';
-import type {GridProps} from '@material-ui/core';
+import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikConfig, FormikValues} from 'formik';
 
 setLocale({
@@ -37,6 +37,10 @@ export type SQFormProps<Values extends FormikValues> = {
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
+  // Set if validation should happen on blur or not.  By default is set to true in Formik API.
+  validateOnBlur?: boolean;
+  // Set if validation should happen on change.  By default is set to true in Formik API.
+  validateOnChange?: boolean;
 };
 
 function SQForm<Values extends FormikValues>({
@@ -46,6 +50,8 @@ function SQForm<Values extends FormikValues>({
   muiGridProps = {},
   onSubmit,
   validationSchema,
+  validateOnBlur,
+  validateOnChange,
 }: SQFormProps<Values>): JSX.Element {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -76,13 +82,15 @@ function SQForm<Values extends FormikValues>({
       onReset={handleReset}
       validationSchema={validationSchema}
       validateOnMount={true}
+      validateOnBlur={validateOnBlur}
+      validateOnChange={validateOnChange}
     >
       {(_props) => {
         return (
           <Form>
             <Grid
               {...muiGridProps}
-              container
+              container={true}
               spacing={muiGridProps.spacing ?? 2}
             >
               {children}

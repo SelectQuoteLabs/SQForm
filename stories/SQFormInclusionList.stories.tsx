@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import React from 'react';
-import {Card, Grid} from '@material-ui/core';
+import {Card, Grid} from '@mui/material';
 import {
   SQFormInclusionList as SQFormInclusionListComponent,
   SQFormInclusionListItem,
@@ -56,7 +56,7 @@ const defaultArgs = {
     const {values} = arrayHelpers.form;
     return (
       <Grid
-        container
+        container={true}
         direction="column"
         wrap="nowrap"
         style={{
@@ -67,7 +67,7 @@ const defaultArgs = {
       >
         {names.map((name) => {
           return (
-            <Grid item key={name}>
+            <Grid item={true} key={name}>
               <SQFormInclusionListItem
                 name="friends"
                 label={name}
@@ -98,7 +98,7 @@ const Template: CustomStory<SQFormInclusionListProps> = (args) => {
       validationSchema={schema}
       {...sqFormProps}
     >
-      <Card raised style={{minWidth: 250, padding: 16}}>
+      <Card raised={true} style={{minWidth: 250, padding: 16}}>
         <SQFormInclusionListComponent {...rest} />
       </Card>
     </SQFormStoryWrapper>
@@ -113,7 +113,7 @@ const ValidationTemplate: CustomStory<SQFormInclusionListProps> = (args) => {
       validationSchema={schema}
       {...sqFormProps}
     >
-      <Card raised style={{minWidth: 250, padding: 16}}>
+      <Card raised={true} style={{minWidth: 250, padding: 16}}>
         <SQFormInclusionListComponent {...rest} />
         <SQFormHelperText
           errorText={'friends field must have at least 5 items'}

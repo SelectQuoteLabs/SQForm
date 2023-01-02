@@ -1,10 +1,12 @@
 import React from 'react';
 import isEqual from 'lodash.isequal';
 import {getIn, useField} from 'formik';
+import {Typography} from '@mui/material';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
+import type {Theme} from '@mui/material';
 import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
 
 type ChangeHandler<TChangeEvent> = (
@@ -39,11 +41,11 @@ type UseFormReturn<TValue, TChangeEvent> = {
   };
 };
 
-const HELPER_TEXT_STYLE = {
-  marginRight: '2px',
-  fontSize: '10px',
-  fontWeight: 400,
-  letterSpacing: '0.4px',
+const SPACE_STYLE = {marginRight: '0.3333rem'};
+const ICON_STYLES = {
+  ...SPACE_STYLE,
+  width: '12px',
+  height: '11px',
 };
 
 function _handleError(name: string) {
@@ -133,40 +135,26 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldError) {
       return (
         <>
-          <WarningIcon
-            style={{
-              color: 'var(--color-textWarningYellow)',
-              ...HELPER_TEXT_STYLE,
-            }}
-          />
-          <span
-            style={{
-              color: 'var(--color-textWarningYellow)',
-              ...HELPER_TEXT_STYLE,
-            }}
-          >
+          <WarningIcon color="error" sx={ICON_STYLES} />
+          <Typography sx={(theme: Theme) => theme.typography.helper}>
             {errorMessage}
-          </span>
+          </Typography>
         </>
       );
     }
     if (isFieldRequired) {
       return (
         <>
-          <WarningIcon
-            style={{color: 'var(--color-stone)', ...HELPER_TEXT_STYLE}}
-          />
-          <span style={{color: 'var(--color-granite)', ...HELPER_TEXT_STYLE}}>
+          <WarningIcon color="disabled" sx={ICON_STYLES} />
+          <Typography sx={(theme: Theme) => theme.typography.helper}>
             Required
-          </span>
+          </Typography>
         </>
       );
     }
     if (isFulfilled) {
       return (
-        <VerifiedIcon
-          style={{color: 'var(--color-palmLeaf)', ...HELPER_TEXT_STYLE}}
-        />
+        <VerifiedIcon sx={{color: 'var(--color-palmLeaf)', ...ICON_STYLES}} />
       );
     }
     return ' '; // return something so UI space always exists
