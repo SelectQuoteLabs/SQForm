@@ -157,6 +157,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
   return (
     <div
       id={`sqform-scrollable-card-id-${cardID}`}
+      data-testid="scrollable-card-container"
       style={{height: heightToUse}}
     >
       <Formik
@@ -171,6 +172,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
           return (
             <Form style={{height: '100%', width: '100%'}}>
               <Card
+                data-testid="scrollable-card-paper"
                 raised={true}
                 elevation={1}
                 square={isSquareCorners}
@@ -208,6 +210,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
                       p: theme.spacing(1),
                     },
                   })}
+                  data-testid="scrollable-card-content"
                 >
                   {SubHeaderComponent}
                   <Grid
