@@ -1,3 +1,10 @@
+### [10.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.0...v10.0.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* 🐛 Fix resetForm not re-validating ([e432693](https://github.com/SelectQuoteLabs/SQForm/commit/e432693b16c6a4465603da931dbbacc39f003d75)), closes [#762](https://github.com/SelectQuoteLabs/SQForm/issues/762)
+
 ## [10.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.7.0...v10.0.0) (2022-12-02)
 
 

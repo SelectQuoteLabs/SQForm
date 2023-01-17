@@ -13,7 +13,6 @@ const {
   WithIcon,
   WithStaticHeight,
 } = composeStories(stories);
-const handleSubmit = jest.fn();
 
 describe('SQFormScrollableCard', () => {
   // test isDisabled, onSubmit, submitButtonText, resetButtonText and reset button
@@ -28,6 +27,7 @@ describe('SQFormScrollableCard', () => {
     });
 
     it('Should call submit handler on click', async () => {
+      const handleSubmit = jest.fn();
       render(<Default onSubmit={handleSubmit} />);
 
       userEvent.type(screen.getByLabelText(/hello/i), 'TypingFifteenChars');
