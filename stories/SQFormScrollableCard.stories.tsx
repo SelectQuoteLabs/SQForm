@@ -93,7 +93,7 @@ CardContentStyles.args = {
 };
 
 const SubHeader = () => (
-  <Paper elevation={2}>
+  <Paper elevation={2} data-testid="subheader-test">
     <h3 style={{textAlign: 'center', padding: '10px'}}>Sub Header</h3>
   </Paper>
 );
@@ -105,7 +105,10 @@ WithSubHeader.args = {
 };
 
 const Wrapper = ({children}: {children?: React.ReactElement}) => (
-  <div style={{height: '100%', overflow: 'hidden'}}>
+  <div
+    style={{height: '100%', overflow: 'hidden'}}
+    data-testid="scrollable-card-wrapper"
+  >
     <Paper
       elevation={2}
       style={{height: '30%', margin: '10px 0', textAlign: 'center'}}
