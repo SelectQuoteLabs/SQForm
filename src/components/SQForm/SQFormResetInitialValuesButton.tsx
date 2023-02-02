@@ -53,7 +53,6 @@ function SQFormResetInitialValuesButton({
     <>
       <TextButton
         tooltip={tooltip}
-        title={buttonTitle}
         isDisabled={isDisabled}
         onClick={openDialog}
         {...props}

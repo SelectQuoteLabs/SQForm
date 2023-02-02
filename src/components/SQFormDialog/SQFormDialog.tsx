@@ -1,6 +1,6 @@
 import React from 'react';
 import {Formik} from 'formik';
-import SQFormDialogInner from './SQFormDialogInner';
+import SQFormDialogInner, {SQFormDialogInnerProps} from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
@@ -21,10 +21,7 @@ export type SQFormDialogProps<Values extends FormikValues> = {
   /** Determine the max-width of the dialog. The dialog width grows with the size of the screen. Set to false to disable maxWidth. */
   maxWidth?: DialogProps['maxWidth'];
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
-  onClose: (
-    event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
-  ) => void;
+  onClose: SQFormDialogInnerProps<Values>['onClose'];
   /** Callback function invoke when the user clicks the primary button */
   onSave: (
     values: Values,

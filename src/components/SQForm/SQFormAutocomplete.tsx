@@ -72,12 +72,13 @@ const OuterElementType = React.forwardRef<HTMLDivElement>(
   (props: OuterElementTypeProps, ref) => {
     const outerProps = React.useContext(OuterElementContext);
     return (
-      <div
+      <Box
+        component="div"
         ref={ref}
         {...props}
         {...outerProps}
         className={`${props?.className || ''} ${outerProps?.className || ''}`}
-        style={{...props?.style, ...outerProps?.style}}
+        sx={{...[props?.style || {}], ...[outerProps?.style || {}]}}
       />
     );
   }

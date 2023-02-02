@@ -8,7 +8,7 @@ const helperTextType = {
   error: 'error',
   success: 'success',
   warning: 'warning',
-};
+} as const;
 
 function Header({
   actions,
