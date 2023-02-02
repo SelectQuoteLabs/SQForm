@@ -39,7 +39,7 @@ function SQFormButton({
   const getTitle = () => {
     switch (true) {
       case Boolean(title):
-        return title;
+        return title || '';
       case isResetButton:
         return 'Reset Form';
       default:

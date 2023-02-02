@@ -20,7 +20,7 @@ import type {TransitionProps} from '@mui/material/transitions';
 import type {FormikContextType, FormikValues} from 'formik';
 import type {SQFormDialogTertiaryValue} from './types';
 
-type SQFormDialogInnerProps<Values extends FormikValues> = {
+export type SQFormDialogInnerProps<Values extends FormikValues> = {
   /** The secondary button text (Button located on left side of Dialog) */
   cancelButtonText?: string;
   /** The content to be rendered in the dialog body */
@@ -35,8 +35,8 @@ type SQFormDialogInnerProps<Values extends FormikValues> = {
   maxWidth?: DialogProps['maxWidth'];
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
   onClose: (
-    event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+    event: React.MouseEvent | undefined,
+    reason?: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => void;
   /** Whether to show save/submit button (default: true) */
   shouldDisplaySaveButton: boolean;
@@ -168,8 +168,8 @@ function SQFormDialogInner<Values extends FormikValues>({
   } = useDialog();
 
   const handleCancel = (
-    event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+    event: React.MouseEvent,
+    reason?: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => {
     if (disableBackdropClick && reason === 'backdropClick') {
       return;
@@ -184,7 +184,7 @@ function SQFormDialogInner<Values extends FormikValues>({
 
   const confirmCancel = () => {
     formikContext.resetForm();
-    onClose && onClose({}, 'escapeKeyDown');
+    onClose && onClose(undefined, 'escapeKeyDown');
     closeDialogAlert();
   };
 
@@ -197,8 +197,8 @@ function SQFormDialogInner<Values extends FormikValues>({
         {showSecondaryButton && (
           <Grid item={true}>
             <RoundedButton
-              title={cancelButtonText}
-              onClick={(event: Record<string, unknown>) =>
+              title={cancelButtonText || ''}
+              onClick={(event: React.MouseEvent) =>
                 handleCancel(event, 'cancelClick')
               }
               color="secondary"
@@ -213,7 +213,7 @@ function SQFormDialogInner<Values extends FormikValues>({
         <Grid item={true}>
           <span style={{paddingRight: '20px'}}>
             <RoundedButton
-              title={tertiaryButtonText}
+              title={tertiaryButtonText || ''}
               isDisabled={getIsDisabled()}
               onClick={() => onTertiaryClick?.(formikContext)}
               type="button"
@@ -297,8 +297,8 @@ function SQFormDialogInner<Values extends FormikValues>({
               ? renderTertiaryButton()
               : showSecondaryButton && (
                   <RoundedButton
-                    title={cancelButtonText}
-                    onClick={(event: Record<string, unknown>) =>
+                    title={cancelButtonText || ''}
+                    onClick={(event: React.MouseEvent) =>
                       handleCancel(event, 'cancelClick')
                     }
                     color="secondary"
