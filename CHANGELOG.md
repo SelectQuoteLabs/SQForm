@@ -1,3 +1,10 @@
+### [10.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.1...v10.0.2) (2023-01-20)
+
+
+### Bug Fixes
+
+* 🐛 ReadOnlyField didn't accept zero ([ce356c4](https://github.com/SelectQuoteLabs/SQForm/commit/ce356c4d48d05ec7663f3e68e736278359b27344)), closes [#813](https://github.com/SelectQuoteLabs/SQForm/issues/813)
+
 ### [10.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.0...v10.0.1) (2023-01-17)
 
 
