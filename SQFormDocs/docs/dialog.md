@@ -1,4 +1,0 @@
----
-id: dialog
-title: Dialog
----
