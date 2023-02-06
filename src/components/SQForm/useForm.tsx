@@ -42,9 +42,14 @@ type UseFormReturn<TValue, TChangeEvent> = {
 };
 
 const SPACE_STYLE = {marginRight: '0.3333rem'};
-const ICON_STYLES = {
+const WARNING_ICON_STYLES = {
   ...SPACE_STYLE,
   width: '12px',
+  height: '11px',
+};
+const SUCCESS_ICON_STYLES = {
+  ...WARNING_ICON_STYLES,
+  width: '9px',
   height: '11px',
 };
 
@@ -135,7 +140,7 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldError) {
       return (
         <>
-          <WarningIcon color="error" sx={ICON_STYLES} />
+          <WarningIcon color="error" sx={WARNING_ICON_STYLES} />
           <Typography sx={(theme: Theme) => theme.typography.helper}>
             {errorMessage}
           </Typography>
@@ -145,7 +150,7 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldRequired) {
       return (
         <>
-          <WarningIcon color="disabled" sx={ICON_STYLES} />
+          <WarningIcon color="disabled" sx={WARNING_ICON_STYLES} />
           <Typography sx={(theme: Theme) => theme.typography.helper}>
             Required
           </Typography>
@@ -154,7 +159,9 @@ export function useForm<TValue, TChangeEvent>({
     }
     if (isFulfilled) {
       return (
-        <VerifiedIcon sx={{color: 'var(--color-palmLeaf)', ...ICON_STYLES}} />
+        <VerifiedIcon
+          sx={{color: 'var(--color-palmLeaf)', ...SUCCESS_ICON_STYLES}}
+        />
       );
     }
     return ' '; // return something so UI space always exists
