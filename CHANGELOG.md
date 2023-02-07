@@ -1,3 +1,15 @@
+## [10.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.1.0...v10.2.0) (2023-02-07)
+
+
+### Features
+
+* 🎸 Upgrade to SCPlus-Shared-Components@12 ([7c40272](https://github.com/SelectQuoteLabs/SQForm/commit/7c402728a000e7f4ce8101deb89b89185eb565c8)), closes [#828](https://github.com/SelectQuoteLabs/SQForm/issues/828)
+
+
+### Bug Fixes
+
+* 🐛 Fix SQFormDatePicker MUI Utils issue ([2ceb6ee](https://github.com/SelectQuoteLabs/SQForm/commit/2ceb6ee06732e08f094ca893b718acd5b668546a))
+
 ## [10.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.2...v10.1.0) (2023-02-07)
 
 
