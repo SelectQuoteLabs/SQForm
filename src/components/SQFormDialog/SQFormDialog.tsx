@@ -1,6 +1,6 @@
 import React from 'react';
 import {Formik} from 'formik';
-import SQFormDialogInner, {SQFormDialogInnerProps} from './SQFormDialogInner';
+import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
