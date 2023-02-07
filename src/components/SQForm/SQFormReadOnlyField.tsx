@@ -30,7 +30,13 @@ function SQFormReadOnlyField({
         variant="standard"
         label={label}
         name={name}
-        value={field.value || '- -'}
+        value={
+          field.value !== null &&
+          field.value !== undefined &&
+          String(field.value)
+            ? field.value
+            : '- -'
+        }
         fullWidth={true}
         InputLabelProps={{shrink: true}}
         InputProps={{

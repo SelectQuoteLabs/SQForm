@@ -5,6 +5,7 @@ import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
 import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
 import type {AnyObjectSchema} from 'yup';
+import type {SQFormDialogInnerProps} from './SQFormDialogInner';
 import type {SQFormDialogTertiaryValue} from './types';
 
 export type SQFormDialogProps<Values extends FormikValues> = {

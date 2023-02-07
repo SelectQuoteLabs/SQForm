@@ -73,7 +73,6 @@ const OuterElementType = React.forwardRef<HTMLDivElement>(
     const outerProps = React.useContext(OuterElementContext);
     return (
       <Box
-        component="div"
         ref={ref}
         {...props}
         {...outerProps}
