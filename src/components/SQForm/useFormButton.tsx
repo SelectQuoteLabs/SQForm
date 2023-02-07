@@ -10,7 +10,7 @@ export const BUTTON_TYPES = {
   BUTTON: 'button',
 } as const;
 
-export type ButtonType = typeof BUTTON_TYPES[keyof typeof BUTTON_TYPES];
+export type ButtonType = (typeof BUTTON_TYPES)[keyof typeof BUTTON_TYPES];
 
 type UseFormButtonProps = {
   isDisabled: boolean;
