@@ -1,3 +1,10 @@
+## [10.1.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.2...v10.1.0) (2023-02-07)
+
+
+### Features
+
+* 🎸 Upgrade to SCPlus-Shared-Components@12 ([737f2f1](https://github.com/SelectQuoteLabs/SQForm/commit/737f2f15e53d65530b197285bb898b7514f525dc)), closes [#828](https://github.com/SelectQuoteLabs/SQForm/issues/828)
+
 ### [10.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v10.0.1...v10.0.2) (2023-01-20)
 
 
