@@ -80,15 +80,7 @@ function SQFormRadioButtonGroup({
         error={isFieldError}
         onBlur={handleBlur}
       >
-        <FormLabel
-          component="legend"
-          classes={{
-            root: 'MuiInputLabel-root',
-            asterisk: 'MuiInputLabel-asterisk',
-          }}
-        >
-          {groupLabel}
-        </FormLabel>
+        <FormLabel component="legend">{groupLabel}</FormLabel>
         <RadioGroup
           value={field.value}
           row={shouldDisplayInRow}

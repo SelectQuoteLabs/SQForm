@@ -1,6 +1,6 @@
 import React from 'react';
 import {ClickAwayListener, Grid, TextField} from '@mui/material';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {DatePicker} from '@mui/x-date-pickers';
 import {useForm} from './useForm';
 import type {Moment} from 'moment';
 import type {InputBaseComponentProps} from '@mui/material';

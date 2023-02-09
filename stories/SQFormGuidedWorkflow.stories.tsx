@@ -19,6 +19,7 @@ import type {
   SQFormGuidedWorkflowProps,
 } from 'components/SQFormGuidedWorkflow/Types';
 import type {CustomStory} from './types/storyHelperTypes';
+import {noop} from 'ts-essentials';
 
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -160,7 +161,11 @@ const Template: CustomStory<
       scriptedTextProps: {
         text: `Stuff about policy cancellation documents`,
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Doc</TextButton>,
+        actionButton: (
+          <TextButton tooltip="View" onClick={noop}>
+            View Doc
+          </TextButton>
+        ),
       },
       outcomeProps: {
         FormElements: (
@@ -248,7 +253,11 @@ const Template: CustomStory<
       scriptedTextProps: {
         text: 'Before proceeding, please verify the list of providers is correct',
         title: 'Agent Script',
-        actionButton: <TextButton tooltip="View">View Providers</TextButton>,
+        actionButton: (
+          <TextButton tooltip="View" onClick={noop}>
+            View Providers
+          </TextButton>
+        ),
       },
       outcomeProps: {
         FormElements: (
@@ -267,7 +276,7 @@ const Template: CustomStory<
   return (
     <Box sx={{width: '90%', height: '95vh'}}>
       <ExpandingCardList>
-        <ExpandingCard title="Guided Workflow" name="guidedWorkflow">
+        <ExpandingCard title="Guided Workflow">
           <SQFormGuidedWorkflow
             mainTitle="CCA Guided Workflow"
             mainSubtitle="Please review these Services with your client, then confirm their responses."
@@ -373,7 +382,7 @@ const TestTemplate: CustomStory<
   return (
     <Box sx={{width: '90%', height: '95vh'}}>
       <ExpandingCardList>
-        <ExpandingCard title="Guided Workflow Test" name="guidedWorkflowTest">
+        <ExpandingCard title="Guided Workflow Test">
           <SQFormGuidedWorkflow<InitialValuesType>
             {...rest}
             mainTitle={mainTitle}

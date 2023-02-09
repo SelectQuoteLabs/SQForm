@@ -48,7 +48,8 @@ function Form({
 }: SQFormStoryWrapperProps): React.ReactElement {
   const [value, setValue] = React.useState({});
 
-  const [snackbarState, {snackbar, closeSnackBar}] = useSnackbar();
+  const [snackbarStateContext, snackbarDispatchContext] = useSnackbar();
+  const {closeSnackbar, snackbar} = snackbarDispatchContext || {};
   const handleSubmit = (values: FormikValues) => {
     setValue(values);
   };
@@ -58,11 +59,7 @@ function Form({
     if (firstUpdate.current) {
       firstUpdate.current = false;
     } else {
-      snackbar.success(
-        <pre style={{fontSize: '14px', margin: 0}}>
-          {JSON.stringify(value, null, 2)}
-        </pre>
-      );
+      snackbar?.success(JSON.stringify(value, null, 2));
     }
   }, [snackbar, value]);
 
@@ -81,7 +78,7 @@ function Form({
           </Grid>
         )}
       </SQForm>
-      <Snackbar snackbarState={snackbarState} closeSnackBar={closeSnackBar} />
+      <Snackbar />
     </>
   );
 }

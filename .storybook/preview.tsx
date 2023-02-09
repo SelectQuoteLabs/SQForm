@@ -1,9 +1,28 @@
 import React from 'react';
-import {ThemeProvider, StyledEngineProvider} from '@mui/material/styles';
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+} from '@mui/material/styles';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import {muiTheme} from 'scplus-shared-components';
 import './styles/index.css';
+
+/**
+ * This method allows us to modify the theme from SSC without having to
+ * modify it in SSC and pack it. We can test theme changes in SQForm first
+ * using this method.
+ *
+ * Before pushing this to master, we should always make sure this matches what
+ * the actual theme is. Usually by just spreading the imported theme.
+ */
+const modifiedTheme = createTheme(
+  {
+    ...muiTheme,
+  },
+  [muiTheme]
+);
 
 // For Storybook usage ONLY
 const centerStyle = {
@@ -13,6 +32,7 @@ const centerStyle = {
   height: '100%',
   padding: '48px',
 };
+
 const CenterComponentsInStorybook = ({children}) => {
   return <div style={centerStyle}>{children}</div>;
 };
@@ -20,10 +40,10 @@ const CenterComponentsInStorybook = ({children}) => {
 // Provides Material UI Theme to all stories
 const withTheme = (storyFn) => {
   return (
-    <StyledEngineProvider injectFirst>
+    <StyledEngineProvider injectFirst={true}>
       {/* ^^ https://material-ui.com/guides/interoperability/#plain-css */}
       <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={'en'}>
-        <ThemeProvider theme={muiTheme}>{storyFn()}</ThemeProvider>
+        <ThemeProvider theme={modifiedTheme}>{storyFn()}</ThemeProvider>
       </LocalizationProvider>
     </StyledEngineProvider>
   );
