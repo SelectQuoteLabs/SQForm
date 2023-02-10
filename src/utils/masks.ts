@@ -13,6 +13,17 @@ const zipMask = (userInput: string): MaskArray => {
   }
 };
 
+const creditCardExpiryMask = (userInput: string): MaskArray => {
+  const expiryMask = [/[0-1]/, /[0-9]/, '/', /[0-9]/, /[0-9]/];
+  const month = Number(userInput.substring(0, 2));
+
+  if (month > 12) {
+    expiryMask[1] = /[0-2]/;
+  }
+
+  return expiryMask;
+};
+
 export const MASKS = {
   phone: [
     '(',
@@ -62,6 +73,6 @@ export const MASKS = {
     /\d/,
     /\d/,
   ],
-  creditCardExpiry: [/[0-1]/, /[0-9]/, '/', /[0-9]/, /[0-9]/],
+  creditCardExpiry: creditCardExpiryMask,
   creditCardCVV: [/\d/, /\d/, /\d/],
 };
