@@ -3,6 +3,7 @@ import {Card, CardHeader} from '@mui/material';
 import {CardPopoverMenu} from 'scplus-shared-components';
 import {HEADER_HEIGHT} from '../../utils/constants';
 import type {ArrayOrSingle} from 'ts-essentials';
+import type {CardPopoverMenuTab} from 'scplus-shared-components';
 
 function getSelectedComponent(
   selectedTab: {label: string; value: string},
@@ -47,7 +48,9 @@ export default function SQFormScrollableCardsMenuWrapper({
 
   const [selectedTab, setSelectedTab] = React.useState(() => menuItems[0]);
 
-  const handleChange = (selectedMenuItemValue: string) => {
+  const handleChange = (
+    selectedMenuItemValue: CardPopoverMenuTab['value'] | undefined
+  ) => {
     const newSelection = menuItems.find(
       (item) => item.value === selectedMenuItemValue
     );

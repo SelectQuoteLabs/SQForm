@@ -42,7 +42,6 @@ function SQFormReadOnlyField({
         InputProps={{
           ...InputProps,
           readOnly: true,
-          disableUnderline: true,
         }}
         inputProps={inputProps}
         style={{marginBottom: 21}}

@@ -1,4 +1,5 @@
 import React from 'react';
+import type {FormikValues} from 'formik';
 import type {
   SQFormGuidedWorkflowTaskModuleProps,
   SQFormGuidedWorkflowContext,
@@ -15,7 +16,7 @@ type UseGuidedWorkflowContextType<TValues> = {
   updateDataByID: (id: number, data: TValues) => void;
 };
 
-export function useGuidedWorkflowContext<TValues>(
+export function useGuidedWorkflowContext<TValues extends FormikValues>(
   taskModules: Array<SQFormGuidedWorkflowTaskModuleProps<TValues>>
 ): UseGuidedWorkflowContextType<TValues> {
   const initialData = taskModules.reduce<SQFormGuidedWorkflowContext<TValues>>(

@@ -221,9 +221,7 @@ function SQFormMultiSelect({
         required={isFieldRequired}
         fullWidth={true}
       >
-        <InputLabel shrink={true} id={labelID}>
-          {label}
-        </InputLabel>
+        <InputLabel id={labelID}>{label}</InputLabel>
         <Tooltip
           placement={toolTipPlacement}
           arrow={true}

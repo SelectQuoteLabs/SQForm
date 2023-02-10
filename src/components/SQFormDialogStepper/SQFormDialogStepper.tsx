@@ -115,8 +115,8 @@ export type SQFormDialogStepperProps<Values extends FormikValues> = {
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   /** Callback function invoked when the user clicks on the secondary button or outside the Dialog */
   onClose: (
-    event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+    event: React.MouseEvent,
+    reason?: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => void;
   /** Callback function invoked when user clicks primary submit button */
   onSubmit: (values: Values, helpers: FormikHelpers<Values>) => void;
@@ -223,8 +223,8 @@ export function SQFormDialogStepper<Values extends FormikValues>({
   }
 
   const handleClose = (
-    event: Record<string, unknown>,
-    reason: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
+    event: React.MouseEvent,
+    reason?: 'backdropClick' | 'escapeKeyDown' | 'cancelClick'
   ) => {
     if (disableBackdropClick && reason === 'backdropClick') {
       return;
@@ -301,7 +301,7 @@ export function SQFormDialogStepper<Values extends FormikValues>({
             <DialogActions sx={classes.action}>
               <RoundedButton
                 title={cancelButtonText}
-                onClick={onClose}
+                onClick={(event) => handleClose(event)}
                 color="secondary"
                 variant="outlined"
               >
