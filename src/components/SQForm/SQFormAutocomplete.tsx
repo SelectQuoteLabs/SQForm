@@ -319,6 +319,22 @@ function SQFormAutocomplete({
           // This makes sure the autocomplete options list width is never less than the input field width
           minWidth: `${Number(baseWidth ?? 0) + LISTBOX_PADDING}px !important`,
         },
+        '& .MuiInputBase-root.Mui-error:before': {
+          borderColor: 'var(--color-textWarningYellow)',
+        },
+        '& .Mui-error': {
+          color: 'var(--color-textWarningYellow)',
+        },
+        '& .MuiFormHelperText-root > .MuiSvgIcon-colorError': {
+          color: 'var(--color-textWarningYellow)',
+        },
+        '& .MuiFormHelperText-root > .MuiSvgIcon-root:not(.MuiSvgIcon-colorDisabled):not(.MuiSvgIcon-colorError)':
+          {
+            color: 'var(--color-textSuccessGreen)',
+          },
+        '& .MuiInputBase-root.Mui-error': {
+          borderColor: 'var(--color-textWarningYellow)',
+        },
       }}
     >
       <Autocomplete
@@ -387,7 +403,7 @@ function SQFormAutocomplete({
         }}
         renderOption={(props, option) => (
           <li {...props}>
-            <Typography variant="body2" noWrap={true}>
+            <Typography variant="body2" sx={{fontWeight: 600}} noWrap={true}>
               {option.label}
             </Typography>
           </li>
