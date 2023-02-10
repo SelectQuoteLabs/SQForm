@@ -886,7 +886,7 @@ export const paymentForm = (): JSX.Element => {
         validationSchema={validationSchema}
       >
         <SQFormTextarea
-          label="Billing Address 1 *"
+          label="Billing Address 1"
           name="billingAddress1"
           minRows={2}
           size={12}
@@ -901,7 +901,7 @@ export const paymentForm = (): JSX.Element => {
         />
         <Grid item container sm={12}>
           <SQFormTextField
-            label="City *"
+            label="City"
             name="city"
             size={5}
             muiFieldProps={{
@@ -911,7 +911,7 @@ export const paymentForm = (): JSX.Element => {
             displayHelperText={false}
           />
           <SQFormAutocomplete
-            label="State *"
+            label="State"
             name="state"
             size={3}
             muiTextFieldProps={{
@@ -923,7 +923,7 @@ export const paymentForm = (): JSX.Element => {
             {MOCK_STATE_OPTIONS}
           </SQFormAutocomplete>
           <SQFormTextField
-            label="ZIP *"
+            label="ZIP"
             name="zip"
             size={4}
             muiFieldProps={{
@@ -933,7 +933,7 @@ export const paymentForm = (): JSX.Element => {
           />
         </Grid>
         <SQFormTextField
-          label="Cardholder Name *"
+          label="Cardholder Name"
           name="cardholderName"
           size={12}
           muiFieldProps={{
@@ -943,7 +943,7 @@ export const paymentForm = (): JSX.Element => {
         />
         <Grid item container sm={12}>
           <SQFormMaskedTextField
-            label="Card Number *"
+            label="Card Number"
             name="cardNumber"
             mask={MASKS.creditCardNumber}
             size={6}
@@ -956,7 +956,7 @@ export const paymentForm = (): JSX.Element => {
             displayHelperText={false}
           />
           <SQFormMaskedTextField
-            label="Exp. *"
+            label="Exp."
             name="expiry"
             mask={MASKS.creditCardExpiry}
             size={3}
@@ -968,7 +968,7 @@ export const paymentForm = (): JSX.Element => {
             displayHelperText={false}
           />
           <SQFormMaskedTextField
-            label="CVV *"
+            label="CVV"
             name="cvv"
             mask={MASKS.creditCardCVV}
             size={3}
