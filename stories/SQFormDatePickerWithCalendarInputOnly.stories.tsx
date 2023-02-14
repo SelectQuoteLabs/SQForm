@@ -7,7 +7,7 @@ import {SQFormDatePickerWithCalendarInputOnly as SQFormDatePickerWithCalendarInp
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Moment} from 'moment';
 import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormDatePickerWithCalendarInputOnlyProps} from 'components/SQForm/SQFormDatePickerWithCalendarInputOnly';
+import type {SQFormDatePickerWithCalendarInputOnlyProps} from 'components/fields/SQFormDatePicker/SQFormDatePickerWithCalendarInputOnly';
 
 const meta: Meta = {
   title: 'Components/SQFormDatePickerWithCalendarInputOnly',

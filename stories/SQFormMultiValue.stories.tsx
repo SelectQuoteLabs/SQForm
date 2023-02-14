@@ -6,7 +6,7 @@ import {SQFormMultiValue as SQFormMultiValueComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormMultiValueProps} from 'components/SQForm/SQFormMultiValue';
+import type {SQFormMultiValueProps} from 'components/fields/SQFormMultiValue/SQFormMultiValue';
 
 export default {
   title: 'Components/SQFormMultiValue',

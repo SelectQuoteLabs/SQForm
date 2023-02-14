@@ -6,7 +6,7 @@ import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Meta} from '@storybook/react';
 import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormDateTimePickerProps} from 'components/SQForm/SQFormDateTimePicker';
+import type {SQFormDateTimePickerProps} from 'components/fields/SQFormDatePicker/SQFormDateTimePicker';
 import getSizeProp from './utils/getSizeProp';
 
 const meta: Meta = {

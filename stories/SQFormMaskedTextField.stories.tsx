@@ -9,7 +9,7 @@ import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
-import type {SQFormMaskedTextFieldProps} from 'components/SQForm/SQFormMaskedTextField';
+import type {SQFormMaskedTextFieldProps} from 'components/fields/SQFormMasked/SQFormMaskedTextField';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 import type {Mask} from 'types';
 

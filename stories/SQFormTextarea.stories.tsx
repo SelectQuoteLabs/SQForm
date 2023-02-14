@@ -5,7 +5,7 @@ import {SQFormTextarea as SQFormTextareaComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
-import type {SQFormTextareaProps} from 'components/SQForm/SQFormTextarea';
+import type {SQFormTextareaProps} from 'components/fields/SQFormTextarea/SQFormTextarea';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 

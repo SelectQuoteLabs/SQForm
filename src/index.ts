@@ -8,79 +8,79 @@ export {sanitizeInitialValues, serializeFormValues, MASKS} from './utils';
 // SQForm Components
 export {default as SQFormDialog} from './components/SQFormDialog';
 export {default as SQForm} from './components/SQForm';
-export {default as SQFormAsyncAutocomplete} from './components/SQForm/SQFormAsyncAutocomplete';
-export {default as SQFormAutocomplete} from './components/SQForm/SQFormAutocomplete';
-export {default as SQFormButton} from './components/SQForm/SQFormButton';
-export {default as SQFormCheckbox} from './components/SQForm/SQFormCheckbox';
-export {default as SQFormInclusionList} from './components/SQForm/SQFormInclusionList';
-export {default as SQFormInclusionListItem} from './components/SQForm/SQFormInclusionListItem';
-export {default as SQFormDatePicker} from './components/SQForm/SQFormDatePicker';
-export {default as SQFormDatePickerWithDateFNS} from './components/SQForm/SQFormDatePickerWithDateFNS';
-export {default as SQFormDateTimePicker} from './components/SQForm/SQFormDateTimePicker';
-export {default as SQFormDatePickerWithCalendarInputOnly} from './components/SQForm/SQFormDatePickerWithCalendarInputOnly';
-export {default as SQFormRadioButtonGroupItem} from './components/SQForm/SQFormRadioButtonGroupItem';
-export {default as SQFormRadioButtonGroup} from './components/SQForm/SQFormRadioButtonGroup';
-export {default as SQFormCheckboxGroup} from './components/SQForm/SQFormCheckboxGroup';
-export {default as SQFormCheckboxGroupItem} from './components/SQForm/SQFormCheckboxGroupItem';
+export {default as SQFormAsyncAutocomplete} from './components/fields/SQFormAsyncAutocomplete/SQFormAsyncAutocomplete';
+export {default as SQFormAutocomplete} from './components/fields/SQFormAutocomplete/SQFormAutocomplete';
+export {default as SQFormButton} from './components/buttons/SQFormButton';
+export {default as SQFormCheckbox} from './components/fields/SQFormCheckbox/SQFormCheckbox';
+export {default as SQFormInclusionList} from './components/fields/SQFormInclusionList/SQFormInclusionList';
+export {default as SQFormInclusionListItem} from './components/fields/SQFormInclusionList/SQFormInclusionListItem';
+export {default as SQFormDatePicker} from './components/fields/SQFormDatePicker/SQFormDatePicker';
+export {default as SQFormDatePickerWithDateFNS} from './components/fields/SQFormDatePicker/SQFormDatePickerWithDateFNS';
+export {default as SQFormDateTimePicker} from './components/fields/SQFormDatePicker/SQFormDateTimePicker';
+export {default as SQFormDatePickerWithCalendarInputOnly} from './components/fields/SQFormDatePicker/SQFormDatePickerWithCalendarInputOnly';
+export {default as SQFormRadioButtonGroupItem} from './components/fields/SQFormRadioButtonGroup/SQFormRadioButtonGroupItem';
+export {default as SQFormRadioButtonGroup} from './components/fields/SQFormRadioButtonGroup/SQFormRadioButtonGroup';
+export {default as SQFormCheckboxGroup} from './components/fields/SQFormCheckboxGroup/SQFormCheckboxGroup';
+export {default as SQFormCheckboxGroupItem} from './components/fields/SQFormCheckboxGroup/SQFormCheckboxGroupItem';
 export {
   SQFormDialogStepper,
   SQFormDialogStep,
 } from './components/SQFormDialogStepper';
-export {default as SQFormDropdown} from './components/SQForm/SQFormDropdown';
-export {default as SQFormReadOnly} from './components/SQForm/SQFormReadOnly';
-export {default as SQFormReadOnlyField} from './components/SQForm/SQFormReadOnlyField';
-export {default as SQFormResetButtonWithConfirmation} from './components/SQForm/SQFormResetButtonWithConfirmation';
-export {default as SQFormResetInitialValuesButton} from './components/SQForm/SQFormResetInitialValuesButton';
-export {default as SQFormTextarea} from './components/SQForm/SQFormTextarea';
-export {default as SQFormTextField} from './components/SQForm/SQFormTextField';
-export {default as SQFormMultiSelect} from './components/SQForm/SQFormMultiSelect';
-export {default as SQFormMaskedTextField} from './components/SQForm/SQFormMaskedTextField';
-export {default as SQFormMaskedReadOnlyField} from './components/SQForm/SQFormMaskedReadOnlyField';
-export {default as SQFormHelperText} from './components/SQForm/SQFormHelperText';
+export {default as SQFormDropdown} from './components/fields/SQFormDropdown/SQFormDropdown';
+export {default as SQFormReadOnly} from './components/SQFormReadOnly';
+export {default as SQFormReadOnlyField} from './components/fields/SQFormReadOnlyField/SQFormReadOnlyField';
+export {default as SQFormResetButtonWithConfirmation} from './components/buttons/SQFormResetButtonWithConfirmation';
+export {default as SQFormResetInitialValuesButton} from './components/buttons/SQFormResetInitialValuesButton';
+export {default as SQFormTextarea} from './components/fields/SQFormTextarea/SQFormTextarea';
+export {default as SQFormTextField} from './components/fields/SQFormTextField/SQFormTextField';
+export {default as SQFormMultiSelect} from './components/fields/SQFormMultiSelect/SQFormMultiSelect';
+export {default as SQFormMaskedTextField} from './components/fields/SQFormMasked/SQFormMaskedTextField';
+export {default as SQFormMaskedReadOnlyField} from './components/fields/SQFormMasked/SQFormMaskedReadOnlyField';
+export {default as SQFormHelperText} from './components/SQFormHelperText';
 export {default as SQFormScrollableCard} from './components/SQFormScrollableCard';
 export {default as SQFormScrollableCardsMenuWrapper} from './components/SQFormScrollableCardsMenuWrapper';
 export {default as SQFormGuidedWorkflow} from './components/SQFormGuidedWorkflow';
-export {default as SQFormMultiValue} from './components/SQForm/SQFormMultiValue';
+export {default as SQFormMultiValue} from './components/fields/SQFormMultiValue/SQFormMultiValue';
 
 // Component Types
 // NOTE: Unfortunately TS doesn't support `export type *`
 export type {SQFormDialogProps} from './components/SQFormDialog/SQFormDialog';
 export type {SQFormProps} from './components/SQForm/SQForm';
-export type {SQFormAsyncAutocompleteProps} from './components/SQForm/SQFormAsyncAutocomplete';
-export type {SQFormAutocompleteProps} from './components/SQForm/SQFormAutocomplete';
-export type {SQFormButtonProps} from './components/SQForm/SQFormButton';
-export type {SQFormCheckboxProps} from './components/SQForm/SQFormCheckbox';
-export type {SQFormInclusionListProps} from './components/SQForm/SQFormInclusionList';
-export type {SQFormInclusionListItemProps} from './components/SQForm/SQFormInclusionListItem';
-export type {SQFormDatePickerProps} from './components/SQForm/SQFormDatePicker';
-export type {SQFormDatePickerDateFNSProps} from './components/SQForm/SQFormDatePickerWithDateFNS';
-export type {SQFormDateTimePickerProps} from './components/SQForm/SQFormDateTimePicker';
-export type {SQFormDatePickerWithCalendarInputOnlyProps} from './components/SQForm/SQFormDatePickerWithCalendarInputOnly';
-export type {SQFormRadioButtonGroupItemProps} from './components/SQForm/SQFormRadioButtonGroupItem';
-export type {SQFormRadioButtonGroupProps} from './components/SQForm/SQFormRadioButtonGroup';
-export type {SQFormCheckboxGroupProps} from './components/SQForm/SQFormCheckboxGroup';
-export type {SQFormCheckboxGroupItemProps} from './components/SQForm/SQFormCheckboxGroupItem';
+export type {SQFormAsyncAutocompleteProps} from './components/fields/SQFormAsyncAutocomplete/SQFormAsyncAutocomplete';
+export type {SQFormAutocompleteProps} from './components/fields/SQFormAutocomplete/SQFormAutocomplete';
+export type {SQFormButtonProps} from './components/buttons/SQFormButton';
+export type {SQFormCheckboxProps} from './components/fields/SQFormCheckbox/SQFormCheckbox';
+export type {SQFormInclusionListProps} from './components/fields/SQFormInclusionList/SQFormInclusionList';
+export type {SQFormInclusionListItemProps} from './components/fields/SQFormInclusionList/SQFormInclusionListItem';
+export type {SQFormDatePickerProps} from './components/fields/SQFormDatePicker/SQFormDatePicker';
+export type {SQFormDatePickerDateFNSProps} from './components/fields/SQFormDatePicker/SQFormDatePickerWithDateFNS';
+export type {SQFormDateTimePickerProps} from './components/fields/SQFormDatePicker/SQFormDateTimePicker';
+export type {SQFormDatePickerWithCalendarInputOnlyProps} from './components/fields/SQFormDatePicker/SQFormDatePickerWithCalendarInputOnly';
+export type {SQFormRadioButtonGroupItemProps} from './components/fields/SQFormRadioButtonGroup/SQFormRadioButtonGroupItem';
+export type {SQFormRadioButtonGroupProps} from './components/fields/SQFormRadioButtonGroup/SQFormRadioButtonGroup';
+export type {SQFormCheckboxGroupProps} from './components/fields/SQFormCheckboxGroup/SQFormCheckboxGroup';
+export type {SQFormCheckboxGroupItemProps} from './components/fields/SQFormCheckboxGroup/SQFormCheckboxGroupItem';
 export type {
   SQFormDialogStepperProps,
   SQFormDialogStepProps,
 } from './components/SQFormDialogStepper/SQFormDialogStepper';
-export type {SQFormDropdownProps} from './components/SQForm/SQFormDropdown';
+export type {SQFormDropdownProps} from './components/fields/SQFormDropdown/SQFormDropdown';
 export type {
   SQFormReadOnlyProps,
   SQFormMaskedReadOnlyFieldWithKey,
-} from './components/SQForm/SQFormReadOnly';
-export type {SQFormReadOnlyFieldProps} from './components/SQForm/SQFormReadOnlyField';
-export type {SQFormResetButtonWithConfirmationProps} from './components/SQForm/SQFormResetButtonWithConfirmation';
-export type {SQFormResetInitialValuesButtonProps} from './components/SQForm/SQFormResetInitialValuesButton';
-export type {SQFormTextareaProps} from './components/SQForm/SQFormTextarea';
-export type {SQFormTextFieldProps} from './components/SQForm/SQFormTextField';
-export type {SQFormMultiSelectProps} from './components/SQForm/SQFormMultiSelect';
-export type {SQFormMaskedTextFieldProps} from './components/SQForm/SQFormMaskedTextField';
-export type {SQFormMaskedReadOnlyFieldProps} from './components/SQForm/SQFormMaskedReadOnlyField';
-export type {SQFormHelperTextProps} from './components/SQForm/SQFormHelperText';
+} from './components/SQFormReadOnly/SQFormReadOnly';
+export type {SQFormReadOnlyFieldProps} from './components/fields/SQFormReadOnlyField/SQFormReadOnlyField';
+export type {SQFormResetButtonWithConfirmationProps} from './components/buttons/SQFormResetButtonWithConfirmation';
+export type {SQFormResetInitialValuesButtonProps} from './components/buttons/SQFormResetInitialValuesButton';
+export type {SQFormTextareaProps} from './components/fields/SQFormTextarea/SQFormTextarea';
+export type {SQFormTextFieldProps} from './components/fields/SQFormTextField/SQFormTextField';
+export type {SQFormMultiSelectProps} from './components/fields/SQFormMultiSelect/SQFormMultiSelect';
+export type {SQFormMaskedTextFieldProps} from './components/fields/SQFormMasked/SQFormMaskedTextField';
+export type {SQFormMaskedReadOnlyFieldProps} from './components/fields/SQFormMasked/SQFormMaskedReadOnlyField';
+export type {SQFormHelperTextProps} from './components/SQFormHelperText/SQFormHelperText';
 export type {SQFormScrollableCardProps} from './components/SQFormScrollableCard/SQFormScrollableCard';
 export type {SQFormScrollableCardsMenuWrapperProps} from './components/SQFormScrollableCardsMenuWrapper/SQFormScrollableCardsMenuWrapper';
-export type {SQFormMultiValueProps} from './components/SQForm/SQFormMultiValue';
+export type {SQFormMultiValueProps} from './components/fields/SQFormMultiValue/SQFormMultiValue';
 export type {
   SQFormGuidedWorkflowProps,
   SQFormGuidedWorkflowHeaderProps,

@@ -4,7 +4,7 @@ import {SQFormButton as SQFormButtonComponent, SQFormTextField} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
-import type {SQFormButtonProps} from 'components/SQForm/SQFormButton';
+import type {SQFormButtonProps} from 'components/buttons/SQFormButton';
 
 export default {
   title: 'Components/SQFormButton',

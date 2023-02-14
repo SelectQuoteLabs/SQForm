@@ -98,7 +98,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     });
     userEvent.click(nextButton);
 
-    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+    await waitForElementToBeRemoved(screen.queryByTestId('loadingSpinner'), {
       timeout: 3500,
     });
 
@@ -128,7 +128,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
     });
     userEvent.click(nextButton);
 
-    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+    await waitForElementToBeRemoved(screen.queryByTestId('loadingSpinner'), {
       timeout: 3500,
     });
 
@@ -169,7 +169,7 @@ describe('SQFormGuidedWorkflow Tests', () => {
       expect(nextButton).toBeEnabled();
     });
     userEvent.click(nextButton);
-    await waitForElementToBeRemoved(screen.getByTestId('loadingSpinner'), {
+    await waitForElementToBeRemoved(screen.queryByTestId('loadingSpinner'), {
       timeout: 3500,
     });
 

@@ -12,8 +12,8 @@ import {
 import {Form, useFormikContext} from 'formik';
 import {useDialog} from '@selectquotelabs/sqhooks';
 import {RoundedButton, DialogAlert} from 'scplus-shared-components';
-import SQFormButton from '../SQForm/SQFormButton';
-import SQFormHelperText from '../SQForm/SQFormHelperText';
+import SQFormButton from '../buttons/SQFormButton';
+import SQFormHelperText from '../SQFormHelperText/SQFormHelperText';
 import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
 import type {Theme} from '@mui/material/styles';
 import type {TransitionProps} from '@mui/material/transitions';
