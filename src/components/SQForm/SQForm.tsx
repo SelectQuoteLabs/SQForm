@@ -6,7 +6,12 @@ import {useDebouncedCallback} from 'use-debounce';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {AnyObjectSchema} from 'yup';
 import type {GridProps} from '@mui/material';
-import type {FormikHelpers, FormikConfig, FormikValues} from 'formik';
+import type {
+  FormikHelpers,
+  FormikConfig,
+  FormikValues,
+  FormikFormProps,
+} from 'formik';
 
 setLocale({
   mixed: {
@@ -41,6 +46,8 @@ export type SQFormProps<Values extends FormikValues> = {
   validateOnBlur?: boolean;
   // Set if validation should happen on change.  By default is set to true in Formik API.
   validateOnChange?: boolean;
+  /** * Any Valid Prop for Formik's Form component, which is a simple wrapper around HTML's form tag */
+  formProps?: FormikFormProps;
 };
 
 function SQForm<Values extends FormikValues>({
@@ -52,6 +59,7 @@ function SQForm<Values extends FormikValues>({
   validationSchema,
   validateOnBlur,
   validateOnChange,
+  formProps,
 }: SQFormProps<Values>): JSX.Element {
   const initialErrors = useInitialRequiredErrors(
     validationSchema,
@@ -87,7 +95,7 @@ function SQForm<Values extends FormikValues>({
     >
       {(_props) => {
         return (
-          <Form>
+          <Form {...formProps}>
             <Grid
               {...muiGridProps}
               container={true}
