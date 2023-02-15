@@ -23,67 +23,68 @@ type CustomHeaderDisabledType =
       title: string;
     };
 
-export type SQFormScrollableCardProps<Values extends FormikValues> = CustomHeaderDisabledType & {
-  /** An object of css-in-js style properties to be passed and spread onto the `CardContent` component */
-  cardContentStyles?: React.CSSProperties;
-  /** Form related Field(s) and components */
-  children: React.ReactNode;
-  /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
-  enableReinitialize?: boolean;
-  /** Number overriding the height of the component */
-  height?: React.CSSProperties['height'];
-  /** Helper text to display in the Footer when the Form is in an Error state */
-  helperErrorText?: string;
-  /** Helper text to display in the Footer when the Form is in a Failure state */
-  helperFailText?: string;
-  /** Helper text to display in the Footer when the Form is in a Valid state */
-  helperValidText?: string;
-  /** Form Entity Object aka initial values of the form */
-  initialValues: Values;
-  /** Imperatively disable the Form Submit button */
-  isDisabled?: boolean;
-  /** Override the failure/success state of the form's footer helper text. Default: false */
-  isFailedState?: boolean;
-  /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
-  isSelfBounding?: boolean;
-  /** Any prop from https://material-ui.com/api/grid */
-  muiGridProps?: GridProps;
-  /**
-   * Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag) => void | Promise<any>
-   * IMPORTANT: If onSubmit is async, then Formik will automatically set isSubmitting to false on your behalf once it has resolved.
-   * This means you do NOT need to call formikBag.setSubmitting(false) manually.
-   * However, if your onSubmit function is synchronous, then you need to call setSubmitting(false) on your own.
-   *
-   * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
-   * */
-  onSubmit: (
-    values: Values,
-    formikHelpers: FormikHelpers<Values>
-  ) => void | Promise<unknown>;
-  /** Label text for the reset button */
-  resetButtonText?: string;
-  /** Conditionally the render of the form's footer helper text. Default: true */
-  shouldRenderHelperText?: boolean;
-  /** Pass through to SQFormButton that determines if the button will disable based on form data */
-  shouldRequireFieldUpdates?: boolean;
-  /** Label text for the Submit button */
-  submitButtonText?: string;
-  /** Component to render as the Subheader */
-  SubHeaderComponent?: React.ReactNode;
-  /**
-   * Yup validation schema shape
-   * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
-   * */
-  validationSchema?: AnyObjectSchema;
-  /** Boolean used to determine if the corners of the card should be squared */
-  isSquareCorners?: boolean;
-  /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
-  value?: string;
-  /** The label to display for this card if used by SQFormScrollableCardsMenuWrapper */
-  label?: string;
-  /** An Icon to be shown to the left of the title */
-  icon?: React.ReactNode;
-};
+export type SQFormScrollableCardProps<Values extends FormikValues> =
+  CustomHeaderDisabledType & {
+    /** An object of css-in-js style properties to be passed and spread onto the `CardContent` component */
+    cardContentStyles?: React.CSSProperties;
+    /** Form related Field(s) and components */
+    children: React.ReactNode;
+    /** Reinitialize form values when props change - https://formik.org/docs/api/formik#enablereinitialize-boolean */
+    enableReinitialize?: boolean;
+    /** Number overriding the height of the component */
+    height?: React.CSSProperties['height'];
+    /** Helper text to display in the Footer when the Form is in an Error state */
+    helperErrorText?: string;
+    /** Helper text to display in the Footer when the Form is in a Failure state */
+    helperFailText?: string;
+    /** Helper text to display in the Footer when the Form is in a Valid state */
+    helperValidText?: string;
+    /** Form Entity Object aka initial values of the form */
+    initialValues: Values;
+    /** Imperatively disable the Form Submit button */
+    isDisabled?: boolean;
+    /** Override the failure/success state of the form's footer helper text. Default: false */
+    isFailedState?: boolean;
+    /** Boolean to determine whether the Card should determine it's own height or use 100% of its parent's height. */
+    isSelfBounding?: boolean;
+    /** Any prop from https://material-ui.com/api/grid */
+    muiGridProps?: GridProps;
+    /**
+     * Form Submission Handler | @typedef onSubmit: (values: Values, formikBag: FormikBag) => void | Promise<any>
+     * IMPORTANT: If onSubmit is async, then Formik will automatically set isSubmitting to false on your behalf once it has resolved.
+     * This means you do NOT need to call formikBag.setSubmitting(false) manually.
+     * However, if your onSubmit function is synchronous, then you need to call setSubmitting(false) on your own.
+     *
+     * https://jaredpalmer.com/formik/docs/api/withFormik#handlesubmit-values-values-formikbag-formikbag--void--promiseany
+     * */
+    onSubmit: (
+      values: Values,
+      formikHelpers: FormikHelpers<Values>
+    ) => void | Promise<unknown>;
+    /** Label text for the reset button */
+    resetButtonText?: string;
+    /** Conditionally the render of the form's footer helper text. Default: true */
+    shouldRenderHelperText?: boolean;
+    /** Pass through to SQFormButton that determines if the button will disable based on form data */
+    shouldRequireFieldUpdates?: boolean;
+    /** Label text for the Submit button */
+    submitButtonText?: string;
+    /** Component to render as the Subheader */
+    SubHeaderComponent?: React.ReactNode;
+    /**
+     * Yup validation schema shape
+     * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
+     * */
+    validationSchema?: AnyObjectSchema;
+    /** Boolean used to determine if the corners of the card should be squared */
+    isSquareCorners?: boolean;
+    /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
+    value?: string;
+    /** The label to display for this card if used by SQFormScrollableCardsMenuWrapper */
+    label?: string;
+    /** An Icon to be shown to the left of the title */
+    icon?: React.ReactNode;
+  };
 
 function SQFormScrollableCard<Values extends FormikValues>({
   cardContentStyles = {},
