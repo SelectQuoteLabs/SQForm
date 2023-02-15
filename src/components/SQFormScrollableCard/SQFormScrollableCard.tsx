@@ -9,7 +9,21 @@ import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 
-export type SQFormScrollableCardProps<Values extends FormikValues> = {
+type CustomHeaderDisabledType =
+  | {
+      /** Boolean used to determine if title/header is enabled or disabled */
+      isHeaderDisabled: true;
+      /** The Title for the Header component */
+      title?: null;
+    }
+  | {
+      /** Boolean used to determine if title/header is enabled or disabled */
+      isHeaderDisabled: boolean;
+      /** The Title for the Header component */
+      title: string;
+    };
+
+export type SQFormScrollableCardProps<Values extends FormikValues> = CustomHeaderDisabledType & {
   /** An object of css-in-js style properties to be passed and spread onto the `CardContent` component */
   cardContentStyles?: React.CSSProperties;
   /** Form related Field(s) and components */
@@ -56,15 +70,11 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   submitButtonText?: string;
   /** Component to render as the Subheader */
   SubHeaderComponent?: React.ReactNode;
-  /** The Title for the Header component */
-  title?: string;
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-  /** Boolean used to determine if title/header is enabled or disabled */
-  isHeaderDisabled?: boolean;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
   /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
