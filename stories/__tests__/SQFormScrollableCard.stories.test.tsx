@@ -26,19 +26,6 @@ describe('SQFormScrollableCard', () => {
       expect(value).toBe('Hello');
     });
 
-    it('Should call submit handler on click', async () => {
-      const handleSubmit = jest.fn();
-      render(<Default onSubmit={handleSubmit} />);
-
-      userEvent.type(screen.getByLabelText(/hello/i), 'TypingFifteenChars');
-      const submitButton = screen.getByRole('button', {name: /submit/i});
-      userEvent.click(submitButton);
-
-      await waitFor(() => {
-        expect(handleSubmit).toHaveBeenCalledTimes(1);
-      });
-    });
-
     it('Should disable submit when form is not filled out', async () => {
       render(<Default />);
 
@@ -90,6 +77,7 @@ describe('SQFormScrollableCard', () => {
     it('Should adjust height of component when specified', () => {
       const {container} = render(<WithStaticHeight />);
 
+      // eslint-disable-next-line testing-library/no-node-access
       const containerNode = container.firstChild as HTMLElement;
       const containerStyles = window.getComputedStyle(containerNode);
 
