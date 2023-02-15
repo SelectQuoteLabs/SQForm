@@ -1,3 +1,10 @@
+## [10.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.2.0...v10.3.0) (2023-02-15)
+
+
+### Features
+
+* 🎸 Adds formProps to SQForm to allow overrides ([05d2a3b](https://github.com/SelectQuoteLabs/SQForm/commit/05d2a3bb7faff74c7458b93b517b72aa67d0cad2))
+
 ## [10.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.1.0...v10.2.0) (2023-02-07)
 
 
