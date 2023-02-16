@@ -1,3 +1,17 @@
+## [10.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.3.0...v10.4.0) (2023-02-16)
+
+
+### Features
+
+* Update helper text and outlined autocomplete ([#727](https://github.com/SelectQuoteLabs/SQForm/issues/727)) ([3c438cf](https://github.com/SelectQuoteLabs/SQForm/commit/3c438cf13292daa37aac10e5011a35c02542bc6c))
+
+## [10.3.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.2.0...v10.3.0) (2023-02-15)
+
+
+### Features
+
+* 🎸 Adds formProps to SQForm to allow overrides ([05d2a3b](https://github.com/SelectQuoteLabs/SQForm/commit/05d2a3bb7faff74c7458b93b517b72aa67d0cad2))
+
 ## [10.2.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.1.0...v10.2.0) (2023-02-07)
 
 
