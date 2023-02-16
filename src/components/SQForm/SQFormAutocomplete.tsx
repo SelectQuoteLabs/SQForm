@@ -12,6 +12,7 @@ import {getIn, useField, useFormikContext} from 'formik';
 import {usePrevious} from '@selectquotelabs/sqhooks';
 import {useForm} from './useForm';
 import type {AutocompleteChangeReason} from '@mui/base';
+import type {TextFieldProps} from '@mui/material';
 import type {ListChildComponentProps} from 'react-window';
 import type {BaseFieldProps, SQFormOption} from '../../types';
 
@@ -20,6 +21,8 @@ export type SQFormAutocompleteProps = BaseFieldProps & {
   children: SQFormOption[];
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
+  /** Whether or not to show the helper text */
+  displayHelperText?: boolean;
   /** Whether to display empty option */
   displayEmpty?: boolean;
   /** Custom onBlur event callback */
@@ -37,6 +40,8 @@ export type SQFormAutocompleteProps = BaseFieldProps & {
   ) => void;
   /** Lock width of the dropdown to the width of the field in the form */
   lockWidthToField?: boolean;
+  /** Any valid prop for material ui text input child component - https://material-ui.com/api/text-field/#props */
+  muiTextFieldProps?: TextFieldProps;
 };
 
 export type OuterElementTypeProps = {
@@ -225,6 +230,7 @@ const calculateBaseWidth = (ref: HTMLDivElement | null) => {
 function SQFormAutocomplete({
   children,
   isDisabled = false,
+  displayHelperText = true,
   displayEmpty = false,
   label,
   name,
@@ -233,6 +239,7 @@ function SQFormAutocomplete({
   onInputChange,
   size = 'auto',
   lockWidthToField = true,
+  muiTextFieldProps = {},
 }: SQFormAutocompleteProps): React.ReactElement {
   const gridContainerRef = React.useRef<HTMLDivElement>(null);
   const baseWidth = calculateBaseWidth(gridContainerRef.current);
@@ -380,8 +387,11 @@ function SQFormAutocomplete({
               FormHelperTextProps={{error: isFieldError}}
               name={name}
               label={label}
-              helperText={!isDisabled && HelperTextComponent}
+              helperText={
+                !isDisabled && displayHelperText && HelperTextComponent
+              }
               required={isFieldRequired}
+              {...muiTextFieldProps}
             />
           );
         }}
