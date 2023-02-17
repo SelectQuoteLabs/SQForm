@@ -46,8 +46,6 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => void | Promise<unknown>;
-  /** The Title for the Header component. If you do not want the header to show, leave undefined or blank (e.g. '') */
-  title?: string;
   /** Label text for the reset button */
   resetButtonText?: string;
   /** Conditionally the render of the form's footer helper text. Default: true */
@@ -58,6 +56,8 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   submitButtonText?: string;
   /** Component to render as the Subheader */
   SubHeaderComponent?: React.ReactNode;
+  /** The Title for the Header component. If you do not want the header to show, leave undefined or blank (e.g. '') */
+  title?: string;
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema

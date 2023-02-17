@@ -137,6 +137,12 @@ describe('SQFormScrollableCard', () => {
       expect(screen.getByText(/Testing Title/i)).toBeInTheDocument();
     });
 
+    it('Should not render specified header title when disabled', () => {
+      render(<Default title={undefined} />);
+
+      expect(screen.queryByTestId(/title/i)).toBeNull();
+    });
+
     it('Should render custom SubHeaderComponent styles', () => {
       render(<WithSubHeader />);
 
