@@ -46,15 +46,13 @@ const defaultArgs = {
 const Template: CustomStory<
   SQFormScrollableCardStoryProps<{[key: string]: unknown}>
 > = (args): React.ReactElement => {
-  const {wrapper, validationSchema, initialValues, title, isHeaderDisabled, ...restArgs} = args;
+  const {wrapper, validationSchema, initialValues, ...restArgs} = args;
 
   const basicCard = (
     <SQFormScrollableCard<typeof initialValues>
       validationSchema={validationSchema}
       shouldRequireFieldUpdates={true}
       initialValues={initialValues}
-      title={title ?? ''}
-      isHeaderDisabled={isHeaderDisabled}
       {...restArgs}
     >
       <SQFormTextField name="hello" label="Hello" size={12} />
