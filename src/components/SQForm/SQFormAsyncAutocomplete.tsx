@@ -118,6 +118,7 @@ const ListboxVirtualizedComponent: React.ForwardRefExoticComponent<
 function SQFormAsyncAutocomplete({
   children,
   isDisabled = false,
+  displayHelperText = true,
   label,
   name,
   onBlur,
@@ -153,7 +154,7 @@ function SQFormAsyncAutocomplete({
   const prevValue = usePrevious(value);
 
   React.useEffect(() => {
-    setInputValue(initialValue?.label || '');
+    setInputValue((prevInputVal) => initialValue?.label || prevInputVal);
   }, [initialValue]);
 
   React.useEffect(() => {
@@ -252,7 +253,9 @@ function SQFormAsyncAutocomplete({
               FormHelperTextProps={{error: isFieldError}}
               name={name}
               label={label}
-              helperText={!isDisabled && HelperTextComponent}
+              helperText={
+                !isDisabled && displayHelperText && HelperTextComponent
+              }
               required={isFieldRequired}
             />
           );

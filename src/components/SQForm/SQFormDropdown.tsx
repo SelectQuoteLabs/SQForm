@@ -25,6 +25,8 @@ export type SQFormDropdownProps = BaseFieldProps & {
   displayEmpty?: boolean;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
+  /** Whether or not to show the helper text */
+  displayHelperText?: boolean;
   /** Custom onBlur event callback */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   /** Custom onChange event callback */
@@ -52,6 +54,7 @@ function SQFormDropdown({
   children,
   displayEmpty = false,
   isDisabled = false,
+  displayHelperText = true,
   label,
   name,
   onBlur,
@@ -156,7 +159,9 @@ function SQFormDropdown({
             );
           })}
         </Select>
-        {!isDisabled && <FormHelperText>{HelperTextComponent}</FormHelperText>}
+        {!isDisabled && displayHelperText && (
+          <FormHelperText>{HelperTextComponent}</FormHelperText>
+        )}
       </FormControl>
     </Grid>
   );

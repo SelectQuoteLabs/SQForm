@@ -40,6 +40,7 @@ function SQFormMaskedTextField({
   name,
   label,
   isDisabled = false,
+  displayHelperText = true,
   placeholder,
   size = 'auto',
   onBlur,
@@ -65,6 +66,7 @@ function SQFormMaskedTextField({
       name={name}
       label={label}
       isDisabled={isDisabled}
+      displayHelperText={displayHelperText}
       placeholder={placeholder}
       size={size}
       onBlur={onBlur}
