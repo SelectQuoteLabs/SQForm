@@ -141,7 +141,10 @@ export function useForm<TValue, TChangeEvent>({
       return (
         <>
           <WarningIcon color="error" sx={WARNING_ICON_STYLES} />
-          <Typography sx={(theme: Theme) => theme.typography.helper}>
+          <Typography
+            component="span"
+            sx={(theme: Theme) => theme.typography.helper}
+          >
             {errorMessage}
           </Typography>
         </>
@@ -151,7 +154,10 @@ export function useForm<TValue, TChangeEvent>({
       return (
         <>
           <WarningIcon color="disabled" sx={WARNING_ICON_STYLES} />
-          <Typography sx={(theme: Theme) => theme.typography.helper}>
+          <Typography
+            component="span"
+            sx={(theme: Theme) => theme.typography.helper}
+          >
             Required
           </Typography>
         </>
