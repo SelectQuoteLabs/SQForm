@@ -55,6 +55,26 @@
           }
         ]
       }
+    },
+    {
+      "files": ["**/*.stories*"],
+      "env": {"browser": true, "es6": true, "node": true},
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {"jsx": true},
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
     }
   ]
 }

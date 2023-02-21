@@ -53,6 +53,7 @@ const Template: CustomStory<
       validationSchema={validationSchema}
       shouldRequireFieldUpdates={true}
       initialValues={initialValues}
+      onReset={() => alert('reset')}
       {...restArgs}
     >
       <SQFormTextField name="hello" label="Hello" size={12} />

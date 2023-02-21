@@ -30,7 +30,7 @@ import {
   MASKS,
   SQFormDatePicker,
 } from '../src';
-import type {FieldArrayRenderProps, FormikHelpers} from 'formik';
+import type {FieldArrayRenderProps, FormikHelpers, FormikValues} from 'formik';
 
 export default {
   title: 'Forms/SQForm',
@@ -157,13 +157,12 @@ const CHECKBOX_GROUP_OPTIONS = [
   {label: 'Interior', value: 4, isDisabled: true},
 ];
 
-const handleSubmit = <TValues extends unknown>(
+const handleSubmit = <TValues extends FormikValues>(
   values: TValues,
   actions: FormikHelpers<TValues>
 ) => {
   window.alert(JSON.stringify(values, null, 2));
   actions.setSubmitting(false);
-  actions.resetForm();
 };
 
 export const BasicForm = (): JSX.Element => {
@@ -847,6 +846,50 @@ export const ccaChecklist = (): JSX.Element => {
         </SQFormDropdown>
         <Grid item={true} style={{alignSelf: 'flex-end'}}>
           <SQFormButton>Submit</SQFormButton>
+        </Grid>
+      </SQForm>
+    </Card>
+  );
+};
+
+export const customResetHandler = (): JSX.Element => {
+  const initialValues = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    city: 'Kansas City',
+  };
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string().min(3).required(),
+    middleName: Yup.string(),
+    lastName: Yup.string().required(),
+    city: Yup.string().required(),
+  });
+
+  const handleReset = () => {
+    alert(
+      'Custom reset handler is called when reset button is clicked OR reset called from formik context'
+    );
+  };
+
+  return (
+    <Card raised={true} style={{padding: '16px', minWidth: '250px'}}>
+      <SQForm
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+      >
+        <SQFormTextField name="firstName" label="First Name" />
+        <SQFormTextField name="middleName" label="Middle Name" />
+        <SQFormTextField name="lastName" label="Last Name" />
+        <SQFormTextField name="city" label="City" />
+        <Grid item={true} sm={12}>
+          <Grid container={true} sx={{justifyContent: 'space-between'}}>
+            <SQFormButton type="reset">RESET</SQFormButton>
+            <SQFormButton>Submit</SQFormButton>
+          </Grid>
         </Grid>
       </SQForm>
     </Card>

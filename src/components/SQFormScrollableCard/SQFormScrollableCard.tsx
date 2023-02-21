@@ -6,7 +6,7 @@ import SQFormButton from '../buttons/SQFormButton';
 import SQFormHelperText from '../SQFormHelperText/SQFormHelperText';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {GridProps} from '@mui/material';
-import type {FormikHelpers, FormikValues} from 'formik';
+import type {FormikHelpers, FormikValues, FormikConfig} from 'formik';
 import type {AnyObjectSchema} from 'yup';
 
 export type SQFormScrollableCardProps<Values extends FormikValues> = {
@@ -46,6 +46,8 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => void | Promise<unknown>;
+  /** Custom reset handler */
+  onReset?: FormikConfig<Values>['onReset'];
   /** Label text for the reset button */
   resetButtonText?: string;
   /** Conditionally the render of the form's footer helper text. Default: true */
@@ -87,6 +89,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
   isSelfBounding,
   muiGridProps = {},
   onSubmit,
+  onReset,
   resetButtonText = 'Reset',
   shouldRenderHelperText = true,
   shouldRequireFieldUpdates = false,
@@ -99,7 +102,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
   const hasSubHeader = Boolean(SubHeaderComponent);
 
-  const initialErrors = useInitialRequiredErrors(
+  const initialErrors = useInitialRequiredErrors<Values>(
     validationSchema,
     initialValues
   );
@@ -162,6 +165,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
         initialErrors={initialErrors}
         initialValues={initialValues}
         onSubmit={handleSubmit}
+        onReset={onReset}
         validationSchema={validationSchema}
         validateOnMount={true}
       >

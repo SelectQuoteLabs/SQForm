@@ -2,7 +2,12 @@ import React from 'react';
 import {Formik} from 'formik';
 import SQFormDialogInner from './SQFormDialogInner';
 import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
-import type {FormikHelpers, FormikValues, FormikContextType} from 'formik';
+import type {
+  FormikHelpers,
+  FormikValues,
+  FormikContextType,
+  FormikConfig,
+} from 'formik';
 import type {DialogProps, GridProps, ButtonProps} from '@mui/material';
 import type {AnyObjectSchema} from 'yup';
 import type {SQFormDialogInnerProps} from './SQFormDialogInner';
@@ -28,6 +33,10 @@ export type SQFormDialogProps<Values extends FormikValues> = {
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => void | Promise<unknown>;
+  /**
+   * Form reset handler
+   */
+  onReset?: FormikConfig<Values>['onReset'];
   /** Determine if the secondary action button should be displayed (default: true) */
   showSecondaryButton?: boolean;
   /**
@@ -82,6 +91,7 @@ function SQFormDialog<Values extends FormikValues>({
   maxWidth = 'sm',
   onClose,
   onSave,
+  onReset,
   shouldDisplaySaveButton = true,
   saveButtonText = 'Save',
   tertiaryButtonText,
@@ -101,7 +111,7 @@ function SQFormDialog<Values extends FormikValues>({
   validateOnBlur,
   validateOnChange,
 }: SQFormDialogProps<Values>): React.ReactElement {
-  const initialErrors = useInitialRequiredErrors(
+  const initialErrors = useInitialRequiredErrors<Values>(
     validationSchema,
     initialValues
   );
@@ -112,6 +122,7 @@ function SQFormDialog<Values extends FormikValues>({
       initialErrors={initialErrors}
       initialValues={initialValues}
       onSubmit={onSave}
+      onReset={onReset}
       validationSchema={validationSchema}
       validateOnMount={true}
       validateOnBlur={validateOnBlur}

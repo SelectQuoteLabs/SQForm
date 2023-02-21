@@ -32,8 +32,15 @@ export function useFormButton<Values>({
   onClick,
   buttonType,
 }: UseFormButtonProps): UseFormButtonReturnType<Values> {
-  const {values, initialValues, isValid, dirty, ...rest} =
-    useFormikContext<Values>();
+  const {
+    values,
+    initialValues,
+    isValid,
+    dirty,
+    validateForm,
+    setErrors,
+    ...rest
+  } = useFormikContext<Values>();
 
   const isButtonDisabled = React.useMemo(() => {
     if (isDisabled) {
@@ -73,6 +80,8 @@ export function useFormButton<Values>({
     isValid,
     handleClick,
     dirty,
+    validateForm,
+    setErrors,
     ...rest,
   };
 }

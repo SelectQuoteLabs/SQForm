@@ -38,6 +38,10 @@ export type SQFormProps<Values extends FormikValues> = {
    * */
   onSubmit: FormikConfig<Values>['onSubmit'];
   /**
+   * Form reset callback
+   */
+  onReset?: FormikConfig<Values>['onReset'];
+  /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
@@ -56,23 +60,16 @@ function SQForm<Values extends FormikValues>({
   initialValues,
   muiGridProps = {},
   onSubmit,
+  onReset,
   validationSchema,
   validateOnBlur,
   validateOnChange,
   formProps,
 }: SQFormProps<Values>): JSX.Element {
-  const initialErrors = useInitialRequiredErrors(
+  const initialErrors = useInitialRequiredErrors<Values>(
     validationSchema,
     initialValues
   );
-
-  // HACK: This is a workaround for: https://github.com/mui-org/material-ui-pickers/issues/2112
-  // Remove this reset handler when the issue is fixed.
-  const handleReset = () => {
-    document &&
-      document.activeElement &&
-      (document.activeElement as HTMLElement).blur();
-  };
 
   const handleSubmit = useDebouncedCallback(
     (values: Values, formikHelpers: FormikHelpers<Values>) =>
@@ -87,7 +84,7 @@ function SQForm<Values extends FormikValues>({
       initialErrors={initialErrors}
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      onReset={handleReset}
+      onReset={onReset}
       validationSchema={validationSchema}
       validateOnMount={true}
       validateOnBlur={validateOnBlur}

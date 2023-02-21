@@ -10,10 +10,13 @@ import userEvent from '@testing-library/user-event';
 
 import {BasicForm} from '../SQForm.stories';
 
-window.alert = jest.fn();
+beforeEach(() => {
+  jest.restoreAllMocks();
+  jest.spyOn(window, 'alert').mockImplementation(() => {});
+})
 
 afterEach(() => {
-  (window.alert as jest.MockedFunction<typeof window.alert>).mockClear();
+  jest.restoreAllMocks();
 });
 
 const mockData = {
@@ -64,7 +67,6 @@ describe('Tests for BasicForm', () => {
     );
 
     userEvent.click(screen.getByRole('button', {name: /submit/i}));
-
     await waitFor(() =>
       expect(window.alert).toHaveBeenCalledWith(
         JSON.stringify(
@@ -87,7 +89,10 @@ describe('Tests for BasicForm', () => {
           null,
           2
         )
-      )
+      ),
+      {
+        timeout: 2000,
+      }
     );
   });
 
