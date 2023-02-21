@@ -6,7 +6,7 @@ import {SQFormReadOnlyField as SQFormReadOnlyFieldComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
-import type {SQFormReadOnlyFieldProps} from 'components/SQForm/SQFormReadOnlyField';
+import type {SQFormReadOnlyFieldProps} from 'components/fields/SQFormReadOnlyField/SQFormReadOnlyField';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 
 type SQFormReadOnlyFieldStory = Story<

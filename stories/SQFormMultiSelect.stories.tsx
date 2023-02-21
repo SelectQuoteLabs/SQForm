@@ -9,7 +9,7 @@ import {
 } from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story} from '@storybook/react';
-import type {SQFormMultiSelectProps} from 'components/SQForm/SQFormMultiSelect';
+import type {SQFormMultiSelectProps} from 'components/fields/SQFormMultiSelect/SQFormMultiSelect';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 
 type MultiSelectStoryType = Story<

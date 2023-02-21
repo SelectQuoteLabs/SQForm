@@ -5,7 +5,7 @@ import {SQFormDatePickerWithDateFNS as SQFormDatePickerComponent} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
-import type {SQFormDatePickerDateFNSProps} from 'components/SQForm/SQFormDatePickerWithDateFNS';
+import type {SQFormDatePickerDateFNSProps} from 'components/fields/SQFormDatePicker/SQFormDatePickerWithDateFNS';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 
 export type FormProps = {

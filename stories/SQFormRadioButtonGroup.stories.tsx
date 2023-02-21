@@ -13,7 +13,7 @@ import {
   SQFormStoryWrapperProps,
 } from './components/SQFormStoryWrapper';
 import type {Story} from '@storybook/react';
-import type {SQFormRadioButtonGroupProps} from 'components/SQForm/SQFormRadioButtonGroup';
+import type {SQFormRadioButtonGroupProps} from 'components/fields/SQFormRadioButtonGroup/SQFormRadioButtonGroup';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 
 type RadioButtonGroupType = Story<
