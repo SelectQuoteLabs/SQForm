@@ -1,3 +1,10 @@
+### [10.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v10.4.0...v10.4.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* 🐛 HelperText console error ([9e855b1](https://github.com/SelectQuoteLabs/SQForm/commit/9e855b17d644b0ca7b3f0f86215774bca7c0d95f)), closes [#838](https://github.com/SelectQuoteLabs/SQForm/issues/838)
+
 ## [10.4.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.3.0...v10.4.0) (2023-02-16)
 
 
