@@ -49,8 +49,14 @@ function SQFormCheckboxGroupItem({
   return (
     <FormControlLabel
       sx={(theme) => ({
-        mb: theme.spacing(1.5),
+        mb: theme.spacing(2),
         mr: isRowDisplay ? theme.spacing(3.75) : undefined,
+        '& .MuiCheckbox-root.Mui-disabled': {
+          color: 'var(--color-stone)',
+        },
+        '& .MuiCheckbox-root:not(.Mui-disabled)': {
+          color: 'var(--color-darkTeal)',
+        },
       })}
       label={label}
       control={
