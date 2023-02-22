@@ -9,7 +9,7 @@ import {
   SectionHeader,
   SectionBody,
 } from 'scplus-shared-components';
-import SQFormButton from '../SQForm/SQFormButton';
+import SQFormButton from '../buttons/SQFormButton';
 import AgentScript from './AgentScript';
 import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';

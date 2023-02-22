@@ -7,7 +7,7 @@ import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Meta, Story} from '@storybook/react';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {GridSizeOptions} from './types/storyHelperTypes';
-import type {SQFormDropdownProps} from 'components/SQForm/SQFormDropdown';
+import type {SQFormDropdownProps} from 'components/fields/SQFormDropdown/SQFormDropdown';
 
 type FormProps = {
   initalValues?: SQFormStoryWrapperProps['initialValues'];

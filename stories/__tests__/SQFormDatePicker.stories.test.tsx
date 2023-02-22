@@ -5,7 +5,7 @@ import {render, screen, within, waitFor} from '@testing-library/react';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import * as stories from '../SQFormDatePicker.stories';
-import type {SQFormDatePickerProps} from 'components/SQForm/SQFormDatePicker';
+import type {SQFormDatePickerProps} from 'components/fields/SQFormDatePicker/SQFormDatePicker';
 import type {FormProps} from '../SQFormDatePicker.stories';
 import type {AnyObjectSchema} from 'yup';
 

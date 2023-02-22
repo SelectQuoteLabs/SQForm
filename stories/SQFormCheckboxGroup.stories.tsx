@@ -5,7 +5,7 @@ import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
-import type {SQFormCheckboxGroupProps} from 'components/SQForm/SQFormCheckboxGroup';
+import type {SQFormCheckboxGroupProps} from 'components/fields/SQFormCheckboxGroup/SQFormCheckboxGroup';
 
 export default {
   title: 'Components/SQFormCheckboxGroup',

@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid} from '@mui/material';
 import type {Meta} from '@storybook/react';
 import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormResetInitialValuesButtonProps} from 'components/SQForm/SQFormResetInitialValuesButton';
+import type {SQFormResetInitialValuesButtonProps} from 'components/buttons/SQFormResetInitialValuesButton';
 
 import {
   SQFormResetInitialValuesButton as SQFormResetInitialValuesButtonComponent,
