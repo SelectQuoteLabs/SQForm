@@ -138,7 +138,7 @@ describe('SQFormScrollableCard', () => {
     });
 
     it('Should not render specified header title when disabled', () => {
-      render(<Default title={undefined} />);
+      render(<Default title="" />);
 
       expect(screen.queryByTestId(/title/i)).toBeNull();
     });

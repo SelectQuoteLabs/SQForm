@@ -183,6 +183,7 @@ function SQFormScrollableCard<Values extends FormikValues>({
               >
                 {title && (
                   <CardHeader
+                    data-testid="title"
                     title={title}
                     sx={(theme) => ({
                       gridArea: 'header',
