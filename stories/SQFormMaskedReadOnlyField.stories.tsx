@@ -9,7 +9,7 @@ import {createDocsPage} from './utils/createDocsPage';
 import type {Meta} from '@storybook/react';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {Mask} from 'types';
-import type {SQFormMaskedReadOnlyFieldProps} from '../src/components/SQForm/SQFormMaskedReadOnlyField';
+import type {SQFormMaskedReadOnlyFieldProps} from '../src/components/fields/SQFormMasked/SQFormMaskedReadOnlyField';
 
 type SQFormMaskedReadOnlyFieldStory = CustomStory<
   SQFormMaskedReadOnlyFieldProps & {

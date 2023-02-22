@@ -5,7 +5,7 @@ import {SQFormAutocomplete} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import type {Story, Meta} from '@storybook/react';
-import type {SQFormAutocompleteProps} from 'components/SQForm/SQFormAutocomplete';
+import type {SQFormAutocompleteProps} from 'components/fields/SQFormAutocomplete/SQFormAutocomplete';
 import type {SQFormStoryWrapperProps} from './components/SQFormStoryWrapper';
 import type {GridSizeOptions} from './types/storyHelperTypes';
 

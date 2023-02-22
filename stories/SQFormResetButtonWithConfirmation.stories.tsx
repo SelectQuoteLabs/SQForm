@@ -7,7 +7,7 @@ import {
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Meta} from '@storybook/react';
-import type {SQFormResetButtonWithConfirmationProps} from 'components/SQForm/SQFormResetButtonWithConfirmation';
+import type {SQFormResetButtonWithConfirmationProps} from 'components/buttons/SQFormResetButtonWithConfirmation';
 import type {CustomStory} from './types/storyHelperTypes';
 
 const meta: Meta = {

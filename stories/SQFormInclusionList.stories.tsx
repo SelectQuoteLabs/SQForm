@@ -10,7 +10,7 @@ import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
 import {createDocsPage} from './utils/createDocsPage';
 import type {FieldArrayRenderProps} from 'formik';
 import type {CustomStory} from './types/storyHelperTypes';
-import type {SQFormInclusionListProps} from 'components/SQForm/SQFormInclusionList';
+import type {SQFormInclusionListProps} from 'components/fields/SQFormInclusionList/SQFormInclusionList';
 
 export default {
   title: 'Components/SQFormInclusionList',
