@@ -138,11 +138,9 @@ describe('SQFormScrollableCard', () => {
     });
 
     it('Should not render specified header title when disabled', () => {
-      render(<Default title="Testing Title" isHeaderDisabled={true} />);
+      render(<Default title="" />);
 
-      expect(() => screen.getByText(/Testing Title/i)).toThrow(
-        'Unable to find an element'
-      );
+      expect(screen.queryByTestId(/title/i)).toBeNull();
     });
 
     it('Should render custom SubHeaderComponent styles', () => {

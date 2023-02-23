@@ -56,15 +56,13 @@ export type SQFormScrollableCardProps<Values extends FormikValues> = {
   submitButtonText?: string;
   /** Component to render as the Subheader */
   SubHeaderComponent?: React.ReactNode;
-  /** The Title for the Header component */
+  /** The Title for the Header component. If you do not want the header to show, leave undefined or blank (e.g. '') */
   title?: string;
   /**
    * Yup validation schema shape
    * https://jaredpalmer.com/formik/docs/guides/validation#validationschema
    * */
   validationSchema?: AnyObjectSchema;
-  /** Boolean used to determine if title/header is enabled or disabled */
-  isHeaderDisabled?: boolean;
   /** Boolean used to determine if the corners of the card should be squared */
   isSquareCorners?: boolean;
   /** The value for this card if used by SQFormScrollableCardsMenuWrapper */
@@ -96,7 +94,6 @@ function SQFormScrollableCard<Values extends FormikValues>({
   SubHeaderComponent,
   title,
   validationSchema,
-  isHeaderDisabled = false,
   isSquareCorners = true,
   icon,
 }: SQFormScrollableCardProps<Values>): React.ReactElement {
@@ -184,8 +181,9 @@ function SQFormScrollableCard<Values extends FormikValues>({
                   height: '100%',
                 }}
               >
-                {!isHeaderDisabled && (
+                {title && (
                   <CardHeader
+                    data-testid="title"
                     title={title}
                     sx={(theme) => ({
                       gridArea: 'header',
