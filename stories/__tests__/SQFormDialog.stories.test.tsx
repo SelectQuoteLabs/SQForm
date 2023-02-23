@@ -7,14 +7,17 @@ import * as stories from '../SQFormDialog.stories';
 
 const {Default, WithValidation, WithAutoFocus} = composeStories(stories);
 
-const mockAlert = jest.fn();
+let handleClose: jest.Mock;
+let handleSave: jest.Mock;
 
-window.alert = mockAlert;
-const handleClose = jest.fn();
-const handleSave = jest.fn();
+beforeEach(() => {
+  window.alert = jest.fn();
+  handleClose = jest.fn();
+  handleSave = jest.fn();
+})
 
 afterEach(() => {
-  mockAlert.mockClear();
+  (window.alert as jest.MockedFunction<typeof window.alert>).mockClear();
   handleClose.mockClear();
   handleSave.mockClear();
 });

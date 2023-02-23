@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 import React from 'react';
 import {Formik, Form} from 'formik';
 import {CardActions, CardContent} from '@mui/material';
@@ -15,11 +14,9 @@ import OutcomeForm from './OutcomeForm';
 import AdditionalInformationSection from './AdditionalInformationSection';
 import {useManageTaskModules} from './useManageTaskModules';
 import {useGuidedWorkflowContext} from './useGuidedWorkflowContext';
+import {getInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {FormikHelpers, FormikValues} from 'formik';
-import type {
-  SQFormGuidedWorkflowDataProps,
-  SQFormGuidedWorkflowProps,
-} from './Types';
+import type {SQFormGuidedWorkflowProps} from './Types';
 
 const classes = {
   sectionBody: {
@@ -44,25 +41,6 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
   onError,
   containerStyles = {},
 }: SQFormGuidedWorkflowProps<TValues>): React.ReactElement {
-  // Until Formik exposes the validationSchema (again) via Context, the solution has to be handled at the Form declaration level
-  // There's a few open PR's on this issue, here's one for reference: https://github.com/formium/formik/pull/2933
-  const getFormikInitialRequiredErrors = (
-    validationSchema?: SQFormGuidedWorkflowDataProps<TValues>['validationSchema']
-  ) => {
-    if (validationSchema?.fields) {
-      const validationFields =
-        validationSchema.fields as Yup.ObjectSchema<TValues>;
-      return Object.entries(validationFields).reduce((acc, [key, value]) => {
-        if (value.tests[0]?.OPTIONS.name === 'required') {
-          return {...acc, [key]: 'Required'};
-        }
-        return acc;
-      }, {});
-    }
-
-    return {};
-  };
-
   const {
     state: taskModulesContext,
     updateDataByID: updateTaskModuleContextByID,
@@ -75,9 +53,12 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
     const taskNumber = index + 1;
     const taskName = taskModule.name;
     const validationYupSchema = taskModule.formikProps?.validationSchema;
-    const initialErrors = getFormikInitialRequiredErrors(
-      taskModule.formikProps?.validationSchema
-    );
+    const initialErrors = taskModule.formikProps?.validationSchema
+      ? getInitialRequiredErrors<TValues>(
+          taskModule.formikProps?.validationSchema,
+          taskModule.formikProps?.initialValues
+        )
+      : {};
     const isPanelExpanded =
       taskModulesContext[taskModulesState.activeTaskModuleID].name === taskName;
 
@@ -115,6 +96,14 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
       }
     };
 
+    const handleReset = async (
+      values: TValues,
+      formikBag: FormikHelpers<TValues>
+    ) => {
+      const onReset = taskModule.formikProps?.onReset;
+      onReset && onReset(values, formikBag, taskModulesContext);
+    };
+
     return {
       ...taskModule,
       isDisabled: getIsDisabled(),
@@ -133,6 +122,7 @@ function SQFormGuidedWorkflow<TValues extends FormikValues>({
           initialErrors={initialErrors}
           initialValues={taskModulesContext[taskNumber].data}
           onSubmit={handleSubmit}
+          onReset={handleReset}
           validationSchema={validationYupSchema}
           validateOnMount={true}
         >

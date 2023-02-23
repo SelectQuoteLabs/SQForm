@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import type {GridProps} from '@mui/material';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {AnyObjectSchema} from 'yup';
@@ -56,6 +56,12 @@ export type SQFormGuidedWorkflowDataProps<TValues extends FormikValues> = {
   ) => void | Promise<unknown>;
   /** Yup validation schema shape */
   validationSchema?: AnyObjectSchema;
+  /** Reset callback */
+  onReset?: (
+    values: TValues,
+    formikBag: FormikHelpers<TValues>,
+    context: SQFormGuidedWorkflowContext<TValues>
+  ) => void;
 };
 
 export type SQFormGuidedWorkflowTaskModuleProps<TValues extends FormikValues> =

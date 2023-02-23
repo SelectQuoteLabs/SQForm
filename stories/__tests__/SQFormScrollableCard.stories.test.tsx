@@ -226,14 +226,16 @@ describe('SQFormScrollableCard', () => {
       });
     });
 
-    it('Should display custom success text when validation is passed', () => {
+    it('Should display custom success text when validation is passed', async () => {
       render(<Default helperValidText={'Testing Custom Valid Text'} />);
 
       userEvent.type(screen.getByLabelText(/hello/i), 'TypingFifteenChars');
 
-      expect(
-        screen.getByText(/Testing Custom Valid Text/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Testing Custom Valid Text/i)
+        ).toBeInTheDocument();
+      });
     });
 
     it('Should display helperFailText when isFailedState is true', () => {

@@ -7,6 +7,7 @@ import {
   TextButton,
 } from 'scplus-shared-components';
 import {Grid, Typography, Box} from '@mui/material';
+import {noop} from 'ts-essentials';
 import {
   SQFormGuidedWorkflow,
   SQFormDropdown,
@@ -17,9 +18,9 @@ import type {FormikHelpers} from 'formik';
 import type {
   SQFormGuidedWorkflowContext,
   SQFormGuidedWorkflowProps,
+  SQFormGuidedWorkflowTaskModuleProps,
 } from 'components/SQFormGuidedWorkflow/Types';
 import type {CustomStory} from './types/storyHelperTypes';
-import {noop} from 'ts-essentials';
 
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -326,58 +327,62 @@ const TestTemplate: CustomStory<
 > = (args): React.ReactElement => {
   const {mainTitle, ...rest} = args;
 
-  const taskModules = [
-    {
-      name: 'firstSection',
-      title: 'First Section',
-      formikProps: {
-        initialValues: firstSectionInitialValues,
-        onSubmit: async (values: InitialValuesType) => {
-          console.log(JSON.stringify(values));
+  const taskModules: SQFormGuidedWorkflowTaskModuleProps<InitialValuesType>[] =
+    [
+      {
+        name: 'firstSection',
+        title: 'test Section',
+        formikProps: {
+          initialValues: firstSectionInitialValues,
+          onSubmit: async (values: InitialValuesType) => {
+            console.log(JSON.stringify(values));
+          },
+          onReset: () => {
+            alert('Custom reset handler :-D');
+          },
+          validationSchema: Yup.object({
+            firstText: Yup.string().required(),
+            secondText: Yup.string(),
+          }),
         },
-        validationSchema: Yup.object({
-          firstText: Yup.string().required(),
-          secondText: Yup.string(),
-        }),
-      },
-      scriptedTextProps: {
-        text: 'This is some text',
-        title: 'Script Title',
-      },
-      outcomeProps: {
-        FormElements: (
-          <>
-            <SQFormTextField name="firstText" label="First Text" size={4} />
-            <SQFormTextField name="secondText" label="Second Text" size={4} />
-          </>
-        ),
-        title: 'Outcome Test',
-      },
-    },
-    {
-      name: 'secondSection',
-      title: 'Second Section',
-      formikProps: {
-        initialValues: secondSectionInitialValues,
-        onSubmit: async (values: InitialValuesType) => {
-          console.log(JSON.stringify(values));
+        scriptedTextProps: {
+          text: 'This is some text',
+          title: 'Script Title',
+        },
+        outcomeProps: {
+          FormElements: (
+            <>
+              <SQFormTextField name="firstText" label="First Text" size={4} />
+              <SQFormTextField name="secondText" label="Second Text" size={4} />
+            </>
+          ),
+          title: 'Outcome Test',
         },
       },
-      scriptedTextProps: {
-        text: 'This is some more text',
-        title: 'Another Script Title',
+      {
+        name: 'secondSection',
+        title: 'Second Section',
+        formikProps: {
+          initialValues: secondSectionInitialValues,
+          onSubmit: async (values: InitialValuesType) => {
+            console.log(JSON.stringify(values));
+          },
+        },
+        scriptedTextProps: {
+          text: 'This is some more text',
+          title: 'Another Script Title',
+        },
+        outcomeProps: {
+          FormElements: (
+            <>
+              <SQFormTextField name="testText" label="Test Text" size={4} />
+              <SQFormTextarea name="notes" label="Notes" size={4} />
+            </>
+          ),
+          title: 'Outcome Test',
+        },
       },
-      outcomeProps: {
-        FormElements: (
-          <>
-            <SQFormTextField name="testText" label="Test Text" size={4} />
-            <SQFormTextarea name="notes" label="Notes" size={4} />
-          </>
-        ),
-        title: 'Outcome Test',
-      },
-    },
-  ];
+    ];
 
   return (
     <Box sx={{width: '90%', height: '95vh'}}>
