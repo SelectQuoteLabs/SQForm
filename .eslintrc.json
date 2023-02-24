@@ -1,18 +1,30 @@
 {
+  "env": {"browser": true, "es6": true, "node": true},
   "extends": [
     "react-app",
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:testing-library/react"
+    "plugin:testing-library/react",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {"jsx": true},
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
   "plugins": [
     "import",
     "flowtype",
     "jsx-a11y",
     "react",
     "react-hooks",
-    "testing-library"
+    "testing-library",
+    "@typescript-eslint"
   ],
   "rules": {
     "no-useless-computed-key": "off",
@@ -26,54 +38,32 @@
     "testing-library/prefer-explicit-assert": "warn",
     "testing-library/prefer-presence-queries": "error",
     "testing-library/prefer-screen-queries": "error",
-    "testing-library/prefer-wait-for": "error"
+    "testing-library/prefer-wait-for": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-explicit-any": [
+      "error",
+      {
+        "ignoreRestArgs": true
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { 
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "env": {"browser": true, "es6": true, "node": true},
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
-      ],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "ecmaFeatures": {"jsx": true},
-        "ecmaVersion": 2021,
-        "sourceType": "module",
-        "project": "./tsconfig.json"
-      },
-      "plugins": ["@typescript-eslint"],
-      "rules": {
-        "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"],
-        "@typescript-eslint/no-explicit-any": [
-          "error",
-          {
-            "ignoreRestArgs": true
-          }
-        ]
-      }
-    },
-    {
+      // story files and test files
       "files": ["**/*.stories*"],
-      "env": {"browser": true, "es6": true, "node": true},
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
-      ],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "ecmaFeatures": {"jsx": true},
-        "ecmaVersion": 2021,
-        "sourceType": "module",
-        "project": "./tsconfig.json"
-      },
-      "plugins": ["@typescript-eslint"],
       "rules": {
-        "import/no-anonymous-default-export": "off"
+        "import/no-anonymous-default-export": "off",
+        "testing-library/no-node-access": "off"
       }
     }
   ]

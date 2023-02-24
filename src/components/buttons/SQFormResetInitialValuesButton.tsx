@@ -13,8 +13,6 @@ export type SQFormResetInitialValuesButtonProps = {
   confirmationContent: React.ReactNode;
   /** Whether the button is disabled */
   isDisabled?: boolean;
-  /** Title for the button */
-  buttonTitle?: string;
   /** initial form values */
   initialValuesObject?: FormikValues;
   /** Button tooltip */
@@ -24,7 +22,6 @@ export type SQFormResetInitialValuesButtonProps = {
 function SQFormResetInitialValuesButton({
   children,
   isDisabled = false,
-  buttonTitle = 'Form Reset',
   confirmationContent,
   confirmationTitle = 'Reset Form',
   tooltip = 'Reset Button',

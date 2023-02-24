@@ -9,6 +9,7 @@ import {
   SQFormDialogStepper as SQFormDialogStepperComponent,
   SQFormDropdown,
 } from '../src';
+import type {FormikValues} from 'formik';
 import type {SQFormDialogStepperProps} from 'components/SQFormDialogStepper/SQFormDialogStepper';
 
 export default {
@@ -30,7 +31,7 @@ export default {
   },
 };
 
-const handleSubmit = <TValues extends unknown>(values: TValues) => {
+const handleSubmit = <TValues extends FormikValues>(values: TValues) => {
   window.alert(JSON.stringify(values, null, 2));
 };
 

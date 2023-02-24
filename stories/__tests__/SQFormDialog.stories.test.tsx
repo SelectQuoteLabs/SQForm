@@ -14,7 +14,7 @@ beforeEach(() => {
   window.alert = jest.fn();
   handleClose = jest.fn();
   handleSave = jest.fn();
-})
+});
 
 afterEach(() => {
   (window.alert as jest.MockedFunction<typeof window.alert>).mockClear();
@@ -136,7 +136,7 @@ it('should not find the cancel secondary button', async () => {
     />
   );
 
-  await screen.findByText(dialogTitleValue);
+  expect(await screen.findByText(dialogTitleValue)).toBeInTheDocument();
 
   expect(screen.queryByRole('button', {name: /cancel/i})).toBeNull();
 });
@@ -230,7 +230,7 @@ describe('Tests for Tertiary Button', () => {
       />
     );
 
-    await screen.findByText(dialogTitleValue);
+    expect(await screen.findByText(dialogTitleValue)).toBeInTheDocument();
 
     const tertiaryButton = screen.getByRole('button', {
       name: tertiaryButtonText,
@@ -254,7 +254,7 @@ describe('Tests for Tertiary Button', () => {
       />
     );
 
-    await screen.findByText(dialogTitleValue);
+    expect(await screen.findByText(dialogTitleValue)).toBeInTheDocument();
 
     expect(screen.queryByText(tertiaryButtonText)).toBeNull();
   });
@@ -273,7 +273,7 @@ describe('Tests for Tertiary Button', () => {
       />
     );
 
-    await screen.findByText(dialogTitleValue);
+    expect(await screen.findByText(dialogTitleValue)).toBeInTheDocument();
 
     const tertiaryButton = screen.getByRole('button', {
       name: tertiaryButtonText,

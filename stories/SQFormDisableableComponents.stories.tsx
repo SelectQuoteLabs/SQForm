@@ -22,7 +22,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const disableableComponents = (): React.ReactElement => {
+export const DisableableComponents = (): React.ReactElement => {
   const initialValues = {
     autoComplete: 'test1',
     datePicker: '12/01/1990',

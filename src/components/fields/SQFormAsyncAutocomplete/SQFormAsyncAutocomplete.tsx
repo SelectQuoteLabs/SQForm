@@ -65,12 +65,7 @@ function renderRow({data, index, style}: ListChildComponentProps) {
 const ListboxVirtualizedComponent: React.ForwardRefExoticComponent<
   React.RefAttributes<HTMLDivElement>
 > = React.forwardRef<HTMLDivElement>(function ListboxVirtualizedComponent(
-  {
-    basewidth,
-    left,
-    lockWidthToField,
-    ...restProps
-  }: ListboxVirtualizedComponentProps,
+  {...restProps}: ListboxVirtualizedComponentProps,
   ref
 ): React.ReactElement {
   const {children, ...listboxProps} = restProps;

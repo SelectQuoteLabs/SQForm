@@ -17,16 +17,17 @@ export default {
   },
 };
 
-export const sqFormScrollableCardsMenuWrapper = (): React.ReactElement => {
-  return (
-    <div style={{width: '100%', height: '100%'}}>
-      <SQFormScrollableCardsMenuWrapper title="[selected user]">
-        <ScrollableDetails value="details" label="Details" />
-        <ScrollablePermissions value="permissions" label="Permissions" />
-      </SQFormScrollableCardsMenuWrapper>
-    </div>
-  );
-};
+export const SQFormScrollableCardsMenuWrapperStoryWrapper =
+  (): React.ReactElement => {
+    return (
+      <div style={{width: '100%', height: '100%'}}>
+        <SQFormScrollableCardsMenuWrapper title="[selected user]">
+          <ScrollableDetails value="details" label="Details" />
+          <ScrollablePermissions value="permissions" label="Permissions" />
+        </SQFormScrollableCardsMenuWrapper>
+      </div>
+    );
+  };
 
 function ScrollableDetails({
   value,
@@ -54,7 +55,6 @@ function ScrollableDetails({
 
   return (
     <SQFormScrollableCard
-      isHeaderDisabled={true}
       isSelfBounding={true}
       initialValues={initialValues}
       onSubmit={handleSubmit}
@@ -94,7 +94,6 @@ function ScrollablePermissions({
 
   return (
     <SQFormScrollableCard
-      isHeaderDisabled={true}
       isSelfBounding={true}
       initialValues={initialValues}
       onSubmit={handleSubmit}

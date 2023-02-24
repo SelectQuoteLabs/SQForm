@@ -96,15 +96,14 @@ describe('SQFormTextField Tests', () => {
 
   describe('Text Field With Validation', () => {
     it('should initially render "Required" helper text if field is required', async () => {
-      const {container} = render(<SQFormTextFieldWithValidation size="auto" />);
+      render(<SQFormTextFieldWithValidation size="auto" />);
 
-      const helperText = container.querySelector('.MuiFormHelperText-root');
-
+      const helperText = screen.getByText(/require/i).parentElement;
       await waitFor(() => expect(helperText).toHaveClass('Mui-required'));
     });
 
     it('should highlight field if required but no value selected', async () => {
-      const {container} = render(<SQFormTextFieldWithValidation size="auto" />);
+      render(<SQFormTextFieldWithValidation size="auto" />);
 
       userEvent.tab();
 
@@ -115,7 +114,7 @@ describe('SQFormTextField Tests', () => {
       expect(textField).not.toHaveFocus();
 
       await waitFor(() => {
-        const helperText = container.querySelector('.MuiFormHelperText-root');
+        const helperText = screen.getByText(/require/i).parentElement;
         expect(helperText).toHaveClass('Mui-error');
       });
     });

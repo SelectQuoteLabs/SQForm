@@ -12,7 +12,7 @@ const {
 
 beforeEach(() => {
   window.alert = jest.fn();
-})
+});
 
 afterEach(() => {
   (window.alert as jest.MockedFunction<typeof window.alert>).mockClear();
@@ -54,7 +54,7 @@ describe('SQFormDialogStepper Tests', () => {
 
   it('should display next step when next button clicked', async () => {
     render(<SQFormDialogStepper isOpen={true} />);
-    await screen.findByText('Default');
+    expect(await screen.findByText('Default')).toBeInTheDocument();
 
     const firstName = screen.getByRole('textbox', {name: /first name/i});
     expect(firstName).toBeVisible();
@@ -62,7 +62,7 @@ describe('SQFormDialogStepper Tests', () => {
     const nextButton = screen.getByRole('button', {name: 'Next'});
     userEvent.click(nextButton);
 
-    await screen.findByText(/account id/i);
+    expect(await screen.findByText(/account id/i)).toBeInTheDocument();
 
     expect(firstName).not.toBeVisible();
 
@@ -72,27 +72,27 @@ describe('SQFormDialogStepper Tests', () => {
 
   it('should go back to previous step', async () => {
     render(<SQFormDialogStepper isOpen={true} />);
-    await screen.findByText('Default');
+    expect(await screen.findByText('Default')).toBeInTheDocument();
 
     expect(screen.getByLabelText(/first name/i)).toBeVisible();
 
     const nextButton = screen.getByRole('button', {name: 'Next'});
     userEvent.click(nextButton);
 
-    await screen.findByLabelText(/account id/i);
+    expect(await screen.findByLabelText(/account id/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/first name/i)).not.toBeInTheDocument();
 
     const personalData = screen.getByRole('button', {name: /personal data/i});
     userEvent.click(personalData);
 
-    await screen.findByLabelText(/first name/i);
+    expect(await screen.findByLabelText(/first name/i)).toBeInTheDocument();
 
     expect(screen.getByLabelText(/first name/i)).toBeVisible();
   });
 
   it('should submit all step values', async () => {
     render(<SQFormDialogStepper isOpen={true} />);
-    await screen.findByText('Default');
+    expect(await screen.findByText('Default')).toBeInTheDocument();
 
     const firstName = screen.getByLabelText(/first name/i);
     userEvent.type(firstName, 'First');
@@ -102,7 +102,7 @@ describe('SQFormDialogStepper Tests', () => {
 
     const nextButton = screen.getByRole('button', {name: 'Next'});
     userEvent.click(nextButton);
-    await screen.findByLabelText(/account id/i);
+    expect(await screen.findByLabelText(/account id/i)).toBeInTheDocument();
 
     const newPatient = screen.getByRole('button', {name: '- -'});
     userEvent.click(newPatient);
@@ -134,7 +134,7 @@ describe('SQFormDialogStepper Tests', () => {
   describe('Validation Tests', () => {
     it('should disable next button until all required fields are valid', async () => {
       render(<SQFormDialogStepperWithValidation isOpen={true} />);
-      await screen.findByText('With Validation');
+      expect(await screen.findByText('With Validation')).toBeInTheDocument();
 
       const nextButton = screen.getByRole('button', {name: 'Next'});
       expect(nextButton).toBeDisabled();
