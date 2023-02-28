@@ -46,6 +46,44 @@ export type SQFormDatePickerProps = BaseFieldProps & {
   isCalendarOnly?: boolean;
 };
 
+const sqFormDatePickerStyles = {
+  '& .MuiInputBase-root, & .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(Mui-disabled)':
+    {
+      '& .MuiButtonBase-root.MuiIconButton-root': {
+        color: 'var(--color-darkTeal)',
+      },
+    },
+  '& .MuiInputBase-input': {
+    fontSize: '14px',
+    fontWeight: 'var(--font-weight-semibold)',
+  },
+  '& .MuiFormHelperText-root.Mui-error': {
+    '& .MuiSvgIcon-root.MuiSvgIcon-colorError': {
+      color: 'var(--color-textWarningYellow)',
+    },
+    '& .MuiTypography-root.MuiTypography-body1': {
+      color: 'var(--color-textWarningYellow)',
+    },
+  },
+  '& .MuiInputLabel-root.Mui-error': {
+    color: 'var(--color-textWarningYellow)',
+  },
+  '& .MuiFormHelperText-root': {
+    '& .MuiSvgIcon-root': {
+      color: 'var(--color-textSuccessGreen)',
+    },
+  },
+  '& .MuiInput-root:before': {
+    borderColor: 'var(--color-stone)',
+  },
+  '& .MuiInput-root.Mui-error:before': {
+    borderBottomColor: 'var(--color-textWarningYellow)',
+  },
+  '& .MuiInput-root.Mui-error:after': {
+    borderBottomColor: 'var(--color-textWarningYellow)',
+  },
+};
+
 function SQFormDatePicker({
   name,
   label,
@@ -123,14 +161,7 @@ function SQFormDatePicker({
                     ? toggleCalendar
                     : handleClickAway
                 }
-                sx={{
-                  '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
-                    {
-                      '& .MuiIconButton-root': {
-                        color: 'var(--color-teal)',
-                      },
-                    },
-                }}
+                sx={sqFormDatePickerStyles}
               />
             );
           }}
