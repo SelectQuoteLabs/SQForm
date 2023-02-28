@@ -26,7 +26,7 @@
     "docs": "cd SQFormDocs && npm start",
     "format": "npx prettier --write '{pages,src,stories}/**/*.{js,ts,tsx}'",
     "format.ci": "npx prettier --check './{pages,src,stories}/**/*.{js,ts,tsx}'",
-    "lint": "eslint --ext .js,.ts,.tsx ./{src,stories} --max-warnings 0",
+    "lint": "eslint './{src,stories}/**/*.{js,ts,tsx}' --max-warnings 0",
     "lint.fix": "eslint --ext .js,.ts,.tsx {./src,./stories} --fix",
     "lint.staged": "lint-staged",
     "nuke-everything": "rimraf ./dist && rimraf ./node_modules && rm -f package-lock.json",

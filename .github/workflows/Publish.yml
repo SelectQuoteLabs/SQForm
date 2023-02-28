@@ -16,7 +16,7 @@ jobs:
       - name: Node Setup
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '14'
+          node-version: '16'
       - run: npm ci
       - run: npm run lint
       - run: npm run build
