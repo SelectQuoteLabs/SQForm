@@ -110,3 +110,6 @@ dist
 
 # TS Declaration files
 .dts
+
+# Mac metadata file
+.ds_store
