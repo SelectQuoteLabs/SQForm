@@ -1,3 +1,10 @@
+## [10.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.4.1...v10.5.0) (2023-03-01)
+
+
+### Features
+
+* 🎸 Allow on reset callbacks ([c70ff1d](https://github.com/SelectQuoteLabs/SQForm/commit/c70ff1d9bf0cf44cf85294029662d03a0f94e896)), closes [#819](https://github.com/SelectQuoteLabs/SQForm/issues/819)
+
 ### [10.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v10.4.0...v10.4.1) (2023-02-21)
 
 
