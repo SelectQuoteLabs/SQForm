@@ -54,6 +54,9 @@ function SQFormMaskedReadOnlyField({
         ...InputProps,
         placeholder,
         inputComponent: TextFieldMask,
+        sx: {
+          fontWeight: 600,
+        },
       }}
       inputProps={{
         ...inputProps,
