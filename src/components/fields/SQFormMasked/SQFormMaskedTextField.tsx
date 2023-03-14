@@ -77,19 +77,15 @@ function SQFormMaskedTextField({
       InputProps={{
         ...InputProps,
         inputComponent: TextFieldMask,
+        sx: {
+          fontWeight: 'var(--font-weight-semibold)',
+        },
       }}
       inputProps={{
         ...inputProps,
         mask,
       }}
-      muiFieldProps={{
-        sx: {
-          '& .MuiInput-input': {
-            fontWeight: 'var(--font-weight-semibold)',
-          },
-        },
-        ...muiFieldProps,
-      }}
+      muiFieldProps={muiFieldProps}
     />
   );
 }
