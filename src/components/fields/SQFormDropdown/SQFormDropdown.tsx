@@ -137,7 +137,7 @@ function SQFormDropdown({
           {label}
         </InputLabel>
         <Select
-          sx={classes.selectHeight}
+          sx={(classes.selectHeight, {fontWeight: 600})}
           displayEmpty={true}
           input={<Input name={name} />}
           value={field.value}
@@ -153,6 +153,7 @@ function SQFormDropdown({
                 key={`${name}_${option.value}`}
                 disabled={option.isDisabled}
                 value={option.value}
+                sx={{fontWeight: 600}}
               >
                 {option.label}
               </MenuItem>

@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import * as markdown from '../notes/SQFormDropdown.md';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
@@ -56,6 +57,10 @@ const defaultArgs = {
   },
 };
 
+const validationSchema = Yup.object({
+  [defaultArgs.name]: Yup.string().required('Required'),
+});
+
 const Template: DropdownStoryType = (args) => {
   const {sqFormProps, schema, size, ...dropdownProps} = args;
   return (
@@ -73,6 +78,15 @@ const Template: DropdownStoryType = (args) => {
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
-Default.storyName = 'SQFormDropdown';
+Default.storyName = 'Default';
+
+export const WithValidation = Template.bind({});
+WithValidation.args = {
+  ...defaultArgs,
+  schema: validationSchema,
+};
+WithValidation.parameters = {
+  controls: {exclude: 'schema'},
+};
 
 export default meta;
