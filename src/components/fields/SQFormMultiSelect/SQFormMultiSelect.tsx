@@ -108,6 +108,7 @@ const classes = {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
+    fontWeight: 'var(--font-weight-semibold)',
   },
 };
 
