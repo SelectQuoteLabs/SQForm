@@ -47,6 +47,7 @@ const classes = {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
+    fontWeight: 600,
   },
 };
 
@@ -137,7 +138,7 @@ function SQFormDropdown({
           {label}
         </InputLabel>
         <Select
-          sx={(classes.selectHeight, {fontWeight: 600})}
+          sx={classes.selectHeight}
           displayEmpty={true}
           input={<Input name={name} />}
           value={field.value}
