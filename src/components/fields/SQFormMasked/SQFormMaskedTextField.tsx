@@ -77,6 +77,9 @@ function SQFormMaskedTextField({
       InputProps={{
         ...InputProps,
         inputComponent: TextFieldMask,
+        sx: {
+          fontWeight: 'var(--font-weight-semibold)',
+        },
       }}
       inputProps={{
         ...inputProps,
