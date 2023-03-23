@@ -164,7 +164,7 @@ const ListboxVirtualizedComponent = React.forwardRef<HTMLDivElement>(
           >
             <VariableSizeList
               style={{
-                overflow: 'hidden',
+                overflowX: 'hidden',
                 margin: 0,
                 padding: 0,
               }}
