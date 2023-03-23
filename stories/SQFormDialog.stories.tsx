@@ -6,6 +6,7 @@ import {
   SQFormTextField,
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
+  SQFormAutocomplete,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
@@ -44,7 +45,7 @@ const alignItems = 'center';
 const spacing: GridSpacing = 2;
 const defaultArgs = {
   title: 'Default',
-  initialValues: {hello: ''},
+  initialValues: {hello: '', autoComplete: ''},
   onSave: console.log,
   muiGridProps: {
     spacing,
@@ -56,6 +57,31 @@ const defaultArgs = {
   showSecondaryButton: true,
   isOpen: false,
 };
+
+function random(length: number) {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+
+  for (let i = 0; i < length; i += 1) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  return result;
+}
+
+const MOCK_AUTOCOMPLETE_OPTIONS = Array.from(new Array(10000))
+  .map(() => {
+    const randomValue = random(10 + Math.ceil(Math.random() * 20));
+    return {
+      label: randomValue,
+      value: randomValue,
+      isDisabled: Math.random() > 0.8,
+    };
+  })
+  .sort((a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase()));
+
+console.log('MOCK_AUTOCOMPLETE_OPTIONS', MOCK_AUTOCOMPLETE_OPTIONS);
 
 const Template: SQFormDialogStory = (args): React.ReactElement => {
   return (
@@ -97,6 +123,15 @@ export const WithAutoFocus: SQFormDialogStory = (args) => {
           label="Hello"
           muiFieldProps={{autoFocus: true}}
         />
+        <SQFormAutocomplete
+          name="autoComplete"
+          label="Auto Complete"
+          size={12}
+          onInputChange={() => {}}
+          lockWidthToField={false}
+        >
+          {MOCK_AUTOCOMPLETE_OPTIONS}
+        </SQFormAutocomplete>
       </SQFormDialog>
     </>
   );
