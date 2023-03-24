@@ -221,6 +221,7 @@ function SQFormMultiSelect({
         disabled={isDisabled}
         required={isFieldRequired}
         fullWidth={true}
+        variant="standard"
       >
         <InputLabel id={labelID}>{label}</InputLabel>
         <Tooltip
