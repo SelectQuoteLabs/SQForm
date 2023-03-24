@@ -125,7 +125,7 @@ function SQFormDropdown({
   };
 
   return (
-    <Grid item sm={size} sx={isDisabled ? {paddingBottom: '21px'} : null}>
+    <Grid item sm={size}>
       <FormControl
         error={isFieldError}
         required={isFieldRequired}
@@ -159,9 +159,11 @@ function SQFormDropdown({
             );
           })}
         </Select>
-        {!isDisabled && displayHelperText && (
-          <FormHelperText>{HelperTextComponent}</FormHelperText>
-        )}
+        {
+          <FormHelperText>
+            {!isDisabled && displayHelperText ? HelperTextComponent : null}
+          </FormHelperText>
+        }
       </FormControl>
     </Grid>
   );
