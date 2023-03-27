@@ -1,6 +1,8 @@
 # SQFormButtons
 
-Button components used in submission and reset of our forms.
+Button component used in submission and reset of our forms.
+<br />
+
 ![SQForm Button Example](../../../images/SQFormButtonExample.png)
 
 <br />
@@ -16,8 +18,11 @@ return (
 );
 ```
 
-See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformbutton--default) for more examples of the 'submit' button
-See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformresetbuttonwithconfirmation--default) for examples of the 'reset' button
+See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformbutton--default) for more examples of the 'submit' button.
+
+<br />
+
+See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformresetbuttonwithconfirmation--default) for examples of the 'reset' button.
 
 <br />
 
