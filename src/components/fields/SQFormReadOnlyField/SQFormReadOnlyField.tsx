@@ -12,7 +12,7 @@ export type SQFormReadOnlyFieldProps = BaseFieldProps & {
 };
 
 const styles = {
-  '& .MuiInput-root:before, & .MuiInput-root:after, & .MuiInput-underline:hover:not(.Mui-disabled):before':
+  '& .MuiInput-root:before, & .MuiInput-root:after, & .MuiInput-underline:hover:not(.Mui-disabled):not(.Mui-multiline):before':
     {
       borderBottom: '0px',
     },
