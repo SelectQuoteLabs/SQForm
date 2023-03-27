@@ -19,7 +19,6 @@ return (
 ```
 
 See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformbutton--default) for more examples of the 'submit' button.
-
 <br />
 
 See [Storybook](https://master--5f4431386ea00a00220d495c.chromatic.com/?path=/story/components-sqformresetbuttonwithconfirmation--default) for examples of the 'reset' button.
