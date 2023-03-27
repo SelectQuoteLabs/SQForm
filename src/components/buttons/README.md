@@ -1,4 +1,4 @@
-# SQFormButtons
+# SQFormButton
 
 Button component used in submission and reset of our forms.
 <br />
