@@ -11,6 +11,16 @@ export type SQFormReadOnlyFieldProps = BaseFieldProps & {
   inputProps?: TextFieldProps['inputProps'];
 };
 
+const styles = {
+  '& .MuiInput-root:before, & .MuiInput-root:after, & .MuiInput-underline:hover:not(.Mui-disabled):before':
+    {
+      borderBottom: '0px',
+    },
+  '& .MuiInput-input': {
+    fontWeight: 'var(--font-weight-semibold)',
+  },
+};
+
 function SQFormReadOnlyField({
   label,
   name,
@@ -46,6 +56,7 @@ function SQFormReadOnlyField({
         inputProps={inputProps}
         style={{marginBottom: 21}}
         {...muiFieldProps}
+        sx={styles}
       />
     </Grid>
   );
