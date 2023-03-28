@@ -11,11 +11,12 @@ export type SQFormReadOnlyFieldProps = BaseFieldProps & {
   inputProps?: TextFieldProps['inputProps'];
 };
 
+const readOnlyInputProps = {
+  disableUnderline: true,
+  readOnly: true,
+};
+
 const styles = {
-  '& .MuiInput-root:before, & .MuiInput-root:after, & .MuiInput-underline:hover:not(.Mui-disabled):not(.Mui-multiline):before':
-    {
-      borderBottom: '0px',
-    },
   '& .MuiInput-input': {
     fontWeight: 'var(--font-weight-semibold)',
   },
@@ -51,12 +52,12 @@ function SQFormReadOnlyField({
         InputLabelProps={{shrink: true}}
         InputProps={{
           ...InputProps,
-          readOnly: true,
+          ...readOnlyInputProps,
         }}
         inputProps={inputProps}
         style={{marginBottom: 21}}
-        {...muiFieldProps}
         sx={styles}
+        {...muiFieldProps}
       />
     </Grid>
   );
