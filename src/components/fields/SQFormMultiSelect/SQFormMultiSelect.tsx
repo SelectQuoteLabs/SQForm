@@ -108,6 +108,7 @@ const classes = {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
+    fontWeight: 'var(--font-weight-semibold)',
   },
 };
 
@@ -220,6 +221,7 @@ function SQFormMultiSelect({
         disabled={isDisabled}
         required={isFieldRequired}
         fullWidth={true}
+        variant="standard"
       >
         <InputLabel id={labelID}>{label}</InputLabel>
         <Tooltip
