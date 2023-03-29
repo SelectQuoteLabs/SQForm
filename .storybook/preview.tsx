@@ -57,6 +57,11 @@ const withCenteredComponents = (storyFn) => {
 export const decorators = [withTheme, withCenteredComponents];
 
 export const parameters = {
+  // See this comment for why we deem this necessary
+  // https://github.com/storybookjs/storybook/issues/17025#issuecomment-1055654634
+  docs: {
+    source: {type: 'code'},
+  },
   options: {
     storySort: {
       order: ['Welcome', ['Intro']],

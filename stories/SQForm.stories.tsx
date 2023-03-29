@@ -276,6 +276,7 @@ export const FormWithValidation = (): JSX.Element => {
           name="tenThousandOptions"
           label="Ten Thousand Options"
           size={6}
+          lockWidthToField={true}
         >
           {MOCK_AUTOCOMPLETE_OPTIONS}
         </SQFormAutocomplete>

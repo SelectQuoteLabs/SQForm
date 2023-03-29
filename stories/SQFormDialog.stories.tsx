@@ -6,14 +6,18 @@ import {
   SQFormTextField,
   SQFormDateTimePicker,
   SQFormDatePickerWithCalendarInputOnly,
+  SQFormAutocomplete,
 } from '../src';
 import {createDocsPage} from './utils/createDocsPage';
-import type {Story, Meta} from '@storybook/react';
+import type {Story, ComponentStory} from '@storybook/react';
 import type {GridSpacing} from '@mui/material';
 import type {FormikContextType} from 'formik';
 import type {SQFormDialogProps} from 'components/SQFormDialog/SQFormDialog';
 
-type DefaultArgsValues = {hello: string};
+type DefaultArgsValues = {
+  hello: string;
+  autocompleteChildren?: string | number;
+};
 type SQFormDialogStory = Story<SQFormDialogProps<DefaultArgsValues>>;
 
 type WithDatePickersValues = {
@@ -25,7 +29,10 @@ type SQFormDialogWithDatePickersStory = Story<
   SQFormDialogProps<WithDatePickersValues>
 >;
 
-const meta: Meta = {
+const alignItems = 'center';
+const spacing: GridSpacing = 2;
+
+export default {
   title: 'Forms/SQFormDialog',
   component: SQFormDialog,
   argTypes: {
@@ -35,29 +42,53 @@ const meta: Meta = {
     children: {table: {disable: true}},
     validationSchema: {table: {disable: true}},
   },
+  args: {
+    title: 'Default',
+    initialValues: {hello: '', autoComplete: ''},
+    onSave: console.log,
+    muiGridProps: {
+      spacing,
+      sx: {
+        alignItems,
+      },
+    },
+    shouldDisplaySaveButton: true,
+    showSecondaryButton: true,
+    isOpen: false,
+  },
   parameters: {
     docs: {page: createDocsPage({showStories: false})},
   },
 };
 
-const alignItems = 'center';
-const spacing: GridSpacing = 2;
-const defaultArgs = {
-  title: 'Default',
-  initialValues: {hello: ''},
-  onSave: console.log,
-  muiGridProps: {
-    spacing,
-    sx: {
-      alignItems,
-    },
-  },
-  shouldDisplaySaveButton: true,
-  showSecondaryButton: true,
-  isOpen: false,
-};
+const Template: ComponentStory<typeof SQFormDialog> = (
+  args
+): React.ReactElement => {
+  function random(length: number) {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
 
-const Template: SQFormDialogStory = (args): React.ReactElement => {
+    for (let i = 0; i < length; i += 1) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+
+    return result;
+  }
+
+  const MOCK_AUTOCOMPLETE_OPTIONS = Array.from(new Array(10000))
+    .map(() => {
+      const randomValue = random(10 + Math.ceil(Math.random() * 20));
+      return {
+        label: randomValue,
+        value: randomValue,
+        isDisabled: Math.random() > 0.8,
+      };
+    })
+    .sort((a, b) => a.label.toUpperCase().localeCompare(b.label.toUpperCase()));
+
   return (
     <>
       <h1>
@@ -65,18 +96,22 @@ const Template: SQFormDialogStory = (args): React.ReactElement => {
       </h1>
 
       <SQFormDialog {...args}>
-        <SQFormTextField name="hello" label="Hello" />
+        <SQFormTextField name="hello" label="Hello" size={12} />
+        <SQFormAutocomplete
+          name="autocomplete"
+          label="Auto Complete"
+          size={12}
+          children={MOCK_AUTOCOMPLETE_OPTIONS}
+        />
       </SQFormDialog>
     </>
   );
 };
 
 export const Default = Template.bind({});
-Default.args = defaultArgs;
 
 export const WithValidation = Template.bind({});
 WithValidation.args = {
-  ...defaultArgs,
   title: 'With Validation',
   validationSchema: Yup.object({
     hello: Yup.string().required(),
@@ -102,7 +137,6 @@ export const WithAutoFocus: SQFormDialogStory = (args) => {
   );
 };
 WithAutoFocus.args = {
-  ...defaultArgs,
   title: 'With Auto Focus',
 };
 
@@ -125,7 +159,7 @@ export const WithDatePickers: SQFormDialogWithDatePickersStory = (args) => {
   );
 };
 WithDatePickers.args = {
-  ...defaultArgs,
+  //...defaultArgs,
   title: 'With Date Pickers',
   initialValues: {
     datePicker: new Date(),
@@ -173,7 +207,6 @@ export const WithOnBlurValidation: SQFormDialogWithDatePickersStory = (
 };
 
 WithOnBlurValidation.args = {
-  ...defaultArgs,
   title: 'With Date Pickers',
   initialValues: {
     datePicker: new Date(),
@@ -237,7 +270,6 @@ const handleTertiaryClick = (
 };
 
 WithTertiaryButton.args = {
-  ...defaultArgs,
   initialValues: {
     hello: '',
   },
@@ -248,9 +280,9 @@ WithTertiaryButton.args = {
 };
 
 WithTertiaryButtonDefinedVariant.args = {
-  ...defaultArgs,
-  ...WithTertiaryButton.args,
+  title: 'With Tertiary Button',
+  tertiaryStatus: 'IS_ENABLED',
+  tertiaryButtonText: 'Tertiary',
+  onTertiaryClick: handleTertiaryClick,
   tertiaryButtonVariant: 'contained',
 };
-
-export default meta;
