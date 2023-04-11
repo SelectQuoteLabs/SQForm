@@ -20,6 +20,9 @@ const styles = {
   '& .MuiInput-input': {
     fontWeight: 'var(--font-weight-semibold)',
   },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'var(--color-jetBlack)',
+  },
 };
 
 function SQFormReadOnlyField({
