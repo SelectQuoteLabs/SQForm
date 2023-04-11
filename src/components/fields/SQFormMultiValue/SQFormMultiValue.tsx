@@ -279,6 +279,15 @@ function SQFormMultiValue({
           ...params.InputLabelProps,
           shrink: true,
         }}
+        error={isFieldError}
+        sx={{
+          '& .MuiInput-root.Mui-error:after': {
+            borderBottomColor: 'var(--color-textWarningYellow)',
+          },
+          '& .MuiInputLabel-root.Mui-error': {
+            color: 'var(--color-textWarningYellow)',
+          },
+        }}
         inputProps={{
           ...params.inputProps,
           disabled: isDisabled,
@@ -313,6 +322,12 @@ function SQFormMultiValue({
               <Chip
                 variant="outlined"
                 label={tagOption.label}
+                sx={{
+                  '& .MuiChip-label': {
+                    fontWeight: 'var(--font-weight-semibold)',
+                    fontSize: '14px',
+                  },
+                }}
                 {...getTagProps({index})}
               />
             );

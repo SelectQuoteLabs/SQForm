@@ -140,9 +140,16 @@ export function useForm<TValue, TChangeEvent>({
     if (isFieldError) {
       return (
         <>
-          <WarningIcon color="error" sx={WARNING_ICON_STYLES} />
+          <WarningIcon
+            color="error"
+            sx={{
+              color: 'var(--color-textWarningYellow)',
+              ...WARNING_ICON_STYLES,
+            }}
+          />
           <Typography
             component="span"
+            color="var(--color-textWarningYellow)"
             sx={(theme: Theme) => theme.typography.helper}
           >
             {errorMessage}
@@ -166,7 +173,7 @@ export function useForm<TValue, TChangeEvent>({
     if (isFulfilled) {
       return (
         <VerifiedIcon
-          sx={{color: 'var(--color-palmLeaf)', ...SUCCESS_ICON_STYLES}}
+          sx={{color: 'var(--color-textSuccessGreen)', ...SUCCESS_ICON_STYLES}}
         />
       );
     }
