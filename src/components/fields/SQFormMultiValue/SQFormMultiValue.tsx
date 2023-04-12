@@ -325,7 +325,7 @@ function SQFormMultiValue({
                 sx={{
                   '& .MuiChip-label': {
                     fontWeight: 'var(--font-weight-semibold)',
-                    fontSize: '14px',
+                    fontSize: 'var(--size-input)',
                   },
                 }}
                 {...getTagProps({index})}
