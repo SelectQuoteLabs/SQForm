@@ -159,9 +159,11 @@ function SQFormDropdown({
             );
           })}
         </Select>
-        {!isDisabled && displayHelperText && (
-          <FormHelperText>{HelperTextComponent}</FormHelperText>
-        )}
+        {
+          <FormHelperText>
+            {!isDisabled && displayHelperText ? HelperTextComponent : null}
+          </FormHelperText>
+        }
       </FormControl>
     </Grid>
   );
