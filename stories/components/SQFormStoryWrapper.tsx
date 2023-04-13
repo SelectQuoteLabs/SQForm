@@ -48,8 +48,8 @@ function Form({
 }: SQFormStoryWrapperProps): React.ReactElement {
   const [value, setValue] = React.useState({});
 
-  const [snackbarStateContext, snackbarDispatchContext] = useSnackbar();
-  const {closeSnackbar, snackbar} = snackbarDispatchContext || {};
+  const [_snackbarStateContext, snackbarDispatchContext] = useSnackbar();
+  const {snackbar} = snackbarDispatchContext || {};
   const handleSubmit = (values: FormikValues) => {
     setValue(values);
   };

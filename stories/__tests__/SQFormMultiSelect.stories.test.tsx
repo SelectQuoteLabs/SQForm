@@ -140,7 +140,7 @@ describe('Tests for SQFormMultiSelect', () => {
   it('should not display "required" helper text if field is not required', async () => {
     render(<SQFormMultiSelect size="auto" />);
 
-    await screen.findByText('Friends');
+    expect(await screen.findByText('Friends')).toBeInTheDocument();
 
     const required = screen.queryByText(/required/i);
     expect(required).not.toBeInTheDocument();

@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 import React from 'react';
-import {Meta} from '@storybook/react';
 import getSizeProp from './utils/getSizeProp';
 import {createDocsPage} from './utils/createDocsPage';
 import {SQFormDatePickerWithCalendarInputOnly as SQFormDatePickerWithCalendarInputOnlyComponent} from '../src';
 import {SQFormStoryWrapper} from './components/SQFormStoryWrapper';
+import type {Meta} from '@storybook/react';
 import type {Moment} from 'moment';
 import type {CustomStory} from './types/storyHelperTypes';
 import type {SQFormDatePickerWithCalendarInputOnlyProps} from 'components/fields/SQFormDatePicker/SQFormDatePickerWithCalendarInputOnly';
