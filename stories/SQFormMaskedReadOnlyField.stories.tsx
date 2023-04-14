@@ -14,6 +14,7 @@ import type {SQFormMaskedReadOnlyFieldProps} from '../src/components/fields/SQFo
 type SQFormMaskedReadOnlyFieldStory = CustomStory<
   SQFormMaskedReadOnlyFieldProps & {
     exampleMasks: Mask;
+    initialValue?: string;
   }
 >;
 
@@ -37,11 +38,14 @@ const defaultArgs = {
   name: 'maskedReadOnlyField',
 };
 
-const Template: SQFormMaskedReadOnlyFieldStory = (args) => {
+const Template: SQFormMaskedReadOnlyFieldStory = ({
+  initialValue = '',
+  ...args
+}) => {
   const {schema, sqFormProps, exampleMasks, ...rest} = args;
   return (
     <SQFormStoryWrapper
-      initialValues={{[defaultArgs.name]: '8168675309'}}
+      initialValues={{[defaultArgs.name]: initialValue}}
       validationSchema={schema}
       showSubmit={false}
       {...sqFormProps}
@@ -57,7 +61,7 @@ const Template: SQFormMaskedReadOnlyFieldStory = (args) => {
 
 export const Default = Template.bind({});
 Default.storyName = 'SQFormMaskedTextField';
-Default.args = defaultArgs;
+Default.args = {...defaultArgs, initialValue: '8888888888'};
 Default.argTypes = {
   exampleMasks: {
     name: 'Example masks',
@@ -68,6 +72,9 @@ Default.argTypes = {
     },
     defaultValue: 'phone',
   },
+};
+Default.parameters = {
+  controls: {exclude: 'initialValue'},
 };
 
 export default meta;
