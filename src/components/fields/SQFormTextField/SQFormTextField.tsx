@@ -13,6 +13,8 @@ export type SQFormTextFieldProps = BaseFieldProps & {
   isDisabled?: boolean;
   /** Whether or not to show the helper text */
   displayHelperText?: boolean;
+  /** Used to display informational Text under the input field same like warning text */
+  informationalText?: string;
   /** Custom onBlur event callback */
   onBlur?: TextFieldProps['onBlur'];
   /** Custom onChange event callback */
@@ -45,6 +47,7 @@ function SQFormTextField({
   startAdornment,
   endAdornment,
   type = 'text',
+  informationalText = '',
   InputProps,
   inputProps = {},
   maxCharacters,
@@ -62,6 +65,7 @@ function SQFormTextField({
     name,
     onBlur,
     onChange,
+    informationalText,
   });
 
   const [valueLength, setValueLength] = React.useState(() => {
@@ -113,7 +117,22 @@ function SQFormTextField({
           maxLength: maxCharacters,
           ...inputProps,
         }}
-        FormHelperTextProps={{error: isFieldError}}
+        FormHelperTextProps={{
+          error: isFieldError,
+          sx: {
+            '&.MuiFormHelperText-root': {
+              color: 'var(--color-slate)',
+            },
+            '&.Mui-focused': {
+              color: !isFieldRequired
+                ? 'var(--color-textInfoBlue)'
+                : 'var(--color-slate)',
+            },
+            '&.Mui-error': {
+              color: 'var(--color-spanishOrange)',
+            },
+          },
+        }}
         name={name}
         type={type}
         label={labelText}

@@ -70,7 +70,11 @@ const Template: DropdownStoryType = (args) => {
         validationSchema={schema}
         {...sqFormProps}
       >
-        <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
+        <SQFormDropdownComponent
+          {...dropdownProps}
+          size={getSizeProp(size)}
+          informationalText="Helper Text Here"
+        />
       </SQFormStoryWrapper>
     </div>
   );

@@ -5,6 +5,7 @@ import {Typography} from '@mui/material';
 import {
   NewReleases as WarningIcon,
   VerifiedUser as VerifiedIcon,
+  Info as InfoIcon,
 } from '@mui/icons-material';
 import type {Theme} from '@mui/material';
 import type {FieldHelperProps, FieldInputProps, FieldMetaProps} from 'formik';
@@ -16,6 +17,7 @@ type ChangeHandler<TChangeEvent> = (
 
 type UseFormParam<TChangeEvent> = {
   name: string;
+  informationalText: string;
   onBlur?: React.FocusEventHandler;
   onChange?: ChangeHandler<TChangeEvent>;
 };
@@ -91,6 +93,7 @@ export function useForm<TValue, TChangeEvent>({
   name,
   onBlur,
   onChange,
+  informationalText,
 }: UseFormParam<TChangeEvent>): UseFormReturn<TValue, TChangeEvent> {
   _handleError(name);
 
@@ -119,6 +122,7 @@ export function useForm<TValue, TChangeEvent>({
   const isFieldRequired = getFieldStatus() === 'REQUIRED';
   const isFieldError = getFieldStatus() === 'ERROR';
   const isFulfilled = getFieldStatus() === 'USER_FULFILLED';
+  const isFieldInfo = getFieldStatus() === 'FULFILLED';
 
   const handleChange: ChangeHandler<TChangeEvent> = React.useCallback(
     (event) => {
@@ -170,8 +174,28 @@ export function useForm<TValue, TChangeEvent>({
         />
       );
     }
+    if (isFieldInfo && informationalText) {
+      return (
+        <>
+          <InfoIcon sx={SUCCESS_ICON_STYLES} />
+          <Typography
+            component="span"
+            sx={(theme: Theme) => theme.typography.helper}
+          >
+            {informationalText}
+          </Typography>
+        </>
+      );
+    }
     return ' '; // return something so UI space always exists
-  }, [isFieldError, isFieldRequired, isFulfilled, errorMessage]);
+  }, [
+    isFieldError,
+    isFieldRequired,
+    isFulfilled,
+    isFieldInfo,
+    informationalText,
+    errorMessage,
+  ]);
 
   return {
     formikField: {field, meta, helpers},

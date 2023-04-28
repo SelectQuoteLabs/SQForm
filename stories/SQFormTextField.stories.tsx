@@ -45,7 +45,11 @@ const Template: SQFormTextFieldStoryType = (args) => {
       initialValues={{[defaultArgs.name]: ''}}
       {...SQFormProps}
     >
-      <SQFormTextFieldComponent {...rest} size={getSizeProp(size)} />
+      <SQFormTextFieldComponent
+        {...rest}
+        size={getSizeProp(size)}
+        informationalText="Helper Text Here"
+      />
     </SQFormStoryWrapper>
   );
 };
