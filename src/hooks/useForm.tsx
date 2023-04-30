@@ -17,7 +17,7 @@ type ChangeHandler<TChangeEvent> = (
 
 type UseFormParam<TChangeEvent> = {
   name: string;
-  informationalText: string;
+  informationalText?: string;
   onBlur?: React.FocusEventHandler;
   onChange?: ChangeHandler<TChangeEvent>;
 };
