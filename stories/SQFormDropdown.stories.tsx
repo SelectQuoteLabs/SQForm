@@ -48,8 +48,14 @@ const MOCK_STATE_OPTIONS = [
   {label: 'Missouri', value: 'MO'},
 ];
 
+const questions = [
+  'What benefits do you use more often?',
+  "Are there benefits that you don't use today, but would like to learn if you have them?",
+  'Are there any quesions that you have about your plan?',
+];
+
 const defaultArgs = {
-  label: 'State',
+  label: 'Is there anything else you would like your plan to do for you?',
   name: 'state',
   children: MOCK_STATE_OPTIONS,
   sqFormProps: {
@@ -70,7 +76,11 @@ const Template: DropdownStoryType = (args) => {
         validationSchema={schema}
         {...sqFormProps}
       >
-        <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
+        <SQFormDropdownComponent
+          {...dropdownProps}
+          size={getSizeProp(size)}
+          questions={questions}
+        />
       </SQFormStoryWrapper>
     </div>
   );
