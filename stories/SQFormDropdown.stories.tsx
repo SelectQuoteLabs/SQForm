@@ -21,6 +21,12 @@ type DropdownStoryType = Story<
   }
 >;
 
+const questions = [
+  'What benefits do you use most often?',
+  "Are there benefits that you don't use today, but would like to learn if you have them?",
+  'Are there any questions that you have about your plan?',
+];
+
 const meta: Meta = {
   title: 'Components/SQFormDropdown',
   component: SQFormDropdownComponent,
@@ -48,7 +54,7 @@ const MOCK_STATE_OPTIONS = [
 ];
 
 const defaultArgs = {
-  label: 'State',
+  label: 'Is there anything else you would like your plan to do for you?',
   name: 'state',
   children: MOCK_STATE_OPTIONS,
   sqFormProps: {
@@ -65,7 +71,11 @@ const Template: DropdownStoryType = (args) => {
         validationSchema={schema}
         {...sqFormProps}
       >
-        <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
+        <SQFormDropdownComponent
+          {...dropdownProps}
+          size={getSizeProp(size)}
+          questions={questions}
+        />
       </SQFormStoryWrapper>
     </div>
   );
