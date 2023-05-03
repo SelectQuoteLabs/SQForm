@@ -70,11 +70,7 @@ const Template: DropdownStoryType = (args) => {
         validationSchema={schema}
         {...sqFormProps}
       >
-        <SQFormDropdownComponent
-          {...dropdownProps}
-          size={getSizeProp(size)}
-          informationalText="Helper Text Here"
-        />
+        <SQFormDropdownComponent {...dropdownProps} size={getSizeProp(size)} />
       </SQFormStoryWrapper>
     </div>
   );
@@ -91,6 +87,12 @@ WithValidation.args = {
 };
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
+};
+
+export const WithInformationalText = Template.bind({});
+WithInformationalText.args = {
+  ...defaultArgs,
+  informationalText: 'Helper Text Here',
 };
 
 export default meta;

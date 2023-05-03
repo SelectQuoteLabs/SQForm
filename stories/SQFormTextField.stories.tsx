@@ -45,11 +45,7 @@ const Template: SQFormTextFieldStoryType = (args) => {
       initialValues={{[defaultArgs.name]: ''}}
       {...SQFormProps}
     >
-      <SQFormTextFieldComponent
-        {...rest}
-        size={getSizeProp(size)}
-        informationalText="Helper Text Here"
-      />
+      <SQFormTextFieldComponent {...rest} size={getSizeProp(size)} />
     </SQFormStoryWrapper>
   );
 };
@@ -70,4 +66,10 @@ WithValidation.args = {
 };
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
+};
+
+export const WithInformationalText = Template.bind({});
+WithInformationalText.args = {
+  ...defaultArgs,
+  informationalText: 'Helper Text Here',
 };
