@@ -57,8 +57,7 @@ const classes = {
     fontSize: 'var(--base-font-size)',
     fontWeight: 'var(--font-weight-normal)',
     whiteSpace: 'pre-line',
-    marginLeft: '25px',
-    marginTop: '20px',
+    margin: '20px 0px 16px 25px',
     lineHeight: '15px',
   },
 };
