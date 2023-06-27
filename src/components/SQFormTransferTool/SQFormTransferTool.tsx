@@ -8,8 +8,6 @@ import type {TransferProduct} from './types';
 
 export type SQFormTransferToolProps<Values extends FormikValues> = {
   initialValues: Values; // This will be removed SC3-1810
-  /** the title to display in the header of the modal */
-  title?: string;
   /** boolean to indicate if the modal should show a loading indicator */
   isLoading: boolean;
   /** That data that drives the content of the modal and it's accordions */
@@ -21,6 +19,8 @@ export type SQFormTransferToolProps<Values extends FormikValues> = {
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => void | Promise<unknown>;
+  /** the title to display in the header of the modal */
+  title?: string;
 };
 
 export default function SQFormTransferTool<Values extends FormikValues>({

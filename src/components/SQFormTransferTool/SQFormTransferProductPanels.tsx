@@ -8,7 +8,9 @@ export type SQFormTransferProductPanelsProps = {
   transferProducts: TransferProduct[];
 };
 
-function getPanel(transferProducts: TransferProduct[]): AccordionPanelType[] {
+function getPanel(
+  transferProducts: TransferProduct[]
+): AccordionPanelType[] | null {
   if (!transferProducts?.length) {
     return [];
   }
