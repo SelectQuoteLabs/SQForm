@@ -1,10 +1,10 @@
 import React from 'react';
-import SQFormDialog from 'components/SQFormDialog/SQFormDialog';
+import LoadingSpinner from '../LoadingSpinner';
+import SQFormDialog from '../SQFormDialog';
 import SQFormTransferProductPanels from './SQFormTransferProductPanels';
-import {noop} from 'utils';
+import {noop} from '../../utils';
 import type {FormikHelpers, FormikValues} from 'formik';
 import type {TransferProduct} from './types';
-import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 export type SQFormTransferToolProps<Values extends FormikValues> = {
   initialValues: Values; // This will be removed SC3-1810
