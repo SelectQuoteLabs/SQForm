@@ -10,7 +10,7 @@ export type SQFormTransferProductPanelsProps = {
 
 function getPanel(
   transferProducts: Array<TransferProduct>
-): AccordionPanelType[] | null {
+): AccordionPanelType[] {
   if (!transferProducts?.length) {
     return [];
   }

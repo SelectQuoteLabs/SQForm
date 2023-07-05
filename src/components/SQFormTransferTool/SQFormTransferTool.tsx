@@ -31,6 +31,7 @@ export default function SQFormTransferTool<Values extends FormikValues>({
   // TODO Validation: this will be internal and the consumer need not worry about it. It should be part of SC3-1810 processing each step
   // TODO Initial Values: like validation this will be hidden from the consumer as they should not need it. SC3-1810 steps
   // TODO Transfer: transfers will be handled via consumer supplied callback. SC3-1811
+  // TODO the onSave, onClose functions seem backward, after adding some more of the required functionality re-evaluate this
 
   return (
     <SQFormDialog
