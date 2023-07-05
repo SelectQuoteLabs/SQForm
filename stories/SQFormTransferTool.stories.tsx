@@ -18,7 +18,7 @@ function getMockData(
     productID: 2 + idx,
     productTag: 'Product Tag ' + idx,
     productDisplayName: 'Product Name ' + idx,
-    modalLinkText: `Transfer <division ${idx}>`,
+    modalLinkText: `Transfer to div ${idx}`, // anylonger than this and the button likely truncates
     transferLine: '7777777777',
     enabled: idx < 3,
     steps: [
