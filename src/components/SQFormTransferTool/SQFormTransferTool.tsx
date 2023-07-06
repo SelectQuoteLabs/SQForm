@@ -8,6 +8,8 @@ import type {TransferProduct} from './types';
 
 export type SQFormTransferToolProps<Values extends FormikValues> = {
   initialValues: Values; // This will be removed SC3-1810
+  /** the title to display in the header of the modal */
+  title?: string;
   /** boolean to indicate if the modal should show a loading indicator */
   isLoading: boolean;
   /** That data that drives the content of the modal and it's accordions */
@@ -27,6 +29,7 @@ export default function SQFormTransferTool<Values extends FormikValues>({
   onSave,
   transferProducts,
   initialValues,
+  title = 'Standard Transfer Modal',
 }: SQFormTransferToolProps<Values>): React.ReactElement {
   // TODO Validation: this will be internal and the consumer need not worry about it. It should be part of SC3-1810 processing each step
   // TODO Initial Values: like validation this will be hidden from the consumer as they should not need it. SC3-1810 steps
@@ -38,7 +41,7 @@ export default function SQFormTransferTool<Values extends FormikValues>({
       isOpen={isOpen}
       onSave={onSave}
       onClose={noop}
-      title="Standard Transfer Modal"
+      title={title}
       initialValues={initialValues}
       shouldDisplaySaveButton={false}
       cancelButtonText="save and close"
