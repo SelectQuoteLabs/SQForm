@@ -7,6 +7,7 @@ export {sanitizeInitialValues, serializeFormValues, MASKS} from './utils';
 
 // SQForm Components
 export {default as SQFormDialog} from './components/SQFormDialog';
+export {default as SQFormTransferTool} from './components/SQFormTransferTool';
 export {default as SQForm} from './components/SQForm';
 export {default as SQFormAsyncAutocomplete} from './components/fields/SQFormAsyncAutocomplete/SQFormAsyncAutocomplete';
 export {default as SQFormAutocomplete} from './components/fields/SQFormAutocomplete/SQFormAutocomplete';
@@ -45,6 +46,7 @@ export {default as SQFormMultiValue} from './components/fields/SQFormMultiValue/
 // Component Types
 // NOTE: Unfortunately TS doesn't support `export type *`
 export type {SQFormDialogProps} from './components/SQFormDialog/SQFormDialog';
+export type {SQFormTransferToolProps} from './components/SQFormTransferTool/SQFormTransferTool';
 export type {SQFormProps} from './components/SQForm/SQForm';
 export type {SQFormAsyncAutocompleteProps} from './components/fields/SQFormAsyncAutocomplete/SQFormAsyncAutocomplete';
 export type {SQFormAutocompleteProps} from './components/fields/SQFormAutocomplete/SQFormAutocomplete';
