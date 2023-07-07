@@ -22,3 +22,5 @@ export type TransferProduct = {
   enabled: boolean;
   steps: Array<Step>;
 };
+
+export type OnTransfer = (msg: string) => void; // TODO this type will be defined in SC3-1811

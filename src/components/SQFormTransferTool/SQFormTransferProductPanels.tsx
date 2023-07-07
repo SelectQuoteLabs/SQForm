@@ -2,20 +2,31 @@ import React from 'react';
 import {Box} from '@mui/material';
 import {Accordion} from 'scplus-shared-components';
 import type {AccordionPanelType} from 'scplus-shared-components';
-import type {TransferProduct} from './types';
+import AccordionBody from './AccordionBody';
+import type {TransferProduct, OnTransfer} from './types';
 
 export type SQFormTransferProductPanelsProps = {
   transferProducts: TransferProduct[];
+  onTransfer: OnTransfer;
 };
 
-function getPanel(transferProducts: TransferProduct[]): AccordionPanelType[] {
+function getPanel(
+  transferProducts: TransferProduct[],
+  onTransfer: OnTransfer
+): AccordionPanelType[] {
   if (!transferProducts?.length) {
     return [];
   }
 
-  return transferProducts.map(({productID, productDisplayName, enabled}) => {
+  return transferProducts.map((transferProduct) => {
+    const {productID, productDisplayName, enabled} = transferProduct;
     return {
-      body: <>TO BE IMPLEMENTED SC3-1809 (accordions) and SC3-1810 (steps)</>,
+      body: (
+        <AccordionBody
+          transferProduct={transferProduct}
+          onTransfer={onTransfer}
+        />
+      ),
       name: `${productID}`,
       title: productDisplayName,
       isDisabled: !enabled,
@@ -25,8 +36,9 @@ function getPanel(transferProducts: TransferProduct[]): AccordionPanelType[] {
 
 export default function SQFormTransferProductPanels({
   transferProducts,
+  onTransfer,
 }: SQFormTransferProductPanelsProps): React.ReactElement | null {
-  const panels = getPanel(transferProducts) ?? [];
+  const panels = getPanel(transferProducts, onTransfer) ?? [];
   if (!panels.length) {
     return null;
     // TODO ??
