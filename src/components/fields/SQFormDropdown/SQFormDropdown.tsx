@@ -23,6 +23,8 @@ export type SQFormDropdownProps = BaseFieldProps & {
   children: SQFormOption[];
   /** Whether to display empty option - - in options */
   displayEmpty?: boolean;
+  /** Used to display informational Text under the input field same like warning text */
+  informationalText?: string;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** Whether or not to show the helper text */
@@ -62,6 +64,7 @@ function SQFormDropdown({
   onChange,
   size = 'auto',
   muiFieldProps = {},
+  informationalText = '',
 }: SQFormDropdownProps): React.ReactElement {
   const {
     formikField: {field},
@@ -71,6 +74,7 @@ function SQFormDropdown({
     name,
     onBlur,
     onChange,
+    informationalText,
   });
   const labelID = label.toLowerCase();
 
@@ -162,7 +166,18 @@ function SQFormDropdown({
           })}
         </Select>
         {!isDisabled && displayHelperText && (
-          <FormHelperText>{HelperTextComponent}</FormHelperText>
+          <FormHelperText
+            sx={{
+              '&.MuiFormHelperText-root': {
+                color: 'var(--color-slate)',
+              },
+              '&.Mui-focused': {
+                color: 'var(--color-textInfoBlue)',
+              },
+            }}
+          >
+            {HelperTextComponent}
+          </FormHelperText>
         )}
       </FormControl>
     </Grid>

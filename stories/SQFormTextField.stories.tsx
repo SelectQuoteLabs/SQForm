@@ -67,3 +67,9 @@ WithValidation.args = {
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
 };
+
+export const WithInformationalText = Template.bind({});
+WithInformationalText.args = {
+  ...defaultArgs,
+  informationalText: 'Helper Text Here',
+};
