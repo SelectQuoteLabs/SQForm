@@ -279,6 +279,7 @@ function SQFormMultiValue({
           ...params.InputLabelProps,
           shrink: true,
         }}
+        error={isFieldError}
         inputProps={{
           ...params.inputProps,
           disabled: isDisabled,
