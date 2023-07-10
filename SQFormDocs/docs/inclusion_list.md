@@ -12,23 +12,14 @@ A field allowing a user to select multiple values to include. <br />
 ```js
 import {
   SQForm,
-  SQFormInclusionList,
-  SQFormStoryWrapper,
+  SQFormInclusionList
 } from '@selectquotelabs/sqform';
+const initialValues={{
+    friends: ['Joe', 'Jane', 'Jack', 'Jill'],
+    selectAll: false,
+}}
 return (
-  <SQFormStoryWrapper
-    initialValues={{
-      friends: ['Joe', 'Jane', 'Jack', 'Jill'],
-      selectAll: false,
-    }}
-  >
-    <Card
-      raised
-      style={{
-        minWidth: 250,
-        padding: 16,
-      }}
-    >
+    <SQForm initialValues={initialValues} onSubmit={noop}>
       <SQFormInclusionList
         name="friends"
         selectAllContainerProps={{
@@ -52,8 +43,7 @@ return (
         }}
         useSelectAll
       />
-    </Card>
-  </SQFormStoryWrapper>
+    </SQForm>
 );
 ```
 
