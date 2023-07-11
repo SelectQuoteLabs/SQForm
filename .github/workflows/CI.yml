@@ -1,6 +1,10 @@
 name: Node CI
 
 on:
+  push:
+    branches:
+      - master
+      - '*maintenance-release*'
   pull_request:
     branches:
       - '**'
