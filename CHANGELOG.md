@@ -1,3 +1,10 @@
+## [9.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.7.0...v9.8.0) (2023-07-11)
+
+
+### Features
+
+* 🎸 Virtualized Multiselect ([f1cefa6](https://github.com/SelectQuoteLabs/SQForm/commit/f1cefa6197c6734985323a993f7a35685680e487))
+
 ## [9.7.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.6.0...v9.7.0) (2022-10-24)
 
 
