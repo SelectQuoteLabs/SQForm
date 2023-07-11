@@ -9,21 +9,24 @@ import {
   Grid,
   Checkbox,
   Tooltip,
-  makeStyles,
   ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {useFormikContext} from 'formik';
 import {VariableSizeList} from 'react-window';
-import {EMPTY_LABEL} from '../../utils/constants';
-import {useForm} from './useForm';
+import {EMPTY_LABEL} from '../../../utils/constants';
+import {useForm} from '../../../hooks/useForm';
 import {
   getOutOfRangeValueWarning,
   getUndefinedChildrenWarning,
   getUndefinedValueWarning,
-} from '../../utils/consoleWarnings';
-import type {TooltipProps, SelectProps} from '@material-ui/core';
+} from '../../../utils/consoleWarnings';
+import type {TooltipProps, SelectProps, SelectChangeEvent} from '@mui/material';
 import type {ListChildComponentProps} from 'react-window';
-import type {BaseFieldProps, SQFormOption} from '../../types';
+import type {
+  BaseFieldProps,
+  SQFormOption,
+  SQFormOptionValue,
+} from '../../../types';
 
 export type SQFormMultiSelectProps<TVirtualized = boolean> = BaseFieldProps & {
   /** Multiselect options to select from */
@@ -47,7 +50,7 @@ export type SQFormMultiSelectProps<TVirtualized = boolean> = BaseFieldProps & {
   /** Custom onChange handler */
   onChange?: (
     event: TVirtualized extends false
-      ? React.ChangeEvent<{name?: string; value: unknown}>
+      ? SelectChangeEvent<SQFormOptionValue[] | ''>
       : React.MouseEvent<HTMLLIElement, MouseEvent>,
     value: SQFormOption['value'][]
   ) => void;
@@ -137,9 +140,10 @@ function SQFormMultiSelect({
 }: SQFormMultiSelectProps): React.ReactElement {
   const MenuProps = {
     PaperProps: {
-      className: `${classes.paperList} ${
-        isVirtualized ? classes.virtualizeListOverflow : ''
-      }`,
+      sx: {
+        ...classes.paperList,
+        ...(isVirtualized ? classes.virtualizeListOverflow : {}),
+      },
     },
     variant: 'menu',
     getContentAnchorEl: null,
@@ -269,7 +273,13 @@ function SQFormMultiSelect({
           onChange && onChange(event, value);
         }}
       >
-        <Checkbox checked={field.value?.includes(option.value)} />
+        <Checkbox
+          checked={
+            Array.isArray(field.value)
+              ? field.value?.includes(option.value)
+              : false
+          }
+        />
         <ListItemText
           primary={option.label}
           primaryTypographyProps={{variant: 'body2'}}
@@ -355,7 +365,13 @@ function SQFormMultiSelect({
                       key={`${name}_${option.value}`}
                       value={option.value}
                     >
-                      <Checkbox checked={field.value?.includes(option.value)} />
+                      <Checkbox
+                        checked={
+                          Array.isArray(field.value)
+                            ? field.value?.includes(option.value)
+                            : false
+                        }
+                      />
                       <ListItemText
                         primary={option.label}
                         primaryTypographyProps={{variant: 'body2'}}
