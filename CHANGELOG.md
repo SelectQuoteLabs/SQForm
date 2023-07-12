@@ -1,3 +1,10 @@
+### [9.8.1](https://github.com/SelectQuoteLabs/SQForm/compare/v9.8.0...v9.8.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* 🐛 SQFormMultiselect isVirtualized prop is now optional ([7140a18](https://github.com/SelectQuoteLabs/SQForm/commit/7140a1816dc04a06071062e2c30e473fc5000c31))
+
 ## [9.8.0](https://github.com/SelectQuoteLabs/SQForm/compare/v9.7.0...v9.8.0) (2023-07-11)
 
 
