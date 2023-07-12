@@ -1,6 +1,6 @@
 module.exports = {
   repositoryUrl: 'https://github.com/SelectQuoteLabs/SQForm.git',
-  // Semantic release will only release off the master branch and any branch with a name like 9.x or 7.7.x, etc
+  // Semantic release will only release off the master branch and any branch that includes the `maintenance-release` string.
   branches: ['*maintenance-release*', 'master'],
   plugins: [
     '@semantic-release/commit-analyzer',
