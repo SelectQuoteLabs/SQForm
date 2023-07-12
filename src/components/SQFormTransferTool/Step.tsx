@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScriptedText} from 'scplus-shared-components';
-import SQFormDropdown from 'components/fields/SQFormDropdown/SQFormDropdown';
-import {useSQFormContext} from 'index';
+import SQFormDropdown from '../../components/fields/SQFormDropdown';
+import {useSQFormContext} from '../../../src';
 import type {Answer, Step} from './types';
 
 type Props = {

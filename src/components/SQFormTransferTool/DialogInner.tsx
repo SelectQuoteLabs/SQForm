@@ -12,7 +12,7 @@ import {
 import {Form} from 'formik';
 import SQFormButton from '../buttons/SQFormButton';
 import SQFormHelperText from '../SQFormHelperText/SQFormHelperText';
-import {noop} from 'utils';
+import {noop} from '../../utils';
 import type {DialogProps, GridProps} from '@mui/material';
 import type {Theme} from '@mui/material/styles';
 import type {TransitionProps} from '@mui/material/transitions';
