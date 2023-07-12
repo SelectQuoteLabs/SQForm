@@ -33,6 +33,20 @@ For **BREAKING CHANGES** Type a brief description of the breaking change when as
 
 - A breaking change will cause a `MAJOR` SemVer bump. Ex: 3.0.5 -> 4.0.0
 
+### Maintenance Releases
+
+Maintenance releases are for when we want to release a new version of the library that is _not_ of the latest major version. This can happen when we notice a bug in a heavily used older version, or we have a request for a new feature that needs to be in an older version.
+
+Maintenance releases are released off any branch that includes the string `"maintenance-release"` such as `"maintenance-release-9.8.x"`. This branch naming convention is protected in repo settings.
+
+- Create a branch off whatever your base version is with the branch naming mentioned
+  - Push it to remove
+- Create a feature branch off that branch for your code changes
+- Create a PR following normal procedures to merge your feature branch into your maintenance-release branch
+  - Address PR feedback and get approvals
+- When the PR is merged it should automatically kick off the release Github Action. This can be verified in the actions tab on Github
+  - When the action is finished a new version should be available to download on [NPM]() for consumption.
+
 ## Consuming
 
 By default in NPM v7 and above peer dependencies will be installed automatically. You can check your npm version using `npm --version` to determine the version you are using. If your version is not at least v7 you must install the peer dependencies manually.

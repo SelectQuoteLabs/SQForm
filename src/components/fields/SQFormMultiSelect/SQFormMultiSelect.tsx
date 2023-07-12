@@ -32,7 +32,7 @@ export type SQFormMultiSelectProps<TVirtualized = boolean> = BaseFieldProps & {
   /** Multiselect options to select from */
   children: SQFormOption[];
   /** Whether the list menu items should be virtualized or not. Defaults false to ensure non-breaking changes. */
-  isVirtualized: TVirtualized;
+  isVirtualized?: TVirtualized;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
   /** This property will allow the end user to check a "Select All" box */
