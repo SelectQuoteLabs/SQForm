@@ -10,7 +10,7 @@ export type SQFormTransferProductPanelsProps = {
   onTransfer: OnTransfer;
 };
 
-function getPanel(
+function getPanels(
   transferProducts: TransferProduct[],
   onTransfer: OnTransfer
 ): AccordionPanelType[] {
@@ -25,6 +25,7 @@ function getPanel(
         <AccordionBody
           transferProduct={transferProduct}
           onTransfer={onTransfer}
+          key={productID}
         />
       ),
       name: `${productID}`,
@@ -38,13 +39,7 @@ export default function SQFormTransferProductPanels({
   transferProducts,
   onTransfer,
 }: SQFormTransferProductPanelsProps): React.ReactElement | null {
-  const panels = getPanel(transferProducts, onTransfer) ?? [];
-  if (!panels.length) {
-    return null;
-    // TODO ??
-    // Is this valid? DO we want some sort of loading indicator?
-    // or will be not opening the modal until the data has loaded?
-  }
+  const panels = getPanels(transferProducts, onTransfer);
 
   return (
     <Box
