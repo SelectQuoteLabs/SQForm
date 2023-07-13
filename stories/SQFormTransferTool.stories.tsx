@@ -4,28 +4,37 @@ import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormTransferToolProps} from 'components/SQFormTransferTool/SQFormTransferTool';
 
-// TODO Values will likely go away on SC3-1810 as they are dynamic and will be handled inside TransferTool compoent
-type DefaultArgsValues = {TODO: string};
-type Values = {hello: 123};
-type SQFormTransferToolStory = Story<
-  SQFormTransferToolProps<DefaultArgsValues>
->;
+type SQFormTransferToolStory = Story<SQFormTransferToolProps>;
 
 function getMockData(
   indexes: number[] = [0]
-): SQFormTransferToolProps<Values>['transferProducts'] {
+): SQFormTransferToolProps['transferProducts'] {
   return indexes.map((idx) => ({
     productID: 2 + idx,
     productTag: 'Product Tag ' + idx,
     productDisplayName: 'Product Name ' + idx,
-    modalLinkText: `Transfer to div ${idx}`, // anylonger than this and the button likely truncates
+    modalLinkText: `Transfer to div ${idx}`, // any longer than this and the button will truncate
     transferLine: '7777777777',
     enabled: idx < 3,
     steps: [
       {
+        type: 'transfer',
+        id: 3 + idx,
+        text: null,
+        options: null,
+        condition: {
+          logicalOperator: 'and',
+          answers: [
+            {questionId: 1, answerId: 2},
+            {questionId: 2, answerId: 2},
+            {questionId: 3, answerId: 2},
+          ],
+        },
+      },
+      {
         type: 'question',
-        id: 1,
-        questionText: 'First Question',
+        id: 1 + idx,
+        text: 'First Question',
         options: [
           {
             value: 1,
@@ -39,9 +48,19 @@ function getMockData(
         condition: null,
       },
       {
+        type: 'scripting',
+        id: 1,
+        text: 'This is the scripting',
+        options: null,
+        condition: {
+          logicalOperator: 'and',
+          answers: [{questionId: 1, answerId: 2}],
+        },
+      },
+      {
         type: 'question',
-        id: 2,
-        questionText: 'question 2',
+        id: 2 + idx,
+        text: 'Question 2',
         options: [
           {
             value: 1,
@@ -91,7 +110,6 @@ const defaultArgs = {
   isOpen: false,
   transferProducts: getMockData([1, 2]),
   isLoading: false,
-  initialValues: {TODO: 'remove me'},
 };
 
 const Template: SQFormTransferToolStory = (args): React.ReactElement => {
@@ -112,6 +130,12 @@ export const WithDisabled = Template.bind({});
 WithDisabled.args = {
   ...defaultArgs,
   transferProducts: getMockData([2, 7, 1]),
+};
+
+export const WithScriptingCondition = Template.bind({});
+WithScriptingCondition.args = {
+  ...defaultArgs,
+  transferProducts: getMockData([0, 2]),
 };
 
 export const IsLoading = Template.bind({});

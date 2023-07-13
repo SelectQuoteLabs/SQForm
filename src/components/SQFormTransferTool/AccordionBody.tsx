@@ -5,6 +5,7 @@ import {
   SectionHeader,
   TextButton,
 } from 'scplus-shared-components';
+import Step from './Step';
 import type {OnTransfer, TransferProduct} from './types';
 
 export type AccordionBodyProps = {
@@ -23,13 +24,17 @@ export default function AccordionBody({
   }
 
   return (
-    <Section>
+    <Section sx={{marginBottom: '0px'}}>
       <SectionHeader title={productDisplayName}>
         <TextButton onClick={handleTransfer} tooltip={modalLinkText}>
           {modalLinkText}
         </TextButton>
       </SectionHeader>
-      <SectionBody>TODO implement step rendering on SC3-1810</SectionBody>
+      <SectionBody>
+        {transferProduct.steps.map((step) => (
+          <Step step={step} key={step.id} />
+        ))}
+      </SectionBody>
     </Section>
   );
 }
