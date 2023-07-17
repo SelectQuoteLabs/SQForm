@@ -45,6 +45,19 @@ export type TransferProduct = {
   steps: Step[];
 };
 
-export type OnTransfer = (msg: string) => void; // TODO this type will be defined in SC3-1811
+export type CallBackData = {
+  /** the id of the transferproduct for which the transfer button was clicked */
+  productID: TransferProduct['productID'];
+  /** number provided for transfer */
+  transferLine: string | null;
+  /** An array of form values, in the same form that the step's conditions are supplied with
+   * While the questions Ids should be globally unique, but do include questions from all
+   * produducts.
+   */
+  questionAnswers: Array<{questionId: number; answerId: number | null}>;
+  // TODO We will also include a log of opened panels
+};
+
+export type OnTransfer = (callBackData: CallBackData) => void;
 
 export type FormValues = Record<string, number | ''>;

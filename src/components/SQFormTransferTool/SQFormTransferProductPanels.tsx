@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box} from '@mui/material';
 import {Accordion} from 'scplus-shared-components';
-import type {AccordionPanelType} from 'scplus-shared-components';
 import AccordionBody from './AccordionBody';
+import type {AccordionPanelType} from 'scplus-shared-components';
 import type {TransferProduct, OnTransfer} from './types';
 
 export type SQFormTransferProductPanelsProps = {
@@ -20,6 +20,7 @@ function getPanels(
 
   return transferProducts.map((transferProduct) => {
     const {productID, productDisplayName, enabled} = transferProduct;
+
     return {
       body: (
         <AccordionBody
