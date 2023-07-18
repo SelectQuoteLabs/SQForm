@@ -19,7 +19,7 @@ function getMockData(
     steps: [
       {
         type: 'transfer',
-        id: 3 + idx,
+        id: 1 + idx,
         text: null,
         options: null,
         condition: {
@@ -33,7 +33,7 @@ function getMockData(
       },
       {
         type: 'question',
-        id: 1 + idx,
+        id: 2 + idx,
         text: 'First Question',
         options: [
           {
@@ -49,7 +49,7 @@ function getMockData(
       },
       {
         type: 'scripting',
-        id: 1,
+        id: 3 + idx,
         text: 'This is the scripting',
         options: null,
         condition: {
@@ -59,7 +59,7 @@ function getMockData(
       },
       {
         type: 'question',
-        id: 2 + idx,
+        id: 4 + idx,
         text: 'Question 2',
         options: [
           {

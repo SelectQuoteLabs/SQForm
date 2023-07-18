@@ -3,7 +3,6 @@ import {Formik} from 'formik';
 import LoadingSpinner from '../LoadingSpinner';
 import SQFormTransferProductPanels from './SQFormTransferProductPanels';
 import DialogInner from './DialogInner';
-import {useInitialRequiredErrors} from '../../hooks/useInitialRequiredErrors';
 import type {GridProps} from '@mui/material';
 import type {FormikHelpers} from 'formik';
 import type {TransferProduct, OnTransfer, Step, FormValues} from './types';
@@ -60,26 +59,12 @@ export default function SQFormTransferTool({
 }: SQFormTransferToolProps): React.ReactElement {
   const initialValues = getInitialValues(transferProducts);
 
-  /* TODO Validation: SC3-1810 NEXT PR -
-   * this will be internal and the consumer need not worry about it.
-   * There is some extra complexity as there could be questions on separate
-   * products. There also may be some question around if all fields are required or not.
-   */
-
   // TODO Transfer: SC3-1811 transfers will be handled via consumer supplied callback. SC3-1811
-
-  const initialErrors = useInitialRequiredErrors<FormValues>(
-    undefined, //TODO - validationSchema next PR
-    initialValues
-  );
-
   return (
     <Formik
-      enableReinitialize={true}
-      initialErrors={initialErrors}
       initialValues={initialValues}
+      enableReinitialize={true}
       onSubmit={onSave}
-      validationSchema={undefined}
       validateOnMount={true}
       validateOnBlur={true}
       validateOnChange={true}
