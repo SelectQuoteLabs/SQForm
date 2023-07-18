@@ -204,14 +204,7 @@ function getMockData(
         id: 1 + idx,
         text: null,
         options: null,
-        condition: {
-          logicalOperator: 'and',
-          answers: [
-            {questionId: MOCK_IDs.QUESTION_ONE_ID, answerId: 2},
-            {questionId: MOCK_IDs.QUESTION_TWO_ID, answerId: 2},
-            {questionId: MOCK_IDs.QUESTION_THREE_ID, answerId: 2},
-          ],
-        },
+        condition: null,
       },
       {
         type: 'question',
@@ -234,10 +227,7 @@ function getMockData(
         id: 3 + idx,
         text: 'This is the scripting',
         options: null,
-        condition: {
-          logicalOperator: 'and',
-          answers: [{questionId: 1, answerId: 2}],
-        },
+        condition: null,
       },
       {
         type: 'question',
@@ -257,19 +247,7 @@ function getMockData(
             label: 'final',
           },
         ],
-        condition: {
-          logicalOperator: `or`,
-          answers: [
-            {
-              questionId: 1,
-              answerId: 2,
-            },
-            {
-              questionId: 3,
-              answerId: 1,
-            },
-          ],
-        },
+        condition: null,
       },
     ],
   }));
@@ -312,18 +290,21 @@ Default.args = defaultArgs;
 export const WithDisabled = Template.bind({});
 WithDisabled.args = {
   ...defaultArgs,
+  title: 'With Disabled',
   transferProducts: getMockData([2, 7, 1]),
 };
 
 export const WithConditions = Template.bind({});
 WithConditions.args = {
   ...defaultArgs,
+  title: 'With Conditions',
   transferProducts: [conditionalMock],
 };
 
 export const IsLoading = Template.bind({});
 IsLoading.args = {
   ...defaultArgs,
+  title: 'Is Loading example',
   isLoading: true,
 };
 

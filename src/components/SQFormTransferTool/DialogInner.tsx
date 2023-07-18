@@ -140,7 +140,7 @@ function DialogInner({
       onClose={noop}
     >
       <Form>
-        <DialogTitle sx={classes.title}>
+        <DialogTitle sx={classes.title} component="div">
           <Typography variant="h5">{title}</Typography>
         </DialogTitle>
         <DialogContent

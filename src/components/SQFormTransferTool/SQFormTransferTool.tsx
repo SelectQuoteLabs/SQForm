@@ -3,9 +3,15 @@ import {Formik} from 'formik';
 import LoadingSpinner from '../LoadingSpinner';
 import SQFormTransferProductPanels from './SQFormTransferProductPanels';
 import DialogInner from './DialogInner';
+import {transformForm} from './util';
 import type {GridProps} from '@mui/material';
-import type {FormikHelpers} from 'formik';
-import type {TransferProduct, OnTransfer, Step, FormValues} from './types';
+import type {
+  TransferProduct,
+  OnTransfer,
+  Step,
+  FormContext,
+  OnSave,
+} from './types';
 
 export type SQFormTransferToolProps = {
   /** boolean to indicate if the modal should show a loading indicator */
@@ -15,10 +21,7 @@ export type SQFormTransferToolProps = {
   /** The current open/closed state of the Dialog */
   isOpen: boolean;
   /** Callback function invoke when the user clicks the primary button */
-  onSave: (
-    values: FormValues,
-    formikHelpers: FormikHelpers<FormValues>
-  ) => void | Promise<unknown>;
+  onSave: OnSave;
   /** the title to display in the header of the modal */
   title?: string;
   /** Callback funciton to be invoked when the transfer button is clicked */
@@ -31,12 +34,12 @@ export type SQFormTransferToolProps = {
  * That object will take the form of [string]: number where the form field name is the
  * question id. The values in this object are initialized to '', but will be the answerIds.
  */
-function getInitialValues(transferProducts: TransferProduct[]): FormValues {
+function getInitialValues(transferProducts: TransferProduct[]): FormContext {
   const steps = transferProducts.reduce((acc, transferProduct) => {
     return [...acc, ...transferProduct.steps];
   }, [] as Step[]);
 
-  return steps.reduce((acc, {id, type}) => {
+  const questionValues = steps.reduce((acc, {id, type}) => {
     if (type !== 'question') {
       return acc;
     }
@@ -46,6 +49,8 @@ function getInitialValues(transferProducts: TransferProduct[]): FormValues {
       [id]: '',
     };
   }, {});
+
+  return {questionValues, viewedProductIDs: []};
 }
 
 export default function SQFormTransferTool({
@@ -59,11 +64,15 @@ export default function SQFormTransferTool({
 }: SQFormTransferToolProps): React.ReactElement {
   const initialValues = getInitialValues(transferProducts);
 
+  function handleSave(values: FormContext): void {
+    onSave({...transformForm(values)});
+  }
+
   return (
     <Formik
       initialValues={initialValues}
       enableReinitialize={true}
-      onSubmit={onSave}
+      onSubmit={handleSave}
       validateOnMount={true}
       validateOnBlur={true}
       validateOnChange={true}

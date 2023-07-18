@@ -2,8 +2,9 @@ import React from 'react';
 import {Box} from '@mui/material';
 import {Accordion} from 'scplus-shared-components';
 import AccordionBody from './AccordionBody';
+import {useSQFormContext} from '../../index';
 import type {AccordionPanelType} from 'scplus-shared-components';
-import type {TransferProduct, OnTransfer} from './types';
+import type {TransferProduct, OnTransfer, FormContext} from './types';
 
 export type SQFormTransferProductPanelsProps = {
   transferProducts: TransferProduct[];
@@ -12,7 +13,8 @@ export type SQFormTransferProductPanelsProps = {
 
 function getPanels(
   transferProducts: TransferProduct[],
-  onTransfer: OnTransfer
+  onTransfer: OnTransfer,
+  onPanelClick: (id: TransferProduct['productID']) => void
 ): AccordionPanelType[] {
   if (!transferProducts?.length) {
     return [];
@@ -32,6 +34,7 @@ function getPanels(
       name: `${productID}`,
       title: productDisplayName,
       isDisabled: !enabled,
+      onClick: () => onPanelClick(transferProduct.productID),
     };
   });
 }
@@ -40,7 +43,17 @@ export default function SQFormTransferProductPanels({
   transferProducts,
   onTransfer,
 }: SQFormTransferProductPanelsProps): React.ReactElement | null {
-  const panels = getPanels(transferProducts, onTransfer);
+  const panels = getPanels(
+    transferProducts,
+    onTransfer,
+    updateViewedProductIDs
+  );
+  const {setFieldValue, values: context} = useSQFormContext<FormContext>();
+
+  function updateViewedProductIDs(newId: TransferProduct['productID']) {
+    const viewedIds = context.viewedProductIDs;
+    setFieldValue('viewedProductIDs', [...new Set([...viewedIds, newId])]);
+  }
 
   return (
     <Box
