@@ -55,11 +55,10 @@ export default function SQFormTransferTool({
   transferProducts,
   title = 'Standard Transfer Modal',
   muiGridProps = {},
-  onTransfer = alert, // TODO this placeholder alert will be replaced in SC3-1811
+  onTransfer,
 }: SQFormTransferToolProps): React.ReactElement {
   const initialValues = getInitialValues(transferProducts);
 
-  // TODO Transfer: SC3-1811 transfers will be handled via consumer supplied callback. SC3-1811
   return (
     <Formik
       initialValues={initialValues}

@@ -2,7 +2,8 @@ import React from 'react';
 import {ScriptedText} from 'scplus-shared-components';
 import SQFormDropdown from '../../components/fields/SQFormDropdown';
 import {useSQFormContext} from '../../../src';
-import type {Answer, Step} from './types';
+import {getIsConditionMet} from './util';
+import type {Step} from './types';
 
 type Props = {
   step: Step;
@@ -13,29 +14,6 @@ const styles = {
     paddingBottom: '16px',
   },
 };
-
-function checkAnswer(answer: Answer, values: Record<string, number | ''>) {
-  return values[answer.questionId] === answer.answerId;
-}
-
-function getIsConditionMet(
-  condition: Step['condition'],
-  values: Record<string, number | ''>
-) {
-  if (condition === null) {
-    return true;
-  }
-
-  const {logicalOperator, answers} = condition;
-
-  if (logicalOperator === 'and') {
-    return answers.every((answer) => checkAnswer(answer, values));
-  }
-
-  if (logicalOperator === 'or') {
-    return answers.some((answer) => checkAnswer(answer, values));
-  }
-}
 
 export default function StepRendering({
   step,

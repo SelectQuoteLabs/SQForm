@@ -3,8 +3,190 @@ import {SQFormTransferTool} from '../src';
 import {createDocsPage} from './utils/createDocsPage';
 import type {Story, Meta} from '@storybook/react';
 import type {SQFormTransferToolProps} from 'components/SQFormTransferTool/SQFormTransferTool';
+import type {
+  Step,
+  TransferProduct,
+  TransferStep,
+} from 'components/SQFormTransferTool/types';
 
 type SQFormTransferToolStory = Story<SQFormTransferToolProps>;
+
+enum MOCK_IDs {
+  QUESTION_ONE_ID,
+  QUESTION_TWO_ID,
+  QUESTION_THREE_ID,
+  QUESTION_FOUR_ID,
+  SCRIPTING_ONE_ID,
+  SCRIPTING_TWO_ID,
+  SCRIPTING_THREE_ID,
+  SCRIPTING_FOUR_ID,
+  TRANSFER_ONE_ID,
+}
+
+const questionStepOne: Step = {
+  type: 'question',
+  id: MOCK_IDs.QUESTION_ONE_ID,
+  text: 'First Question',
+  options: [
+    {
+      value: 1,
+      label: 'Yes',
+    },
+    {
+      value: 2,
+      label: 'No',
+    },
+  ],
+  condition: null,
+};
+
+const questionStepTwo: Step = {
+  type: 'question',
+  id: MOCK_IDs.QUESTION_TWO_ID,
+  text: 'Question 2',
+  options: [
+    {
+      value: 1,
+      label: 'an option',
+    },
+    {
+      value: 2,
+      label: 'another option',
+    },
+    {
+      value: 3,
+      label: 'final',
+    },
+  ],
+  condition: null,
+};
+
+const conditionExample = {
+  answers: [
+    {
+      questionId: MOCK_IDs.QUESTION_ONE_ID,
+      answerId: 2,
+    },
+    {
+      questionId: MOCK_IDs.QUESTION_TWO_ID,
+      answerId: 1,
+    },
+  ],
+};
+
+// demonstrates AND logic
+const questionStepThree: Step = {
+  type: 'question',
+  id: MOCK_IDs.QUESTION_THREE_ID,
+  text: 'Question 3',
+  options: [
+    {
+      value: 1,
+      label: 'an option',
+    },
+    {
+      value: 2,
+      label: 'another option',
+    },
+    {
+      value: 3,
+      label: 'final',
+    },
+  ],
+  condition: {
+    ...conditionExample,
+    logicalOperator: 'and',
+  },
+};
+
+// demonstrates OR logic
+const questionStepFour: Step = {
+  type: 'question',
+  id: MOCK_IDs.QUESTION_FOUR_ID,
+  text: 'Question 4',
+  options: [
+    {
+      value: 1,
+      label: 'an option',
+    },
+    {
+      value: 2,
+      label: 'another option',
+    },
+    {
+      value: 3,
+      label: 'final',
+    },
+  ],
+  condition: {
+    ...conditionExample,
+    logicalOperator: 'or',
+  },
+};
+
+const stepScriptOne: Step = {
+  type: 'scripting',
+  id: MOCK_IDs.SCRIPTING_ONE_ID,
+  text: 'Question 3 demonstrates AND logic, pick no for question one AND "an option" for question two',
+  options: null,
+  condition: null,
+};
+
+const stepScriptTwo: Step = {
+  ...stepScriptOne,
+  id: MOCK_IDs.SCRIPTING_TWO_ID,
+  text: 'Question 4 demonstrates OR logic, pick either "no" for question one OR "an option for question two',
+};
+
+const stepScriptThree: Step = {
+  ...stepScriptOne,
+  id: MOCK_IDs.SCRIPTING_THREE_ID,
+  text: 'The transfer button can also depend on question answers, select "Yes" for question 1',
+};
+
+const stepScriptFour: Step = {
+  ...stepScriptOne,
+  id: MOCK_IDs.SCRIPTING_FOUR_ID,
+  text: 'Scripting steps are also conditional, this script is shown on the same condition that enables question 4',
+  condition: questionStepFour.condition,
+};
+
+const stepTransfer: TransferStep = {
+  type: 'transfer',
+  id: MOCK_IDs.TRANSFER_ONE_ID,
+  text: null,
+  options: null,
+  condition: {
+    logicalOperator: 'or',
+    answers: [
+      {
+        questionId: MOCK_IDs.QUESTION_ONE_ID,
+        answerId: 1,
+      },
+    ],
+  },
+};
+
+const conditionalMock: TransferProduct = {
+  productID: 222,
+  productTag: 'Product Tag',
+  // Note the product name and transfer button text have to share space
+  productDisplayName: 'Conditional Example',
+  modalLinkText: `Transfer to DIV AB`,
+  transferLine: '7777777777',
+  enabled: true,
+  steps: [
+    stepTransfer,
+    questionStepOne,
+    questionStepTwo,
+    stepScriptOne,
+    questionStepThree,
+    stepScriptTwo,
+    questionStepFour,
+    stepScriptThree,
+    stepScriptFour,
+  ],
+};
 
 function getMockData(
   indexes: number[] = [0]
@@ -25,15 +207,15 @@ function getMockData(
         condition: {
           logicalOperator: 'and',
           answers: [
-            {questionId: 1, answerId: 2},
-            {questionId: 2, answerId: 2},
-            {questionId: 3, answerId: 2},
+            {questionId: MOCK_IDs.QUESTION_ONE_ID, answerId: 2},
+            {questionId: MOCK_IDs.QUESTION_TWO_ID, answerId: 2},
+            {questionId: MOCK_IDs.QUESTION_THREE_ID, answerId: 2},
           ],
         },
       },
       {
         type: 'question',
-        id: 2 + idx,
+        id: MOCK_IDs.QUESTION_ONE_ID + idx,
         text: 'First Question',
         options: [
           {
@@ -110,6 +292,7 @@ const defaultArgs = {
   isOpen: false,
   transferProducts: getMockData([1, 2]),
   isLoading: false,
+  onTransfer: console.log,
 };
 
 const Template: SQFormTransferToolStory = (args): React.ReactElement => {
@@ -132,10 +315,10 @@ WithDisabled.args = {
   transferProducts: getMockData([2, 7, 1]),
 };
 
-export const WithScriptingCondition = Template.bind({});
-WithScriptingCondition.args = {
+export const WithConditions = Template.bind({});
+WithConditions.args = {
   ...defaultArgs,
-  transferProducts: getMockData([0, 2]),
+  transferProducts: [conditionalMock],
 };
 
 export const IsLoading = Template.bind({});
