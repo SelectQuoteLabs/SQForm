@@ -83,6 +83,7 @@ export default function SQFormTransferTool({
         maxWidth={'sm'}
         title={title}
         muiGridProps={muiGridProps}
+        isLoading={isLoading}
       >
         <>
           {isLoading ? (
