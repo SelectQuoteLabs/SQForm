@@ -93,7 +93,6 @@ export type {
   SQFormGuidedWorkflowTaskModuleProps,
   SQFormGuidedWorkflowContext,
 } from './components/SQFormGuidedWorkflow/Types';
-
 // Other Types
 export type {default as BaseFieldProps} from './types/BaseFieldProps';
 export type {default as SQFormOption, SQFormOptionValue} from './types/Option';

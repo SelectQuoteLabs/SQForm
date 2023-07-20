@@ -42,11 +42,17 @@ export default function AccordionBody({
   onTransfer,
 }: AccordionBodyProps): React.ReactElement {
   const {productDisplayName, modalLinkText} = transferProduct;
-  const {values} = useSQFormContext<FormContext>();
+  /* while the name formik Helpers is slightly misleading as it contains more
+   * than that, it is at least safe given that the rest is inclusive of the helpers
+   */
+  const {values, ...formikHelpers} = useSQFormContext<FormContext>();
 
   function handleTransfer() {
     const {productID, transferLine} = transferProduct;
-    onTransfer({transferLine, productID, ...transformForm(values)});
+    onTransfer(
+      {transferLine, productID, ...transformForm(values)},
+      formikHelpers
+    );
   }
 
   const isTransferConditionMet = getIsTransferConditionMet(

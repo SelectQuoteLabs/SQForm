@@ -12,6 +12,7 @@ import type {
   FormContext,
   OnSave,
 } from './types';
+import type {FormikHelpers} from 'formik';
 
 export type SQFormTransferToolProps = {
   /** boolean to indicate if the modal should show a loading indicator */
@@ -28,6 +29,8 @@ export type SQFormTransferToolProps = {
   onTransfer: OnTransfer;
   /** Any prop from https://material-ui.com/api/grid applied to contents of modal */
   muiGridProps?: GridProps;
+  /** Loading Message to be shown under the loading spinner when isLoading is true*/
+  loadingMessage?: string;
 };
 
 /** Given an array of TransferProduct produce initial values object
@@ -61,11 +64,15 @@ export default function SQFormTransferTool({
   title = 'Standard Transfer Modal',
   muiGridProps = {},
   onTransfer,
+  loadingMessage = 'Loading...',
 }: SQFormTransferToolProps): React.ReactElement {
   const initialValues = getInitialValues(transferProducts);
 
-  function handleSave(values: FormContext): void {
-    onSave({...transformForm(values)});
+  function handleSave(
+    values: FormContext,
+    formikHelpers: FormikHelpers<FormContext>
+  ): void {
+    onSave({...transformForm(values)}, formikHelpers);
   }
 
   return (
@@ -87,7 +94,7 @@ export default function SQFormTransferTool({
       >
         <>
           {isLoading ? (
-            <LoadingSpinner message="Loading transfer options" />
+            <LoadingSpinner message={loadingMessage} />
           ) : (
             <SQFormTransferProductPanels
               transferProducts={transferProducts}
