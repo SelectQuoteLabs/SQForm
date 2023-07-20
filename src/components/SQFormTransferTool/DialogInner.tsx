@@ -38,6 +38,8 @@ export type DialogInnerProps = {
   helperText?: string;
   /** helper text type to pass to SQFormHelperText component */
   helperTextType?: 'fail' | 'error' | 'valid';
+  /** loading state used to determine if we should show the footer */
+  isLoading: boolean;
 };
 
 /*
@@ -105,6 +107,7 @@ function DialogInner({
   muiGridProps,
   helperText,
   helperTextType = 'error',
+  isLoading,
 }: DialogInnerProps): React.ReactElement {
   const theme = useTheme();
   const classes = useClasses(theme);
@@ -138,9 +141,10 @@ function DialogInner({
       open={isOpen}
       TransitionComponent={Transition}
       onClose={noop}
+      fullWidth={true}
     >
       <Form>
-        <DialogTitle sx={classes.title}>
+        <DialogTitle sx={classes.title} component="div">
           <Typography variant="h5">{title}</Typography>
         </DialogTitle>
         <DialogContent
@@ -160,18 +164,20 @@ function DialogInner({
             {children}
           </Grid>
         </DialogContent>
-        <DialogActions sx={classes.primaryAction}>
-          <>
-            {helperText && renderHelperText()}
-            <SQFormButton
-              title={saveButtonText}
-              isDisabled={isSaveButtonDisabled}
-              shouldRequireFieldUpdates={shouldRequireFieldUpdates}
-            >
-              {saveButtonText}
-            </SQFormButton>
-          </>
-        </DialogActions>
+        {!isLoading ? (
+          <DialogActions sx={classes.primaryAction}>
+            <>
+              {helperText && renderHelperText()}
+              <SQFormButton
+                title={saveButtonText}
+                isDisabled={isSaveButtonDisabled}
+                shouldRequireFieldUpdates={shouldRequireFieldUpdates}
+              >
+                {saveButtonText}
+              </SQFormButton>
+            </>
+          </DialogActions>
+        ) : null}
       </Form>
     </Dialog>
   );

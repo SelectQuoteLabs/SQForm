@@ -3,7 +3,7 @@ import {ScriptedText} from 'scplus-shared-components';
 import SQFormDropdown from '../../components/fields/SQFormDropdown';
 import {useSQFormContext} from '../../../src';
 import {getIsConditionMet} from './util';
-import type {Step} from './types';
+import type {FormContext, Step} from './types';
 
 type Props = {
   step: Step;
@@ -19,14 +19,14 @@ export default function StepRendering({
   step,
 }: Props): React.ReactElement | null {
   const {id, type, text, options, condition} = step;
-  const {values} = useSQFormContext<Record<string, number | ''>>();
-  const isConditionMet = getIsConditionMet(condition, values);
+  const {values: context} = useSQFormContext<FormContext>();
+  const isConditionMet = getIsConditionMet(condition, context.questionValues);
 
   if (type === 'question') {
     return (
       <SQFormDropdown
         label={text}
-        name={`${id}`}
+        name={`questionValues.${id}`}
         // For question steps, if the condition is not met we should disable the dropdown
         isDisabled={!isConditionMet}
         displayEmpty={true}

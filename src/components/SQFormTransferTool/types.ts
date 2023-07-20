@@ -45,19 +45,30 @@ export type TransferProduct = {
   steps: Step[];
 };
 
-export type CallBackData = {
-  /** the id of the transferproduct for which the transfer button was clicked */
-  productID: TransferProduct['productID'];
-  /** number provided for transfer */
-  transferLine: string | null;
+type OnSaveCallBackData = {
   /** An array of form values, in the same form that the step's conditions are supplied with
    * While the questions Ids should be globally unique, but do include questions from all
    * produducts.
    */
   questionAnswers: Array<{questionId: number; answerId: number | null}>;
-  // TODO We will also include a log of opened panels
+  /** Opened product panel ids, all products are initially not expanded */
+  viewedProductIDs: Array<TransferProduct['productID']>;
 };
 
-export type OnTransfer = (callBackData: CallBackData) => void;
+type TransferCallBackData = OnSaveCallBackData & {
+  /** the id of the transferproduct for which the transfer button was clicked */
+  productID: TransferProduct['productID'];
+  /** number provided for transfer */
+  transferLine: string | null;
+};
+
+export type CallBackData = OnSaveCallBackData | TransferCallBackData;
+
+export type OnTransfer = (callBackData: TransferCallBackData) => void;
+export type OnSave = (callBackData: OnSaveCallBackData) => void;
 
 export type FormValues = Record<string, number | ''>;
+export type FormContext = {
+  viewedProductIDs: number[];
+  questionValues: FormValues;
+};

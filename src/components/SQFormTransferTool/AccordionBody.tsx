@@ -7,32 +7,18 @@ import {
 } from 'scplus-shared-components';
 import Step from './Step';
 import {useSQFormContext} from '../../../src';
-import {getIsConditionMet} from './util';
+import {getIsConditionMet, transformForm} from './util';
 import type {
   OnTransfer,
   TransferProduct,
   FormValues,
-  CallBackData,
+  FormContext,
 } from './types';
 
 export type AccordionBodyProps = {
   transferProduct: TransferProduct;
   onTransfer: OnTransfer;
 };
-
-/**
- * Transforms the form values into a more friendly format. Specifically the
- * same form that the step condition uses to define questions and answers
- * with the exception that the value can be null, representing an empty value
- */
-function transformValues(values: FormValues): CallBackData['questionAnswers'] {
-  return Object.entries(values).map(([key, value]) => {
-    return {
-      questionId: Number(key),
-      answerId: value === '' ? null : Number(value),
-    };
-  });
-}
 
 function getIsTransferConditionMet(
   transferProduct: TransferProduct,
@@ -56,19 +42,16 @@ export default function AccordionBody({
   onTransfer,
 }: AccordionBodyProps): React.ReactElement {
   const {productDisplayName, modalLinkText} = transferProduct;
-  const {values} = useSQFormContext<FormValues>();
+  const {values} = useSQFormContext<FormContext>();
 
   function handleTransfer() {
-    const questionAnswers = transformValues(values);
     const {productID, transferLine} = transferProduct;
-    // TODO we will also include a log of open panels
-
-    onTransfer({transferLine, questionAnswers, productID});
+    onTransfer({transferLine, productID, ...transformForm(values)});
   }
 
   const isTransferConditionMet = getIsTransferConditionMet(
     transferProduct,
-    values
+    values.questionValues
   );
 
   const tooltip = isTransferConditionMet ? modalLinkText : 'Condition Not Met';
