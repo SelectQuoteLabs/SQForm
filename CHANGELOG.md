@@ -1,3 +1,13 @@
+## [11.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.6.0...v11.0.0) (2023-07-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 no
+* 🧨 No
+
+* Adding our style updates (#914) ([89a0758](https://github.com/SelectQuoteLabs/SQForm/commit/89a075891e3724a1d37a061cbda5cdbce72f4455)), closes [#914](https://github.com/SelectQuoteLabs/SQForm/issues/914) [#854](https://github.com/SelectQuoteLabs/SQForm/issues/854) [#856](https://github.com/SelectQuoteLabs/SQForm/issues/856) [#866](https://github.com/SelectQuoteLabs/SQForm/issues/866) [#865](https://github.com/SelectQuoteLabs/SQForm/issues/865) [#865](https://github.com/SelectQuoteLabs/SQForm/issues/865)
+
 ## [10.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.5.0...v10.6.0) (2023-07-13)
 
 
