@@ -1,3 +1,23 @@
+## [10.6.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.5.0...v10.6.0) (2023-07-13)
+
+
+### Features
+
+* 🎸 "Up-port" virtualized Multiselect feature ([e50b053](https://github.com/SelectQuoteLabs/SQForm/commit/e50b0537f802c14073ccaaa1a7c68bc0f1630a12))
+* 🎸 Virtualized Multiselect ([2321c86](https://github.com/SelectQuoteLabs/SQForm/commit/2321c86e136b5430af0e1ad06b637b9c2eb96f01))
+
+
+### Bug Fixes
+
+* 🐛 SQFormMultiselect isVirtualized prop is now optional ([9f74a5f](https://github.com/SelectQuoteLabs/SQForm/commit/9f74a5f9b658446de4dff9c9500b538804a1e0e7))
+
+## [10.5.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.4.1...v10.5.0) (2023-03-01)
+
+
+### Features
+
+* 🎸 Allow on reset callbacks ([c70ff1d](https://github.com/SelectQuoteLabs/SQForm/commit/c70ff1d9bf0cf44cf85294029662d03a0f94e896)), closes [#819](https://github.com/SelectQuoteLabs/SQForm/issues/819)
+
 ### [10.4.1](https://github.com/SelectQuoteLabs/SQForm/compare/v10.4.0...v10.4.1) (2023-02-21)
 
 

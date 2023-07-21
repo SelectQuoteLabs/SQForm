@@ -217,13 +217,13 @@ describe('SQFormCheckboxGroup Tests', () => {
     });
 
     it('should render "required" text when when its field is required', async () => {
-      const {container} = render(
-        <SQFormCheckboxGroupWithValidation size="auto" />
-      );
+      render(<SQFormCheckboxGroupWithValidation size="auto" />);
+      const helperText = screen.getByText(/required/i)?.parentElement;
 
       await waitFor(() => {
-        const helperText = container.querySelector('.MuiFormHelperText-root');
         expect(helperText).toBeInTheDocument();
+      });
+      await waitFor(() => {
         expect(helperText).toHaveClass('Mui-required');
       });
     });

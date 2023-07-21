@@ -359,7 +359,7 @@ export const FormWithOnBlurValidation = (): JSX.Element => {
   );
 };
 
-export const formWithFieldArray = (): JSX.Element => {
+export const FormWithFieldArray = (): JSX.Element => {
   return (
     <Card raised={true} style={{padding: 16}}>
       <SQForm
@@ -408,7 +408,7 @@ const names = [
   'Jill',
 ];
 
-export const formWithInclusionlist = (): JSX.Element => {
+export const FormWithInclusionlist = (): JSX.Element => {
   return (
     <Card raised={true} style={{padding: 16}}>
       <SectionHeader title="Friends" />
@@ -491,7 +491,7 @@ export const formWithInclusionlist = (): JSX.Element => {
   );
 };
 
-export const basicFormWithMultiSelect = (): JSX.Element => {
+export const BasicFormWithMultiSelect = (): JSX.Element => {
   const validationSchema = Yup.object({
     friends: Yup.array().of(Yup.string()).required().min(1, 'Required'),
   });
@@ -516,6 +516,7 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
           size={5}
           onChange={action('Friends selected')}
           useSelectAll={boolean('Use Select All', true)}
+          isVirtualized={boolean('Use virtualized Multiselect', false)}
         >
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
@@ -527,7 +528,7 @@ export const basicFormWithMultiSelect = (): JSX.Element => {
   );
 };
 
-export const basicFormWithMaskedFields = (): JSX.Element => {
+export const BasicFormWithMaskedFields = (): JSX.Element => {
   const validationSchema = Yup.object({
     phone: Yup.string()
       .required()
@@ -619,7 +620,7 @@ export const basicFormWithMaskedFields = (): JSX.Element => {
   );
 };
 
-export const basicFormWithCustomOnBlur = (): JSX.Element => {
+export const BasicFormWithCustomOnBlur = (): JSX.Element => {
   return (
     <Card raised={true} style={{padding: 16}}>
       <SQForm
@@ -670,7 +671,7 @@ export const basicFormWithCustomOnBlur = (): JSX.Element => {
   );
 };
 
-export const basicFormWithCustomOnChange = (): JSX.Element => {
+export const BasicFormWithCustomOnChange = (): JSX.Element => {
   return (
     <Card raised={true} style={{padding: 16}}>
       <SQForm
@@ -721,7 +722,7 @@ export const basicFormWithCustomOnChange = (): JSX.Element => {
   );
 };
 
-export const applyAnAction = (): JSX.Element => {
+export const ApplyAnAction = (): JSX.Element => {
   const validationSchema = Yup.object({
     actions: Yup.string().required(),
   });
@@ -801,7 +802,7 @@ export const SQFormCheckboxGroupExample = (): JSX.Element => {
   );
 };
 
-export const ccaChecklist = (): JSX.Element => {
+export const CCAChecklist = (): JSX.Element => {
   const dropdownOptions = [
     {label: 'Pitched', value: 'pitched'},
     {label: 'Transferred', value: 'transferred'},
@@ -852,7 +853,7 @@ export const ccaChecklist = (): JSX.Element => {
   );
 };
 
-export const customResetHandler = (): JSX.Element => {
+export const CustomResetHandler = (): JSX.Element => {
   const initialValues = {
     firstName: '',
     middleName: '',
@@ -896,7 +897,7 @@ export const customResetHandler = (): JSX.Element => {
   );
 };
 
-export const paymentForm = (): JSX.Element => {
+export const PaymentForm = (): JSX.Element => {
   const validationSchema = Yup.object({
     billingAddress1: Yup.string().required(),
     billingAddress2: Yup.string(),

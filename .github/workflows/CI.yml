@@ -1,6 +1,10 @@
 name: Node CI
 
 on:
+  push:
+    branches:
+      - master
+      - '*maintenance-release*'
   pull_request:
     branches:
       - '**'
@@ -12,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '14'
+          node-version: '16'
       - run: npm ci
       - run: npm run format.ci
       - run: npm run lint

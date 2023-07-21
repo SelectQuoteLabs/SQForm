@@ -73,9 +73,8 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     const datePickerButton = screen.getByRole('button', {name: /Choose date/i});
 
     userEvent.click(datePickerButton);
-    await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
 
-    await screen.findByRole('dialog');
+    expect(await screen.findByRole('dialog')).toBeInTheDocument();
 
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
@@ -93,7 +92,7 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
     const datePickerButton = screen.getByRole('button', {name: /Choose date/i});
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     userEvent.click(datePickerButton);
-    await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument());
+    expect(await screen.findByRole('dialog')).toBeInTheDocument();
     const calendarDialog = screen.getByRole('dialog');
     expect(calendarDialog).toBeInTheDocument();
     expect(calendarDialog).toBeVisible();
@@ -143,10 +142,15 @@ describe('SQFormDatePickerWithDateFNS Tests', () => {
       },
     };
 
-    const {container} = renderDatePicker({sqFormProps});
+    renderDatePicker({sqFormProps});
+
+    const helperText = screen.getByText(/required/i)?.parentElement;
+
     await waitFor(() => {
-      const helperText = container.querySelector('.MuiFormHelperText-root');
       expect(helperText).toBeVisible();
+    });
+
+    await waitFor(() => {
       expect(helperText).toHaveClass('Mui-required');
     });
   });

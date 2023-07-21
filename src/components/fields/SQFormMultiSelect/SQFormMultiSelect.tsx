@@ -8,10 +8,11 @@ import {
   FormHelperText,
   Grid,
   Checkbox,
-  ListItemText,
   Tooltip,
+  ListItemText,
 } from '@mui/material';
 import {useFormikContext} from 'formik';
+import {VariableSizeList} from 'react-window';
 import {EMPTY_LABEL} from '../../../utils/constants';
 import {useForm} from '../../../hooks/useForm';
 import {
@@ -20,19 +21,20 @@ import {
   getUndefinedValueWarning,
 } from '../../../utils/consoleWarnings';
 import type {TooltipProps, SelectProps, SelectChangeEvent} from '@mui/material';
+import type {ListChildComponentProps} from 'react-window';
 import type {
   BaseFieldProps,
   SQFormOption,
   SQFormOptionValue,
 } from '../../../types';
 
-export type SQFormMultiSelectProps = BaseFieldProps & {
+export type SQFormMultiSelectProps<TVirtualized = boolean> = BaseFieldProps & {
   /** Multiselect options to select from */
   children: SQFormOption[];
+  /** Whether the list menu items should be virtualized or not. Defaults false to ensure non-breaking changes. */
+  isVirtualized?: TVirtualized;
   /** Disabled property to disable the input if true */
   isDisabled?: boolean;
-  /** Custom onChange event callback */
-  onChange?: SelectProps<SQFormOptionValue[] | ''>['onChange'];
   /** This property will allow the end user to check a "Select All" box */
   useSelectAll?: boolean;
   /** Use MUI's Tooltip Position Values */
@@ -45,6 +47,13 @@ export type SQFormMultiSelectProps = BaseFieldProps & {
    * Note: Default behavior is to show the selected value(s)
    */
   tooltipText?: TooltipProps['title'];
+  /** Custom onChange handler */
+  onChange?: (
+    event: TVirtualized extends false
+      ? SelectChangeEvent<SQFormOptionValue[] | ''>
+      : React.MouseEvent<HTMLLIElement, MouseEvent>,
+    value: SQFormOption['value'][]
+  ) => void;
 };
 
 /**
@@ -54,16 +63,6 @@ export type SQFormMultiSelectProps = BaseFieldProps & {
  */
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-  variant: 'menu',
-  getContentAnchorEl: null,
-} as SelectProps<SQFormOptionValue[] | ''>['MenuProps'];
 
 const selectedDisplayValue = (
   values: SQFormOptionValue[] | '',
@@ -110,6 +109,20 @@ const classes = {
     },
     fontWeight: 'var(--font-weight-semibold)',
   },
+  paperList: {
+    maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+    width: 250,
+  },
+  virtualizeListOverflow: {
+    overflow: 'hidden',
+    height: '100%',
+    '& > ul': {
+      height: `calc(100% + ${ITEM_PADDING_TOP * 1.5}px)`,
+      '& > div': {
+        height: `calc(100% - ${ITEM_HEIGHT}px - ${ITEM_PADDING_TOP}px) !important`, // Sigh, overriding inline style
+      },
+    },
+  },
 };
 
 function SQFormMultiSelect({
@@ -124,7 +137,19 @@ function SQFormMultiSelect({
   muiFieldProps = {},
   showTooltip = true,
   tooltipText,
+  isVirtualized = false,
 }: SQFormMultiSelectProps): React.ReactElement {
+  const MenuProps = {
+    PaperProps: {
+      sx: {
+        ...classes.paperList,
+        ...(isVirtualized ? classes.virtualizeListOverflow : {}),
+      },
+    },
+    variant: 'menu',
+    getContentAnchorEl: null,
+  } as SelectProps['MenuProps'];
+
   const {setFieldValue} = useFormikContext();
   const [toolTipEnabled, setToolTipEnabled] = React.useState(true);
   const {
@@ -214,6 +239,80 @@ function SQFormMultiSelect({
     return tooltipText || toolTipTitle;
   };
 
+  const rowRenderer = (row: ListChildComponentProps<SQFormOption>) => {
+    const {index, style} = row;
+    const option = children[index];
+    return (
+      <MenuItem
+        key={`${name}_${option.value}`}
+        value={option.value}
+        style={{
+          ...style,
+          paddingTop: 0,
+          paddingBottom: 0,
+        }}
+        onClick={(event) => {
+          const value = [...field.value] as unknown as SQFormOption['value'][];
+          const indexToRemove = value.indexOf(option.value);
+
+          if (indexToRemove > -1) {
+            value.splice(indexToRemove, 1);
+          } else {
+            value.push(option.value);
+          }
+
+          const isSelectAllChecked = getIsSelectAllChecked(value);
+          const isSelectNoneChecked = getIsSelectNoneChecked(value);
+          const values = getValues(
+            children,
+            isSelectAllChecked,
+            isSelectNoneChecked,
+            value
+          );
+
+          setFieldValue(name, values);
+          onChange && onChange(event, value);
+        }}
+      >
+        <Checkbox
+          checked={
+            Array.isArray(field.value)
+              ? field.value?.includes(option.value)
+              : false
+          }
+        />
+        <ListItemText
+          primary={option.label}
+          primaryTypographyProps={{variant: 'body2'}}
+        />
+      </MenuItem>
+    );
+  };
+
+  const listItems = () => {
+    const LIST_MAX_VIEWABLE_ITEMS = 8;
+    const LIST_OVERSCAN_COUNT = 7;
+
+    const getHeight = () => {
+      if (children.length > LIST_MAX_VIEWABLE_ITEMS) {
+        return LIST_MAX_VIEWABLE_ITEMS * ITEM_HEIGHT;
+      }
+      return children.length * ITEM_HEIGHT + 2 * ITEM_PADDING_TOP;
+    };
+
+    return (
+      <VariableSizeList
+        itemSize={() => ITEM_HEIGHT}
+        width={''}
+        height={getHeight()}
+        itemCount={children.length}
+        overscanCount={LIST_OVERSCAN_COUNT}
+      >
+        {rowRenderer}
+      </VariableSizeList>
+    );
+  };
+
   return (
     <Grid item={true} sm={size}>
       <FormControl
@@ -260,23 +359,28 @@ function SQFormMultiSelect({
                 />
               </MenuItem>
             )}
-            {children?.map((option) => {
-              return (
-                <MenuItem key={`${name}_${option.value}`} value={option.value}>
-                  <Checkbox
-                    checked={
-                      Array.isArray(field.value)
-                        ? field.value?.includes(option.value)
-                        : false
-                    }
-                  />
-                  <ListItemText
-                    primary={option.label}
-                    primaryTypographyProps={{variant: 'body2'}}
-                  />
-                </MenuItem>
-              );
-            })}
+            {isVirtualized
+              ? listItems()
+              : children?.map((option) => {
+                  return (
+                    <MenuItem
+                      key={`${name}_${option.value}`}
+                      value={option.value}
+                    >
+                      <Checkbox
+                        checked={
+                          Array.isArray(field.value)
+                            ? field.value?.includes(option.value)
+                            : false
+                        }
+                      />
+                      <ListItemText
+                        primary={option.label}
+                        primaryTypographyProps={{variant: 'body2'}}
+                      />
+                    </MenuItem>
+                  );
+                })}
           </Select>
         </Tooltip>
         {!isDisabled && <FormHelperText>{HelperTextComponent}</FormHelperText>}

@@ -7,13 +7,13 @@ import {
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
+import {noop} from 'ts-essentials';
 import {BasicForm} from '../SQForm.stories';
 
 beforeEach(() => {
   jest.restoreAllMocks();
-  jest.spyOn(window, 'alert').mockImplementation(() => {});
-})
+  jest.spyOn(window, 'alert').mockImplementation(noop);
+});
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -67,29 +67,30 @@ describe('Tests for BasicForm', () => {
     );
 
     userEvent.click(screen.getByRole('button', {name: /submit/i}));
-    await waitFor(() =>
-      expect(window.alert).toHaveBeenCalledWith(
-        JSON.stringify(
-          {
-            firstName: mockData.firstName,
-            lastName: lastNameInputValue,
-            city: '',
-            age: mockData.age,
-            state: mockData.state,
-            tenThousandOptions: '',
-            note: '',
-            preferredPet: mockData.preferredPet,
-            warrantyOptions: mockData.warrantyOptions,
-            warrantyOptionsSelectAll: false,
-            favoriteColors: [2, 4],
-            hobby: mockData.hobby,
-            cool: mockData.cool,
-            lame: false,
-          },
-          null,
-          2
-        )
-      ),
+    await waitFor(
+      () =>
+        expect(window.alert).toHaveBeenCalledWith(
+          JSON.stringify(
+            {
+              firstName: mockData.firstName,
+              lastName: lastNameInputValue,
+              city: '',
+              age: mockData.age,
+              state: mockData.state,
+              tenThousandOptions: '',
+              note: '',
+              preferredPet: mockData.preferredPet,
+              warrantyOptions: mockData.warrantyOptions,
+              warrantyOptionsSelectAll: false,
+              favoriteColors: [2, 4],
+              hobby: mockData.hobby,
+              cool: mockData.cool,
+              lame: false,
+            },
+            null,
+            2
+          )
+        ),
       {
         timeout: 2000,
       }
@@ -103,7 +104,7 @@ describe('Tests for BasicForm', () => {
 
     userEvent.click(screen.getByRole('button', {name: /reset/i}));
 
-    await screen.findByText('Reset Form');
+    expect(await screen.findByText('Reset Form')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', {name: /reset/i}));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Reset Form'));
