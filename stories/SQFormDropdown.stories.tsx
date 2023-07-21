@@ -78,7 +78,6 @@ const Template: DropdownStoryType = (args) => {
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
-Default.storyName = 'Default';
 
 export const WithValidation = Template.bind({});
 WithValidation.args = {
