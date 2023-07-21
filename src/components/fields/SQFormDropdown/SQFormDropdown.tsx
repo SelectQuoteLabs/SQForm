@@ -47,6 +47,7 @@ const classes = {
     '& .MuiSelect-selectMenu': {
       height: '1.1876em',
     },
+    fontWeight: 600,
   },
 };
 
@@ -153,6 +154,7 @@ function SQFormDropdown({
                 key={`${name}_${option.value}`}
                 disabled={option.isDisabled}
                 value={option.value}
+                sx={{fontWeight: 600}}
               >
                 {option.label}
               </MenuItem>
