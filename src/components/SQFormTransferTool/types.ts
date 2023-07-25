@@ -1,3 +1,5 @@
+import type {FormikHelpers, FormikValues} from 'formik';
+
 export type Answer = {
   questionId: number;
   answerId: number;
@@ -64,11 +66,17 @@ type TransferCallBackData = OnSaveCallBackData & {
 
 export type CallBackData = OnSaveCallBackData | TransferCallBackData;
 
-export type OnTransfer = (callBackData: TransferCallBackData) => void;
-export type OnSave = (callBackData: OnSaveCallBackData) => void;
+export type OnTransfer = (
+  callBackData: TransferCallBackData,
+  formikHelpers: FormikHelpers<FormContext>
+) => void;
+export type OnSave = (
+  callBackData: OnSaveCallBackData,
+  formikHelpers: FormikHelpers<FormContext>
+) => void;
 
 export type FormValues = Record<string, number | ''>;
-export type FormContext = {
+export type FormContext = FormikValues & {
   viewedProductIDs: number[];
   questionValues: FormValues;
 };

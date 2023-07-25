@@ -299,6 +299,7 @@ WithConditions.args = {
   ...defaultArgs,
   title: 'With Conditions',
   transferProducts: [conditionalMock],
+  loadingMessage: 'Loading Conditional Example...',
 };
 
 export const IsLoading = Template.bind({});
