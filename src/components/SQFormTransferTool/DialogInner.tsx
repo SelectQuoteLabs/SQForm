@@ -42,11 +42,6 @@ export type DialogInnerProps = {
   isLoading: boolean;
 };
 
-/*
-const Transition = React.forwardRef<HTMLDivElement>((props, ref) => {
-  return <Slide direction="down" ref={ref} {...props}>{undefined}</Slide>;
-});
-*/
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {children: React.ReactElement<unknown, string>},
   ref: React.Ref<unknown>
