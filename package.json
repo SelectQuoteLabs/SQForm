@@ -1,6 +1,6 @@
 {
   "name": "@selectquotelabs/sqform",
-  "version": "10.5.0",
+  "version": "11.0.0",
   "description": "SQ Form",
   "files": [
     "dist"
@@ -178,7 +178,7 @@
     "react-textarea-autosize": "^8.4.0",
     "react-weekly-schedule": "0.0.0-development",
     "rimraf": "^3.0.2",
-    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/12.0.1",
+    "scplus-shared-components": "https://npm-public.selectquotelabs.com/scplus-shared-components/12.1.0",
     "semantic-release": "^17.4.2",
     "storybook-addon-material-ui5": "^1.0.0",
     "ts-essentials": "^9.2.0",

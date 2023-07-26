@@ -166,7 +166,7 @@ export function useForm<TValue, TChangeEvent>({
     if (isFulfilled) {
       return (
         <VerifiedIcon
-          sx={{color: 'var(--color-palmLeaf)', ...SUCCESS_ICON_STYLES}}
+          sx={{color: 'var(--color-textSuccessGreen)', ...SUCCESS_ICON_STYLES}}
         />
       );
     }

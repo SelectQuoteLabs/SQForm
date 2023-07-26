@@ -516,6 +516,7 @@ export const BasicFormWithMultiSelect = (): JSX.Element => {
           size={5}
           onChange={action('Friends selected')}
           useSelectAll={boolean('Use Select All', true)}
+          isVirtualized={boolean('Use virtualized Multiselect', false)}
         >
           {MOCK_FRIENDS_OPTIONS}
         </SQFormMultiSelect>
