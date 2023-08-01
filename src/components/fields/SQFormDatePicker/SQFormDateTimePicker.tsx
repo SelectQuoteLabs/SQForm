@@ -1,6 +1,6 @@
 import React from 'react';
 import {ClickAwayListener, Grid, TextField} from '@mui/material';
-import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
+import {DateTimePicker} from '@mui/x-date-pickers';
 import {useForm} from '../../../hooks/useForm';
 import type {MarkOptional} from 'ts-essentials';
 import type {Moment} from 'moment';
