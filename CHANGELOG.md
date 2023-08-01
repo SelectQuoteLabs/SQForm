@@ -1,3 +1,10 @@
+### [11.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v11.0.0...v11.0.1) (2023-08-01)
+
+
+### Bug Fixes
+
+* 🐛 The consumer would get an error due to incorrect import ([#919](https://github.com/SelectQuoteLabs/SQForm/issues/919)) ([b10f7e8](https://github.com/SelectQuoteLabs/SQForm/commit/b10f7e8546e1e7a6230c16428d83e7a2188babb8)), closes [#918](https://github.com/SelectQuoteLabs/SQForm/issues/918)
+
 ## [11.0.0](https://github.com/SelectQuoteLabs/SQForm/compare/v10.6.0...v11.0.0) (2023-07-21)
 
 
