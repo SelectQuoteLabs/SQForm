@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Typography,
 } from '@mui/material';
 import {useForm} from '../../../hooks/useForm';
 import {
@@ -33,6 +34,8 @@ export type SQFormDropdownProps = BaseFieldProps & {
   onChange?: SelectProps['onChange'];
   /** Any valid prop for material ui select child component - https://material-ui.com/api/select/#props  */
   muiFieldProps?: SelectProps;
+  /** OPTIONAL - Questions that could be asked with the dropdown label */
+  questions?: string[];
 };
 
 const EMPTY_VALUE = '';
@@ -49,6 +52,14 @@ const classes = {
     },
     fontWeight: 600,
   },
+  typographyStyle: {
+    color: 'var(--color-granite)',
+    fontSize: 'var(--base-font-size)',
+    fontWeight: 'var(--font-weight-normal)',
+    whiteSpace: 'pre-line',
+    margin: '20px 0px 16px 25px',
+    lineHeight: '15px',
+  },
 };
 
 function SQFormDropdown({
@@ -62,6 +73,7 @@ function SQFormDropdown({
   onChange,
   size = 'auto',
   muiFieldProps = {},
+  questions,
 }: SQFormDropdownProps): React.ReactElement {
   const {
     formikField: {field},
@@ -137,6 +149,11 @@ function SQFormDropdown({
         <InputLabel shrink={true} id={labelID}>
           {label}
         </InputLabel>
+        {questions && (
+          <Typography sx={classes.typographyStyle}>
+            {questions.map((question) => `- ${question}\n`)}
+          </Typography>
+        )}
         <Select
           sx={classes.selectHeight}
           displayEmpty={true}

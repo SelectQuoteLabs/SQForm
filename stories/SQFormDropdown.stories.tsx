@@ -48,12 +48,33 @@ const MOCK_STATE_OPTIONS = [
   {label: 'Missouri', value: 'MO'},
 ];
 
+const MOCK_CONFIRMATION_OPTIONS = [
+  {label: 'Yes', value: 1},
+  {label: 'No', value: 0},
+];
+
+const questions = [
+  'What benefits do you use more often?',
+  "Are there benefits that you don't use today, but would like to learn if you have them?",
+  'Are there any quesions that you have about your plan?',
+];
+
 const defaultArgs = {
   label: 'State',
   name: 'state',
   children: MOCK_STATE_OPTIONS,
   sqFormProps: {
     initialValues: {state: ''},
+  },
+};
+
+const argsWithQuestions = {
+  name: 'plans',
+  label: 'Is there anything else you would like your plan to do for you?',
+  children: MOCK_CONFIRMATION_OPTIONS,
+  questions: questions,
+  sqFormProps: {
+    initialValues: {plans: ''},
   },
 };
 
@@ -87,5 +108,9 @@ WithValidation.args = {
 WithValidation.parameters = {
   controls: {exclude: 'schema'},
 };
+
+export const withQuestion = Template.bind({});
+withQuestion.args = argsWithQuestions;
+withQuestion.storyName = 'Dropdown with Question';
 
 export default meta;
