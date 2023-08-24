@@ -1,3 +1,10 @@
+### [11.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v11.0.1...v11.0.2) (2023-08-24)
+
+
+### Bug Fixes
+
+* 🐛 Fields scroll behind form modal header ([#921](https://github.com/SelectQuoteLabs/SQForm/issues/921)) ([eab8299](https://github.com/SelectQuoteLabs/SQForm/commit/eab82999e4a0e6dbf8850a80964948a0a871367d)), closes [#920](https://github.com/SelectQuoteLabs/SQForm/issues/920)
+
 ### [11.0.1](https://github.com/SelectQuoteLabs/SQForm/compare/v11.0.0...v11.0.1) (2023-08-01)
 
 
