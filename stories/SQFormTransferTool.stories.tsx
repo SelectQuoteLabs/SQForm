@@ -125,7 +125,7 @@ const questionStepFour: Step = {
 };
 
 const stepScriptOne: Step = {
-  type: 'scripting',
+  type: 'script',
   id: MOCK_IDs.SCRIPTING_ONE_ID,
   text: 'Question 3 demonstrates AND logic, pick no for question one AND "an option" for question two',
   options: null,
@@ -147,7 +147,7 @@ const stepScriptThree: Step = {
 const stepScriptFour: Step = {
   ...stepScriptOne,
   id: MOCK_IDs.SCRIPTING_FOUR_ID,
-  text: 'Scripting steps are also conditional, this script is shown on the same condition that enables question 4',
+  text: 'Script steps are also conditional, this script is shown on the same condition that enables question 4',
   condition: questionStepFour.condition,
 };
 

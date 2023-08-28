@@ -30,7 +30,7 @@ export type QuestionStep = BaseStep & {
 };
 
 export type ScriptingStep = BaseStep & {
-  type: 'scripting';
+  type: 'script';
   text: string;
   options: null;
 };

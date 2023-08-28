@@ -36,8 +36,8 @@ export default function StepRendering({
     );
   }
 
-  // for scripting steps, if the condition is not met we do not want to render anything
-  if (type === 'scripting' && isConditionMet) {
+  // for script steps, if the condition is not met we do not want to render anything
+  if (type === 'script' && isConditionMet) {
     return <ScriptedText text={text} key={`script_${id}`} sx={styles.script} />;
   }
 
