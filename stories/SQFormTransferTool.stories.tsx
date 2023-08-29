@@ -125,7 +125,7 @@ const questionStepFour: Step = {
 };
 
 const stepScriptOne: Step = {
-  type: 'scripting',
+  type: 'script',
   id: MOCK_IDs.SCRIPTING_ONE_ID,
   text: 'Question 3 demonstrates AND logic, pick no for question one AND "an option" for question two',
   options: null,
@@ -147,7 +147,7 @@ const stepScriptThree: Step = {
 const stepScriptFour: Step = {
   ...stepScriptOne,
   id: MOCK_IDs.SCRIPTING_FOUR_ID,
-  text: 'Scripting steps are also conditional, this script is shown on the same condition that enables question 4',
+  text: 'Script steps are also conditional, this script is shown on the same condition that enables question 4',
   condition: questionStepFour.condition,
 };
 
@@ -172,7 +172,7 @@ const conditionalMock: TransferProduct = {
   productTag: 'Product Tag',
   // Note the product name and transfer button text have to share space
   productDisplayName: 'Conditional Example',
-  modalLinkText: `Transfer to DIV AB`,
+  linkText: `Transfer to DIV AB`,
   transferLine: '7777777777',
   enabled: true,
   steps: [
@@ -195,7 +195,7 @@ function getMockData(
     productID: 2 + idx,
     productTag: 'Product Tag ' + idx,
     productDisplayName: 'Product Name ' + idx,
-    modalLinkText: `Transfer to div ${idx}`, // any longer than this and the button will truncate
+    linkText: `Transfer to div ${idx}`, // any longer than this and the button will truncate
     transferLine: '7777777777',
     enabled: idx < 3,
     steps: [
@@ -223,9 +223,9 @@ function getMockData(
         condition: null,
       },
       {
-        type: 'scripting',
+        type: 'script',
         id: 3 + idx,
-        text: 'This is the scripting',
+        text: 'This is the script',
         options: null,
         condition: null,
       },

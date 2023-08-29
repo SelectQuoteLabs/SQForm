@@ -30,7 +30,7 @@ export type QuestionStep = BaseStep & {
 };
 
 export type ScriptingStep = BaseStep & {
-  type: 'scripting';
+  type: 'script';
   text: string;
   options: null;
 };
@@ -41,7 +41,7 @@ export type TransferProduct = {
   productID: number;
   productTag: string;
   productDisplayName: string;
-  modalLinkText: string;
+  linkText: string;
   transferLine: string;
   enabled: boolean;
   steps: Step[];

@@ -24,7 +24,10 @@ export function getIsConditionMet(
     return answers.every((answer) => checkAnswer(answer, values));
   }
 
-  if (logicalOperator === 'or') {
+  /* In the case where there is only one question step, the 
+     logical operator will be null. We still need to check that answer
+   */
+  if (logicalOperator === 'or' || logicalOperator === null) {
     return answers.some((answer) => checkAnswer(answer, values));
   }
 }
