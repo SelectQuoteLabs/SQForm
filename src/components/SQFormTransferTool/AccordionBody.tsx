@@ -41,7 +41,7 @@ export default function AccordionBody({
   transferProduct,
   onTransfer,
 }: AccordionBodyProps): React.ReactElement {
-  const {productDisplayName, modalLinkText} = transferProduct;
+  const {productDisplayName, linkText} = transferProduct;
   /* while the name formik Helpers is slightly misleading as it contains more
    * than that, it is at least safe given that the rest is inclusive of the helpers
    */
@@ -60,7 +60,7 @@ export default function AccordionBody({
     values.questionValues
   );
 
-  const tooltip = isTransferConditionMet ? modalLinkText : 'Condition Not Met';
+  const tooltip = isTransferConditionMet ? linkText : 'Condition Not Met';
 
   return (
     <Section sx={{marginBottom: '0px'}}>
@@ -70,7 +70,7 @@ export default function AccordionBody({
           tooltip={tooltip}
           isDisabled={!isTransferConditionMet}
         >
-          {modalLinkText}
+          {linkText}
         </TextButton>
       </SectionHeader>
       <SectionBody>

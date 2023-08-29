@@ -172,7 +172,7 @@ const conditionalMock: TransferProduct = {
   productTag: 'Product Tag',
   // Note the product name and transfer button text have to share space
   productDisplayName: 'Conditional Example',
-  modalLinkText: `Transfer to DIV AB`,
+  linkText: `Transfer to DIV AB`,
   transferLine: '7777777777',
   enabled: true,
   steps: [
@@ -195,7 +195,7 @@ function getMockData(
     productID: 2 + idx,
     productTag: 'Product Tag ' + idx,
     productDisplayName: 'Product Name ' + idx,
-    modalLinkText: `Transfer to div ${idx}`, // any longer than this and the button will truncate
+    linkText: `Transfer to div ${idx}`, // any longer than this and the button will truncate
     transferLine: '7777777777',
     enabled: idx < 3,
     steps: [
@@ -223,9 +223,9 @@ function getMockData(
         condition: null,
       },
       {
-        type: 'scripting',
+        type: 'script',
         id: 3 + idx,
-        text: 'This is the scripting',
+        text: 'This is the script',
         options: null,
         condition: null,
       },

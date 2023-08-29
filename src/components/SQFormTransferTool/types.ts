@@ -41,7 +41,7 @@ export type TransferProduct = {
   productID: number;
   productTag: string;
   productDisplayName: string;
-  modalLinkText: string;
+  linkText: string;
   transferLine: string;
   enabled: boolean;
   steps: Step[];
