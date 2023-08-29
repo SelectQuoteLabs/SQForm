@@ -1,3 +1,10 @@
+### [11.0.3](https://github.com/SelectQuoteLabs/SQForm/compare/v11.0.2...v11.0.3) (2023-08-29)
+
+
+### Bug Fixes
+
+* 🐛 the data contract changed, we need `script` instead ([#922](https://github.com/SelectQuoteLabs/SQForm/issues/922)) ([cf5bea7](https://github.com/SelectQuoteLabs/SQForm/commit/cf5bea702cc0a3abc16c37275d96689be6b7d10b))
+
 ### [11.0.2](https://github.com/SelectQuoteLabs/SQForm/compare/v11.0.1...v11.0.2) (2023-08-24)
 
 
