@@ -4,6 +4,7 @@ import {DateTimePicker} from '@mui/x-date-pickers';
 import {useForm} from '../../../hooks/useForm';
 import type {MarkOptional} from 'ts-essentials';
 import type {Moment} from 'moment';
+import type {InputBaseComponentProps} from '@mui/material';
 import type {BaseDateTimePickerProps} from '@mui/x-date-pickers/DateTimePicker/shared';
 import type {BaseFieldProps} from '../../../types';
 
@@ -21,6 +22,8 @@ export type SQFormDateTimePickerProps = BaseFieldProps & {
     BaseDateTimePickerProps<Moment, Moment>,
     'onChange' | 'value' | 'renderInput'
   >;
+  /** Any valid prop for MUI input field - https://material-ui.com/api/text-field/ & https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes */
+  muiTextInputProps?: InputBaseComponentProps;
 };
 
 function SQFormDateTimePicker({
@@ -28,10 +31,11 @@ function SQFormDateTimePicker({
   label,
   size = 'auto',
   isDisabled = false,
-  placeholder = '',
+  placeholder = 'MM / DD / YYYY HH:MM (A|P)M',
   onBlur,
   onChange,
   muiFieldProps = {},
+  muiTextInputProps = {},
 }: SQFormDateTimePickerProps): JSX.Element {
   const {
     formikField: {field, helpers},
@@ -80,10 +84,14 @@ function SQFormDateTimePicker({
                 disabled={isDisabled}
                 error={isFieldError}
                 fullWidth={true}
+                inputProps={{
+                  ...inputProps.inputProps,
+                  placeholder,
+                  ...muiTextInputProps,
+                }}
                 InputLabelProps={{shrink: true}}
                 FormHelperTextProps={{error: isFieldError}}
                 helperText={!isDisabled && HelperTextComponent}
-                placeholder={placeholder}
                 onBlur={handleBlur}
                 onClick={handleClickAway}
                 required={isFieldRequired}

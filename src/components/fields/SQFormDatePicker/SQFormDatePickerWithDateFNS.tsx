@@ -22,7 +22,7 @@ function SQFormDatePickerWithDateFNS({
   label,
   size = 'auto',
   isDisabled = false,
-  placeholder = '',
+  placeholder = 'MM / DD / YYYY',
   onBlur,
   onChange,
   setDisabledDate,
@@ -79,11 +79,14 @@ function SQFormDatePickerWithDateFNS({
                 variant="standard"
                 error={isFieldError}
                 fullWidth={true}
-                inputProps={{...inputProps.inputProps, ...muiTextInputProps}}
+                inputProps={{
+                  ...inputProps.inputProps,
+                  placeholder,
+                  ...muiTextInputProps,
+                }}
                 InputLabelProps={{shrink: true}}
                 FormHelperTextProps={{error: isFieldError}}
                 helperText={!isDisabled && HelperTextComponent}
-                placeholder={placeholder}
                 onBlur={handleBlur}
                 required={isFieldRequired}
                 onClick={
@@ -91,14 +94,6 @@ function SQFormDatePickerWithDateFNS({
                     ? toggleCalendar
                     : handleClickAway
                 }
-                sx={{
-                  '& .MuiInputBase-root.Mui-focused, & .MuiInputBase-root:hover:not(.Mui-disabled)':
-                    {
-                      '& .MuiIconButton-root': {
-                        color: 'var(--color-teal)',
-                      },
-                    },
-                }}
               />
             );
           }}
