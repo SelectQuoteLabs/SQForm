@@ -31,7 +31,7 @@ function SQFormDatePickerWithCalendarInputOnly({
   label,
   size = 'auto',
   isDisabled = false,
-  placeholder = '',
+  placeholder,
   onBlur,
   onChange,
   setDisabledDate,
