@@ -48,9 +48,8 @@ export default function AccordionBody({
   const {values, ...formikHelpers} = useSQFormContext<FormContext>();
 
   function handleTransfer() {
-    const {productID, transferLine} = transferProduct;
     onTransfer(
-      {transferLine, productID, ...transformForm(values)},
+      {product: transferProduct, ...transformForm(values)},
       formikHelpers
     );
   }

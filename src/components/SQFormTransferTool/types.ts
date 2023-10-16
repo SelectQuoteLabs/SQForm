@@ -58,10 +58,8 @@ type OnSaveCallBackData = {
 };
 
 type TransferCallBackData = OnSaveCallBackData & {
-  /** the id of the transferproduct for which the transfer button was clicked */
-  productID: TransferProduct['productID'];
-  /** number provided for transfer */
-  transferLine: string | null;
+  /** the product which is calling its transfer or alternative behavior */
+  product: TransferProduct;
 };
 
 export type CallBackData = OnSaveCallBackData | TransferCallBackData;
@@ -70,6 +68,7 @@ export type OnTransfer = (
   callBackData: TransferCallBackData,
   formikHelpers: FormikHelpers<FormContext>
 ) => void;
+
 export type OnSave = (
   callBackData: OnSaveCallBackData,
   formikHelpers: FormikHelpers<FormContext>
