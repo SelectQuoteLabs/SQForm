@@ -65,7 +65,7 @@ Optional dependencies are always installed but can be omitted by using `npm inst
 - Using TypeScript
   - `> npm install -D @types/react @types/react-dom @types/react-text-mask @types/yup`
 
-> Note: Ensure the types package major version number matches the package of your project. ex: React 16 should use v16 of @types/react
+> Note: Ensure the types package major version number matches the package of your project. ex: React 16 should use v16 of @types/react.
 
 ## Breaking Changes / Upgrade Guide
 
